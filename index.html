@@ -19,6 +19,9 @@
     background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
   }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
   header h1 { margin: 0 0 .35rem; font-size: 1.25rem; font-weight: 650; }
   header p { margin: 0; color: var(--muted); font-size: .9rem; }
   .controls {
@@ -67,7 +70,7 @@
 <body>
 <header>
   <h1>Homes near 1062KS (≤ €800k · ≥ 3 bedrooms · 2 km)</h1>
-  <p>137 listings · source Funda · 137 koopwoningen in Postcode 1062KS</p>
+  <p>137 listings · source Funda · 156 koopwoningen in Postcode 1062KS</p>
   <div class="controls">
     <label>Sort
       <select id="sort">
@@ -83,6 +86,7 @@
         <option value="Available">Available</option>
         <option value="Under offer">Under offer</option>
         <option value="New">New</option>
+        <option value="Sold subject to conditions">Sold subject to conditions</option>
       </select>
     </label>
     <input type="search" id="q" placeholder="Filter address or postcode…">
@@ -91,15 +95,12 @@
 </header>
 <main id="grid">
 
-
-
-
 <article class="card" data-price="375000" data-m2="81" data-beds="3" data-energy="C" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-calandlaan-411/80912561/" target="_blank" rel="noopener"><img src="photos/80912561.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-calandlaan-411/80912561/" target="_blank" rel="noopener"><img src="../photos/80912561.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€375.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-calandlaan-411/80912561/" target="_blank" rel="noopener">Pieter Calandlaan 411</a></h2>
     <p class="loc">1068 NK Amsterdam</p>
@@ -111,9 +112,8 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="395000" data-m2="92" data-beds="4" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-eastonstraat-126/44518251/" target="_blank" rel="noopener"><img src="photos/44518251.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-eastonstraat-126/44518251/" target="_blank" rel="noopener"><img src="../photos/44518251.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€395.000</div>
@@ -130,7 +130,7 @@
   </div>
 </article>
 <article class="card" data-price="400000" data-m2="77" data-beds="3" data-energy="B" data-status="New">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-burgemeester-hogguerstraat-537/80988093/" target="_blank" rel="noopener"><img src="photos/80988093.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-burgemeester-hogguerstraat-537/80988093/" target="_blank" rel="noopener"><img src="../photos/80988093.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€400.000</div>
@@ -147,7 +147,7 @@
   </div>
 </article>
 <article class="card" data-price="400000" data-m2="74" data-beds="3" data-energy="D" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-calandlaan-48-1/44579824/" target="_blank" rel="noopener"><img src="photos/44579824.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-calandlaan-48-1/44579824/" target="_blank" rel="noopener"><img src="../photos/44579824.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€400.000</div>
@@ -164,7 +164,7 @@
   </div>
 </article>
 <article class="card" data-price="425000" data-m2="71" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jan-mankesstraat-15-2/44518869/" target="_blank" rel="noopener"><img src="photos/44518869.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jan-mankesstraat-15-2/44518869/" target="_blank" rel="noopener"><img src="../photos/44518869.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€425.000</div>
@@ -181,7 +181,7 @@
   </div>
 </article>
 <article class="card" data-price="425000" data-m2="74" data-beds="3" data-energy="D" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cornelis-lelylaan-101-3/44598844/" target="_blank" rel="noopener"><img src="photos/44598844.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cornelis-lelylaan-101-3/44598844/" target="_blank" rel="noopener"><img src="../photos/44598844.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€425.000</div>
@@ -197,9 +197,8 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="425000" data-m2="76" data-beds="3" data-energy="F" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-mourik-broekmanstraat-19-3/44430961/" target="_blank" rel="noopener"><img src="photos/44430961.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-mourik-broekmanstraat-19-3/44430961/" target="_blank" rel="noopener"><img src="../photos/44430961.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€425.000</div>
@@ -216,7 +215,7 @@
   </div>
 </article>
 <article class="card" data-price="440000" data-m2="49" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-bartholomeus-diazstraat-10-1/44590697/" target="_blank" rel="noopener"><img src="photos/44590697.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-bartholomeus-diazstraat-10-1/44590697/" target="_blank" rel="noopener"><img src="../photos/44590697.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€440.000</div>
@@ -233,7 +232,7 @@
   </div>
 </article>
 <article class="card" data-price="450000" data-m2="115" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nicolaas-anslijnstraat-148/44505743/" target="_blank" rel="noopener"><img src="photos/44505743.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nicolaas-anslijnstraat-148/44505743/" target="_blank" rel="noopener"><img src="../photos/44505743.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€450.000</div>
@@ -250,7 +249,7 @@
   </div>
 </article>
 <article class="card" data-price="450000" data-m2="68" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-johan-kernstraat-23/44594067/" target="_blank" rel="noopener"><img src="photos/44594067.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-johan-kernstraat-23/44594067/" target="_blank" rel="noopener"><img src="../photos/44594067.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€450.000</div>
@@ -267,7 +266,7 @@
   </div>
 </article>
 <article class="card" data-price="450000" data-m2="96" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ruimzicht-298/44446681/" target="_blank" rel="noopener"><img src="photos/44446681.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ruimzicht-298/44446681/" target="_blank" rel="noopener"><img src="../photos/44446681.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€450.000</div>
@@ -283,9 +282,8 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="465000" data-m2="55" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-heemstedestraat-20-1/44585892/" target="_blank" rel="noopener"><img src="photos/44585892.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-heemstedestraat-20-1/44585892/" target="_blank" rel="noopener"><img src="../photos/44585892.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€465.000</div>
@@ -302,7 +300,7 @@
   </div>
 </article>
 <article class="card" data-price="475000" data-m2="89" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-calandlaan-31/44517683/" target="_blank" rel="noopener"><img src="photos/44517683.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-calandlaan-31/44517683/" target="_blank" rel="noopener"><img src="../photos/44517683.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€475.000</div>
@@ -319,7 +317,7 @@
   </div>
 </article>
 <article class="card" data-price="475000" data-m2="77" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-wilhelmina-druckerstraat-11-3/44594509/" target="_blank" rel="noopener"><img src="photos/44594509.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-wilhelmina-druckerstraat-11-3/44594509/" target="_blank" rel="noopener"><img src="../photos/44594509.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€475.000</div>
@@ -336,7 +334,7 @@
   </div>
 </article>
 <article class="card" data-price="475000" data-m2="70" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-burgemeester-van-de-pollstraat-2-b/44585564/" target="_blank" rel="noopener"><img src="photos/44585564.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-burgemeester-van-de-pollstraat-2-b/44585564/" target="_blank" rel="noopener"><img src="../photos/44585564.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€475.000</div>
@@ -353,7 +351,7 @@
   </div>
 </article>
 <article class="card" data-price="475000" data-m2="50" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-balboastraat-11-d/44574052/" target="_blank" rel="noopener"><img src="photos/44574052.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-balboastraat-11-d/44574052/" target="_blank" rel="noopener"><img src="../photos/44574052.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€475.000</div>
@@ -369,9 +367,8 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="480000" data-m2="76" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-elisabeth-boddaertstraat-30-3/44526304/" target="_blank" rel="noopener"><img src="photos/44526304.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-elisabeth-boddaertstraat-30-3/44526304/" target="_blank" rel="noopener"><img src="../photos/44526304.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€480.000</div>
@@ -388,7 +385,7 @@
   </div>
 </article>
 <article class="card" data-price="485000" data-m2="83" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-orteliusstraat-287-2/44526828/" target="_blank" rel="noopener"><img src="photos/44526828.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-orteliusstraat-287-2/44526828/" target="_blank" rel="noopener"><img src="../photos/44526828.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€485.000</div>
@@ -405,7 +402,7 @@
   </div>
 </article>
 <article class="card" data-price="495000" data-m2="75" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-elisabeth-boddaertstraat-38-3/44513921/" target="_blank" rel="noopener"><img src="photos/44513921.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-elisabeth-boddaertstraat-38-3/44513921/" target="_blank" rel="noopener"><img src="../photos/44513921.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€495.000</div>
@@ -422,7 +419,7 @@
   </div>
 </article>
 <article class="card" data-price="495000" data-m2="64" data-beds="3" data-energy="E" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jan-van-galenstraat-208-1/44511806/" target="_blank" rel="noopener"><img src="photos/44511806.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jan-van-galenstraat-208-1/44511806/" target="_blank" rel="noopener"><img src="../photos/44511806.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€495.000</div>
@@ -439,11 +436,11 @@
   </div>
 </article>
 <article class="card" data-price="495000" data-m2="100" data-beds="3" data-energy="B" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-hageland-122/44479787/" target="_blank" rel="noopener"><img src="photos/44479787.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-hageland-122/44479787/" target="_blank" rel="noopener"><img src="../photos/44479787.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€495.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-hageland-122/44479787/" target="_blank" rel="noopener">Hageland 122</a></h2>
     <p class="loc">1066 SB Amsterdam</p>
@@ -456,7 +453,7 @@
   </div>
 </article>
 <article class="card" data-price="499000" data-m2="76" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-balboastraat-11/44568621/" target="_blank" rel="noopener"><img src="photos/44568621.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-balboastraat-11/44568621/" target="_blank" rel="noopener"><img src="../photos/44568621.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€499.000</div>
@@ -473,11 +470,11 @@
   </div>
 </article>
 <article class="card" data-price="499000" data-m2="91" data-beds="3" data-energy="A" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-belgieplein-8/89791959/" target="_blank" rel="noopener"><img src="photos/89791959.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-belgieplein-8/89791959/" target="_blank" rel="noopener"><img src="../photos/89791959.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€499.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-belgieplein-8/89791959/" target="_blank" rel="noopener">Belgiëplein 8</a></h2>
     <p class="loc">1066 SC Amsterdam</p>
@@ -490,7 +487,7 @@
   </div>
 </article>
 <article class="card" data-price="499000" data-m2="105" data-beds="4" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ck-eloutstraat-22/89566640/" target="_blank" rel="noopener"><img src="photos/89566640.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ck-eloutstraat-22/89566640/" target="_blank" rel="noopener"><img src="../photos/89566640.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€499.000</div>
@@ -506,13 +503,12 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="500000" data-m2="67" data-beds="3" data-energy="C" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-curacaostraat-100-1/80812859/" target="_blank" rel="noopener"><img src="photos/80812859.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-curacaostraat-100-1/80812859/" target="_blank" rel="noopener"><img src="../photos/80812859.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€500.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-curacaostraat-100-1/80812859/" target="_blank" rel="noopener">Curaçaostraat 100-1</a></h2>
     <p class="loc">1058 CB Amsterdam</p>
@@ -525,11 +521,11 @@
   </div>
 </article>
 <article class="card" data-price="525000" data-m2="77" data-beds="3" data-energy="D" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-theodorus-majofskistraat-11-h/80968878/" target="_blank" rel="noopener"><img src="photos/80968878.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-theodorus-majofskistraat-11-h/80968878/" target="_blank" rel="noopener"><img src="../photos/80968878.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€525.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-theodorus-majofskistraat-11-h/80968878/" target="_blank" rel="noopener">Theodorus Majofskistraat 11-H</a></h2>
     <p class="loc">1065 SN Amsterdam</p>
@@ -542,7 +538,7 @@
   </div>
 </article>
 <article class="card" data-price="525000" data-m2="76" data-beds="3" data-energy="D" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-ward-bingleystraat-91/44582812/" target="_blank" rel="noopener"><img src="photos/44582812.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-ward-bingleystraat-91/44582812/" target="_blank" rel="noopener"><img src="../photos/44582812.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€525.000</div>
@@ -558,9 +554,8 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="525000" data-m2="69" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-curacaostraat-124-2/44468688/" target="_blank" rel="noopener"><img src="photos/44468688.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-curacaostraat-124-2/44468688/" target="_blank" rel="noopener"><img src="../photos/44468688.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€525.000</div>
@@ -577,7 +572,7 @@
   </div>
 </article>
 <article class="card" data-price="540000" data-m2="89" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-leuvenstraat-138/80944449/" target="_blank" rel="noopener"><img src="photos/80944449.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-leuvenstraat-138/80944449/" target="_blank" rel="noopener"><img src="../photos/80944449.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€540.000</div>
@@ -594,11 +589,11 @@
   </div>
 </article>
 <article class="card" data-price="545000" data-m2="101" data-beds="3" data-energy="A" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-leuvenstraat-136/80821076/" target="_blank" rel="noopener"><img src="photos/80821076.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-leuvenstraat-136/80821076/" target="_blank" rel="noopener"><img src="../photos/80821076.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€545.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-leuvenstraat-136/80821076/" target="_blank" rel="noopener">Leuvenstraat 136</a></h2>
     <p class="loc">1066 HD Amsterdam</p>
@@ -611,7 +606,7 @@
   </div>
 </article>
 <article class="card" data-price="549000" data-m2="92" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-duke-ellingtonstraat-60/80915266/" target="_blank" rel="noopener"><img src="photos/80915266.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-duke-ellingtonstraat-60/80915266/" target="_blank" rel="noopener"><img src="../photos/80915266.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€549.000</div>
@@ -628,7 +623,7 @@
   </div>
 </article>
 <article class="card" data-price="550000" data-m2="84" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-gerrit-mannourystraat-81/44501310/" target="_blank" rel="noopener"><img src="photos/44501310.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-gerrit-mannourystraat-81/44501310/" target="_blank" rel="noopener"><img src="../photos/44501310.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€550.000</div>
@@ -645,7 +640,7 @@
   </div>
 </article>
 <article class="card" data-price="550000" data-m2="116" data-beds="4" data-energy="D" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-esther-de-boer-van-rijkstraat-104-2/44566562/" target="_blank" rel="noopener"><img src="photos/44566562.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-esther-de-boer-van-rijkstraat-104-2/44566562/" target="_blank" rel="noopener"><img src="../photos/44566562.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€550.000</div>
@@ -662,7 +657,7 @@
   </div>
 </article>
 <article class="card" data-price="565000" data-m2="71" data-beds="4" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-borgerstraat-266-3/44567514/" target="_blank" rel="noopener"><img src="photos/44567514.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-borgerstraat-266-3/44567514/" target="_blank" rel="noopener"><img src="../photos/44567514.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€565.000</div>
@@ -679,7 +674,7 @@
   </div>
 </article>
 <article class="card" data-price="575000" data-m2="74" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jan-pieter-heijestraat-62-a/80969468/" target="_blank" rel="noopener"><img src="photos/80969468.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jan-pieter-heijestraat-62-a/80969468/" target="_blank" rel="noopener"><img src="../photos/80969468.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€575.000</div>
@@ -695,15 +690,12 @@
     </div>
   </div>
 </article>
-
-
-
 <article class="card" data-price="585000" data-m2="108" data-beds="4" data-energy="C" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-esther-de-boer-van-rijkstraat-102-2/44586820/" target="_blank" rel="noopener"><img src="photos/44586820.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-esther-de-boer-van-rijkstraat-102-2/44586820/" target="_blank" rel="noopener"><img src="../photos/44586820.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€585.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-esther-de-boer-van-rijkstraat-102-2/44586820/" target="_blank" rel="noopener">Esther de Boer-van Rijkstraat 102-2</a></h2>
     <p class="loc">1065 GR Amsterdam</p>
@@ -716,7 +708,7 @@
   </div>
 </article>
 <article class="card" data-price="585000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-489/43206209/" target="_blank" rel="noopener"><img src="photos/43206209.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-489/43206209/" target="_blank" rel="noopener"><img src="../photos/43206209.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€585.000</div>
@@ -733,7 +725,7 @@
   </div>
 </article>
 <article class="card" data-price="590000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-493/43206292/" target="_blank" rel="noopener"><img src="photos/43206292.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-493/43206292/" target="_blank" rel="noopener"><img src="../photos/43206292.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€590.000</div>
@@ -750,7 +742,7 @@
   </div>
 </article>
 <article class="card" data-price="595000" data-m2="73" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-postjesweg-103-2/80982843/" target="_blank" rel="noopener"><img src="photos/80982843.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-postjesweg-103-2/80982843/" target="_blank" rel="noopener"><img src="../photos/80982843.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€595.000</div>
@@ -767,11 +759,11 @@
   </div>
 </article>
 <article class="card" data-price="595000" data-m2="101" data-beds="3" data-energy="E" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-92-2/44592313/" target="_blank" rel="noopener"><img src="photos/44592313.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-92-2/44592313/" target="_blank" rel="noopener"><img src="../photos/44592313.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€595.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-92-2/44592313/" target="_blank" rel="noopener">Paramaribostraat 92-2</a></h2>
     <p class="loc">1058 VN Amsterdam</p>
@@ -784,7 +776,7 @@
   </div>
 </article>
 <article class="card" data-price="595000" data-m2="112" data-beds="6" data-energy="E" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-theodorus-majofskistraat-1-h/80955324/" target="_blank" rel="noopener"><img src="photos/80955324.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-theodorus-majofskistraat-1-h/80955324/" target="_blank" rel="noopener"><img src="../photos/80955324.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€595.000</div>
@@ -801,7 +793,7 @@
   </div>
 </article>
 <article class="card" data-price="595000" data-m2="103" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-boas-en-judelshof-8/44561133/" target="_blank" rel="noopener"><img src="photos/44561133.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-boas-en-judelshof-8/44561133/" target="_blank" rel="noopener"><img src="../photos/44561133.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€595.000</div>
@@ -818,7 +810,7 @@
   </div>
 </article>
 <article class="card" data-price="595000" data-m2="99" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-323/44550253/" target="_blank" rel="noopener"><img src="photos/44550253.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-323/44550253/" target="_blank" rel="noopener"><img src="../photos/44550253.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€595.000</div>
@@ -835,7 +827,7 @@
   </div>
 </article>
 <article class="card" data-price="595000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-497/43206214/" target="_blank" rel="noopener"><img src="photos/43206214.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-497/43206214/" target="_blank" rel="noopener"><img src="../photos/43206214.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€595.000</div>
@@ -852,7 +844,7 @@
   </div>
 </article>
 <article class="card" data-price="595000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-490/43206200/" target="_blank" rel="noopener"><img src="photos/43206200.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-490/43206200/" target="_blank" rel="noopener"><img src="../photos/43206200.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€595.000</div>
@@ -869,7 +861,7 @@
   </div>
 </article>
 <article class="card" data-price="598000" data-m2="67" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-bonairestraat-43-1/44526931/" target="_blank" rel="noopener"><img src="photos/44526931.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-bonairestraat-43-1/44526931/" target="_blank" rel="noopener"><img src="../photos/44526931.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€598.000</div>
@@ -886,11 +878,11 @@
   </div>
 </article>
 <article class="card" data-price="600000" data-m2="64" data-beds="3" data-energy="D" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-rhijnvis-feithstraat-60-2/44516738/" target="_blank" rel="noopener"><img src="photos/44516738.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-rhijnvis-feithstraat-60-2/44516738/" target="_blank" rel="noopener"><img src="../photos/44516738.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€600.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-rhijnvis-feithstraat-60-2/44516738/" target="_blank" rel="noopener">Rhijnvis Feithstraat 60-2</a></h2>
     <p class="loc">1054 VA Amsterdam</p>
@@ -903,7 +895,7 @@
   </div>
 </article>
 <article class="card" data-price="600000" data-m2="100" data-beds="4" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-van-abbestraat-18/44589374/" target="_blank" rel="noopener"><img src="photos/44589374.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-van-abbestraat-18/44589374/" target="_blank" rel="noopener"><img src="../photos/44589374.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€600.000</div>
@@ -920,7 +912,7 @@
   </div>
 </article>
 <article class="card" data-price="600000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-494/43206213/" target="_blank" rel="noopener"><img src="photos/43206213.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-494/43206213/" target="_blank" rel="noopener"><img src="../photos/43206213.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€600.000</div>
@@ -937,7 +929,7 @@
   </div>
 </article>
 <article class="card" data-price="605000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-498/43206218/" target="_blank" rel="noopener"><img src="photos/43206218.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-498/43206218/" target="_blank" rel="noopener"><img src="../photos/43206218.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€605.000</div>
@@ -954,7 +946,7 @@
   </div>
 </article>
 <article class="card" data-price="605000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-505/43206223/" target="_blank" rel="noopener"><img src="photos/43206223.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-505/43206223/" target="_blank" rel="noopener"><img src="../photos/43206223.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€605.000</div>
@@ -971,7 +963,7 @@
   </div>
 </article>
 <article class="card" data-price="609000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-501/43206226/" target="_blank" rel="noopener"><img src="photos/43206226.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-501/43206226/" target="_blank" rel="noopener"><img src="../photos/43206226.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€609.000</div>
@@ -988,7 +980,7 @@
   </div>
 </article>
 <article class="card" data-price="609000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-509/43206210/" target="_blank" rel="noopener"><img src="photos/43206210.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-509/43206210/" target="_blank" rel="noopener"><img src="../photos/43206210.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€609.000</div>
@@ -1005,7 +997,7 @@
   </div>
 </article>
 <article class="card" data-price="614000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-506/43206212/" target="_blank" rel="noopener"><img src="photos/43206212.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-506/43206212/" target="_blank" rel="noopener"><img src="../photos/43206212.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€614.000</div>
@@ -1022,7 +1014,7 @@
   </div>
 </article>
 <article class="card" data-price="619000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-502/43206225/" target="_blank" rel="noopener"><img src="photos/43206225.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-502/43206225/" target="_blank" rel="noopener"><img src="../photos/43206225.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€619.000</div>
@@ -1039,7 +1031,7 @@
   </div>
 </article>
 <article class="card" data-price="619000" data-m2="83" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-510/43206224/" target="_blank" rel="noopener"><img src="photos/43206224.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-urban-80-95-bouwnr-510/43206224/" target="_blank" rel="noopener"><img src="../photos/43206224.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€619.000</div>
@@ -1056,7 +1048,7 @@
   </div>
 </article>
 <article class="card" data-price="625000" data-m2="98" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-51/44514450/" target="_blank" rel="noopener"><img src="photos/44514450.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-51/44514450/" target="_blank" rel="noopener"><img src="../photos/44514450.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€625.000</div>
@@ -1073,11 +1065,11 @@
   </div>
 </article>
 <article class="card" data-price="625000" data-m2="112" data-beds="4" data-energy="A" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jacques-veltmanstraat-237/80877679/" target="_blank" rel="noopener"><img src="photos/80877679.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jacques-veltmanstraat-237/80877679/" target="_blank" rel="noopener"><img src="../photos/80877679.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€625.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-jacques-veltmanstraat-237/80877679/" target="_blank" rel="noopener">Jacques Veltmanstraat 237</a></h2>
     <p class="loc">1065 DB Amsterdam</p>
@@ -1090,11 +1082,11 @@
   </div>
 </article>
 <article class="card" data-price="635000" data-m2="79" data-beds="3" data-energy="D" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-achillesstraat-109-h/44594498/" target="_blank" rel="noopener"><img src="photos/44594498.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-achillesstraat-109-h/44594498/" target="_blank" rel="noopener"><img src="../photos/44594498.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€635.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-achillesstraat-109-h/44594498/" target="_blank" rel="noopener">Achillesstraat 109-H</a></h2>
     <p class="loc">1076 RA Amsterdam</p>
@@ -1107,7 +1099,7 @@
   </div>
 </article>
 <article class="card" data-price="645000" data-m2="105" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-mercatorplein-72/44593926/" target="_blank" rel="noopener"><img src="photos/44593926.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-mercatorplein-72/44593926/" target="_blank" rel="noopener"><img src="../photos/44593926.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€645.000</div>
@@ -1124,7 +1116,7 @@
   </div>
 </article>
 <article class="card" data-price="649000" data-m2="118" data-beds="3" data-energy="A+" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ottho-heldringstraat-27-r/44461973/" target="_blank" rel="noopener"><img src="photos/44461973.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ottho-heldringstraat-27-r/44461973/" target="_blank" rel="noopener"><img src="../photos/44461973.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€649.000</div>
@@ -1141,7 +1133,7 @@
   </div>
 </article>
 <article class="card" data-price="650000" data-m2="91" data-beds="3" data-energy="D" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nepveustraat-32-1/44511883/" target="_blank" rel="noopener"><img src="photos/44511883.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nepveustraat-32-1/44511883/" target="_blank" rel="noopener"><img src="../photos/44511883.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€650.000</div>
@@ -1158,7 +1150,7 @@
   </div>
 </article>
 <article class="card" data-price="650000" data-m2="79" data-beds="3" data-energy="E" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-admiralengracht-105-3/44590820/" target="_blank" rel="noopener"><img src="photos/44590820.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-admiralengracht-105-3/44590820/" target="_blank" rel="noopener"><img src="../photos/44590820.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€650.000</div>
@@ -1174,13 +1166,12 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="650000" data-m2="70" data-beds="3" data-energy="B" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-baarsjesweg-176-2/80882992/" target="_blank" rel="noopener"><img src="photos/80882992.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-baarsjesweg-176-2/80882992/" target="_blank" rel="noopener"><img src="../photos/80882992.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€650.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-baarsjesweg-176-2/80882992/" target="_blank" rel="noopener">Baarsjesweg 176-2</a></h2>
     <p class="loc">1057 HP Amsterdam</p>
@@ -1192,9 +1183,8 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="660000" data-m2="123" data-beds="4" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-bocholtstraat-34/44507577/" target="_blank" rel="noopener"><img src="photos/44507577.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-bocholtstraat-34/44507577/" target="_blank" rel="noopener"><img src="../photos/44507577.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€660.000</div>
@@ -1211,7 +1201,7 @@
   </div>
 </article>
 <article class="card" data-price="660000" data-m2="97" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-246/80955188/" target="_blank" rel="noopener"><img src="photos/80955188.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-246/80955188/" target="_blank" rel="noopener"><img src="../photos/80955188.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€660.000</div>
@@ -1228,7 +1218,7 @@
   </div>
 </article>
 <article class="card" data-price="675000" data-m2="84" data-beds="3" data-energy="E" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-tuyll-van-serooskerkenweg-1-1/80989730/" target="_blank" rel="noopener"><img src="photos/80989730.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-tuyll-van-serooskerkenweg-1-1/80989730/" target="_blank" rel="noopener"><img src="../photos/80989730.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€675.000</div>
@@ -1245,7 +1235,7 @@
   </div>
 </article>
 <article class="card" data-price="675000" data-m2="98" data-beds="3" data-energy="A+" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-derkinderenstraat-156/80968145/" target="_blank" rel="noopener"><img src="photos/80968145.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-derkinderenstraat-156/80968145/" target="_blank" rel="noopener"><img src="../photos/80968145.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€675.000</div>
@@ -1262,7 +1252,7 @@
   </div>
 </article>
 <article class="card" data-price="675000" data-m2="121" data-beds="4" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-kinrooistraat-43/44507882/" target="_blank" rel="noopener"><img src="photos/44507882.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-kinrooistraat-43/44507882/" target="_blank" rel="noopener"><img src="../photos/44507882.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€675.000</div>
@@ -1279,11 +1269,11 @@
   </div>
 </article>
 <article class="card" data-price="675000" data-m2="130" data-beds="4" data-energy="C" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-desselstraat-22/80940582/" target="_blank" rel="noopener"><img src="photos/80940582.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-desselstraat-22/80940582/" target="_blank" rel="noopener"><img src="../photos/80940582.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€675.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/huis-desselstraat-22/80940582/" target="_blank" rel="noopener">Desselstraat 22</a></h2>
     <p class="loc">1066 LT Amsterdam</p>
@@ -1296,7 +1286,7 @@
   </div>
 </article>
 <article class="card" data-price="675000" data-m2="102" data-beds="3" data-energy="G" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-marco-polostraat-72-2/44570451/" target="_blank" rel="noopener"><img src="photos/44570451.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-marco-polostraat-72-2/44570451/" target="_blank" rel="noopener"><img src="../photos/44570451.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€675.000</div>
@@ -1313,7 +1303,7 @@
   </div>
 </article>
 <article class="card" data-price="680000" data-m2="91" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-500/44436227/" target="_blank" rel="noopener"><img src="photos/44436227.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-500/44436227/" target="_blank" rel="noopener"><img src="../photos/44436227.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€680.000</div>
@@ -1330,7 +1320,7 @@
   </div>
 </article>
 <article class="card" data-price="684000" data-m2="91" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-499/44429876/" target="_blank" rel="noopener"><img src="photos/44429876.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-499/44429876/" target="_blank" rel="noopener"><img src="../photos/44429876.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€684.000</div>
@@ -1347,7 +1337,7 @@
   </div>
 </article>
 <article class="card" data-price="685000" data-m2="100" data-beds="3" data-energy="A" data-status="New">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-512/44522251/" target="_blank" rel="noopener"><img src="photos/44522251.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-512/44522251/" target="_blank" rel="noopener"><img src="../photos/44522251.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€685.000</div>
@@ -1364,7 +1354,7 @@
   </div>
 </article>
 <article class="card" data-price="685000" data-m2="109" data-beds="3" data-energy="A+" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-billie-holidaystraat-22/80985875/" target="_blank" rel="noopener"><img src="photos/80985875.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-billie-holidaystraat-22/80985875/" target="_blank" rel="noopener"><img src="../photos/80985875.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€685.000</div>
@@ -1381,7 +1371,7 @@
   </div>
 </article>
 <article class="card" data-price="695000" data-m2="126" data-beds="4" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-herentalsstraat-104/44512753/" target="_blank" rel="noopener"><img src="photos/44512753.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-herentalsstraat-104/44512753/" target="_blank" rel="noopener"><img src="../photos/44512753.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€695.000</div>
@@ -1398,7 +1388,7 @@
   </div>
 </article>
 <article class="card" data-price="695000" data-m2="100" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-480/44598028/" target="_blank" rel="noopener"><img src="photos/44598028.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-480/44598028/" target="_blank" rel="noopener"><img src="../photos/44598028.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€695.000</div>
@@ -1415,7 +1405,7 @@
   </div>
 </article>
 <article class="card" data-price="695000" data-m2="106" data-beds="4" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-derkinderenstraat-134/44595003/" target="_blank" rel="noopener"><img src="photos/44595003.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-derkinderenstraat-134/44595003/" target="_blank" rel="noopener"><img src="../photos/44595003.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€695.000</div>
@@ -1432,7 +1422,7 @@
   </div>
 </article>
 <article class="card" data-price="696000" data-m2="96" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-484/43294109/" target="_blank" rel="noopener"><img src="photos/43294109.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-484/43294109/" target="_blank" rel="noopener"><img src="../photos/43294109.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€696.000</div>
@@ -1449,7 +1439,7 @@
   </div>
 </article>
 <article class="card" data-price="699000" data-m2="86" data-beds="3" data-energy="F" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-herculesstraat-30-c/80978273/" target="_blank" rel="noopener"><img src="photos/80978273.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-herculesstraat-30-c/80978273/" target="_blank" rel="noopener"><img src="../photos/80978273.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€699.000</div>
@@ -1466,7 +1456,7 @@
   </div>
 </article>
 <article class="card" data-price="699000" data-m2="95" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-521/43206227/" target="_blank" rel="noopener"><img src="photos/43206227.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-521/43206227/" target="_blank" rel="noopener"><img src="../photos/43206227.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€699.000</div>
@@ -1483,7 +1473,7 @@
   </div>
 </article>
 <article class="card" data-price="700000" data-m2="113" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-maassluisstraat-61/44518838/" target="_blank" rel="noopener"><img src="photos/44518838.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-maassluisstraat-61/44518838/" target="_blank" rel="noopener"><img src="../photos/44518838.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€700.000</div>
@@ -1500,7 +1490,7 @@
   </div>
 </article>
 <article class="card" data-price="700000" data-m2="113" data-beds="4" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jacques-veltmanstraat-249/44517862/" target="_blank" rel="noopener"><img src="photos/44517862.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jacques-veltmanstraat-249/44517862/" target="_blank" rel="noopener"><img src="../photos/44517862.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€700.000</div>
@@ -1517,7 +1507,7 @@
   </div>
 </article>
 <article class="card" data-price="700000" data-m2="73" data-beds="3" data-energy="—" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramariboplein-22/44504236/" target="_blank" rel="noopener"><img src="photos/44504236.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramariboplein-22/44504236/" target="_blank" rel="noopener"><img src="../photos/44504236.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€700.000</div>
@@ -1534,7 +1524,7 @@
   </div>
 </article>
 <article class="card" data-price="700000" data-m2="91" data-beds="3" data-energy="D" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-leimuidenstraat-10-2/44502330/" target="_blank" rel="noopener"><img src="photos/44502330.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-leimuidenstraat-10-2/44502330/" target="_blank" rel="noopener"><img src="../photos/44502330.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€700.000</div>
@@ -1551,11 +1541,11 @@
   </div>
 </article>
 <article class="card" data-price="700000" data-m2="101" data-beds="3" data-energy="A" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-derkinderenstraat-162/80912163/" target="_blank" rel="noopener"><img src="photos/80912163.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-derkinderenstraat-162/80912163/" target="_blank" rel="noopener"><img src="../photos/80912163.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€700.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-derkinderenstraat-162/80912163/" target="_blank" rel="noopener">Derkinderenstraat 162</a></h2>
     <p class="loc">1061 VX Amsterdam</p>
@@ -1568,11 +1558,11 @@
   </div>
 </article>
 <article class="card" data-price="700000" data-m2="102" data-beds="4" data-energy="C" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-aalsmeerweg-7-3/44420013/" target="_blank" rel="noopener"><img src="photos/44420013.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-aalsmeerweg-7-3/44420013/" target="_blank" rel="noopener"><img src="../photos/44420013.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€700.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-aalsmeerweg-7-3/44420013/" target="_blank" rel="noopener">Aalsmeerweg 7-3</a></h2>
     <p class="loc">1059 AA Amsterdam</p>
@@ -1585,7 +1575,7 @@
   </div>
 </article>
 <article class="card" data-price="701000" data-m2="96" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-483/43294114/" target="_blank" rel="noopener"><img src="photos/43294114.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-483/43294114/" target="_blank" rel="noopener"><img src="../photos/43294114.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€701.000</div>
@@ -1602,7 +1592,7 @@
   </div>
 </article>
 <article class="card" data-price="701000" data-m2="96" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-488/43294115/" target="_blank" rel="noopener"><img src="photos/43294115.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-488/43294115/" target="_blank" rel="noopener"><img src="../photos/43294115.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€701.000</div>
@@ -1619,7 +1609,7 @@
   </div>
 </article>
 <article class="card" data-price="703000" data-m2="93" data-beds="4" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-549/43294103/" target="_blank" rel="noopener"><img src="photos/43294103.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-549/43294103/" target="_blank" rel="noopener"><img src="../photos/43294103.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€703.000</div>
@@ -1636,7 +1626,7 @@
   </div>
 </article>
 <article class="card" data-price="704000" data-m2="95" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-526/43206234/" target="_blank" rel="noopener"><img src="photos/43206234.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-526/43206234/" target="_blank" rel="noopener"><img src="../photos/43206234.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€704.000</div>
@@ -1653,7 +1643,7 @@
   </div>
 </article>
 <article class="card" data-price="706000" data-m2="96" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-492/43294116/" target="_blank" rel="noopener"><img src="photos/43294116.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-492/43294116/" target="_blank" rel="noopener"><img src="../photos/43294116.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€706.000</div>
@@ -1670,7 +1660,7 @@
   </div>
 </article>
 <article class="card" data-price="706000" data-m2="96" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-487/43294101/" target="_blank" rel="noopener"><img src="photos/43294101.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-487/43294101/" target="_blank" rel="noopener"><img src="../photos/43294101.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€706.000</div>
@@ -1687,7 +1677,7 @@
   </div>
 </article>
 <article class="card" data-price="708000" data-m2="93" data-beds="4" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-554/43294104/" target="_blank" rel="noopener"><img src="photos/43294104.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-554/43294104/" target="_blank" rel="noopener"><img src="../photos/43294104.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€708.000</div>
@@ -1704,7 +1694,7 @@
   </div>
 </article>
 <article class="card" data-price="709000" data-m2="95" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-531/43206229/" target="_blank" rel="noopener"><img src="photos/43206229.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-531/43206229/" target="_blank" rel="noopener"><img src="../photos/43206229.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€709.000</div>
@@ -1721,7 +1711,7 @@
   </div>
 </article>
 <article class="card" data-price="711000" data-m2="96" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-496/43294118/" target="_blank" rel="noopener"><img src="photos/43294118.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-496/43294118/" target="_blank" rel="noopener"><img src="../photos/43294118.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€711.000</div>
@@ -1738,7 +1728,7 @@
   </div>
 </article>
 <article class="card" data-price="711000" data-m2="96" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-491/43294113/" target="_blank" rel="noopener"><img src="photos/43294113.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-491/43294113/" target="_blank" rel="noopener"><img src="../photos/43294113.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€711.000</div>
@@ -1755,7 +1745,7 @@
   </div>
 </article>
 <article class="card" data-price="713000" data-m2="93" data-beds="4" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-559/43294108/" target="_blank" rel="noopener"><img src="photos/43294108.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-559/43294108/" target="_blank" rel="noopener"><img src="../photos/43294108.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€713.000</div>
@@ -1772,7 +1762,7 @@
   </div>
 </article>
 <article class="card" data-price="714000" data-m2="95" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-536/43206239/" target="_blank" rel="noopener"><img src="photos/43206239.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-536/43206239/" target="_blank" rel="noopener"><img src="../photos/43206239.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€714.000</div>
@@ -1789,7 +1779,7 @@
   </div>
 </article>
 <article class="card" data-price="716000" data-m2="99" data-beds="4" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-519/43294175/" target="_blank" rel="noopener"><img src="photos/43294175.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-519/43294175/" target="_blank" rel="noopener"><img src="../photos/43294175.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€716.000</div>
@@ -1806,7 +1796,7 @@
   </div>
 </article>
 <article class="card" data-price="716000" data-m2="96" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-495/43294119/" target="_blank" rel="noopener"><img src="photos/43294119.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cortado-waterfront-95-100-bouwnr-495/43294119/" target="_blank" rel="noopener"><img src="../photos/43294119.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€716.000</div>
@@ -1823,7 +1813,7 @@
   </div>
 </article>
 <article class="card" data-price="718000" data-m2="95" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-541/43206237/" target="_blank" rel="noopener"><img src="photos/43206237.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-541/43206237/" target="_blank" rel="noopener"><img src="../photos/43206237.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€718.000</div>
@@ -1840,7 +1830,7 @@
   </div>
 </article>
 <article class="card" data-price="719000" data-m2="99" data-beds="4" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-529/43294184/" target="_blank" rel="noopener"><img src="photos/43294184.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-529/43294184/" target="_blank" rel="noopener"><img src="../photos/43294184.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€719.000</div>
@@ -1857,7 +1847,7 @@
   </div>
 </article>
 <article class="card" data-price="721000" data-m2="99" data-beds="4" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-524/43294171/" target="_blank" rel="noopener"><img src="photos/43294171.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-524/43294171/" target="_blank" rel="noopener"><img src="../photos/43294171.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€721.000</div>
@@ -1874,7 +1864,7 @@
   </div>
 </article>
 <article class="card" data-price="723000" data-m2="95" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-546/43206221/" target="_blank" rel="noopener"><img src="photos/43206221.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-546/43206221/" target="_blank" rel="noopener"><img src="../photos/43206221.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€723.000</div>
@@ -1891,7 +1881,7 @@
   </div>
 </article>
 <article class="card" data-price="725000" data-m2="100" data-beds="3" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-308/80986293/" target="_blank" rel="noopener"><img src="photos/80986293.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-308/80986293/" target="_blank" rel="noopener"><img src="../photos/80986293.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€725.000</div>
@@ -1908,7 +1898,7 @@
   </div>
 </article>
 <article class="card" data-price="725000" data-m2="100" data-beds="3" data-energy="A+++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jacob-geelstraat-103/44507088/" target="_blank" rel="noopener"><img src="photos/44507088.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jacob-geelstraat-103/44507088/" target="_blank" rel="noopener"><img src="../photos/44507088.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€725.000</div>
@@ -1924,9 +1914,8 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="725000" data-m2="85" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-zocherstraat-46/44564999/" target="_blank" rel="noopener"><img src="photos/44564999.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-zocherstraat-46/44564999/" target="_blank" rel="noopener"><img src="../photos/44564999.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€725.000</div>
@@ -1943,7 +1932,7 @@
   </div>
 </article>
 <article class="card" data-price="725000" data-m2="98" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-68-2/44452329/" target="_blank" rel="noopener"><img src="photos/44452329.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-68-2/44452329/" target="_blank" rel="noopener"><img src="../photos/44452329.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€725.000</div>
@@ -1960,7 +1949,7 @@
   </div>
 </article>
 <article class="card" data-price="730000" data-m2="95" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-551/43206243/" target="_blank" rel="noopener"><img src="photos/43206243.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-551/43206243/" target="_blank" rel="noopener"><img src="../photos/43206243.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€730.000</div>
@@ -1977,7 +1966,7 @@
   </div>
 </article>
 <article class="card" data-price="730000" data-m2="99" data-beds="4" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-534/43294186/" target="_blank" rel="noopener"><img src="photos/43294186.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-534/43294186/" target="_blank" rel="noopener"><img src="../photos/43294186.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€730.000</div>
@@ -1994,7 +1983,7 @@
   </div>
 </article>
 <article class="card" data-price="735000" data-m2="95" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-556/43206222/" target="_blank" rel="noopener"><img src="photos/43206222.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-556/43206222/" target="_blank" rel="noopener"><img src="../photos/43206222.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€735.000</div>
@@ -2011,7 +2000,7 @@
   </div>
 </article>
 <article class="card" data-price="735000" data-m2="99" data-beds="4" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-539/43294180/" target="_blank" rel="noopener"><img src="photos/43294180.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-539/43294180/" target="_blank" rel="noopener"><img src="../photos/43294180.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€735.000</div>
@@ -2028,7 +2017,7 @@
   </div>
 </article>
 <article class="card" data-price="740000" data-m2="95" data-beds="3" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-561/43206247/" target="_blank" rel="noopener"><img src="photos/43206247.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-urban-80-95-bouwnr-561/43206247/" target="_blank" rel="noopener"><img src="../photos/43206247.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€740.000</div>
@@ -2045,7 +2034,7 @@
   </div>
 </article>
 <article class="card" data-price="740000" data-m2="99" data-beds="4" data-energy="A++" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-544/43294194/" target="_blank" rel="noopener"><img src="photos/43294194.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-544/43294194/" target="_blank" rel="noopener"><img src="../photos/43294194.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€740.000</div>
@@ -2062,7 +2051,7 @@
   </div>
 </article>
 <article class="card" data-price="750000" data-m2="101" data-beds="3" data-energy="F" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-olympiaplein-152-2/44521165/" target="_blank" rel="noopener"><img src="photos/44521165.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-olympiaplein-152-2/44521165/" target="_blank" rel="noopener"><img src="../photos/44521165.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€750.000</div>
@@ -2079,7 +2068,7 @@
   </div>
 </article>
 <article class="card" data-price="750000" data-m2="99" data-beds="4" data-energy="D" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-orteliusstraat-181-3/44512046/" target="_blank" rel="noopener"><img src="photos/44512046.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-orteliusstraat-181-3/44512046/" target="_blank" rel="noopener"><img src="../photos/44512046.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€750.000</div>
@@ -2096,7 +2085,7 @@
   </div>
 </article>
 <article class="card" data-price="750000" data-m2="126" data-beds="4" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-395/44517180/" target="_blank" rel="noopener"><img src="photos/44517180.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-395/44517180/" target="_blank" rel="noopener"><img src="../photos/44517180.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€750.000</div>
@@ -2113,7 +2102,7 @@
   </div>
 </article>
 <article class="card" data-price="750000" data-m2="99" data-beds="3" data-energy="D" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-vaartstraat-48-3/44505461/" target="_blank" rel="noopener"><img src="photos/44505461.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-vaartstraat-48-3/44505461/" target="_blank" rel="noopener"><img src="../photos/44505461.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€750.000</div>
@@ -2130,11 +2119,11 @@
   </div>
 </article>
 <article class="card" data-price="750000" data-m2="100" data-beds="3" data-energy="D" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-50-2/80940073/" target="_blank" rel="noopener"><img src="photos/80940073.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-50-2/80940073/" target="_blank" rel="noopener"><img src="../photos/80940073.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€750.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-50-2/80940073/" target="_blank" rel="noopener">Paramaribostraat 50-2</a></h2>
     <p class="loc">1058 VM Amsterdam</p>
@@ -2147,7 +2136,7 @@
   </div>
 </article>
 <article class="card" data-price="750000" data-m2="101" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-aalsmeerweg-28-3/80949859/" target="_blank" rel="noopener"><img src="photos/80949859.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-aalsmeerweg-28-3/80949859/" target="_blank" rel="noopener"><img src="../photos/80949859.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€750.000</div>
@@ -2164,7 +2153,7 @@
   </div>
 </article>
 <article class="card" data-price="750000" data-m2="123" data-beds="3" data-energy="A+" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-loosduinenstraat-13/44562517/" target="_blank" rel="noopener"><img src="photos/44562517.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-loosduinenstraat-13/44562517/" target="_blank" rel="noopener"><img src="../photos/44562517.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€750.000</div>
@@ -2181,7 +2170,7 @@
   </div>
 </article>
 <article class="card" data-price="750000" data-m2="141" data-beds="3" data-energy="A+" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ottho-heldringstraat-27-u/80800943/" target="_blank" rel="noopener"><img src="photos/80800943.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ottho-heldringstraat-27-u/80800943/" target="_blank" rel="noopener"><img src="../photos/80800943.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€750.000</div>
@@ -2197,9 +2186,8 @@
     </div>
   </div>
 </article>
-
 <article class="card" data-price="769000" data-m2="131" data-beds="5" data-energy="D" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-cornelis-van-alkemadestraat-17/44505292/" target="_blank" rel="noopener"><img src="photos/44505292.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-cornelis-van-alkemadestraat-17/44505292/" target="_blank" rel="noopener"><img src="../photos/44505292.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€769.000</div>
@@ -2216,7 +2204,7 @@
   </div>
 </article>
 <article class="card" data-price="775000" data-m2="134" data-beds="4" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-hof-van-versailles-3/44412062/" target="_blank" rel="noopener"><img src="photos/44412062.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-hof-van-versailles-3/44412062/" target="_blank" rel="noopener"><img src="../photos/44412062.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€775.000</div>
@@ -2233,7 +2221,7 @@
   </div>
 </article>
 <article class="card" data-price="775000" data-m2="145" data-beds="4" data-energy="E" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-august-vermeylenstraat-48/44483570/" target="_blank" rel="noopener"><img src="photos/44483570.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-august-vermeylenstraat-48/44483570/" target="_blank" rel="noopener"><img src="../photos/44483570.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€775.000</div>
@@ -2250,7 +2238,7 @@
   </div>
 </article>
 <article class="card" data-price="779000" data-m2="132" data-beds="5" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-houthalenstraat-83/80928154/" target="_blank" rel="noopener"><img src="photos/80928154.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-houthalenstraat-83/80928154/" target="_blank" rel="noopener"><img src="../photos/80928154.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€779.000</div>
@@ -2267,7 +2255,7 @@
   </div>
 </article>
 <article class="card" data-price="780000" data-m2="92" data-beds="3" data-energy="C" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-stadionweg-310-3/43323797/" target="_blank" rel="noopener"><img src="photos/43323797.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-stadionweg-310-3/43323797/" target="_blank" rel="noopener"><img src="../photos/43323797.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€780.000</div>
@@ -2284,11 +2272,11 @@
   </div>
 </article>
 <article class="card" data-price="785000" data-m2="82" data-beds="3" data-energy="B" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-frederiksstraat-28-3/44577229/" target="_blank" rel="noopener"><img src="photos/44577229.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-frederiksstraat-28-3/44577229/" target="_blank" rel="noopener"><img src="../photos/44577229.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€785.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-frederiksstraat-28-3/44577229/" target="_blank" rel="noopener">Frederiksstraat 28-3</a></h2>
     <p class="loc">1054 LD Amsterdam</p>
@@ -2301,11 +2289,11 @@
   </div>
 </article>
 <article class="card" data-price="785000" data-m2="93" data-beds="3" data-energy="A" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-orteliusstraat-148-3/44576907/" target="_blank" rel="noopener"><img src="photos/44576907.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-orteliusstraat-148-3/44576907/" target="_blank" rel="noopener"><img src="../photos/44576907.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€785.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-orteliusstraat-148-3/44576907/" target="_blank" rel="noopener">Orteliusstraat 148-3</a></h2>
     <p class="loc">1057 BH Amsterdam</p>
@@ -2318,11 +2306,11 @@
   </div>
 </article>
 <article class="card" data-price="790000" data-m2="135" data-beds="5" data-energy="A" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-diepenbeekplantsoen-67/80946368/" target="_blank" rel="noopener"><img src="photos/80946368.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-diepenbeekplantsoen-67/80946368/" target="_blank" rel="noopener"><img src="../photos/80946368.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€790.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/huis-diepenbeekplantsoen-67/80946368/" target="_blank" rel="noopener">Diepenbeekplantsoen 67</a></h2>
     <p class="loc">1066 KG Amsterdam</p>
@@ -2335,7 +2323,7 @@
   </div>
 </article>
 <article class="card" data-price="795000" data-m2="98" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-postjesweg-120-3/44517113/" target="_blank" rel="noopener"><img src="photos/44517113.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-postjesweg-120-3/44517113/" target="_blank" rel="noopener"><img src="../photos/44517113.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€795.000</div>
@@ -2352,11 +2340,11 @@
   </div>
 </article>
 <article class="card" data-price="795000" data-m2="110" data-beds="4" data-energy="C" data-status="Under offer">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-52-2/44588682/" target="_blank" rel="noopener"><img src="photos/44588682.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-52-2/44588682/" target="_blank" rel="noopener"><img src="../photos/44588682.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€795.000</div>
-      <span class="status offer">Under offer</span>
+      <span class="status ok">Under offer</span>
     </div>
     <h2><a href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-52-2/44588682/" target="_blank" rel="noopener">Paramaribostraat 52-2</a></h2>
     <p class="loc">1058 VM Amsterdam</p>
@@ -2368,11 +2356,8 @@
     </div>
   </div>
 </article>
-
-
-
 <article class="card" data-price="799000" data-m2="110" data-beds="4" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-speijkstraat-48-3/44585619/" target="_blank" rel="noopener"><img src="photos/44585619.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-speijkstraat-48-3/44585619/" target="_blank" rel="noopener"><img src="../photos/44585619.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€799.000</div>
@@ -2389,7 +2374,7 @@
   </div>
 </article>
 <article class="card" data-price="799000" data-m2="167" data-beds="4" data-energy="B" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-hamontstraat-41/44569332/" target="_blank" rel="noopener"><img src="photos/44569332.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/huis-hamontstraat-41/44569332/" target="_blank" rel="noopener"><img src="../photos/44569332.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€799.000</div>
@@ -2406,7 +2391,7 @@
   </div>
 </article>
 <article class="card" data-price="800000" data-m2="115" data-beds="3" data-energy="A" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ottho-heldringstraat-35-l/80937754/" target="_blank" rel="noopener"><img src="photos/80937754.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ottho-heldringstraat-35-l/80937754/" target="_blank" rel="noopener"><img src="../photos/80937754.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€800.000</div>
@@ -2423,7 +2408,7 @@
   </div>
 </article>
 <article class="card" data-price="800000" data-m2="109" data-beds="4" data-energy="F" data-status="Available">
-  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-bonaireplein-2-3/44415009/" target="_blank" rel="noopener"><img src="photos/44415009.jpg" alt="" loading="lazy"></a>
+  <a class="photo" href="https://www.funda.nl/detail/koop/amsterdam/appartement-bonaireplein-2-3/44415009/" target="_blank" rel="noopener"><img src="../photos/44415009.jpg" alt="" loading="lazy"></a>
   <div class="body">
     <div class="top">
       <div class="price">€800.000</div>
