@@ -310,6 +310,19 @@ let idx = 0;
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
 const lbCap = document.getElementById('lbCap');
+const preloaded = new Map();
+
+function preload(i) {
+  if (!PHOTOS.length) return;
+  i = ((i % PHOTOS.length) + PHOTOS.length) % PHOTOS.length;
+  if (preloaded.has(i)) return;
+  const img = new Image();
+  img.src = PHOTOS[i];
+  preloaded.set(i, img);
+}
+function preloadAround(i) {
+  for (const d of [-2, -1, 0, 1, 2]) preload(i + d);
+}
 
 function openLb(i) {
   if (!PHOTOS.length) return;
@@ -319,6 +332,10 @@ function openLb(i) {
   lb.hidden = false;
   lb.classList.add('open');
   document.body.classList.add('lb-lock');
+  if (lbImg.decode) {
+    lbImg.decode().catch(() => {});
+  }
+  preloadAround(idx);
 }
 function closeLb() {
   lb.classList.remove('open');
@@ -357,6 +374,8 @@ lbImg.addEventListener('touchend', e => {
   tx = null;
   if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
 }, {passive:true});
+preload(0);
+preload(1);
 </script>
 </body>
 </html>
