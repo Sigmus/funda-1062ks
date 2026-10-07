@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amsterdamseweg 363-BV · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Amsterdamseweg 363-BV</h1>
+  <p class="sub">
+    <span>1182 HB Amstelveen</span>
+    <span>·</span>
+    <span>Oranjebuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/050/251_1440x960.jpg" alt="Amsterdamseweg 363-BV — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">32 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€565.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.594/m² · 4.4 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.4 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">101 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1948</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amstelveen/appartement-amsterdamseweg-363-bv/44565923/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 75 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Aanvaarding</dd></div>
+        <div class="frow"><dt>In overleg</dt><dd>Vraagprijs</dd></div>
+        <div class="frow"><dt>€ 565.000 kosten koper</dt><dd>Vraagprijs per m²</dd></div>
+        <div class="frow"><dt>€ 5.594</dt><dd>Status</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1948</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>101 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>333 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en HR-glas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Gas gestookt, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTELVEEN H 11748</dt><dd>ownedssituatie</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande stenen berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Direct online een bezichtiging inplannen? Bezoek onze website!
+
+Op zeer goede locatie gelegen ruime en goed onderhouden en instapklare 4-kamer hoekmasionette van ca. 101 m², gelegen op op een top locatie op steenworp afstand van het Amsterdamse Bos en de heemparken De Braak!
+
+LIGGING &amp; BEREIKBAARHEID
+
+Het appartement bevindt zich op een van de meest aantrekkelijke locaties in Amstelveen. Hier ervaar je de unieke combinatie tussen stadsleven en natuur: je woont slechts een korte wandeling verwijderd van het oudste heempark van Amstelveen, Heempark de Braak, dat dateert uit 1939. In het midden van het park ligt een grote vijver waar je kunt genieten van een schitterend uitzicht op de omliggende beplanting. Vooral in de lente, wanneer het park tot leven komt met een overvloed aan voorjaarsbloemen, is het de perfecte plek om te wandelen of lekker te ontspannen. Daarnaast vind je in de directe omgeving ook het Broersepark, het Amsterdamse Bos, de Poel en diverse sportclubs.
+
+Wat betreft voorzieningen zit je hier uitstekend; zo zijn een Albert Heijn, patisserie Prenger en de bekende bakkerij Le Fournil de Sébastien op loopafstand te bereiken. Voor een avondje uit kun je terecht bij restaurants als Aan de Poel (twee Michelinsterren), Villa Borghese of Gusto in het sfeervolle Oude Dorp. Voor een gezellige borrel of een kop koffie kun je terecht bij cafés zoals Thijs. Daarnaast ben je met de fiets zo in Amsterdam-Zuid of in het Stadshart van Amstelveen. Er zijn ook diverse (internationale) scholen, kinderdagverblijven en speeltuinen nabij. Verder fiets je vlot naar winkelcentrum Gelderlandplein in Amsterdam of naar het Stadshart van Amstelveen, waar je een ruim aanbod aan winkels, horeca, een bioscoop en het Cobra Museum vindt. En als je in Amsterdam werkt of regelmatig naar Schiphol moet, is deze locatie ideaal: de woning profiteert van een gunstige ligging ten opzichte van de A9, A10 en het openbaar vervoer, met snelle verbindingen naar Amsterdam-Zuid, de Zuidas en het centrum.
+
+INDELING
+
+Eerste verdieping: de entree op de begane grond wordt gedeeld met de benedenbewoners. Via de afgesloten trap komt u op de eerste etage. Hier bevindt zich de ruime overloop met fraaie massieve houten vloer, een gemoderniseerd toilet en een vaste kast. De open keuken is gelegen aan de achterzijde van de woning en is uitgerust met diverse inbouwapparatuur. De moderne badkamer is gelegen aan de voorzijde van de woning.
+
+Tweede verdieping: via de overloop zijn alle vertrekken bereikbaar en op de overloop bevindt zich een ruime vaste kast en een luik naar de bergzolder. Op deze etage zijn 3 goed bemeten slaapkamers. Er is een aparte was-/c.v.-ruimte aanwezig. De berging gelegen aan het achterpad.
+
+Bijzonderheden:
+
+- Woonoppervlakte: ca. 101 m²
+- Bouwjaar: 1948
+- Servicekosten: € 75,- per maand
+- 3 slaapkamers
+- Keuken vernieuwd in 2020 
+- Badkamer vernieuwd in 2018
+- Berging gelegen aan het achterpad
+- Oplevering in overleg
+
+Direct online een bezichtiging inplannen? Bezoek onze website!
+
+----------------------------------------------------------------------
+
+Schedule a viewing online right away? Visit our website!
+
+Excellent location – Spacious, well-maintained, and turnkey 4-room corner maisonette of approximately 101 m², situated in a prime area just a stone’s throw from the Amsterdam Forest and the historic De Braak Heempark!
+
+LOCATION &amp; ACCESSIBILITY
+
+This apartment is located in one of the most attractive areas in Amstelveen. Here you experience the unique combination of urban living and nature: you live only a short walk away from the oldest heempark in Amstelveen, Heempark de Braak, dating from 1939. In the center of the park lies a large pond, where you can enjoy a magnificent view of the surrounding greenery. Especially in the spring, when the park comes alive with an abundance of spring flowers, it is the perfect place for a walk or to simply relax. In addition, the immediate area also offers Broersepark, the Amsterdam Forest, De Poel, and various sports clubs.
+
+As for amenities, you will be excellently served here; for example, Albert Heijn, patisserie Prenger, and the renowned bakery Le Fournil de Sébastien are all within walking distance. For an evening out, you can visit restaurants such as Aan de Poel (two Michelin stars), Villa Borghese, or Gusto in the charming Oude Dorp. For a cozy drink or a cup of coffee, cafés like Thijs are also available nearby. Moreover, you can easily cycle to Amsterdam-Zuid or to the Amstelveen City Center. There are also various (international) schools, daycares, and playgrounds nearby. Furthermore, you can conveniently cycle to the Gelderlandplein shopping center in Amsterdam or to the Amstelveen City Center, where you will find a wide range of shops, dining options, a cinema, and the Cobra Museum. And if you work in Amsterdam or regularly travel to Schiphol, this location is ideal: the property benefits from its favorable location with respect to the A9, A10, and public transportation, providing quick connections to Amsterdam-Zuid, the Zuidas, and the city center.
+
+LAYOUT
+
+First Floor: The entrance at ground level is shared with the ground-floor residents. Through a secure staircase you reach the first floor. Here, you find a spacious landing with a beautiful solid wooden floor, a modernized toilet, and a built-in closet. The open kitchen is located at the rear of the property and is equipped with various built-in appliances. The modern bathroom is situated at the front of the property.
+
+Second Floor: Through the landing, all rooms are accessible, and there is a spacious built-in closet along with a hatch to the storage attic. On this floor, there are 3 well-proportioned bedrooms. A separate laundry/C.V. (central heating) room is also present. The storage room is located at the rear access.
+
+Highlights: 
+
+- Living area: approximately 101 m²
+- Year built: 1948
+- Service costs: €75 per month
+- 3 bedrooms
+- Kitchen renovated in 2020
+- Bathroom renovated in 2018 
+- Storage room located at the rear access 
+- Delivery date: in consultation
+
+Schedule a viewing online right away? Visit our website!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegrond(en), not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 32</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/050/251_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/258_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/168_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/115_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/348_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/320_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/210_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/246_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/166_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/141_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/315_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/312_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/270_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/162_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/337_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/139_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/327_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/351_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/271_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/263_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/264_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/124_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/093_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/163_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/257_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/272_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/261_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/199_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/158_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/147_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/138_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/050/103_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

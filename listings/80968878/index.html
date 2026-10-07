@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theodorus Majofskistraat 11-H · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Theodorus Majofskistraat 11-H</h1>
+  <p class="sub">
+    <span>1065 SN Amsterdam</span>
+    <span>·</span>
+    <span>Jacques Veltmanbuurt</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/086/056_1440x960.jpg" alt="Theodorus Majofskistraat 11-H — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">53 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€525.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.818/m² · 0.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">0.6 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">77 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1955</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-theodorus-majofskistraat-11-h/80968878/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>Available per 01-02-2027</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 525.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.818</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Ground-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1955</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gedeeltelijk gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>77 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>11 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>18 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>374 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>Begane grond</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas-fired combi boiler uit 2021, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND D 9180</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>owned belast met Leasehold (einddatum Leasehold: 30-11-2054)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-11-2054</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>39 m² (4,50 m deep en 8,62 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het oosten bereikbaar via achterom</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Jacques Veltmanbuurt</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>3.745</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>21%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 6.672</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">#PLAN DIRECT ZELF EEN AFSPRAAK VIA FUNDA#
+#ENGLISH BELOW#
+
+Sfeervol en hoogwaardig afgewerkt dubbel benedenhuis van circa 77 m² met 3 slaapkamers, een heerlijke eigen achtertuin van circa 38 m², vloerverwarming door de gehele woning en 2 bergingen. 
+Een bijzondere combinatie van een eigen tuin met directe toegang tot de grote, groene gemeenschappelijke binnentuin. Rustig gelegen en toch uitstekend bereikbaar, met het Vondelpark op slechts circa 1,8 km afstand!
+
+Dit verrassend ruime dubbele benedenhuis is verdeeld over de eerste verdieping en begane grond en is in 2021 volledig verbouwd en vernieuwd. Daarbij is de woning logisch ingedeeld en met veel aandacht en een hoogwaardig afwerkingsniveau afgewerkt.
+
+Indeling:
+
+Eerste verdieping:
+
+Via het gemeenschappelijke trappenhuis bereik je de voordeur van de woning op de eerste verdieping. Hier bevindt zich de ruime en lichte woonkamer met open keuken. De moderne keuken is tijdens de renovatie vernieuwd en voorzien van diverse inbouwapparatuur, waaronder inductie, oven, vaatwasser en koel-/vriescombinatie. Daarnaast is er een close-in boiler voor direct warm water.
+
+Op deze verdieping bevindt zich tevens een ruime kamer die uitstekend dienst kan doen als slaapkamer, maar bijvoorbeeld ook als eetkamer of studeerkamer. Ook de moderne badkamer bevindt zich op deze verdieping.
+Vanuit de woning leidt een interne trap naar de begane grond.
+
+Begane grond:
+
+Op de begane grond bevinden zich twee slaapkamers en een praktische was- en bergruimte, waar tevens de mogelijkheid bestaat om een tweede toilet te realiseren.
+
+Vanuit deze verdieping is er toegang tot de heerlijke eigen achtertuin van circa 38 m², met volop ruimte voor een eettafel, loungehoek en groen. Een groot pluspunt is dat je vanuit de eigen tuin direct de ruime en groene gemeenschappelijke binnentuin inloopt. Hierdoor profiteer je van je eigen buitenruimte én van een bijzonder ruime, groene omgeving direct achter de woning.
+
+De gehele woning beschikt over vloerverwarming, waarbij iedere ruimte afzonderlijk kan worden ingesteld. De verwarming is centraal én op afstand via een app te bedienen.
+Ook de elektrische installatie is in 2021 volledig vernieuwd, inclusief alle bedrading, de meterkast en groepen. De woning beschikt daarnaast over kunststof kozijnen met dubbel glas.
+Bij het appartement horen bovendien twee separate bergingen: één op de begane grond en één op de zolderverdieping.
+
+Complex en VvE:
+
+Het appartement maakt deel uit van een verzorgd complex met een prachtige, rustige en opvallend ruime gemeenschappelijke binnentuin. De directe verbinding vanuit de eigen achtertuin met deze groene binnentuin is een van de bijzondere kenmerken van de woning en geeft een gevoel van ruimte dat je in de stad niet snel tegenkomt.
+
+De actieve en professioneel beheerde VvE bestaat uit 97 appartementsrechten. Het reservefonds bedraagt € 1.153.300,20 per 31 december 2025. Er is een in 2025 opgesteld meerjarenonderhoudsplan met een planning tot 2049. De maandelijkse VvE-bijdrage bedraagt € 198,95.
+
+Omgeving:
+
+De Theodorus Majofskistraat ligt in een rustige en groene woonomgeving in Amsterdam Nieuw-West, terwijl de levendigheid van de stad dichtbij is. Het Vondelpark ligt op slechts circa 1,8 kilometer afstand en ook Oud-Zuid, Oud-West en De Baarsjes zijn gemakkelijk per fiets bereikbaar.
+
+De bereikbaarheid is uitstekend. Station Amsterdam Lelylaan ligt in de buurt en biedt snelle trein- en metroverbindingen. Vanaf station Lelylaan reis je met de trein in circa 6 minuten rechtstreeks naar Schiphol, ideaal voor wie regelmatig reist. Daarnaast zijn er diverse tramverbindingen in de omgeving en is de Ring A10 snel bereikbaar.
+
+Voor dagelijkse boodschappen, horeca en sportvoorzieningen is er in de directe omgeving volop keuze. Zo combineert de woning een rustige en groene woonomgeving met een zeer goede verbinding naar zowel het centrum van Amsterdam als Schiphol.
+
+Erfpacht:
+
+De erfpachtcanon is afgekocht tot en met 30 november 2054. De overstap naar eeuwigdurende erfpacht is aangevraagd.
+
+Bijzonderheden:
+
+-Dubbel benedenhuis van circa 77 m²;
+-3 slaapkamers: 1 op de eerste verdieping en 2 op de begane grond;
+-Kamer op de eerste verdieping ook uitstekend geschikt als eetkamer of studeerkamer;
+-Eigen achtertuin van circa 38 m²;
+-Vanuit de eigen tuin directe toegang tot de grote, groene gemeenschappelijke binnentuin;
+-In 2021 volledig verbouwd en vernieuwd;
+-Hoogwaardig afwerkingsniveau;
+-Vloerverwarming door de gehele woning, per ruimte regelbaar en via app te bedienen;
+-Elektrische installatie volledig vernieuwd in 2021;
+-Kunststof kozijnen met dubbel glas;
+-Moderne keuken met inductie en diverse inbouwapparatuur;
+-Close-in boiler voor direct warm water;
+-Was- en bergruimte op de begane grond;
+-Mogelijkheid voor een tweede toilet;
+-2 separate bergingen: één op de begane grond en één op zolder;
+-Actieve en professioneel beheerde VvE met 97 appartementsrechten;
+-VvE-bijdrage € 198,95 per maand;
+-Reservefonds € 1.153.300,20 per 31 december 2025;
+-MJOP uit 2025 met planning tot 2049;
+-Erfpachtcanon afgekocht tot en met 30 november 2054;
+-Overstap naar eeuwigdurende erfpacht aangevraagd;
+-Vondelpark op slechts circa 1,8 km afstand;
+-Uitstekende verbinding met Schiphol via station Lelylaan;
+-Vaste projectnotaris: Legal Loyalty Amsterdam.
+
+Een heerlijk compleet en instapklaar dubbel benedenhuis met 3 slaapkamers, een eigen tuin én directe toegang tot een grote groene gemeenschappelijke binnentuin. Met veel wooncomfort, volop bergruimte en uitstekende verbindingen richting zowel de stad als Schiphol is dit een bijzonder fijne plek om te wonen.
+
+#English#
+
+Charming and beautifully finished two-storey ground-floor apartment of approximately 77 m², offering 3 bedrooms, a wonderful private rear garden of approximately 38 m², underfloor heating throughout and 2 separate storage rooms. 
+A particularly attractive feature is the combination of a private garden with direct access to the large, green communal courtyard garden. Peacefully located yet exceptionally well connected, with Vondelpark just approximately 1.8 km away!
+
+This surprisingly spacious two-storey apartment is arranged over the first and ground floors and was completely renovated and modernised in 2021. The property has been thoughtfully laid out and finished to a high standard throughout.
+
+Layout:
+
+First floor:
+
+The front door of the apartment is reached via the communal staircase on the first floor. Here you will find the spacious and bright living room with open-plan kitchen. The modern kitchen was renewed as part of the renovation and is equipped with a range of integrated appliances, including an induction hob, oven, dishwasher and fridge/freezer. There is also a close-in boiler providing instant hot water.
+This floor also features a generously sized room that is ideal as a bedroom, but could equally be used as a dining room or study. The modern bathroom is also located on this floor.
+An internal staircase leads down to the ground floor.
+
+Ground floor:
+
+The ground floor comprises two bedrooms and a practical utility and storage room, where there is also the possibility of creating a second WC.
+From this floor, there is direct access to the wonderful private rear garden of approximately 38 m², offering plenty of space for a dining table, lounge area and greenery. A major advantage is that the private garden provides direct access to the spacious and green communal courtyard garden. This allows you to enjoy your own private outdoor space as well as an exceptionally generous green setting immediately behind the property.
+
+The entire property benefits from underfloor heating, with the temperature in each room individually adjustable. The heating can be controlled centrally as well as remotely via an app.
+
+The electrical installation was also completely renewed in 2021, including all wiring, the consumer unit and electrical circuits. The property is fitted with uPVC window frames and double glazing.
+The apartment also comes with two separate storage rooms: one on the ground floor and another in the attic.
+
+Building and Owners’ Association:
+
+The apartment forms part of a well-maintained residential complex featuring a beautifully landscaped, peaceful and exceptionally spacious communal courtyard garden. The direct connection between the private rear garden and this green communal garden is one of the property’s most distinctive features, creating a sense of space that is rarely found in the city.
+
+The active and professionally managed Owners’ Association (VvE) comprises 97 apartment rights. The reserve fund stood at €1,153,300.20 as at 31 December 2025. A long-term maintenance plan (MJOP) was drawn up in 2025 and covers planned maintenance through to 2049. The monthly VvE contribution for the apartment is €198.95.
+
+Location:
+
+Theodorus Majofskistraat is situated in a peaceful and green residential area of Amsterdam Nieuw-West, while the vibrancy of the city remains within easy reach. Vondelpark is just approximately 1.8 kilometres away, while Oud-Zuid, Oud-West and De Baarsjes are also easily accessible by bicycle.
+
+Transport connections are excellent. Amsterdam Lelylaan station is nearby and offers convenient train and metro services. From Lelylaan station, Schiphol Airport can be reached by direct train in approximately 6 minutes, making this an ideal location for frequent travellers. There are also several tram connections nearby, while the A10 ring road is easily accessible by car.
+
+A wide range of shops, cafés, restaurants and sports facilities can be found in the surrounding area. The property therefore combines a peaceful, green living environment with excellent connections to both central Amsterdam and Schiphol Airport.
+
+Ground lease:
+
+The ground lease has been prepaid until 30 November 2054. An application to switch to perpetual ground lease has been submitted.
+
+Key features:
+
+-Two-storey ground-floor apartment of approximately 77 m²;
+-3 bedrooms: 1 on the first floor and 2 on the ground floor;
+-Room on the first floor also ideally suited as a dining room or study;
+-Private rear garden of approximately 38 m²;
+-Direct access from the private garden to the large, green communal courtyard garden;
+-Completely renovated and modernised in 2021;
+-High-quality finish throughout;
+-Underfloor heating throughout, individually adjustable per room and controllable via an app;
+-Electrical installation completely renewed in 2021;
+-PVC window frames with double glazing;
+-Modern kitchen with induction hob and various integrated appliances;
+-Close-in boiler providing instant hot water;
+-Utility and storage room on the ground floor;
+-Possibility of creating a second WC;
+-2 separate storage rooms: one on the ground floor and one in the attic;
+-Active and professionally managed Owners’ Association comprising 97 apartment rights;
+-Monthly VvE contribution: €198.95;
+-Reserve fund of €1,153,300.20 as at 31 December 2025;
+-Long-term maintenance plan drawn up in 2025, covering planned maintenance through to 2049;
+-Ground lease prepaid until 30 November 2054;
+-Application to switch to perpetual ground lease submitted;
+-Vondelpark approximately 1.8 km away;
+-Excellent connection to Schiphol Airport via Amsterdam Lelylaan station;
+-Designated project notary: Legal Loyalty Amsterdam.
+
+A wonderfully complete and move-in-ready home with 3 bedrooms, a private garden and direct access to a large, green communal courtyard garden. Offering excellent comfort, plenty of storage space and superb connections to both the city and Schiphol Airport, this is an exceptionally pleasant place to call home.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Honq Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 53</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/086/056_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/050_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/067_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/052_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/038_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/057_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/027_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/029_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/049_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/051_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/039_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/060_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/009_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/010_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/034_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/069_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/071_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/032_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/019_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/025_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/015_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/021_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/059_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/020_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/041_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/045_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/042_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/044_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/037_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/066_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/033_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/018_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/065_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/026_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/048_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/054_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/064_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/035_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/014_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/031_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/062_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/058_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/040_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/024_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/023_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/068_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/086/047_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

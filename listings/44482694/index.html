@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>H. Gerhardstraat 78 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>H. Gerhardstraat 78</h1>
+  <p class="sub">
+    <span>1069 TD Amsterdam</span>
+    <span>·</span>
+    <span>Zuidwestkwadrant-Zuid</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/230/272/361_1440x960.jpg" alt="H. Gerhardstraat 78 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">47 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€625.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.252/m²
+    </div>
+    <div class="chips">
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">119 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2012</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-h-gerhardstraat-78/44482694/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 625.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.252</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 150,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Double lower house (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2012</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>119 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>24 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>15 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>543 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 2 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, Walk-in shower, Bathtub, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN E 8681</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 30-11-2060)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-11-2060</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN E 8681A</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN E 8681A</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>24 m² (4,89 m deep en 4,97 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het westen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking en parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 150,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Heerlijk licht en ruim opgezet duplex benedenhuis van 119 m2 met een ruime terrastuin van 25 m² op het westen, vier slaapkamers, een eigen berging, een eigen parkeerplaats en energielabel A. De woning heeft een eigen entree en biedt aan de voorzijde een prachtig vrij uitzicht op het groen en het water.
+
+De H. Gerardstraat grenst aan de Pieter Calandlaan, ter hoogte van de Hoekenesgracht en heeft in de directe omgeving diverse mogelijkheden voor restaurants, park, cafés en winkels. De buurt kenmerkt zich als levendig en kindvriendelijk. Het complex is gelegen bij de entree van Stadspark Osdorp. Dit park loopt door tot aan de winkelstraat Tussen Meer en het Osdorpplein. Door de ligging in de nabijheid van de A10, nabij afrit S106, is de H. Gerardstraat goed bereikbaar met de auto. Ook met het openbaar vervoer is de woning goed bereikbaar. Tram 1 stopt direct bij de brug van de Hoekenesgracht aan de Pieter Calandlaan en brengt u in ongeveer 5 minuten naar NS Station Lelylaan, en 20 minuten naar Leidseplein en 16 naar Vondelpark. Stadsbus 69 rijdt elk kwartier naar Schiphol. In de directe omgeving bevinden zich diverse scholen, kinderopvang, gezellige cafés en restaurants, grootste meer van Amsterdam Sloterplas, theater De Meervaart met bioscoop Oxville. Voor de dagelijkse boodschappen zijn enkele grote supermarkten of de weekmarkt op Tussenmeer op loopafstand.
+
+Goed om te weten:
+* Bouwjaar: 2012
+* Woonoppervlakte 119 m²
+* Energielabel A
+* Privé berging in de onderbouw
+* Gemeenschappelijke binnentuin
+* Ruim terras op het westen
+* Eigen parkeerplaats in parkeergarage
+* De erfpachtcanon is tot en met 30 november 2060 afgekocht
+* Actieve en gezonde Vereniging van Eigenaren; administratie door VvE Gemak 
+* Maandelijkse Vve bijdrage: € 150,- 
+* Oplevering in overleg
+
+Het appartement
+Begane grond
+Via de entree betreed je de woning, waar de hal toegang biedt tot het toilet met fonteintje en de meterkast. Vanuit de hal bereik je de open keuken aan de voorzijde van de woning.
+
+De keuken is uitgevoerd in een open opstelling en staat in directe verbinding met de woonkamer. De keuken beschikt over diverse apparatuur, waaronder een grote koelkast, een dubbele vriezer, een Siemens combi-oven en een 4-pits inductiekookplaat. Aan het raam is een gezellige plek gecreëerd waar ruimte is om rustig te ontbijten of te genieten van een kop koffie. Dankzij de grote raampartijen en hoge plafonds aan de voorzijde profiteert de ruimte van veel natuurlijk licht.
+
+Centraal in de woning bevindt zich de trapopgang naar de eerste verdieping met daarnaast praktische bergruimte, waaronder een trapkast en extra kastruimte.
+
+De woonkamer bevindt zich aan de achterzijde van de woning en biedt voldoende ruimte voor zowel een zit- als eetgedeelte. Door de grote raampartijen aan de achterzijde ontstaat een prettige verbinding met buiten en is er uitzicht op de achtertuin. De fijne tuin is gunstig gelegen ten opzichte van de zon en een groot pluspunt is de nabijgelegen sfeervolle, afgesloten binnentuin, die volop ruimte biedt voor spelende kinderen. Via de woonkamer is de tuin direct toegankelijk.
+
+Door de split-level indeling ontstaat een speelse en prettige woonopzet, met op het lagere niveau een moderne, ruime keuken en op het tussenliggende niveau een royale woonkamer met eetgedeelte.
+
+Eerste verdieping
+Via de trap bereik je de eerste verdieping, waar de overloop toegang geeft tot meerdere vertrekken. Aan de achterzijde zijn twee slaapkamers gesitueerd. Beide slaapkamers zijn gelegen aan de rustige achterzijde van de woning, kijken uit over de achtertuinen en beschikken over openslaande kiepramen die zorgen voor veel lichtinval en ventilatiemogelijkheden.
+
+De badkamer is recent geheel vernieuwd, ruim opgezet en uitgevoerd in warme kleurstellingen. De ruimte beschikt over een dubbele wastafel met wastafelmeubel, een elektrische ronde spiegel met verlichting, een prachtig vrijstaand ovaal ligbad en een ruime inloopdouche voorzien van dubbele douchekoppen.
+
+Op deze verdieping bevindt zich daarnaast een separate toiletruimte met fonteintje en een praktische ruimte met aansluiting voor wasmachine en wasapparatuur. Aan de rustige voorzijde bevindt zich een royale masterbedroom. Daarnaast beschikt deze verdieping over een extra kamer met inloopkast, die eveneens gebruikt kan worden als slaapkamer, werkruimte of kinderkamer.
+
+In de onderbouw bevindt zich de eigen berging en de parkeerplaats.
+
+Dankzij de rustige ligging en de nabijheid van diverse voorzieningen betreft dit een bijzonder gewilde woning.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Isabelle Band</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 47</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/230/272/361_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/269_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/399_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/295_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/374_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/336_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/310_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/380_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/237_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/258_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/362_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/211_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/323_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/411_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/443_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/452_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/335_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/378_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/341_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/415_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/259_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/228_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/389_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/249_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/408_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/405_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/217_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/425_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/205_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/253_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/426_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/260_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/325_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/286_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/404_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/390_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/245_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/413_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/291_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/357_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/418_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/212_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/370_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/272/453_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

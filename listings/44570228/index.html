@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Egidiusstraat 46-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Egidiusstraat 46-2</h1>
+  <p class="sub">
+    <span>1055 GW Amsterdam</span>
+    <span>·</span>
+    <span>Bosleeuw</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/708/317_1440x960.jpg" alt="Egidiusstraat 46-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">47 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€425.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.967/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">61 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1950</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-egidiusstraat-46-2/44570228/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 425.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.967</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 179,45 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1950</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>61 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>206 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Frans balkon, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HRE (elektrisch combiketel uit 2017, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND C 11048</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 30-04-2055)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-04-2055</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, City centre, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 179,45 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">SFEERVOL 4-KAMERAPPARTEMENT MET DRIE SLAAPKAMERS, MATZWARTE DESIGNKEUKEN, GROENE ACHTERZIJDE EN OVERDEKT BALKON IN BOS EN LOMMER
+
+Aan de Egidiusstraat ligt dit sfeervolle en praktisch ingedeelde 4-kamerappartement van circa 61 m² met drie slaapkamers, een stijlvolle matzwarte keuken, karakteristieke details en twee eigen bergingen op de begane grond. De huidige bewoners gebruiken één van de slaapkamers als eetkamer, waardoor een fijne leefruimte aan de achterzijde is ontstaan. Wie alle drie de slaapkamers nodig heeft, kan de oorspronkelijke indeling eenvoudig weer als zodanig gebruiken.
+
+EEN WONING MET KARAKTER
+Begane grond: Via de ruime entree op de begane grond, met eigen brievenbus, bereik je het trappenhuis. Hier bevinden zich twee privébergingen, waarvan één met raam, ideaal voor fietsen en extra opslag. Via de achterom kun je bovendien gemakkelijk met de fiets naar buiten. Entree van de woning
+Op de tweede verdieping, feitelijk de derde woonlaag van het gebouw, ligt de entree van de woning. Vanuit de hal zijn de verschillende vertrekken bereikbaar, is ruimte voor een garderobe en bevindt zich het separate toilet. De sfeervolle drempelloze eikenhouten lamelparketvloer geeft de woning direct warmte en kwaliteit en vormt een mooie combinatie met de originele paneeldeuren en andere karakteristieke details. De woonkamer ligt aan de straatzijde en voelt aangenaam licht aan. Het daglicht valt hier zacht naar binnen en het Franse balkon aan de westzijde geeft de kamer een fijne verbinding met buiten. Ook aan deze zijde zorgen de volwassen bomen in de straat voor een groen beeld. De originele marmeren schouw is een mooie blikvanger en brengt direct sfeer in de ruimte. Daarnaast is er een praktische inbouwkast met elektra, waar naast extra bergruimte momenteel ook de vriezer een plek heeft gekregen. Direct naast de woonkamer ligt de ruime hoofdslaapkamer.
+
+KOKEN EN BORRELEN MET UITZICHT OP HET GROEN
+Aan de rustige achterzijde ligt de stijlvolle matzwarte keuken met composiet aanrechtblad van Kvik Keukens. De extra diepe keukenkasten zorgen voor verrassend veel opbergruimte. Vanuit hier kijk je uit over de groenstrook met volle, volwassen bomen die ieder seizoen weer een ander uitzicht geven. De keuken is voorzien van alle gemakken, waaronder een SMEG inductiekookplaat, SMEG combi-oven, Siemens koelkast, Bauknecht vaatwasser en de mogelijkheid voor het plaatsen van een was-droogcombinatie.
+Vanuit de keuken stap je direct het overdekte balkon op. Doordat het balkon beschut binnen de gevel ligt, voelt het bijna als een verlengstuk van de keuken. In de ochtend is dit een heerlijke plek voor een ontbijtje in de zon en later op de dag zet je tijdens het koken de deur open, schenk je een glas wijn in en laat je vrienden buiten aanschuiven. En trekt er ineens een regenbui over Amsterdam, dan kan de borrel gewoon doorgaan.
+
+FLEXIBEL WONEN MET DRIE SLAAPKAMERS
+De woning beschikt officieel over drie slaapkamers en biedt daarmee verrassend veel mogelijkheden. De hoofdslaapkamer ligt aan de voorzijde naast de woonkamer. Aan de achterzijde bevinden zich nog twee slaapkamers, beide met uitzicht op het groen.
+Eén van deze kamers wordt momenteel gebruikt als eetkamer en sluit prettig aan op de keuken. Hierdoor is een fijne plek ontstaan voor lange diners en gezellige avonden met vrienden. Wie de kamer liever als slaapkamer gebruikt, beschikt over drie volwaardige slaapkamers. De andere slaapkamer aan de achterzijde heeft openslaande ramen met kunststof kozijnen en HR++ glas. Vanuit hier kijk je uit over de bomen van de groenstrook en zie je de seizoenen letterlijk voorbij komen.
+
+Dankzij de drie slaapkamers en flexibele indeling past de woning bij verschillende levensfases: van twee studenten of een stel dat samen een eerste huis zoekt tot een gezin of bewoner(s) die behoefte hebben aan een fijne thuiswerkplek.
+Vanuit de huidige eetkamer, met extra bergkast, bereik je de badkamer. De originele granito vloer geeft de ruimte karakter en is gecombineerd met een douche met mengkraan, wastafel met spiegelkast en radiator.
+
+BOS EN LOMMER OP ZIJN LEUKST
+Hier woon je aan een rustige straat, terwijl alles wat Bos en Lommer zo geliefd maakt dichtbij ligt. De Bos en Lommerweg ligt letterlijk om de hoek en is zo&#x27;n plek waar vertrouwde buurtadressen en nieuwe favorieten moeiteloos naast elkaar bestaanVoor vers brood wandel je naar Broodbakkerij Van der Heijden, Bbrood of Farine voor zuurdesembrood en iets lekkers bij de koffie. Ook Patisserie Rijkhoff is zo’n vertrouwd adres waar je gemakkelijk even binnenloopt, terwijl Abbey aan de Admiraal de Ruijterweg een fijne plek is voor lunch, diner of een borrel. Er zit zoveel leuks in de buurt: van de vishandel voor verse vis tot een fijne boekhandel en bloemist voor een spontaan cadeautje. Voor cultuur wandel je richting Podium Mozaïek of No Man’s Art Gallery en voor de dagelijkse boodschappen liggen Albert Heijn aan de Bos en Lommerweg en Dirk bij het Bos en Lommerplein dichtbij. Ook voor groen hoef je niet ver. Met het Erasmuspark, Westerpark en Rembrandtpark in de buurt heb je maar liefst drie fijne parken binnen handbereik voor een wandeling, een rondje sporten, een picknick in het gras of gewoon even ontspannen. In het Erasmuspark schuif je bovendien gemakkelijk aan bij café Terrasmus voor een kop koffie. En op de fiets bereik je vanuit hier gemakkelijk het Westerpark, de Jordaan en het centrum.
+
+JE STAPT ZO OP DE BUS NAAR HET STRAND 
+Wil je een dag richting Haarlem of naar het strand? Bijna voor de deur stap je op bus 80, die je rechtstreeks richting Haarlem en Zandvoort brengt. Zo verruil je de stad op een zonnige dag heel gemakkelijk voor zee, strand en duinen.
+
+BEREIKBAARHEID 
+Ook de bereikbaarheid richting de rest van Amsterdam en daarbuiten is uitstekend. Station Sloterdijk ligt op korte fietsafstand en met bus, tram en metro reis je gemakkelijk richting onder meer Amsterdam Centraal en Amsterdam Zuid. Met de auto zit je bovendien binnen circa vijf minuten op de Ring A10, met snelle verbindingen richting Zaandam, Schiphol en via de A4 richting Rotterdam.
+
+HIGHLIGHTS
+• Sfeervol 4-kamerappartement van circa 61 m², juridisch gelegen op de tweede verdieping en feitelijk op de derde verdieping;
+• Twee balkons, waarvan één Frans balkon;
+• Drie officiële slaapkamers;
+• Achterzijde gelegen op het oosten en voorzijde gelegen op het westen;
+• Stijlvolle, extra diepe matzwarte keuken van Kvik Keukens met veel opbergruimte;
+• 3-laags eikenhouten lamelparketvloer met 3 mm Europese eiken toplaag en topcoat-afwerking;
+• Originele paneeldeuren door de woning;
+• Originele marmeren schouw in de woonkamer;
+• Grotendeels kunststof kozijnen voorzien van HR++ beglazing;
+• Twee privébergingen op de begane grond, waarvan één met raam, en een praktische achterom;
+• Professioneel beheerde VvE door VvE Beheer Amsterdam;
+• De VvE heeft plannen voor verdere verduurzaming, waaronder het vernieuwen van de kozijnen en dak;
+• Huidige VvE-bijdrage circa € 179,45 per maand;
+• Erfpacht voor het huidige tijdvak afgekocht tot en met 30 april 2055;
+• Meterkast met 8 groepen en twee 2-fasegroepen;
+• Verwarming en warm water via een Intergas HRE cv-ketel, bouwjaar 2017;
+• Station Sloterdijk op korte fietsafstand;
+• Goede verbindingen richting Amsterdam Centraal en Amsterdam Zuid;
+• Ring A10 binnen circa vijf minuten bereikbaar;
+• Koper is ermee bekend dat in de koopakte een asbest- en ouderdomsclausule zal worden opgenomen;
+• Oplevering in overleg;
+• De koopakte wordt opgemaakt bij een notaris in Amsterdam, Diemen of Amstelveen volgens het Amsterdams Ringmodel.
+
+Wij plannen graag een moment voor je in voor de bezichtiging van dit appartement. Onze makelaar vertelt je graag van alles over dit appartement terwijl je rondkijkt. Zien we jou binnenkort?
+
+Deze informatie is door ons met zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Metropool Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 47</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/708/317_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/418_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/428_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/250_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/408_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/261_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/329_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/274_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/344_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/381_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/342_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/370_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/355_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/222_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/362_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/424_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/390_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/243_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/387_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/237_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/327_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/322_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/293_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/401_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/283_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/366_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/348_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/267_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/671/547_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/671/531_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/671/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/671/537_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/671/478_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/671/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/417_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/312_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/225_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/252_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/338_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/423_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/708/336_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nico Snijdersstraat 22 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Nico Snijdersstraat 22</h1>
+  <p class="sub">
+    <span>1063 VD Amsterdam</span>
+    <span>·</span>
+    <span>Meerwaldtbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/564/969_1440x960.jpg" alt="Nico Snijdersstraat 22 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">26 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€525.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.325/m² · 3.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.1 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">83 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1953</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-nico-snijdersstraat-22/44526728/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 525.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.325</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1953</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>83 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>101 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>290 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche en Bathtub</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors en een zolder</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler uit 2022, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN (N.H) D 8349</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>101 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 16-06-2053</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, beschutte ligging en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>36 m² (7,56 m deep en 4,73 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidoosten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Meerwaldtbuurt</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>1.970</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>31%</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruime en instapklare eengezinswoning in Amsterdam-West met volwaardige zolderverdieping in een van het meest charmante straatje van Slotermeer!
+
+Rustig gelegen in een groene omgeving en met laagbouw aan de overzijde, bieden wij deze goed onderhouden en smaakvol verbouwde eengezinswoning te koop aan. De woning beschikt over 4 slaapkamers, een volwaardige zolderverdieping met vaste trap en dakkapel, een voortuin, een zonnige achtertuin met achterom en een ruime berging. Pak je kans want er komt niet zo vaak een woning te koop in dit straatje!
+
+Een woning waar ruimte en comfort samenkomen
+De huidige eigenaar heeft de woning op fraaie wijze vergroot door de zolderverdieping volledig bij de woning te betrekken. Dankzij de vaste trap en de dakkapel is hier een volwaardige extra verdieping ontstaan, ideaal als royale slaapkamer. In combinatie met de verzorgde afwerking, praktische indeling en royale zonnige tuin is dit een woning waar je direct kunt genieten.
+
+Indeling:
+Verrassend ruimte voortuin. Via de entree kom je in de hal met garderoberuimte, trapkast en toilet. Vanuit de hal bereik je de lichte woonkamer gelegen aan de achterzijde. Aan de voorzijde bevindt zich de moderne open keuken, voorzien van diverse (inbouw)apparatuur. 
+Aan de achterzijde geven de schuifpui en de grote raampartijen een prettige verbinding met de zonnige achtertuin.
+De tuin is verzorgd en is gelegen op het zonnige zuiden. De berging beschikt over elektra en een betonnen vloer, ideaal voor fietsen en extra opslag. de tuin en de berging zijn te bereiken via de achtergelegen steeg. 
+
+Eerste verdieping:
+De overloop geeft toegang tot drie slaapkamers en de ruime badkamer. De badkamer is praktisch ingedeeld en voorzien van een wastafelmeubel en een ruime hoekbad met douche. Er zijn 2 slaapkamers aan de achterzijde en de 3e is -naast de badkamer- gelegen aan de voorzijde. 
+
+Tweede verdieping:
+Via een vaste trap bereik je de volwaardige zolderverdieping. Dankzij de gerealiseerde dakkapel is hier een heerlijke lichte en ruime kamer ontstaan die zich uitstekend leent als hoofdslaapkamer, werkkamer of logeerkamer. Tevens bevindt zich op deze verdieping de cv-installatie en is er praktische bergruimte (achter de knieschotten) aanwezig.
+
+Locatie:
+Diverse voorzieningen zoals supermarkten, winkels, (basis)scholen, kinderopvang en sport- en fitnessfaciliteiten liggen op loopafstand. Nabij bevindt zich winkelcentrum Plein &#x27;40-&#x27;45. De bereikbaarheid is uitstekend dankzij diverse bus- en tramverbindingen. Via de Haarlemmerweg zijn de Ring A10 en de A4, A5 en A9 snel bereikbaar. NS-station Sloterdijk ligt op enkele fietsminuten en binnen circa 15 minuten bereik je het centrum van Amsterdam.
+
+Algemeen:
+- Woonoppervlakte 83,3 m2, 5,8 m2 externe bergruimte, conform professioneel opgemaakte meetrapport;
+- Perceeloppervlakte van 101 m²;
+- Gelegen op gemeentelijke erfpachtgrond, waarvan de canon is afgekocht tot 15-06-2053;
+- Koper is in de gelegenheid om de erfpacht eeuwigdurend af te kopen voor € 30.727,- (excl. notariskosten). Dit zit niet in de koopsom van het verkochte inbegrepen. Door te kiezen voor eeuwigdurende afkoop is zekerheid voor altijd binnen handbereik!
+- Er is ook de mogelijkheid om te kiezen voor jaarlijkse erfpachtcanon; € 1.499,66 per jaar exclusief indexering. Dit betalingsverplichting zal na het huidig tijdvak aanvangen. De PIP en aanbieding kunnen op verzoek verstrekt worden;
+- De woning is vergroot door de zolderverdieping middels een vaste trap en dakkapel volledig bij de woning te betrekken, waardoor extra wooncomfort en leefruimte zijn ontstaan;
+- Vanwege het bouwjaar (1953) worden in de koopakte een ouderdoms- en asbestclausule opgenomen;
+- Vaste notaris is van toepassing: Veenhof Notariaat;
+- Oplevering in overleg.
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien.
+
+ *** 
+
+Spacious and move-in ready family home in Amsterdam-West with a full-fledged attic floor in one of the most charming streets in Slotermeer!
+
+Quietly situated in a green area with low-rise buildings across the street, we offer this well-maintained and tastefully renovated family home for sale. The home features 4 bedrooms, a full-fledged attic floor with a fixed staircase and dormer window, a front garden, a sunny back garden with rear access, and a spacious storage shed. Seize this opportunity, as a home in this street does not come up for sale very often!
+
+A home where space and comfort come together
+The current owner has beautifully extended the home by fully integrating the attic floor into the living space. Thanks to the fixed staircase and the dormer window, a full-fledged extra floor has been created here, ideal as a spacious bedroom. Combined with the well-maintained finish, practical layout, and spacious sunny garden, this is a home where you can enjoy life immediately.
+
+Layout:
+Surprisingly spacious front garden. Through the entrance, you enter the hall with wardrobe space, under-stairs cupboard, and toilet. From the hallway, you reach the bright living room located at the rear. At the front is the modern open kitchen, equipped with various (built-in) appliances.
+At the rear, the sliding doors and large windows provide a pleasant connection to the sunny backyard.
+The garden is well-maintained and faces the sunny south. The storage shed features electricity and a concrete floor, ideal for bicycles and extra storage. The garden and the shed can be accessed via the alley located at the rear.
+
+First floor:
+The landing provides access to three bedrooms and the spacious bathroom. The bathroom is practically laid out and equipped with a vanity unit and a spacious corner bath with shower. There are 2 bedrooms at the rear, and the 3rd is located at the front, next to the bathroom.
+
+Second floor:
+A fixed staircase leads to the full-fledged attic floor. Thanks to the added dormer window, a lovely bright and spacious room has been created here that is perfectly suited as a master bedroom, study, or guest room. The central heating system is also located on this floor, and there is practical storage space available (behind the knee walls).
+
+Area:
+Various amenities such as supermarkets, shops, (primary) schools, childcare, and sports and fitness facilities are within walking distance. The Plein &#x27;40-&#x27;45 shopping center is located nearby. Accessibility is excellent thanks to various bus and tram connections. The A10 ring road and the A4, A5, and A9 motorways are quickly accessible via the Haarlemmerweg. Sloterdijk train station is just a few minutes away by bicycle, and the center of Amsterdam can be reached within approximately 15 minutes.
+
+General:
+- Living area 83.3 m², 5.8 m² of external storage space, in accordance with a professionally prepared measurement report;
+- Plot area of 101 m²;
+- Situated on municipal leasehold land, for which the ground rent has been paid off until 15-06-2053;
+- The buyer has the opportunity to pay off the leasehold in perpetuity for € 30,727 (excluding notary fees). This is not included in the purchase price of the property. With perpetual buyout, security is within reach forever!
+- There is also the option to choose an annual ground rent; € 1,499.66 per year excluding indexation. This payment obligation will commence after the current period. The PIP (personal information package) and offer can be provided upon request;
+- The home has been enlarged by fully incorporating the attic floor into the dwelling via a fixed staircase and dormer window, creating extra living comfort and living space;
+- Due to the year of construction (1953), an age and asbestos clause will be included in the purchase agreement;
+- The designated notary applies: Veenhof Notariaat;
+- Completion in consultation.
+
+This information has been compiled by us with due care. However, no liability is accepted on our part for any incompleteness, inaccuracy or otherwise, or the consequences thereof. All specified sizes and surfaces are indicative. The buyer has his own obligation to investigate all matters that are important to him or her. With regard to this property, the broker is an advisor to the seller. We advise you to engage an expert real estate agent who will guide you through the purchase process. If you have specific wishes regarding the house, we advise you to make this known to your purchasing broker in good time and to conduct independent research into this (or have it done). If you do not engage an expert representative, you consider yourself to be an expert enough to be able to oversee all matters of importance according to the law.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Bosma Makelaardij | Bosma Real Estate</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 26</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/564/969_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/044_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/895_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/923_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/872_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/816_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/848_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/980_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/828_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/088_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/908_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/805_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/041_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/004_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/057_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/997_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/909_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/056_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/040_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/036_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/564/861_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/565/077_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

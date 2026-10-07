@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cornelis Springerstraat 29-1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Cornelis Springerstraat 29-1</h1>
+  <p class="sub">
+    <span>1073 LG Amsterdam</span>
+    <span>·</span>
+    <span>Burgemeester Tellegenbuurt-Oost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/338/655_1440x960.jpg" alt="Cornelis Springerstraat 29-1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€625.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.058/m² · 4.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.3 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">69 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1923</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-cornelis-springerstraat-29-1/44510204/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 625.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.058</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 307,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1923</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>69 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>25 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>207 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 11615</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-07-2057</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 307,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** ZELDZAME KANS IN HET RUSTIGE HART VAN DE PIJP! ***
+SFEERVOLLE BOVENWONING, VOLLEDIG GERENOVEERD IN 2025, MET BALKON, EXTRA WERKRUIMTE EN
+EEUWIGDURENDE ERFPACHT
+Wonen in de Pijp, maar dan in het rustige, groene hart ervan: deze sfeervolle bovenwoning aan de Cornelis Springerstraat 29-1 is een schot in de roos. De woning is in 2025 volledig en met liefde voor detail gerenoveerd, van de moderne keuken tot de badkamer en de ruimte op zolder. Met 69 m² heerlijk lichte woonruimte, een eigen balkon en daarbovenop nog een riante extra ruimte op de derde verdieping, pak je hier zo je koffers uit. HIGHLIGHTS:
+Volledig gerenoveerd in 2025, van keuken tot badkamer tot de ruimte op zolder
+69 m² gebruiksoppervlakte wonen (NEN-2580, meetcertificaat A) op de eerste verdieping
+Extra ruimte van 25 m² op de derde verdieping, te gebruiken als kantoor-, werk- of logeerruimte Lichte woonkamer met erker
+Moderne keuken (2025) met toegang tot het balkon
+Drie slaapkamers
+Luxe badkamer met inloop-regendouche
+Balkon met zicht op de binnentuinen
+Erfpachtcanon afgekocht tot en met 31 juli 2057, overstap naar eeuwigdurende erfpacht onder gunstige voorwaarden al vastgelegd bij de notaris
+Professioneel beheerde en actieve VvE (Pro VvE Beheer), met een MJOP aanwezig
+Op loopafstand van de Albert Cuypmarkt, het Sarphatipark en de gezellige Van Woustraat
+Woningdeel vergunning voor bewoning voor 3 personen
+WONEN
+Aan de achterzijde van de woning ligt de lichte woonkamer met erker, die doorloopt in de eetkamer. Genoeg ruimte dus voor zowel een zithoek als een eettafel, met een rustig, groen uitzicht dat de hele dag met je meebeweegt. Precies de plek waar je &#x27;s avonds neerploft op de bank of vrienden ontvangt voor het eten. KOKEN
+De keuken is in 2025 volledig vernieuwd en direct klaar voor gebruik: een vierpits gaskookplaat, koel- vriescombinatie, oven en vaatwasser staan er allemaal al. Vanuit de keuken loop je zo door naar het balkon. SLAPEN EN BADEN
+De woning beschikt over drie slaapkamers, waaronder een ruime master-bedroom met toegang tot het balkon. De overige kamers zijn flexibel in te delen als kinder-, logeer- of werkkamer. Of zelfs als aparte eetkamer. De badkamer is modern en praktisch ingericht met een wastafelmeubel, toilet en een inloop-regendouche waar je elke ochtend fris de dag mee begint.
+WERKRUIMTE OP ZOLDER
+Op de derde verdieping wacht een verrassing: een zeer ruime en lichte ruimte van 25 m². Deze staat volgens de splitsingsakte geregistreerd als berging, maar mag worden gebruikt als kantoor-, werk- of logeerruimte. Ideaal als je thuis wilt werken of met enige regelmaat logees over de vloer hebt. Let op: deze ruimte is niet bestemd voor permanente bewoning.
+BUITENLEVEN
+Het balkon kijkt uit over de binnentuinen en vangt de ochtendzon, een fijne plek voor je eerste kop koffie voordat de dag begint.
+LOCATIE
+De Cornelis Springerstraat ligt op een uitstekende locatie in Amsterdam Oud-Zuid, in het rustige deel van de bruisende Pijp. Om de hoek liggen het Henriëtte Ronnerplein en de Jozef Israëlkade, waar je heerlijk kunt wandelen langs het water. Op loopafstand vind je de Van Woustraat en de Rijnstraat, met een ruim aanbod aan supermarkten, speciaalzaken en eetgelegenheden. Voor de dagelijkse boodschappen is ook de Albert Cuypmarkt, de bekendste markt van Nederland, vlakbij.
+De buurt is bovendien rijk aan gezellige cafés, restaurants en koffietentjes. Met mooi weer ontspan je in het Sarphatipark, het Beatrixpark of het Martin Luther Kingpark. Binnen enkele minuten fietsen sta je in de historische grachtengordel of midden in het centrum.
+Ook de bereikbaarheid is uitstekend: tram 4 en de Noord/Zuidlijn zijn op loopafstand, en met de auto ben je binnen vijf minuten op de A1, A2 of A10. Amstel Station en Station Zuid zijn eveneens eenvoudig te bereiken. WOONOPPERVLAKTE EN BUITENRUIMTE
+Woonoppervlakte 69 m², conform NEN-2580 meetcertificaat A. Gebouwgebonden buitenruimte (balkon) ca. 3 m². Externe bergruimte op de derde verdieping 25 m². In totaal dus ca. 94 m² aan woon-, buiten- en bergruimte. VVE
+De VvE wordt professioneel beheerd door Pro VvE Beheer en is actief en financieel gezond. Er is een meerjarenonderhoudsplan (MJOP) aanwezig. Servicekosten €307,- per maand.
+ERFPACHT
+Erfpachtcanon afgekocht tot en met 31 juli 2057. Voor de periode daarna is de overstap naar eeuwigdurende erfpacht, met een jaarlijkse canon onder de destijds gunstige voorwaarden, al vastgelegd in een notariële akte. OPLEVERING
+Oplevering in overleg.
+DISCLAIMER
+Deze informatie is met de nodige zorgvuldigheid samengesteld. Desondanks aanvaarden wij geen aansprakelijkheid voor eventuele onvolledigheden, onjuistheden of de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Kopers hebben een eigen onderzoeksplicht naar alle zaken die voor hen van belang zijn. De NEN-2580 meetinstructie is van toepassing.
+Met betrekking tot deze woning is ons kantoor de makelaar van verkoper. Wij adviseren je een NVM/MVA- makelaar in te schakelen, die je met zijn deskundigheid zal bijstaan in het aankoopproces. Indien je geen professionele begeleiding wenst in te schakelen, acht je je volgens de wet deskundig genoeg om alle zaken, die van belang zijn, te kunnen overzien.
+*** A RARE FIND IN THE QUIET HEART OF DE PIJP! ***
+CHARMING UPPER-FLOOR APARTMENT, FULLY RENOVATED IN 2025, WITH BALCONY, EXTRA WORKSPACE
+AND PERPETUAL GROUND LEASE
+Living in de Pijp, but in its quiet, green heart: this charming upper-floor apartment at Cornelis Springerstraat 29-1 hits the mark. The home was fully renovated in 2025 with real attention to detail, from the modern kitchen to the bathroom and the space in the attic. With 69 sqm of wonderfully bright living space, a private balcony and, on top of that, a generous extra room on the third floor, you can unpack your bags and move straight in. HIGHLIGHTS:
+Fully renovated in 2025, from the kitchen to the bathroom to the attic space
+69 sqm of living space (NEN-2580, measurement certificate A) on the first floor
+Extra 25 sqm space on the third floor, usable as a home office, workspace or guest room
+Bright living room with bay window
+Modern kitchen (2025) with direct access to the balcony
+Three bedrooms
+Luxury bathroom with walk-in rain shower
+Balcony overlooking the courtyard gardens
+Ground lease (erfpacht) prepaid up to and including 31 July 2057, with the switch to a perpetual ground lease on favourable terms already secured with the notary
+Professionally managed, active homeowners&#x27; association (VvE) with Pro VvE Beheer, long-term maintenance plan (MJOP) in place.
+Within walking distance of the Albert Cuyp Market, Sarphatipark and the lively Van Woustraat LIVING
+At the rear of the apartment is the bright living room with its bay window, flowing straight into the dining area. There&#x27;s plenty of room for both a seating area and a dining table, with a calm, green view that follows you throughout the day, exactly the spot to sink into the sofa in the evening or have friends over for dinner. KITCHEN
+The kitchen was completely renewed in 2025 and is ready to use from day one: a four-burner gas hob, fridge- freezer, oven and dishwasher are all already in place. From the kitchen, you step straight out onto the balcony. BEDROOMS AND BATHROOM
+The apartment has three bedrooms, including a spacious master bedroom with access to the balcony. The remaining rooms can be arranged flexibly as a children&#x27;s room, guest room or home office, or even as a separate dining room. The bathroom is fitted out in a modern, practical style with a vanity unit, toilet and a walk- in rain shower to start every morning fresh.
+ATTIC WORKSPACE
+A surprise awaits on the third floor: a very spacious, light-filled room of 25 sqm. Under the deed of division (splitsingsakte) it is registered as storage space, but it may be used as a home office, workspace or guest room. Ideal if you work from home or regularly have guests to stay. Please note: this space is not intended for permanent occupation.
+OUTDOOR LIVING
+The balcony overlooks the courtyard gardens and catches the morning sun, the perfect spot for your first cup of coffee before the day begins.
+LOCATION
+Cornelis Springerstraat enjoys an excellent location in Amsterdam Oud-Zuid, in the quiet part of the lively Pijp neighbourhood. Around the corner are Henriëtte Ronnerplein and Jozef Israëlkade, perfect for a stroll along the water. Within walking distance you&#x27;ll find Van Woustraat and Rijnstraat, with a wide range of supermarkets, specialty shops and places to eat. For your daily shopping, the Albert Cuyp Market, the most famous market in the Netherlands, is also close by.
+The neighbourhood is also packed with cosy cafés, restaurants and coffee spots. When the weather is good, you can relax in Sarphatipark, Beatrixpark or Martin Luther King Park. Within a few minutes&#x27; cycling you&#x27;re in the historic canal ring or right in the city centre.
+Accessibility is excellent too: tram 4 and the North/South metro line are within walking distance, and by car you can reach the A1, A2 or A10 within five minutes. Amstel Station and Station Zuid are also easy to reach. LIVING AREA AND OUTDOOR SPACE
+Living area 69 sqm, in accordance with NEN-2580 measurement certificate A. Attached outdoor space (balcony) approx. 3 sqm. External storage space on the third floor 25 sqm. That comes to a total of approximately 94 sqm of living, outdoor and storage space.
+HOMEOWNERS&#x27; ASSOCIATION (VVE)
+The homeowners&#x27; association (VvE) is professionally managed by Pro VvE Beheer and is active and financially healthy. A long-term maintenance plan (MJOP) is in place. Service charges are €307 per month. GROUND LEASE (ERFPACHT)
+Ground rent (erfpachtcanon) prepaid up to and including 31 July 2057. For the period after that, the conversion to a perpetual ground lease, with an annual ground rent under the favourable terms agreed at the time, has already been laid down in a notarial deed.
+COMPLETION
+Completion date by mutual agreement.
+DISCLAIMER
+This information has been compiled with due care. Nevertheless, we accept no liability for any omissions, inaccuracies or their consequences. All measurements and surface areas stated are indicative. Buyers have their own duty to investigate all matters of importance to them. The NEN-2580 measurement instruction applies. With regard to this property, our office acts as the seller&#x27;s agent. We advise you to engage an NVM/MVA real estate agent, whose expertise will assist you throughout the purchase process. If you choose not to engage professional guidance, you are deemed under Dutch law to be sufficiently knowledgeable to assess all matters of importance yourself.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Thoma Post Makelaars Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/338/655_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/669_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/647_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/633_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/774_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/764_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/779_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/730_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/769_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/739_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/641_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/682_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/640_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/665_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/781_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/683_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/780_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/718_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/755_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/686_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/659_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/776_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/338/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/385/348_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/385/370_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/385/245_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/385/358_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

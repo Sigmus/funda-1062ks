@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gaaspstraat 50-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Gaaspstraat 50-2</h1>
+  <p class="sub">
+    <span>1079 VG Amsterdam</span>
+    <span>·</span>
+    <span>Kromme Mijdrechtbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/527/174_1440x960.jpg" alt="Gaaspstraat 50-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">24 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€550.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.821/m² · 4.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">56 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1934</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-gaaspstraat-50-2/44591530/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 550.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.821</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 115,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1934</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>56 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>180 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 12983</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 31-01-2059)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 464,24 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, City centre en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>No</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 115,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>No</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">In de populaire Rivierenbuurt bieden wij dit charmante en goed ingedeelde 4 kamerappartement van 56 m² aan, gelegen op de tweede verdieping. De jaren 30 woning beschikt over een ruim balkon op het zuidwesten, een woonkamer ensuite met zijkamer, twee slaapkamers, een dichte keuken aan de achterzijde en een moderne badkamer.
+
+INDELING
+Via het gemeenschappelijke trappenhuis bereikt u de woning op de tweede verdieping. Entree in de hal, die toegang biedt tot alle vertrekken. De lichte en sfeervolle woonkamer met zijkamer valt direct op door de karakteristieke erker, die zorgt voor extra ruimte en een prachtige lichtinval. Ruimte genoeg voor een eetgedeelte en een zitgedeelte. De zijkamer kan bij de woonkamer betrokken worden maar kan ook als werkkamer of zelfs als derde slaapkamer fungeren. Aan de achterzijde 2 slaapkamers en de moderne dichte keuken met diverse inbouwapparatuur die alle drie toegang bieden tot het heerlijke zonnige balkon op het zuidwesten. 
+In het midden van de woning de riante badkamer die compleet is uitgerust met een ligbad, een wastafelmeubel en WC. 
+
+BIJZONDERHEDEN
+Woonoppervlakte ca. 56 m² (NEN2580 gemeten)
+Ruim balkon gelegen op het zuidwesten
+Karakteristiek jaren ’30 pand
+Drie slaapkamers
+Openslaande deuren naar het balkon
+Energielabel B
+Het pand is afgelopen mei van dit jaar met vergunning gesplitst in 4 appartementsrechten en voldoet aan alle splitsingseisen van de gemeente Amsterdam
+Projectnotaris BA Notariaat
+
+EIGENDOMSSITUATIE
+Er is sprake van het recht van erfpacht, eigendom van de gemeente Amsterdam. De erfpachtcanon bedraagt  € 464,24- per jaar. De erfpacht is voortdurend en loopt t/m 31 januari 2059. 
+
+VERENIGING VAN EIGENAREN
+De VVE bestaat uit 4 leden. De maandelijkse servicekosten zijn € 115,=.
+
+OMGEVING
+De woning is gelegen in de geliefde Rivierenbuurt, een van de meest charmante en gewilde wijken van Amsterdam. Deze buurt staat bekend om haar karakteristieke jaren ’30 architectuur, brede straten en groene lanen, wat zorgt voor een prettige en rustige woonomgeving midden in de stad. In de directe omgeving vindt u een gevarieerd aanbod aan winkels, gezellige cafés, restaurants, speciaalzaken en supermarkten voor de dagelijkse boodschappen, onder andere aan de Maasstraat en Scheldestraat. Voor ontspanning en recreatie liggen het Martin Luther Kingpark en de Amstel op korte afstand, ideaal voor een wandeling, sportactiviteiten of een ontspannen middag in het groen.
+De bereikbaarheid is uitstekend: zowel met de auto als met het openbaar vervoer. Diverse tram- en busverbindingen bevinden zich in de nabijheid en station Amsterdam RAI en station Amstel zijn snel bereikbaar. Met de auto bent u binnen enkele minuten op de Ring A10.
+Kortom, een ideale locatie waar rustig wonen perfect samengaat met de levendigheid van de stad.
+
+ALGEMEEN
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien. Van toepassing zijn de NVM voorwaarden.
+
+Wij plannen graag een bezichtiging met u in!
+
+============================================================================================
+
+ENGLISH
+
+We are offering this charming, well-laid-out 4-room apartment (56 m²) on the second floor of the popular Rivierenbuurt neighborhood. This 1930s property features a spacious southwest-facing balcony, an en-suite living room with an adjoining side room, two bedrooms, a separate kitchen at the rear, and a modern bathroom.
+
+LAYOUT
+You reach the apartment on the second floor via the communal staircase. The entrance opens into a hallway providing access to all rooms. The bright and inviting living room—complete with an adjoining side room—immediately stands out thanks to its characteristic bay window, which creates extra space and allows for beautiful natural light. There is ample room for both a dining area and a seating area. The side room can be incorporated into the living room or serve as a home office or even a third bedroom. At the rear, there are two bedrooms and a modern, separate kitchen equipped with various built-in appliances; all three provide access to the delightful, sunny southwest-facing balcony.
+Centrally located in the apartment is the spacious bathroom, fully equipped with a bathtub, a vanity unit, and a toilet.
+
+FEATURES
+Living area approx. 56 m² (measured according to NEN2580 standards)
+Spacious southwest-facing balcony
+Characteristic 1930s building
+Three bedrooms
+French doors opening onto the balcony
+Energy label B
+The building was legally subdivided into four apartment units this past May (with a permit) and complies with all subdivision requirements set by the Municipality of Amsterdam
+Designated civil-law notary: BA Notariaat
+
+OWNERSHIP STATUS
+Subject to a leasehold right owned by the Municipality of Amsterdam. The annual ground lease payment is €464.24. The leasehold is perpetual and runs until January 31, 2059.
+
+OWNERS&#x27; ASSOCIATION (VvE)
+The Owners&#x27; Association consists of 4 members. The monthly service charges are €115.
+
+SURROUNDINGS
+The property is located in the popular Rivierenbuurt, one of Amsterdam&#x27;s most charming and sought-after neighborhoods. This area is known for its characteristic 1930s architecture, wide streets, and tree-lined avenues, creating a pleasant and peaceful living environment right in the heart of the city. In the immediate vicinity, you will find a wide range of shops, cozy cafés, restaurants, specialty stores, and supermarkets for daily groceries—particularly along Maasstraat and Scheldestraat. For relaxation and recreation, Martin Luther Kingpark and the Amstel River are just a short distance away, offering ideal spots for walks, sports activities, or a relaxing afternoon outdoors.
+Accessibility is excellent, whether by car or public transport. Various tram and bus connections are nearby, and both Amsterdam RAI and Amstel stations are easily accessible. By car, you can reach the A10 ring road within minutes.
+In short, an ideal location where peaceful living perfectly combines with the vibrancy of the city.
+
+GENERAL
+We have compiled this information with the utmost care. However, we accept no liability for any incompleteness, inaccuracy, or otherwise, nor for the consequences thereof. All stated dimensions and surface areas are indicative. The buyer has a duty to investigate all matters of importance to them. The real estate agent acts as an advisor to the seller regarding this property. We recommend engaging an expert (NVM) real estate agent to guide you through the purchasing process. If you have specific requirements regarding the property, we advise you to communicate these to your buying agent in a timely manner and to conduct (or commission) your own independent research into these matters. If you do not engage an expert representative, the law deems you sufficiently knowledgeable to assess all relevant aspects yourself. The NVM terms and conditions apply.
+
+We would be happy to schedule a viewing with you!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>ME Makelaars B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 24</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/527/174_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/179_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/168_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/185_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/169_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/187_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/170_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/176_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/186_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/182_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/177_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/171_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/173_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/181_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/175_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/172_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/180_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/167_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/184_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/183_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/166_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/178_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/699/064_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/698/984_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

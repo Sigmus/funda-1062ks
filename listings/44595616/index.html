@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jan de Louterstraat 84 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Jan de Louterstraat 84</h1>
+  <p class="sub">
+    <span>1063 KX Amsterdam</span>
+    <span>·</span>
+    <span>Jan de Louterbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/297/370_1440x960.jpg" alt="Jan de Louterstraat 84 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">35 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.610/m² · 3.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">141 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2005</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jan-de-louterstraat-84/44595616/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.610</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 283,58 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Penthouse</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2005</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>141 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>490 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches, dubbele Washbasin, Bathtub, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Frans balkon, lift, en Mechanical ventilation</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>8e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Combiketel uit 2019, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN D 8319</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN D 8319</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder en parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 283,58 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Royaal penthouse met vrij uitzicht en eigen parkeerplaats
+
+Op de achtste en tevens bovenste verdieping van een modern appartementencomplex uit 2005 ligt dit royale penthouse van 141 m² met een prachtig vrij uitzicht over de omgeving. De woning is volledig rolstoelvriendelijk ingedeeld en biedt veel wooncomfort dankzij de ruime opzet en praktische indeling. De lichte woonkamer vormt samen met de luxe open keuken met kookeiland het hart van de woning. Vanuit de woonkamer is het balkon bereikbaar, waar je kunt genieten van het vrije uitzicht. Verder beschikt het appartement over twee ruime slaapkamers, twee badkamers, een extra berging en een eigen parkeerplaats in de ondergelegen parkeergarage. De erfpacht is eeuwigdurend afgekocht en met energielabel A is de woning bovendien energiezuinig.
+
+Wist je dat je ook zelf een bezichtiging kunt plannen? Via Funda: druk op de knop rechts ‘vraag bezichtiging aan” en ontvang direct een link om een afspraak in te plannen. Via onze eigen woningwebsite druk op de knop rechts onderin “plan een bezichtiging”. 
+
+Beschrijving en indeling:
+Het penthouse is gelegen op de achtste en tevens bovenste verdieping van een modern appartementencomplex. Via de verzorgde gezamenlijke entree bereik je met de lift of trap de woning. De entree van het appartement bevindt zich aan de rustige galerijzijde met uitzicht op de fraai aangelegde gemeenschappelijke binnentuin. Bij binnenkomst valt direct de royale hal op, die toegang biedt tot alle vertrekken. Aan de voorzijde van het appartement bevindt zich de ruime en lichte woonkamer met grote raampartijen en een prachtig vrij uitzicht over de omgeving. De luxe open keuken met kookeiland vormt het hart van de woning en is uitgerust met hoogwaardige Miele inbouwapparatuur, waaronder een inductiekookplaat, stoomoven, oven, vaatwasser met knock2open systeem, grote koelkast en vriezer. Daarnaast beschikt de keuken over een Quooker voor koud, kokend en bruisend water. Vanuit de woonkamer is het zonnige balkon op het zuidoosten bereikbaar. Hier geniet je van veel privacy en een weids uitzicht over Amsterdam West. Het appartement beschikt momenteel over twee zeer ruime slaapkamers. De hoofdslaapkamer heeft een eigen en-suite badkamer met wastafel en douche. De tweede badkamer is voorzien van een ligbad, inloopdouche, dubbele wastafel en toilet. Daarnaast is er een separaat Japans toilet aanwezig. Dankzij de royale afmetingen van het appartement bestaat bovendien de mogelijkheid om een derde slaapkamer te realiseren; zie hiervoor de alternatieve plattegrond. Verder beschikt de woning over een praktische interne berging met aansluitingen voor een wasmachine en droger. In de onderbouw bevinden zich een externe berging en een eigen parkeerplaats in de afgesloten parkeergarage.
+
+Kenmerken:
+- Penthouse appartement van 141 m2 op de 8e verdieping met lift
+- Modern complex uit 2005
+- Geheel rolstoelvriendelijk
+- 2 slaapkamers en mogelijkheid een 3e slaapkamer te creëren 
+- Zeer luxe open keuken met kookeiland uit 2020
+- Houten lamelparket vloer
+- Vrij uitzicht
+- Balkon op het zuidoosten
+- Extra berging op de begane grond 
+- Parkeerplaats in de ondergelegen parkeergarage
+- Gemeenschappelijke binnentuin
+- Geheel voorzien van dubbel glas
+- Energielabel A
+- Eeuwigdurende erfpacht afgekocht
+- VvE maandelijkse servicekosten € 283,58
+
+Locatie: 
+De Jan de Louterstraat is gelegen in een levendige en goed bereikbare buurt, op korte afstand van het bruisende Plein ’40-’45 in Slotermeer in Amsterdam Nieuw-West. Het winkelcentrum Plein ’40-’45 biedt een gevarieerd aanbod aan winkels voor de dagelijkse boodschappen en staat bekend om de gezellige markt die van dinsdag tot en met zaterdag plaatsvindt. Voor ontspanning en recreatie ligt de Sloterplas op korte afstand. Hier kun je wandelen, hardlopen, fietsen of genieten van de natuur in het omliggende Sloterpark. Tijdens de zomermaanden zijn het Sloterplasstrand en het nabijgelegen Sloterparkbad geliefde plekken om te ontspannen en verkoeling te zoeken. De omgeving beschikt daarnaast over diverse voorzieningen, waaronder scholen, kinderopvang, zorginstellingen en sportfaciliteiten. Ook de bereikbaarheid is uitstekend. Met tramlijnen 7 en 13 sta je binnen circa 20 minuten in het centrum van Amsterdam. Metrostation Burgemeester de Vlugtlaan ligt op slechts enkele minuten fietsen en biedt snelle verbindingen naar onder meer Station Sloterdijk, Amsterdam Zuid en de Zuidas. Met de auto bereik je binnen enkele minuten de Ring A10 en de uitvalswegen A4 en A9. Schiphol bevindt zich op ongeveer 20 minuten rijden.
+
+-----------------------------------------------------------------------------------------
+
+Spacious penthouse with unobstructed views and private parking space
+
+Located on the eighth and top floor of a modern apartment complex built in 2005, this spacious 141 m² penthouse offers a beautiful unobstructed view of the surrounding area. The home is fully wheelchair-friendly and provides high levels of living comfort thanks to its spacious layout and practical design. The bright living room, together with the luxurious open kitchen featuring a kitchen island, forms the heart of the home. The balcony is accessible from the living room, where you can enjoy the unobstructed view. Furthermore, the apartment features two spacious bedrooms, two bathrooms, an additional storage unit, and a private parking space in the underground parking garage. The ground lease has been bought out in perpetuity, and with an energy label A, the property is also energy-efficient.
+
+Did you know you can also schedule a viewing yourself? Via Funda: press the button on the right &#x27;request a viewing&#x27; and receive a link directly to schedule an appointment. Via our own property website press the button at the bottom right &#x27;schedule a viewing&#x27;.
+
+Description:
+The penthouse is situated on the eighth and top floor of a modern apartment complex. You can reach the apartment via the well-maintained communal entrance using the elevator or stairs. The apartment entrance is located on the quiet gallery side, overlooking the beautifully landscaped communal courtyard. Upon entering, the spacious hall immediately catches the eye, providing access to all rooms. At the front of the apartment is the spacious and bright living room with large windows and a beautiful unobstructed view of the surroundings. The luxurious open kitchen with a kitchen island forms the heart of the home and is equipped with high-quality Miele built-in appliances, including an induction hob, steam oven, oven, dishwasher with knock2open system, large refrigerator, and freezer. Additionally, the kitchen features a Quooker for cold, boiling, and sparkling water. The sunny southeast-facing balcony is accessible from the living room. Here, you can enjoy plenty of privacy and a panoramic view of Amsterdam West. The apartment currently features two very spacious bedrooms. The master bedroom has its own en-suite bathroom with a sink and shower. The second bathroom is equipped with a bathtub, walk-in shower, double sink, and toilet. Additionally, there is a separate Japanese toilet. Thanks to the generous dimensions of the apartment, it is also possible to create a third bedroom; please refer to the alternative floor plan for details. Furthermore, the property features a practical internal storage unit with connections for a washing machine and dryer. In the basement, there is an external storage unit and a private parking space in the enclosed parking garage.
+
+Features and details:
+- Penthouse apartment of 141 m2 on the 8th floor with elevator
+- Modern complex from 2005
+- Fully wheelchair accessible
+- 2 bedrooms with the possibility to create a 3rd bedroom
+- Very luxurious open kitchen with kitchen island from 2020
+- Wooden laminate parquet flooring
+- Unobstructed view
+- South-east facing balcony
+- Additional storage unit on the ground floor
+- Parking space in the underground parking garage
+- Communal courtyard
+- Fully equipped with double glazing
+- Energy label A
+- Communal garden
+- Perpetual leasehold redeemed
+- Active association of owners with a monthly service costs € 283,58
+
+Location:
+Jan de Louterstraat is situated in a lively and easily accessible neighborhood, a short distance from the bustling Plein ’40-’45 in Slotermeer in Amsterdam Nieuw-West. The Plein ’40-’45 shopping center offers a varied selection of shops for daily necessities and is known for the lively market that takes place from Tuesday to Saturday. For relaxation and recreation, the Sloterplas is a short distance away. Here you can walk, run, cycle, or enjoy nature in the surrounding Sloterpark. During the summer months, Sloterplas beach and the nearby Sloterparkbad are popular spots to relax and cool off. The area also features various amenities, including schools, childcare, healthcare facilities, and sports facilities. Accessibility is also excellent. With tram lines 7 and 13, you can reach the center of Amsterdam in approximately 20 minutes. Burgemeester de Vlugtlaan metro station is just a few minutes&#x27; bike ride away and offers fast connections to Sloterdijk Station, Amsterdam Zuid, and the Zuidas, among others. By car, you can reach the A10 ring road and the A4 and A9 arterial roads within a few minutes. Schiphol is approximately a 20-minute drive away.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Alice Bakker Makelaardij O.G.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 35</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/297/370_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/402_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/415_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/366_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/379_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/369_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/398_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/372_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/343_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/383_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/422_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/291_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/347_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/357_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/375_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/331_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/316_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/397_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/306_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/373_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/388_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/425_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/294_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/283_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/288_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/374_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/433_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/307_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/290_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/423_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/394_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/297/412_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

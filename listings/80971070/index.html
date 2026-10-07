@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Haarlemmerweg 205-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Haarlemmerweg 205-3</h1>
+  <p class="sub">
+    <span>1051 LD Amsterdam</span>
+    <span>·</span>
+    <span>Westerstaatsman</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/178/489_1440x960.jpg" alt="Haarlemmerweg 205-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€675.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €10.385/m² · 4.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">65 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1901</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-haarlemmerweg-205-3/80971070/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 675.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 10.385</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 250,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1901</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>65 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>30 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>276 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Dakraam en natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HR 107 ( combiketel, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM Y 4227A</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 250,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>No</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">STUNNING BRIGHT DOUBLE UPPER HOME WITH WATER VIEWS, EXPOSED BEAMS AND ON FREEHOLD LAND
+
+Haarlemmerweg 205-3
+
+Welcome to this exceptionally bright double upper-floor home located on the top levels of a characteristic Amsterdam building.  , combining modern simplicity with authentic charm, this apartment features painted white wooden floors, exposed ceiling beams, and serene views directly overlooking the canal and surrounding greenery.
+
+Layout &amp; Highlights
+
+Second Floor (Entry Level)
+Via the shared stairway you enter the apartment on the 2nd floor. Where there is a small area to hang coats and store shoes. Stairs lead you to the main living level
+
+Third Floor (Main Living Space): Step into a wide, open-plan living and dining area flooded with natural light.   . 
+The modern black kitchen includes some integrated appliances and some free standing; including the large fridge freezer, a central wooden (removable) island, and 2 wide picture windows framing scenic water views.  .
+At the rear, double doors open directly onto a private balcony.  . Which was renovated in 2025.
+This level also includes a guest toilet and a versatile third bedroom—currently configured as a walk-in wardrobe and useful storage
+
+Fourth Floor (Top Sleeping Level): An internal staircase leads up to two charming equally sized bedrooms characterized by exposed wooden structural beams.
+Skylights bring in abundant daylight, both in the hallway and front bedroom. The rear bedroom has L shaped built-in wardrobes.
+The sleek modern bathroom features a walk-in rain shower, contemporary wooden washbasin vanity, towel radiator, and dedicated laundry facilities.
+The ceiling height on this floor ranges from 194-200cm. The bedroom at the front is included in the 65m2 of living space. The back bedroom and bathroom have the lower height ceilings and are not counted in the official total living m2.
+
+Key Features &amp; Figures
+Living Space (GO Wonen): approx. 64.5 m² (with an additional 30.1 m² with slightly lower ceilings).
+Outdoor Space: Private balcony of approx. 3.5 m²
+Land Tenure: Freehold / Eigen Grond (No leasehold/erfpacht fees ever)
+VvE: Active, small-scale, self-managed Homeowners Association with service charges of €250/month
+Maintenance: Roof repairs completed in 2020; balconies fully renovated in 2025
+
+Neighbourhood &amp; Location
+Situated in the highly popular Staatsliedenbuurt district right on the edge of the iconic Westerpark area, Haarlemmerweg balances urban pulse with relaxed waterside living. Across the street sits the sprawling Westerpark complex—home to green lawns, running paths, indie cinema Ketelhuis, local breweries, market pop-ups, and vibrant culinary hot spots. A short walk brings you into the vibrant Jordaan neighbourhood and the boutique-lined streets of Haarlemmerdijk and Haarlemmerstraat.
+
+Accessibility &amp; Public Transport
+The location offers seamless transport links into the city centre or out toward the A10 ring road:
+Cycling: 5 minutes to Central Station, 5 minutes into the Jordaan, and 10 minutes to Dam Square.
+Public Transport: Bus stops (Lines 21 &amp; 18) and Tram stops (Line 5) are located right outside your door, taking you straight to Amsterdam Centraal or Leidseplein in under 10 minutes.
+Train Connections: Amsterdam Sloterdijk station is reachable within a 7-minute cycle or direct bus trip.
+Car: Quick and convenient access to the S103 exit connecting directly to the A10 Ring Road.
+
+Disclaimer
+While compiled with care, no liability is accepted for inaccuracies, omissions, or listed dimensions, which are indicative only. The buyer is legally responsible for conducting their own due diligence. The estate agent represents the seller; buyers without an expert representative are assumed legally competent to handle all relevant matters.
+
+Measurement Clause
+The measurement report has been prepared in accordance with the 2019 Measurement Instructions guidelines: &quot;Surface areas and volumes of buildings – Terms, definitions, and determination methods&quot;
+
+*****************************************************************************************************************************
+
+PRACHTIGE, LICHTE DOUBLE-UPPER-WONING MET UITZICHT OP HET WATER, ZICHTBARE BALKEN EN OP EIGEN GROND
+
+Haarlemmerweg 205-3
+
+Welkom in deze uitzonderlijk lichte double-upper-woning op de bovenste verdiepingen van een karakteristiek Amsterdams pand.  Dit appartement combineert moderne eenvoud met authentieke charme en beschikt over witgeschilderde houten vloeren, zichtbare plafondbalken en een rustgevend uitzicht dat direct uitkijkt op de gracht en het omliggende groen.
+
+Indeling &amp; Hoogtepunten
+
+Tweede verdieping (entree)
+Via de gemeenschappelijke trap komt u het appartement op de 2e verdieping binnen. Hier is een kleine ruimte om jassen op te hangen en schoenen op te bergen. Een trap leidt u naar het belangrijkste woongedeelte
+
+Derde verdieping (hoofdwoonruimte): 
+U stapt binnen in een ruime, open woon- en eetkamer die baadt in natuurlijk licht.
+De moderne zwarte keuken is deels voorzien van inbouwapparatuur en deels van vrijstaande apparaten, waaronder de grote koelkast met vriesvak, een centraal houten (verplaatsbaar) kookeiland en twee brede ramen die een schilderachtig uitzicht op het water bieden.
+Aan de achterzijde geven dubbele deuren direct toegang tot een eigen balkon, dat in 2025 is gerenoveerd.
+Op deze verdieping bevinden zich ook een gastentoilet en een veelzijdige derde slaapkamer – momenteel ingericht als inloopkast en handige opslagruimte
+
+Vierde verdieping (bovenste slaapverdieping): 
+Een binnentrap leidt naar twee charmante slaapkamers van gelijke grootte, die worden gekenmerkt door zichtbare houten constructiebalken.
+Dakramen zorgen voor veel daglicht, zowel in de gang als in de slaapkamer aan de voorzijde. De slaapkamer aan de achterzijde heeft L-vormige inbouwkasten.
+De strakke, moderne badkamer is voorzien van een inloopregendouche, een eigentijds houten wastafelmeubel, een handdoekradiator en een aparte wasruimte.
+De plafondhoogte op deze verdieping varieert van 194 tot 200 cm. De slaapkamer aan de voorzijde is inbegrepen in de 65 m² woonoppervlakte. De slaapkamer aan de achterzijde en de badkamer hebben lagere plafonds en worden niet meegeteld in de officiële totale woonoppervlakte in m².
+
+Belangrijkste kenmerken:
+Woonoppervlakte (GO Wonen): ca. 64,5 m² (met 30,1 m² met iets lagere plafonds).
+Buitenruimte: eigen balkon van ca. 3,5 m²
+Grondbezit: eigendom / Eigen Grond (nooit erfpachtkosten)
+VvE: actieve, kleinschalige, zelfbeheerde Vereniging van Eigenaren met servicekosten van € 250 per maand
+Onderhoud: dakreparaties voltooid in 2020; balkons volledig gerenoveerd in 2025
+
+Buurt &amp; Locatie
+De Haarlemmerweg ligt in de zeer populaire Staatsliedenbuurt, direct aan de rand van het iconische Westerpark, en biedt een perfecte balans tussen het bruisende stadsleven en het ontspannen wonen aan het water. Aan de overkant van de straat ligt het uitgestrekte Westerpark-complex, met groene grasvelden, hardlooproutes, de onafhankelijke bioscoop Ketelhuis, lokale brouwerijen, pop-upmarkten en levendige culinaire hotspots. Een korte wandeling brengt je naar de levendige Jordaan en de met boetiekjes gevulde straten Haarlemmerdijk en Haarlemmerstraat.
+
+Bereikbaarheid &amp; openbaar vervoer
+De locatie biedt naadloze vervoersverbindingen naar het stadscentrum of richting de ringweg A10:
+Fietsen: 5 minuten naar het Centraal Station, 5 minuten naar de Jordaan en 10 minuten naar de Dam.
+Openbaar vervoer: Bushaltes (lijnen 21 en 18) en tramhaltes (lijn 5) bevinden zich direct voor de deur en brengen je in minder dan 10 minuten rechtstreeks naar Amsterdam Centraal of het Leidseplein.
+Treinverbindingen: Station Amsterdam Sloterdijk is bereikbaar binnen 7 minuten fietsen of met een directe busrit.
+Auto: Snelle en gemakkelijke toegang tot afrit S103, die direct aansluit op de ringweg A10.
+
+Disclaimer
+Hoewel met zorg samengesteld, wordt geen aansprakelijkheid aanvaard voor onjuistheden, weglatingen of vermelde afmetingen; deze zijn slechts indicatief. De koper is wettelijk verantwoordelijk voor het uitvoeren van eigen onderzoek. De makelaar vertegenwoordigt de verkoper; van kopers zonder deskundige vertegenwoordiging wordt aangenomen dat zij juridisch bekwaam zijn om alle relevante zaken te behartigen.
+
+Meetclausule
+Het meetrapport is opgesteld conform de richtlijnen van de Meetinstructie 2019: &quot;Oppervlakten en inhouden van gebouwen – Begrippen, definities en bepalingsmethoden&quot;.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Lichte open woonverdieping
+
+Ruime living met zwarte keuken en wateruitzicht.
+
+Balkon met wateruitzicht
+
+Eigen balkon van ca. 3,5 m², vernieuwd in 2025.
+
+Aan Westerpark en gracht
+
+Aan het water, tegenover Westerpark, dicht bij Jordaan.
+
+Is deze informatie behulpzaam?
+Advertentie</div>
+    <p class="note">Description from listing source.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Amsterdam House Hunting B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/178/489_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/179/418_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/386_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/341_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/179/280_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/391_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/224_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/261_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/362_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/051_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/222_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/110_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/482_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/396_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/307_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/097_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/144_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/124_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/424_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/168_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/153_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/073_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/476_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/412_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/496_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/274_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/076_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/422_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/105_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/484_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/236_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/310_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/213_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/068_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/510_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/265_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/155_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/324_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/178/281_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

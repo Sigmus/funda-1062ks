@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Romeinsarmsteeg 5-B · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Romeinsarmsteeg 5-B</h1>
+  <p class="sub">
+    <span>1016 AR Amsterdam</span>
+    <span>·</span>
+    <span>Felix Meritisbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/221/097/910_1440x960.jpg" alt="Romeinsarmsteeg 5-B — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€699.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.786/m² · 3.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">103 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip">Built 1650</span>
+      <span class="chip">4 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-romeinsarmsteeg-5-b/89612877/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oorspronkelijke vraagprijs</dt><dd>€ 750.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 699.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.786</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1650</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht, dubbele bewoning mogelijk, monument en monumentaal pand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>103 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>25 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>361 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>4 bathrooms</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>4 douches, 4 toiletten, en 4 Washbasins</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>4 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>Niet verplicht</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM E 9670</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan water en City centre</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>No</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>No</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>No</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>No</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">****English below****
+
+Monumentale bovenwoning met een vloeroppervlak van 103 m2 verdeeld over 4 bouwlagen + een entresol in de kapverdieping. Dit heerlijke bovenhuis bestaat uit 2 wooneenheden. Een studio op de eerste verdieping (nr. 5b) en een bovenwoning op de 2e, 3e, 4e en 5e verdieping. Dit charmante en karakteristieke pand is gelegen op eigen grond, dus geen erfpacht!
+
+Omgeving/buurt:
+
+De bovenwoning is gelegen in de Romeinsarmsteeg, een charmante zijstraat tussen de Herengracht en de Singel. En zeer centrale locatie in het centrum van Amsterdam. De gezellige 9-straatjes, de Dam, Leidseplein en het Spui, zijn allen op loopafstand. Hier heb je alles wat je maar wenst in de binnenstad, van sfeervolle boetiekjes, hippe kledingwinkels en tal van eetgelegenheden en cafés. Geniet van alle gezellige bistro&#x27;s tot en met restaurants op sterrenniveau. Ook zijn er tal van culturele bezienswaardigheden zeer nabij, zoals het Anne Frank Huis, Koninklijk paleis op de Dam en de Westerkerk. 
+
+Bereikbaarheid:
+Vanwege de centrale ligging tref je diverse tram-, bus en metroverbindingen op loopafstand. En met de auto kunt u parkeren in de nabijgelegen parkeergarage (Europarking) of betaald parkeren op de grachten of middels uw parkeervergunning (check beschikbaar/wachttijd op website gemeente).  
+
+Indeling:
+
+Begane grond:
+Eigen entree op de begane grond met trap naar de eerste verdieping. 
+Op de eerste verdieping kom je in de hal met toegang tot de studio. De studio is voorzien van een grote raampartij, eenvoudige keuken en eigen badkamer welke is voorzien van toilet en douche. Terug in de hal tref je de trap naar de tweede verdieping. 
+
+De tweede verdieping betreedt je vanuit het trappenhuis aan de achterzijde van dit voorhuis. Deze woonlaag leent zich goed voor het creëren van een woonkeuken of een woonkamer. Ook deze woonlaag beschikt over een badkamer voorzien van toilet, wastafel en douche. 
+
+De derde verdieping is een kopie van de tweede verdieping en beschikt daarom dan ook over eenzelfde indeling. Hierdoor is hier tevens de mogelijkheid om een woonkeuken of woonkamer te creëren. Maar het kan natuurlijk ook een royale masterbedroom worden met bijvoorbeeld een badkamer ensuite en of inloopkast. 
+
+De vierde verdieping is conform de NEN-meting niet meegenomen als woonmeters, maar als overige inpandige vierkante meters. Dit omdat de helft van deze woonlaag een entresol heeft en daardoor niet over genoeg hoogte beschikt. Dit is wel de meest speelse en lichte verdieping. Halverwege deze verdiepingsvloer is een trap naar de entresol. De entresol (officieel de 5e verdieping) zou perfect dienst kunnen doen voor een speelzolder of thuiswerkplek. Maar ook als slaapkamer zou deze goed gebruikt kunnen worden (let wel op met de hoogte). 
+
+Voor de precieze indeling en afmetingen verwijzen we naar de plattegronden en het meetrapport. 
+
+Bijzonderheden:
+- Rijksmonument (nr. 5031);
+- Gelegen op eigen grond, dus geen erfpacht;
+- Bestaat uit 2 wooneenheden (huisnummer 5b en 5c);
+- totale oppervlak 103m2 waarvan 78m2 woonoppervlak en 25m2 overige inpandig, gemeten conform NEN2580;
+- Niet zelfbewonings-, ouderdoms- en asbestclausule van toepassing;
+- Slapende VvE;
+- Koopakte bij Amsterdamse notaris, naar keuze koper;
+- oplevering in overleg/ kan snel.
+
+Disclaimer:
+Hoewel aan de samenstelling en inhoud van deze omschrijving de grootst mogelijke zorg is besteed, kunnen wij niet aansprakelijk worden gesteld voor onverhoopte fouten en gebreken, noch kunnen aan de inhoud rechten worden ontleend.
+
+English version:
+Monumental upper house with a floor area of 103 m2 divided over 4 floors + a mezzanine in the attic. This lovely upper house consists of 2 residential units. A studio on the first floor (no. 5b) and an upper house on the 2nd, 3rd, 4th and 5th floor. This charming and characteristic building is located on private land, so no leasehold!
+
+Area/neighborhood:
+
+The upper house is located in the Romeinsarmsteeg, a charming side street between the Herengracht and the Singel. And very central location in the center of Amsterdam. The cozy 9-streets, the Dam, Leidseplein and the Spui, are all within walking distance. Here you have everything you could wish for in the city center, from charming boutiques, trendy clothing stores and numerous eateries and cafes. Enjoy all the cozy bistros to restaurants at star level. There are also many cultural attractions very close by, such as the Anne Frank House, the Royal Palace on Dam Square and the Westerkerk. 
+
+Accessibility:
+Due to its central location, you will find various tram, bus and metro connections within walking distance. And by car you can park in the nearby parking garage (Europarking) or paid parking on the canals or with your parking permit (check availability/waiting time on the municipality&#x27;s website).
+
+Layout:
+
+Ground floor:
+Private entrance on the ground floor with stairs to the first floor. 
+On the first floor you enter the hall with access to the studio. The studio has a large window, simple kitchen and private bathroom with toilet and shower. Back in the hall you will find the stairs to the second floor. 
+
+You enter the second floor from the staircase at the rear of this front house. This living floor is ideal for creating a kitchen-diner or living room. This living floor also has a bathroom with toilet, sink and shower. 
+
+The third floor is a copy of the second floor and therefore has the same layout. This also makes it possible to create a kitchen-diner or living room. But of course it can also become a spacious master bedroom with, for example, an ensuite bathroom and/or walk-in closet. 
+
+The fourth floor is not included as living meters in accordance with the NEN measurement, but as other indoor square meters. This is because half of this living floor has a mezzanine and therefore does not have enough height. This is the most playful and light floor. Halfway up this floor is a staircase to the mezzanine. The mezzanine (officially the 5th floor) could perfectly serve as a play loft or home office. But it could also be used as a bedroom (pay attention to the height). 
+
+For the exact layout and dimensions, we refer to the floor plans and the measurement report.
+
+Details:
+- National monument (no. 5031);
+- Situated on private land, so no leasehold;
+- Consists of 2 residential units (house number 5b and 5c);
+- Total surface area 103m2 of which 78m2 living space and 25m2 other indoor, measured according to NEN2580;
+- Non-self-occupation, age and asbestos clauses apply;
+- Dormant VvE;
+- Purchase deed at Amsterdam notary, buyer&#x27;s choice;
+- Delivery in consultation / can be quick.
+
+Disclaimer:
+Although the greatest possible care has been taken in the composition and content of this description, we cannot be held liable for unexpected errors and defects, nor can rights be derived from the content.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 6 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Raek Makelaars B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/221/097/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/912_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/908_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/909_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/911_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/914_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/916_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/917_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/918_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/919_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/923_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/925_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/928_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/929_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/931_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/932_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/934_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/936_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/939_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/940_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/942_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/221/097/952_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

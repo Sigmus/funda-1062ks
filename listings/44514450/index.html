@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nachtwachtlaan 51 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Nachtwachtlaan 51</h1>
+  <p class="sub">
+    <span>1058 EB Amsterdam</span>
+    <span>·</span>
+    <span>Rembrandtpark-Zuid</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/477/250_1440x960.jpg" alt="Nachtwachtlaan 51 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">46 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€625.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.378/m² · 0.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">0.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">98 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1972</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-51/44514450/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 116 per maand</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 625.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.378</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 300,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Walk-up flat</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1972</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>98 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>313 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN D 9199</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan park</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Indoor, parkeerkelder en parkeerplaats</dd></div>
+        <div class="frow"><dt>Capaciteit</dt><dd>1 auto</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Op afgesloten terrein, On own property en parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 300,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Onderhoudsplan</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Nachtwachtlaan 51</dt><dd>Yes Nom contact op</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>€ 625.000 k.k.</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*****For English read below*****
+Ruimte is in Amsterdam schaars. Een appartement van bijna 100 m², met drie slaapkamers, een eigen parkeerplaats, lift, energielabel A én een ligging direct naast het Rembrandtpark is dan ook een combinatie die je niet dagelijks tegenkomt. Nachtwachtlaan 51 biedt bovendien een uitstekende basis voor wie op zoek is naar een ruim appartement dat je volledig naar eigen smaak kunt maken.
+Gelegen in een verzorgd appartementencomplex biedt deze woning alles wat je nodig hebt voor comfortabel wonen. De royale woonkamer vormt het hart van het appartement en profiteert van een prettige lichtinval dankzij de grote raampartijen. Vanuit de woonkamer stap je direct het balkon op waar je nog kan nagenieten van de avondzon, ook een fijne plek om even buiten te zitten en te genieten van de groene omgeving. De open keuken sluit aan op de leefruimte, waardoor koken, eten en wonen op een natuurlijke manier samenkomen. Dankzij de praktische indeling voelt het appartement ruim en overzichtelijk aan en is er volop ruimte voor zowel het dagelijks leven als gezellige momenten met familie en vrienden.
+Met maar liefst drie goed bemeten slaapkamers biedt deze woning verrassend veel mogelijkheden. Of je nu een gezin hebt, regelmatig thuiswerkt of simpelweg behoefte hebt aan extra leefruimte, de indeling sluit aan op uiteenlopende woonwensen. De ruime badkamer wordt aangevuld met een separaat toilet, wat het wooncomfort verder vergroot.
+De woning is altijd netjes onderhouden en biedt een verzorgde basis waar je direct prettig kunt wonen. Tegelijkertijd biedt zij volop mogelijkheden om, geheel naar eigen smaak en woonwensen, verder te moderniseren. Juist die combinatie van ruimte, een praktische indeling en de aantrekkelijke vraagprijs maakt dit appartement interessant voor kopers die waarde hechten aan zowel wooncomfort als toekomstig potentieel. Ook op praktisch vlak scoort deze woning uitstekend. Zo beschikt het appartement over een eigen parkeerplaats, twee bergingen en is het complex voorzien van een lift. Bovendien beschikt de woning over energielabel A, wat bijdraagt aan een comfortabel en energiezuinig woonklimaat. De erfpacht is bovendien eeuwigdurend afgekocht, waardoor toekomstige canonverplichtingen niet meer aan de orde zijn. De ligging is zonder meer een van de grote pluspunten van deze woning. Het Rembrandtpark ligt praktisch aan je voeten en vormt een verlengstuk van de buurt. Een heerlijke plek voor een wandeling, een rondje hardlopen of om simpelweg van het groen te genieten. Ook het Vondelpark, De Hallen, de Overtoom en het gezellige Oud-West liggen op korte fietsafstand. Voor de dagelijkse boodschappen bevinden zich diverse supermarkten en buurtwinkels in de directe omgeving.
+Ook qua bereikbaarheid zit je hier uitstekend. Tram- en busverbindingen bevinden zich op korte loopafstand en Station Lelylaan ligt op slechts enkele minuten fietsen. Van daaruit reis je snel naar Station Zuid, Amsterdam Centraal en Schiphol. Met de auto bereik je bovendien binnen enkele minuten de Ring A10.
+Een verrassend ruim 4-kamerappartement op een uitstekende locatie, waar ruimte, bereikbaarheid en toekomstbestendig wonen samenkomen.
+**Bijzonderheden**
+• Woonoppervlakte circa 97,5 m²
+• Drie goed bemeten slaapkamers
+• Eigen parkeerplaats in de parkeergarage
+• Twee eigen bergingen
+• Balkon van circa 8,2 m²
+• Lift aanwezig
+• Ruime badkamer met separaat toilet
+• Open keuken
+• Energielabel A
+• Erfpacht eeuwigdurend afgekocht
+• Actieve, professioneel beheerde Vereniging van Eigenaars
+• **Servicekosten € 300,- per maand + € 116,- voorschot stookkosten (totaal VvE-bijdrage € 416,- per maand)**
+• Gelegen direct naast het Rembrandtpark
+• Op korte afstand van De Hallen, het Vondelpark en Oud-West
+• Uitstekende bereikbaarheid met tram, bus, Station Lelylaan en de Ring A10
+*****English*****
+Space is becoming increasingly rare in Amsterdam. An apartment of almost 100 sqm with three bedrooms, a private parking space, lift, energy label A and a location directly next to Rembrandtpark is therefore a combination that is rarely available. Nachtwachtlaan 51 also offers an excellent opportunity for buyers looking for a spacious apartment that can gradually be tailored to their own style and preferences.
+Situated in a well-maintained apartment complex, this home offers everything you need for comfortable everyday living. The generous living room is the heart of the apartment and enjoys plenty of natural daylight through its large windows. From here you have direct access to the balcony where you can enjoy the last bit of sun in the afternoon, it is also a pleasant place to relax and enjoy the green surroundings. The open-plan kitchen connects naturally to the living area, creating an inviting space where cooking, dining and everyday living come together. Thanks to its practical layout, the apartment feels spacious and well organised, making it ideal for both daily life and entertaining family and friends.
+With three well-proportioned bedrooms, the apartment offers excellent flexibility. Whether you have a growing family, work from home or simply appreciate additional living space, the layout easily adapts to different lifestyles. The spacious bathroom is complemented by a separate toilet, adding to the overall comfort. The apartment has always been well maintained and offers a neat and comfortable base that is ready to move into. At the same time, it provides plenty of opportunities to modernise the finishes entirely according to your own taste. This combination of generous living space, a practical layout and an attractive asking price makes it particularly appealing for buyers looking to add their own personal touch over time.
+Practical features have also been carefully considered. The apartment comes with a private parking space, two private storage rooms and lift access. The property benefits from an excellent A energy label, ensuring comfortable and energy-efficient living. In addition, the perpetual leasehold has been fully bought off, providing complete certainty regarding future ground rent obligations.
+One of the apartment&#x27;s greatest assets is its location. Rembrandtpark is virtually on your doorstep, offering the perfect setting for a walk, a run or simply relaxing outdoors. Vondelpark, De Hallen, the Overtoom and the vibrant Oud-West district are all within easy cycling distance, while supermarkets and everyday amenities are conveniently located nearby.
+Accessibility is excellent. Tram and bus connections are within walking distance, while Amsterdam Lelylaan Station is just a few minutes away by bike, offering fast connections to Amsterdam Zuid, Amsterdam Central Station and Schiphol Airport. By car, the A10 Ring Road is only minutes away.
+A surprisingly spacious four-room apartment in an excellent location, combining space, accessibility and future- proof living.
+**Key Features**
+• Approximately 97.5 sqm of living space
+• Three well-proportioned bedrooms
+• Private parking space in the underground garage
+• Two private storage rooms
+• Balcony of approximately 8.2 sqm
+• Lift in the building
+• Spacious bathroom with separate toilet
+• Open-plan kitchen
+• Energy label A
+• Perpetual leasehold fully bought off
+• Professionally managed Homeowners&#x27; Association (VvE)
+• **Service charges €300 per month + €116 advance heating costs (total monthly VvE contribution €416)**
+• Located directly next to Rembrandtpark
+• Close to De Hallen, Vondelpark and Oud-West
+• Excellent accessibility by tram, bus, Amsterdam Lelylaan Station and the A10 Ring Road</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Fred Koot Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 46</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/477/250_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/167_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/181_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/316_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/357_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/557_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/578_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/515_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/550_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/387_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/601_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/644_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/345_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/594_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/636_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/561_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/329_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/429_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/424_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/383_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/322_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/427_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/540_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/509_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/420_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/468_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/321_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/618_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/451_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/439_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/432_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/325_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/655_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/493_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/343_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/491_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/421_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/318_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/453_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/496_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/323_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/477/470_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

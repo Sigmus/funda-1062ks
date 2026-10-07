@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nieuwe Osdorpergracht 470-B · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Nieuwe Osdorpergracht 470-B</h1>
+  <p class="sub">
+    <span>1068 HV Amsterdam</span>
+    <span>·</span>
+    <span>Osdorpplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/038/622_1440x960.jpg" alt="Nieuwe Osdorpergracht 470-B — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">41 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€580.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.444/m² · 2.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">90 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A+++</span>
+      <span class="chip">Built 2023</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nieuwe-osdorpergracht-470-b/44503386/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 580.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.444</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 199,23 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2023</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies en Woningborg Garantiecertificaat</dd></div>
+        <div class="frow"><dt>Toegankelijkheid</dt><dd>Toegankelijk voor mensen met een beperking en</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>90 m²</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>buitenruimte</h3>
+        <dl class="flist">
+        <div class="frow"><dt>External storage</dt><dd>12 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>236 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>CCTV, glasvezelkabel, lift, Mechanical ventilation, en TV</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+++</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating en gehele Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening en District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN E 9702</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>owned belast met Leasehold (einddatum Leasehold: 31-05-</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>2070)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-05-2070</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan vaarwater, aan water, in woonwijk en</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>vrij uitzicht</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking en parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 199,23 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Wist je dat je ook zelf een bezichtiging in kan plannen? Klik op de oranje button en ontvang direct een link om een afspraak in te plannen. INDELING Via de nette entree bereik je het appartement met de trap of lift, waarna je op de vierde verdieping binnenkomt in de hal. Vanuit hier heb je toegang tot alle vertrekken. Dankzij de hoekligging beschikt de woning over meerdere raampartijen, waardoor er veel natuurlijk licht naar binnen valt en de ruimtes een prettige en lichte uitstraling hebben. De fijne indeling biedt volop ruimte voor een comfortabele zit- en eethoek. De keuken is op een speelse wijze opgesteld en beschikt over een gezellig kookeiland, een heerlijke plek om de dag te beginnen met een kop koffie. De keuken is voorzien van diverse inbouwapparatuur van Siemens en BORA, waaronder een koel-/vriescombinatie, kookplaat met afzuiging, spoelbak, oven en vaatwasser. Daarnaast is er voldoende opbergruimte aanwezig. Via de living bereik je het zonnige balkon, gelegen op het westen. Een heerlijke plek om in de middag en avond van de zon en het buitenleven te genieten. Het appartement beschikt over drie slaapkamers. De master bedroom bevindt zich aan het einde van de hal en biedt voldoende ruimte voor een comfortabel tweepersoonsbed en een ruime kast. De overige twee slaapkamers zijn dankzij de grote raampartijen heerlijk licht en kunnen uitstekend worden ingericht als slaapkamer, hobbyruimte of thuiswerkplek. De ruime badkamer is uitgevoerd in lichte, neutrale tinten en beschikt over een inloopdouche en wastafel. Het separate toilet is voorzien van een fonteintje. Via de hal bereik je tevens de inpandige berging, waar de aansluitingen voor het witgoed aanwezig zijn. Op de begane grond bevindt zich een eigen parkeerplaats met eigen laadpaal in de garage. Zo beschik je altijd over een vaste en comfortabele plek voor je (elektrische) auto, ideaal! Daarnaast zijn er vier fietsplekken beschikbaar in de gezamenlijke fietsenstalling. GRACHT Een bijzonder toekomstig pluspunt van deze woning is de ontwikkeling van de Nieuwe Osdorpergracht. De omgevingsvergunning voor de gracht is verleend en de bouw gaat naar verwachting begin 2027 van start. Hiermee krijgt de woning in de toekomst een fraai uitzicht op het water en een nog aantrekkelijkere ligging. Wij kunnen op verzoek meer informatie aanleveren over de plannen en laten graag zien hoe de toekomstige situatie eruit komt te zien. Ook kunnen wij op verzoek een augmented reality (AR)-link versturen, waarmee je een beeld krijgt van de toekomstige gracht. Meer informatie over de ontwikkeling van de Nieuwe Osdorpergracht en het Stadscentrum Osdorpplein is te vinden bij de gemeente Amsterdam. OMGEVING De woning ligt op korte afstand van verschillende groene en recreatieve plekken. Het Sloterpark en de Sloterplas zijn ideaal voor een wandeling, rondje hardlopen of een ontspannen middag in de buitenlucht. Bij mooi weer kun je terecht op het stadsstrand aan de Sloterplas om te zwemmen of lekker van de zon te genieten. Ook de Osdorper Binnenpolder ligt dichtbij en is per fiets snel te bereiken. Hier ervaar je even het gevoel buiten de stad te zijn. Ook voor de dagelijkse voorzieningen hoef je niet ver van huis. Op loopafstand vind je maar liefst vier supermarkten: Albert Heijn XL, Lidl, Dirk en Jumbo. Daarnaast zijn er diverse winkels in de buurt, waaronder HEMA, H&amp;M, Etos, Douglas en Action. Op het gebied van cultuur en ontspanning is er eveneens genoeg te beleven. Theater De Meervaart bevindt zich in de directe omgeving en ook het Filmhuis &amp; Verhalenhuis komt op loopafstand. De opening hiervan staat gepland voor het vierde kwartaal van 2027. Ook de bereikbaarheid van de woning is uitstekend. Dankzij de verschillende tram- en busverbindingen ben je snel onderweg en bereik je de binnenstad van Amsterdam in ongeveer 15 minuten. Met de fiets je bovendien in circa 15 minuten naar het Vondelpark. Met de auto zijn de uitvalswegen A4, A5, A9 en A10 snel bereikbaar, waardoor onder andere Haarlem, Schiphol en Den Haag goed aan te rijden zijn. Amsterdam Nieuw-West is de afgelopen jaren volop in ontwikkeling. De wijk heeft zich steeds verder vernieuwd en er zijn diverse nieuwe voorzieningen, horecagelegenheden en verbeterde openbare ruimtes bijgekomen. Hierdoor ontstaat een mooie combinatie van het vertrouwde karakter van de wijk en nieuwe, moderne ontwikkelingen. Een fijne woonomgeving met veel groen en recreatiemogelijkheden, terwijl alle dagelijkse voorzieningen binnen handbereik zijn. Dankzij de goede verbindingen ben je bovendien zo in het centrum van Amsterdam. Een ideale combinatie van rustig en comfortabel wonen, met de stad dichtbij. VERENIGING VAN EIGENAREN De Vereniging van Eigenaren (VvE) genaamd “VvE SuHa Zuidwest” wordt professioneel beheerd en beschikt over een actueel MJOP (Meerjarenonderhoudsplan). De maandelijkse servicekosten voor de woning en de bijbehorende parkeerplaats bedragen € 199,23. ERFPACHT De woning is gelegen op erfpacht en is afgekocht t/m 31-05-2070. BIJZONDERHEDEN
+- Woonoppervlakte ca. 90m2;
+- Bouwjaar 2023;
+- Energielabel A+++;
+- Luxe complex voorzien van twee liften;
+- Hoogwaardig afwerkingsniveau;
+- Ruim balkon van ca. 12m² op het westen;
+- Erfpacht afgekocht tot 2070;
+- Privéparkeerplaats in de parkeergarage met laadpaal;
+- Gezamenlijke fietsenstalling;
+- Separate berging van ca. 12m2;
+- Praktische interne berging/wasruimte;
+- Actieve en professioneel beheerde VvE;
+- Maandelijkse servicekosten € 199,23 euro voor de woning + parkeerplaats.
+DISCLAIMER
+Deze informatie is met zorg samengesteld. Aan de inhoud kunnen echter geen rechten worden ontleend. Alle opgegeven maten en oppervlakten zijn indicatief. Een koper heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Wij adviseren een eigen makelaar in te schakelen. NEN-CLAUSULE De gebruiksoppervlakte is berekend conform de door de branche vastgestelde NEN 2580-norm. De oppervlakte kan derhalve afwijken van vergelijkbare panden en/of oude referenties. Dit heeft vooral te maken met deze (nieuwe) rekenmethode. Koper verklaart voldoende te zijn geïnformeerd over de hiervoor gemelde normering. ENGLISH TRANSLATION Luxury, light and energy efficient living by the Nieuwe Osdorpergracht! This stylish and move in ready corner apartment, located on the fourth floor. Offers approximately 90 m² of living space three bedrooms and a spacious west-facing balcony of approximately 12 m². With its modern finish generous windows and A+++ energy label this is a comfortable and highly energy efficient home in a vibrant and rapidly developing part of Amsterdam Nieuw-West. Did you know that you can also schedule a viewing yourself? Simply click the orange button and you will immediately receive a link to arrange an appointment. LAYOUT The well maintained communal entrance provides access to the apartment by both stairs and lift. On the fourth floor, the private entrance opens into a central hallway, providing access to all rooms. Thanks to the corner position and numerous windows, the apartment enjoys an abundance of natural daylight and a wonderfully spacious feel. The bright living area offers plenty of room for both a comfortable lounge and dining area. The kitchen has been thoughtfully designed with a playful layout and a central island creating a lovely social space and the perfect spot to enjoy your morning coffee. The kitchen is fitted with a range of Siemens and BORA built-in appliances, including a fridge-freezer combination, induction hob with integrated extractor, sink, oven and dishwasher. There is also plenty of cupboard space for all your kitchen essentials. From the living room, you step directly onto the sunny west-facing balcony of approximately 12 m². A wonderful outdoor space to enjoy the afternoon and evening sun. The apartment features three bedrooms. The spacious master bedroom is located at the end of the hallway and comfortably accommodates a double bed and a large wardrobe. The two additional bedrooms are also bright and versatile, thanks to their large windows. They are ideal as children&#x27;s bedrooms, guest rooms, home offices or hobby spaces. The spacious bathroom is finished in light, neutral tones and features a walk-in shower and washbasin. The separate toilet is fitted with a small washbasin. The hallway also provides access to a practical internal storage/laundry room with connections for a washing machine and dryer. On the ground floor, the property benefits from a private parking space in the secure parking garage, complete with its own EV charging point. Four private bicycle spaces are also available in the communal bicycle storage. FUTURE CANAL One of the property&#x27;s particularly interesting future features is the planned development of the Nieuwe Osdorpergracht. The environmental permit has been granted and construction is expected to start in early 2027. Once completed, the canal will create a new waterside setting and provide the apartment with a future view over the water. We would be happy to provide further information about the plans upon request and can show you what the future situation is expected to look like. An augmented reality (AR) link is also available upon request, allowing you to experience an impression of the future canal. More information about the development of the Nieuwe Osdorpergracht and the Stadscentrum Osdorpplein can be found via the Municipality of Amsterdam. LOCATION The apartment is located in Amsterdam Nieuw-West, close to a wide range of green spaces, recreational facilities and everyday amenities. Sloterpark and Sloterplas are just a short distance away and are perfect for a morning run, a walk or a relaxing afternoon outdoors. On warm summer days, the city beach at Sloterplas is a popular spot for swimming and enjoying the sun. The nearby Osdorper Binnenpolder offers a more peaceful, rural setting and can easily be reached by bicycle. Everyday shopping is particularly convenient, with four supermarkets within walking distance: Albert Heijn XL, Lidl, Dirk and Jumbo. You will also find a wide variety of shops nearby, including HEMA, H&amp;M, Etos, Douglas and Action. There is plenty to enjoy in the area when it comes to culture and entertainment. Theater De Meervaart is located nearby, while the new Filmhuis &amp; Verhalenhuis is also planned within walking distance, with the opening currently scheduled for the fourth quarter of 2027. The apartment is very well connected to the rest of Amsterdam and beyond. Several tram and bus routes are within easy reach, taking you to Amsterdam city centre in approximately 15 minutes. The Vondelpark is around 15 minutes away by bicycle. By car, the A4, A5, A9 and A10 motorways are easily accessible, providing convenient connections to Haarlem, Schiphol Airport and The Hague. Amsterdam Nieuw-West has seen significant development in recent years, with new residential areas, amenities, cafés and restaurants, as well as improvements to public spaces and infrastructure. The area offers an increasingly attractive combination of urban convenience, greenery and modern developments. In short, this is a comfortable and energy-efficient home in a well-connected neighbourhood, surrounded by green spaces and everyday amenities, while the centre of Amsterdam remains within easy reach. OWNERS&#x27; ASSOCIATION The Owners&#x27; Association (VvE), known as “VvE SuHa Zuidwest”, is professionally managed and has an up-to- date Long-Term Maintenance Plan (MJOP). The monthly service charges for the apartment and the associated parking space amount to €199.23. LEASEHOLD The property is situated on leasehold land. The ground lease has been bought off until 31 May 2070. KEY FEATURES
+- Approximately 90 m² of living space;
+- Built in 2023;
+- Energy label A+++;
+- Stylish and modern apartment complex with two lifts;
+- High-quality finish throughout;
+- Spacious west-facing balcony of approximately 12 m²;
+- Leasehold bought off until 31 May 2070;
+- Private parking space in the parking garage;
+- Private EV charging point;
+- Four private bicycle spaces in the communal bicycle storage;
+- Separate storage unit of approximately 12 m²;
+- Practical internal storage/laundry room;
+- Active and professionally managed Owners&#x27; Association;
+- Monthly service charges of €199.23 for the apartment and parking space;
+- Future development of the Nieuwe Osdorpergracht, with construction expected to start in early 2027. DISCLAIMER This information has been compiled with care. However, no rights may be derived from its contents. All stated dimensions and areas are indicative. Buyers have their own responsibility to investigate all matters that may be of importance to them. We recommend appointing your own estate agent. NEN CLAUSE The usable floor area has been calculated in accordance with the NEN 2580 standard established by the Dutch real estate industry. The stated area may therefore differ from comparable properties and/or previous references, mainly due to the application of this calculation method. The buyer declares to have been sufficiently informed about the aforementioned standard.</div>
+    <p class="note">English paraphrase of the listing text. Original Dutch omschrijving is in the source JSON.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Daphne Haakman</strong> · La Maison Makelaars &amp; Taxateurs B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 41</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/038/622_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/580_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/638_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/620_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/572_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/600_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/612_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/644_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/627_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/651_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/574_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/606_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/633_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/617_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/592_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/652_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/776_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/679_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/657_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/716_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/673_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/775_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/760_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/659_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/768_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/734_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/739_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/667_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/038/753_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

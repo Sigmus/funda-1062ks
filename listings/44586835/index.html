@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frederiksstraat 5-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Frederiksstraat 5-3</h1>
+  <p class="sub">
+    <span>1054 LA Amsterdam</span>
+    <span>·</span>
+    <span>Vondelparkbuurt-West</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/940/920_1440x960.jpg" alt="Frederiksstraat 5-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">35 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€725.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.797/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">74 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1882</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-frederiksstraat-5-3/44586835/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 725.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.797</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 106,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1882</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>74 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>225 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HR-107, ATAG ( combiketel uit 2022, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM U 10554</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan park, On a quiet road, beschutte ligging en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>No</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** The English translation can be found under the Dutch text or on the English Funda website *** FANTASTISCH LICHT DUBBEL BOVENHUIS MET 3 SLAAPKAMERS, EEN ZONNIG DAKTERRAS, VERNIEUWDE FUNDERING ÉN GELEGEN OP EIGEN GROND DEZE HEERLIJKE WONING IS IN 2020 VOLLEDIG GERENOVEERD EN COMBINEERT MODERN WOONCOMFORT MET DE CHARME VAN EEN AUTHENTIEK AMSTERDAMS PAND MET 74 M² WOONOPPERVLAKTE, 3 SLAAPKAMERS, EEN DAKTERRAS VAN 7 M² EN EEN NIEUW EN GEÏSOLEERD DAK UIT 2021. ENERGIELABEL C!
+LOCATIE
+Het appartement ligt in de geliefde Frederiksstraat, een rustige en doodlopende straat om de hoek van de Overtoom en letterlijk op steenworp afstand van het Vondelpark.
+Hier woon je rustig, maar bevindt het bruisende Oud-West zich direct om de hoek. Op de Overtoom en in de omliggende straten vind je een breed aanbod aan winkels, restaurants, koffietentjes en traiteurs. De Hallen, het Museumplein, het Concertgebouw en de P.C. Hooftstraat liggen allemaal op korte afstand.
+Voor sport en ontspanning hoef je alleen maar het Vondelpark in te lopen. Ook het openbaar vervoer is uitstekend geregeld met tram 1 om de hoek op de Overtoom. De Ring A10 is binnen enkele minuten bereikbaar.
+Parkeren kan middels het vergunningensysteem, de gemiddelde wachttijd is ca. 9 maanden (bron: website Gemeente Amsterdam).
+Kortom: een ideale combinatie van rust, levendigheid en alles wat Amsterdam Oud-West zo geliefd maakt!
+INDELING
+Via de entree op de tweede etage bereik je de woonverdieping. De lichte woonkamer heeft ramen aan zowel de voor- als achterzijde en wordt gekenmerkt door hoge plafonds, mooie authentieke balken en strak gestuukte wanden. Hierdoor ontstaat een sfeervolle combinatie van karakter en modern wooncomfort.
+Er is volop ruimte voor een royale eettafel én een ruime zithoek.
+De open keuken sluit hier mooi op aan en is strak en modern uitgevoerd met een prachtig marmeren werkblad.
+De subtiele afscheiding zorgt ervoor dat je tijdens het koken contact houdt met de woonkamer. Het Boraafzuigsysteem is geïntegreerd in de kookplaat.
+Vanuit de keuken is er toegang tot de eerste slaapkamer.
+Deze ruimte is natuurlijk ook uitstekend geschikt als werk- of logeerkamer.
+Via de interne trap bereik je de vierde verdieping. Hier bevinden zich de andere twee slaapkamers, aan de
+voor- en achterzijde, en de badkamer.
+De ruime hoofdslaapkamer beschikt over een mooi hoog plafond en geeft toegang tot het zonnige dakterras (met vergunning!) van circa 7 m². Een heerlijke plek om buiten te zitten en van de zon te genieten.
+De tweede slaapkamer bevindt zich aan de voorzijde en is flexibel in te delen als slaap-, werk- of logeerkamer.
+De moderne badkamer ligt centraal op deze verdieping en beschikt over een inloopdouche met glazen wanden, wastafel en toilet. De ruimte is strak en licht afgewerkt en voorzien van vloerverwarming.
+Hier is ook de wasmachine netjes weggewerkt.
+De woning is in 2020 vrijwel volledig gerenoveerd. In 2021 is het volledige dak vervangen en geïsoleerd en eind 2022 is een nieuwe cv-ketel geplaatst. De woning beschikt over energielabel C. In zowel de woon- als ouderslaapkamer is airco aanwezig.
+Het pand werd in 2003 met vergunning gesplitst en het appartement ligt op eigen grond.
+Toen werd ook de fundering vernieuwd/hersteld.
+De VvE wordt door een van de eigenaren zelf beheerd. De afgelopen jaren is flink geïnvesteerd in het pand, waaronder het nieuwe geïsoleerde dak. De maandelijkse servicekosten bedragen € 106,-.
+Kortom: een heerlijk licht en sfeervol dubbel bovenhuis met drie slaapkamers, een zonnig dakterras en een moderne afwerking. Gelegen op een rustige plek, midden in het geliefde Oud-West én op eigen grond.
+Een woning waar je zo kunt intrekken en jarenlang met plezier kunt wonen!
+BIJZONDERHEDEN
+• Woonoppervlakte: ca. 74 m² (NEN-2580 meetrapport aanwezig)
+• Dakterras: ca. 7 m²
+• EIGEN GROND
+• Dubbel bovenhuis
+• 3 slaapkamers
+• Volledig gerenoveerd in 2020
+• Authentieke balken en hoge plafonds
+• Moderne open keuken met marmeren werkblad
+• Bora-afzuigsysteem geïntegreerd in de kookplaat
+• Moderne badkamer met inloopdouche, wastafel en toilet
+• Vloerverwarming in de badkamer
+• Nieuw en geïsoleerd dak uit 2021
+• Nieuwe Cv-ketel eind 2022
+• Air-conditioning aanwezig
+• Energielabel C
+• Bouwjaar ca. 1882
+• Pand gesplitst met vergunning in 2003 – funderingsherstel ook in 2003
+• VvE in eigen beheer
+• Servicekosten € 106,- per maand
+• De standaard ouderdoms- en asbestclausule zullen in het koopcontract opgenomen worden
+• Oplevering: in overleg / kan snel
+-----------FANTASTIC LIGHT-FILLED DUPLEX UPPER-FLOOR APARTMENT WITH 3 BEDROOMS, A SUNNY ROOFTOP TERRACE, RENOVATED FOUNDATIONS AND FREEHOLD OWNERSHIP THIS BEAUTIFUL HOME WAS COMPLETELY RENOVATED IN 2020 AND COMBINES MODERN LIVING COMFORT WITH THE CHARM OF AN AUTHENTIC AMSTERDAM PROPERTY. IT OFFERS 74 M² OF LIVING SPACE, 3 BEDROOMS, A 7 M² ROOFTOP TERRACE AND A NEW, INSULATED ROOF INSTALLED IN 2021.
+ENERGY LABEL C!
+LOCATION
+The apartment is located on the sought-after Frederiksstraat, a quiet cul-de-sac just around the corner from the Overtoom and literally a stone’s throw from the Vondelpark.
+Here you can enjoy a peaceful setting while the lively Oud-West neighbourhood is right around the corner.
+Along the Overtoom and the surrounding streets, you will find a wide range of shops, restaurants, cafés and delicatessens. De Hallen, Museumplein, the Concertgebouw and P.C. Hooftstraat are all within a short distance.
+For sports and relaxation, you only have to walk into the Vondelpark. Public transport is also excellent, with tram line 1 just around the corner on the Overtoom. The A10 ring road can be reached within a few minutes.
+Parking is available through the municipal permit system, with an average waiting time of approximately 9 months (source: City of Amsterdam website).
+In short: an ideal combination of tranquillity, vibrant city life and everything that makes Amsterdam Oud-West such a popular neighbourhood!
+LAYOUT
+The entrance on the second floor leads to the main living level. The bright living room has windows at both the front and rear and is characterised by high ceilings, beautiful original beams and smoothly plastered walls. This creates an atmospheric combination of character and modern living comfort.
+There is plenty of space for a large dining table as well as a spacious seating area.
+The open-plan kitchen connects beautifully to the living room and has a sleek, modern design with a stunning marble worktop. The subtle separation between the kitchen and living room allows you to remain connected with the living space while cooking. The Bora extractor system is integrated into the hob.
+The first bedroom can be accessed from the kitchen. This room is also ideally suited as a home office or guest bedroom.
+The internal staircase leads to the fourth floor. Here you will find the other two bedrooms, located at the front and rear of the property, as well as the bathroom.
+The spacious master bedroom features a beautiful high ceiling and provides access to the sunny rooftop terrace of approximately 7 m², which has the necessary permit. A wonderful place to sit outside and enjoy the sun.
+The second bedroom is located at the front of the property and can be flexibly used as a bedroom, home office or guest room.
+The modern bathroom is centrally located on this floor and features a walk-in shower with glass screens, washbasin and toilet. The bathroom is finished in a sleek and light style and features underfloor heating. The washing machine is also neatly concealed here.
+The property was almost completely renovated in 2020. In 2021, the entire roof was replaced and insulated, and a new central heating boiler was installed at the end of 2022. The property has an energy label C. Air conditioning is installed in both the living room and the master bedroom.
+The building was legally divided into separate apartments in 2003, and the apartment is situated on freehold land. The foundation was also renewed/restored at that time.
+The Owners’ Association (VvE) is self-managed by one of the owners. Considerable investment has been made in the building in recent years, including the new insulated roof. The monthly service charges are €106.
+In short: a wonderfully bright and atmospheric duplex upper-floor apartment with three bedrooms, a sunny rooftop terrace and modern finishes. Located in a quiet setting in the heart of popular Oud-West and situated on freehold land. A home that is ready to move into and enjoy for many years to come!
+KEY FEATURES
+• Living area: approx. 74 m² (NEN-2580 measurement report available)
+• Rooftop terrace: approx. 7 m²
+• FREEHOLD OWNERSHIP
+• Duplex upper-floor apartment
+• 3 bedrooms
+• Fully renovated in 2020
+• Original beams and high ceilings
+• Modern open-plan kitchen with marble worktop
+• Bora extractor system integrated into the hob
+• Modern bathroom with walk-in shower, washbasin and toilet
+• Underfloor heating in the bathroom
+• New and insulated roof installed in 2021
+• New central heating boiler installed at the end of 2022
+• Air conditioning
+• Energy label C
+• Year of construction: approx. 1882
+• Building legally divided into apartments in 2003 – foundation restoration also carried out in 2003
+• Self-managed Owners’ Association (VvE)
+• Service charges: €106 per month
+• The standard age-related and asbestos clauses will be included in the purchase agreement
+• Transfer: by mutual agreement / can take place quickly</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 35</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/940/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/919_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/883_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/918_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/871_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/878_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/922_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/897_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/880_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/892_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/867_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/913_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/904_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/903_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/881_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/862_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/899_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/876_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/895_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/896_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/865_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/870_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/885_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/879_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/882_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/866_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/905_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/886_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/872_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/917_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/909_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/940/877_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

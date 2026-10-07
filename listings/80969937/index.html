@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meerhuizenplein 28-F · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Meerhuizenplein 28-F</h1>
+  <p class="sub">
+    <span>1078 TD Amsterdam</span>
+    <span>·</span>
+    <span>IJselbuurt-Oost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/726/451_1440x960.jpg" alt="Meerhuizenplein 28-F — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">23 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€775.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.158/m² · 4.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.7 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">95 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 2002</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-meerhuizenplein-28-f/80969937/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd></dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 775.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.158</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 174,72 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2002</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>95 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>325 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift en Mechanical ventilation</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing, HR-glas en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en gehele Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Gas gestookt, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 1034</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 174,72 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">***English below***
+3-SLAAPKAMERAPPARTEMENT VAN 95 M² MET OPEN LEEFKEUKEN EN BALKON OP HET ZUIDEN AAN HET
+MEERHUIZENPLEIN
+Aan het rustige Meerhuizenplein in de Rivierenbuurt ligt dit ruime en lichte appartement van circa 95 m² in een modern complex met lift. Meer dan acht meter aan raampartijen brengt de hele dag licht naar binnen. Het gebouw, in 2001 ontworpen door architect Liesbeth van der Pol en opgeleverd in 2002, kenmerkt zich door een stijlvolle combinatie van de Amsterdamse School en jaren &#x27;30-architectuur, verrijkt met het wooncomfort van een modern appartement. In 2017 is het appartement compleet gerenoveerd, met onder meer vloerverwarming door de hele woning. Een open keuken met kookeiland, drie slaapkamers en een balkon op het zuiden maken dit een woning waar je direct thuiskomt.
+ENTREE EN INDELING
+De entree van het appartement is ruim en direct praktisch. De hal is zo royaal dat hij bijna als een extra kamer voelt, met volop ruimte voor kasten, een dressoir of een zitbank, zodat jassen en schoenen hun plek krijgen en binnenkomen meteen prettig voelt. Vanuit de hal zijn alle vertrekken bereikbaar: de woonkamer met open keuken aan de voorzijde, en de drie slaapkamers, de badkamer, het aparte toilet en een aparte wasruimte aan de achterzijde.
+WOONKAMER
+De woon- en eetkamer beslaat de volledige breedte van de voorzijde. Brede raampartijen laten de hele dag licht binnen en geven uitzicht op boomtoppen en de gevels aan de overkant van het plein. Er is ruimte voor een royale zithoek en een aparte eethoek bij het raam, waar je met vrienden aan tafel zit terwijl het buiten langzaam donker wordt. Door de open verbinding met de keuken blijf je tijdens het koken altijd in contact met je gasten.
+Hier kook je nooit alleen: terwijl de pan op het vuur staat, schuift iedereen al aan de bar aan.
+KEUKEN
+De open keuken van KVIK is modern en licht, met werkbladen verdeeld over twee werkzones. Het kookeiland met 5-pits gasfornuis en bargedeelte is het natuurlijke middelpunt van de woning en biedt volop ruimte om uitgebreid te koken. Daarachter ligt een tweede werkblad met de spoelbak en een hoge kastenwand met inbouwoven, ruime koelkast en apart vriesgedeelte; ook de vaatwasser en een moderne afzuigkap ontbreken niet. Vanachter het fornuis kijk je door de ramen uit op het groen van het plein.
+SLAAPKAMERS
+Een grote troef van dit appartement: drie volwaardige slaapkamers, naast elkaar aan de rustige achterzijde. De master bedroom is royaal, heeft een brede kastenwand met schuifdeuren en openslaande deuren naar het zuidbalkon, zodat je &#x27;s ochtends met een kop koffie in de zon de dag begint. De tweede slaapkamer is eveneens royaal; een tweepersoonsbed en kasten passen hier moeiteloos. De derde slaapkamer is veelzijdig inzetbaar als kinderkamer, logeerkamer of thuiswerkplek. Drie slaapkamers zonder dat je op woonruimte inlevert: dat kom je niet vaak tegen.
+BADKAMER EN TOILET
+De luxe badkamer ligt centraal aan de hal en is ingericht op comfort: een regendouche met handdouche, een dubbele wastafel met antifog-spiegel met geïntegreerde verlichting, op maat gemaakte kasten, een designradiator en wand- en vloerverwarming. Een plek waar je je even terugtrekt en de dag van je afspoelt. Het toilet is apart, wat prettig is in een woning met meerdere bewoners.
+BALKON
+Het balkon ligt op het zuiden, grenzend aan de grootste slaapkamer, en kijkt uit op een rustig, groen binnenterrein. Het biedt veel privacy en is de ideale plek om in de zon te ontbijten of op een warme avond bij te komen van een drukke dag.
+BERGING
+Op de begane grond van het complex hoort een eigen berging bij het appartement, handig voor fietsen en alles wat je niet dagelijks nodig hebt.
+LIGGING EN BEREIKBAARHEID
+De Rivierenbuurt is een rustige woonbuurt met alle voorzieningen dichtbij. De Rijnstraat is om de hoek voor de dagelijkse boodschappen en binnen enkele minuten ben je in De Pijp of aan de Amstel voor restaurants en cafés. Tram 4 en 12 stoppen letterlijk om de hoek, Station Amstel ligt dichtbij en met de auto zit je snel op de Ring A10. Parkeren kan met een vergunning; de straat valt onder vergunninggebied Zuid 4.1 Rivierenbuurt Noord.
+COMPLEX EN DUURZAAMHEID
+Het appartement maakt deel uit van een modern, goed geïsoleerd woongebouw met lift, in 2001 ontworpen door architect Liesbeth van der Pol. De architectuur combineert de Amsterdamse School met de stijl van de jaren &#x27;30, terwijl de woning zelf alle comfort van een modern appartement biedt. In 2024 is de gevel aan de binnentuinzijde volledig gerenoveerd en zijn alle slaapkamers voorzien van nieuwe, energiezuinige ramen. De woning heeft energielabel B.
+VERENIGING VAN EIGENAREN
+VvE &#x27;Woongebouw Meerhuizenplein&#x27; bestaat uit 27 appartementen met bijbehorende bergingen en wordt professioneel beheerd door VZB Vastgoed. De VvE is actief en financieel doordacht: de afgelopen jaren is fors geïnvesteerd in het gebouw, waaronder de volledige renovatie van de gevel aan de binnentuinzijde in 2024 en nieuwe energiezuinige ramen. Daarvoor is in 2023 een lening afgesloten die de VvE bewust versneld aflost, wat de eigenaren samen ruim twee ton aan rente bespaart. De maandelijkse bijdrage is daardoor tijdelijk hoger: € 592,68 in 2026 en € 610,75 in 2027, opgebouwd uit reguliere servicekosten (€ 192,19 in 2027) en € 418,56 aflossing en rente op de lening. Bij voortzetting van de versnelde aflossing is de lening eind oktober 2029 volledig afgelost en daalt de bijdrage naar het niveau van de reguliere servicekosten. Voor een koper betekent dit een gebouw waar het grote onderhoud al is gedaan, met een VvE die vooruitkijkt.
+ERFPACHT
+De woning staat op erfpachtgrond van de gemeente Amsterdam. De erfpachtcanon is afgekocht tot 1
+september 2049.
+BIJZONDERHEDEN
+-3 volwaardige slaapkamers
+-Lift in het complex
+-Complete renovatie in 2017, met vloerverwarming door de hele woning
+-Gevel aan de binnentuinzijde gerenoveerd in 2024, met nieuwe energiezuinige ramen in alle slaapkamers -Energielabel B -Balkon op het zuiden -Eigen berging op de begane grond -Erfpachtcanon afgekocht tot 1 september 2049 -Parkeren via vergunninggebied Zuid 4.1 Rivierenbuurt Noord -Oplevering in overleg, snelle oplevering mogelijk DISCLAIMER De gegevens en maatvoeringen op de plattegronden en in de brochure zijn indicatief. Hoewel de informatie zorgvuldig is samengesteld, is het toch niet uitgesloten dat bepaalde informatie na verloop van tijd verouderd of niet meer correct is.
+***English***
+THREE-BEDROOM APARTMENT OF 95 M² WITH OPEN-PLAN KITCHEN AND SOUTH-FACING BALCONY ON
+MEERHUIZENPLEIN
+On the quiet Meerhuizenplein in the Rivierenbuurt sits this spacious, light-filled apartment of approx. 95 m² in a modern building with a lift. More than eight metres of windows bring in light all day long. Designed in 2001 by architect Liesbeth van der Pol and completed in 2002, the building pairs the Amsterdam School with 1930s architecture in an elegant blend, enriched with the comfort of a modern apartment. The apartment was fully renovated in 2017, including underfloor heating throughout. An open-plan kitchen with an island, three bedrooms and a south-facing balcony make this a home you settle into immediately.
+ENTRANCE AND LAYOUT
+The entrance is spacious and immediately practical. The hall is so generous it almost feels like an extra room, with plenty of space for wardrobes, a sideboard or a bench, so coats and shoes have their place and arriving home feels good from the first step. All rooms are accessed from the hall: the living room with open-plan kitchen at the front, and the three bedrooms, the bathroom, the separate toilet and a separate laundry room at the rear.
+LIVING ROOM
+The living and dining room spans the full width of the front. Wide window sections bring in light all day and frame views of treetops and the façades across the square. There is room for a generous seating area and a separate dining space by the window, where you can linger at the table with friends as the evening draws in.
+Thanks to the open connection with the kitchen, you stay in touch with your guests while you cook. Cooking here is never a solitary affair: while the pan is on the hob, everyone is already gathering at the bar.
+KITCHEN
+The open-plan KVIK kitchen is modern and bright, with worktops arranged over two work zones. The island with its five-burner gas hob and bar section is the natural centre of the home and offers plenty of space for elaborate cooking. Behind it, a second worktop holds the sink, alongside a tall run of cabinets with a built-in oven, large fridge and separate freezer section; a dishwasher and modern extractor complete the picture. From behind the hob, the windows give you a view of the greenery on the square.
+BEDROOMS
+One of this apartment&#x27;s great strengths: three full-size bedrooms, side by side at the quiet rear. The master bedroom is generous, with a wide wardrobe with sliding doors and French doors onto the south-facing balcony, so you can start the day with a coffee in the sun. The second bedroom is equally generous; a double bed and wardrobes fit here with ease. The third bedroom is versatile, whether as a children&#x27;s room, guest room or home office. Three bedrooms without giving up living space: that is a rare find.
+BATHROOM AND TOILET
+The luxurious bathroom is centrally located off the hall and is designed for comfort: a rain shower with hand shower, a double washbasin with an anti-fog mirror with integrated lighting, custom-made cabinets, a designer radiator and wall and underfloor heating. A private retreat where you can wash the day away. The toilet is separate, a real convenience in a home with several occupants.
+BALCONY
+The balcony faces south, adjoins the largest bedroom and overlooks a quiet, green inner yard. It offers plenty of privacy and is the ideal spot for breakfast in the sun or for unwinding after a busy day on a warm evening.
+STORAGE ROOM
+A private storage room on the ground floor of the building belongs to the apartment, handy for bicycles and everything you don&#x27;t need every day.
+BUILDING AND SUSTAINABILITY
+The apartment is part of a modern, well-insulated residential building with a lift, designed in 2001 by architect Liesbeth van der Pol. The architecture blends the Amsterdam School with the style of the 1930s, while the apartment itself offers all the comfort of a modern home. In 2024 the façade on the courtyard side was fully renovated and all bedrooms were fitted with new, energy-efficient windows. The property has energy label B.
+HOMEOWNERS&#x27; ASSOCIATION
+The homeowners&#x27; association &#x27;Woongebouw Meerhuizenplein&#x27; comprises 27 apartments with their storage rooms and is professionally managed by VZB Vastgoed. The association is active and financially prudent: in recent years it has invested substantially in the building, including the full renovation of the courtyard-side façade in 2024 and new energy-efficient windows. This was financed by a loan taken out in 2023 that the association is deliberately repaying ahead of schedule, saving the owners well over € 200,000 in interest. As a result, the monthly contribution is temporarily higher: € 592.68 in 2026 and € 610.75 in 2027, made up of regular service charges (€ 192.19 in 2027) and € 418.56 in repayment and interest on the loan. If the accelerated repayment continues, the loan will be fully repaid by the end of October 2029, after which the contribution falls to the level of the regular service charge. For a buyer, this means a building where the major maintenance has already been done, with an association that plans ahead.
+GROUND LEASE
+The property is on ground lease from the Municipality of Amsterdam. The groundlease has been bought off until 1 September 2049.
+PARTICULARS
+-3 full-size bedrooms
+-Lift in the building
+-Fully renovated in 2017, with underfloor heating throughout
+-Courtyard-side façade renovated in 2024, with new energy-efficient windows in all bedrooms
+-Energy label B
+-South-facing balcony
+-Private storage room on the ground floor
+-Active homeowners&#x27; association, professionally managed by VZB Vastgoed; contribution € 592.68 per month (2026), € 610.75 per month (2027), of which € 418.56 is temporary repayment and interest on the association&#x27;s loan until October 2029 - Groundlease bought off until 1 September 2049 -Parking via permit zone Zuid 4.1 Rivierenbuurt Noord -Completion by mutual agreement, quick completion possible DISCLAIMER The details and measurements on the floor plans and in the brochure are indicative. Although this information has been compiled with care, it cannot be ruled out that certain information may become outdated or no longer correct over time.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Unique Real Estate B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 23</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/726/451_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/435_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/409_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/418_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/406_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/403_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/476_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/412_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/447_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/420_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/468_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/422_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/402_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/430_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/404_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/456_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/457_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/423_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/485_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/484_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/429_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/726/466_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

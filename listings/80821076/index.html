@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leuvenstraat 136 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Leuvenstraat 136</h1>
+  <p class="sub">
+    <span>1066 HD Amsterdam</span>
+    <span>·</span>
+    <span>Nieuw-Sloten-Zuidoost</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/229/241/990_1440x960.jpg" alt="Leuvenstraat 136 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">46 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€545.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.396/m² · 1.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.7 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">101 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1993</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-leuvenstraat-136/80821076/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 545.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.396</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 182,97 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1993</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gemeubileerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>101 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>317 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, Walk-in shower, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, Wall insulation en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN E 4345</dt><dd>ownedssituatie</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde houten berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 182,97 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">WONEN OP JE BEST IN NIEUW-SLOTEN: RUIM, DUURZAAM ÉN DIRECT TE BETREKKEN!
+
+Ben je op zoek naar een instapklaar, modern én energiezuinig appartement waar comfort, ruimte en woonplezier perfect samenkomen? Dan is Leuvenstraat 136 een kans die je niet aan je voorbij wilt laten gaan! Deze verrassend ruime maisonnette op de bovenste verdieping gelegen in het geliefde Nieuw-Sloten heeft alles in huis om je direct enthousiast te maken. Hier geniet je van een slimme indeling, veel lichtinval en een eigentijdse uitstraling gecombineerd met het gemak van zorgeloos wonen.
+
+Met maar liefst drie fijne slaapkamers, een zonnig terras op het zuiden en energielabel A woon je hier niet alleen heerlijk comfortabel, maar ook duurzaam en toekomstbestendig. Of je nu starter bent, een volgende stap maakt als stel of op zoek bent naar een fijne plek voor een (jong) gezin: deze woning past zich moeiteloos aan jouw woonwensen aan. Rust, ruimte en alle dagelijkse voorzieningen binnen handbereik maken het plaatje compleet. Dit is zo’n woning waar je binnenkomt en meteen voelt: hier wil ik wonen! 
+
+INDELING:
+Aan de buitenzijde van het gebouw bevindt zich het belplateau. Via de centrale entree heeft u toegang tot de gemeenschappelijke binnentuin, een prettige en groene buitenruimte met een speelveld en een zitgedeelte voor de bewoners van het complex. Op het binnenterrein bevindt zich tevens een houten berging behoren bij het appartement.
+
+Via het nette trappenhuis bereikt u de maisonnette, gelegen op de derde en vierde verdieping van het gebouw. Dit betreft de bovenste woonlagen, wat zorgt voor extra rust, privacy en het grote voordeel dat u geen bovenburen heeft.
+
+Bij binnenkomst in de woning komt u in de hal, die toegang biedt tot vrijwel alle vertrekken. De royale woonkamer valt direct op door de grote raampartijen, die zorgen voor een overvloed aan natuurlijk licht en een vrij uitzicht. De ruimte is royaal opgezet en biedt volop mogelijkheden voor zowel een comfortabele zithoek als een ruime eethoek. Aansluitend bevindt zich het zonnige terras op het zuiden, waar u in alle rust kunt genieten van het vrije uitzicht en de groene gemeenschappelijke binnentuin. 
+
+De semi-open keuken met kookeiland sluit mooi aan op de leefruimte en is voorzien van diverse inbouwapparatuur. Dankzij de gunstige ligging aan de voorzijde profiteert ook de keuken van veel lichtinval. Vanuit de hal is er tevens toegang tot een separaat toilet, dat in 2023 volledig is gerenoveerd en strak en modern is afgewerkt.
+
+Op de vierde verdieping bevinden zich drie goed bemeten slaapkamers, die zich uitstekend lenen als slaapkamers, werkkamer en/of logeerkamer. De royale hoofdslaapkamer is voorzien van een ruime kledingkast. De twee overige slaapkamers bieden eveneens voldoende ruimte voor een bed en kledingkast. 
+De badkamer en het separate toilet zijn in 2023 volledig vernieuwd en modern en stijlvol afgewerkt met eigentijdse grijze tegels. Daarnaast beschikt de woning over een praktische wasruimte met ruimte voor zowel de wasmachine als droger, aangevuld met extra bergruimte.
+
+VERENIGING VAN EIGENAREN (VvE):
+Er is sprake van een actieve en professioneel beheerde Vereniging van Eigenaars (VvE), voorzien van een actueel Meerjarenonderhoudsplan (MJOP). De VvE komt jaarlijks bijeen en het beheer is goed georganiseerd. De servicekosten voor het appartement en de berging bedragen € 182,97 per maand. Het betreft een financieel gezonde VvE. Voor het onderhoud van de gemeenschappelijke binnentuin betalen de eigenaren jaarlijks een vast bedrag van € 38,-.
+
+ERFPACHT:
+Het appartement bevindt zich op erfpacht. De erfpacht is afgekocht tot 1 september 2042. 
+
+OMGEVING:
+De maisonette ligt in het geliefde Nieuw-Sloten, een ruim opgezette en groene woonwijk waar rust en stedelijke voorzieningen perfect samenkomen. Hier woon je in een prettige omgeving met alle dagelijkse gemakken binnen handbereik, terwijl het bruisende Amsterdam nooit ver weg is.
+
+Voor boodschappen en winkels kun je terecht bij diverse winkelcentra en buurtvoorzieningen in de directe omgeving. Daarnaast zijn scholen, kinderdagverblijven en sportfaciliteiten volop aanwezig. Ook liefhebbers van groen zitten hier goed, met verschillende parken en recreatiegebieden in de buurt om te wandelen, sporten of ontspannen.
+
+De bereikbaarheid is uitstekend: het centrum van Amsterdam is eenvoudig bereikbaar met de fiets of het openbaar vervoer en Schiphol ligt op slechts circa 15 minuten afstand. Bovendien zijn de A4, A9 en A10 snel te bereiken, waardoor je altijd vlot onderweg bent.
+
+BIJZONDERHEDEN:
+- Bouwjaar 1993 
+- Woonoppervlakte ca. 101,2 m² 
+- Energielabel A (nieuw) 
+- Instapklare woning 
+- Zonnige terras op het Zuiden
+- Badkamer en toiletten volledig vernieuwd eind 2023
+- Alle binnendeuren vervangen eind 2023
+- Schilderwerk uitgevoerd eind 2023
+- CV-ketel vernieuwd in 2021
+- Servicekosten €182,97 per maand
+- Houten berging 
+- Erfpacht afgekocht tot 1 september 2042
+
+--------------
+
+LIVING AT ITS BEST IN NIEUW-SLOTEN: SPACIOUS, SUSTAINABLE &amp; MOVE-IN READY!
+
+Are you looking for a modern, energy-efficient apartment where comfort, space and living pleasure come together seamlessly? Then Leuvenstraat 136 is an opportunity you don’t want to miss! This surprisingly spacious maisonette, located on the top floors in the highly desirable Nieuw-Sloten area, has everything to instantly capture your attention. Enjoy a smart layout, abundant natural light and a contemporary feel, combined with the ease of carefree living.
+
+With no fewer than three comfortable bedrooms, a sunny south-facing terrace and an A energy label, this home offers not only exceptional comfort but also a sustainable and future-proof lifestyle. Whether you are a first-time buyer, a couple taking the next step, or looking for a great home for a (young) family: this property adapts effortlessly to your lifestyle needs. Peace, space and all daily amenities within easy reach complete the picture. A home like this makes you feel right away: this is where I want to live! 
+
+LAYOUT:
+On the exterior of the building you will find the doorbell panel. Through the central entrance, you have access to the communal courtyard garden, a pleasant green outdoor space featuring a playground and seating area for residents of the complex. On the shared grounds there is also a private wooden storage unit belonging to the apartment.
+
+Via the well-maintained staircase, you reach the maisonette located on the third and fourth floors of the building. As these are the top floors, you benefit from extra peace, privacy and the major advantage of having no upstairs neighbours.
+
+Upon entering the home, you step into the hallway, which provides access to almost all rooms. The spacious living room immediately stands out thanks to its large windows, offering an abundance of natural light and an open, unobstructed view. The living area is generously sized and offers ample space for both a comfortable seating area and a dining space. Adjacent to the living room is the sunny south-facing terrace, where you can enjoy peace, privacy and views over the green communal courtyard.
+
+The semi-open kitchen with kitchen island connects beautifully to the living space and is equipped with various built-in appliances. Thanks to its favourable position at the front, the kitchen also benefits from excellent natural light. From the hallway, you also have access to a separate toilet, which was fully renovated in 2021 and finished in a modern, stylish design.
+
+On the fourth floor, you will find three well-proportioned bedrooms, ideal as bedrooms, a home office and/or guest room. The spacious primary bedroom includes a large wardrobe. The two additional bedrooms also offer sufficient space for a bed and wardrobe.
+
+The bathroom and separate toilet were fully renovated in 2021 and are finished in a modern and elegant style with contemporary grey tiling. In addition, the home features a practical laundry room with space for both a washing machine and dryer, as well as extra storage.
+
+HOMEOWNERS’ ASSOCIATION (VvE):
+There is an active and professionally managed Homeowners’ Association (VvE), supported by an up-to-date Multi-Year Maintenance Plan (MJOP). The association meets annually, and its management is well organised. The service charges for the apartment and storage unit amount to €182.97 per month. The association is financially sound. For the maintenance of the communal courtyard garden, owners pay a fixed annual contribution of €38.
+
+LEASEHOLD:
+The apartment is situated on leasehold land. The ground lease has been paid off until 1 September 2042.
+
+SURROUNDINGS:
+The maisonette is located in the popular Nieuw-Sloten district, a spacious and green residential area where tranquillity and urban amenities come together perfectly. Here you enjoy a pleasant living environment with all daily conveniences within easy reach, while vibrant Amsterdam is never far away.
+
+For groceries and shopping, several nearby shopping centres and neighbourhood facilities are available. Schools, childcare centres and sports facilities are also widely present. Nature lovers will appreciate the nearby parks and recreational areas, ideal for walking, exercising or simply relaxing outdoors.
+
+Accessibility is excellent: Amsterdam city centre can be reached easily by bike or public transport, and Schiphol Airport is only around 15 minutes away. In addition, the A4, A9 and A10 motorways are quickly accessible, ensuring smooth travel in all directions.
+
+KEY FEATURES:
+- Built in 1993
+- Living area approx. 101.2 m²
+- Energy label A (new)
+- Move-in ready property
+- Sunny south-facing terrace
+- Bathroom and toilets fully renovated at the end of 2023
+- All interior doors replaced at the end of 2023
+- Interior painting completed at the end of 2023
+- Central heating boiler replaced in 2021
+- Service charges: €182.97 per month
+- Wooden storage shed
+- Leasehold paid off until 1 September 2042</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Real Estate Agent</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 46</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/229/241/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/978_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/994_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/647_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/979_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/983_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/975_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/987_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/984_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/988_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/973_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/000_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/999_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/002_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/004_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/998_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/992_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/981_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/005_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/012_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/007_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/006_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/009_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/015_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/014_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/648_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/008_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/010_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/980_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/991_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/242/001_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/993_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/241/997_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waterschapstraat 101 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Waterschapstraat 101</h1>
+  <p class="sub">
+    <span>1069 WR Amsterdam</span>
+    <span>·</span>
+    <span>Dijkgraafpleinbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/636/059_1440x960.jpg" alt="Waterschapstraat 101 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">34 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€535.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.612/m² · 3.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.9 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">116 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1964</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-waterschapstraat-101/80982084/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 535.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.612</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1964</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Bouwkundige Keuring</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>116 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>98 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>387 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oppervlakte</dt><dd>98 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>28 m² (6,09 m deep en 4,53 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Instapklare, moderne eengezinswoning met vier ruime slaapkamers en zonnige tuin!
+
+Welkom in deze ruime en modern afgewerkte tussenwoning van 115 m², gelegen in de rustige en kindvriendelijke Dijkgraafpleinbuurt in Amsterdam. De woning beschikt over maar liefst vier royale slaapkamers, een lichte woonkamer, een moderne badkamer en een fraai aangelegde tuin. Een ideale gezinswoning die direct te betrekken is!
+
+De buurt
+De woning is gelegen in De Punt, een rustige woonwijk binnen de Dijkgraafpleinbuurt. Hier woon je in een fijne en kindvriendelijke omgeving met diverse voorzieningen binnen handbereik. Winkels, supermarkten, scholen en openbaar vervoer zijn op loop- en fietsafstand te vinden. Met de tram en bus bereik je eenvoudig het centrum van Amsterdam en ook de belangrijkste uitvalswegen zijn snel bereikbaar.
+
+Begane grond
+Via de verzorgde entree kom je binnen in de hal, waar zich de meterkast, het toilet met fonteintje en een praktische inpandige berging bevinden. Deze ruimte is ideaal te gebruiken als garderobe of voor extra opslag.
+
+De royale woonkamer is licht, modern en sfeervol. Door de grote raampartij aan de achterzijde komt er volop natuurlijk daglicht binnen. De woonkamer biedt voldoende ruimte voor zowel een comfortabele zithoek als een gezellige eethoek.
+De open L-vormige keuken sluit mooi aan op de woonkamer en is voorzien van veel kastruimte en diverse apparatuur. Onder de trap bevindt zich daarnaast een handige trapkast, ideaal voor extra bergruimte.
+
+Eerste verdieping
+Op de eerste verdieping bevinden zich drie ruime slaapkamers en de moderne badkamer. Eén slaapkamer is aan de voorzijde gelegen en de andere twee slaapkamers bevinden zich aan de achterzijde.
+
+De moderne badkamer is stijlvol afgewerkt en beschikt over een ruime inloopdouche, dubbele wastafel met spiegelkast, designradiator en een hangend toilet.
+
+Tweede verdieping
+Via een vaste trap bereik je de tweede verdieping. Hier bevindt zich de royale vierde slaapkamer, voorzien van een dakkapel.
+
+Op deze verdieping zijn tevens de cv-installatie en de aansluiting voor de wasmachine aanwezig.
+
+Bijzonderheden
+• Instapklare en modern afgewerkte tussenwoning
+• Woonoppervlakte van 115 m²
+• Vier royale slaapkamers
+• Lichte woonkamer
+• Moderne open keuken 
+• Moderne badkamer 
+• Fraai aangelegde achtertuin 
+• Erfpacht EEUWIGDUREND afgekocht
+• Rustige en kindvriendelijke ligging
+• &#x27;As is, where is&#x27; clausule  
+• Ouderdomsclausule
+• Goede bereikbaarheid met openbaar vervoer en uitvalswegen
+
+Disclaimer:
+De op deze website getoonde vrijblijvende informatie is door ons (met zorg) samengesteld op basis van gegevens van de verkoper (en/of derden). Deze tekst is zorgvuldig samengesteld, echter kunnen er geen rechten worden ontleend.  Wij staan niet in voor de juistheid of volledigheid daarvan. Wij adviseren u en/of uw makelaar om contact met ons op te nemen bij interesse in een van onze woningen.
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Move-in ready, modern family home with four spacious bedrooms and a sunny garden!
+
+Welcome to this spacious and modernized terraced family home of 115 m², situated in the quiet and child-friendly Dijkgraafplein area of Amsterdam. The property features no fewer than four generous bedrooms, a bright living room, a modern bathroom and a beautifully landscaped garden. An ideal family home that is ready to move into!
+
+The neighborhood
+The property is located in De Punt, a quiet residential area within the Dijkgraafplein neighborhood. Here you can enjoy a pleasant and child-friendly environment with a wide range of amenities close by. Shops, supermarkets, schools and public transport are all within walking or cycling distance. Trams and buses provide easy access to Amsterdam city centre, while the main roads are also quickly accessible.
+
+Ground floor
+Through the well-maintained entrance, you enter the hallway, which provides access to the meter cupboard, a separate toilet with washbasin and a practical indoor storage room. This space is ideal for use as a cloakroom or for additional storage.
+
+The spacious living room is bright, modern and inviting. The large windows at the rear of the property allow plenty of natural light to enter. The living room offers ample space for both a comfortable seating area and a cozy dining area.
+
+The open-plan L-shaped kitchen connects nicely to the living space and is equipped with plenty of storage and various appliances. In addition, there is a convenient storage cupboard underneath the stairs, providing extra storage space.
+
+First floor
+The first floor features three spacious bedrooms and the modern bathroom. One bedroom is located at the front of the property, while the other two bedrooms are situated at the rear.
+
+The modern bathroom is stylishly finished and features a spacious walk-in shower, double washbasin with mirrored cabinet, designer radiator and wall-mounted toilet.
+
+Second floor
+A fixed staircase leads to the second floor, where you will find the spacious fourth bedroom, complete with a dormer window.
+
+This floor also houses the central heating system and washing machine connection.
+
+Key features
+Move-in ready and modernized terraced family home
+Living area of 115 m²
+Four spacious bedrooms
+Bright living room
+Modern open-plan kitchen
+Modern bathroom
+Beautifully landscaped rear garden
+Ground lease paid off
+Quiet and child-friendly location
+Excellent access to public transport and major roads
+
+Disclaimer:
+The non-binding information displayed on this website has been compiled by us with due care, based on information provided by the seller and/or third parties. Although this text has been carefully prepared, no rights may be derived from it. We do not guarantee the accuracy or completeness of the information provided. If you are interested in one of our properties, we recommend that you and/or your estate agent contact us for further information.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Lichte moderne woonkamer
+
+Ruime, lichte woonkamer met grote raampartij achter.
+
+Fraai aangelegde achtertuin
+
+Zonnige, fraai aangelegde achtertuin bij de woning.
+
+Vier ruime slaapkamers
+
+Instapklare eengezinswoning met vier royale kamers.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 34</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/636/059_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/030_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/083_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/061_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/087_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/034_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/025_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/026_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/060_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/081_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/071_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/048_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/047_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/088_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/068_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/063_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/073_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/049_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/035_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/040_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/036_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/024_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/054_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/033_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/032_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/078_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/045_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/085_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/042_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/065_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/057_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/636/037_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

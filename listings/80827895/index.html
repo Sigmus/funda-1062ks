@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Johan Hofmanstraat 86 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Johan Hofmanstraat 86</h1>
+  <p class="sub">
+    <span>1069 KE Amsterdam</span>
+    <span>·</span>
+    <span>Zuidwestkwadrant-Zuid</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/229/518/515_1440x960.jpg" alt="Johan Hofmanstraat 86 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€695.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.664/m² · 2.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.9 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">149 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2008</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-johan-hofmanstraat-86/80827895/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 79 per maand</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 695.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.664</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2008</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Dubbele bewoning mogelijk</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>149 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>527 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 3 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches en 2 Washbasinmeubels</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Buitenzonwering, frans balkon, Mechanical ventilation, natuurlijke ventilatie, schuifpui, en zonnepanelen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>HR-glas en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en gedeeltelijke Underfloor heating</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Atag (gas-fired combi boiler uit 2023, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND E 8312</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijk eigendom belast met erfpacht</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>French balcony present</dd></div>
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>40 m² (8,00 m deep en 5,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder en parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Parkeergarage</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**English version below**
+
+Bent u op zoek naar een lichte en goed onderhouden woning met veel ruimte, een zonnige tuin en een eigen overdekte privé parkeerplek? Deze eigentijdse tussenwoning van 149 m² woonoppervlakte biedt alles wat u nodig heeft: een royale woonkamer met open keuken, drie slaapkamers, twee werkkamers, twee badkamers én een zelfstandige studio op de begane grond. Ideaal als kantoor aan huis, gastenverblijf of zelfstandige ruimte voor bijvoorbeeld een studerend kind. Het is mogelijk een tweede parkeerplek, naast de huidige, erbij te kopen voor €25.000,- k.k.
+
+De woning is gebouwd in 2008, uitstekend geïsoleerd en beschikt over energielabel A. Het is voorzien van zonnepanelen en een moderne cv-ketel (Atag, 2023). 
+
+De ligging aan de autovrije Johan Hofmanstraat is heerlijk rustig met veel groen in de buurt, terwijl u binnen enkele minuten bij winkels, scholen en het openbaar vervoer bent.
+
+De erfpachtcanon is eeuwigdurend afgekocht.
+
+Indeling
+
+Begane grond: Via de entree komt u binnen in de hal met toegang tot de studio. Deze studio heeft een eigen keuken, badkamer met douche en wastafel, separaat toilet en aansluiting voor de wasmachine. Dankzij de eigen ingang is dit een volwaardige woonruimte die ook uitstekend gebruikt kan worden als kantoor, praktijkruimte of logeerplek. Vanuit de entree bereikt u ook de inpandige berging en de parkeerplaats in de afgesloten parkeergarage. Tevens is hier de trap naar de eerste verdieping. 
+
+Eerste verdieping: De eerste verdieping vormt het hart van de woning: een ruime living met open keuken, eethoek en zithoek. De moderne keuken met kookeiland is voorzien van diverse inbouwapparatuur waaronder een inductiekookplaat, een combi-oven, een stoomoven, een vaatwasser en een Quooker. De grote ramen en de schuifpui zorgen voor veel lichtinval en geven toegang tot de zonnige daktuin. 
+Daarnaast zijn er op deze verdieping twee werk-/slaapkamers aan de voorzijde, een toilet en een praktische inbouwkast.
+
+Tweede verdieping: Hier bevinden zich drie ruime slaapkamers, waarvan één met een walk-in closet. De badkamer is uitgerust met een douche en een wastafelmeubel. Verder is er een separaat toilet en een handige berging met aansluiting voor de wasmachine.
+
+Buitenruimte: De zonnige daktuin van circa 40 m² ligt op het zuiden en is een heerlijke plek om te ontspannen. De tuin is verzorgd aangelegd, biedt volop privacy en beschikt over een handige berging. Via de achterom is er directe toegang tot de parkeergarage.
+
+Bijzonderheden
+•	Woonoppervlakte ca. 149 m² (NEN2580)
+•	Erfpachtcanon eeuwigdurend afgekocht
+•	Bouwjaar 2008
+•	Servicekosten €53,34 voor de woning en €25,32 voor de parkeerplaats
+•	Energielabel A – volledig geïsoleerd en voorzien van zonnepanelen (18)
+•	Zonnige daktuin op het zuiden (ca. 40 m²)
+•	Studio met eigen entree, keuken en badkamer
+•	3 slaapkamers + 2 extra (werk)kamers
+•	Gedeeltelijk vloerverwarming
+•	Privé parkeerplaats met laadpaal in parkeergarage
+•	Mogelijkheid voor extra parkeerplaats (€25.000,-)
+•	Cv-ketel Atag 2023 (eigendom)
+
+Omgeving
+De woning ligt in een rustige autovrije straat in Amsterdam Nieuw-West, vlak bij de Pieter Calandlaan. Op loopafstand vindt u winkels, supermarkten en eetgelegenheden. Winkelcentrum Dukaat, het Osdorpplein en theater De Meervaart liggen in de directe omgeving.
+Ook zijn er scholen, kinderopvang, sportverenigingen en medische voorzieningen in de buurt. Voor ontspanning kunt u terecht bij de Sloterplas, de Nieuwe Meer of het Amsterdamse Bos. De bereikbaarheid is uitstekend: tramlijn 1 stopt om de hoek en binnen 10 minuten rijdt u op de A10, A4 of A9.
+
+Kortom:
+Een moderne en royale woning met veel mogelijkheden, perfect voor wie ruimte en comfort zoekt in de stad.
+Neem contact op met makelaarFRANK voor een bezichtiging – en ervaar zelf wat de Johan Hofmanstraat 86 te bieden heeft!
+
+**Englisch version**
+
+Are you looking for a bright and well-maintained home with plenty of space, a sunny garden, and a private covered parking space? This contemporary terraced house offers approximately 149 m² of living space and has everything you need: a generous living room with open kitchen, three bedrooms, two home offices, two bathrooms, and an independent studio on the ground floor — ideal as a home office, guest accommodation, or a separate space for a student child. 
+
+Built in 2008, the property is excellently insulated and has an energy label A. It features solar panels, and a modern central heating system (Atag, 2023). 
+Located on the car-free Johan Hofmanstraat, the area is wonderfully quiet and green, while shops, schools, and public transport are just minutes away.
+
+The ground lease has been bought off in perpetuity.
+
+Layout
+
+Ground floor: Through the entrance, you enter the hallway with access to the studio. This studio has its own kitchen, bathroom with shower and sink, separate toilet, and a connection for a washing machine. Thanks to its own entrance, this is a fully independent living space that can also serve perfectly as an office, practice space, or guest room.
+From the entrance you also reach the internal storage room and the private parking space in the secured parking garage. The stairs to the first floor are also located here.
+
+First floor: The first floor is the heart of the home: a spacious living area with an open kitchen, dining area, and lounge. The modern kitchen with cooking island is equipped with built-in appliances including an induction hob, combi oven, steam oven, dishwasher, and a Quooker. Large windows and sliding doors allow in lots of natural light and provide access to the sunny rooftop garden.
+There are also two work/bedrooms at the front, a separate toilet, and a practical built-in closet.
+
+Second floor: Here you’ll find three spacious bedrooms, one of which features a walk-in closet. The bathroom is fitted with a shower and vanity unit. There is also a separate toilet and a convenient storage room with washing machine connection.
+
+Outdoor space: The sunny rooftop garden of approximately 40 m² is south-facing and a perfect place to relax. The garden is nicely landscaped, offers plenty of privacy, and includes a handy storage unit. Via the back entrance, there is direct access to the parking garage.
+
+Key features
+
+•	Living area approx. 149 m² (NEN 2580)
+•	Perpetual ground lease fully bought off
+•	Built in 2008
+•	Service costs: €53.34 for the home and €25.32 for the parking space
+•	Energy label A – fully insulated and equipped with solar panels (18)
+•	Sunny south-facing rooftop garden (approx. 40 m²)
+•	Studio with private entrance, kitchen, and bathroom
+•	3 bedrooms + 2 additional (work)rooms
+•	Underfloor heating on the ground floor
+•	Private parking space with charging station in secured garage
+•	Possibility to buy an additional parking space (€25,000)
+•	Central heating system (Atag, 2023, owned)
+
+Surroundings
+
+The property is located on a quiet, car-free street in Amsterdam Nieuw-West, close to Pieter Calandlaan. Shops, supermarkets, and dining options are all within walking distance. Shopping center Dukaat, Osdorpplein, and theater De Meervaart are nearby.
+Schools, childcare, sports clubs, and medical facilities are also in the area. For leisure, the Sloterplas, Nieuwe Meer, and the Amsterdamse Bos are great nearby options. Accessibility is excellent: tram line 1 stops just around the corner, and you can reach the A10, A4, or A9 within 10 minutes by car.
+
+In short: A modern and spacious home with many possibilities — perfect for anyone seeking comfort and flexibility in the city.
+
+Contact makelaarFRANK to schedule a viewing and experience all that Johan Hofmanstraat 86 has to offer!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/229/518/515_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/557_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/540_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/532_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/556_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/549_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/510_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/555_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/546_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/548_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/509_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/525_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/553_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/529_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/520_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/513_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/511_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/544_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/514_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/523_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/547_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/527_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/526_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/539_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/534_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/512_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/537_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/559_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/516_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/530_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/535_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/542_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/517_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/545_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/519_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/522_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/518/531_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

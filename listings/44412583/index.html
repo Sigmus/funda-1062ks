@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klaas Katerstraat 158 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Klaas Katerstraat 158</h1>
+  <p class="sub">
+    <span>1069 RT Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/231/436/964_1440x960.jpg" alt="Klaas Katerstraat 158 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">54 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€595.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.042/m² · 3.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">118 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 2003</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-klaas-katerstraat-158/44412583/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 595.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.042</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 281,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Ground-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2003</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>118 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>80 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>19 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>404 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation en natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>Begane grond</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (2018, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND E 7058</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 16-12-2050</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND E 7058</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 16-12-2050</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Sun terrace</dd></div>
+        <div class="frow"><dt>Sun terrace</dt><dd>82 m² (15,12 m deep en 5,40 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het westen</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, parkeergarage en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 281,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">(ENGLISH BELOW)
+Ruime maisonnettewoning met eigen parkeerplaats en een fenomenaal dakterras van ca. 80 m²!
+
+Bent u op zoek naar een verrassend ruime woning met meerdere slaapkamers, een eigen parkeerplaats én een uitzonderlijk groot zonnig dakterras? Dan is deze aantrekkelijke maisonnette aan de Klaas Katerstraat 158 in Amsterdam absoluut een bezichtiging waard.
+
+De woning beschikt over een gunstig energielabel B, een praktische indeling verdeeld over twee woonlagen, een externe berging in de onderbouw en een eigen parkeerplaats in de afgesloten parkeergarage.
+
+Locatie
+Voor dagelijkse boodschappen zijn de Albert Heijn en Jumbo op loopafstand. De winkels in Osdorperban en Nieuw Sloten bereikt u binnen enkele minuten met de fiets. Ook winkelcentrum Osdorpplein en Akerpoort Outlet &amp; Megastores liggen dichtbij en bieden een ruim aanbod aan winkels, horeca en voorzieningen. Met de tram bent u in circa 20 minuten op het Leidseplein
+De woning is gunstig gelegen voor gezinnen, met basisscholen, middelbare scholen en kinderopvang in de directe omgeving. Ook de British School of Amsterdam en de Vrije Universiteit Amsterdam zijn goed bereikbaar.
+In de buurt zijn diverse sport- en recreatiemogelijkheden, waaronder voetbal, golf, zwemmen en wielrennen. Voor ontspanning in de natuur liggen het Sloterpark, het Slotermeer en de Nieuwe Meer op korte afstand.
+
+De woning is uitstekend bereikbaar. De tramhalte van lijn 1 ligt op één minuut lopen en biedt snelle verbindingen naar Station Lelylaan, het Leidseplein en andere delen van de stad. Via Station Lelylaan zijn onder meer Station Amsterdam Zuid, Station Sloterdijk en Amsterdam Airport Schiphol snel bereikbaar. Met de auto bereikt u de A10 en A4 binnen ongeveer 10 minuten. Ook Schiphol, de Zuidas en Riekerpolder zijn vlot bereikbaar.
+
+Indeling
+Via de entree aan de straatzijde betreedt u de woning. Bij binnenkomst valt direct de royale ontvangsthal op, die toegang biedt tot de verschillende vertrekken op deze verdieping. Aan de voorzijde bevindt zich een ruime slaapkamer van goed formaat. Aan de achterzijde treft u de badkamer, voorzien van een ligbad met douchevoorziening, een wastafel en een toilet.
+
+Via de vaste trap bereikt u de eerste verdieping. Hier bevinden zich aan de voorzijde nog twee ruime slaapkamers, ideaal als kinderkamers, werkkamers of logeerkamers. Daarnaast beschikt deze verdieping over een tweede, separate toiletruimte.
+Aan de achterzijde bevindt zich de lichte en royale woonkamer met aangrenzende hoekkeuken. De keuken is voorzien van diverse inbouwapparatuur en biedt volop werk- en bergruimte. Extra praktisch is de berging met wasmachineaansluiting, ideaal voor het opbergen van voorraad en huishoudelijke spullen.
+
+Vanuit de woonkamer geven de grote schuifpuien toegang tot het absolute hoogtepunt van deze woning: het indrukwekkende dakterras van circa 80 m². Dankzij de gunstige ligging op het westen geniet u hier optimaal van de middag- en avondzon. Er is meer dan voldoende ruimte voor een comfortabele loungehoek, een grote eettafel en eventueel een buitenkeuken. Een heerlijke plek om te ontspannen, te genieten van lange zomeravonden of gezellig te borrelen met familie en vrienden.
+
+In de onderbouw beschikt u bovendien over een externe berging, ideaal voor fietsen en extra opslag, en een eigen parkeerplaats in de parkeergarage, waardoor parkeren altijd comfortabel en zorgeloos is.
+
+Bijzonderheden:
+- Royale maisonnettewoning verdeeld over twee woonlagen
+- Voortdurend recht van erfpacht canon afgekocht tot 6-12-2050
+- Energielabel B 
+- Drie ruime slaapkamers 
+- Royale woonkamer met veel lichtinval 
+- Hoekkeuken voorzien van inbouwapparatuur
+- Zeer groot dakterras van circa 80 m² 
+- Dakterras gelegen op het westen 
+- Externe berging in de onderbouw 
+- Eigen parkeerplaats in de afgesloten parkeergarage 
+- Actieve VVE, € 281,- servicekosten per maand.
+- Gelegen in Amsterdam met diverse voorzieningen in de directe omgeving. 
+
+Een woning als deze, met zoveel ruimte binnen én buiten, komt niet vaak beschikbaar. Maak snel een afspraak voor een bezichtiging en ervaar zelf het wooncomfort dat deze bijzondere maisonnette te bieden heeft.
+
+NOTARIS
+De koper heeft de keuze voor een Amsterdamse notaris welke een koopakte zal opstellen conform Amsterdams Model.
+
+Disclaimer: Deze beschrijving dient ter informatie en is niet bindend. Aan de verstrekte informatie kunnen geen rechten worden ontleend.
+
+Spacious Duplex Apartment with Private Parking Space and an Exceptional Rooftop Terrace of Approximately 80 m²!
+
+Are you looking for a surprisingly spacious home with multiple bedrooms, a private parking space, and an exceptionally large sunny rooftop terrace? Then this attractive duplex apartment at Klaas Katerstraat 158 in Amsterdam is definitely worth viewing.
+
+The property features a favourable Energy Label B, a practical layout spread over two floors, a private storage unit in the basement, and a dedicated parking space in the secure underground parking garage.
+
+Location
+For your daily groceries, both Albert Heijn and Jumbo supermarkets are within walking distance. The shopping areas of Osdorperban and Nieuw Sloten can be reached within minutes by bicycle. Osdorpplein Shopping Centre and Akerpoort Outlet &amp; Megastores are also nearby, offering a wide range of shops, restaurants, and other amenities. By tram, Leidseplein can be reached in approximately 20 minutes.
+The property is ideally situated for families, with primary and secondary schools, as well as childcare facilities, in the immediate vicinity. The British School of Amsterdam and Vrije Universiteit Amsterdam are also easily accessible.
+The neighbourhood offers a variety of sports and recreational facilities, including football, golf, swimming, and cycling. For outdoor relaxation, Sloterpark, Sloterplas, and De Nieuwe Meer are all just a short distance away.
+
+Accessibility is excellent. Tram line 1 stops just a one-minute walk from the property, providing direct connections to Amsterdam Lelylaan Station, Leidseplein, and other parts of the city. From Lelylaan Station, Amsterdam Zuid, Sloterdijk, and Amsterdam Airport Schiphol are easily accessible. By car, the A10 and A4 motorways can be reached within approximately 10 minutes, while Schiphol Airport, the Zuidas business district, and Riekerpolder are all within easy driving distance.
+
+Layout
+
+The property is accessed via its private entrance at street level. Upon entering, you are welcomed by a spacious entrance hall providing access to the various rooms on this floor. At the front of the property is a generously sized bedroom. At the rear, you will find the bathroom, equipped with a bathtub with shower, washbasin, and toilet.
+
+A fixed staircase leads to the upper floor. At the front are two additional spacious bedrooms, ideal as children&#x27;s rooms, home offices, or guest bedrooms. This floor also features a separate second toilet.
+
+At the rear is the bright and spacious living room with an adjoining corner kitchen. The kitchen is fitted with various built-in appliances and offers ample workspace and storage. A practical utility/storage room with washing machine connection provides additional storage for household items and pantry supplies.
+
+Large sliding doors from the living room open onto the absolute highlight of this home: the impressive rooftop terrace of approximately 80 m². Thanks to its west-facing orientation, you can enjoy the afternoon and evening sun to the fullest. There is ample space for a comfortable lounge area, a large dining table, and even an outdoor kitchen. It is the perfect place to relax, enjoy long summer evenings, or entertain family and friends.
+
+The property also includes a private storage room in the basement, ideal for bicycles and additional storage, as well as a private parking space in the secure underground garage, ensuring convenient and worry-free parking.
+
+Key Features
+- Spacious duplex apartment spread over two floors
+- Perpetual leasehold; annual ground rent prepaid until 6 December 2050
+- Energy Label B
+- Three spacious bedrooms
+- Bright and generous living room
+- Corner kitchen with built-in appliances
+- Exceptional rooftop terrace of approximately 80 m²
+- West-facing terrace with excellent afternoon and evening sun
+- Private storage room in the basement
+- Private parking space in the secure underground garage
+- Active Homeowners&#x27; Association (VvE); service charges €281 per month
+- Located in Amsterdam with a wide range of amenities nearby
+
+Properties offering this much indoor and outdoor space rarely become available. Schedule a viewing today and experience for yourself the comfort and lifestyle this exceptional duplex apartment has to offer.
+
+Notary
+The purchaser is free to choose any Amsterdam-based civil-law notary, who will prepare the purchase agreement in accordance with the standard Amsterdam Model.
+
+Disclaimer
+This information has been compiled with due care and is intended for informational purposes only. No rights may be derived from the information provided.
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Makelaarsland</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 54</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/231/436/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/046_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/034_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/881_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/889_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/000_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/884_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/853_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/829_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/878_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/898_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/042_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/961_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/936_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/833_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/852_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/827_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/993_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/862_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/836_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/004_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/041_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/922_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/055_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/828_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/859_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/020_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/969_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/994_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/999_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/846_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/908_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/845_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/987_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/024_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/064_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/437/028_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/887_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/436/842_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

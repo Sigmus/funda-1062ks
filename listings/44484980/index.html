@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pieter Calandlaan 46-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Pieter Calandlaan 46-2</h1>
+  <p class="sub">
+    <span>1065 KP Amsterdam</span>
+    <span>·</span>
+    <span>Louis Crispijnbuurt</span>
+    <span class="status offer">Sold</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/230/366/851_1440x960.jpg" alt="Pieter Calandlaan 46-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">32 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€450.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.000/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">75 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A+</span>
+      <span class="chip">Built 1958</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-calandlaan-46-2/44484980/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 231 per maand</dd></div>
+        <div class="frow"><dt>Laatste vraagprijs</dt><dd>€ 450.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.000</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1958</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>75 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>250 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en warmtepomp</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas-fired combi boiler uit 2025, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN (NH) D 9599</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>No</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>No</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>No</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>No</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>No</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">ZEER LUXE en VOLLEDIG GERENOVEERD en goed geïsoleerde (ENERGIELABEL A+) VIER-kamerappartement van 75 M2 met EEUWIGDURENDE AFGEKOCHTE ERFPACHT, TWEE BALKONS en BERGINGEN op steenworp afstand van station Lelylaan, is het forenzen nog nooit zo makkelijk geweest. Nabij het Vondelpark en aan de rand van Amsterdam-Zuid! 
+
+***English below***
+
+Highlights:
+• Volledig gerenoveerd in 2025 – eerste bewoner na renovatie.
+• Energielabel A+ – duurzaam en lage energielasten.
+• Luxe keuken &amp; badkamer met hoogwaardige inbouwapparatuur.
+• Drie slaapkamers – ideaal voor gezin, thuiswerkers of logees.
+• Twee balkons op het oosten én westen.
+• Twee ruime bergingen.
+• Erfpacht eeuwigdurend afgekocht.
+• Toplocatie in Slotervaart nabij OV, winkels, parken en scholen.
+
+Indeling: zie de plattegronden in de fotobijlage en/of maak een afspraak met Urban Makelaars. 
+
+Het appartement bevindt zich op de tweede verdieping en is recentelijk volledig verbouwd. Tijdens de recente renovatie is werkelijk alles aangepakt: van installaties tot afwerking. De lichte woonkamer kijkt vrij weg en verbindt moeiteloos met het balkon op het westen– perfect om na het werk nog heerlijk in de avondzon te zitten. De woning telt drie volwaardige slaapkamers, ideaal voor een gezin, gasten, of thuiswerken. Alle kamers zijn strak afgewerkt met nieuw stucwerk, frisse kleuren en hoogwaardig laminaat.
+
+Keuken en sanitair:
+De nieuwe keuken is een echte blikvanger: modern, luxe en voorzien van hoogwaardige inbouwapparatuur. Denk aan een inductiekookplaat, combi-oven, vaatwasser en koel-vriescombinatie. De badkamer straalt hotelkwaliteit uit met een ruime inloopdouche, modern wastafelmeubel en stijlvolle tegels. Daarnaast is er een separaat toilet, eveneens vernieuwd.
+
+Buitenruimte:
+Met twee balkons kun je de hele dag door van buiten genieten:
+- Oostbalkon voor een rustig ontbijt in de ochtendzon.
+- Westbalkon voor ontspannen avonden met uitzicht en licht.
+
+Bergingen: het appartement heeft een eigen (fietsen)berging op de begane grond en nog een extra berging op de zolderverdieping.
+
+Duurzaamheid:
+Met energielabel A+ is deze woning klaar voor de toekomst. Dankzij isolatie, moderne installaties en nieuwe apparatuur profiteer je van uitstekende energieprestaties en lage maandlasten.
+
+Bereikbaarheid en omgeving: 
+Het appartement ligt in de Jacques Veldmanbuurt in Slotervaart: een wijk met volop voorzieningen vlakbij het geliefde Sierplein. Binnen enkele minuten sta je ook bij winkelcentrum Osdorpplein, Delflandplein of het gezellige Hoofddorpplein. De tram- en busverbindingen richting het centrum en station Lelylaan liggen op korte afstand. Met de auto zijn de A4, A9 en A10 snel bereikbaar en ook Schiphol ligt op slechts enkele minuten rijden. Met de fiets bereik je de Sloterplas, Rembrandtpark en De Baarsjes eenvoudig. De omgeving staat bekend om de combinatie van groen en stedelijk gemak. Kindvriendelijke pleintjes, goede scholen, speeltuinen en brede lanen maken dit een prettige woonomgeving. Voor natuurliefhebbers zijn de Sloterplas en het omliggende park perfect voor hardlopen, wandelen of een picknick aan het water. De aanwezigheid van internationale voorzieningen en goede bereikbaarheid maakt dit bovendien een geliefde plek voor expats.
+
+Kenmerken:
+- Volledig gerenoveerd. 
+- Woonoppervlakte: ca. 75 m2.
+- Energielabel: A+.
+- Drie royale slaapkamers.
+- Twee balkons (oost en west).
+- Erfpacht: eeuwigdurend afgekocht.
+- Actieve en professionele VvE, VvE-bijdrage: € 231,- per maand.
+- Uitstekende ligging ten opzichte van het openbaar vervoer, winkels en sportvoorzieningen.
+- Notaris: naar keuze koper, mits koopakte conform Model Ring bij notaris in Groot Amsterdam.
+- Vraagprijs: € 450.000,- k.k.  
+- Oplevering: in overleg, kan snel!
+
+***English***
+
+VERY LUXURIOUS and FULLY RENOVATED and well-insulated (ENERGY LABEL A+) four-room apartment of 75 m² with PERPETUAL GROUND LEASE PAID OFF, TWO BALCONIES and STORAGE ROOMS, located just a stone’s throw from Lelylaan station — commuting has never been easier. Close to the Vondelpark and on the edge of Amsterdam-Zuid!
+
+Highlights:
+- Fully renovated in 2025 – first occupant after renovation
+- Energy label A+ – sustainable with low energy costs
+- Luxury kitchen &amp; bathroom with high-end built-in appliances
+- Three bedrooms – ideal for families, remote workers, or guests
+- Two balconies facing east and west
+- Two spacious storage rooms
+- Ground lease perpetually paid off
+- Prime location in Slotervaart near public transport, shops, parks, and schools
+
+Layout:
+See the floor plans in the photo attachments and/or schedule a viewing with URBAN MAKELAARS.
+The apartment is located on the second floor and has been recently completely renovated. During the renovation, everything was updated: from installations to finishing. The bright living room offers unobstructed views and connects seamlessly to the west-facing balcony — perfect for enjoying the evening sun after work. The property features three full-sized bedrooms, ideal for a family, guests, or working from home. All rooms are finished to a high standard with fresh plasterwork, modern colors, and high-quality laminate flooring.
+
+Kitchen and sanitary facilities:
+The new kitchen is a real eye-catcher: modern, luxurious, and equipped with high-end built-in appliances, including an induction hob, combi oven, dishwasher, and fridge-freezer combination.
+The bathroom has a hotel-like feel, featuring a spacious walk-in shower, modern vanity unit, and stylish tiling. There is also a separate toilet, which has also been fully renovated.
+
+Outdoor space:
+With two balconies, you can enjoy the outdoors all day long:
+East-facing balcony for a peaceful breakfast in the morning sun
+West-facing balcony for relaxing evenings with light and views
+
+Storage:
+The apartment includes a private (bicycle) storage unit on the ground floor, as well as an additional storage room in the attic.
+
+Sustainability:
+With an A+ energy label, this home is future-proof. Thanks to insulation, modern installations, and new appliances, you benefit from excellent energy performance and low monthly costs.
+
+Accessibility and surroundings:
+The apartment is located in the Jacques Veldman neighborhood in Slotervaart, an area with plenty of amenities near the popular Sierplein. Within minutes you can reach Osdorpplein, Delflandplein, or the lively Hoofddorpplein shopping area. Tram and bus connections to the city center and Lelylaan station are within walking distance. By car, the A4, A9, and A10 motorways are easily accessible, and Schiphol Airport is just a short drive away.
+By bike, you can easily reach the Sloterplas, Rembrandtpark, and De Baarsjes. The area is known for its combination of greenery and urban convenience. Child-friendly squares, good schools, playgrounds, and wide avenues make it a pleasant living environment. Nature lovers will enjoy the Sloterplas and surrounding park, perfect for jogging, walking, or picnicking by the water. The presence of international amenities and excellent accessibility also make this a popular location for expats.
+
+Features:
+- Fully renovated
+- Living area: approx. 75 m²
+- Energy label: A+
+- Three spacious bedrooms
+- Two balconies (east and west)
+- Ground lease: perpetually paid off
+- Active and professional HOA, contribution approx. € 231 per month
+- Excellent location relative to public transport, shops, and sports facilities
+- Notary: buyer’s choice, provided deed follows Model Ring (Greater Amsterdam)
+- Asking price: €450,000 (costs for buyer)
+- Delivery: in consultation, can be quick
+
+Interested?
+Schedule a viewing with Urban Makelaars today. This luxurious apartment is turn-key, stylish, and ideally located — an opportunity you don’t want to miss!
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Raymond Noordeloos</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 32</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/230/366/851_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/797_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/801_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/839_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/868_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/853_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/867_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/833_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/810_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/880_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/863_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/844_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/862_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/812_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/843_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/805_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/859_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/836_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/807_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/872_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/790_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/852_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/820_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/798_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/825_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/842_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/826_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/876_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/794_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/366/850_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

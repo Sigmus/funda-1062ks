@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coronelstraat 4 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Coronelstraat 4</h1>
+  <p class="sub">
+    <span>1063 EP Amsterdam</span>
+    <span>·</span>
+    <span>Coronelbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/645/958_1440x960.jpg" alt="Coronelstraat 4 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">47 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€695.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.376/m² · 3.4 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.4 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">109 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1954</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-coronelstraat-4/44528884/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 695.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.376</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1954</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>109 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>76 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>366 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 2 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches, toilet, Washbasinmeubel, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Zonnepanelen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, HR-glas en Wall insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HR (gas-fired combi boiler uit 2016, lease)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oppervlakte</dt><dd>76 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk, open ligging en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>18 m² (4,83 m deep en 3,75 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">SPACIOUS FAMILY HOME WITH ENERGY LABEL A, ROOF EXTENSION (2009) AND 9 SOLAR PANELS
+FOUR BEDROOMS, WITH THE POSSIBILITY OF FIVE – POTENTIALLY A SIX-ROOM HOME
+TWO BATHROOMS (2021 AND 2009), THREE TOILETS AND A SURPRISINGLY SPACIOUS TOP FLOOR
+GROUND LEASE FULLY BOUGHT OUT
+
+A proper family home in Amsterdam. Spread over three floors, offering plenty of space and excellent possibilities for family living. Coronelstraat 4 combines 109 m² of living space with a surprisingly practical layout and a very solid technical foundation. With energy label A, nine solar panels, double glazing, cavity wall insulation and air conditioning, considerable investment has clearly been made in comfort and energy efficiency over the years.
+
+The interior is also in excellent condition where it matters most. The electrical system, plasterwork, ceilings and bathrooms have all been properly upgraded and well maintained. The kitchen is somewhat dated and offer the perfect opportunity to modernise the property to your own taste without having to tackle the major technical elements.
+
+LIVING
+
+As soon as you enter, you notice that this is a solid and well-maintained home. The walls have been neatly plastered and painted, while significant technical improvements have also been made. The electrical installation has been fully modernised and earthed, with the wiring neatly concealed. The central heating system has also been fully integrated.
+
+The ground floor offers a pleasant living space with a natural connection between the living and dining areas. A new kitchen would quickly give this level a fresh, contemporary feel, while the important technical foundations are already in excellent order.
+
+FOUR BEDROOMS – FIVE POSSIBLE
+
+The first floor offers no fewer than three bedrooms as well as the first bathroom. This bathroom was installed in 2021 and is neatly finished with a shower, washbasin and toilet.
+
+The second floor, created as part of the roof extension in 2009, has a surprisingly spacious and open character. It is currently arranged as one generous bedroom combined with an open-plan bathroom featuring a walk-in shower and washbasin. There is also a separate toilet.
+
+For those requiring additional bedrooms, this floor can be reconfigured to create two bedrooms. This means the property could potentially offer five bedrooms and six rooms in total. Ideal for a larger family, working from home or simply anyone who appreciates having some extra space.
+
+With two bathrooms and three toilets, the house is also exceptionally practical for family life.
+
+The garden may be compact, but it is a lovely outdoor space with excellent sun exposure. Measuring approximately 18 m², it borders almost directly onto a green play area and forms part of a child-friendly courtyard setting. There is also a pleasant outdoor terrace on the first floor.
+
+ENERGY-EFFICIENT &amp; COMFORTABLE
+
+The property also performs very well in terms of energy efficiency. It has energy label A and benefits from cavity wall insulation and full double glazing. No fewer than nine solar panels have been installed on the roof, and the is partially equipped with air conditioning.
+
+The result is a comfortable and well-insulated family home with a strong technical foundation that is already well prepared for the future.
+
+LOCATION
+
+Coronelstraat is located in Amsterdam-West, strategically positioned in relation to Amsterdam city centre. Here you can enjoy the atmosphere and space of a genuine residential neighbourhood while the rest of the city remains within easy reach.
+
+An attractive combination for anyone looking for the space of a family home without having to leave Amsterdam.
+
+KEY FEATURES
+Approx. 109 m² of living space
+76 m² plot
+Approx. 6 m² of internal ancillary space
+Approx. 5 m² of external storage space
+Approx. 366 m³ volume
+Terraced family home
+Currently four bedrooms
+Possibility of five bedrooms – potentially six rooms in total
+Two bathrooms
+Three toilets
+Energy label A
+9 solar panels
+Cavity wall insulation
+Fully double glazed
+Air conditioning
+Modern, fully earthed electrical installation
+Neat plasterwork and paintwork
+Excellent technical foundation
+Kitchen, flooring and stair coverings offer scope for modernisation
+Ground lease fully bought out
+Leased central heating boiler dating from 2016
+Available for immediate completion
+
+RUIME GEZINSWONING MET A-LABEL DAKOPBOUW (2009) EN 9 ZONNEPANELEN
+VIER SLAAPKAMERS, VIJF MOGELIJK – POTENTIEEL EEN ZESKAMERWONING
+TWEE BADKAMERS(2021 en 2009), DRIE TOILETTEN EN EEN VERRASSEND RUIME BOVENVERDIEPING
+ERFPACHT VOLLEDIG AFGEKOCHT
+
+Een écht huis in Amsterdam. Met drie woonlagen, lekker veel ruimte en volop mogelijkheden voor een gezin. Coronelstraat 4 combineert 109 m² woonoppervlakte met een verrassend praktische indeling en een technisch zeer goede basis. Energielabel A, negen zonnepanelen, dubbel glas, spouwmuurisolatie en airconditioning: hier is de afgelopen jaren duidelijk geïnvesteerd in comfort en verduurzaming.
+
+Ook binnen is de basis uitstekend. Elektra, stucwerk, plafonds en badkamers zijn goed aangepakt en verzorgd. De keuken is inmiddels wat meer gedateerd en biedt juist de mogelijkheid om het huis met een relatief overzichtelijke moderniseringsslag helemaal naar eigen smaak te maken.
+
+WONEN
+
+Bij binnenkomst merk je direct dat dit een degelijk en verzorgd huis is. De woning is netjes gestuct en geschilderd en ook technisch is er veel aangepakt. De elektra is volledig gemoderniseerd, geaard en netjes als inbouw uitgevoerd. Ook de cv-installatie is geïntegreerd aangelegd.
+
+De begane grond biedt een fijne leefruimte met een prettige verbinding tussen wonen en eten. Met een nieuwe keuken en vloer kun je hier vrij eenvoudig een eigentijdse woonverdieping van maken, terwijl de belangrijke technische basis al dik in orde is.
+
+VIER SLAAPKAMERS – VIJF MOGELIJK
+
+Op de eerste verdieping bevinden zich maar liefst drie slaapkamers en de eerste badkamer. Deze is netjes uitgevoerd met een douche, wastafel en toilet en in 2021 gerealiseerd.
+
+De tweede verdieping, gerealiseerd in 2009 heeft een verrassend ruim en open karakter. Momenteel is hier één royale slaapkamer gecreëerd in combinatie met een open badkamer, voorzien van een inloopdouche en wastafel. Het toilet bevindt zich separaat.
+
+Wie behoefte heeft aan extra kamers kan deze verdieping anders indelen, waarbij hier twee slaapkamers mogelijk zijn. Daarmee beschikt de woning in potentie over vijf slaapkamers en zes kamers in totaal. Ideaal voor een groter gezin, thuiswerkers of simpelweg voor wie graag wat extra ruimte heeft.
+
+Met twee badkamers en drie toiletten is het huis bovendien bijzonder praktisch ingedeeld voor gezinsgebruik.
+
+De tuin is klein maar heel fijn en ligt perfect op de zon. Circa 18 M2 en grenst vrijwel direct aan een speelplantsoen en is daar onderdeel van een kindvriendelijk binnenhofje! Ook is er een leuk buitenterras op de eerste verdieping.
+
+DUURZAAM &amp; COMFORTABEL
+
+Ook qua verduurzaming zit het hier goed. De woning beschikt over energielabel A en is onder andere voorzien van spouwmuurisolatie en volledig dubbel glas. Op het dak liggen maar liefst negen zonnepanelen. Daarnaast is er gedeeltelijk airconditioning aanwezig.
+
+Het resultaat is een comfortabel en goed geïsoleerd huis met een sterke technische basis, dat al behoorlijk is voorbereid op de toekomst.
+
+LIGGING
+
+De Coronelstraat ligt in Amsterdam-West, op een strategische plek ten opzichte van het centrum. Je woont hier in een echte woonomgeving, terwijl de rest van de stad uitstekend bereikbaar blijft. Een aantrekkelijke combinatie voor wie de ruimte van een gezinswoning zoekt, maar Amsterdam niet wil verlaten.
+
+KENMERKEN
+Woonoppervlakte ca. 109 m²
+Perceeloppervlakte 76 m²
+Inpandige ruimte ca. 6 m²
+Externe bergruimte ca. 5 m²
+Inhoud ca. 366 m³
+Tussenwoning / gezinswoning
+Momenteel vier slaapkamers
+Vijf slaapkamers mogelijk – potentieel zes kamers
+Twee badkamers
+Drie toiletten
+Energielabel A
+9 zonnepanelen
+Spouwmuurisolatie
+Volledig voorzien van dubbel glas
+Airconditioning
+Moderne en volledig geaarde elektrische installatie
+Verzorgd stuc- en schilderwerk
+Goede technische basis
+Keuken, vloeren en trapbekleding bieden ruimte voor modernisering
+Erfpacht volledig afgekocht
+Lease CV ketel uit 2016
+Oplevering kan per direct
+
+Vraagprijs: € 695.000,- k.k.
+
+Veel ruimte, een uitstekende basis én de mogelijkheid om met een aantal cosmetische aanpassingen je eigen stempel op het huis te drukken. Met 109 m², vier tot vijf slaapkamers, twee badkamers, energielabel A en afgekochte erfpacht is Coronelstraat 4 een bijzonder complete gezinswoning in Amsterdam.
+
+Nieuwsgierig? Kom kijken en ontdek hoeveel mogelijkheden dit huis te bieden heeft.</div>
+    <p class="note">Description from listing source.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 47</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/645/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/923_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/928_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/940_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/954_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/934_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/939_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/924_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/931_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/957_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/956_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/932_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/926_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/925_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/936_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/966_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/929_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/961_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/942_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/645/922_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

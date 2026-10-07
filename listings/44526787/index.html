@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bestevâerstraat 273-A · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Bestevâerstraat 273-A</h1>
+  <p class="sub">
+    <span>1055 TP Amsterdam</span>
+    <span>·</span>
+    <span>Landlust-Noord</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/563/623_1440x960.jpg" alt="Bestevâerstraat 273-A — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">38 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€775.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.381/m² · 3.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">105 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1934</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-bestevaerstraat-273-a/44526787/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>Per Immediate Available</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 775.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.381</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 239,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonnette</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1934</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>105 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>358 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HR (gas-fired combi boiler uit 2026, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Ownership</dt><dd>owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 01-04-2056</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, beschutte ligging en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>60 m² (10,00 m deep en 5,83 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het westen</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 239,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">U HEEFT EEN OBJECTCODE NODIG ALS U ONS BELT. DE CODE IS: 9 1 3 4 2
+De sluitingsdatum voor de biedingen is bepaald op woensdag 14 oktober om 12.00 uur.
+
+Ruim wonen met een diepe tuin én balkon in Amsterdam-West? Aan de Bestevâerstraat 273 A in Amsterdam ligt deze royale maisonnette met een woonoppervlakte van circa 105 m², verdeeld over twee woonlagen. De woning beschikt over een ruime woonkamer, halfopen keuken, drie slaapkamers, badkamer, twee toiletten en volop buitenruimte in de vorm van een diepe achtertuin met berging en een balkon op de eerste verdieping. De grote raampartijen aan zowel de voor- als achterzijde zorgen voor veel daglicht en geven de woning een aangenaam ruimtelijk karakter.
+De Bestevâerstraat ligt in Landlust, op de grens van Bos en Lommer en De Baarsjes: een levendig deel van Amsterdam-West waar wonen, groen en stedelijke voorzieningen prettig samenkomen. Voor de dagelijkse boodschappen zijn de Bos en Lommerweg, het Bos en Lommerplein en de Jan van Galenstraat dichtbij. Het Bos en Lommerplein heeft onder meer supermarkten, winkels, horeca en sportvoorzieningen. Ook voor koffie, lunch of diner hoeft u de buurt niet uit; in de omgeving vindt u diverse horecagelegenheden.
+Wie graag de stad combineert met groen woont hier eveneens goed. Het Erasmuspark ligt op korte afstand en ook het Westerpark en Rembrandtpark zijn goed bereikbaar. De Jordaan en het centrum zijn eenvoudig per fiets te bereiken. Voor het openbaar vervoer liggen tram- en bushaltes in de omgeving. Met de auto is de Ring A10 binnen enkele minuten bereikbaar.
+
+Begane grond
+Via de eigen entree stapt u binnen in de hal, met toegang tot het separate toilet en de meterkast. Vanuit de hal bereikt u de keuken aan de voorzijde van de woning. Deze ruimte beschikt over een keukenopstelling langs de wand en een groot raam richting de straat.
+Vanuit de keuken loopt de woning door naar de woonkamer. Dit is een royale leefruimte waarin eenvoudig afzonderlijke zit- en eetgedeelten kunnen worden ingericht. De lengte van de ruimte en de brede achtergevel maken verschillende indelingen mogelijk. Aan de tuinzijde bevinden zich meerdere openslaande deuren en ramen, waardoor de woonkamer veel contact heeft met buiten en er prettig daglicht binnenvalt.
+
+De trapopgang naar de 1e verdieping bevindt zich tevens in de woonkamer.
+De begane grond beschikt daarnaast over praktische bergruimte.  
+
+Eerste verdieping
+De trap vanuit de woonkamer leidt naar de eerste verdieping, waar de slaapvertrekken en badkamer zijn. Hier bevinden zich drie slaapkamers, waardoor de woning geschikt is voor uiteenlopende woonwensen.
+Aan de voorzijde ligt een ruime slaapkamer. Dankzij meerdere grote ramen is dit een lichte kamer met voldoende plaats voor een tweepersoonsbed, kasten en bijvoorbeeld een werkplek.
+Aan de achterzijde bevinden zich nog twee slaapkamers. Beide kamers hebben deuren richting het balkon en zijn goed bruikbaar als slaapkamer, kinderkamer, logeerkamer of werkkamer.
+Centraal op deze verdieping ligt de badkamer. Deze is voorzien van een inloopdouche, wastafel en 2e toilet. De overloop verbindt de verschillende vertrekken en biedt toegang tot het trappenhuis.
+
+Tuin
+
+Een belangrijk pluspunt van deze woning is de diepe achtertuin. Vanuit de woonkamer stapt u rechtstreeks naar buiten, waardoor binnen en buiten gemakkelijk met elkaar worden verbonden. De tuin biedt volop ruimte voor een groot terras, verschillende zitplekken en een groene inrichting.
+Achter in de tuin staat een vrijstaande berging, handig voor tuingereedschap en overige spullen. De combinatie van een diepe tuin op de begane grond en het balkon bij de slaapkamers op de eerste verdieping zorgt ervoor dat er op beide woonlagen buitenruimte aanwezig is. Het balkon aan de achterzijde is bereikbaar vanuit de twee slaapkamers. Het kijkt uit over het groene binnenterrein en vormt een prettige aanvulling op de tuin beneden.
+
+Bijzonderheden
+-Erfpacht afgekocht tot 1-4-2056
+-Woonoppervlakte circa 105 m²;
+-Houten kozijnen voorzien van dubbel glas 
+-De maandelijkse VvE bijdrage € 239,13
+-Royale woonkamer;
+-Halfopen keuken;
+-Drie slaapkamers;
+-Badkamer met douche, wastafel en toilet;
+-Separaat toilet op de begane grond;
+-Diepe achtertuin met directe toegang vanuit de woonkamer;
+-Vrijstaande berging van circa 6 m² achter in de tuin;
+-Balkon op de eerste verdieping;
+-Gelegen in Landlust, tussen Bos en Lommer en De Baarsjes;
+-Winkels, horeca, scholen, sportvoorzieningen en openbaar vervoer in de directe
+-omgeving;
+-Het Erasmuspark en diverse andere groene plekken in Amsterdam-West zijn snel
+-bereikbaar;
+-Station Sloterdijk, de Ring A10, de Jordaan en het centrum van Amsterdam zijn
+goed bereikbaar.
+-      De feitelijke situatie wijkt iets af van de splitsingstekening( intekening slaapkamer). 
+       Verkoopster onderneemt hierop geen actie
+-In deze woning heeft een asbestinventarisatie plaatsgevonden. Het saneringsplichtige asbest is verwijderd.
+-Er geldt een zelfbewoningsclausule voor 2 jaar. 
+-In de koopovereenkomst zal een ouderdomsclausule worden opgenomen.
+-Er zal een niet-bewoningsclausule in de koopovereenkomst worden opgenomen. 
+-Projectnotaris ten behoeve van de koop- en leveringsakte
+
+Benieuwd naar de ruimte, de diepe tuin en de mogelijkheden die Bestevâerstraat 273 A
+te bieden heeft? Maak een afspraak voor een bezichtiging en ervaar zelf hoe prettig en
+ruim u hier midden in Amsterdam-West kunt wonen.
+
+Koper heeft een eigen onderzoeksplicht naar alle zaken, die van belang zijn. Wij adviseren u een aankoopmakelaar of deskundige in te schakelen, die u met zijn/haar deskundigheid zal bijstaan in het aankoopproces. Indien u geen professionele begeleiding wenst in te schakelen, acht u zich volgens de wet deskundig genoeg om alle zaken, die van belang zijn, te kunnen overzien.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Royale maisonnette met tuin
+
+Maisonnette van circa 105 m² met 3 slaapkamers.
+
+Lichte woonkamer met tuin
+
+Royale woonkamer met openslaande deuren naar tuin.
+
+Diepe tuin en balkon
+
+Diepe achtertuin met berging en balkon met groen uitzicht.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 38</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/563/623_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/481_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/646_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/479_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/639_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/663_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/638_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/490_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/488_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/664_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/683_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/673_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/539_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/689_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/526_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/515_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/498_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/565_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/610_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/624_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/837_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/730_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/770_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/861_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/779_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/866_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/781_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/844_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/563/756_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

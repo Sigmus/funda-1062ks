@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suze Groenewegplantsoen 33 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Suze Groenewegplantsoen 33</h1>
+  <p class="sub">
+    <span>1067 DB Amsterdam</span>
+    <span>·</span>
+    <span>Eendrachtspark</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/981/886_1440x960.jpg" alt="Suze Groenewegplantsoen 33 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€475.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.657/m² · 3.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">102 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1994</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-suze-groenewegplantsoen-33/80941508/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 475.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.657</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 323,22 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1994</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>102 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>17 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>313 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Buitenzonwering en lift</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Combiketel</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND I 3018</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan park en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Garagebox</dd></div>
+        <div class="frow"><dt>Capaciteit</dt><dd>1 auto</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 323,22 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Eendrachtspark</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>270</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>22%</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Recent gerenoveerde en royale 4-kamer maisonnette met zonnig balkon en eigen garage op de begane grond. De erfpacht is eeuwigdurend afgekocht!
+
+Op een rustige en groene locatie in Amsterdam Nieuw-West, aan de rand van Geuzenveld nabij de Haarlemmerweg, bevindt zich deze recent gerenoveerde en uitstekend onderhouden 4-kamer maisonnette van circa 102 m². De woning beschikt over een speelse indeling verdeeld over twee woonlagen met drie volwaardige slaapkamers, een zonnig balkon op het zuiden met vrij uitzicht over het achtergelegen park en een eigen garage/berging op de begane grond.
+
+De woning is gelegen op de derde en vierde verdieping van een verzorgd appartementencomplex uit 1994. Dankzij de royale raampartijen, de vrije ligging en de praktische indeling geniet de woning van een prettige lichtinval en een ruimtelijk gevoel.
+
+De woning is recent met veel zorg gerenoveerd en instapklaar afgewerkt. Zo is de keuken gemoderniseerd, zijn de badkamer en het separate toilet vernieuwd en zijn alle wanden voorzien van strak stucwerk. Daarnaast is de gehele woning geschilderd in een neutrale kleurstelling en afgewerkt met een stijlvolle visgraatvloer, wat zorgt voor een eigentijdse en luxe uitstraling.
+
+Een pluspunt is dat de erfpacht eeuwigdurend is afgekocht, waardoor u nooit meer canon verschuldigd bent.
+
+INDELING
+
+Begane grond
+Verzorgde, afgesloten centrale entree met bellentableau, brievenbussen, lift en trappenhuis. Op de begane grond bevindt zich tevens de ruime privégarage met bergfunctie.
+
+Derde verdieping
+Entree, ruime hal met meterkast, praktische bergkast en modern toilet met fonteintje.
+
+De royale woonkamer is aan de achterzijde gelegen. Grote raampartijen zorgen voor een prachtige lichtinval en bieden een vrij uitzicht over het achtergelegen park. De op maat gemaakte open vakkenkast met geïntegreerde televisieaansluiting is een stijlvolle blikvanger en laat de televisie volledig opgaan in het interieur. Via openslaande deuren bereikt u het zonnige balkon op het zuiden, waar u vrijwel de gehele dag kunt genieten van de zon en het groene uitzicht.
+
+De moderne open keuken is uitgevoerd in een tijdloze witte kleurstelling met een luxe marmerlook werkblad en voorzien van diverse inbouwapparatuur, waaronder een inductiekookplaat met afzuigkap, oven, vaatwasser, koelkast en vriezer.
+
+Vierde verdieping
+Ruime overloop met toegang tot alle vertrekken, een praktische bergkast, de cv-/technische ruimte en een separate wasruimte.
+
+Aan de voorzijde bevindt zich de royale hoofdslaapkamer met een vaste kastenwand. De tweede en derde slaapkamer liggen aan de rustige achterzijde en bieden eveneens een fraai uitzicht over het groen.
+
+De moderne badkamer is stijlvol afgewerkt en voorzien van een ruime inloopdouche, een stijlvol wastafelmeubel, een zwevend toilet en een luxe marmerlook wandafwerking.
+
+LIGGING EN BEREIKBAARHEID
+De woning is gelegen in een rustige, groene en kindvriendelijke woonomgeving in Amsterdam Nieuw-West, nabij de Haarlemmerweg en de Burgemeester De Vlugtlaan. De wijk kenmerkt zich door haar ruime opzet, veel groen en uitstekende voorzieningen. Hier woont u rustig, terwijl alle voorzieningen binnen handbereik zijn.
+
+Voor de dagelijkse boodschappen, markt en een uitgebreid winkelaanbod ligt winkelcentrum Plein &#x27;40-&#x27;45 op enkele minuten afstand. In de directe omgeving bevinden zich diverse restaurants, cafés, basisscholen, middelbare scholen en kinderopvang.
+
+Ook recreatieliefhebbers komen hier volop aan hun trekken. Het Eendrachtpark en diverse andere groenvoorzieningen bevinden zich op loopafstand en bieden volop mogelijkheden om te wandelen, hardlopen, sporten of ontspannen.
+
+De bereikbaarheid is uitstekend. Tram- en bushaltes liggen op korte afstand waardoor Station Sloterdijk en de Amsterdamse binnenstad snel bereikbaar zijn. Met de auto bereikt u binnen enkele minuten de Ring A10, de A5 en A9. Parkeren kan middels het vergunningensysteem.
+
+VERENIGING VAN EIGENAARS
+De woning maakt deel uit van de actieve Vereniging van Eigenaars &#x27;Parkzicht&#x27;, bestaande uit 87 appartementsrechten. De VvE wordt professioneel beheerd, beschikt over een Meerjarenonderhoudsplan (MJOP) en opstalverzekering. 
+
+EIGENDOMSSITUATIE
+De woning is gelegen op erfpachtgrond van de gemeente Amsterdam. De erfpacht is eeuwigdurend afgekocht; u bent hierdoor geen canon meer verschuldigd. De Algemene Bepalingen 2016 zijn van toepassing.
+
+BIJZONDERHEDEN
+- Recent volledig gerenoveerde 4-kamer maisonnette van circa 102 m²
+- Eigen garage/berging op de begane grond
+- Drie ruime slaapkamers
+- Zonnig balkon op het zuiden met vrij uitzicht over het park
+- Energielabel A
+- Volledig voorzien van isolerende beglazing
+- Verwarming en warm water via CV-ketel
+- Actieve en professioneel beheerde VvE
+- Servicekosten € 323,22 per maand
+- Erfpacht eeuwigdurend afgekocht
+- Parkeren via vergunningensysteem
+- Niet-zelfbewoningsclausule van toepassing
+- Oplevering in overleg
+
+DISCLAIMER
+De informatie betreffende het aangeboden object is met de grootst mogelijke zorgvuldigheid samengesteld door de verkoper en diens makelaar. Desondanks kunnen er onjuistheden en/of onvolledigheden in de verstrekte gegevens voorkomen. Aan de inhoud van deze informatie kunnen geen rechten worden ontleend. Alle vermelde maten, oppervlakten en inhoud zijn indicatief en gebaseerd op door verkoper aangeleverde gegevens en/of metingen conform de geldende branche-instructies. Koper wordt nadrukkelijk in de gelegenheid gesteld om zelfstandig onderzoek te (laten) verrichten naar alle voor hem/haar relevante aspecten van het object, waaronder de bouwkundige staat, juridische status, bestemming en gebruiksmogelijkheden. De makelaar treedt op in opdracht van de verkoper en behartigt diens belangen. Wij adviseren u bij aankoop een eigen deskundige (aankoopmakelaar) in te schakelen. 
+
+Deze aanbieding dient te worden gezien als een uitnodiging tot het doen van een bod of het starten van onderhandelingen. Een overeenkomst komt eerst tot stand na schriftelijke vastlegging en ondertekening door partijen
+
+***ENGLISH TRANSLATION***
+
+Recently renovated and spacious 4-room duplex apartment with sunny south-facing balcony and private garage. The ground lease has been bought off in perpetuity!
+
+Situated in a quiet and green residential area in Amsterdam Nieuw-West, on the edge of Geuzenveld near the Haarlemmerweg, this recently renovated and exceptionally well-maintained duplex apartment of approximately 102 m² offers generous living space spread over two floors. The property features three full-sized bedrooms, a sunny south-facing balcony overlooking the park, and a private garage/storage unit on the ground floor.
+
+The apartment is located on the third and fourth floors of a well-maintained apartment complex dating from 1994. Thanks to its large windows, open outlook and practical layout, the home enjoys an abundance of natural light and a wonderful sense of space.
+
+The property has recently been renovated to a high standard and is ready for immediate occupancy. The kitchen has been modernised, the bathroom and separate toilet have been completely renewed, and all walls have been professionally plastered with a smooth finish. The entire apartment has been painted in neutral tones and fitted with a stylish herringbone floor, creating a contemporary and luxurious atmosphere throughout.
+
+A major advantage is that the municipal ground lease has been bought off in perpetuity, meaning no future ground lease payments (canon) are due.
+
+LAYOUT
+Ground Floor
+Well-maintained secured entrance with video intercom, mailboxes, lift and staircase. The spacious private garage, which also provides additional storage space, is located on the ground floor.
+
+Third Floor
+Entrance hall with meter cupboard, practical storage cupboard and a modern separate toilet with washbasin.
+
+The spacious living room is situated at the rear of the apartment. Large windows flood the room with natural daylight and provide uninterrupted views over the park behind the building. A bespoke open shelving unit with an integrated television connection forms a stylish focal point, allowing the television to blend seamlessly into the interior. French doors open onto the sunny south-facing balcony, where you can enjoy sunshine throughout most of the day while overlooking the surrounding greenery.
+
+The modern open-plan kitchen is finished in timeless white cabinetry with a luxurious marble-look worktop and is equipped with a range of integrated appliances, including an induction hob with extractor hood, oven, dishwasher, refrigerator and freezer.
+
+Fourth Floor
+Spacious landing providing access to all rooms, a practical storage cupboard, the central heating/technical room and a separate laundry room.
+
+The generous principal bedroom is located at the front of the apartment and features a full wall of built-in wardrobes. The second and third bedrooms are positioned at the quiet rear of the property and also enjoy attractive views over the greenery.
+
+The stylish contemporary bathroom has been finished to a high standard and features a spacious walk-in shower, elegant vanity unit, wall-mounted toilet and luxurious marble-look wall tiles.
+
+LOCATION &amp; ACCESSIBILITY
+The apartment is located in a quiet, green and family-friendly neighbourhood in Amsterdam Nieuw-West, close to the Haarlemmerweg and Burgemeester De Vlugtlaan. The area is characterised by its spacious layout, abundant green spaces and excellent amenities, offering peaceful living with everything you need close at hand.
+
+For daily shopping, the weekly market and a wide range of retail facilities, Shopping Centre Plein &#x27;40-&#x27;45 is only a few minutes away. The immediate surroundings also offer a variety of restaurants, cafés, primary and secondary schools, and childcare facilities.
+
+Nature and outdoor enthusiasts will appreciate the nearby Eendrachtpark and several other parks and green spaces within walking distance, providing excellent opportunities for walking, jogging, sports and relaxation.
+
+Accessibility is excellent. Tram and bus stops are within easy walking distance, offering quick connections to Amsterdam Sloterdijk Station and Amsterdam city centre. By car, the A10 Ring Road, A5 and A9 motorways can all be reached within minutes. Parking is available through the municipal permit system.
+
+HOMEOWNERS&#x27; ASSOCIATION (VvE)
+The apartment forms part of the active Homeowners&#x27; Association &quot;Parkzicht&quot;, comprising 87 apartment rights. The association is professionally managed and has a comprehensive Long-Term Maintenance Plan (MJOP) as well as building insurance in place.
+
+PROPERTY RIGHTS
+The property is situated on municipal leasehold land owned by the Municipality of Amsterdam. The ground lease has been bought off in perpetuity, meaning no future annual ground lease payments are payable. The General Provisions 2016 apply.
+
+KEY FEATURES
+- Recently fully renovated duplex apartment of approximately 102 m²
+- Private garage/storage unit on the ground floor
+- Three spacious bedrooms
+- Sunny south-facing balcony overlooking the park
+- Energy label A
+- Fully fitted with insulating double glazing
+- Central heating and hot water provided by a central heating boiler
+- Active and professionally managed Homeowners&#x27; Association (VvE)
+- Service charges: €323.22 per month
+- Perpetually bought-off municipal ground lease
+- Resident parking permit system
+- Non-owner occupancy clause applies
+- Completion in consultation
+
+DISCLAIMER
+The information relating to this property has been compiled with the utmost care by the seller and the seller&#x27;s real estate agent. Nevertheless, inaccuracies and/or omissions may occur. No rights may be derived from the information provided. All dimensions, floor areas and volumes are indicative and based on information supplied by the seller and/or measurements carried out in accordance with industry standards.
+Prospective buyers are expressly encouraged to conduct their own investigation, or have one carried out on their behalf, into all aspects of the property they deem relevant, including but not limited to its structural condition, legal status, zoning and permitted use. The real estate agent acts solely on behalf of the seller and represents the seller&#x27;s interests. Buyers are advised to engage their own professional purchasing agent.
+
+This information should be regarded solely as an invitation to make an offer or to enter into negotiations. A binding agreement will only come into existence after it has been recorded in writing and signed by both parties.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Dutch Real Estate Company B.V.</strong> · Dutch Real Estate Company B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/981/886_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/966_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/825_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/972_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/867_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/822_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/912_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/820_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/802_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/829_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/837_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/872_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/885_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/892_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/266_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/100_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/084_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/195_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/997_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/376_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/192_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/079_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/068_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/981/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/255_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/008_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/320_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/174_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/408_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/254_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/054_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/982/135_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

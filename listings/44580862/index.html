@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desselstraat 30 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Desselstraat 30</h1>
+  <p class="sub">
+    <span>1066 LT Amsterdam</span>
+    <span>·</span>
+    <span>Nieuw-Sloten-Noordoost</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/092/712_1440x960.jpg" alt="Desselstraat 30 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.924/m²
+    </div>
+    <div class="chips">
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1991</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-desselstraat-30/44580862/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.924</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, hoekwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1991</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd>Wonen</dd></div>
+        <div class="frow"><dt>132 m²</dt><dd>Overige Indoore ruimte</dd></div>
+        <div class="frow"><dt>4 m²</dt><dd>Gebouwgebonden buitenruimte</dd></div>
+        <div class="frow"><dt>8 m²</dt><dd>Externe bergruimte</dd></div>
+        <div class="frow"><dt>4 m²</dt><dd>Perceel</dd></div>
+        <div class="frow"><dt>106 m²</dt><dd>Inhoud</dd></div>
+        <div class="frow"><dt>426 m³</dt><dd>Indeling</dd></div>
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches, 2 toiletten, en 2 Washbasinmeubels</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Airconditioning, buitenzonwering, glasvezelkabel, Mechanical ventilation, rolluiken, schuifpui, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Vaillant HR combi (gas-fired combi boiler uit 2015, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN (N-H) E 4611</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>106 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-09-2040</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruime hoekwoning met vier slaapkamers, twee badkamers en een zonnige tuin op het westen!
+
+Ruimte voor het hele gezin, een fijne tuin, een rustige en groene ligging én toch gewoon in Amsterdam. Aan de Desselstraat in Nieuw Sloten staat deze verrassend ruime hoekwoning met circa 132 m² woonoppervlakte, verdeeld over drie volwaardige woonlagen.
+
+De woning is gebouwd in 1991 en in 2008 aanzienlijk vergroot door het plaatsen van een vergunde dakopbouw. Hierdoor beschikt het huis tegenwoordig over maar liefst vier slaapkamers, twee badkamers en een zeer royale bovenverdieping die desgewenst nog kan worden opgedeeld om een vijfde slaapkamer te creëren.
+
+Ook de hoekligging is een duidelijk pluspunt. Een extra raam in de zijgevel zorgt voor meer licht in de woonkamer en naast de woning ligt gemeentelijk groen met een fietspad. Aan de achterzijde bevindt zich de circa 40 m² grote tuin op het westen: een fijne plek om na een werkdag nog van de middag- en avondzon te genieten.
+
+Een compleet en vooral ruim gezinshuis op een prettige plek in Nieuw Sloten.
+
+Indeling
+Begane grond
+Entree van de woning met hal en direct rechts toegang tot de aan de woning grenzende berging. Vanuit de hal kom je in de ruime woonkamer met open keuken.
+
+De keuken bevindt zich aan de voorzijde en is in 2015 geplaatst. De woonkamer is tuingericht en krijgt dankzij de grote glazen pui en het extra raam in de zijgevel prettig veel daglicht. Hier komt het voordeel van de hoekligging mooi tot zijn recht. Via de schuifpui loop je zo de achtertuin in. Aan de achterpui is tevens buitenzonwering aanwezig.
+
+In een tweede hal bevinden zich het separate toilet en de trap naar de eerste verdieping. De woonkamer is voorzien van een novilon vloer.
+
+De circa 40 m² grote achtertuin ligt op het westen en is praktisch aangelegd met bestrating. Achter in de tuin staat een tweede, vrijstaande houten berging. Naast de woning ligt gemeentelijk groen met een fietspad, waardoor het huis aan deze zijde een vrijere ligging heeft.
+
+Eerste verdieping
+Overloop met toegang tot drie slaapkamers van verschillend formaat. Daarmee biedt deze verdieping een praktische indeling voor een gezin, maar uiteraard kunnen de kamers ook uitstekend worden gebruikt als werk-, logeer- of hobbykamer.
+
+De badkamer beschikt over een douche, dubbele wastafel en toilet.
+
+Tweede verdieping
+In 2008 is met vergunning een volledige dakopbouw gerealiseerd, waardoor er een verrassend ruime derde woonlaag aan de woning is toegevoegd.
+
+Vanaf de overloop is de tweede badkamer bereikbaar, voorzien van een douche, wastafel en toilet.
+Daarnaast bevindt zich hier een zeer royale slaapkamer met een vaste inbouwkast. Door het formaat van deze kamer bestaat de mogelijkheid om deze desgewenst op te delen in twee afzonderlijke kamers. Daarmee kan het huidige aantal van vier slaapkamers relatief eenvoudig worden uitgebreid naar vijf.
+
+Vanuit deze verdieping is tevens toegang tot een klein dakterras. Hier bevindt zich ook de buitenunit van de aanwezige airconditioning. De vloer op deze verdieping is voorzien van laminaat.
+
+Ligging
+De Desselstraat ligt in Nieuw Sloten, een ruim opgezette woonwijk in Amsterdam Nieuw-West waar groen, ruimte en een goede bereikbaarheid met elkaar worden gecombineerd.
+
+Voor de dagelijkse boodschappen ligt Winkelcentrum Nieuw Sloten aan het Belgiëplein in de buurt. Hier bevinden zich diverse winkels, supermarkten en andere dagelijkse voorzieningen. Ook scholen, kinderopvang, sportvoorzieningen en recreatiemogelijkheden zijn in de omgeving aanwezig.
+
+Wie graag naar buiten gaat, vindt in en rond Nieuw Sloten volop groen en mogelijkheden om te wandelen, fietsen en sporten. Tegelijkertijd is de stad uitstekend bereikbaar. Met tram en bus zijn er goede verbindingen richting onder meer het centrum van Amsterdam en ook met de auto is de ligging praktisch. De Ring A10 en de snelwegen A4, A5 en A9 zijn vlot bereikbaar, waardoor onder andere Schiphol, de Zuidas en de omliggende steden goed te bereiken zijn.
+In de omgeving geldt betaald parkeren en parkeren met een parkeervergunning.
+
+Erfpacht
+De woning is gelegen op gemeentelijke erfpachtgrond. Het huidige erfpachttijdvak loopt tot en met 2040 en de canon voor dit tijdvak is afgekocht. Voor de periode daarna is reeds overgestapt naar eeuwigdurende erfpacht. Vanaf dat moment is een jaarlijkse erfpachtcanon verschuldigd, die overeenkomstig de toepasselijke voorwaarden wordt geïndexeerd.
+
+Bijzonderheden
+- Hoekwoning uit 1991;
+- circa 132 m² woonoppervlakte;
+- in 2008 met vergunning voorzien van een dakopbouw;
+- vier slaapkamers, mogelijkheid tot vijf;
+- tuin van circa 40 m² op het westen;
+ - twee bergingen;
+- energielabel in aanvraag;
+- erfpacht afgekocht tot en met 2040, daarna eeuwigdurende erfpacht met jaarlijkse canon;
+- notariskeuze aan koper;
+- oplevering in overleg.
+
+English translation
+Spacious corner house with four bedrooms, two bathrooms and a sunny west-facing garden!
+
+Plenty of space for the whole family, a lovely garden, a quiet and green setting, yet still very much in Amsterdam. Located on Desselstraat in Nieuw Sloten, this surprisingly spacious corner house offers approximately 132 m² of living space, divided over three full floors.
+
+Built in 1991, the property was significantly extended in 2008 with the addition of a fully permitted rooftop extension. As a result, the house now offers no fewer than four bedrooms, two bathrooms and a very spacious top floor, which could even be divided to create a fifth bedroom if desired.
+
+The corner position is another clear advantage. An additional window in the side façade brings extra natural light into the living room, while the property borders municipal greenery and a cycle path on one side. At the rear is the approximately 40 m² west-facing garden: a wonderful place to enjoy the afternoon and evening sun after a day at work.
+
+A complete and, above all, spacious family home in a pleasant location in Nieuw Sloten.
+
+Layout
+Ground floor
+Entrance hall with direct access on the right to the storage room adjoining the house. From the hall, you enter the spacious living room with open-plan kitchen.
+
+The kitchen is located at the front of the property and was installed in 2015. The living room faces the garden and benefits from plenty of natural light thanks to the large glazed rear façade and the additional window in the side wall. This is where the advantage of the corner position really comes into its own. Sliding doors provide direct access to the rear garden. External sun blinds are also fitted to the rear façade.
+
+A second hallway contains the separate toilet and the staircase to the first floor. The living room features a Novilon floor.
+The approximately 40 m² rear garden faces west and is practically landscaped with paving. At the rear of the garden is a second, detached wooden storage shed. The municipal greenery and cycle path alongside the property give the house a more open and spacious setting on this side.
+
+First floor
+Landing providing access to three bedrooms of varying sizes. This floor therefore offers a practical layout for a family, although the rooms are equally suitable for use as a home office, guest room or hobby room.
+The bathroom is fitted with a shower, double washbasin and toilet.
+
+Second floor
+In 2008, a fully permitted rooftop extension was added, creating a surprisingly spacious third floor.
+The landing provides access to the second bathroom, which is fitted with a shower, washbasin and toilet.
+This floor also features a very spacious bedroom with a built-in wardrobe. Given the generous dimensions of this room, it could be divided into two separate rooms if desired, allowing the current four-bedroom layout to be relatively easily converted into a five-bedroom home.
+
+There is also access from this floor to a small roof terrace. The outdoor unit of the air-conditioning system is located here. This floor has laminate flooring.
+
+Location
+Desselstraat is situated in Nieuw Sloten, a spacious and green residential neighbourhood in Amsterdam Nieuw-West, combining plenty of greenery with excellent accessibility.
+
+For everyday shopping, the Nieuw Sloten shopping centre at Belgiëplein is nearby, offering various shops, supermarkets and other daily amenities. Schools, childcare facilities, sports facilities and recreational amenities can also be found in the surrounding area.
+
+For those who enjoy the outdoors, Nieuw Sloten and its surroundings offer plenty of green spaces and opportunities for walking, cycling and sports. At the same time, the city is easily accessible. Tram and bus services provide good connections to, among other destinations, Amsterdam city centre. The location is also convenient by car, with quick access to the A10 ring road and the A4, A5 and A9 motorways, providing easy connections to Schiphol Airport, the Zuidas business district and surrounding cities.
+Paid parking and parking by permit apply in the area.
+
+Ground lease
+The property is situated on municipal leasehold land. The ground lease for the current period has been prepaid until 2040. For the period thereafter, the switch to Amsterdam&#x27;s perpetual ground lease system has already been completed. From that point onwards, an annual ground rent will be payable, subject to indexation in accordance with the applicable ground lease conditions.
+
+Particulars
+- Corner house built in 1991;
+- approximately 132 m² of living space;
+- fully permitted rooftop extension added in 2008;
+- four bedrooms, with the possibility of creating a fifth;
+- approximately 40 m² west-facing garden;
+- two storage rooms/sheds;
+- energy label currently being prepared;
+- current ground lease prepaid until 2040, followed by perpetual ground lease with an annual ground rent;
+- buyer&#x27;s choice of civil-law notary;
+- transfer date in consultation.
+
+Disclaimer
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper / huurder heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper / verhuurder. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces / aanhuurproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend / aanhurend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Marlous Nanninga</strong> · Nanninga &amp; Burger Makelaardij og</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/092/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/725_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/834_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/701_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/807_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/794_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/818_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/766_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/799_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/829_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/716_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/774_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/813_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/738_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/757_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/821_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/735_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/755_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/780_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/789_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/825_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/782_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/760_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/811_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/808_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/840_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/838_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/839_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/841_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/835_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/842_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/092/836_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

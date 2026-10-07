@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frederik Hendrikplantsoen 102-4 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Frederik Hendrikplantsoen 102-4</h1>
+  <p class="sub">
+    <span>1052 XZ Amsterdam</span>
+    <span>·</span>
+    <span>Frederik Hendrikbuurt-Noord</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/340/663_1440x960.jpg" alt="Frederik Hendrikplantsoen 102-4 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">61 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€700.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.861/m² · 3.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.6 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">79 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1906</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-frederik-hendrikplantsoen-102-4/44510254/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 700.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.861</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 126,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1906</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>79 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>28 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>250 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, 2 toiletten, Washbasinmeubel, en douche</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Dakraam, frans balkon, Mechanical ventilation, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>4e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Nefit HR eco-line (gas-fired combi boiler uit 2012, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM Q 9016</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 16-08-2030)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 105,54 per Yesar met optie tot afkopen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan park, City centre, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra en verwarming</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking, parkeergarage en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 126,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*ENGLISH TEXT BELOW*
+
+OMSCHRIJVING
+Sfeervol, licht en praktisch ingedeeld bovenhuis van circa 80 m² met drie slaapkamers, twee badkamers, energielabel B en een fantastisch privé dakterras van maar liefst 28 m². De woning is gelegen op de bovenste verdieping van een karakteristiek pand, direct aan het groene Frederik Hendrikplantsoen. Dankzij de hoge ligging, grote raampartijen en het vrije uitzicht is het appartement heerlijk licht en biedt het een prachtig uitzicht over de omgeving richting de Jordaan. Het appartement is in 2012 compleet gerenoveerd en verkeert in een verzorgde staat. De praktische indeling maakt de woning zeer geschikt voor een gezin, maar biedt ook volop mogelijkheden voor een comfortabele thuiswerkplek/logeerkamer. Het appartement maakt deel uit van een actieve en financieel gezonde VvE met een meerjarenonderhoudsplan. De overstap naar eeuwigdurende erfpacht is bovendien reeds onder gunstige voorwaarden notarieel vastgelegd. De ligging aan het Frederik Hendrikplantsoen combineert rust en groen met alles wat de stad te bieden heeft. De Jordaan ligt op steenworp afstand en ook het Hugo de Grootplein, de Westerstraat en de Noordermarkt zijn gemakkelijk te voet bereikbaar. Kortom: een bijzonder licht en sfeervol bovenhuis met drie slaapkamers, twee badkamers en een royaal dakterras, op een zeer gewilde locatie aan het Frederik Hendrikplantsoen.
+
+INDELING (zie plattegrond) 
+Via het verzorgde gemeenschappelijke trappenhuis wordt op de derde verdieping de eigen entree bereikt, met ruimte voor een garderobe. Een privétrap leidt vervolgens naar de vierde verdieping, waar de overloop toegang geeft tot de verschillende vertrekken van het appartement. De lichte woonkamer is voorzien van een houten lamelparketvloer en staat in open verbinding met de keuken. De keuken is compleet uitgevoerd en voorzien van een 4-pits gaskookplaat, afzuigkap, combi-oven, vaatwasser en koel-/vriescombinatie. Aansluitend aan de woonkamer bevindt zich een van de slaapkamers, voorzien van een Frans balkon. Vanuit de hal zijn de twee overige slaapkamers bereikbaar, waarvan één aan de voorzijde en één aan de achterzijde van het pand. De slaapkamer aan de achterzijde beschikt over een op maat gemaakte vaste kastenwand en een tweede, compacte badkamer met douche en toilet. Het toilet momenteel in gebruik als berging, maar kan desgewenst eenvoudig weer worden hersteld. De hoofdbadkamer is centraal in het appartement gelegen en voorzien van een wastafelmeubel, inloopdouche en toilet. Naast de badkamer bevindt zich een praktische kast met de aansluiting voor de wasmachine en de cv-ketel. Via een vaste houten trap en een elektrisch bedienbaar dakluik wordt het riante privé dakterras bereikt. Dankzij de hoge ligging kan hier volop van de zon worden genoten, met als extra pluspunt een fraai en weids uitzicht over Amsterdam.
+
+OMGEVING
+De woning ligt op een prachtige locatie in de geliefde Frederik Hendrikbuurt, direct aan het groen van het Frederik Hendrikplantsoen. Een rustige en prettige woonomgeving, terwijl de levendigheid van de stad letterlijk om de hoek ligt. Het fraai aangelegde plantsoen beschikt over diverse speelvoorzieningen en biedt volop ruimte voor ontspanning en recreatie. In de directe omgeving bevindt zich een ruim aanbod aan winkels, speciaalzaken, supermarkten, cafés en restaurants. Het Hugo de Grootplein en de Frederik Hendrikstraat vormen gezellige plekken voor de dagelijkse boodschappen en horeca. Aan de andere zijde van het plantsoen begint vrijwel direct de Jordaan, met de Westerstraat, de Noordermarkt en de bekende Negen Straatjes op korte loop- en fietsafstand. Op maandagochtend is er markt op de Westerstraat en op zaterdag de populaire markt op de Noordermarkt. Ook het Westerpark en het Westergasterrein liggen op enkele minuten afstand en bieden volop mogelijkheden voor sport, ontspanning, cultuur en horeca. De Foodhallen, het centrum van Amsterdam en Amsterdam Centraal zijn eveneens eenvoudig per fiets bereikbaar. De bereikbaarheid is uitstekend. In de nabije omgeving bevinden zich diverse tram- en bushaltes en met de auto zijn de Ring A10 en de belangrijkste uitvalswegen snel bereikbaar via onder meer de S103 en S105. Parkeren vindt plaats via het gemeentelijke vergunningensysteem. Daarnaast ligt de ondergrondse Singelgrachtgarage op korte afstand, waardoor een groot deel van het parkeren uit de omliggende straten is verplaatst en bovengronds meer ruimte is ontstaan voor groen, voetgangers en fietsers. Kortom: een bijzonder fijne woonomgeving waar rust, groen en speelruimte worden gecombineerd met alles wat het centrum van Amsterdam te bieden heeft.
+
+VERENIGING VAN EIGENAARS
+De actieve VvE wordt in eigen beheer gevoerd en de maandelijkse bijdrage bedraagt € 126. Er is een meerjarenonderhoudsplan (MJOP) opgesteld en voor de nabije toekomst staan geen grote werkzaamheden gepland. De afgelopen jaren is al het nodige onderhoud uitgevoerd: zo is in 2021 het dak gerenoveerd, zijn in 2024 de balkons vernieuwd en is datzelfde jaar het schilderwerk aan de achterzijde uitgevoerd. Ook heeft het gemeenschappelijke trappenhuis in 2024 een opfrisbeurt gekregen.
+
+BIJZONDERHEDEN
+- energielabel B
+- bouwjaar 1906
+- bovenste verdieping
+- oplevering va. eind februari  
+- zeer veel daglicht toetreding 
+- volledig gerenoveerd in 2012 
+- strak gestuukte wanden en plafonds
+- riant zonnig dakterras (vergund) van ca. 28 m²
+- uitstekend gelegen m.b.t. tram, bus en uitvalswegen
+- courante indeling met 3 slaapkamers en 2 badkamers
+- actieve en financieel gezonde VvE bestaande uit 5 leden 
+- gesplitst in 5 appartementsrechten met vergunning in 2012
+- ideaal gelegen m.b.t. winkels cafés/restaurants in de Jordaan en Oud-West 
+- erfpachtcanon bedraagt € 105 p.jr, na 2030 wordt de canon € 1.262 (+inflatie)
+- overstap eeuwigdurende erfpacht notarieel vastgelegd onder gunstige voorwaarden
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn slechts indicatief.
+
+*ENGLISH TEXT*
+
+DESCRIPTION
+Charming, bright and practically laid-out upper-floor apartment of approximately 80 m², featuring three bedrooms, two bathrooms, energy abel B and a fantastic private roof terrace of no less than 28 m². The apartment occupies the top floor of a characteristic building, directly overlooking the green Frederik Hendrikplantsoen. Thanks to its elevated position, large windows and unobstructed views, the apartment enjoys an abundance of natural light and offers lovely views across the surrounding area towards the Jordaan. The apartment was fully renovated in 2012 and has been well maintained ever since. Its practical layout makes it particularly suitable for a family, while also offering plenty of flexibility for a comfortable home office or guest room. The apartment forms part of an active and financially healthy Owners’ Association (VvE), with a long-term maintenance plan in place. In addition, the transition to perpetual ground lease has already been formalised by notarial deed under favourable conditions. The location directly on Frederik Hendrikplantsoen offers the perfect combination of peace and greenery, while everything the city has to offer is close at hand. The Jordaan is just a stone’s throw away, while Hugo de Grootplein, Westerstraat and Noordermarkt are all within easy walking distance. In short: an exceptionally bright and charming upper-floor apartment with three bedrooms, two bathrooms and a generous private roof terrace, in a highly sought-after location overlooking Frederik Hendrikplantsoen.
+
+LAYOUT (see floor plan)
+The private entrance is reached on the third floor via the well-maintained communal staircase, with space for coats and storage. A private staircase leads to the fourth floor, where the landing provides access to the various rooms of the apartment. The bright living room features wooden engineered parquet flooring and connects seamlessly with the open-plan kitchen. The kitchen is fully equipped with a four-burner gas hob, extractor hood, combination oven, dishwasher and fridge/freezer. Adjoining the living room is one of the bedrooms, featuring a French balcony. The hallway provides access to the two remaining bedrooms, one situated at the front and the other at the rear of the building. The rear bedroom features a custom-made fitted wardrobe and a second compact bathroom with a shower and toilet. The toilet is currently being used as storage space but can easily be reinstated if desired. The main bathroom is centrally located within the apartment and is fitted with a washbasin unit, walk-in shower and toilet. Next to the bathroom is a practical cupboard housing the washing machine connection and central heating boiler. A fixed wooden staircase and electrically operated roof hatch provide access to the generous private roof terrace. Thanks to its elevated position, the terrace enjoys plenty of sunshine as well as beautiful, far-reaching views across Amsterdam.
+
+LOCATION
+The apartment enjoys a wonderful location in the popular Frederik Hendrikbuurt, directly overlooking the greenery of Frederik Hendrikplantsoen. It offers a peaceful and pleasant residential setting, while the vibrant city is literally just around the corner. The beautifully landscaped park features several playgrounds and provides plenty of space for relaxation and recreation. The immediate neighbourhood offers a wide variety of shops, speciality stores, supermarkets, cafés and restaurants. Hugo de Grootplein and Frederik Hendrikstraat are lively local hubs for everyday shopping, cafés and restaurants. On the other side of the park, the Jordaan begins almost immediately, with Westerstraat, Noordermarkt and the famous Nine Streets all within easy walking and cycling distance. A market is held on Westerstraat on Monday mornings, while the popular Noordermarkt takes place on Saturdays. Westerpark and the Westergasterrein are also just a few minutes away, offering a wide range of opportunities for sports, recreation, culture, cafés and restaurants. The Foodhallen, Amsterdam city centre and Amsterdam Central Station are all easily accessible by bicycle. Public transport connections are excellent, with several tram and bus stops nearby. By car, the A10 ring road and the main arterial routes can be reached quickly via, among others, the S103 and S105. Parking is available through the municipal permit system. The underground Singelgracht parking garage is also located nearby. As a result, a significant amount of parking has been moved away from the surrounding streets, creating more space at street level for greenery, pedestrians and cyclists. In short: an exceptionally pleasant residential environment where peace, greenery and recreational space are combined with everything Amsterdam city centre has to offer.
+
+OWNERS’ ASSOCIATION
+The active Owners’ Association (VvE) is self-managed and the monthly service charge is €126. A long-term maintenance plan (MJOP) is in place and no major works are scheduled for the near future. A considerable amount of maintenance has already been carried out in recent years. The roof was renovated in 2021, the balconies were renewed in 2024 and the rear exterior of the building was painted in the same year. The communal staircase was also refreshed in 2024.
+
+PARTICULARS
+- built in 1906
+- energy label B
+- fully renovated in 2012
+- situated on the top floor
+- excellent natural light throughout
+- smoothly plastered walls and ceilings
+- transfer possible from the end of February
+- generous and sunny licensed roof terrace of approx. 28 m²
+- practical and versatile layout with three bedrooms and two bathrooms
+- building divided into five apartment rights with the required permit in 2012
+- ideally located for shops, cafés and restaurants in the Jordaan and Oud-West
+- active and financially healthy Owners’ Association consisting of five members
+- excellent location in relation to tram and bus connections and main arterial roads
+- transition to perpetual ground lease formalised (notarial) under favourable conditions
+- current ground lease amounts to €105 per year; after 2030, the annual ground rent will be €1,262 (plus indexation)
+
+This information has been compiled by us with due care. However, we accept no liability for any incompleteness, inaccuracies or otherwise, nor for any consequences thereof. All stated dimensions and surface areas are indicative only.
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Migiel Krijger</strong> · Thuis in Vastgoed</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 61</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/340/663_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/559_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/567_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/817_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/620_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/611_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/609_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/665_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/715_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/591_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/676_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/629_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/698_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/542_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/546_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/684_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/637_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/565_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/555_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/529_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/590_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/543_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/841_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/691_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/564_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/540_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/622_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/496_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/699_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/553_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/581_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/491_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/514_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/660_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/652_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/599_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/631_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/492_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/560_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/836_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/792_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/833_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/901_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/893_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/745_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/871_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/340/970_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

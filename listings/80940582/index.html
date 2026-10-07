@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desselstraat 22 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Desselstraat 22</h1>
+  <p class="sub">
+    <span>1066 LT Amsterdam</span>
+    <span>·</span>
+    <span>Nieuw-Sloten-Noordoost</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/945/660_1440x960.jpg" alt="Desselstraat 22 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">29 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€675.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.192/m² · 1.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.5 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">130 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1991</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-desselstraat-22/80940582/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 675.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.192</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1991</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>130 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>52 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>102 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>324 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches, Bathtub, 2 toiletten, Underfloor heating, Washbasin, 2 Washbasinmeubels, en dubbele Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Kombi Kompakt HR 36/30 (gas-fired combi boiler uit 2006, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND E</dt><dd>4615</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>102 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-09-2040</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, beschutte ligging en in woonwijk</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Tuin</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Back garden</dt><dd>Back garden 44 m² (8,08 m deep en 5,47 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het westen</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">***See English description below***
+Heerlijk ruime, lichte en goed onderhouden 3-laagse eengezinswoning met zonnige achtertuin (44 m2) inclusief groot terras, leuke beplanting en een handig schuurtje (4 m2) plus de mogelijkheid tot woninguitbouw. Tevens is er een dakterras (8 m2) op de compleet gerenoveerde bovenverdieping en een extra berging aan de voorzijde van het pand. Voorzien van energielabel C en de ERFPACHT AFGEKOCHT T/M 30-09-2040 (gunstige voorwaarden restdeel AB2016).
+Binnen geniet je van een grote doorzon woonkamer inclusief gashaard en een half-open keuken, 4 slaapkamers (en vijfde slaapkamer zeer makkelijk te creëren), klassieke badkamer op de eerste verdieping én een moderne badkamer voorzien van bubbel-ligbad op de bovenverdieping. Verder zijn er 3 toiletten, veel opbergkasten en leuke details zoals ornamenten, glas-in-lood-raampje en een wandschildering.
+Ideaal gelegen in het rustige en groene Nieuw-Sloten te Amsterdam-West, nabij vaarwater, uitvalswegen, openbaar vervoer, scholen, winkels, gezellige horeca, Sloterplas en het Amsterdamse Bos. Echt een verrassend leuke plek in een gezellig straatje, dus kom snel langs voor een bezichtiging!
+INDELING
+De woning is goed bereikbaar via de eigen entree en nabij veel parkeergelegenheid. Bij binnenkomst stap je direct in de entreehal met tochtportaal, waar je een grote garderobe met wandschappen voor schoenen, een sleutelrekje en de meterkast treft. De begane grond is gelegd met een donkere hardhouten vloer in schuine banen en binnenkomen in dit instapklare huis voelt ongetwijfeld al snel vertrouwd. Welkom thuis!
+Woonkamer
+Als ware het kloppend hart van de woning is de ruime doorzon-woonkamer. Hier zijn dan ook volop mogelijkheden voor het plaatsen van zowel een gezellige zithoek met grote familiesofa, salontafel en eventuele luie stoel met (boeken)kasten als een eettafel met bijpassende stoelen. In de hoek is de karakteristieke gashaard gesitueerd. Er is sprake van veel lichtinval, mede dankzij grote ramen in de schuifdeuren richting de tuin. Aan de voorkant is de half-open keuken handig gepositioneerd aan de korte zijde van de woonkamer.
+Half-open keuken
+Vanuit de keuken heb je ideaal uitzicht op de rustige straat, dankzij het openslaande raam met natuurlijke ventilatie. Het L-vormige keukenblok is voorzien van inbouwapparatuur: 4-pits gasfornuis, afzuigkap, grote oven, magnetron, koelkast met aparte vriezer en een vaatwasser (Bosch). Verder is er veel werkruimte op het kunststof aanrechtblad en opbergplek in de hoge apothekerskast, carrouselkast voor pannen, keukenkastjes en een wandrek voor het uitstallen van keukengerei en ingrediënten. Wandcontactdozen zijn centraal geplaatst voor optimaal gebruiksgemak, zodat de chef naar hartenlust kan kokkerellen.
+Achtertuin (44 m2)
+De grote glazen schuifdeuren in de woonkamer verschaffen toegang tot de riante achtertuin. Dankzij de ligging op het westen geniet je, vanaf de middag, volop van de zon tot in de late uurtjes.
+Deze heerlijke privé buitenruimte is van alle gemakken voorzien met een groot terras, handig schuurtje en vrolijke beplanting. Zelfs na de mogelijke uitbouw van de woning, zoals de buren inmiddels hebben gerealiseerd, blijft er nog een mooie tuin over. In de zomer is het dan ook heerlijk genieten van een eventuele BBQ en waterpret in een zwembadje met familie en vrienden. Het brede zonnescherm zal dan waarschijnlijk goed van pas komen, om lekker beschut te kunnen zitten op het terras.
+Eerste verdieping
+Middels de interne trap in de entreehal begeven we ons, langs het separate toilet op de begane grond, richting de eerste verdieping. Zo stap je midden op de overloop, die in verbinding staat met alle vertrekken.
+Badkamer (1 van de 2)
+Goed bereikbaar vanuit de slaapkamers op de eerste verdieping is de (eerste) badkamer, uitgevoerd in klassieke ‘badhuis stijl’ en voorzien van vloerverwarming, ruime douchecabine inclusief handig nisje voor badkamer accessoires, daarnaast de dubbele wastafel met badkamermeubel en spiegels, een designradiator en tenslotte het tweede toilet van de woning.
+Slapen
+Drie van de vier slaapkamers zijn tevens gelegen op de eerste verdieping. De grootste (master) slaapkamer biedt meer dan voldoende ruimte voor een tweepersoonsbed met nachtkastjes en verder is er een grote kledingkast met hanggedeelte, schappen en lades tegen de muur bevestigd. Ook de tweede en derde slaapkamer zijn ruim en bieden eveneens plek voor een eventueel tweepersoonsbed en kledingkasten.
+Uiteraard kunnen deze kamers ook ideaal als thuiswerkplek, kinderkamer of hobbyruimte gebruikt worden. Alle slaapkamers hebben openslaande ramen en door de fijne omgeving kun je hier in alle rust vertoeven. De vierde en tevens laatste slaapkamer is gelegen op de bovenverdieping van de woning.
+Tweede verdieping (met extra badkamer én dakterras)
+Tenslotte begeven we ons middels de doorlopende interne trap richting de compleet gerenoveerde bovenste verdieping. Deze multifunctionele kamer is zeer ruim en door het plaatsen van een tussenwandje, kan er heel eenvoudig een vijfde slaapkamer gerealiseerd worden. De huidige eigenaren gebruiken het vooral als ontspanningsruimte, waar voorheen een biljarttafel, spelcomputer en louche-hoek met zitbank te vinden waren.
+Ook is er een handige opbergkast. Uiteraard kun je een (logeer)bed plaatsen en tevens gebruik maken van de tweede, moderne badkamer (2024) met vloerverwarming, bubbel-ligbad met douche, wastafelmeubel met spiegel en toilet. Tenslotte verschaffen glazen schuifdeuren toegang tot het dakterras (8 m2) op de bovenste verdieping.
+EIGENDOM
+De erfpacht is afgekocht t/m 30-09-2040, dus tot die tijd betaal je helemaal géén erfpacht. (gunstige voorwaarden restdeel AB2016).
+BIJZONDERHEDEN
+- Bouwjaar 1991;
+- Woonoppervlakte 130 m2, conform NEN2580;
+- 3-laagse eengezinswoning met veel privé buitenruimte;
+- Zonnige achtertuin (44 m2) met leuke beplanting en handig schuurtje (3 m2);
+- Extra berging (4 m2) aan de voorzijde – ook ideaal voor (elektrische) fietsen;
+- Dakterras (8 m2) op de compleet gerenoveerde bovenverdieping;
+- Uitbouw woning nog mogelijk aan de achterzijde – zoals de buren reeds gerealiseerd hebben;
+- Ruime doorzonwoonkamer inclusief half-open keuken;
+- 4 comfortabele slaapkamers met praktische indeling (vijfde slaapkamer makkelijk te creëren);
+- Eerste badkamer in klassieke ‘badhuis-stijl’ met vloerverwarming, douche, dubbele wastafelmeubel, spiegels, designradiator en toilet;
+- Tweede, moderne badkamer (2024) wederom voorzien van vloerverwarming, bubbel-ligbad inclusief douche, wastafelmeubel met spiegel en toilet;
+- Extra separaat toilet beneden;
+- Wasruimte en veel opbergplek;
+- Energielabel C;
+- ERFPACHT AFGEKOCHT T/M 30-09-2040 (gunstige voorwaarden restdeel AB2016);
+- Glasvezel internet aansluiting;
+- Ideaal gelegen in het rustige en groene Nieuw-Sloten te Amsterdam-West, nabij vaarwater, uitvalswegen, openbaar vervoer, scholen, winkels, gezellige horeca, Sloterplas en het Amsterdamse Bos;
+- Goedkoop parkeren in de buurt;
+- Notaris naar keuze koper (ring model Amsterdam);
+- Oplevering kan snel – in overleg met koper;
+- Voorbehoud gunning verkoper.
+*** English description ***
+Desselstraat 22, 1066LT Amsterdam.
+Delightfully spacious, bright, and well-maintained 3-story family home with a sunny backyard (44 m²) including large terrace, cheerful greenery, and a handy shed (4 m²), plus the possibility of a home extension. There is also a roof terrace (8 m²) on the completely renovated upper floor and an additional storage unit at the front side of the property. Equipped with energy label C and the LEASEHOLD BOUGHT OFF UNTIL 30-09-2040 (favorable terms for the remaining part AB2016).
+Inside, you enjoy a large, bright living room including gas fireplace and a semi-open kitchen, 4 bedrooms (with a fifth bedroom very easy to create), classic bathroom on the first floor, and a modern bathroom with a whirlpool bath on the top floor. Furthermore, there are 3 toilets, plenty of storage cupboards, and charming details such as ornaments, a stained-glass window, and a wall mural.
+Ideally located in the quiet and green area of ‘Nieuw-Sloten’ in Amsterdam-West, near waterways, main roads, public transport, schools, shops, cozy restaurants and cafes, the Sloterplas park with lake, and the forest called Amsterdamse Bos. Truly a surprisingly lovely place on a charming street, so book your viewing right away!
+LAYOUT
+The property is easily accessible via its own private entrance and is close to ample parking. Upon entering, you step directly into the entrance hall with a vestibule, where you will find a large wardrobe with wall shelves for shoes, a key rack, and the meter cupboard. The ground floor features dark hardwood flooring laid in diagonal
+strips, and entering this move-in ready home will undoubtedly feel familiar very quickly. Welcome home!
+Living Room
+The spacious, ‘sun-through-living room’ (with windows on both sides) serves as the beating heart of the home.
+Consequently, there are ample possibilities here for placing both a cozy seating area with a large family sofa, coffee table, and optional armchair with bookcases or shelves, as well as a dining table with matching chairs.
+The characteristic gas fireplace is situated in the corner. There is plenty of natural light incidence, for example through to large windows in the sliding doors facing the garden. At the front, the semi-open kitchen is conveniently positioned along the short side of the living room.
+Semi-open kitchen
+From the kitchen, you have an ideal view of the quiet street, thanks to the opening window with natural ventilation. The L-shaped kitchen unit is equipped with built-in appliances: 4-burner gas hob, extractor hood, large oven, microwave, refrigerator with separate freezer, and a dishwasher (Bosch). Furthermore, there is plenty of workspace on the synthetic countertop and storage space in the tall pull-out pantry, carousel cabinet for pans, kitchen cabinets, and a wall rack for displaying kitchen utensils and ingredients. Wall sockets are centrally located for optimal convenience, so the chef can cook to his heart&#x27;s content.
+Back Garden (44 m²)
+Large glass sliding doors in the living room provide access to the spacious back garden. Due to its west-facing location, you will enjoy lots of sunshine from the afternoon until the late evening. This amazing private outdoor space is fully equipped with a large terrace, handy shed, and cheerful planting. Even after a possible extension of the house, as the neighbors have realized already, a beautiful garden remains. In summer, it is therefore wonderful to enjoy a BBQ and water fun in a pool with family and friends. The wide sun-awning will likely come in handy then, allowing you to sit comfortably sheltered on the terrace.
+First floor
+Via the internal staircase in the entrance hall, we proceed past the separate toilet on the ground floor towards the first floor. This leads you directly onto the landing, which connects to all the rooms.
+Bathroom (1 of 2)
+Easily accessible from the bedrooms on the first floor is the (first) bathroom, finished in a classic ‘bathhouse style’ and equipped with underfloor hearing, a spacious shower cabin including a handy niche for bathroom accessories, as well as a double washbasin with vanity unit and mirrors, a designer radiator, and finally, the second toilet in the house.
+Bedrooms
+Three of the four bedrooms are also situated on the first floor. The largest (master) bedroom offers more than enough space for a double bed with bedside tables, and there is also a large wardrobe mounted against the wall with hanging space, shelves, and drawers. The second and third bedrooms are also spacious and likewise offer room for a potential double bed and wardrobes. Naturally, these rooms can also be ideally used as a home office, hobby area or children&#x27;s room. All bedrooms have opening windows, and because of the pleasant surroundings, you can be here in complete peace. The fourth and final bedroom is located upstairs on the top floor of the house.
+Second floor (with extra bathroom and roof terrace)
+Finally, we proceed via the continuous internal staircase to the completely renovated top floor. This multifunctional room is very spacious, and by installing a partition wall, a fifth bedroom can easily be created.
+The current owners primarily use it as a relaxation area, where a billiard table, game console, and lounge corner with a sofa were previously installed. There is also a handy storage cupboard. Naturally, you can place a (guest)
+bed and also make use of the second, modern bathroom (2024) with underfloor heating, a whirlpool bath including shower, vanity unit with mirror, and the third toilet. Finally, glass sliding doors provide access to the roof terrace (8 m²) on the top floor.
+PROPERTY
+The ground lease has been bought off until 30-09-2040, so until then you pay absolutely no leasehold.
+(favorable conditions for rest part AB2016).
+PARTICULARITIES
+- Year of build 1991;
+- Living area of 130 m2, according to NEN2580;
+- 3 floor family home with plenty of private outdoor space;
+- Sunny backyard (44 m2) with cheerful planting and a handy shed (3 m2);
+- Additional storage (4 m2) at the front – also ideal for (electric) bicycles;
+- Roof terrace (8 m2) on the completely renovated upper floor;
+- Extension of the house is still possible at the rear – as some neighbors have already realized;
+- Spacious living room with windows on both sides, including a semi-open kitchen;
+- 4 comfortable bedrooms with practical layout (fifth bedroom easy to create);
+- First bathroom in a classic ‘bathhouse style’ with underfloor heating, shower, double vanity unit, mirrors, designer radiator and toilet;
+- Second, modern bathroom (2024) once again equipped with underfloor heating, whirlpool bath including shower, vanity unit with mirror, and toilet;
+- Additional separate toilet downstairs;
+- Laundry room and ample storage space;
+- Energy label C;
+- LEASEHOLD BOUGHT OFF UNTIL 30-09-2040 (favorable terms for the remaining part AB2016);
+- Fiber optic internet connection;
+- Ideally located in the quiet and green Nieuw-Sloten in Amsterdam-West, near waterways, main roads, public transport, schools, shops, cozy restaurants and bars, Sloterplas park with lake, and the forrest of Amsterdamse Bos;
+- Affordable parking nearby;
+- Notary of buyer&#x27;s choice (Amsterdam ring model);
+- Delivery could be quick – in consultation with buyer;
+- Reservation to seller&#x27;s award.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 29</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/945/660_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/575_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/612_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/621_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/515_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/577_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/632_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/669_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/532_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/561_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/614_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/516_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/534_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/665_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/552_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/522_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/606_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/537_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/567_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/637_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/674_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/645_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/536_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/604_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/945/672_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

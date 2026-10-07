@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Martini van Geffenstraat 104 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Martini van Geffenstraat 104</h1>
+  <p class="sub">
+    <span>1068 GL Amsterdam</span>
+    <span>·</span>
+    <span>Osdorpplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/440/293_1440x960.jpg" alt="Martini van Geffenstraat 104 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">20 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€520.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.561/m² · 2.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">114 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2002</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-martini-van-geffenstraat-104/17240951/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 254 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 520.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.561</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2002</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>114 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>376 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>7e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Kombi Kompakt HRE (gas-fired combi boiler uit 2023, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Kadastraal perceel</dt><dd>SLOTEN NOORD-HOLLAND E 7009</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Open huizendag  op 7 oktober van 16:00 uur tot 17:00 uur.
+Je kunt zonder afspraak langskomen. 
+
+***ENGLISH TEXT BELOW***
+
+Direct online een bezichtiging inplannen? Ga naar onze website!
+
+RUIM APPARTEMENT OP TOPLOCATIE IN AMSTERDAM NIEUW-WEST
+Ben je op zoek naar een woning die ruimte, comfort en een praktische locatie combineert? Dit hoogwaardig afgewerkt appartement met drie slaapkamers op de 7e verdieping biedt alles wat je nodig hebt. Ideaal gelegen in een rustige omgeving, maar toch met alle stedelijke voorzieningen binnen handbereik. Je profiteert van een energiezuinige woning (Energielabel A), een strak afgewerkte keuken en badkamer, én een eigen parkeerplaats. De erfpacht is ook nog eens eeuwigdurend afgekocht – een zorg minder! Kortom, de ideale woning voor wie een combinatie zoekt van rust, ruimte en bereikbaarheid.
+
+HIGHLIGHTS IN ÉÉN OOGOPSLAG:
+- Drie slaapkamers: Ideaal voor gezinnen, werken vanuit huis of extra opslag.
+- Energielabel A: Duurzaam en lage maandlasten voor energieverbruik.
+- Lichte woonkamer: Grote ramen zorgen voor optimale lichtinval en een ruimtelijk gevoel.
+- Moderne keuken en badkamer: Strak en van alle gemakken voorzien.
+- Eigen parkeerplaats &amp; externe berging: Altijd parkeren zonder gedoe.
+- Erfpacht eeuwigdurend afgekocht: Geen toekomstige kosten of verrassingen.
+- Uitstekende ligging: Dicht bij het Osdorpplein, Sloterpark en OV, waarmee je in 20 minuten in het centrum bent.
+
+STRAKKE EN PRAKTISCHE WONING MET EEN IDEALE LIGGING
+Dit appartement van circa 114 m² is gelegen op de 7e verdieping van een keurig complex met een lift. De woning is praktisch ingedeeld, met een centraal gelegen hal die toegang biedt tot alle vertrekken.
+
+De woonkamer is heerlijk licht en ruim dankzij de grote ramen. Hier heb je voldoende plek voor een comfortabele zithoek en een eettafel. Aangrenzend vind je de nette keuken, die is uitgerust met een elektrische kookplaat, afzuigkap, koelkast, vriezer, vaatwasser en voldoende opbergruimte.
+
+De woning beschikt over drie goed bemeten slaapkamers, die je flexibel kunt inrichten. Of je nu extra slaapkamers nodig hebt, wilt thuiswerken of een hobbykamer overweegt: de indelingsopties zijn eindeloos. De badkamer is strak afgewerkt met een wastafelmeubel en inloopdouche. Naast de badkamer is er een separaat toilet met fonteintje.
+
+Een handige inpandige berging biedt ruimte voor je wasmachine en droger. Daarnaast is er een praktische externe berging op de begane grond voor bijvoorbeeld fietsen en andere spullen. De parkeerplaats op het afgesloten terrein is inbegrepen en maakt het wooncomfort compleet.
+
+WONEN IN AMSTERDAM NIEUW-WEST: VOORZIENINGEN EN BEREIKBAARHEID
+De locatie van dit appartement combineert alles wat je nodig hebt voor een comfortabele leefstijl. Je woont in een rustige buurt, maar met alle voorzieningen binnen handbereik. Op slechts 500 meter afstand vind je het vernieuwde Osdorpplein, waar je terechtkunt voor een compleet aanbod aan winkels, horeca en zelfs een overdekte markt met internationale gerechten. Ook scholen, sportscholen en culturele voorzieningen zoals Theater De Meervaart bevinden zich in de directe omgeving.
+
+Recreatieliefhebbers genieten volop van het nabijgelegen Sloterpark en de Sloterplas. Hier kun je wandelen, sporten of ontspannen bij het stadsstrand. Het groen in de omgeving maakt dit een ideale plek om je even terug te trekken uit de drukte van de stad.
+
+Qua bereikbaarheid zit je hier perfect. Tramlijnen 1 en 17 brengen je in minder dan 20 minuten naar</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Hoekstra en Van Eck Amsterdam West</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 20</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/440/293_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/281_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/298_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/279_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/288_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/299_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/280_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/286_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/285_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/294_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/295_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/301_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/292_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/291_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/282_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/296_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/283_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/440/287_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

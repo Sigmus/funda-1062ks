@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerrit Mannourystraat 81 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Gerrit Mannourystraat 81</h1>
+  <p class="sub">
+    <span>1062 LC Amsterdam</span>
+    <span>·</span>
+    <span>Koningin Wilhelminaplein</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/955/463_1440x960.jpg" alt="Gerrit Mannourystraat 81 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">43 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€550.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.548/m² · 0.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">0.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">84 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1993</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">8 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-gerrit-mannourystraat-81/44501310/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 550.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.548</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 220,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Gallery flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1993</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>84 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>2 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>16 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>265 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>8 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, schuifpui, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>4e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Gas gestookt, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN E 7019</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan park, On a quiet road en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder en parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Op afgesloten terrein en parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 220,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">HEERLIJK RUIM EN LICHT APPARTEMENT MET WEIDS PARKUITZICHT IN AMSTERDAM-WEST!
+*** VLAKBIJ HET WFC, STATION LELYLAAN EN DE A10, MET EEUWIGDUREND AFGEKOCHTE ERFPACHT! *** MET EIGEN PARKEERPLAATS IN DE PARKEERGARAGE!
+Op zoek naar een lichte, ruime woning met een weids uitzicht over het groene Koningin Wilhelminapark? Dan is dit hem! Dit heerlijke appartement op de 4 etage aan de Gerrit Mannourystraat combineert twee, straks misschien wel drie, royale slaapkamers met een volledig opgeknapte woonkamer, een keuken vol ruimte om samen te koken, en een zonnig balkon en loggia op het zuiden. En dat op een steenworp afstand van het bruisende WFC en station Lelylaan, in een rustige straat zonder doorgaand verkeer!
+HIGHLIGHTS
+- 2 ruime slaapkamers, met de mogelijkheid om er zo een derde bij te maken!
+- Volledig vernieuwde vloer en fris schilderwerk (2026): helemaal instapklaar
+- Zonnig balkon én aparte loggia op het zuiden, de hele dag zon!
+- Rustige, autoluwe straat, en toch alles binnen handbereik: het WFC, station Lelylaan, de A10 zo bereikbaar!
+- Eigen berging op straatniveau
+- Plus inpandige ruimte voor wasmachine en droger
+- Erfpacht eeuwigdurend afgekocht: geen omkijken naar canonbetalingen
+- Energielabel A
+- Parkeerplaats in de onderbouw, deze is inclusief in de vraagprijs opgenomen. En heeft een eigen laadpaal (fijn voor je fiets of scooter ook om op te laden) WONEN Stap binnen en voel meteen de ruimte! De woonkamer is heerlijk licht en kijkt uit over het groene Koningin Wilhelminapark, van hieruit zie je de lucht van alle kanten en, als je geluk hebt, ook de zon prachtig ondergaan.
+Praktisch ingedeeld, en dus ook top om thuis te werken. De gloednieuwe pvc-vloer (2026, met geluidsisolatie) en het frisse schilderwerk maken het helemaal af: je stapt zo een verzorgde, instapklare woning binnen!
+KOKEN
+De open keuken zit centraal tussen het eet- en woongedeelte, met genoeg ruimte voor een grote eettafel.
+Samen koken en meteen aanschuiven, zo hoort het! Liever apart koken? Dan sluit je de keuken eenvoudig af met een deur. De keuken (2020) is voorzien van inbouwapparatuur waaronder een combi-oven, gaskookplaat en vaatwasser, met een koel-vriescombinatie die in 2022 vervangen is voor een nieuwe.
+SLAPEN EN BADEN
+Twee ruime slaapkamers, en de huidige eetkamer, met eigen raam en mooi uitzicht, is zo omgebouwd tot een derde! Ideaal als je gezin groeit. De badkamer, circa 11 jaar oud, heeft een bad met douchemogelijkheid en een wastafel, met ruimte voor een extra meubel. Het toilet is apart en in 2020 vernieuwd. En voor de was: een eigen inpandige bergruimte voor wasmachine en droger is in de gang.
+LOGGIA
+
+Naast de woonkamer ligt een heerlijke aparte loggia, dé plek om te chillen of juist om je thuiskantoor in te richten. Door de zuidelijke ligging profiteer je hier de hele dag van veel licht.
+BUITENLEVEN
+Het balkon grenst aan de woonkamer en de loggia en ligt vol op het zuiden. In de zomer vang je hier de zon van 11 tot 17 uur. Met dit uitzicht over het park heb je alles wat je nodig hebt.
+LOCATIE
+Om de hoek ligt het bruisende WFC, met creatieve werkplekken, fashion hotspots en steeds meer leuke eet- en drinkgelegenheden zoals restaurant Bolenius, Vascobelo V-Bar, restaurant Cedars en Bar Restaurant LELY.
+Dagelijkse boodschappen doe je bij de Spar of bij de winkelcentra van het Delflandplein en Hoofddorpplein. En sporten? Dat kan op loopafstand bij Train More, met sauna en massage, een 24-uurs Basic Fit, Movement, WellCome Wellness in het Fashion Hotel, Sporthal Calvijn, MPPRO boxing center, David Lloyd en Liferoots Yoga.
+Groen heb je hier in overvloed: naast het park voor de deur fiets je zo naar het Rembrandtpark, het Vondelpark en het Sloterpark met stadsstrand, en ook de Nieuwe Meer en het Amsterdamse Bos, heerlijk zwemmen, zeilen of andere watersport, liggen op zo&#x27;n 15 fietsminuten. Station Lelylaan, met trein, metro, tram en taxistandplaats, is 5 minuten lopen. Met de auto zit je zo op de A10 en de A4 via afslag 106, zonder de bekende filedrukte! Voor de kinderen zijn er volop opties: voorscholen en kinderdagverblijven zoals CompaNanny in het WFC, basisscholen als de 7e Montessorischool, de Nautilius en de Notenkraker, en de internationale school Denise voor kinderen van 4 tot 18 jaar.
+WOONOPPERVLAKTE EN BERGING
+Woonoppervlakte: 84m2 conform de NEN-2580 gemeten. Externe berging beneden is 16 m².
+PARKEREN
+In de onderliggende garage, bereikbaar via een speedgate en vanuit de hoofdentree, hoort een eigen overdekte parkeerplaats met eigen laadpaal, ook fijn om je fiets of scooter op te laden.
+VVE
+De VvE Gerrit Mannoury wordt professioneel beheerd door VvE Beheer Amsterdam. Er is een meerjarenonderhoudsplan (MJOP) aanwezig en de servicekosten bedragen € 220,- per maand, dit is inclusief de parkeerplaats in de garage.
+ERFPACHT
+De erfpacht is eeuwigdurend afgekocht, dus geen doorlopende canonbetalingen van toepassing.
+OPLEVERING
+Oplevering kan op korte termijn plaatsvinden, in overleg.
+DISCLAIMER
+Deze informatie is met de nodige zorgvuldigheid samengesteld. Desondanks aanvaarden wij geen aansprakelijkheid voor eventuele onvolledigheden, onjuistheden of de gevolgen daarvan. Alle opgegeven Neem contact op € 550.000 k.k. maten en oppervlakten zijn indicatief. Kopers hebben een eigen onderzoeksplicht naar alle zaken die voor hen
+
+van belang zijn. De NEN-2580 meetinstructie is van toepassing.
+Met betrekking tot deze woning is ons kantoor de makelaar van verkoper. Wij adviseren je een NVM/MVAmakelaar in te schakelen, die je met zijn deskundigheid zal bijstaan in het aankoopproces. Indien je geen professionele begeleiding wenst in te schakelen, acht je je volgens de wet deskundig genoeg om alle zaken, die van belang zijn, te kunnen overzien.
+................................................
+SPACIOUS, BRIGHT APARTMENT WITH SWEEPING PARK VIEWS IN AMSTERDAM WEST!
+*** CLOSE TO THE WFC, LELYLAAN STATION AND THE A10, WITH THE GROUND LEASE BOUGHT OFF IN PERPETUITY! *** PARKING SPOT IN THE PARKING GARAGE INCLUDED!
+Looking for a bright, spacious home with sweeping views over the green Queen Wilhelmina Park (Koningin Wilhelminapark)? Then this is it! This wonderful apartment on the 4th floor on Gerrit Mannourystraat combines two – and possibly soon three – generous bedrooms with a fully renovated living room, a kitchen with plenty of room to cook together, and a sunny, south-facing balcony and loggia. And all just a stone&#x27;s throw from the vibrant WFC and Lelylaan station, on a quiet street with no through traffic!
+HIGHLIGHTS
+Two spacious bedrooms, with the option to add a third!
+Fully renewed flooring and fresh paintwork (2026): completely move-in ready.
+Sunny, south-facing balcony and separate loggia – sunshine all day long!
+Quiet, low-traffic street, yet everything within easy reach: the WFC, Lelylaan station and the A10 are all close by!
+Private storage room at street level.
+Plus an indoor space for a washing machine and dryer.
+Ground lease bought off in perpetuity: no ongoing ground rent to worry about.
+Energy label A.
+Parking space in the basement, included in the asking price, with its own charging point (handy for charging your bike or scooter too).
+LIVING
+Step inside and you&#x27;ll immediately feel the sense of space! The living room is wonderfully bright and looks out over the green Queen Wilhelmina Park; from here you can see the sky from every side, and if you&#x27;re lucky, catch a beautiful sunset. The practical layout also makes it perfect for working from home. The brand-new PVC flooring (2026, with sound insulation) and fresh paintwork complete the picture: step straight into a wellmaintained, move-in-ready home!
+KITCHEN
+The open-plan kitchen sits centrally between the dining and living areas, with plenty of room for a large dining table – cook together and sit straight down to eat, just as it should be! Prefer to cook separately? Simply close off the kitchen with a door. The kitchen (2020) is fitted with built-in appliances including a combi oven, gas hob and dishwasher, plus a fridge-freezer that was replaced with a new one in 2022.
+
+BEDROOMS AND BATHROOM
+Two spacious bedrooms, and the current dining room – with its own window and lovely view – can easily be converted into a third. Ideal if your family is growing. The bathroom, around 11 years old, has a bath with shower facility and a washbasin, with room for an additional unit. The toilet is separate and was renovated in 2020. For the laundry, there is a dedicated indoor storage space for a washing machine and dryer in the hallway.
+LOGGIA
+Next to the living room is a lovely, separate loggia – the perfect spot to relax or to set up a home office. Thanks to its southern orientation, you&#x27;ll enjoy plenty of light here throughout the day.
+OUTDOOR LIVING
+The balcony adjoins the living room and the loggia and faces fully south. In summer you&#x27;ll catch the sun here from 11am to 5pm, and with this view over the park, you have everything you need.
+LOCATION
+Around the corner is the vibrant WFC (World Fashion Centre), with creative workspaces, fashion hotspots and a growing number of great places to eat and drink, such as restaurant Bolenius, Vascobelo V-Bar, restaurant Cedars and Bar Restaurant LELY. For everyday shopping, head to the Spar or the Delflandplein and Hoofddorpplein shopping centres. Want to work out? Within walking distance you&#x27;ll find Train More (with sauna and massage), a 24-hour Basic Fit, Movement, WellCome Wellness at the Fashion Hotel, Sporthal Calvijn, MPPRO boxing centre, David Lloyd and Liferoots Yoga.
+There is plenty of greenery here too: besides the park right outside your door, it&#x27;s a short cycle to Rembrandtpark, Vondelpark and Sloterpark with its city beach, while the Nieuwe Meer and the Amsterdamse Bos – great for swimming, sailing and other watersports – are about a 15-minute bike ride away. Lelylaan station, with train, metro, tram and taxi rank, is a 5-minute walk. By car you&#x27;ll reach the A10 and A4 via exit 106 in no time, avoiding the usual traffic. For children there are plenty of options too: pre-schools and daycare centres such as CompaNanny at the WFC, primary schools including the 7e Montessorischool, De Nautilus and De Notenkraker, and the Denise international school for children aged 4 to 18.
+LIVING AREA AND STORAGE
+Living area: 84 m², measured in accordance with the NEN-2580 standard. The external storage room downstairs measures 16 m².
+PARKING
+In the underground garage, accessible via a speed gate and from the main entrance, there is a private, covered parking space with its own charging point – also handy for charging your bike or scooter.
+OWNERS&#x27; ASSOCIATION (VVE)
+The Gerrit Mannoury owners&#x27; association is professionally managed by VvE Beheer Amsterdam. A long-term maintenance plan (MJOP) is in place, and the service charges are €220 per month, including the parking space in the garage.
+€
+550.000LEASE
+k.k.
+GROUND
+
+The ground lease has been bought off in perpetuity, so no ongoing ground rent payments apply.
+COMPLETION
+Completion can take place at short notice, in consultation.
+DISCLAIMER
+This information has been compiled with due care. Nevertheless, we accept no liability for any incompleteness, inaccuracies or their consequences. All stated dimensions and areas are indicative. Buyers have their own duty to investigate all matters relevant to them. The NEN-2580 measurement standard applies.
+With regard to this property, our office acts as the seller&#x27;s agent. We advise you to engage an NVM/MVAaffiliated agent, who will assist you with their expertise throughout the purchase process. If you choose not to engage professional guidance, you are, by law, considered sufficiently knowledgeable to assess all matters of importance yourself.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Plattegronden present on page, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Thoma Post Makelaars Amsterdam</strong> · Thoma Post Makelaars Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 43</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/955/463_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/487_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/486_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/481_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/473_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/496_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/502_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/471_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/476_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/498_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/505_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/478_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/490_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/489_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/492_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/467_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/495_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/464_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/475_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/482_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/484_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/499_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/470_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/497_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/506_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/480_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/468_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/493_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/479_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/494_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/472_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/474_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/477_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/501_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/485_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/483_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/466_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/469_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/465_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/491_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/503_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/955/500_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

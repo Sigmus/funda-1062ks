@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aalsmeerweg 7-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Aalsmeerweg 7-3</h1>
+  <p class="sub">
+    <span>1059 AA Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/231/762/824_1440x960.jpg" alt="Aalsmeerweg 7-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">26 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€700.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.863/m² · 0.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">0.8 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">102 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1928</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-aalsmeerweg-7-3/44420013/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 700.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.863</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1928</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>102 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>383 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Hybride (gas-fired combi boiler, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND O 3361</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a busy road</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>No</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>No</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>No</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">***ENGLISH TEXT BELOW***
+
+Sommige woningen koop je om er direct in te trekken. Andere koop je omdat je ziet wat ze kunnen worden.
+
+Welkom aan de Aalsmeerweg 7-III+IV: een uitzonderlijke kans om op een van de leukste locaties van Amsterdam-Zuid een royaal dubbel bovenhuis van circa 102 m² te realiseren, volledig naar eigen inzicht en smaak.
+
+De woning wordt verkocht in de huidige staat: een zelfstandig appartement op de derde verdieping met een eenvoudige keuken en badkamer, gecombineerd met de bovengelegen bergingen. De entree bevindt zich al op de tweede verdieping, waardoor de basis voor een prachtig dubbel bovenhuis al aanwezig is.
+
+Voor handige kopers, aannemers, beleggers en ontwikkelaars biedt dit object een unieke mogelijkheid om substantiële waarde toe te voegen. De toekomstige indeling omvat circa 62,6 m² woonoppervlak op de derde verdieping en circa 38,8 m² op de vierde verdieping.
+
+De woning is gelegen op eigen grond, beschikt reeds over een hybride warmtepomp en vormt daarmee een uitstekende basis voor een toekomstbestendige renovatie. Tegelijkertijd is duidelijk dat de woning volledig gemoderniseerd dient te worden. Vrijwel alles vraagt om vernieuwing, waardoor je als koper volledige vrijheid hebt om het huis precies zo te maken als jij voor ogen hebt.
+
+Indeling
+Via het gezamenlijke trappenhuis bereik je de eigen entree op de tweede verdieping.
+
+De derde verdieping is momenteel ingericht als zelfstandig appartement met een woonkamer, slaapkamer, eenvoudige keuken en badkamer. De vierde verdieping bestaat uit de voormalige bergingen van het pand, die bij de splitsing reeds aan dit appartementsrecht zijn toegevoegd. Samen vormen deze verdiepingen de basis voor een royaal dubbel bovenhuis.
+
+Juist deze opzet maakt het object zo interessant. Door de twee verdiepingen met elkaar te verbinden ontstaat een royaal dubbel bovenhuis van circa 102 m², geheel naar eigen ontwerp in te delen.
+
+Daarnaast hebben diverse omliggende appartementen aan de achterzijde van de vierde verdieping een dakterras gerealiseerd. Hoewel hiervoor vanzelfsprekend de benodigde vergunning(en) en eventuele toestemmingen vereist zijn, biedt dit interessante perspectieven voor de toekomst.
+
+Omgeving
+De Aalsmeerweg ligt in de populaire Hoofddorppleinbuurt in Amsterdam-Zuid. Een levendige buurt met een bijna dorpse sfeer, waar werkelijk alle dagelijkse voorzieningen binnen handbereik zijn. In de directe omgeving bevinden zich diverse speciaalzaken, biologische supermarkten, goede bakkers, traiteurs en populaire horecagelegenheden zoals Bar Bonnie, Café Wiesje, Stadscafé Van Mechelen en Gent aan de Schinkel.
+
+Voor ontspanning wandel of fiets je binnen enkele minuten naar het Vondelpark, het Rembrandtpark of de Schinkel.
+
+De bereikbaarheid is uitstekend. Tram- en bushaltes bevinden zich op loopafstand en met de auto zijn zowel de Ring A10 als de Zuidas en Schiphol snel bereikbaar.
+
+Bijzonderheden
+- Unieke kans om een dubbel bovenhuis van circa 102 m² te realiseren;
+- Circa 63 m² op de derde verdieping en 39 m² op de vierde verdieping;
+- Eigen entree vanaf de tweede verdieping;
+- Gelegen op eigen grond (dus géén erfpacht);
+- Volledig naar eigen smaak te renoveren;
+- Hybride warmtepomp reeds aanwezig;
+- Kozijnen voorzien van enkel glas;
+- Mogelijkheid om (onder voorbehoud van de benodigde vergunningen en toestemmingen) een dakterras te realiseren, conform diverse vergelijkbare woningen in de directe omgeving;
+- Gelegen op een toplocatie aan het begin van de Aalsmeerweg, in de geliefde Hoofddorppleinbuurt;
+- VvE in oprichting;
+- Oplevering in overleg, kan op korte termijn.
+
+ENGLISH
+
+Some homes are bought to move straight into. Others are bought because of what they have the potential to become.
+
+Welcome to Aalsmeerweg 7-III+IV: a rare opportunity to create an impressive 102 m2 duplex apartment in one of Amsterdam South&#x27;s most desirable neighbourhoods, entirely according to your own vision.
+
+The property is sold in its current condition: a self-contained apartment on the third floor with a basic kitchen and bathroom, together with the storage rooms on the fourth floor. The private entrance is already located on the second floor, providing an excellent starting point for the creation of a spacious duplex home.
+
+For renovators, investors, contractors and developers, this property offers outstanding value-add potential. Once converted, the home can provide approximately 63 m2 of living space on the third floor and 39 m2 on the fourth floor.
+
+The apartment is situated on freehold land, already benefits from a hybrid heat pump, and offers an excellent foundation for a complete renovation. Virtually every aspect of the property is ready to be modernised, giving the new owner complete freedom to create a home tailored entirely to their own taste.
+
+Layout
+The private entrance is located on the second floor via the communal staircase.
+
+The third floor is currently arranged as a self-contained apartment comprising a living room, bedroom, basic kitchen and bathroom. The fourth floor consists of the building&#x27;s former storage rooms, which were incorporated into this apartment as part of the subdivision. Together, these floors provide the foundation for the creation of a spacious duplex apartment.
+
+This configuration offers exceptional potential. By combining both floors, a spacious duplex apartment of approximately 102 m2 can be created with complete freedom of layout and design.
+
+Several neighbouring properties have already realised roof terraces at the rear of the fourth floor. Subject to obtaining the necessary permissions and approvals, this property may offer similar possibilities in the future.
+
+Location
+Aalsmeerweg is located in the highly sought-after Hoofddorpplein neighbourhood in Amsterdam South. The area combines a relaxed village atmosphere with all the conveniences of city life, including artisan bakeries, delicatessens, organic supermarkets and popular cafés such as Bar Bonnie, Café Wiesje, Stadscafé Van Mechelen and Gent aan de Schinkel.
+
+Vondelpark, Rembrandtpark and the Schinkel are all just a short walk or bike ride away.
+
+Public transport connections are excellent, while the A10 Ring Road, the Zuidas business district and Schiphol Airport are all easily accessible by car.
+
+Highlights
+- Rare opportunity to create a duplex apartment of approximately 102 m2;
+- Approximately 63 m2 on the third floor and 39 m2 on the fourth floor;
+- Private entrance on the second floor;
+- Situated on freehold land (no leasehold);
+- Complete renovation opportunity;
+- Hybrid heat pump already installed;
+- Single glazing throughout;
+- Potential to create a roof terrace (subject to the necessary permissions and approvals), similar to several neighbouring properties;
+- Prime location at the beginning of Aalsmeerweg in the popular Hoofddorpplein neighbourhood;
+- Owners&#x27; Association currently being established;
+- Completion in consultation and available at short notice.
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Another Real Estate Agency (AREA)</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 26</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/231/762/824_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/866_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/838_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/815_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/843_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/845_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/916_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/831_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/787_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/847_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/827_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/870_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/896_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/825_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/806_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/892_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/798_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/875_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/897_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/767_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/769_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/849_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/810_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/852_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/762/887_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

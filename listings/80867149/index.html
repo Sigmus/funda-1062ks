@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pond Sterlinglaan 52 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Pond Sterlinglaan 52</h1>
+  <p class="sub">
+    <span>1060 RT Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/231/084/632_1440x960.jpg" alt="Pond Sterlinglaan 52 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">63 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€575.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.117/m² · 3.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.6 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">94 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1998</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-pond-sterlinglaan-52/80867149/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 575.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.117</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1998</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Lessenaardak bedekt met tiles</dd></div>
+        <div class="frow"><dt>Toegankelijkheid</dt><dd>Toegankelijk voor mensen met een beperking en toegankelijk voor ouderen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>94 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>91 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>330 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Dakraam en Mechanical ventilation</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN G 5948</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>91 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>42 m² (10,20 m deep en 4,10 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het noordwesten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Pond Sterlinglaan, Amsterdam / Nieuw-West
+
+Ruime, instapklare eengezinswoning met zonnige tuin, drie slaapkamers en eeuwigdurend afgekochte erfpacht
+
+Pond Sterlinglaan 52 is zo’n woning die bij binnenkomst direct meer biedt dan je van buiten verwacht. Rustig gelegen, verrassend ruim, grondig vernieuwd in 2023 en met een groot financieel voordeel: de erfpacht is eeuwigdurend afgekocht.
+
+Achter de groene voordeur bevindt zich de entreehal met meterkast en separaat een hangend toilet. Vanuit de hal loop je door naar de lichte woonkamer met open keuken. De grote glazen pui aan de achterzijde zorgt voor veel daglicht en verbindt de leefruimte op natuurlijke wijze met de tuin. Hierdoor voelt de begane grond open, comfortabel en uitnodigend aan.
+
+De keuken is in 2023 vernieuwd en praktisch ingedeeld. Je beschikt hier over een 5-pits gasfornuis, vaatwasser, koel-vriescombinatie en combi-oven. Er is volop ruimte voor een grote eettafel en een royale zithoek, waardoor de woonkamer zich uitstekend leent voor lange diners, ontspannen avonden en gezellig samenzijn met familie of vrienden.
+
+De tuin is een van de sterke punten van deze woning. Met circa 42 m² is er veel buitenruimte en dankzij de diepte profiteer je op zonnige dagen van fijne zonmomenten. De tuin ligt op het noordwesten, is verzorgd aangelegd, heeft een wateraansluiting en beschikt over een achterom. De houten schuur met elektra biedt praktische bergruimte voor fietsen, tuingereedschap en andere spullen die je liever uit het zicht houdt.
+
+Op de eerste verdieping bevinden zich twee slaapkamers, de badkamer en een aparte wasruimte. De slaapkamer aan de voorzijde is circa 8 m² groot en heeft openslaande deuren met een Frans balkon. De ruime slaapkamer aan de achterzijde, circa 14 m² biedt plaats aan een groot tweepersoonsbed en een royale garderobekast.
+
+De badkamer is in 2023 gerenoveerd en uitgevoerd met een ligbad met douche, hangend toilet en wastafel. De naastgelegen wasruimte is een prettige extra: hier is plek voor wasmachine, droger en aanvullende opbergruimte. Ook de cv-installatie is hier netjes weggewerkt.
+
+Op de bovenste verdieping wacht nog een verrassend lichte zolderkamer met groot dakraam. Deze ruimte is uitstekend te gebruiken als derde slaapkamer, werkkamer of hobbyruimte. Wie verder vooruitkijkt, ziet bovendien de mogelijkheid om met een dakkapel extra wooncomfort en indelingsmogelijkheden te creëren, wat vergunningsvrij mogelijk is.
+
+Omgeving
+De ligging is praktisch en rustig tegelijk. Winkelcentrum De Dukaat ligt op korte afstand en biedt alles voor de dagelijkse boodschappen, waaronder een Jumbo, viswinkel, slager, drogist en diverse speciaalzaken. Voor gezinnen is het nabijgelegen Forintplantsoen een fijne plek om buiten te spelen of even de buurt in te wandelen.
+
+Ook de bereikbaarheid is uitstekend. Met de auto bereik je de A4 en A9 binnen circa 10 minuten. Tramhalte Ecuplein ligt op loopafstand, waardoor je snel en eenvoudig richting de stad reist. Er is sprake van rust en ruimte in de woonomgeving, maar ook uitstekende bereikbaarheid. 
+
+Erfpacht
+De erfpacht is eeuwigdurend afgekocht. Dat betekent dat er geen periodieke canonbetaling meer verschuldigd is: een aantrekkelijk en waardevast voordeel voor de toekomstige eigenaar.
+
+Bijzonderheden
+- Energielabel A
+- Erfpacht eeuwigdurend afgekocht
+- Gerenoveerd in 2023
+- Mogelijkheid tot het plaatsen van een dakkapel
+- Tuin van ruim 40m² met veel zon
+- Parkeren voor de deur met parkeervergunningsysteem
+- Winkelcentrum de Dukaat op loopafstand gelegen
+- Per direct beschikbaar
+
+DISCLAIMER
+Deze advertentie is met zorg samengesteld en gebaseerd op informatie die op het moment van schrijven beschikbaar was voor de makelaar. Desondanks kunnen er onbedoelde onjuistheden in staan en kunnen de vermelde afmetingen (marginaal) afwijken. Aan de inhoud van deze advertentie kunnen geen rechten worden ontleend. Het is de verantwoordelijkheid van de koper om zelf onderzoek te doen naar zowel de staat van het object als de gebruiksmogelijkheden.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Mitchel Mense</strong> · Koops Makelaardij Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 63</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/231/084/632_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/678_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/761_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/654_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/742_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/765_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/763_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/689_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/682_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/681_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/685_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/782_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/676_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/644_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/713_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/701_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/638_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/798_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/686_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/783_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/743_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/649_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/778_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/656_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/684_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/757_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/655_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/749_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/698_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/784_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/637_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/738_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/663_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/677_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/772_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/667_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/762_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/639_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/646_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/084/683_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

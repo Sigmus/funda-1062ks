@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesbosstraat 36 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Lesbosstraat 36</h1>
+  <p class="sub">
+    <span>1060 SW Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/230/701/371_1440x960.jpg" alt="Lesbosstraat 36 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">47 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€700.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.636/m²
+    </div>
+    <div class="chips">
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">151 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2003</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-lesbosstraat-36/44493552/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 700.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.636</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2003</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>151 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>129 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>532 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, dubbele Washbasin, Bathtub, en toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Zonnepanelen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Gedeeltelijke Underfloor heating en warmtepomp</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN G 4623</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>129 m²</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>43 m² (8,35 m deep en 5,10 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidwesten bereikbaar via achterom</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>On own property</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruimte, comfort en een fijne ligging komen samen in deze uitstekend ingedeelde eengezinswoning in de populaire wijk De Aker. De woning beschikt over een lichte woonkamer met open keuken, vier volwaardige slaapkamers, een zonnige tuin op het zuidwesten en een balkon op de bovenste verdieping. Een ideale gezinswoning met volop leefruimte, gelegen in een groene en kindvriendelijke omgeving met alle voorzieningen binnen handbereik.
+
+*English translation below*
+
+Wist je dat je ook zelf een bezichtiging in kan plannen? Klik op de oranje button en ontvang direct een link om een afspraak in te plannen. 
+
+INDELING 
+Via de voorzijde betreed je deze sfeervolle en goed ingedeelde eengezinswoning. In de hal bevindt zich het separate toilet met fonteintje en heb je toegang tot de ruime woonkamer.
+
+Zodra je de woonkamer binnenstapt, word je direct verrast door de prettige lichtinval. Dankzij de grote raampartijen aan de achterzijde en de lichtstraat in de uitbouw wordt de ruimte overspoeld met natuurlijk daglicht en geniet deze van een open en lichte uitstraling. De woonkamer biedt volop mogelijkheden voor het creëren van een royale zithoek waar je heerlijk kunt ontspannen, terwijl er daarnaast nog veel ruimte is voor een gezellige eethoek om uitgebreid te tafelen met familie en vrienden. Door de praktische indeling van de ruimte is er bovendien een fijne plek gerealiseerd voor een thuiswerk- of studiehoek, ideaal voor wie wonen en werken graag combineert. De woonkamer is opvallend ruim en biedt een uitstekende basis voor diverse indelingsmogelijkheden.
+
+De woonkamer staat in open verbinding met de ruime keuken, wat zorgt voor een gezellige en uitnodigende leefruimte. De keuken is uitgevoerd in lichte houttinten, wat een warme en tijdloze uitstraling geeft. Daarnaast beschikt de keuken over alle benodigde inbouwapparatuur, waaronder een oven, magnetron, inductiekookplaat met afzuigkap, vaatwasser, spoelbak en een koel-/vriescombinatie. Dankzij de vele kast- en laderuimtes is er bovendien meer dan voldoende opbergruimte aanwezig voor al je keukenbenodigdheden. Vanuit de keuken heb je een leuk uitzicht op de rustige Lesbosstraat, wat bijdraagt aan het prettige woongevoel.
+
+Schuif de glazen pui open en stap zo de heerlijke tuin in. Op zonnige dagen kan de pui voor tweederde worden geopend, waardoor binnen en buiten naadloos in elkaar overlopen en de tuin een verlengstuk van de woonkamer wordt. De tuin is gelegen op het zuidwesten, dus hier kan je optimaal genieten van het zonnetje. De tuin is voorzien van een ruime berging, ideaal om je tuin spullen in op te bergen en eventueel de fietsen te plaatsen. 
+
+Via de trap bereik je de eerste verdieping. De overloop geeft toegang tot alle vertrekken op deze woonlaag. Hier bevinden zich drie goed bemeten slaapkamers, die allemaal voldoende ruimte bieden voor een tweepersoonsbed en kastruimte.
+De badkamer is uitgevoerd in lichte kleurtinten en beschikt over een dubbele wastafel, toilet, ligbad en een separate douchehoek. Een complete en verzorgde ruimte met alles wat je nodig hebt.
+
+Via de vaste trap bereik je de tweede verdieping, een verrassend ruime toevoeging aan de woning. Hier vind je een praktische wasruimte met extra bergruimte en opberghok, ideaal voor het opbergen van spullen. De ruimte biedt de mogelijkheid voor het realiseren van een vijfde slaapkamer of tweede badkamer.
+
+Daarnaast bevindt zich op deze verdieping de vierde slaapkamer. Deze lichte slaapkamer biedt volop ruimte voor een tweepersoonsbed en een royale kastenwand. De openslaande deuren geven direct toegang tot het balkon, wat zorgt voor extra lichtinval en een heerlijk ruimtelijk gevoel.
+
+DUURZAAMHEID 
+De woning is volledig gasloos en klaar voor de toekomst. Op het dak liggen 10 zonnepanelen en een warmtepomp zorgt efficiënt voor zowel verwarming als warm water. De begane grond is voorzien van comfortabele vloerverwarming, terwijl de verdiepingen zijn uitgerust met convectoren. Dankzij deze duurzame voorzieningen zijn de energiekosten bijzonder laag.
+
+OMGEVING 
+De Lesbosstraat is gelegen in de geliefde De Aker, een ruim opgezette en groene woonwijk met diverse speelvoorzieningen en alle dagelijkse voorzieningen binnen handbereik. Op loopafstand bevindt zich het pittoreske Sloten en winkelcentrum Dukaat met onder andere een supermarkt, speciaalzaken, een apotheek en gezondheidscentrum. Daarnaast zijn er meerdere basisscholen, sportverenigingen en recreatiemogelijkheden in de directe omgeving.
+
+Voor ontspanning en natuur liggen de ecostrook langs de Ringvaart, de Lutkemeerpolder en de Nieuwe Meer in het Amsterdamse Bos op korte afstand. Ook winkelcentrum Osdorpplein, Theater De Meervaart, de bibliotheek en de diverse horecagelegenheden van Westmarket zijn eenvoudig bereikbaar.
+
+De bereikbaarheid is uitstekend. Met de auto zijn de A4, A5, A9 en A10 binnen enkele minuten bereikbaar en ook Schiphol ligt op slechts 15 minuten rijden. Daarnaast zorgen tram 1 en diverse busverbindingen voor een snelle verbinding naar onder meer het centrum van Amsterdam, Station Lelylaan, Station Sloterdijk en Schiphol.
+
+Een ideale woonomgeving die rust, groen en uitstekende voorzieningen combineert met een centrale ligging.
+
+PARKEREN
+De huidige eigenaren beschikken niet over een auto en hebben ervoor gekozen de voormalige parkeerplaats bij de tuin te betrekken, waardoor er extra buitenruimte is ontstaan. Mocht je wel behoefte hebben aan een eigen parkeerplek, dan is deze op eenvoudige wijze weer te realiseren. Zo creëer je gemakkelijk een eigen oprit op eigen terrein.
+
+ERFPACHT
+De woning is gelegen op gemeentelijke erfpachtgrond en deze is afgekocht t/m 31-01-2049.
+
+BIJZONDERHEDEN 
+- Woonoppervlakte circa. 151m2
+- Glazen pui van vloer tot plafond die de tuin met de woonkamer verbindt.
+- Zonnige tuin gelegen op het zuidwesten
+- Vier ruime slaapkamers, eenvoudig uit te breiden naar vijf
+- De woning is instapklaar en zeer goed onderhouden
+- Energielabel A 
+- Woning is voorzien van 10 zonnepanelen en een warmtepomp waardoor de energiekosten bijzonder laag zijn
+- Vloerverwarming op de begane grond
+- De uitbouw heeft een verkoelend groen dak
+- Bouwjaar 2003
+- Oplevering in overleg
+
+DISCLAIMER
+Deze informatie is met zorg samengesteld. Aan de inhoud kunnen echter geen rechten worden ontleend. Alle opgegeven maten en oppervlakten zijn indicatief. Een koper heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Wij adviseren een eigen makelaar in te schakelen.
+
+NEN-CLAUSULE
+De gebruiksoppervlakte is berekend conform de door de branche vastgestelde NEN 2580-norm. De oppervlakte kan derhalve afwijken van vergelijkbare panden en/of oude referenties. Dit heeft vooral te maken met deze (nieuwe) rekenmethode. Koper verklaart voldoende te zijn geïnformeerd over de hiervoor gemelde normering.
+
+ENGLISH TRANSLATION
+
+Space, comfort and an excellent location come together in this well designed family home situated in the popular De Aker district. The property features a bright living room with an open plan kitchen, four generously sized bedrooms, a sunny southwest facing garden, and a balcony on the top floor. An ideal family home offering plenty of living space, located in a green and child friendly neighbourhood with all amenities within easy reach. 
+
+Did you know that you can also schedule a viewing yourself? Simply click the orange button and receive a direct link to arrange an appointment.
+
+LAYOUT
+You enter this charming and well designed family home through the front entrance. The hallway provides access to a separate toilet with washbasin and leads to the spacious living room.
+
+As soon as you step into the living room, you are immediately struck by the abundance of natural light. Thanks to the large rear windows and the skylight in the extension, the space is flooded with daylight, creating an open and airy atmosphere. The living room offers ample possibilities for a generous seating area where you can relax, while still leaving plenty of room for a cosy dining area to enjoy meals with family and friends. The practical layout also provides an ideal space for a home office or study area, perfect for combining living and working. The living room is exceptionally spacious and offers a great foundation for a variety of interior arrangements.
+
+The living room seamlessly connects to the spacious open kitchen, creating a warm and inviting living area. Finished in light wood tones, the kitchen has a timeless and welcoming appearance. It is fully equipped with built in appliances, including an oven, microwave, induction hob with extractor hood, dishwasher, sink, and fridge freezer combination. In addition, the many cupboards and drawers provide ample storage space for all your kitchen essentials. From the kitchen, you enjoy a pleasant view of the quiet Lesbosstraat, adding to the home&#x27;s attractive atmosphere.
+
+Open the glass sliding doors and step directly into the wonderful garden. On sunny days, the doors can be opened by two-thirds, allowing the indoor and outdoor spaces to blend seamlessly and making the garden a true extension of the living room. The garden faces southwest, enabling you to enjoy the sun throughout the day. It also features a spacious storage shed, ideal for storing garden equipment and bicycles.
+
+The staircase leads to the first floor. The landing provides access to all rooms on this level. Here you will find three well proportioned bedrooms, each offering sufficient space for a double bed and wardrobes.
+
+The bathroom is finished in light colours and features a double washbasin, toilet, bathtub, and a separate shower. A complete and well maintained space equipped with everything you need.
+
+A fixed staircase leads to the second floor, a surprisingly spacious addition to the home. Here you will find a practical laundry room with additional storage space and a separate storage closet, ideal for keeping household items neatly organised. This area also offers the possibility of creating a fifth bedroom or a second bathroom.
+
+The fourth bedroom is also located on this floor. This bright room offers ample space for a double bed and a large wardrobe. French doors provide direct access to the balcony, bringing in extra natural light and creating a pleasant sense of space.
+
+SUSTAINABILITY
+The property is fully gas-free and future proof. Ten solar panels have been installed on the roof, and a heat pump efficiently provides both heating and hot water. The ground floor benefits from comfortable underfloor heating, while the upper floors are fitted with convectors. These sustainable features contribute to exceptionally low energy costs.
+
+LOCATION
+Lesbosstraat is situated in the highly sought-after De Aker neighbourhood, a spacious and green residential area with several playgrounds and all daily amenities within easy reach. Within walking distance lies the picturesque village of Sloten and the Dukaat shopping centre, offering a supermarket, specialty shops, a pharmacy and a health centre. Several primary schools, sports clubs and recreational facilities are also located nearby.
+
+For nature and outdoor activities, the ecological zone along the Ringvaart canal, the Lutkemeerpolder and the Nieuwe Meer in the Amsterdamse Bos are all within close proximity. Osdorpplein shopping centre, De Meervaart Theatre, the public library and the various restaurants and cafés at Westmarket are also easily accessible.
+
+Accessibility is excellent. By car, the A4, A5, A9 and A10 motorways can be reached within minutes, while Schiphol Airport is only a 15-minute drive away. In addition, tram line 1 and various bus connections provide quick access to Amsterdam city centre, Lelylaan Station, Sloterdijk Station and Schiphol Airport.
+
+This is an ideal residential environment that combines tranquillity, greenery and excellent amenities with a central location.
+
+PARKING
+The current owners do not own a car and have chosen to incorporate the former parking space adjacent to the garden into the outdoor area, creating additional garden space. Should you require private parking, it can easily be reinstated, allowing you to create your own driveway on private land.
+
+LEASEHOLD
+The property is situated on municipal leasehold land. The leasehold has been prepaid until 31 January 2049.
+
+-PARTICULARS
+-Living area approximately 151 m²
+-Floor-to-ceiling glass façade connecting the garden with the living room
+-Sunny southwest-facing garden
+-Four spacious bedrooms, with the possibility to create a fifth bedroom
+-Move-in ready and exceptionally well maintained
+-Energy label A
+-Equipped with 10 solar panels and a heat pump, resulting in very low energy costs
+-Underfloor heating on the ground floor
+-The extension features a cooling green roof
+-Built in 2003
+-Transfer date in consultation
+
+DISCLAIMER
+This information has been compiled with due care. However, no rights can be derived from its contents. All measurements and surface areas are indicative. Buyers are responsible for conducting their own investigations into matters that may be important to them. We recommend engaging your own real estate agent.
+
+NEN CLAUSE
+The usable floor area has been calculated in accordance with the industry-standard NEN 2580 measurement guidelines. As a result, the stated surface area may differ from comparable properties and/or older references, mainly due to this method of measurement. The buyer declares to have been sufficiently informed regarding the aforementioned standard.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Daphne Haakman</strong> · La Maison Makelaars &amp; Taxateurs B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 47</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/230/701/371_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/366_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/376_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/379_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/216_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/375_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/238_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/215_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/394_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/368_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/401_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/277_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/404_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/380_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/302_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/322_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/355_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/393_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/402_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/399_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/388_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/805/397_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/405_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/391_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/369_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/387_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/396_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/381_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/374_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/728/405_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/367_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/728/217_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/392_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/406_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/389_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/721/361_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/403_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/397_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/400_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/395_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/382_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/384_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/390_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/373_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/701/407_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

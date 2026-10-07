@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akoleienstraat 8-4 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Akoleienstraat 8-4</h1>
+  <p class="sub">
+    <span>1016 LN Amsterdam</span>
+    <span>·</span>
+    <span>Bloemgrachtbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/424/726_1440x960.jpg" alt="Akoleienstraat 8-4 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">36 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€730.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.952/m² · 3.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.3 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">105 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1905</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-akoleienstraat-8-4/80976895/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 730.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.952</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 306,86 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1905</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht en gedeeltelijk gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>105 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>278 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>4e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha (gas-fired combi boiler uit 2024, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM L 9416</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>City centre</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 306,86 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">- English tekst below -
+
+WONINGDELERS OPGELET!
+
+Op een rustige zijstraat van de Rozengracht, midden in de geliefde Jordaan, bevindt zich dit ruime appartement nabij de Westertoren. Wat deze woning extra bijzonder maakt, is de aanwezigheid van een vergunning voor vier onzelfstandige woonruimten!
+
+Het appartement, gelegen op eigen grond, maakt deel uit van een kleinschalig complex bestaande uit een bedrijfsruimte op de begane grond met in totaal vijf bovengelegen woningen. In 2009 is de fundering vernieuwd.
+
+Een werkelijk unieke locatie! Niet alleen bevinden zich diverse winkels in de directe omgeving, maar ook gezellige restaurants en cafés. De populaire zaterdagmarkt op de Lindengracht ligt op loopafstand. Het Anne Frank Huis en de prachtige Westerkerk bereik je binnen enkele minuten, evenals het Westerpark, het Vondelpark en het Museumplein.
+Daarnaast bevinden zich scholen, kinderdagverblijven en sportvoorzieningen in de directe omgeving.
+Ook de bereikbaarheid is uitstekend, met tram-, bus-, metro- en treinverbindingen (Centraal Station) vlakbij.
+
+Ben je op zoek naar een appartement om samen te delen of juist naar een ruime woning voor een gezin, dan is dit een unieke kans!
+
+Indeling:
+Gezamenlijk trappenhuis met entree van het appartement op de 4e verdieping.
+Bij binnenkomst stap je direct de sfeervolle woonkamer met open keuken binnen. De keuken is voorzien van een koel-/vriescombinatie, vaatwasser, oven, 5-pits gasfornuis en een heetwaterkraan (Quooker). Tevens bevindt zich hier de kast met wasmachineaansluiting en de C.V.-ketel.
+
+Vanuit de woonkamer is er toegang tot de ruime badkamer, voorzien van een wastafelmeubel, toilet en inloopdouche. Naast de badkamer bevindt zich één van de vier slaapkamers.
+De overige drie slaapkamers grenzen aan de royale hal, die beschikt over een praktische inbouwkast.
+
+Bijzonderheden:
+* woonoppervlakte ca. 105 m2;
+* voormalig pakhuis, waardoor de stahoogte maximaal 2.03m bedraagt;
+* verwarming- en warmwatervoorziening middels een C.V.-ketel (Remeha, 2024);
+* gelegen op eigen grond, dus geen erfpacht;
+* fundering vernieuwd in 2009;
+* energielabel C afgegeven;
+* betaald parkeren en via vergunningstelsel (Centrum-2b). Meer informatie hierover vind je op de website van de gemeente Amsterdam; 
+* de actieve VvE Akoleienstraat 8 wordt professioneel beheerd door Van Roemburg VvE beheer;
+* de maandelijkse servicekosten bedragen € 306,86.
+
+Is je interesse gewekt? Wij maken graag een bezichtigingsafspraak met je!
+
+Vraagprijs € 730.000,-- k.k.
+De tussen verkoper en koper gesloten koopovereenkomst komt pas tot stand indien beide partijen schriftelijk de koopakte hebben ondertekend.
+
+Aanvaarding in overleg.
+-----------------
+ATTENTION HOME SHARERS!
+
+On a quiet side street off the Rozengracht, in the heart of the beloved Jordaan district, you will find this spacious apartment near the Westertoren. What makes this property particularly unique is that it comes with a permit for four non-self-contained residential units!
+
+The apartment is situated on freehold land and forms part of a small-scale complex consisting of a commercial space on the ground floor and a total of five apartments above. The foundation was renewed in 2009.
+
+A truly unique location! Not only are there various shops in the immediate vicinity, but also a wide selection of charming restaurants and cafés. The popular Saturday market on the Lindengracht is within walking distance. The Anne Frank House and the beautiful Westerkerk can be reached within minutes, as well as Westerpark, Vondelpark and Museumplein.
+In addition, schools, daycare centres and sports facilities are all located nearby.
+Accessibility is excellent as well, with tram, bus, metro and train connections (including Amsterdam Centraal) close at hand.
+
+Whether you are looking for an apartment to share with others or a spacious family home, this is a unique opportunity!
+
+Layout:
+Shared staircase with the apartment entrance located on the fourth floor.
+
+Upon entering, you step directly into the inviting living room with open-plan kitchen. The kitchen is equipped with a fridge/freezer combination, dishwasher, oven, 5-burner gas stove and a boiling water tap (Quooker). There is also a utility cupboard housing the washing machine connection and the central heating boiler.
+
+From the living room, there is access to the spacious bathroom, fitted with a washbasin cabinet, toilet and walk-in shower. Next to the bathroom is one of the four bedrooms.
+The other three bedrooms are connected to the generous hallway, which also features a practical built-in storage cupboard.
+
+Details:
+* living area approx. 106m2; 
+* Former warehouse, resulting in a maximum ceiling height of 2.03 metres;
+* heating and hot water supply by C.V. boiler (Rehema, 2024);
+* eigen grond/own land, so no leasehold;
+* foundation renewed in 2009;
+* energy label C issued;
+* paid parking and according to permit system (Centrum-2b). More information about this can be found on the website of the municipality of Amsterdam;
+* The active VvE Akoleienstraat 8 is professionally managed by Van Roemburg VvE beheer;
+* The monthly service costs are € 306.86.
+
+Is your interest aroused? We are happy to make a viewing appointment with you!
+
+Asking price € 730,000.- k.k.
+The purchase agreement concluded between the seller and the buyer is only concluded if both parties have signed the deed of sale in writing.
+
+Acceptance in consultation.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 1 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>27 Huis Makelaars BV</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 36</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/424/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/718_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/697_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/730_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/703_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/733_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/738_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/715_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/699_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/745_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/746_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/749_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/739_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/747_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/743_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/424/744_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

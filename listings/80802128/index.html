@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pieter Calandlaan 369 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Pieter Calandlaan 369</h1>
+  <p class="sub">
+    <span>1068 NJ Amsterdam</span>
+    <span>·</span>
+    <span>Osdorp-Zuidoost</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/232/388/184_1440x960.jpg" alt="Pieter Calandlaan 369 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">49 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€375.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.688/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">80 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1965</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-calandlaan-369/80802128/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 375.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.688</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 284,24 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonnette</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1965</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>80 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>249 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND D 5749</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 31-05-2036)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 98,92 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 284,24 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">** English translation below **
+
+Heerlijk licht en praktisch ingedeeld maisonnette appartement met 3 slaapkamers en balkon op het zuiden!
+
+Dit recent gerenoveerde appartement bevindt zich in een goed onderhouden galerijflat aan de Pieter Calandlaan, op loopafstand van het winkelcentrum Osdorpplein en de Sloterplas. Ideaal voor starters, expats en kleine gezinnen die op zoek zijn naar een instapklare woning.
+
+Indeling:
+Verzorgde gesloten entree met intercomsysteem, brievenbussen en de lift naar de 1e etage. Via de galerij bereik je de entree van het appartement. 
+
+De lichte woonkamer is gelegen aan de achterzijde en is voorzien van grote raampartijen en toegang tot een heerlijk balkon op het zuiden. De volledig nieuwe keuken is gelegen aan de voorzijde en is praktisch ingericht met diverse inbouwapparatuur, waaronder een oven, vaatwasser, koelkast, vriezer en een inductiekookplaat met afzuigkap – ideaal voor wie van koken houdt. Op deze etage verder een separate toiletruimte met hangend toilet en een fonteintje. 
+
+Trap naar de bovengelegen etage met moderne badkamer die is uitgerust met een inloopdouche en een wastafelmeubel. Verder op deze verdieping drie slaapkamers. De ruime hoofdslaapkamer biedt plek voor een tweepersoonsbed en kastruimte en de twee kleinere slaapkamers zijn zeer geschikt als kinderkamer en/of werkkamer. Een kast op de overloop biedt plaats voor de wasmachine en droger. 
+
+Op de begane grond bevindt zich een eigen berging, ideaal voor fietsen en extra opslag.
+
+Locatie:
+In de directe omgeving vind je diverse faciliteiten, zoals winkelcentrum het Sierplein met 2 grote supermarkten en de wekelijkse markt en het Osdorpplein met naast een groot winkelaanbod tevens theater Meervaart. In de directe omgeving kunt u heerlijk ontspannen, de woning is gelegen op loopafstand van de Sloterplas met een prachtig stadsstrand en een wandelboulevard. Recreëren kunt u tevens aan de rand van de Nieuwe Meer en het nabijgelegen Amsterdamse Bos die gemakkelijk te bereiken zijn met de fiets. Ook bevinden zich in de omgeving meerdere sportverenigingen.
+
+Bereikbaarheid:
+De bereikbaarheid is uitstekend. Op de fiets bent u binnen een half uur in het centrum van Amsterdam. Met de auto rijdt u binnen enkele minuten de A4, A5, A9 en A10 op. Buslijn 369 brengt u rechtstreeks naar Schiphol en Station Sloterdijk, buslijn 63 brengt u naar Station Lelylaan en de tramhalte voor tram 1 en 17 naar het centrum van Amsterdam liggen op korte loopafstand.
+
+Kortom, een instapklaar appartement met een prettige indeling, zonnig balkon en een uitstekende ligging – direct beschikbaar en klaar om zo snel te betrekken!
+
+Bijzonderheden:
+•	Woonoppervlakte: 80,2 m² (conform NEN2580, meetrapport beschikbaar)
+•	Privéberging op de begane grond van 5,6 m²
+•	Gelegen in een goed onderhouden galerijflat met lift
+•	3 slaapkamers
+•	Balkon gelegen op het zuiden
+•	Energielabel B
+•	Goede bereikbaarheid met OV en auto
+•	Ideaal voor starters en kleine gezinnen
+•	Erfpacht met vaste canon van € 98,92 per jaar (einddatum erfpacht: 31-05-2036)
+•	Professioneel beheerde VvE
+•	Servicekosten €284,24,- per maand, inclusief voorschot op de stookkosten (blokverwarming)
+•	Niet-zelfbewoningsclausule van toepassing
+•	Notariskeuze koper (binnen Groot-Amsterdam, KNB-model)
+•	Oplevering in overleg, kan snel
+
+Enthousiast geworden? Neem dan contact met ons op voor een bezichtiging. We laten je deze woning graag zien!
+
+Bright and practical duplex apartment with 3 Bedrooms and south-facing balcony!
+
+This recently renovated duplex apartment is situated in a well-maintained apartment building on Pieter Calandlaan, within walking distance of Osdorpplein shopping centre and the Sloterplas recreational lake. An ideal home for first-time buyers, expats, and small families looking for a turn-key property.
+
+Layout:
+The building features a well-maintained, secure entrance with an intercom system, mailboxes, and an elevator to the first floor. The front door of the apartment can be reached via the gallery.
+
+The bright living room is located at the rear of the apartment and benefits from large windows and access to a lovely south-facing balcony. The brand-new kitchen is situated at the front and is practically designed with various built-in appliances, including an oven, dishwasher, refrigerator, freezer, and induction hob with extractor hood – perfect for those who enjoy cooking. Also on this floor is a separate toilet with a wall-mounted WC and washbasin.
+
+A staircase leads to the upper floor, where you will find a modern bathroom fitted with a walk-in shower and vanity unit. This level offers three bedrooms. The spacious master bedroom has space for a double bed and wardrobe, while the two smaller bedrooms are ideal as children&#x27;s rooms, guest rooms, and/or a home office. A cupboard on the landing provides space for a washing machine and tumble dryer.
+
+On the ground floor, there is a private storage room, ideal for bicycles and additional storage.
+
+Location:
+The apartment is conveniently located near a wide range of amenities, including Sierplein shopping centre with two large supermarkets and a weekly market, and Osdorpplein shopping centre, which offers an extensive range of shops as well as the Meervaart theatre. The surrounding area offers excellent opportunities for relaxation and recreation. The property is within walking distance of the Sloterplas lake, featuring a beautiful urban beach and promenade. Additional recreational areas include the Nieuwe Meer lake and the nearby Amsterdamse Bos, both easily accessible by bicycle. Several sports clubs and facilities can also be found in the immediate vicinity.
+
+Accessibility:
+The property enjoys excellent transport connections. Amsterdam city centre can be reached by bicycle in approximately 30 minutes. By car, the A4, A5, A9, and A10 motorways are accessible within minutes. Bus line 369 provides direct connections to Schiphol Airport and Sloterdijk Station, while bus line 63 connects to Lelylaan Station. Tram stops for lines 1 and 17, offering direct access to Amsterdam city centre, are within short walking distance.
+
+In Summary, a move-in-ready apartment with a practical layout, sunny south-facing balcony, and an excellent location. Available at short notice and ready for immediate occupation!
+
+Key Features:
+•	Living area: 80,2 m² (measured in accordance with NEN 2580; measurement report available)
+•	Private storage room on the ground floor of 5,6 m²
+•	Located in a well-maintained apartment building with elevator
+•	3 bedrooms
+•	South-facing balcony
+•	Energy label B
+•	Excellent accessibility by public transport and car
+•	Ideal for first-time buyers and small families
+•	Leasehold property with a fixed annual ground rent of €98.92 (leasehold end date: 31-05-2036)
+•	Professionally managed Homeowners’ Association (VvE)
+•	Service charges: €284.24 per month, including an advance payment for heating costs (block heating system)
+•	Non-owner-occupancy clause applies
+•	Buyer may choose the notary (within Greater Amsterdam, KNB model)
+•	Completion by mutual agreement; quick transfer possible
+
+Interested? Please contact us to arrange a viewing. We would be happy to show you this home!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Interhouse makelaars Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 49</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/232/388/184_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/196_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/245_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/286_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/240_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/202_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/263_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/269_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/251_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/247_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/257_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/197_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/236_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/260_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/209_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/290_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/278_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/239_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/180_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/246_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/215_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/224_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/228_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/201_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/193_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/243_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/293_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/233_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/237_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/287_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/188_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/175_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/213_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/273_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/235_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/223_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/272_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/227_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/181_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/195_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/270_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/211_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/256_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/183_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/280_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/388/217_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frederik Hendrikstraat 4-H · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Frederik Hendrikstraat 4-H</h1>
+  <p class="sub">
+    <span>1052 HT Amsterdam</span>
+    <span>·</span>
+    <span>Frederik Hendrikbuurt-Noord</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/034/726_1440x960.jpg" alt="Frederik Hendrikstraat 4-H — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">35 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€800.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.602/m² · 3.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.6 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">93 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1910</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-frederik-hendrikstraat-4-h/44565689/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Aanvaarding</dd></div>
+        <div class="frow"><dt>In overleg</dt><dd>Vraagprijs</dd></div>
+        <div class="frow"><dt>€ 800.000 kosten koper</dt><dd>Vraagprijs per m²</dd></div>
+        <div class="frow"><dt>€ 8.602</dt><dd>Status</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Ground-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1910</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>93 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>244 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>Begane grond</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Combiketel uit 2013, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM Q 8915</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijk eigendom belast met erfpacht (einddatum erfpacht: 31-12-2061)</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>City centre en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Een uniek en bijzonder sfeervolle benedenwoning met een beschutte en zonnige tuin en maar liefst drie slaapkamers in de woning zelf. En dan de tuinstudio! Dit is echt een pareltje. Deze is compleet zelfvoorzienend, met aangrenzend een eigen terras. Je kunt er alle kanten mee op. Je kunt er zelfs met een gezin overnachten met vier slaapplekken, een keuken, een badkamer en een uitklapbare eethoek. Zo heb je vakantie in eigen tuin. Het is ook perfect voor een studerend kind, een au-pair, of voor ouders die langskomen en blijven overnachten. En natuurlijk kun je het ook als kantoor of atelierruimte gebruiken. Alles is op maat gemaakt en met mooie materialen vervaardigd. Een lust voor het oog. Als kers op de taart kan je via een ondergronds buizensysteem communiceren met deze tuinstudio.
+Het totale woonoppervlak is 93 m2 waarvan 81 m2 voor de woning en 12 m2 voor de tuinstudio is.
+
+De woning is uitgebouwd in 2026 en voorzien van een nieuwe keuken. Ook zijn er meerdere kamers gecreëerd. De keuken met ochtendzon is een fijne plek om de dag te beginnen. En als de dag vordert is het heerlijk toeven aan de eettafel richting tuin of het terras dat hieraan grenst. De keuken is ruim en is voorzien van Siemens inbouwapparatuur en heeft bovendien veel kastruimte. 
+De woning is nu ingericht voor een gezin met haar drie slaapkamers, maar je kunt ook de indeling aanpassen en deze kamers weer bij de woonruimte betrekken.
+
+Op een zonnige dag is de zon in de tuin vanaf ongeveer 13.00 uur en dan is er tot laat op de dag ergens wel een zonnig plekje te vinden om te eten, een boek te lezen of voor kinderen om te kunnen spelen. 
+Het huis heeft bovendien een fijne sfeer en je kunt merken dat er met heel veel plezier in is gewoond. Een woning als deze is er maar één van.
+
+Van harte welkom voor een bezichtiging.
+
+Indeling
+Entree met eigen voordeur. Je komt in de hal met toegang tot de een ruime kast met wasmachine en droger en extra bergruimte. Hier is ook een toilet. En je hebt er de deur naar de woonkamer met open keuken. 
+De keuken is aan de straatkant. In het midden is een knusse zithoek. 
+De badkamer is in het midden van de woning en is voorzien van een ligbad en een wastafel, deze dateren uit 2013.
+Er zijn twee kinderkamers die ook vanuit de woonkamer te bereiken zijn en grenzend aan de tuin is de grote slaapkamer met openslaande deuren naar de tuin.
+In de uitbouw staat nu een eettafel en hier zijn ook openslaande deuren naar een breed terras en de tuin met tuinhuis.
+
+Omgeving
+De woning is zeer centraal gelegen. De Frederik Hendrikbuurt staat bekend om de ideale combinatie van rust en levendigheid. De straat heeft een paar mooie winkels, een grote supermarkt en verschillende fijne horecaplekken. Ook de Jordaan, het bruisende culturele Westerpark, de gezellige Haarlemmerstraat, leuke cafés en restaurants, het Marnixbad, verschillende scholen, kinderdagverblijven en speeltuinen liggen allemaal op loopafstand. Aan de overkant is zelfs een goede middelbare school. 
+Ook de bereikbaarheid is uitstekend. Met de fiets ben je met 10 minuten fietsen bij het Centraal Station of het Leidseplein. Ook met een tram of de bus die voor de deur stoppen, ben je in binnen enkele minuten bij het Amsterdam Centraal Station, de binnenstad of het Museumplein. Met een parkeervergunning is parkeren direct voor de deur mogelijk of in de nieuwe overdekte parkeergarage aan Nassaukade. Naar de A10 is het ongeveer 10 minuten rijden.
+
+Erfpacht en VvE
+De erfpacht is afgekocht tot 2062 en voor de periode daarna loopt de overstapaanvraag met de gunstige voorwaarden. Daarnaast verkeert het pand aan de buitenzijde in goede staat en is er een actieve en gezonde VvE met een meerjarenonderhoudsplan. 
+
+Doelgroep
+Het appartement is geschikt voor zeer uiteenlopende doelgroepen. Mensen die graag een tuin willen, stellen die ruimte willen of aan huis werken, of jonge gezinnen die graag in dit geliefde stadsdeel willen blijven wonen met hun kinderen. 
+
+Kenmerken:
+- Bouwjaar 1910
+- Uitbouw woning in 2026 
+- Woonmeters 93 m2 waaronder appartement 81 m2 en tuinhuis 12 m2
+- Gemeentelijk monument 
+- Op een prachtig plekje in bruisend Westerpark
+- Erfpacht afgekocht tot 2062 en het traject loopt nog om de voorwaarden vast te klikken onder gunstige voorwaarden.
+- Servicekosten EUR 218,-
+- CV-ketel uit 2012 (Intergas)
+- Multifuncioneel zelfvoorzienende vrijstaande tuinstudio van 12 m2 (voorzien van keuken, badkamer, 4 slaapplaatsen en terras)
+- Fijne rustige tuin op het zuidwesten
+- Oplevering in overleg
+
+Disclaimer
+De op deze website getoonde vrijblijvende informatie is door ons (met zorg) samengesteld op basis van gegevens van de verkoper (en/of derden). Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegrond(en), not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 35</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/034/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/691_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/701_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/693_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/703_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/697_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/698_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/716_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/706_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/715_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/718_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/694_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/713_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/034/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/888/842_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uiterwaardenstraat 4-1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Uiterwaardenstraat 4-1</h1>
+  <p class="sub">
+    <span>1079 BW Amsterdam</span>
+    <span>·</span>
+    <span>Rijnbuurt-Oost</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/230/479/277_1440x960.jpg" alt="Uiterwaardenstraat 4-1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">27 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€745.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.602/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">98 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1961</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-uiterwaardenstraat-4-1/44497796/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 213 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 745.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.602</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 212,93 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1961</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>98 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>332 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha Tzerra 38C (gas-fired combi boiler uit 2017, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 10844</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 212,93 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** English text below ***
+*** This Property is listed by a MVA Certified Expat Broker***
+
+Ruim en praktisch appartement op de eerste verdieping met een woonoppervlakte van circa 98 m². De woning beschikt momenteel over een lichte woonkamer, drie slaapkamers, een dichte keuken, een badkamer, een separaat toilet en maar liefst drie balkons. In de onderbouw bevinden zich een ruime privéberging en een gezamenlijke fietsenstalling. Het appartement is gelegen in een goed onderhouden pand uit de beginjaren ’60. Daarnaast is de erfpacht eeuwigdurend afgekocht.
+
+Het appartement ligt aan de rustige Uiterwaardenstraat in de geliefde Rivierenbuurt: een groene, ruim opgezette wijk met een vriendelijk karakter. De ligging is zeer gunstig. Diverse winkels en restaurants bevinden zich op loopafstand en binnen tien minuten bereik je het centrum van Amsterdam. Station RAI, Station Zuid/WTC en station Amstel liggen op circa vijf minuten fietsafstand. Ook de bereikbaarheid met de auto is uitstekend dankzij de nabijheid van de A2 en A10.
+
+Indeling
+Entree op de eerste verdieping. Hal met toegang tot alle vertrekken.
+
+De lichte woonkamer bevindt zich aan de voorzijde van het appartement en biedt een prettige leefruimte met veel lichtinval en een vrij uitzicht. De royale master bedroom ligt aan de achterzijde en beschikt over een praktische inbouwkast. De tweede slaapkamer aan de voorzijde grenst aan de woonkamer en kan eenvoudig bij de woonkamer worden betrokken, waardoor een extra ruime living ontstaat (zie Ai-gemaakt foto). De huidige eigenaren hebben hier in het verleden gebruik van gemaakt. Deze kamer heeft toegang tot een balkon op het westen.
+
+De derde slaapkamer bevindt zich eveneens aan de voorzijde en biedt ook toegang tot een balkon op het westen.
+
+De centraal gelegen badkamer is voorzien van een ligbad, douche, wastafelmeubel en handdoekradiator. Het toilet is separaat.
+
+De ruime (Tulp) keuken is functioneel ingericht en voorzien van de benodigde apparatuur. Er is voldoende ruimte voor een eettafel. Tevens bevinden zich hier de aansluitingen voor wasmachine en droger. Vanuit de keuken is er toegang tot het balkon, waar zich een praktische bergkast bevindt. Ook de cv-ketel is hier gesitueerd.
+
+Berging en fietsenstalling
+In de onderbouw bevinden zich een privéberging en een gezamenlijke fietsenstalling.
+
+Erfpacht en energielabel
+Het pand is gelegen op grond in eigendom van de Gemeente Amsterdam. Voor dit appartementsrecht is de erfpacht eeuwigdurend afgekocht, waardoor er geen canon meer verschuldigd is. Het appartement beschikt over energielabel C.
+
+VvE en servicekosten
+De VvE wordt professioneel beheerd en is gezond. Alle relevante stukken zijn aanwezig, waaronder een meerjarenonderhoudsplan (MJOP), notulen en jaarrekeningen. De maandelijkse servicekosten bedragen € 212,93.
+
+Bereikbaarheid en parkeren
+In de directe omgeving kan worden geparkeerd middels een parkeervergunning voor bewoners. Voor meer informatie en eventuele wachttijden verwijzen wij naar de website van de Gemeente Amsterdam.
+
+Kortom: Een praktisch familiehuis zonder onderburen, gelegen in de geliefde Rivierenbuurt, met eeuwigdurend afgekochte erfpacht.
+
+Bijzonderheden
+•	Licht en praktisch familie appartement in de Rivierenbuurt; 
+•	Woonoppervlakte: 97,9 m² (NEN 2580 meetcertificaat aanwezig); 
+•	Gelegen op de eerste verdieping; 
+•	Ruime privéberging (circa 7 m²) en gezamenlijke fietsenstalling; 
+•	Bouwjaar: jaren ’60; 
+•	Drie slaapkamers; 
+•	Drie balkons; 
+•	Mogelijkheid tot het creëren van een grotere woonkamer; 
+•	Fundering op betonpalen; 
+•	Professioneel beheerde en gezonde VvE; 
+•	Servicekosten: € 212,93 per maand; 
+•	Erfpacht eeuwigdurend afgekocht; 
+•	Energielabel C; 
+•	Volledig voorzien van dubbel glas; 
+•	De woning wordt verkocht met een ouderdomsclausule en asbestclausule;
+•	Oplevering op korte termijn mogelijk. 
+
+Vraagprijs: € 745.000,- kosten koper
+
+Heeft deze woning je interesse gewekt en wil je komen bezichtigen?
+Maak dan gerust een afspraak via telefoonnummer 020-6240363 of via de bezichtigingsplanner.
+
+Deze informatie is met zorg samengesteld. Er wordt echter geen aansprakelijkheid aanvaard voor eventuele onvolledigheden, onjuistheden of de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft een eigen onderzoeksplicht naar alle zaken die voor hem/haar van belang zijn. De makelaar treedt op als adviseur van de verkoper. Wij adviseren je een deskundige (NVM-)makelaar in te schakelen ter begeleiding bij het aankoopproces.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Spacious and practical first-floor apartment with a living area of approximately 98 m². The property currently features a bright living room, three bedrooms, a separate kitchen, a bathroom, a separate toilet, and no fewer than three balconies. In the basement, there is a spacious private storage room and a communal bicycle storage area. The apartment is situated in a well-maintained building dating from the early 1960s. In addition, the ground lease has been bought off in perpetuity.
+
+The apartment is located on the quiet Uiterwaardenstraat in the highly sought-after Rivierenbuurt: a green and spacious neighborhood with a friendly character. The location is highly convenient, with various shops and restaurants within walking distance, while Amsterdam city center can be reached within ten minutes. Station RAI, Station Zuid/WTC, and Amstel Station are all approximately a five-minute bike ride away. Accessibility by car is also excellent due to the nearby A2 and A10 motorways.
+
+Layout
+Entrance on the first floor. Hallway with access to all rooms.
+
+The bright living room is situated at the front of the apartment and offers a pleasant living space with plenty of natural light and unobstructed views. The generous master bedroom is located at the rear and features a practical built-in wardrobe. The second bedroom at the front adjoins the living room and can easily be incorporated into the living area, creating an extra spacious living room (see AI-generated image). The current owners have made use of this layout in the past. This room also provides access to a west-facing balcony.
+
+The third bedroom is also situated at the front and likewise has access to a west-facing balcony.
+
+The centrally located bathroom is fitted with a bathtub, shower, washbasin vanity unit, and towel radiator. The toilet is separate.
+
+The spacious kitchen (Tulp kitchen) is functionally designed and equipped with the necessary appliances. There is ample room for a dining table. The connections for a washing machine and dryer are also located here. From the kitchen, there is access to the balcony, where a practical storage cupboard can be found. The central heating boiler is also situated here.
+
+Storage and bicycle parking
+In the basement, there is a private storage room and a communal bicycle storage area.
+
+Ground lease and energy label
+The property is situated on leasehold land owned by the Municipality of Amsterdam. The ground lease for this apartment right has been bought off in perpetuity, meaning no further ground rent is payable. The apartment has an energy label C.
+
+Homeowners’ association and service charges
+The homeowners’ association (VvE) is professionally managed and financially healthy. All relevant documentation is available, including a long-term maintenance plan (MJOP), meeting minutes, and annual accounts. Monthly service charges amount to €212.93.
+
+Accessibility and parking
+Resident parking is available in the immediate area through a parking permit system. For more information and possible waiting times, please refer to the website of the Municipality of Amsterdam.
+
+In short: a practical family home without downstairs neighbors, located in the popular Rivierenbuurt, with the ground lease bought off in perpetuity.
+
+Key features
+• Bright and practical family apartment in the Rivierenbuurt;
+• Living area: 97.9 m² (NEN 2580 measurement report available);
+• Situated on the first floor;
+• Spacious private storage room (approx. 7 m²) and communal bicycle storage;
+• Built in the 1960s;
+• Three bedrooms;
+• Three balconies;
+• Possibility to create a larger living room;
+• Foundation on concrete piles;
+• Professionally managed and financially healthy homeowners’ association;
+• Service charges: €212.93 per month;
+• Ground lease bought off in perpetuity;
+• Energy label C;
+• Fully fitted with double glazing;
+• The property is sold with an age clause and asbestos clause;
+• Quick delivery possible.
+
+Asking price: €745,000 costs for buyer.
+
+Has this property sparked your interest and would you like to schedule a viewing?
+Please feel free to make an appointment by calling 020-6240363 or via the viewing planner.
+
+This information has been compiled with due care. However, no liability is accepted for any inaccuracies, omissions, or consequences thereof. All stated measurements and surface areas are indicative only. Buyers have their own duty to investigate all matters that may be of importance to them. The real estate agent acts on behalf of the seller. We advise engaging a professional (NVM) real estate agent to assist you during the purchasing process.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Rappange Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 27</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/230/479/277_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/033_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/478/993_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/297_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/478/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/294_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/136_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/069_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/228_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/149_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/272_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/293_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/478/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/047_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/478/987_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/478/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/201_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/163_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/271_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/109_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/037_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/239_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/478/979_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/304_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/010_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/479/205_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

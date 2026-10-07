@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dijkgraafplein 271 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Dijkgraafplein 271</h1>
+  <p class="sub">
+    <span>1069 ES Amsterdam</span>
+    <span>·</span>
+    <span>Dijkgraafpleinbuurt</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/911/951_1440x960.jpg" alt="Dijkgraafplein 271 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">35 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€395.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €3.990/m² · 3.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.7 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">99 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1972</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-dijkgraafplein-271/44585161/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 395.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 3.990</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 369,14 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1972</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Monument</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>99 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>328 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel en lift</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>5e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>HR-glas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND G 2903</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 369,14 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">English summary below
+
+Twee woonlagen, drie slaapkamers, een balkon en genoeg ruimte om echt lekker te leven. Deze maisonnette aan het Dijkgraafplein 271 voelt ruim, praktisch en verrassend huiselijk. Precies zo’n woning waar je jezelf snel ziet wonen.
+Nieuwsgierig geworden? Plan een bezichtiging en ontdek het zelf!
+
+LIGGING
+Even boodschappen halen zonder er een halve onderneming van te maken? Dat lukt hier prima. Op het Dijkgraafplein zelf vind je onder andere een supermarkt, winkels en verschillende eetgelegenheden.
+Voor wat meer keuze ligt Osdorpplein in de buurt, met een groot aanbod aan winkels en horeca, maar ook de bibliotheek, De Meervaart en diverse sportvoorzieningen. En als je liever het groen opzoekt, liggen het Stadspark Osdorp en de Sloterplas dichtbij voor een wandeling, rondje hardlopen of gewoon even buiten zijn. Stadscentrum Osdorpplein
+
+BEREIKBAARHEID
+De rest van Amsterdam is vanuit hier goed bereikbaar. De tram stopt praktisch voor de deur en brengt je via onder andere Osdorpplein en Station Lelylaan verder richting de stad. Vanaf Lelylaan stap je eenvoudig over op trein, metro en andere tram- en busverbindingen. 
+Met de auto bereik je via de omliggende uitvalswegen gemakkelijk de Ring A10 en ook richting Schiphol, Haarlem en andere delen van de Randstad rijd je vlot weg.
+
+INDELING
+Met de lift bereik je de vijfde verdieping, waar de entree van deze fijne maisonnette zich bevindt. Je komt binnen in de hal met voldoende ruimte voor een kapstok. Aan de rechterzijde vind je het separate toilet met fonteintje en de meterkast.
+
+Vanuit de hal stap je de woonkamer binnen. Een prettige leefruimte met een praktische trapkast, toegang tot het balkon en de aangrenzende keuken. De keuken is voorzien van diverse inbouwapparatuur en staat in verbinding met de woonkamer.
+
+Via de trap in de woonkamer bereik je de tweede woonlaag, gelegen op de zesde verdieping van het complex. De overloop geeft toegang tot drie slaapkamers en de badkamer. De badkamer is compleet uitgevoerd met een tweede toilet, wastafel, douche én een apart ligbad.
+
+Op de begane grond beschikt de woning daarnaast over een eigen berging.
+
+PARKEREN
+In de directe omgeving kan op straat worden geparkeerd. Hier geldt betaald parkeren en voor bewoners bestaat de mogelijkheid om, afhankelijk van de gemeentelijke voorwaarden, een parkeervergunning aan te vragen.
+
+EIGENDOMSSITUATIE
+Volle eigendom.
+
+VERENIGING VAN EIGENAREN
+Actieve Vereniging van Eigenaars Woningen Parkeervlakken En Garages Dijkgraafplein E.O. Te Amsterdam, ingeschreven onder KVK nummer: 51893428.
+Maandelijkse bijdrage aan de VvE is € 369,14. Dit is inclusief een voorschot van € 75,- voor de stookkosten.
+
+BIJZONDERHEDEN
+• energielabel A;
+• volle eigendom;
+• externe berging op de begane grond;
+• woonoppervlakte 99 m²;
+• buitenruimte 4,80  m²;
+• externe bergruimte 4,70 m²;
+• inhoud 328,04 m³;
+• notaris: naar keuze van de koper, binnen een straal van 15 kilometer van de woning;
+• er is pas een overeenkomst indien zowel de particuliere koper en verkoper een schriftelijke koopovereenkomst hebben ondertekend;
+• verkoper behoudt zich het recht van gunning voor.
+
+Oplevering: in overleg.
+
+Voorbehoud
+De Meetinstructie is gebaseerd op de NEN2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting.
+
+Alle verkoopinformatie is met de nodige zorgvuldigheid samengesteld. Wij aanvaarden geen enkele aansprakelijkheid voor onjuist verkregen (mondelinge) informatie, onvolledigheid of anderszins, dan wel de gevolgen daarvan en wijzen de koper nadrukkelijk op zijn wettelijke onderzoeksplicht.
+
+Interesse in dit huis?
+Schakel direct jouw eigen NVM-aankoopmakelaar in.
+Jouw NVM-aankoopmakelaar komt op voor jouw belang en bespaart tijd, geld en zorgen.
+Adressen van collega NVM-aankoopmakelaars vind je op Funda.
+
+******************************************
+
+Two floors, three bedrooms, a balcony and plenty of space to truly enjoy everyday living. This maisonette at Dijkgraafplein 271 feels spacious, practical and surprisingly homely. Exactly the kind of property you can easily imagine yourself living in.
+
+Curious to see more? Schedule a viewing and discover it for yourself!
+
+LOCATION
+Need to pick up some groceries without turning it into a major expedition? No problem here. Dijkgraafplein itself offers a supermarket, various shops and several places to eat.
+
+For an even wider selection, Osdorpplein is nearby, offering a broad range of shops and restaurants, as well as the library, De Meervaart theatre and various sports facilities. If you prefer some greenery, Stadspark Osdorp and the Sloterplas are also close by, ideal for a walk, a run or simply spending some time outdoors.
+
+ACCESSIBILITY
+The rest of Amsterdam is easily accessible from here. The tram stops practically on your doorstep and takes you via, among other places, Osdorpplein and Lelylaan Station further into the city. At Lelylaan Station, you can easily transfer to trains, metro services and other tram and bus connections.
+
+By car, the nearby main roads provide easy access to the A10 ring road. Schiphol Airport, Haarlem and other parts of the Randstad can also be reached quickly and conveniently.
+
+LAYOUT
+The lift takes you to the fifth floor, where the entrance to this pleasant maisonette is located. You enter into the hallway, which offers ample space for coats and storage. On the right-hand side are the separate toilet with washbasin and the meter cupboard.
+
+From the hallway, you enter the living room. This is a comfortable living space with a practical under-stairs storage cupboard, access to the balcony and the adjoining kitchen. The kitchen is fitted with various built-in appliances and connects directly to the living room.
+
+The staircase in the living room leads to the second residential level, situated on the sixth floor of the complex. The landing provides access to three bedrooms and the bathroom. The bathroom is fully equipped with a second toilet, washbasin, shower and a separate bathtub.
+
+The property also includes a private storage unit on the ground floor.
+
+PARKING
+Street parking is available in the immediate vicinity. Paid parking applies in this area and residents may, subject to the applicable municipal conditions, apply for a parking permit.
+
+OWNERSHIP
+Freehold.
+
+HOMEOWNERS&#x27; ASSOCIATION
+Active Homeowners&#x27; Association: Vereniging van Eigenaars Woningen Parkeervlakken En Garages Dijkgraafplein E.O. Te Amsterdam, registered with the Dutch Chamber of Commerce under number 51893428.
+
+The monthly contribution to the Homeowners&#x27; Association is €369.14. This includes an advance payment of €75 for heating costs.
+
+PARTICULARS
+• Energy label A;
+• Freehold property;
+• External storage unit on the ground floor;
+• Living area: 99 m²;
+• Outdoor space: 4.80 m²;
+• External storage space: 4.70 m²;
+• Volume: 328.04 m³;
+• Civil-law notary: buyer&#x27;s choice, provided the notary is located within a 15-kilometre radius of the property;
+• An agreement is only considered concluded once both the private buyer and seller have signed a written purchase agreement;
+• The seller reserves the right of award.
+Completion: by mutual agreement.
+
+DISCLAIMER
+The Measurement Instruction is based on NEN 2580. The purpose of the Measurement Instruction is to provide a more uniform method of measuring and to give an indication of the usable floor area. The Measurement Instruction does not fully exclude differences in measurement results, for example due to differences in interpretation, rounding or limitations encountered while carrying out the measurement.
+
+All sales information has been compiled with due care. We accept no liability whatsoever for incorrectly obtained verbal information, omissions or inaccuracies of any kind, or for any consequences thereof. Buyers are expressly reminded of their statutory duty to investigate the property themselves.
+
+Interested in this property?
+Engage your own NVM purchasing agent directly.
+Your NVM purchasing agent will represent your interests and can save you time, money and unnecessary concerns.
+You can find the contact details of fellow NVM purchasing agents on Funda.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Amster Vastgoed</strong> · Amster Vastgoed</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 35</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/911/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/762_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/634_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/800_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/651_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/909_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/863_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/803_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/681_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/818_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/889_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/814_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/754_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/746_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/777_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/830_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/922_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/853_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/900_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/636_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/792_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/956_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/911/949_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

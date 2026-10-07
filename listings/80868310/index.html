@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slauerhoffstraat 64-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Slauerhoffstraat 64-2</h1>
+  <p class="sub">
+    <span>1064 TH Amsterdam</span>
+    <span>·</span>
+    <span>Dichtersbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/231/136/032_1440x960.jpg" alt="Slauerhoffstraat 64-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">30 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€389.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.403/m² · 2.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">72 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1953</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-slauerhoffstraat-64-2/80868310/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 389.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.403</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 298,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1953</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>72 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>15 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>237 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en HR-glas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND D 9339</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 31-07-2056)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-07-2056</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 298,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">ENGLISH BELOW
+
+Slauerhoffstraat 64-II, Amsterdam
+
+Wonen met ruimte, licht en een fijne flow — dit appartement voelt direct goed aan. Met drie volwaardige slaapkamers, een lichte woonkamer en zowel een loggia als een balkon, biedt deze woning alles voor comfortabel en flexibel wonen in de stad.
+
+Indeling:
+
+De indeling is overzichtelijk en praktisch opgezet, met een duidelijke scheiding tussen het woon- en slaapgedeelte. De lichte woonkamer vormt het hart van de woning en sluit prettig aan op de buitenruimte. De separate keuken biedt volop mogelijkheden om naar eigen smaak in te richten. De drie slaapkamers zijn goed van formaat en multifunctioneel inzetbaar — ideaal voor een gezin, thuiswerken of logeerruimte. Daarnaast beschikt de woning over een nette badkamer en een separate toiletruimte.
+
+Omgeving:
+
+De ligging is bijzonder gunstig. In de directe omgeving vind je winkels, supermarkten, scholen en diverse voorzieningen voor dagelijks gemak. Ook het openbaar vervoer is goed bereikbaar, evenals uitvalswegen richting de rest van de stad en daarbuiten. Voor ontspanning en recreatie liggen er meerdere groene plekken in de buurt. Hier woon je rustig, met alle dynamiek van Amsterdam binnen handbereik.
+
+Wat deze woning extra aantrekkelijk maakt, is de hoeveelheid bergruimte. Naast een interne berging is er een externe berging op de begane grond van circa 6 m² én een extra zolderruimte van circa 9 m² — ideaal voor opslag zonder in te leveren op leefruimte.
+
+Kernmerken:
+
+- Adres: Slauerhoffstraat 64-II, Amsterdam.
+- Indeling: 3 slaapkamers, woonkamer, aparte keuken.
+- Buitenruimte: Loggia en balkon.
+- Sanitair: Badkamer en separate toiletruimte.
+- Extra: Berging beneden van ca. 6 m² en extra berging/zolderruimte van ca. 9 m².
+- Ligging: Winkels, scholen, OV, parken en uitvalswegen dichtbij.
+- VvE: Gezond en actief, met focus op onderhoud en verduurzaming.
+
+Kortom: een licht en ruim appartement met een doordachte indeling, fijne buitenruimtes en volop mogelijkheden om het geheel naar eigen smaak in te richten. Een ideale plek voor wie comfortabel wil wonen in Amsterdam.
+
+Disclaimer:
+Deze informatie is met zorg samengesteld, maar hieraan kunnen geen rechten worden ontleend. Alle maten en gegevens zijn indicatief.
+
+Slauerhoffstraat 64-II, Amsterdam
+
+A bright, spacious home with a natural flow — this apartment immediately feels right. Featuring three well-sized bedrooms, a bright living room, and both a loggia and a balcony, it offers comfortable and flexible city living.
+
+Layout
+The layout is clear and practical, with a natural separation between the living and sleeping areas. The bright living room forms the heart of the home and connects well with the outdoor space. The separate kitchen offers plenty of possibilities to design it to your own taste. All three bedrooms are well-proportioned and versatile — perfect for families, working from home, or hosting guests. The apartment also includes a bathroom and a separate toilet.
+
+Location
+The property is ideally situated. Shops, supermarkets, schools, and daily amenities are all within close reach. Public transport connections are excellent, and main roads provide easy access to other parts of the city and beyond. Several green areas are nearby, offering space for relaxation and recreation. A ????? and convenient location with the vibrancy of Amsterdam always nearby.
+
+A key advantage is the generous storage space. In addition to internal storage, there is a ground-floor storage unit of approximately 6 m² and an additional attic/storage space of approximately 9 m² — providing ample room without compromising living space.
+
+Key features:
+
+- Address: Slauerhoffstraat 64-II, Amsterdam.
+- Layout: 3 bedrooms, living room, separate kitchen.
+- Outdoor space: Loggia and balcony.
+- Bathroom: Bathroom and separate toilet.
+- Extra: Ground-floor storage room of approx. 6 m² and additional attic/storage room of approx. 9 m².
+- Location: Close to shops, schools, public transport, parks and main roads.
+- Owners’ association: Healthy and active, with a focus on maintenance and sustainability.
+
+In short: a bright and spacious apartment with a comfortable layout, enjoyable outdoor spaces and great potential to make it your own. Schedule a viewing and experience it yourself.
+
+Disclaimer:
+This information has been compiled with care; however, no rights can be derived from it. All measurements and details are indicative.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Raek Makelaars B.V.</strong> · Raek Makelaars B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 30</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/231/136/032_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/056_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/045_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/028_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/076_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/067_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/010_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/983_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/072_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/106_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/017_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/082_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/079_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/048_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/136/049_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/135/969_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

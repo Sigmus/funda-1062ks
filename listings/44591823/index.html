@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slaakstraat 3-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Slaakstraat 3-2</h1>
+  <p class="sub">
+    <span>1078 BC Amsterdam</span>
+    <span>·</span>
+    <span>Wielingenbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/540/156_1440x960.jpg" alt="Slaakstraat 3-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">35 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€800.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.195/m² · 3.4 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.4 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">87 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1936</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-slaakstraat-3-2/44591823/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 800.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.195</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 274,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1936</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>87 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>293 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, Bathtub, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 10472</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>owned belast met Leasehold (einddatum Leasehold: 14-09-2059)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan water, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 274,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">NVM Open Huizen Dag VAN 11:00-14:00!
+
+LICHT, RUIM, DRIE SLAAPKAMERS ÉN EEN PRACHTIG VRIJ UITZICHT OVER HET ZUIDER AMSTELKANAAL!
+
+Aan de rustige Slaakstraat in de geliefde Rivierenbuurt mogen wij dit bijzonder lichte en goed ingedeelde appartement van circa 87 m² aanbieden. De woning ligt op de tweede verdieping van een karakteristiek pand uit 1936 en beschikt over een royale woonkamer met grote raampartijen en vrij uitzicht over het water, een moderne open keuken, drie goede slaapkamers, een luxe badkamer en een heerlijk balkon aan de achterzijde.
+
+De combinatie van de fijne lichtinval, goede indeling en het vrije uitzicht maakt dit een bijzonder prettig appartement. Aan de voorzijde kijk je vanuit de woonkamer prachtig uit over de groene kade en het Zuider Amstelkanaal, terwijl de slaapkamers juist rustig aan de achterzijde zijn gelegen. Met drie slaapkamers is de woning bovendien ideaal voor een gezin, maar ook uitstekend geschikt voor wie behoefte heeft aan een comfortabele thuiswerkplek.
+
+INDELING
+Via het gemeenschappelijke trappenhuis bereik je de entree van het appartement op de tweede verdieping.
+
+Je komt binnen in de ruime centrale hal, die toegang geeft tot vrijwel alle vertrekken. In de hal bevindt zich tevens een praktische kast met aansluitingen voor de wasmachine en droger. Aan de voorzijde bevindt zich de royale en bijzonder lichte woonkamer. De grote raampartijen zorgen voor veel daglicht en bieden een prachtig vrij uitzicht over de Slaakstraat, de groene kade en het Zuider Amstelkanaal. De fraaie houten vloer en rustige afwerking geven de ruimte een warme en verzorgde uitstraling.
+
+De open keuken sluit direct aan op de woonkamer en is modern uitgevoerd. De keuken is voorzien van diverse hoogwaardige inbouwapparatuur, waaronder Miele-apparatuur, een 5-pits inductiekookplaat en combi-oven. Er is voldoende ruimte voor een royale eettafel, waardoor de keuken en woonkamer samen een heerlijke leefruimte vormen voor lange diners met familie en vrienden.
+
+Aan de rustige achterzijde bevinden zich maar liefst drie slaapkamers. De hoofdslaapkamer is royaal van formaat, daarnaast is er een goede tweede slaapkamer en een derde kamer die uitstekend kan worden gebruikt als kinder-, werk- of logeerkamer. Vanuit de slaapkamers is het brede balkon aan de achterzijde bereikbaar. Het balkon ligt op het oosten en is een fijne plek om in alle rust van de ochtendzon te genieten.
+
+De luxe badkamer is in 2022 vernieuwd en stijlvol afgewerkt. De badkamer beschikt over een vrijstaand ligbad, een royale inloopregendouche, wastafelmeubel en designradiator. De messing kranen en accessoires uit de Crosswater Belgravia-collectie geven de ruimte een klassieke en tegelijkertijd eigentijdse uitstraling.
+
+OMGEVING
+De woning ligt op een heerlijke plek in de geliefde Rivierenbuurt in Amsterdam-Zuid. De Slaakstraat is een rustige en vriendelijke woonstraat, direct aan het groene en rustige gedeelte van de Amstelkade. Juist de combinatie van water, groen en de vele voorzieningen in de directe omgeving maakt dit een bijzonder fijne plek om te wonen.
+
+Voor de dagelijkse boodschappen, speciaalzaken en gezellige horeca kun je terecht in de nabijgelegen Maasstraat, Rijnstraat en Scheldestraat. Hier vind je een ruim aanbod aan winkels, cafés en restaurants. Ook De Pijp ligt op korte fietsafstand, waardoor je binnen enkele minuten midden tussen de vele restaurants, terrassen en winkels van deze populaire buurt staat.
+
+Voor ontspanning en recreatie hoef je eveneens niet ver. Langs het Zuider Amstelkanaal kun je heerlijk wandelen of hardlopen en ook het Beatrixpark ligt op korte afstand. Daarnaast bevinden diverse scholen, kinderopvanglocaties en sportvoorzieningen zich in de directe omgeving.
+
+BEREIKBAARHEID
+De bereikbaarheid is uitstekend. Met de fiets bereik je binnen korte tijd zowel Station Amsterdam Zuid als het Amstelstation en ook het centrum van Amsterdam is eenvoudig bereikbaar.
+
+In de directe omgeving bevinden zich verschillende tram- en busverbindingen. Met de auto ben je via de nabijgelegen uitvalswegen snel op de Ring A10 en de A2 richting onder andere Utrecht, Schiphol en de rest van de Randstad.
+
+VVE
+De Vereniging van Eigenaars is actief en gezond. De maandelijkse servicekosten bedragen circa € 274,-, inclusief stookkosten.
+
+BIJZONDERHEDEN
+- Bouwjaar 1936;
+- Woonoppervlakte circa 87 m²;
+- Maar liefst drie slaapkamers;
+- Royale en bijzonder lichte woonkamer;
+- Prachtig vrij uitzicht over het Zuider Amstelkanaal;
+- Moderne open keuken voorzien van diverse hoogwaardige inbouwapparatuur;
+- Luxe badkamer vernieuwd in 2022;
+- Voorzien van isolerende beglazing;
+- Breed balkon aan de achterzijde, gelegen op het oosten;
+- Energielabel D;
+- Erfpachtcanon afgekocht tot en met 15 september 2059;
+- Oplevering in overleg.
+
+Kortom: een bijzonder licht en uitstekend ingedeeld appartement met drie slaapkamers, een fijne buitenruimte en een prachtig vrij uitzicht over het Zuider Amstelkanaal. Dit alles op een rustige locatie midden in de geliefde Rivierenbuurt. Een heerlijke woning waar je zo in kunt! Maak snel een afspraak voor een bezichtiging.
+
+DISCLAIMER
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is Brummel &amp; Beuk Makelaars adviseur van verkoper. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundig genoeg om alle zaken die van belang zijn te kunnen overzien.
+
+Meetclausule: Het verkochte is gemeten conform de branchebrede meetinstructie (gebaseerd op de normen zoals vastgelegd in NEN 2580). De meetinstructie is bedoeld om op een eenduidige wijze de gebruiksoppervlakte te bepalen. Verschillen in meetuitkomsten kunnen echter niet volledig worden uitgesloten als gevolg van interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting. Koper wordt in de gelegenheid gesteld het verkochte zelfstandig conform de meetinstructie te (laten) meten.
+
+ENGLISH VERSION:
+
+BRIGHT, SPACIOUS, THREE BEDROOMS AND BEAUTIFUL UNOBSTRUCTED VIEWS OVER THE ZUIDER AMSTELKANAAL!
+
+Situated on the quiet Slaakstraat in the highly sought-after Rivierenbuurt, we are pleased to offer this exceptionally bright and well-laid-out apartment of approximately 87 m². Located on the second floor of a characteristic building dating from 1936, the apartment features a spacious living room with large windows and unobstructed views over the water, a modern open-plan kitchen, three good-sized bedrooms, a luxurious bathroom and a lovely balcony at the rear.
+
+The combination of abundant natural light, an excellent layout and the unobstructed views makes this a particularly pleasant home. From the living room at the front, you enjoy beautiful views over the green waterfront and the Zuider Amstelkanaal, while the bedrooms are quietly situated at the rear. With three bedrooms, the apartment is ideal for a family, but equally well suited to anyone looking for a comfortable home office.
+
+LAYOUT
+The communal staircase leads to the entrance of the apartment on the second floor.
+
+You enter into a spacious central hallway providing access to virtually all rooms. The hallway also features a practical cupboard with connections for a washing machine and dryer. At the front of the apartment is the spacious and exceptionally bright living room. Large windows provide an abundance of natural daylight and beautiful unobstructed views over Slaakstraat, the green waterfront and the Zuider Amstelkanaal. The attractive wooden flooring and neutral finishes create a warm and well-maintained feel.
+
+The modern open-plan kitchen connects directly to the living room and is equipped with a range of high-quality built-in appliances, including Miele appliances, a five-burner induction hob and a combination oven. There is ample space for a large dining table, creating a wonderful living area for long dinners with family and friends.
+
+At the quiet rear of the apartment are no fewer than three bedrooms. The primary bedroom is generously sized, alongside a good-sized second bedroom and a third room that is perfectly suited as a child&#x27;s bedroom, home office or guest room. The wide rear balcony can be accessed from the bedrooms. Facing east, it is a lovely place to enjoy the morning sun in peace.
+
+The luxurious bathroom was renovated in 2022 and has been stylishly finished. It features a freestanding bathtub, spacious walk-in rainfall shower, washbasin with vanity unit and a designer radiator. Brass taps and accessories from the Crosswater Belgravia collection give the bathroom a classic yet contemporary appearance.
+
+LOCATION
+The apartment enjoys a wonderful location in the popular Rivierenbuurt in Amsterdam-Zuid. Slaakstraat is a quiet and friendly residential street situated directly alongside the green and peaceful section of the Amstelkade. The combination of water, greenery and the many amenities nearby makes this a particularly pleasant place to live.
+
+For daily shopping, speciality stores and a wide selection of cafés and restaurants, the nearby Maasstraat, Rijnstraat and Scheldestraat offer plenty of choice. De Pijp is also just a short bicycle ride away, putting its many restaurants, terraces and shops within easy reach.
+
+For recreation and relaxation, there is no need to travel far. The Zuider Amstelkanaal is perfect for walking or running along the water, while the Beatrixpark is also nearby. Various schools, childcare facilities and sports amenities can be found in the immediate area.
+
+ACCESSIBILITY
+Accessibility is excellent. Both Amsterdam Zuid Station and Amstel Station can be reached quickly by bicycle, while Amsterdam city centre is also within easy reach.
+
+Several tram and bus connections are available nearby. By car, the Ring A10 and A2 motorway can be reached quickly, providing convenient connections towards Utrecht, Schiphol Airport and the rest of the Randstad.
+
+HOMEOWNERS&#x27; ASSOCIATION
+The Homeowners&#x27; Association (VvE) is active and financially healthy. The monthly service charges amount to approximately €274, including heating costs.
+
+KEY FEATURES:
+- Built in 1936;
+- Living area approximately 87 m²;
+- Three bedrooms;
+- Spacious and exceptionally bright living room;
+- Beautiful unobstructed views over the Zuider Amstelkanaal;
+- Modern open-plan kitchen with various high-quality built-in appliances;
+- Practical cupboard with connections for washing machine and dryer;
+- Luxurious bathroom renovated in 2022;
+- Insulating glazing;
+- Wide east-facing balcony at the rear;
+- Energy label D;
+- Ground lease prepaid until 15 September 2059;
+- Transfer date in consultation.
+
+In short: an exceptionally bright and well-laid-out apartment with three bedrooms, a pleasant outdoor space and beautiful unobstructed views over the Zuider Amstelkanaal. All this in a peaceful location in the heart of the highly sought-after Rivierenbuurt. A wonderful home that is ready to move into! Contact us to arrange a viewing.
+
+DISCLAIMER
+This information has been compiled with due care. However, no liability is accepted for any incompleteness, inaccuracies or otherwise, nor for the consequences thereof. All stated dimensions and surface areas are indicative. The buyer has a duty to conduct their own investigation into all matters that may be relevant to them. With regard to this property, Brummel &amp; Beuk Makelaars acts as advisor to the seller. We recommend that you engage a qualified (NVM) real estate agent to assist you throughout the purchasing process. If you have specific requirements regarding the property, we recommend communicating these to your purchasing agent in good time and carrying out, or commissioning, your own independent investigation. If you choose not to engage professional representation, you are deemed under Dutch law to consider yourself sufficiently knowledgeable to assess all matters relevant to the purchase.
+
+Measurement clause: The property has been measured in accordance with the industry-wide measurement instructions based on the standards set out in NEN 2580. These instructions are intended to provide a uniform method for determining the usable floor area. Differences in measurement results cannot, however, be entirely excluded due to differences in interpretation, rounding or limitations encountered during the measurement process. The buyer is given the opportunity to independently measure, or have the property measured, in accordance with the applicable measurement instructions.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 1 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Djurre Kleibeuker</strong> · Brummel &amp; Beuk Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 35</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/540/156_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/109_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/173_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/164_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/070_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/147_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/058_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/054_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/125_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/059_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/121_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/066_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/094_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/085_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/100_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/159_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/088_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/112_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/082_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/039_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/204_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/179_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/051_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/047_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/119_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/129_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/157_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/118_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/181_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/114_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/107_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/152_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/073_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/540/050_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

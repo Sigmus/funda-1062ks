@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lauernessestraat 12-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Lauernessestraat 12-3</h1>
+  <p class="sub">
+    <span>1061 EZ Amsterdam</span>
+    <span>·</span>
+    <span>Kolenkitbuurt-Noord</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/784/627_1440x960.jpg" alt="Lauernessestraat 12-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">26 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€425.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.746/m² · 3.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">63 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1951</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-lauernessestraat-12-3/44521346/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 425.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.746</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 166,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Walk-up flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1951</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>63 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>208 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Voorzieningen</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Mechanische ventilatie en TV kabel</dt><dd>Gelegen op</dd></div>
+        <div class="frow"><dt>3e woonlaag</dt><dd>Energie</dd></div>
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha (gas-fired combi boiler uit 2026, owned)</dd></div>
+        <div class="frow"><dt>Elektra</dt><dd>Isolatie</dd></div>
+        <div class="frow"><dt>Geen isolatie</dt><dd>Parkeergelegenheid</dd></div>
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND N 656</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-08-2062</dd></div>
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND N 656</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-08-2062</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 166,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*English tekst below
+
+Licht, sfeervol en recent gemoderniseerd wonen met twee balkons!
+
+Op de derde en bovenste verdieping van een appartementencomplex in Bos en Lommer ligt dit sfeervolle appartement van circa 63 m². De huidige eigenaar heeft de woning in 2026 grotendeels gemoderniseerd, met onder meer een nieuwe open keuken, een fraaie visgraatvloer en een nieuwe cv-installatie. De lichte vertrekken, zachte kleuren en verzorgde afwerking zorgen voor een warm en prettig thuis.
+Met drie slaapkamers, twee balkons op het oosten en westen en een eigen berging op de begane grond biedt de woning een praktische indeling en volop mogelijkheden. Een fijne plek voor wie rustig wil wonen, met alle voorzieningen van de stad binnen handbereik.
+
+Indeling
+Via de gemeenschappelijke entree en het trappenhuis bereik je de woning op de derde verdieping.
+
+De hal geeft toegang tot de verschillende vertrekken. Aan de voorzijde ligt de lichte woonkamer, waar de grote ramen zorgen voor een prettige lichtinval. De fraaie visgraatvloer en warme afwerking geven de ruimte een sfeervol karakter. Vanuit de woonkamer stap je op het balkon op het westen: een heerlijke plek om van de middag- en avondzon te genieten.
+
+De in 2026 vernieuwde open keuken sluit mooi aan op de woonkamer. De keuken is uitgevoerd met rustige, lichte fronten, een donker werkblad en nieuwe inbouwapparatuur. Ook is er een kokendwaterkraan aanwezig. Bij het raam is ruimte voor een eettafel, waardoor koken, eten en gezellig samenzijn hier vanzelf samenkomen.
+Vanuit de keuken is het tweede balkon bereikbaar, gelegen op het oosten. Ideaal voor een kop koffie in de ochtendzon.
+
+Aan de achterzijde bevinden zich twee slaapkamers, die naar wens ook als werk-, kinder- of logeerkamer kunnen worden gebruikt. Aan de voorzijde is 3e slaapkamer voorzien van opstelling cv-ketel en wasmachine aansluiting. 
+
+De badkamer beschikt over een douche, wastafel en wasmachineaansluiting. Het toilet is separaat en bereikbaar vanuit de hal.
+
+Op de begane grond bevindt zich een eigen berging van circa 7 m², met praktische ruimte voor fietsen en extra opslag.
+
+Modernisering
+De huidige eigenaar heeft de woning in 2026 grotendeels gemoderniseerd. Daarbij is een open keuken gerealiseerd en zijn zowel de keukenopstelling als de inbouwapparatuur vernieuwd. Ook is een nieuwe vloer gelegd, is de elektra op onderdelen aangepast en uitgebreid en is in januari 2026 een nieuwe Remeha cv-installatie geplaatst. De woning is geheel voorzien van isolerende beglazing.
+
+Locatie
+De Lauernessestraat ligt in een rustige, groene woonomgeving in Bos en Lommer. Hier woon je met dagelijkse voorzieningen dichtbij en de levendigheid van Amsterdam om de hoek.
+Rond het Bos en Lommerplein vind je diverse winkels, supermarkten en horeca. Ook het Erasmuspark en Westerpark zijn goed bereikbaar: fijne plekken voor een wandeling, een rondje hardlopen of een ontspannen middag in het groen. Met de fiets bereik je gemakkelijk de Jordaan en de rest van de binnenstad.
+
+Bereikbaarheid
+De woning is goed bereikbaar met zowel het openbaar vervoer als de auto. Er zijn tram- en busverbindingen in de omgeving en ook station Amsterdam Sloterdijk is goed bereikbaar. Via de nabijgelegen Ring A10 rijd je eenvoudig de stad in en uit.
+Parkeren gebeurt op de openbare weg volgens het gemeentelijke vergunningenstelsel.
+
+Vereniging van Eigenaars
+Het appartement maakt deel uit van de actieve Vereniging van Eigenaars Kasteelvrouwe. Het beheer wordt professioneel verzorgd door Arlanda VvE Beheer. De vereniging beschikt over reservefondsen en een meerjarenonderhoudsplan.
+Binnen de VvE wordt gewerkt aan het onderhoud van het complex en worden mogelijkheden voor verduurzaming onderzocht. De bijbehorende stukken zijn beschikbaar ter inzage. De vastgestelde maandelijkse VvE-bijdrage bedraagt € 166,-.
+
+Eigendomssituatie
+De woning is gelegen op gemeentelijke erfpachtgrond. De Algemene Bepalingen voor voortdurende erfpacht 2000 zijn van toepassing. De canon voor het huidige tijdvak is afgekocht tot en met 15 augustus 2062.
+De huidige eigenaar heeft op 14 september 2026 een aanvraag ingediend voor de overstap naar eeuwigdurende erfpacht. De overstap is nog niet afgerond; de beschikbare erfpachtinformatie is ter inzage.
+
+Bijzonderheden
+•	Woonoppervlakte circa 63 m² (NEN 2580 meetrapport aanwezig);
+•	Gelegen op de derde en bovenste verdieping, geen bovenburen;
+•	In 2026 grotendeels gemoderniseerd;
+•	Drie slaapkamers;
+•	Twee balkons, gelegen op het oosten en westen;
+•	Eigen berging van circa 7 m² op de begane grond;
+•	Remeha cv-installatie geplaatst in januari 2026;
+•	Geheel voorzien van isolerende beglazing;
+•	Energielabel C;
+•	Professioneel beheerde VvE;
+•	VvE-bijdrage: € 166,- per maand;
+•	Erfpachtcanon afgekocht tot en met 15 augustus 2062;
+•	Overstap naar eeuwigdurende erfpacht aangevraagd;
+•	Geen verhoogd funderingsrisico (risicoklasse A, B of C).
+•	Oplevering in overleg.
+
+Bij woningen ouder dan 30 jaar hanteren wij standaard een ouderdom en asbest clausule. 
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Van toepassing zijn de NVM voorwaarden. 
+
+De Meetinstructie is gebaseerd op de NEN2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het kadaster.
+
+English text
+
+Bright, Characterful and Recently Modernised Apartment with Two Balconies!
+
+Situated on the third and top floor of an apartment complex in Bos en Lommer, this attractive apartment offers approximately 63 m² of living space. The current owner largely modernised the property in 2026, including the installation of a new open-plan kitchen, an elegant herringbone floor and a new central heating system. The bright rooms, soft colours and tasteful finishes create a warm and comfortable home.
+
+With three bedrooms, two balconies facing east and west, and a private storage unit on the ground floor, the apartment offers a practical layout and plenty of possibilities. A wonderful place for those seeking peaceful living while keeping all the amenities of the city within easy reach.
+
+Layout
+The communal entrance and staircase lead to the apartment on the third floor.
+
+The hallway provides access to the various rooms. At the front of the apartment is the bright living room, where the large windows provide plenty of natural light. The attractive herringbone floor and warm finishes give the room a welcoming atmosphere. From the living room, you can step out onto the west-facing balcony: a lovely place to enjoy the afternoon and evening sun.
+
+The open-plan kitchen, renovated in 2026, connects seamlessly with the living room. It features calm, light-coloured cabinetry, a dark worktop and new built-in appliances. A boiling-water tap has also been installed. There is space for a dining table by the window, making this the perfect setting for cooking, dining and spending time together.
+The second balcony can be accessed from the kitchen and faces east, making it ideal for enjoying a cup of coffee in the morning sun.
+
+Two bedrooms are situated at the rear of the apartment and can also be used as a home office, children’s room or guest room. The third bedroom is located at the front and houses the central heating boiler and a connection for a washing machine.
+
+The bathroom is fitted with a shower, washbasin and washing machine connection. The separate toilet can be accessed from the hallway.
+
+A private storage unit of approximately 7 m² is located on the ground floor, providing practical space for bicycles and additional storage.
+
+Modernisation
+The current owner largely modernised the apartment in 2026. An open-plan kitchen was created, and both the kitchen units and built-in appliances were renewed. New flooring was installed, parts of the electrical system were modified and expanded, and a new Remeha central heating system was installed in January 2026. The apartment is fully fitted with insulating glazing.
+
+Location
+Lauernessestraat is situated in a quiet and green residential area in Bos en Lommer. Here, you can enjoy peaceful living with everyday amenities nearby and the vibrancy of Amsterdam just around the corner.
+The Bos en Lommerplein area offers a variety of shops, supermarkets and cafés and restaurants. Erasmuspark and Westerpark are also within easy reach, providing wonderful places for a walk, a run or a relaxing afternoon surrounded by greenery. The Jordaan district and the rest of Amsterdam’s city centre are easily accessible by bicycle.
+
+Accessibility
+The apartment is easily accessible by both public transport and car. Several tram and bus connections are available nearby, while Amsterdam Sloterdijk railway station is also within easy reach. The nearby A10 ring road provides convenient access into and out of the city.
+Parking is available on the public road in accordance with the municipal parking permit system.
+
+Owners’ Association
+The apartment forms part of the active Owners’ Association “Kasteelvrouwe”. The association is professionally managed by Arlanda VvE Beheer and has reserve funds and a long-term maintenance plan in place.
+The Owners’ Association is working on the maintenance of the complex and is exploring various sustainability measures. The relevant documents are available for inspection. The current monthly service charge is €166.
+
+Ownership Situation
+The apartment is situated on municipal leasehold land. The General Provisions for Perpetual Ground Lease 2000 apply. The ground rent for the current leasehold period has been bought out up to and including 15 August 2062.
+On 14 September 2026, the current owner submitted an application to convert to perpetual ground lease. This conversion has not yet been completed. The available leasehold information is available for inspection.
+
+Key Features
+•	Approximately 63 m² of living space, measured in accordance with NEN 2580; measurement report available;
+•	Situated on the third and top floor, with no upstairs neighbours;
+•	Largely modernised in 2026;
+•	Three bedrooms;
+•	Two balconies, facing east and west;
+•	Private storage unit of approximately 7 m² on the ground floor;
+•	Remeha central heating system installed in January 2026;
+•	Fully fitted with insulating glazing;
+•	Energy label C;
+•	Professionally managed Owners’ Association;
+•	Monthly service charge: €166;
+•	Ground rent bought out up to and including 15 August 2062;
+•	Application submitted for conversion to perpetual ground lease;
+•	No increased foundation risk (risk category A, B or C);
+•	Transfer date by mutual agreement.
+
+For properties more than 30 years old, we include standard age and asbestos clauses in the purchase agreement.
+
+This information has been compiled by us with due care. However, we accept no liability for any incompleteness, inaccuracies or otherwise, nor for the consequences thereof. All stated dimensions and surface areas are indicative. The NVM conditions apply.
+
+The Measurement Instruction is based on NEN 2580. Its purpose is to provide a more uniform method of measurement in order to give an indication of the usable floor area. The Measurement Instruction does not fully exclude differences in measurement results, for example due to differences in interpretation, rounding or restrictions in carrying out the measurement.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 1 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 26</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/784/627_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/669_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/664_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/633_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/645_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/642_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/679_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/676_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/693_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/682_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/635_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/683_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/640_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/646_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/636_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/784/680_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/846/339_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/846/318_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/846/361_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/846/302_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

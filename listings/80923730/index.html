@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Albert Cuypstraat 10-A · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Albert Cuypstraat 10-A</h1>
+  <p class="sub">
+    <span>1072 CT Amsterdam</span>
+    <span>·</span>
+    <span>Hercules Seghersbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/222/118_1440x960.jpg" alt="Albert Cuypstraat 10-A — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">35 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€695.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.688/m² · 3.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.3 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">80 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1991</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-albert-cuypstraat-10-a/80923730/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oorspronkelijke vraagprijs</dt><dd>€ 675.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 695.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.688</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 231,76 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1991</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>80 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>243 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler uit 2012, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM 81 2</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold (einddatum Leasehold: 30-09-2042)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Lasten</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Afgekocht tot 30-09-2042</dt><dd>Buitenruimte</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 231,76 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">English translation below#
+
+Gelegen in de populaire buurt De Pijp bieden wij dit praktisch ingedeelde drie kamerappartement van ca. 80m2 aan, voorzien van een balkon gelegen op het zuiden en een separate berging van 4m2.
+
+Dit goed onderhouden appartement ligt midden in De Pijp in het marktvrije, rustige, tramvrije gedeelte van de Albert Cuypstraat. De woning beschikt over een lichte, riante woonkamer met half open keuken gescheiden door een bar welke het centrum van de ruimte is. Een ideale woning voor wie comfortabel wil wonen in een levendige en goed bereikbare omgeving.
+
+Locatie &amp; bereikbaarheid
+
+Je woont hier midden in De Pijp, op steenworp afstand van diverse hippe en trendy cafés, bars en restaurants. 
+Binnen enkele minuten wandel je het Sarphatipark in, haal je verse producten op de Albert Cuypmarkt of fiets je moeiteloos richting het Centrum en Oud-Zuid.
+De woning ligt op korte afstand van de metrohalte De Pijp van de Noord/Zuidlijn en de parkeergarage Albert Cuyp. Voor een parkeervergunning voor bewoners in De Pijp geldt momenteel een wachtlijst van ca. 9 maanden.
+Stations RAI, Zuid en Amstel zijn snel bereikbaar. 
+Kortom een heerlijke plek voor wie de levendigheid en veelzijdigheid van Amsterdam binnen handbereik wil hebben, maar thuis kiest voor rust, licht en een royale buitenruimte op het zuiden. Bekijk de video voor een impressie.
+
+Indeling
+
+Via de gezamenlijke entree en het trappenhuis bereikt u de eigen voordeur op de tweede verdieping. De hal geeft toegang tot alle vertrekken: de lichte woonkamer met halfopen keuken, de drie slaapkamers, de badkamer en het separate toilet met fontein. 
+
+De riante woonkamer van ca. 22m2 beschikt over een grote raampartij met openslaande ramen, waardoor veel daglicht naar binnen valt. Er is voldoende ruimte voor zowel een volwaardige eettafel als een comfortabele zithoek.
+
+De halfopen keuken heeft een bar en een directe doorkijk naar de woonkamer. De keuken is uitgerust met een combi-oven, een 4-pits gasfornuis, een vaatwasser en een separate Amerikaanse koelkast met twee deuren.
+Het appartement beschikt over drie slaapkamers aan de rustige achterzijde. Vanuit één van de slaapkamers is het balkon bereikbaar. De “kleinere” slaapkamer leent zich daarnaast uitstekend als werkkamer, studeerkamer of kinderkamer.
+
+De badkamer is voorzien van een inloopdouche, een wastafelmeubel en een aansluiting voor de wasmachine en droger. Het separate toilet met fontein bevindt zich direct naast de badkamer.
+Aan de achterzijde bevindt zich een zonnig balkon van circa 7 m², gelegen op het zuiden. Het balkon is vanuit één van de slaapkamers bereikbaar en is een fijne plek om buiten te zitten midden in de stad. Op de begane grond beschikt het appartement bovendien over een eigen externe berging van circa 4 m².
+
+Dankzij de bouwperiode en de goede isolerende eigenschappen van het gebouw biedt de woning een prettig binnenklimaat. Aangenaam koel in de zomer en comfortabel warm in de winter, met een relatief laag gasverbruik. Een extra fijne bijkomstigheid is daarnaast dat de solide bouw bijdraagt aan het buiten houden van ongedierte.
+
+VVE 
+
+Het pand wordt door de VVE goed onderhouden. De buitenzijde van het pand is het afgelopen jaar volledig geschilderd. De woning maakt deel uit van een VVE die professioneel wordt beheerd door Ymere.
+
+Woningdelen
+
+In Amsterdam heeft u een vergunning nodig als een woning wordt bewoond door 3 of meer personen die geen gezin of duurzaam huishouden vormen. Dit valt onder woningdelen of kamerverhuur, waarvoor u via de Gemeente Amsterdam een omzettingsvergunning moet aanvragen.
+Het appartement beschikt over deze omgevingsvergunning voor woningdelen tot maximaal drie personen. Ideaal voor 3 studenten of jong werkenden.
+De actuele voorwaarden en eventuele gemeentelijke voorschriften zijn uiteraard van toepassing.
+
+Bijzonderheden
+
+Appartementsrecht van circa 80 m² (NEN 2580)
+Drie slaapkamers
+Balkon van circa 7 m²
+Berging van circa 4 m² op de begane grond
+Bouwjaar 1991
+Goede isolerende eigenschappen dankzij de relatief jonge bouw (1991)
+Buitenschilderwerk gedaan in 2026
+Separaat toilet 
+Energielabel A
+Professionele VVE beheerder
+VVE-servicekosten: € 231,76 per maand
+Erfpacht afgekocht tot 30-09-2042; daarna eeuwigdurende erfpacht vastgeklikt
+Canon per 01-01-2026: € 1.581,46 per jaar, jaarlijks geïndexeerd
+Omgevingsvergunning voor woningdelen tot maximaal 3 personen 
+Oplevering in overleg
+
+Benieuwd hoe het is om hier te wonen? Plan een bezichtiging. 
+
+Deze informatie is met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief en van toepassing zijn de Vastgoed Nederland voorwaarden. 
+
+English Translation#
+Albert Cuypstraat 10A, 1072 CT Amsterdam
+
+Located in the popular De Pijp neighbourhood, we offer this practically laid out three bedroom apartment of approximately 80 m², featuring a south-facing balcony and a separate storage unit of 4 m².
+This well maintained apartment is situated right in the heart of De Pijp, in the quiet, traffic-free section of Albert Cuypstraat where the market does not operate. The property features a bright and spacious living room with a semi-open kitchen, separated by a breakfast bar that forms the centrepiece of the space. An ideal home for those who want to live comfortably in a vibrant and well connected neighbourhood.
+
+Location &amp; accessibility
+You will live right in the heart of De Pijp, just steps away from numerous trendy cafés, bars and restaurants.
+Within a few minutes, you can walk to Sarphatipark, pick up fresh produce at the Albert Cuyp Market, or easily cycle towards the city centre and Oud-Zuid.
+
+The apartment is a short distance from De Pijp metro station on the North/South Line and the Albert Cuyp parking garage. There is currently a waiting list of approximately 9 months for a residents&#x27; parking permit in De Pijp.
+Amsterdam RAI, Zuid and Amstel railway stations are also easily accessible.
+
+In short, this is a wonderful location for those who want the vibrancy and diversity of Amsterdam within easy reach, while enjoying peace, natural light and a generous south-facing outdoor space at home. Watch the video for an impression.
+
+Layout
+Through the communal entrance and staircase, you reach the private entrance to the apartment on the second floor. The hallway provides access to all rooms: the bright living room with semi-open kitchen, three bedrooms, the bathroom and the separate toilet with washbasin.
+
+The spacious living room of approximately 22 m² features a large window façade with opening windows, allowing plenty of natural daylight to enter. There is ample space for both a full-size dining table and a comfortable seating area.
+
+The semi-open kitchen features a breakfast bar and a direct view into the living room. The kitchen is equipped with a combination oven, four burner gas hob, dishwasher and a separate American-style double-door refrigerator.
+The apartment has three bedrooms at the quiet rear of the property. The balcony can be accessed from one of the bedrooms. The smaller bedroom is also ideally suited as a home office, study or children&#x27;s room.
+
+The bathroom features a walk-in shower, vanity unit and connections for a washing machine and dryer. The separate toilet with washbasin is located directly next to the bathroom.
+
+At the rear is a sunny south-facing balcony of approximately 7 m². Accessible from one of the bedrooms, it is a lovely place to sit outside while being right in the heart of the city. The apartment also comes with a private external storage unit of approximately 4 m² on the ground floor.
+
+Thanks to the building&#x27;s construction period and its good insulating properties, the apartment offers a comfortable indoor climate. It stays pleasantly cool in summer and comfortably warm in winter, with relatively low gas consumption. An additional benefit is that the solid construction helps keep pests outside.
+
+Homeowners&#x27; Association (VvE)
+The building is well maintained by the VvE (Homeowners&#x27; Association). The exterior of the building was fully painted in the past year. The property is part of a VvE that is professionally managed by Ymere.
+
+Shared occupancy
+In Amsterdam, a permit is required if a property is occupied by three or more people who are not a family or a permanent household. This is considered shared occupancy or room rental, for which a conversion permit must be obtained from the Municipality of Amsterdam.
+
+The apartment has this environmental permit for shared occupancy by a maximum of three people. This makes it ideal for three students or young professionals.
+
+The current conditions and any municipal regulations naturally apply.
+Features
+Apartment right of approximately 80 m² (NEN 2580)
+Three bedrooms
+Balcony of approximately 7 m²
+Storage unit of approximately 4 m² on the ground floor
+Built in 1991
+Good insulation properties due to the relatively recent construction date (1991)
+Exterior painting completed in 2026
+Separate toilet
+Energy label A
+Professional VvE management
+VvE service charges: €231.76 per month
+Ground lease (erfpacht) prepaid until 30 September 2042; thereafter perpetual ground lease has been fixed
+Ground rent (canon) as of 1 January 2026: €1,581.46 per year, indexed annually
+Environmental permit for shared occupancy by a maximum of 3 people
+Completion/transfer by mutual agreement
+
+Curious what it is like to live here? Schedule a property viewing
+
+This information has been compiled with due care. However, we accept no liability for any incompleteness, inaccuracy, or otherwise, or the consequences thereof. All stated dimensions and surface areas are indicative and the Vastgoed Nederland conditions apply.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>muriel makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 35</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/222/118_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/128_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/239_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/134_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/196_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/130_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/234_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/180_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/285_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/282_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/230_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/269_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/144_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/232_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/172_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/212_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/224_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/194_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/209_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/291_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/301_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/148_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/281_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/249_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/279_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/297_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/114_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/188_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/177_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/090_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/222/143_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

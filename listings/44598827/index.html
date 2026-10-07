@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sam van Houtenstraat 193-C · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Sam van Houtenstraat 193-C</h1>
+  <p class="sub">
+    <span>1067 JG Amsterdam</span>
+    <span>·</span>
+    <span>Dudokbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/423/977_1440x960.jpg" alt="Sam van Houtenstraat 193-C — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">31 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€460.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.299/m² · 3.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">107 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2006</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-sam-van-houtenstraat-193-c/44598827/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 460.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.299</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 231,19 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2006</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>107 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>353 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, Bathtub, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, lift, en Mechanical ventilation</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>5e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas-fired combi boiler uit 2026, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND I 3980</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 1.837,72 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 231,19 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">RUIM 4-KAMERAPPARTEMENT OP DE 5E VERDIEPING | GUNSTIGE ERFPACHTREGELING | ENERGIELABEL A
+
+Ruimte, comfort, licht en een uitstekende bereikbaarheid: dat zijn enkele kenmerken van dit ruime 4-kamerappartement op de 5e verdieping in Geuzenveld.
+
+Welkom in dit lichte en praktisch ingedeelde appartement, gelegen in een modern en verzorgd appartementencomplex in Amsterdam Nieuw-West. De woning beschikt over drie slaapkamers, een royale woonkamer met open keuken en kookeiland, een complete badkamer, een separaat toilet en een praktische separate was/stookruimte.
+
+Daarnaast beschikt de woning over een eigen berging op de 1e verdieping. Het appartementencomplex is voorzien van twee liften en beschikt over een actieve en financieel gezonde VvE, die professioneel wordt beheerd. Voor de bewoners is er bovendien een appgroep waarin praktische meldingen en informatie over het complex met elkaar worden gedeeld.
+
+I N D E L I N G
+Via de verzorgde gemeenschappelijke entree bereik je met één van de drie liften de 5e verdieping. Een extra praktisch voordeel is dat je vanuit het complex ook direct toegang hebt tot de parkeergarage en de Vomar supermarkt, waardoor de dagelijkse boodschappen letterlijk binnen handbereik zijn.
+
+Bij binnenkomst in het appartement kom je in de ruime hal. Vanuit de hal is er toegang tot verschillende vertrekken. Hier bevinden zich onder andere de meterkast, de toegang tot de master bedroom en kantoorruimte
+
+S L A A P K A M E R S
+Aan de voorzijde van de woning bevinden zich twee slaapkamers.
+
+De royale master bedroom biedt volop ruimte voor een comfortabel tweepersoonsbed en een ruime garderobekast. Vanuit de slaapkamer heb je tevens toegang tot het terras aan de voorzijde. Hier kun je eenvoudig een gezellig zitje plaatsen, bijvoorbeeld met een bankje of compact tuinsetje, en genieten van het buitenleven.
+
+De tweede slaapkamer is momenteel ingericht als kantoorruimte en beschikt over praktische inbouwkasten. Deze kamer is uiteraard ook uitstekend geschikt als slaap, kinder, studie of hobbykamer.
+
+Aan de achterzijde van de woning bevindt zich de derde slaapkamer, momenteel ingericht als kinderkamer. Ook deze ruimte is veelzijdig te gebruiken en kan volledig naar eigen wens worden ingericht als slaapkamer, werkkamer, studeerkamer of hobbyruimte.
+
+Dankzij de drie afzonderlijke slaapkamers is de woning bijzonder geschikt voor gezinnen, thuiswerkers of bewoners die behoefte hebben aan extra ruimte.
+
+B A D K A M E R  EN  O V E R I G E  V O O R Z I E N I N G E N
+De complete en verzorgde badkamer beschikt over een ligbad, een separate inloopdouche en een ruim wastafelmeubel. Hierdoor zijn zowel een ontspannen bad als een snelle douche binnen handbereik.
+
+Daarnaast beschikt de woning over een separaat toilet met fonteintje, wat extra comfort biedt voor zowel bewoners als gasten.
+
+De separate was/stookruimte is praktisch ingericht en beschikt onder andere over de aansluiting voor de wasmachine. De ruimte biedt daarnaast mogelijkheden voor het opbergen van huishoudelijke benodigdheden en andere praktische zaken.
+
+W O O N K A M E R
+De royale woonkamer met ligging op het Oosten vormt het centrale hart van de woning. Dankzij de grote raampartijen valt er veel natuurlijk daglicht naar binnen, waardoor de woonkamer een lichte, open en aangename sfeer heeft.
+
+De open keuken sluit mooi aan op de woonkamer en is voorzien van een praktisch kookeiland en diverse voorzieningen. De open indeling zorgt ervoor dat koken en gezellig samenzijn uitstekend met elkaar kunnen worden gecombineerd.
+
+De ruime leefruimte biedt volop mogelijkheden voor het creëren van zowel een comfortabele zithoek als een royale eethoek. Door de prettige lichtinval en de ruime opzet is dit een fijne plek om dagelijks te ontspannen, te eten en gasten te ontvangen.
+
+B E R G I N G
+Op de 1e verdieping bevindt zich een eigen berging. Deze praktische ruimte is ideaal voor het stallen van fietsen en het opbergen van bijvoorbeeld seizoensgebonden spullen, gereedschap en overige huishoudelijke benodigdheden.
+
+O M G E V I N G
+Het appartement ligt in Geuzenveld, onderdeel van Amsterdam Nieuw-West. De locatie biedt een prettige combinatie van stedelijke voorzieningen, goede bereikbaarheid en veel groen en recreatiemogelijkheden.
+
+Voor de dagelijkse boodschappen zijn er volop voorzieningen in de directe omgeving. Een bijzonder praktisch voordeel is dat zich in de onderbouw van het complex een Vomar supermarkt bevindt, waardoor je voor de dagelijkse boodschappen niet ver hoeft te reizen.
+
+Op korte afstand ligt bovendien het Lambertus Zijlplein, met een gevarieerd aanbod aan supermarkten, winkels, horecagelegenheden en andere dagelijkse voorzieningen.
+
+O P E N B A A R V E R V O E R  EN  B E R E I K B A A R H E I D
+Ook met het openbaar vervoer is de woning goed bereikbaar. In de directe omgeving bevinden zich verschillende tram en busverbindingen.
+
+Tramlijn 13 biedt een rechtstreekse verbinding richting Amsterdam Centraal. Daarnaast zijn er busverbindingen richting onder andere Schiphol, Osdorpplein en Station Sloterdijk. Ook is er een nachtbusverbinding richting Amsterdam Centraal.
+
+Met de auto zijn de belangrijkste uitvalswegen eveneens goed bereikbaar. De A10, A5 en A9 zijn binnen circa 10 minuten te bereiken.
+
+Parkeren in de omgeving is mogelijk middels een parkeervergunning. De kosten bedragen momenteel € 18,47 per half jaar voor de eerste vergunning en € 46,17 per half jaar voor de tweede vergunning.
+
+G R O E N, R E C R E A T I E  EN  S P O R T
+Ondanks de stedelijke ligging biedt Geuzenveld volop groen en ruimte. In de omgeving kun je heerlijk wandelen, fietsen en recreëren.
+
+De Sloterplas en de Tuinen van West bevinden zich op korte afstand en bieden volop mogelijkheden voor ontspanning, sportieve activiteiten en recreatie.
+
+Ook voor gezinnen is de omgeving aantrekkelijk. In de wijk zijn diverse basisscholen, kinderopvanglocaties, speeltuinen en een kinderboerderij aanwezig.
+
+Sportliefhebbers kunnen gebruikmaken van verschillende sportvoorzieningen in de omgeving. Zo ligt het (top)sportcentrum Ookmeer in de buurt, met diverse faciliteiten, waaronder een sporthal, atletiekhal en turnhal.
+
+Ook sportpark De Eendracht bevindt zich in de omgeving en biedt mogelijkheden voor diverse sporten, waaronder voetbal, volleybal, tennis en cricket.
+
+B I J Z O N D E R H E D E N
+- Gunstige erfpachtregeling: de canon bedraagt momenteel: € 1.837,72 per jaar en wordt jaarlijks geïndexeerd. De erfpachtcanon ligt relatief laag, omdat deze gunstig is vastgelegd. (ook nog fiscaal aftrekbaar inkomstenbelasting)
+- Bouwjaar 2006
+- Woonoppervlakte 107 m², (conform meetrapport)
+- Energielabel A
+- Ruim 4-kamerappartement op de 5e verdieping
+- Open keuken met praktisch kookeiland
+- Modern en verzorgd appartementencomplex;
+- Directe toegang Vomar supermarkt
+- Actieve en professioneel VvE beheer
+- VvE bijdrage €231,19 per maand (woning en berging)
+- Winkels, supermarkt en horeca in handbereik
+- Parkeervergunning slechts € 18,47 per half jaar (momenteel 1 maand wachtlijst, 2e vergunning mogelijk voor € 46,17 per half jaar)
+- (Fietsen)berging op het binnenterrein van het complex
+- Goede openbaarvervoersverbindingen
+- Goede verbinding met Amsterdam Centraal, Schiphol en Sloterdijk
+- Uitvalswegen A10, A5 en A9 goed bereikbaar
+- Sloterplas en Tuinen van West op korte afstand
+- Diverse sport en recreatiemogelijkheden in de omgeving.
+- Oplevering in overleg, kan snel.
+
+Kortom: een fijn appartement op een toplocatie die het bezichtigen waard is.
+
+Plan nu eenvoudig een bezichtiging in of neem contact met ons op</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floor plans were listed on Funda (2) but were not scraped for this page — no floorplan images invented here.</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 31</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/423/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/967_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/956_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/077_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/925_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/018_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/019_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/035_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/070_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/012_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/997_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/049_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/932_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/064_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/017_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/940_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/942_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/424/026_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/423/960_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

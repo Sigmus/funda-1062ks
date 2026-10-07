@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jan Pieter Heijestraat 62-A · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Jan Pieter Heijestraat 62-A</h1>
+  <p class="sub">
+    <span>1053 GR Amsterdam</span>
+    <span>·</span>
+    <span>Lootsbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/836/620_1440x960.jpg" alt="Jan Pieter Heijestraat 62-A — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">24 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€575.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.770/m² · 1.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">74 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1987</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jan-pieter-heijestraat-62-a/80969468/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>Per Immediate Available</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 575.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.770</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 205,07 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Gallery flat (appartement met open portiek)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1987</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>74 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>30 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>231 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM (ASD16) T 5904</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-10-2037</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>City centre</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 205,07 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Lootsbuurt</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>1.850</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>14%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 9.353</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Licht appartement van 73 m² met twee balkons in Oud West, energielabel B en canon afgekocht tot 2037
+
+Een appartement dat doet wat je in Oud West zelden tegenkomt: ruim wonen, ruim dertig vierkante meter eigen buitenruimte voor én achter, en maandlasten die overzichtelijk blijven. Het gebouw is uit 1987, en dat merk je. Een solide fundering, een goed onderhouden complex, energielabel B. De charme van de buurt met de zekerheid van een jong gebouw, en een interieur dat je volledig naar eigen hand kunt zetten.
+
+De woning is per augustus leeg opgeleverd en direct beschikbaar.
+
+Indeling
+
+Een bovenwoning op de eerste woonlaag, in de eerste opgang van het complex op de hoek van de Kinkerstraat. Je komt binnen in de hal, met daarachter de woonkamer met open keuken. Aan de voorzijde ligt een balkon van 9 m² over de volle breedte van het pand, aan de achterzijde een privébalkon van ruim 20 m² op de zonzijde.
+
+De keuken is compleet en direct bruikbaar, en biedt tegelijk alle ruimte om het interieur naar eigen smaak af te werken in een van de meest gewilde straten van Oud West.
+
+De woning telt drie slaapkamers, alle drie volwaardig, met ruimte voor een werkkamer of logeerkamer. Wie liever royaal woont dan veel slaapkamers heeft, kan één slaapkamer bij de woonkamer trekken: dat levert een grote doorzon woonkamer op met licht en buitenruimte aan twee zijden. De badkamer heeft een douche en wastafel, het toilet is separaat. Verwarming en warm water via een eigen cv ketel.
+
+In het souterrain hoort een eigen berging van 4,90 m² bij de woning.
+
+Buitenruimte
+
+Twee balkons, samen 30,10 m² gebouwgebonden buitenruimte, beide privé. Dat is in dit deel van de stad uitzonderlijk. Achter zit je uit het zicht met een eettafel of loungebank op ruim 20 m², voor kijk je vanaf 9 m² over de straat en de hoek met de Kinkerstraat. Twee buitenruimtes betekent ook twee momenten zon op de dag.
+
+Ligging
+
+De Jan Pieter Heijestraat loopt dwars door Oud West en zet je binnen een paar minuten waar je wilt zijn. De Ten Katemarkt en De Hallen om de hoek, de Kinkerstraat voor de dagelijkse boodschappen, en het Vondelpark aan de zuidkant van de straat. Rondom zit de generatie zaken waar de buurt zijn naam aan dankt: koffie, wijn, een goede bakker, restaurants waar je spontaan nog een tafel vindt.
+
+Tram 7 en 17 stoppen op de Kinkerstraat bij halte Ten Katestraat, letterlijk om de hoek. Tram 1 rijdt over de Overtoom aan de andere kant van de straat. Station Amsterdam Lelylaan en de ring A10 zijn snel bereikbaar. Parkeren gaat via vergunning van de gemeente Amsterdam, stadsdeel West.
+
+Erfpacht
+
+Hier onderscheidt deze woning zich. De canon is afgekocht tot en met 31 oktober 2037, dus tot die datum zijn de erfpachtlasten volledig voldaan. Er is bovendien al overgestapt naar eeuwigdurende erfpacht onder de Algemene Bepalingen 2016. Vanaf 1 november 2037 geldt de eeuwigdurende canon van € 1.191,28 per jaar, jaarlijks aangepast aan de inflatie. Daarmee ligt de erfpacht voor altijd vast, los van de marktontwikkeling.
+
+Voor de volledigheid: bij de gemeente lopen aanvragen om ook dat eeuwigdurende tijdvak af te kopen. Zodra daar duidelijkheid over is, informeren wij gegadigden.
+
+VvE
+
+Vereniging van Eigenaars Jan Pieter Heijestraat 62-64. De VvE is ingeschreven bij de Kamer van Koophandel, vergadert jaarlijks, en beschikt over een reservefonds, een meerjarenonderhoudsplan en een opstalverzekering. De maandelijkse bijdrage bedraagt € 205,07, opgebouwd uit € 192,51 voor de woning en € 12,56 voor de berging.
+
+Bijzonderheden
+
+Bouwjaar 1987, plat dak
+73,20 m² gebruiksoppervlakte wonen, 30,10 m² gebouwgebonden buitenruimte (9 m² voor, ruim 20 m² achter), 4,90 m² externe bergruimte, inhoud 242 m³, gemeten volgens NEN 2580
+Vier kamers waarvan drie slaapkamers, met de mogelijkheid één slaapkamer bij de woonkamer te trekken voor een doorzon woonkamer
+Energielabel B, geldig tot 8 oktober 2034
+Cv ketel op gas, in eigendom
+Eigendom betreft twee appartementsrechten, de woning en de berging, die volgens de splitsingsakte samen worden geleverd
+Erfpacht gemeente Amsterdam, canon afgekocht tot en met 31 oktober 2037, eeuwigdurend onder AB 2016
+Op de woning rust een omzettingsvergunning voor drie onzelfstandige bewoners, afgegeven op 30 april 2020
+De verkoper heeft de woning zelf niet bewoond, waardoor een niet zelfbewoningsclausule in de koopakte wordt opgenomen
+Leeg opgeleverd en vrij van huur en gebruik te aanvaarden
+Oplevering in overleg
+Het volledige verkoopdossier is op aanvraag beschikbaar
+
+Een bezichtiging plannen kan via ons kantoor. Wij adviseren je een eigen aankoopmakelaar in te schakelen die jouw belang behartigt.
+
+ENGLISH BELOW
+
+Bright 73 m² apartment with two balconies in Oud West, energy label B and ground rent bought off until 2037
+
+An apartment that offers what is increasingly rare in Oud West: generous living space, over thirty square metres of private outdoor space at both the front and the rear, and monthly costs that stay manageable. The building dates from 1987, and it shows. A solid foundation, a well maintained complex, energy label B. All the character of the neighbourhood with the reassurance of a younger building, and an interior you can shape entirely to your own taste.
+
+The apartment was handed over vacant in August and is available immediately.
+
+Layout
+
+An upper floor apartment on the first residential level, in the first entrance of the complex on the corner of the Kinkerstraat. You enter into the hallway, with the living room and open kitchen behind it. At the front there is a 9 m² balcony running the full width of the building, and at the rear a private balcony of more than 20 m² on the sunny side.
+
+The kitchen is complete and ready to use, while the apartment equally offers the freedom to finish the interior to your own taste in one of the most sought after streets of Oud West.
+
+There are three bedrooms, all of them full size, leaving room for a study or guest room. If you would rather have space than bedroom count, one bedroom can be opened up into the living room, creating a large through lounge with light and outdoor space on both sides. The bathroom has a shower and washbasin, and the toilet is separate. Heating and hot water are provided by the apartment&#x27;s own central heating boiler.
+
+A private storage room of 4.90 m² in the basement belongs to the apartment.
+
+Outdoor space
+
+Two balconies, together 30.10 m² of building related outdoor space, both private. That is exceptional in this part of the city. At the rear you sit out of sight with a dining table or lounge seating on more than 20 m², while the 9 m² at the front looks out over the street and the corner with the Kinkerstraat. Two outdoor spaces also means sun at two moments of the day.
+
+Location
+
+The Jan Pieter Heijestraat runs straight through Oud West and puts you within a few minutes of wherever you want to be. The Ten Katemarkt and De Hallen are around the corner, the Kinkerstraat covers the daily shopping, and the Vondelpark lies at the southern end of the street. All around you find the kind of places the neighbourhood built its name on: coffee, wine, a good bakery, restaurants where you can still find a table on the spot.
+
+Trams 7 and 17 stop on the Kinkerstraat at the Ten Katestraat stop, literally around the corner. Tram 1 runs along the Overtoom at the other end of the street. Amsterdam Lelylaan station and the A10 ring road are quickly reached. Parking is arranged through a permit from the City of Amsterdam, district West.
+
+Ground lease
+
+This is where the apartment stands apart. The ground rent has been bought off through to 31 October 2037, so up to that date the ground lease charges are fully settled. The lease has also already been converted to perpetual ground lease under the 2016 General Provisions. From 1 November 2037 the perpetual ground rent of € 1,191.28 per year applies, adjusted annually for inflation. The ground lease is therefore fixed permanently, independent of market developments.
+
+For completeness: applications are currently pending with the municipality to buy off that perpetual period as well. As soon as there is clarity, interested parties will be informed.
+
+Owners association
+
+Owners association Jan Pieter Heijestraat 62-64. The association is registered with the Chamber of Commerce, meets annually, and has a reserve fund, a long term maintenance plan and a building insurance policy. The monthly contribution is € 205.07, made up of € 192.51 for the apartment and € 12.56 for the storage room.
+
+Details
+
+Built in 1987, flat roof
+73.20 m² of living space, 30.10 m² of building related outdoor space (9 m² at the front, over 20 m² at the rear), 4.90 m² of external storage, volume 242 m³, measured in accordance with NEN 2580
+Four rooms of which three bedrooms, with the option of opening one bedroom into the living room for a through lounge
+Energy label B, valid until 8 October 2034
+Gas fired central heating boiler, owned
+Ownership concerns two apartment rights, the apartment and the storage room, which under the deed of division are transferred together
+Ground lease from the City of Amsterdam, ground rent bought off through to 31 October 2037, perpetual under the 2016 General Provisions
+A conversion permit for three non self contained occupants, issued on 30 April 2020, applies to the apartment
+The seller has not occupied the apartment, so a non occupancy clause will be included in the deed of sale
+Handed over vacant and free of lease and use
+Transfer date by mutual agreement
+The full sales file is available on request
+
+Viewings can be arranged through our office. We advise you to engage your own purchase agent to represent your interests.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Twee ruime privébalkons
+
+Voorbalkon van 9 m² en achterbalkon van ruim 20 m², samen 30,10 m².
+
+Toplocatie in Oud West
+
+Jan Pieter Heijestraat bij Kinkerstraat, vlak bij Ten Katemarkt, De Hallen en Vondelpark.
+
+Licht appartement met opties
+
+73,20 m² bovenwoning met drie slaapkamers en optie voor doorzon woonkamer.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Find Real Estate</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 24</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/836/620_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/612_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/623_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/628_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/621_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/617_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/615_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/630_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/609_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/611_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/622_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/624_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/632_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/631_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/610_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/607_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/627_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/629_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/614_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/608_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/836/619_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

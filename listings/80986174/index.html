@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dijkgraafplein 253 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Dijkgraafplein 253</h1>
+  <p class="sub">
+    <span>1069 ER Amsterdam</span>
+    <span>·</span>
+    <span>Dijkgraafpleinbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/793/314_1440x960.jpg" alt="Dijkgraafplein 253 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">41 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€395.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €3.950/m² · 3.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.7 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">100 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1972</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-dijkgraafplein-253/80986174/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 395.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 3.950</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 294,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1972</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>100 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>329 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, lift, Mechanical ventilation, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND G 4739</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk, open ligging en Open views</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, parkeergarage en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 294,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Dijkgraafplein 253 te Amsterdam
+
+Ruim, licht en comfortabel wonen op twee verdiepingen!
+
+Deze verrassend ruime maisonnette van 100 m² beschikt over drie slaapkamers, een moderne keuken en badkamer, een aparte inloopkast, balkon en eigen berging. De woning is verdeeld over twee woonlagen en ligt in een verzorgd appartementencomplex met lift.
+
+Dankzij de grote raampartijen is de woning heerlijk licht en de indeling is ideaal voor wie op zoek is naar nét wat meer ruimte. De afgelopen jaren is het appartement op verschillende punten gemoderniseerd, waaronder de keuken, badkamer, woonkamer en slaapkamer/inloopkast.
+
+OMGEVING
+Dijkgraafplein 253 ligt in Amsterdam Nieuw-West, in de buurt De Punt. Een praktische woonomgeving met vrijwel alle dagelijkse voorzieningen binnen handbereik.
+Op en rond het Dijkgraafplein bevinden zich diverse winkels, een supermarkt en verschillende eetgelegenheden. Ook winkelcentrum Osdorpplein ligt op korte afstand en biedt een uitgebreid aanbod aan winkels, horeca en voorzieningen.
+
+Voor ontspanning en recreatie zijn er eveneens volop mogelijkheden. Zo liggen onder andere de Sloterplas, de Ringvaart en Theater De Meervaart in de omgeving. Daarmee woon je hier stedelijk, maar met groen en recreatiemogelijkheden dichtbij.
+
+BEREIKBAARHEID
+Ook qua bereikbaarheid is de ligging gunstig. Openbaar vervoer bevindt zich op korte afstand van de woning en biedt goede verbindingen richting onder andere het centrum van Amsterdam en Schiphol.
+Met de auto zijn de belangrijke uitvalswegen A4, A9 en A10 goed bereikbaar, waardoor je ook snel de stad uit bent. Voor parkeren geldt momenteel een vergunningstelsel. Er kunnen maximaal twee parkeervergunningen worden aangevraagd. Ook een mogelijkheid om een parkeerplaats te huren of te kopen in de ondergelegen parkeergarage.
+
+INDELING
+Via de gemeenschappelijke entree bereik je met de lift de verdieping waar de woning is gelegen.
+
+Woonverdieping
+Entree met hal, meterkast, separaat toilet en trapopgang naar de slaapverdieping.
+
+De ruime woonkamer is heerlijk licht en biedt volop plaats voor zowel een comfortabele zithoek als een royale eettafel. Via openslaande deuren is het balkon bereikbaar, waardoor binnen en buiten mooi met elkaar worden verbonden.
+
+De open keuken sluit goed aan op de leefruimte en is uitgevoerd in een moderne kleurstelling. Dankzij de praktische opstelling is er veel werk- en kastruimte en de keuken beschikt over diverse inbouwapparatuur. De bar vormt een gezellige verbinding tussen de keuken en woonkamer en is ideaal voor een snel ontbijt, een kop koffie of een borrel met vrienden.
+
+Vanuit de woonkamer stap je via openslaande deuren het balkon op. Een fijne buitenruimte om even buiten te zitten en te genieten van het uitzicht over de omgeving.
+
+Slaapverdieping
+Via de vaste trap bereik je de tweede woonlaag.
+
+Hier bevinden zich drie slaapkamers, waardoor de woning uitstekend geschikt is voor een gezin, maar ook voor wie graag een aparte werk-, kinder- of logeerkamer wil. De hoofdslaapkamer beschikt daarnaast over een separate inloopkast, waardoor er bijzonder veel praktische opbergruimte aanwezig is. Ook is er een aparte ruimte voor de wasmachine en droger die via deze slaapkamer toegankelijk is.
+
+De moderne badkamer is uitgevoerd in een strakke moderne kleurstelling en voorzien van een ruime inloopdouche, wastafelmeubel en toilet.
+
+In de onderbouw van het complex bevindt zich bovendien een eigen berging, ideaal voor fietsen en extra opslag.
+
+BIJZONDERHEDEN:
+- Het appartementsrecht is gelegen op EIGEN GROND. Er is dus geen sprake van erfpacht;
+- Ruime maisonnette verdeeld over twee woonlagen;
+- Woonoppervlakte 100 m²;
+- Open keuken uit 2020;
+- Moderne badkamer;
+- Balkon;
+- Eigen berging in de onderbouw;
+- Kunststof kozijnen;
+- 2 Liften aanwezig;
+- Actieve VvE, Reservefonds en MJOP aanwezig;
+- Servicekosten € 294,- per maand, Voorschot stookkosten € 150,- per maand;
+- Oplevering in overleg.
+
+VERENIGING VAN EIGENAARS
+Het appartement maakt deel uit van een actieve Vereniging van Eigenaars. De VvE is ingeschreven bij de Kamer van Koophandel, er wordt jaarlijks vergaderd en er is zowel een reservefonds als een meerjarenonderhoudsplan aanwezig. De woning wordt verwarmd middels blokverwarming.
+De actuele maandelijkse lasten bedragen:
+- Servicekosten: € 294,- per maand
+- Voorschot stookkosten (blokverwarming): € 150,- per maand
+
+Dijkgraafplein 253 combineert ruimte, een praktische indeling en moderne afwerking met het gemak van winkels en openbaar vervoer dichtbij. Met drie slaapkamers, twee woonlagen en circa 99 m² woonoppervlakte is dit een appartement waar je verrassend veel kanten mee op kunt. 
+
+Maak snel een afspraak voor een bezichtiging via Funda of  en ervaar zelf de ruimte van deze woning!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>eXp NL</strong> · eXp NL</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 41</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/793/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/330_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/223_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/379_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/199_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/197_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/186_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/337_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/390_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/177_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/368_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/192_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/243_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/270_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/311_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/304_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/188_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/383_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/207_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/225_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/239_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/190_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/277_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/350_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/295_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/394_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/271_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/196_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/402_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/230_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/209_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/291_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/318_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/303_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/220_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/194_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/395_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/345_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/392_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/793/279_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

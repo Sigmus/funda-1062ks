@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gibraltarstraat 99-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Gibraltarstraat 99-3</h1>
+  <p class="sub">
+    <span>1055 NM Amsterdam</span>
+    <span>·</span>
+    <span>Gibraltarbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/935/770_1440x960.jpg" alt="Gibraltarstraat 99-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€750.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.812/m² · 3.4 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.4 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">96 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1937</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-gibraltarstraat-99-3/44586783/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>96 m²</dd></div>
+        <div class="frow"><dt>96 m²</dt><dd>Gebouwgebonden buitenruimte</dd></div>
+        <div class="frow"><dt>16 m²</dt><dd>Inhoud</dd></div>
+        <div class="frow"><dt>320 m³</dt><dd>Indeling</dd></div>
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, Bathtub, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 192 per maand</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 750.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.812</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1937</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met tiles</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>AWB (gas-fired combi boiler, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN C 11186</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 15-05-2050)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 564,90 per Yesar met optie tot afkopen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present en Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Sfeervolle dubbele bovenwoning van 96 m² met balkon en zonnig dakterras op het zuidwesten, gelegen op een toplocatie in geliefd Bos en Lommer nabij het Westerpark!
+
+*** ENGLISH BELOW ***
+
+OMGEVING EN BEREIKBAARHEID
+In de nabije omgeving van het appartement is een grote diversiteit van buurtwinkels, cafés en restaurants te vinden. Deze zijn onder meer gevestigd op de Admiraal de Ruijterweg, Haarlemmerweg, Bos en Lommerweg en aan het Bos &amp; Lommerplein. Binnen 10 minuten fietsen ligt de Jordaan, Oud West en het Centrum. Het appartement ligt ideaal om per auto of openbaar vervoer alles in Amsterdam te bereiken of om de stad uit te komen. De Ring A10 is een paar minuten per auto te bereiken en geeft aansluiting op de A1, A2, A4 en Vliegveld Schiphol. Er is voldoende parkeergelegenheid voor de deur en momenteel is er geen wachtlijst voor het aanvragen van een parkeervergunning voor dit gebied. Zeer goede openbaar vervoerverbindingen met tram -en bushaltes om de hoek en Station Sloterdijk is op 5 minuten fietsafstand. Ook zijn er uitstekende lagere scholen, kinderopvang en grote speeltuinen in de directe omgeving.
+
+INDELING: zie de plattegronden in de fotobijlage en/of maak een afspraak met Urban Makelaars.
+
+Bij binnenkomst op de derde verdieping kom je in de hal van de onderste woonlaag van het appartement, vanwaar je toegang hebt tot alle vertrekken. Vanaf de hal bereik je het separate toilet, de wasruimte met cv-opstelling en de badkamer. Je vindt hier een wastafel met spiegel, een ligbad met douchefunctie en een handig handdoekenrek. Op deze verdieping zijn de drie goed bemeten slaapkamers te vinden. De slaapkamer aan de voorzijde beschikt over twee vaste kasten met veel opbergruimte. De twee slaapkamers aan de achterzijde hebben beide openslaande deuren naar het brede balkon. Alle slaapkamers zijn fraai afgewerkt met een mooie houten vloer en wit gestuukte wanden en plafond. Vanaf de hal bereik je ook het separate toilet met fonteintje, de wasruimte met cv-opstelling en de badkamer. De moderne badkamer is voorzien van een wastafelmeubel met spiegel, een ligbad en inloopdouche.  
+
+Via de trap naar de 4e en tevens bovenste verdieping kom je uit in de gezellige woonkamer en woonkeuken welke voorzien is van de benodigde inbouwapparatuur, plus een wijnkast. De woonkeuken met een kleine opstap is heerlijk licht en royaal. Zowel de keuken als de woonkamer zijn voorzien van een eiken houten parketvloer en strak gestuukte wanden en plafond. Vanuit de woonkamer heb je via de grote pui met openslaande deuren toegang tot het zonnige dakterras gelegen op het zuidwesten waar je de hele middag en avond kunt genieten van de zon.
+
+BIJZONDERHEDEN: 
+- Dubbele bovenwoning van 96 m2 op de derde en vierde etage. (NEN 2580 gemeten, meetrapport aanwezig)
+- Lichte woonruimte met open keuken.
+- Ruim terras op het westen, grenzend aan de woonruimte.
+- 3 slaapkamers.
+- Balkon over de gehele breedte van de slaapverdieping.
+- Energielabel C en dubbele beglazing.
+- Houten vloer.
+- Drie royale slaapkamer. 
+- Videofoon aanwezig. 
+- Notaris: naar keuze koper, mits koopakte conform Model Ring bij notaris in Groot Amsterdam.
+- Oplevering: per direct mogelijk. 
+- Vraagprijs: € 750.000,- k.k.
+
+EIGENDOM:
+Het appartementsrecht is gelegen op erfpachtgrond van de gemeente Amsterdam, Het jaarlijkse canon bedraagt € 564,90 en is volledig fiscaal aftrekbaar. Het huidige tijdvak loopt tot 15-5-2050 is hier zijn Algemene bepalingen van 2000 van toepassing.
+
+KADASTRALE AANDUIDING:
+Het appartementsrecht, rechtgevende op het uitsluitend gebruik van de woning op de derde-en vierde verdieping, met balkon en dakterras, plaatselijk bekend te 1055 NM Amsterdam Gibraltarstraat 99- 3, kadastraal bekend gemeente Sloten Noord Holland, sectie C complexaanduiding 11186 A, appartementsindex 79, uitmakende het eenhonderd acht/vierduizend vierhonderd elfde (108/4.411de) onverdeeld aandeel in de gemeenschap.
+
+VERENIGING VAN EIGENAARS:
+De Vereniging van Eigenaars is genaamd &quot;Vereniging Van Eigenaars gebouw Gibraltarstraat 63-99 te Amsterdam&#x27;&#x27; en wordt professioneel beheerd door Falcon VVE Management. De maandelijkse bijdrage is € 191,83. Er is een MJOP aanwezig.
+
+*** ENGLISH ***
+
+DOUBLE-UPSTAIRS APARTMENT (96 SQM) IN THE SOUGHT-AFTER BOS EN LOMMER AREA, NEAR WESTERPARK! This spacious two-level apartment (96 sqm), located on the 3rd and 4th floors in the sought-after Bos en Lommer neighbourhood near Westerpark, has a very practical layout and features both a balcony and a sunny southwest-facing roof terrace!
+
+LOCATION &amp; ACCESSIBILITY:
+The immediate surroundings offer a wide variety of local shops, cafés and restaurants. These can be found on Admiraal de Ruijterweg, Haarlemmerweg, Bos en Lommerweg and around Bos &amp; Lommerplein. The Jordaan, Oud-West and Amsterdam city centre are all within a 10-minute cycle ride. The apartment is ideally located for reaching all parts of Amsterdam by car or public transport, as well as for travelling out of the city. The A10 ring road can be reached within a few minutes by car, providing easy access to the A1, A2 and A4 motorways and Schiphol Airport. There is ample street parking available in front of the property, and currently there is no waiting list for applying for a residential parking permit in this area. Public transport connections are excellent, with tram and bus stops just around the corner. Amsterdam Sloterdijk Station is approximately a 5-minute cycle ride away. There are also excellent primary schools, childcare facilities and large playgrounds in the immediate vicinity.
+
+LAYOUT: (SEE FLOOR PLANS)
+Upon entering on the third floor, you arrive in the hallway of the lower residential level of the apartment, from which all rooms can be accessed. From the hallway, you can access the separate toilet, the laundry/utility room with the central heating boiler, and the bathroom. The bathroom features a washbasin with mirror, a bathtub with shower function and a convenient towel rack. This floor also comprises three generously sized bedrooms. The front bedroom features two built-in wardrobes offering plenty of storage space. Both rear bedrooms have French doors opening onto the wide balcony. All bedrooms are beautifully finished with attractive wooden flooring and white-plastered walls and ceilings. From the hallway, you can also access the separate toilet with washbasin, the laundry/utility room with the central heating boiler and the bathroom. The modern bathroom is equipped with a vanity unit with mirror, a bathtub and a walk-in shower.
+
+A staircase leads to the fourth and top floor, where you enter the inviting living room and open-plan kitchen. The kitchen is equipped with all the necessary built-in appliances and also features a wine cabinet. The open-plan kitchen, which is slightly elevated, is wonderfully bright and spacious. Both the kitchen and living room feature oak parquet flooring and sleekly plastered walls and ceilings. From the living room, large French doors in the wide window frontage provide direct access to the sunny southwest-facing roof terrace, where you can enjoy the sun throughout the afternoon and evening.
+
+KEY FEATURES:
+- Two-level upper-floor apartment of 96 sqm, located on the third and fourth floors (measured in accordance with NEN 2580; measurement report available).
+- Bright living space with open-plan kitchen.
+- Spacious west-facing terrace adjoining the living area.
+- 3 bedrooms.
+- Balcony spanning the entire width of the bedroom floor.
+- Energy label C and double glazing.
+- Wooden flooring.
+- Three generously sized bedrooms.
+- Video intercom system.
+- Notary of the buyer&#x27;s choice, provided the purchase agreement is in accordance with the Model Ring agreement at a notary in the Greater Amsterdam area.
+- Completion: available immediately.
+- Asking price: € 750.000 buyer&#x27;s costs (k.k.).
+
+LEASEHOLD:
+The apartment right is situated on leasehold land owned by the Municipality of Amsterdam. The annual ground rent (canon) is €564.90 and is fully tax-deductible. The current leasehold period runs until 15 May 2050, and the General Provisions of 2000 apply.
+
+CADASTRAL DESIGNATION:
+The apartment right, entitling the owner to the exclusive use of the residence on the third and fourth floors, including the balcony and roof terrace, locally known as Gibraltarstraat 99-3, 1055 NM Amsterdam, cadastral municipality of Sloten, North Holland, Section C, complex designation 11186 A, apartment index 79, representing a one hundred and eight/four thousand four hundred and eleventh (108/4,411th) undivided share in the community.
+
+OWNERS&#x27; ASSOCIATION: (VvE)
+The Owners&#x27; Association is called &quot;Vereniging Van Eigenaars gebouw Gibraltarstraat 63-99 te Amsterdam&quot; and is professionally managed by Falcon VVE Management. The monthly service charge is €191.83. A Long-Term Maintenance Plan (MJOP) is available.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Raymond Noordeloos</strong> · Urban Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/935/770_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/756_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/738_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/734_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/745_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/766_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/742_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/760_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/780_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/799_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/797_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/790_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/786_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/759_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/796_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/763_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/733_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/776_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/798_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/735_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/935/750_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

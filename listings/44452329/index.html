@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paramaribostraat 68-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Paramaribostraat 68-2</h1>
+  <p class="sub">
+    <span>1058 VM Amsterdam</span>
+    <span>·</span>
+    <span>Paramariboplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/229/088/460_1440x960.jpg" alt="Paramaribostraat 68-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">33 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€725.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.398/m² · 1.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.2 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">98 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1930</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-68-2/44452329/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oorspronkelijke vraagprijs</dt><dd>€ 795.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>Per Immediate Available</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 725.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.398</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 223,31 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1930</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Monumentaal pand</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met bitumineuze dakbedekking en tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>98 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>361 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Gedeeltelijk Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HRE (gas-fired combi boiler uit 2022, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM M 1535</dt><dd>ownedssituatie</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 223,31 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruim en licht 4-kamer dubbel bovenhuis van 98 m2 gelegen op Eigen Grond in Amsterdam Oud-West De Baarsjes.
+
+Indeling: 
+
+Eerste verdieping: portiek, eigen entree met trap naar de tweede verdieping.
+Tweede verdieping: hal en overloop met toegang tot de vertrekken, ruime en lichte voormalig ensuite-woonkamer met inbouwkasten en aparte eetkamer, slaapkamer aan de voorzijde met inbouwkasten, aparte keuken met inbouwapparatuur, een separaat toilet en trap naar de derde verdieping. 
+Derde verdieping: overloop met toegang tot de vertrekken, twee slaapkamers aan de voorzijde, moderne badkamer met ligbad, douche, wastafel, toilet en wasmachineplek, aparte berging. 
+Vierde verdieping: Via trap in de slaapkamer bereik tot vliering met extra bergruimte. 
+
+Omgeving:
+
+In de nabije omgeving treft u op de Overtoom, de Amstelveenseweg, de Postjesweg en de Kinkerstraat een ruim winkelaanbod voor uw dagelijkse boodschappen. Verder kunt u zich heerlijk ontspannen in het zich op loopafstand bevindende Vondel- en Rembrandtpark. Met de fiets bereikt u binnen 5 tot 10 minuten de J.P. Heijestraat, de Ten Katemarkt, het Leidseplein, de Jordaan en Project de Hallen, met hun bijzondere winkels en gezellige uitgaansgelegenheden. Bovendien is de woning goed bereikbaar met zowel de auto (via afslag S106 van de ring) als het openbaar vervoer (o.a. tram 1, 17 en bus 15). 
+
+Bijzonderheden: 
+
+- Gelegen op Eigen grond, dus geen erfpacht.
+- Drie slaapkamers en twee toiletten.
+- Actieve, financieel gezonde en professioneel beheerde VvE.
+- Maakt deel uit van een gemeentelijk monument.
+- Keuring onderhouden en met veel originele details.
+- Intergas HRE CV ketel uit 2022.
+- Energielabel C.
+- In 2024 is dak gerenoveerd en zijn buitenkozijnen geschilderd.
+- Vraagprijs € 725.000,-- k.k. 
+- Levering in overleg, kan snel indien gewenst.	
+
+**
+
+Spacious and bright 4-room double topfloor apartment of 98 m² situated on freehold land in Amsterdam Oud-West, De Baarsjes.
+
+Layout:
+
+First floor: porch, private entrance with stairs to the second floor.
+Second floor: hall and landing with access to the rooms, spacious and bright former en-suite living room with built-in wardrobes and separate dining room, front bedroom with built-in wardrobes, separate kitchen with built-in appliances, a separate toilet, and stairs to the third floor.
+Third floor: landing with access to the rooms, two front bedrooms, modern bathroom with bathtub, shower, sink, toilet, and washing machine area, separate storage room.
+Fourth floor: Access via stairs in the bedroom to the attic with extra storage space.
+
+Surroundings:
+
+In the immediate vicinity, you will find a wide range of shops for your daily groceries on the Overtoom, Amstelveenseweg, Postjesweg, and Kinkerstraat. Furthermore, you can relax wonderfully in the Vondel Park and Rembrandt Park, which are located within walking distance. By bicycle, you can reach J.P. Heijestraat, Ten Katemarkt, Leidseplein, the Jordaan, and Project de Hallen, with their unique shops and lively nightlife venues, within 5 to 10 minutes. Furthermore, the property is easily accessible by both car (via exit S106 from the ring road) and public transport (including tram 1, 17, and bus 15).
+
+Particulars:
+
+- Situated on freehold land, so no leasehold.
+- Three bedrooms and two toilets.
+- Active, financially sound, and professionally managed Owners&#x27; Association.
+- Part of a municipal monument.
+- Well-maintained and featuring many original details.
+- Intergas HRE central heating boiler from 2022.
+- Energy label C.
+- The roof was renovated and the exterior window frames painted in 2024.
+- Asking price € 725.000,-- k.k.
+- Delivery by mutual agreement; can be quick if desired.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Martijn W. Baart</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 33</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/229/088/460_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/491_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/428_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/593_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/464_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/494_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/483_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/532_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/422_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/499_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/384_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/374_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/456_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/553_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/377_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/393_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/546_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/441_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/575_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/479_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/461_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/417_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/528_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/408_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/576_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/592_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/373_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/405_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/088/449_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assumburg 126 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Assumburg 126</h1>
+  <p class="sub">
+    <span>1081 GC Amsterdam</span>
+    <span>·</span>
+    <span>Buitenveldert-Zuidwest</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/219/495/964_1440x960.jpg" alt="Assumburg 126 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">44 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€795.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.361/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">108 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1967</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">12 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-assumburg-126/89576671/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 795.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.361</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 421,23 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Gallery flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1967</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>108 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>11 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>337 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub en 2 toiletten</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>12 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>12e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>111 28 AK</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan bosrand en aan park</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 421,23 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">UNIEK APPARTEMENT OP DE 11E VERDIEPING MET DRIE SLAAPKAMERS, MODERN COMFORT EN ADEMBENEMEND UITZICHT!
+
+Stap binnen in dit prachtige 4-kamer appartement van 108 m² woonoppervlakte op de 11e verdieping en geniet van modern comfort, een open keuken en schitterende uitzichten. Het appartement is volledig gerenoveerd in 2024 en beschikt over drie slaapkamers, waaronder een master bedroom met een badkamer ensuite met inloopdouche, toilet en een vrijstaand bad bij het raam. Ook de tweede badkamer biedt comfort met een grote en toegankelijke douche. In de hal bevindt zich een separaat gastentoilet.
+
+INDELING
+
+- Ruime, lichte woonkamer met fantastisch uitzicht vanaf de 11e verdieping
+- Moderne open keuken (2024) voorzien van inbouwapparatuur, inclusief vaatwasser
+- Master bedroom met badkamer ensuite
+- Twee extra slaapkamers
+- Tweede badkamer
+- Gastentoilet
+- Balkon met toegang vanuit de keuken en woonkamer
+- Aparte berging op -1 van het gebouw
+- Centrale verwarming via radiatoren
+- Lift aanwezig
+
+VERENIGING VAN EIGENAREN (VVE)
+De maandelijkse VvE-bijdrage bedraagt €298,23, plus voorschot stookkosten van €133 (totaal €431,23).
+
+EIGENDOM VAN DE GROND
+De erfpacht is eeuwigdurend afgekocht, wat betekent dat er geen canon meer betaald hoeft te worden.
+
+LOCATIE EN BEREIKBAARHEID
+Het appartement is gunstig gelegen in een rustige, groene buurt van Amsterdam, nabij winkels, gezellige cafés en restaurants. Op korte afstand bevindt zich het Gelderlandplein, een levendig winkelcentrum met een divers aanbod van boetiekwinkels, sfeervolle cafés, restaurants en speciaalzaken zoals een groenteboer, fruitwinkel en vishandel. Openbaar vervoer is eenvoudig bereikbaar en er zijn snelle verbindingen naar de Zuidas, Schiphol en het stadscentrum. Voor ontspanning ligt het prachtige Amsterdamse Bos om de hoek, ideaal voor wandelingen, hardlooprondjes of een dagje recreëren aan het water.
+
+BIJZONDERHEDEN
+
+- Woonoppervlakte: 108 m² (GO)
+- Bruto vloeroppervlakte: 119,3 m²
+- Balkon
+- Berging op -1 van het gebouw
+- Centrale verwarming
+- Lift aanwezig
+- Moderne keuken uit 2024 met vaatwasser
+- Energielabel A
+- Erfpacht eeuwigdurend afgekocht
+
+NOTARIS EN OPLEVERING
+De koopakte zal worden opgesteld via een notaris binnen de Notariële Ring. Oplevering in overleg, leeg en ontruimd.
+
+UNIQUE 11TH-FLOOR APARTMENT WITH THREE BEDROOMS, MODERN COMFORT, AND STUNNING VIEWS!
+
+Step into this beautiful 4-room apartment of 108 m² located on the 11th floor and enjoy modern comfort, an open kitchen, and breathtaking views. Fully renovated in 2024, the apartment features three bedrooms, including a master bedroom with an ensuite bathroom complete with a walk-in shower, toilet, and a freestanding bathtub by the window. The second bathroom also offers a spacious and accessible shower. A separate guest toilet is conveniently located in the hallway.
+
+LAYOUT
+
+- Spacious, bright living room with fantastic views from the 11th floor
+- Modern open kitchen (2024) equipped with built-in appliances, including a dishwasher
+- Master bedroom with ensuite bathroom
+- Two additional bedrooms
+- Second bathroom
+- Guest toilet
+- Balcony accessible from both the kitchen and living room
+- Separate storage room on -1 level of the building
+- Central heating via radiators
+- Elevator in the building
+
+HOMEOWNERS ASSOCIATION (VVE)
+The monthly VvE contribution is €298.23, plus a heating advance of €133 (total €431.23).
+
+FREEHOLD / LAND LEASE
+The ground lease has been bought off indefinitely, meaning no further lease payments are required.
+
+LOCATION AND ACCESSIBILITY
+The apartment is ideally located in a quiet, green area of Amsterdam, close to shops, cozy cafés, and restaurants. Nearby is Gelderlandplein, a vibrant shopping center offering boutiques, cafés, restaurants, and specialty stores such as a greengrocer, fruit shop, and fishmonger. Public transport is easily accessible, with quick connections to Zuidas, Schiphol, and the city center. For leisure, the beautiful Amsterdamse Bos is just around the corner, perfect for walks, runs, or a day by the water.
+
+FEATURES &amp; DETAILS
+
+- Living area: 108 m² (usable floor space)
+- Gross floor area: 119.3 m²
+- Balcony
+- Storage on -1 level of the building
+- Central heating
+- Elevator
+- Modern kitchen (2024) with dishwasher
+- Energy label A
+- Indefinitely bought-off ground lease
+
+NOTARY AND DELIVERY
+The purchase deed will be drawn up through a notary within the Notarial Ring. Delivery is by agreement, vacant and cleared.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 1 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 44</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/219/495/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/954_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/966_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/969_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/967_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/988_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/978_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/973_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/023_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/005_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/992_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/957_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/089_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/979_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/956_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/999_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/046_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/000_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/002_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/998_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/496/017_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/219/495/970_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

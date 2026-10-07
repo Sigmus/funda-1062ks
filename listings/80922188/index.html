@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burgemeester De Vlugtlaan 345 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Burgemeester De Vlugtlaan 345</h1>
+  <p class="sub">
+    <span>1063 BP Amsterdam</span>
+    <span>·</span>
+    <span>Jan de Louterbuurt</span>
+    <span class="status offer">Sold</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/155/971_1440x960.jpg" alt="Burgemeester De Vlugtlaan 345 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">24 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€327.500</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.486/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">73 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy G</span>
+      <span class="chip">Built 1958</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-burgemeester-de-vlugtlaan-345/80922188/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Laatste vraagprijs</dt><dd>€ 327.500 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.486</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 263,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Gallery flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1958</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        <div class="frow"><dt>Toegankelijkheid</dt><dd>Toegankelijk voor ouderen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>73 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>239 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>8e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>G</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN D 5775</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 31-08-2032)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 63,52 per Yesar met optie tot afkopen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 263,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Licht, ruimte en vrij uitzicht op de bovenste verdieping in Amsterdam.
+
+Op een rustige en prettige locatie, met de Sloterplas op korte fietsafstand en de stad binnen handbereik, ligt dit lichte en praktisch ingedeelde 4-kamerappartement op de achtste en tevens bovenste verdieping van het complex.
+
+Met een woonoppervlakte van circa 73 m², drie goed bemeten slaapkamers, een lichte woonkamer met open keuken en een zonnig balkon op het westen is dit een woning met verrassend veel mogelijkheden. Hier geniet je van rust, ruimte, vrij uitzicht en volop middag- en avondzon.
+
+De huidige indeling is praktisch en comfortabel, maar biedt bovendien flexibiliteit. Wie behoefte heeft aan een grotere woonkamer kan eenvoudig één van de slaapkamers bij de living betrekken. Zo ontstaat een royale open leefruimte met volop plek voor een ruime zithoek en grote eettafel.
+
+Een fijn appartement op een rustige plek, met Amsterdam centrum altijd dichtbij.
+
+Indeling
+
+Via de verzorgde centrale entree op de begane grond kom je het goed onderhouden complex binnen. Het gebouw beschikt over een huismeester en in de onderbouw bevindt zich de eigen berging van circa 5 m², ideaal voor fietsen, opslag en overige spullen.
+
+Met de lift of via het trappenhuis bereik je de achtste en bovenste verdieping.
+
+Bij binnenkomst valt direct de prettige en overzichtelijke indeling op. Vanuit de centrale hal zijn vrijwel alle vertrekken bereikbaar.
+
+De woonkamer bevindt zich aan de achterzijde van het appartement en beschikt over grote raampartijen en een fraai vrij uitzicht. Hierdoor komt er veel daglicht binnen en voelt de ruimte licht en aangenaam aan.
+
+De open keuken sluit direct aan op de woonkamer en is praktisch ingericht met een royaal werkblad, een keramische kookplaat, combi-oven, afzuigkap en voldoende kastruimte.
+
+Grenzend aan de woonkamer bevindt zich één van de slaapkamers. Deze kamer kan uitstekend als volwaardige slaapkamer, werkruimte of logeerkamer worden gebruikt. Daarnaast bestaat de mogelijkheid deze kamer bij de woonkamer te betrekken. Daarmee creëer je eenvoudig een bijzonder royale leefruimte.
+
+Vanuit de ruime slaapkamer aan de achterzijde is het balkon op het westen bereikbaar. Dit is zonder twijfel een van de fijne plekken van het appartement. Hier kun je vanaf de middag tot in de avond heerlijk van de zon genieten. Er is voldoende ruimte voor een comfortabele zithoek, een tafel met stoelen of een compacte loungebank.
+
+Aan de voorzijde bevinden zich de overige twee slaapkamers. Ook deze kamers zijn goed van formaat en bieden voldoende ruimte voor een bed, kast en eventueel een bureau.
+
+De badkamer is praktisch ingericht en voorzien van een douche, wastafelmeubel en aansluiting voor de wasmachine. Het toilet bevindt zich separaat.
+
+Daarnaast beschikt het appartement over meerdere vaste bergkasten, waardoor er verrassend veel bergruimte aanwezig is.
+
+Omgeving
+
+De ligging biedt een mooie combinatie van rust, groen en bereikbaarheid.
+
+Binnen enkele minuten fietsen bereik je de Sloterplas, een heerlijke plek om te wandelen, sporten, zwemmen of gewoon even aan het water te zitten. Ook het Rembrandtpark en het Erasmuspark liggen op korte afstand.
+
+Voor dagelijkse boodschappen, winkels en diverse horecagelegenheden kun je onder andere terecht rondom Plein ’40-’45 en de Jan van Galenstraat.
+
+Ook de bereikbaarheid is uitstekend. Metro 50 en 51, tram 13 en verschillende busverbindingen bevinden zich op loopafstand. Met de auto bereik je binnen enkele minuten de Ring A10 en ook het centrum van Amsterdam is zowel per fiets als met het openbaar vervoer goed bereikbaar.
+
+Vereniging van Eigenaren
+
+De woning maakt deel uit van een professioneel beheerde Vereniging van Eigenaren. Het beheer wordt gevoerd door Stedeplan en er is een meerjarenonderhoudsplan aanwezig.
+
+De servicekosten bedragen € 263,- per maand. Daarnaast wordt een voorschot van € 118,- per maand in rekening gebracht voor de stookkosten.
+
+Bijzonderheden:
+
+* Bouwjaar 1958;
+* Woonoppervlakte circa 73 m²;
+* NEN-meetrapport beschikbaar;
+* Gelegen op de achtste en bovenste verdieping;
+* Drie slaapkamers;
+* Mogelijkheid om één slaapkamer bij de woonkamer te betrekken;
+* Zonnig balkon op het westen;
+* Vrij uitzicht;
+* Eigen berging van circa 5 m² in de onderbouw;
+* Volledig voorzien van dubbele beglazing;
+* Energielabel G;
+* Professioneel beheerde VvE;
+* Meerjarenonderhoudsplan aanwezig;
+* Servicekosten € 263,- per maand;
+* Voorschot stookkosten € 118,- per maand;
+* Erfpachtcanon € 63,52 per jaar. Huidig tijdvak loopt tot en met 31 augustus 2032.
+
+* Niet-bewoningsclausule van toepassing;
+* Asbestclausule van toepassing.
+
+Oplevering in overleg, kan snel.
+
+ENGLISH
+Bright top-floor apartment with open views and a sunny west-facing balcony
+
+Situated in a pleasant and quiet location, just a short bike ride from the Sloterplas and with the city centre within easy reach, this bright and efficiently laid-out four-room apartment occupies the eighth and top floor of the building.
+
+With approximately 73 m² of living space, three well-proportioned bedrooms, a bright living room with open-plan kitchen and a sunny west-facing balcony, this apartment offers a surprising amount of space and flexibility.
+
+The current layout is comfortable and practical, while also offering the opportunity to create a considerably larger living area. One of the bedrooms can easily be incorporated into the living room, resulting in a spacious open-plan living and dining area.
+
+A comfortable home in a peaceful setting, with everything Amsterdam has to offer close at hand.
+
+Layout
+
+The well-maintained building is entered through a neat communal entrance on the ground floor. The complex benefits from a caretaker and the apartment includes a private storage room of approximately 5 m² in the basement, ideal for bicycles and additional storage.
+
+The eighth and top floor can be reached by lift or stairs.
+
+Upon entering the apartment, the practical and well-balanced layout immediately becomes apparent. The central hallway provides access to almost all rooms.
+
+The living room is situated at the rear of the apartment and benefits from large windows and unobstructed views. Plenty of natural daylight enters the room, creating a bright and pleasant atmosphere.
+
+The open-plan kitchen adjoins the living room and is practically equipped with a generous worktop, ceramic hob, combination oven, extractor hood and ample cupboard space.
+
+One of the bedrooms is located directly next to the living room. This room can be used as a full-sized bedroom, home office or guest room. Alternatively, it can be incorporated into the living room, creating a particularly spacious living and dining area.
+
+The generous rear bedroom provides access to the west-facing balcony. This is a wonderful place to enjoy the afternoon and evening sun. There is ample room for a seating area, table and chairs or a compact lounge sofa.
+
+Two further bedrooms are located at the front of the apartment. Both are well proportioned and provide enough space for a bed, wardrobe and, if desired, a desk.
+
+The bathroom is practically fitted with a shower, washbasin unit and washing machine connection. The toilet is separate.
+
+The apartment also offers several built-in storage cupboards, providing a useful amount of additional storage space.
+
+Location
+
+The location offers an attractive combination of tranquillity, greenery and excellent accessibility.
+
+The Sloterplas can be reached within just a few minutes by bicycle and is ideal for walking, exercising, swimming or simply relaxing by the water. Rembrandtpark and Erasmuspark are also nearby.
+
+Daily shopping, restaurants and other amenities can be found around Plein ’40-’45 and Jan van Galenstraat.
+
+Public transport connections are excellent. Metro lines 50 and 51, tram 13 and several bus routes are all within walking distance. The A10 ring road can be reached within minutes by car, while Amsterdam city centre is also easily accessible by bicycle and public transport.
+
+Homeowners’ Association
+
+The apartment forms part of a professionally managed homeowners’ association. Management is carried out by Stedeplan and a long-term maintenance plan is in place.
+
+The monthly service charges amount to €263. In addition, an advance payment of €118 per month is charged for heating costs.
+
+Key features
+Year of construction: 1958
+Living area approximately 73 m²
+NEN measurement report available
+Situated on the eighth and top floor
+Three bedrooms
+Possibility to incorporate one bedroom into the living room
+Sunny west-facing balcony
+Unobstructed views
+Private storage room of approximately 5 m²
+Fully fitted with double glazing
+Energy label G
+Professionally managed homeowners’ association
+Long-term maintenance plan in place
+Service charges €263 per month
+Heating advance €118 per month
+Ground lease €63.52 per year
+Current lease period runs until 31 August 2032
+Non-occupancy clause applies
+Asbestos clause applies
+Completion in consultation</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>N.O.G.B.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 24</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/155/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/957_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/970_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/942_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/934_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/928_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/967_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/924_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/931_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/155/923_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

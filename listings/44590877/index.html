@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montelbaanstraat 20 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Montelbaanstraat 20</h1>
+  <p class="sub">
+    <span>1011 EG Amsterdam</span>
+    <span>·</span>
+    <span>Lastage</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/499/343_1440x960.jpg" alt="Montelbaanstraat 20 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">37 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€620.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.611/m² · 4.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">72 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1932</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-montelbaanstraat-20/44590877/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 620.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.611</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 274,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1932</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>72 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>244 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation en Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Gehele Underfloor heating en warmtepomp</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM G 9447</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 28-02-2066)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 3.516,42 per Yesar met optie tot afkopen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en City centre</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 274,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">OP EEN VAN DE AUTHENTIEKSTE PLEKKEN VAN DE STAD AMSTERDAM, BIEDEN WIJ EEN LICHT &amp; RUIM APPARTEMENT VAN 72M2 MET LIFT, WARMTEPOMP, (DUS GASVRIJ) VERDEELD OVER TWEE VERDIEPINGEN, IN EEN RUSTIG STRAATJE IN DE OUDE BINNENSTAD, HET PAND IS VERNIEUWBOUWD IN 2018.
+
+Het appartement is verdeeld over de derde en vierde verdieping met een berging in het souterrain. De lift brengt je naar de derde verdieping. Naast de lift is de voordeur van het appartement. Entree, hal, living met open keuken, aparte w.c., bovenste verdieping heeft 3 slaapkamers en een badkamer. De aanvraag voor overstap naar eeuwigdurende erfpacht is gedaan. Het pand is geheel aardgas vrij en voorzien van warmtepomp.
+
+DERDE VERDIEPING
+
+ENTREE &amp; LIVING
+Zeer verzorgd gemeenschappelijk trappenhuis met lift, entree op de derde verdieping. Hal met ruimte voor schoenen en jassen, doorloop naar de woon-eetkamer met vier ramen, waardoor er enorm veel licht in valt. Er is naast de trapopgang een separaat toilet met fonteintje.
+De nette open keuken is modern en strak afgewerkt met grijze kastjes en lades, wit composiet aanrechtblad en een leuk extra barretje. Voorzien van een ijskast, diepvries, inductie kookplaat met afzuigkap, afwasmachine van Siemens en een Siemens oven. Deze gehele verdieping heeft een gietvloer met vloerverwarming. 
+De open keuken met eetgedeelte is nu afgescheiden middels een fraaie boekenkast van het &quot;zitgedeelte&quot;. Dit is een speelse oplossing om de kamer te verdelen, maar wel het licht te behouden. 
+Hier is aan de andere zijde een knusse hoek voor een bureau, een rustige thuiswerkplek. 
+
+VIERDE VERDIEPING
+
+3 SLAAPKAMERS &amp; BADKAMER
+Bereikbaar via de vaste trap, lichte hal met tevens een strakke lichte gietvloer met vloerverwarming. Deze verdieping is tevens de bovenste verdieping en heeft nokhoogte en charmante balken in het zicht.  
+De master bedroom is gelegen aan de oostzijde met royale inloopkast. De tweede en derde slaapkamer zijn kleiner, om ze zo efficiënt mogelijk te maken zijn de bedden en bureaus ingebouwd. Uiteraard kan je deze ingebouwde bedden en bureaus er ook uithalen en van deze twee kamers een grotere slaapkamer maken. 
+De badkamer is afgewerkt met de balken en dakbeschot in zicht en witte wand- en grijze vloertegels. Voorzien van een ligbad met douche, wastafel en nog een tweede w.c. Tevens is hier ruimte voor een wasmachine en droger. 
+
+SOUTERRAIN
+
+BERGING
+Ruime berging gelegen in het souterrain van het pand, bereikbaar met lift.
+
+OMGEVING:
+Gelegen in het Centrum, in de wijk Nieuwmarkt/ Lastage in de Scheepvaartsthuisbuurt, in een rustige straat. De buurt kenmerkt zich door het dorpse karakter en ruimtelijkheid.
+
+Alle voorzieningen van moderne winkels op het Oosterdok, tot de speciaalzaken in de buurt. De Nieuwmarkt bekend van de De Boerenmarkt op zaterdag, Viswinkel Tel en &#x27;t Loosje is om de hoek.
+
+Naast het pand is de klassieker Hemelse Modder gelegen en even verder aan het water Captein &amp; Co. Het Nationale Opera &amp; Ballet en Muziekgebouw aan het IJ zijn op loopafstand.
+
+De bereikbaarheid is uitstekend zowel met eigen vervoer, IJ-tunnel als met openbaar vervoer, het Centraal Station is vijf minuten wandelen. De locatie tussen de autovrije Nieuwe Ridder- en Nieuwe Jonkerstraat is een oase van rust. Via de Rechtboomssloot en de Oude Waal kan men met de auto er komen. 
+
+Bijzonderheden:
+• Gebruiksoppervlakte wonen totaal 72 m², bruto 105 M²
+• Om de hoek bij de Oude Waal
+• Dorps karakter en ruimtelijkheid
+• Gehele appartement is voorzien van vloerverwarming en deze kan in de warme maanden op koeling worden gezet 
+• 3 slaapkamers
+• Geheel aardgas vrij en voorzien van een warmtepomp met boiler.
+• Gezonde VVE voor 16 appartementen 
+• Servicekosten € 274,00 + € 93,00 per maand voor de stookkosten
+• De overstap naar eeuwigdurende erfpacht is gemaakt  onder gunstige voorwaarden, de canon bedraagt nu €3.516,42 per jaar tot 28 februari 2066, de canon zal daarna € 1.180,96 bedragen + een inflatie correctie vanaf 2022
+
+Historie:
+Montelbaanstraat 6 is in 1932 gebouwd als Volkslogement voor het Amsterdamsch Bouwfonds, naar ontwerp van Pieter Vorkink. Het Volkslogement was een eenvoudig hotel met 78 kamers, gedeelde was- en doucheruimtes, een eet- en ontspanningszaal en een leeszaal, waar bijvoorbeeld havenwerkers en zeelieden een betaalbaar onderdak konden krijgen. Na de oorlog werd het gebouw onder de naam Walenburg gebruikte als daklozenopvang.
+
+• Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn slechts indicatief
+• De Meetinstructie is gebaseerd op de NEN2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting
+
+ENGLISH VERSION:
+
+IN ONE OF THE MOST AUTHENTIC PARTS OF AMSTERDAM, WE OFFER A BRIGHT &amp; SPACIOUS 72-SQUARE-METER APARTMENT WITH AN ELEVATOR, WARMTH PUMP, (MEANING GAS-FREE) SPREAD OVER TWO FLOORS, IN A QUIET STREET IN THE OLD CITY CENTER; THE BUILDING WAS RENOVATED IN 2018.
+
+The apartment is located on the third and fourth floors with a storage room in the basement. The elevator takes you to the third floor. The apartment’s front door is located next to the elevator. Entryway, hallway, living room with open kitchen, separate toilet; the top floor has 3 bedrooms and a bathroom. The application to convert to a perpetual leasehold has been submitted. The property is entirely natural gas-free and equipped with a heat pump.
+
+THIRD FLOOR
+
+ENTRANCE &amp; LIVING ROOM
+Very well-maintained common stairwell with elevator; entrance on the third floor. Hallway with space for shoes and coats, leading to the living-dining room with four windows, allowing lots of light to enter. Next to the staircase is a separate toilet with a sink.
+The neat open kitchen is modern and finished with grey cabinets and drawers, a white composite countertop, and a nice little bar. It is equipped with a refrigerator, freezer, induction cooktop with extractor hood, a Siemens dishwasher, and a Siemens oven. This entire floor features a polished concrete floor with underfloor heating. 
+The open kitchen with dining area is now separated from the “sitting area” by a beautiful bookshelf. This is a playful solution for dividing the room while still allowing light to enter.
+On the other side, there is a cozy corner for a desk, providing a quiet home office. 
+
+FOURTH FLOOR
+
+3 BEDROOMS &amp; BATHROOM
+Accessible via the staircase, this floor features a bright hallway with stylish light-colored flooring and underfloor heating. Being the top floor, it features high ceilings and charming exposed beams.  
+The master bedroom is located on the east side and features a spacious walk-in closet. The second and third bedrooms are smaller; to maximize efficiency, the beds and desks are built-in. Of course, you can also remove these built-in beds and desks to convert these two rooms into a large bedroom. 
+The bathroom features exposed beams and roof panels, along with white wall tiles and gray floor tiles. It is equipped with a bathtub with shower, a sink, and a second toilet. There is also space here for an washer and dryer. 
+
+BASEMENT
+
+STORAGE ROOM
+Spacious storage room located in the basement of the building, accessible by elevator.
+
+SURROUNDINGS:
+Located in the city center, in the Nieuwmarkt/Lastage neighborhood within the Scheepvaartsthuisbuurt, on a quiet street. The neighborhood is characterized by its village-like atmosphere and spaciousness.
+
+All amenities are available, from modern shops on the Oosterdok to specialty stores in the neighborhood. The Nieuwmarkt is known for the De Boerenmarkt on Saturdays, and the fishmongers Tel and &#x27;t Loosje are just around the corner.
+
+Next to the building is the classic restaurant Hemelse Modder, and a little further along the waterfront is Captein &amp; Co. The Dutch National Opera &amp; Ballet and  The Music Building on the IJ is within walking distance.
+
+Accessibility is excellent, whether by private vehicle, the IJ Tunnel, or public transportation; Central Station is a five-minute walk away. The location between the car-free Nieuwe Ridderstraat and Nieuwe Jonkerstraat is an oasis of serenity. Access by car is available via the Rechtboomssloot and the Oude Waal. 
+
+Details:
+• Total living area 72 m², gross 105 m²
+• Just around the corner from the Oude Waal
+• Village-like character and spaciousness
+• The entire apartment is equipped with underfloor heating, which can be set to cooling during the warmer months
+• 3 bedrooms
+• Completely natural gas-free and equipped with a heat pump and boiler.
+• Well-managed homeowners’ association for 16 apartments
+• Service charges €274.00 + €93.00 per month for heating costs
+• The transition to a perpetual ground lease was made  under favorable terms; the ground rent is currently €3,516.42 per year until February 28, 2066, after which it will be €1,180.96 plus an inflation adjustment starting in 2022
+
+History:
+Montelbaanstraat 6 was built in 1932 as a Volkslogement for the Amsterdamsch Bouwfonds, designed by Pieter Vorkink. The Volkslogement was a simple hotel with 78 rooms, shared laundry and shower facilities, a dining and lounge area, and a reading room, where dockworkers and sailors, for example, could find affordable lodging. After the war, the building was used as a homeless shelter under the name Walenburg.
+
+• We have compiled this information with due care. However, we accept no liability whatsoever for any incompleteness, inaccuracy, or other errors, or for the consequences thereof. All dimensions and surface areas provided are for reference only
+• The Measurement Instructions are based on NEN 2580. The Measurement Instructions are intended to provide a more uniform method of measurement for estimating usable floor area. The Measurement Instructions do not completely eliminate differences in measurement results, due to factors such as differences in interpretation, rounding, or limitations in the measurement process
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 37</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/499/343_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/310_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/368_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/316_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/355_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/348_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/307_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/349_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/325_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/377_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/280_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/367_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/330_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/335_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/359_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/351_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/293_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/326_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/317_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/390_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/353_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/381_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/327_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/371_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/295_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/350_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/281_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/346_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/290_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/388_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/296_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/339_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/321_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/344_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/499/323_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

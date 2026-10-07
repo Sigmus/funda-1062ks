@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dijkgraafplein 171 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Dijkgraafplein 171</h1>
+  <p class="sub">
+    <span>1069 EN Amsterdam</span>
+    <span>·</span>
+    <span>Dijkgraafpleinbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/785/886_1440x960.jpg" alt="Dijkgraafplein 171 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">46 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€385.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €3.929/m² · 3.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.6 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">98 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1970</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-dijkgraafplein-171/80961385/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 385.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 3.929</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 249,14 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Walk-up flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1970</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Monument</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>98 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>325 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND G 2903</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>owned belast met Leasehold</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en open ligging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, parkeergarage en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 249,14 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Dijkgraafplein 171 – Amsterdam
+
+Verrassend ruime en lichte maisonnette met drie slaapkamers, vernieuwde keuken, zonnig balkon op het zuiden en vrij uitzicht over het groen. Verdeeld over twee woonlagen én met lift, eigen berging en parkeergelegenheid voor bewoners.
+
+Wie op zoek is naar ruimte in Amsterdam, moet deze woning beslist van binnen bekijken. Dijkgraafplein 171 is een heerlijk lichte maisonnette verdeeld over twee woonlagen, met een royale woon-/eetkamer, drie volwaardige slaapkamers en een moderne keuken.
+
+De grote raampartijen aan beide zijden van de woning zorgen de hele dag voor veel natuurlijk licht en versterken het open en ruimtelijke karakter. Vanuit de woonkamer stap je via dubbele openslaande deuren zo het zonnige balkon op het zuiden op. Hier geniet je van een prettig vrij uitzicht over het omliggende groen.
+
+De woning heeft een rustige, neutrale basis en biedt volop mogelijkheden om geheel naar eigen smaak in te richten. Dankzij de drie slaapkamers is dit een bijzonder geschikte woning voor een gezin, maar ook voor stellen die extra ruimte zoeken of één of meerdere kamers als werk-, studie- of logeerkamer willen gebruiken.
+
+Het appartement maakt deel uit van een verzorgd complex met lift, een eigen berging in de onderbouw, een gemeenschappelijke fietsenstalling en een afgesloten parkeerterrein voor bewoners.
+
+Indeling
+Woonverdieping – licht, ruimte en een fijne verbinding met buiten
+
+De woning is bereikbaar via zowel het gemeenschappelijke trappenhuis als de lift.
+
+Bij binnenkomst kom je in de ruime hal. Hier bevindt zich een praktische inloopkast met volop ruimte voor jassen, schoenen en andere spullen. De kast is bovendien voorzien van automatische sensorverlichting. Vanuit de hal zijn de verschillende vertrekken bereikbaar en bevindt zich het separate toilet met fonteintje.
+
+De royale woon-/eetkamer is zonder twijfel één van de sterke punten van de woning. Door de langgerekte indeling en brede raampartijen is er meer dan voldoende ruimte voor een comfortabele zithoek én een grote eettafel.
+
+De lichte laminaatvloer en neutrale wandafwerking geven het geheel een rustige en eigentijdse uitstraling. Tegelijkertijd biedt de ruimte volop mogelijkheden om er met een eigen interieurstijl iets heel persoonlijks van te maken.
+
+Via de dubbele openslaande deuren bereik je het balkon op het zuiden. Een heerlijke plek om buiten te zitten, met een relatief vrij en groen uitzicht en volop mogelijkheden om van de zon te genieten.
+
+Volledig vernieuwde keuken
+
+Aan de andere zijde van de woonverdieping bevindt zich de moderne keuken.
+
+De moderne keuken is uitgevoerd in een stijlvolle grijstint en voorzien van een licht composiet werkblad. Dankzij de royale U-opstelling is er opvallend veel werk- en bergruimte.
+
+De keuken beschikt over diverse inbouwapparatuur, waaronder een inductiekookplaat, oven, magnetron, koelkast en afzuigkap. De brede raampartij boven het werkblad zorgt tijdens het koken voor veel daglicht en geeft de keuken een aangename, lichte uitstraling.
+
+Door de directe aansluiting op het eetgedeelte vormen koken en tafelen hier op natuurlijke wijze één geheel.
+
+Slaapverdieping – drie volwaardige kamers
+
+Via de interne trap, afgewerkt met onderhoudsvriendelijk PVC, bereik je de slaapverdieping.
+
+Hier bevinden zich drie goed bemeten slaapkamers. De grootste slaapkamer biedt ruimschoots plaats aan een tweepersoonsbed, nachtkastjes en een kledingkast en profiteert dankzij het brede raam van veel natuurlijk licht.
+
+Ook de andere twee slaapkamers zijn praktisch van formaat. Hierdoor is de woning bijzonder flexibel in gebruik. Denk aan comfortabele kinderkamers, een logeerkamer of een rustige thuiswerkplek. Wie regelmatig vanuit huis werkt, hoeft dus geen concessies te doen aan de woon- of slaapruimte.
+
+Badkamer
+
+De badkamer is praktisch ingedeeld en uitgevoerd in lichte tinten. Deze beschikt over een douche met glazen douchewand, een wastafel met modern houten wastafelmeubel, spiegelkast, tweede toilet en mechanische ventilatie.
+
+Balkon en vrij uitzicht
+
+Het op het zuiden gelegen balkon verdient extra aandacht. Vanuit de woonkamer loop je via de dubbele openslaande deuren rechtstreeks naar buiten.
+
+Door de ligging en het vrije zicht over de omliggende bebouwing en het aanwezige groen ervaar je hier een aangename combinatie van privacy en openheid. Een fijne buitenruimte voor een kop koffie in de zon, een borrel aan het einde van de dag of gewoon om even rustig buiten te zitten.
+
+Berging, fietsen én parkeren
+
+In de onderbouw beschikt de woning over een eigen berging van circa 5 m², ideaal voor onder andere fietsen, gereedschap, koffers en andere spullen die je niet dagelijks nodig hebt.
+
+Daarnaast is er een gemeenschappelijke fietsenstalling aanwezig.
+
+Een ander praktisch pluspunt is de parkeermogelijkheid voor bewoners. Het complex beschikt over een afgesloten parkeerterrein, waarbij bewoners de slagboom met een chip kunnen bedienen.
+
+Onderhoud, VvE en verwarming
+
+Aan de achterzijde van de woning zijn de ramen in 2024 gerenoveerd. Volgens de huidige planning van de Vereniging van Eigenaars staat ook de renovatie van de ramen aan de voorzijde binnen circa één jaar gepland.
+
+De maandelijkse VvE-bijdrage bedraagt momenteel circa € 249,14.
+
+De woning wordt verwarmd middels blokverwarming. Het huidige voorschot voor de stookkosten bedraagt circa € 134,- per maand.
+
+Verder beschikt de woning over energielabel A en mechanische ventilatie.
+
+BIJZONDERHDEN
+
+- Ruime maisonnette verdeeld over twee woonlagen;
+- Drie goed bemeten slaapkamers;
+- Royale en opvallend lichte woon-/eetkamer;
+- Veel natuurlijke lichtinval;
+- Zonnig balkon op het zuiden;
+- Geen erfpacht volledig eigengrond;
+- Vrij en groen uitzicht;
+- Dubbele openslaande deuren naar het balkon;
+- Een stijlvolle, moderne keuken, afgewerkt met elegante wandtegels in marmerlook.
+- Moderne keuken in royale U-opstelling;
+- Voorzien van inductiekookplaat, oven, magnetron, koelkast en afzuigkap;
+- Veel werk- en kastruimte;
+- Lichte laminaatvloer op de woonverdieping;
+- Interne trap met onderhoudsvriendelijke PVC-afwerking;
+- Praktische inloopkast met automatische sensorverlichting;
+- Separaat toilet op de woonverdieping;
+- Mechanische ventilatie;
+- Energielabel A;
+- Blokverwarming;
+- Lift aanwezig;
+- Eigen berging van circa 5 m² in de onderbouw;
+- Gemeenschappelijke fietsenstalling;
+- Afgesloten parkeerterrein voor bewoners met slagboom;
+- Ramen achterzijde gerenoveerd in 2024;
+- Renovatie ramen voorzijde volgens huidige planning VvE binnen circa één jaar;
+- VvE-bijdrage circa € 249,14 per maand;
+- Voorschot stookkosten circa € 134,- per maand.
+- Een woning met meer ruimte dan je op het eerste gezicht verwacht
+
+Ruim, licht en comfortabel wonen
+
+Met twee woonlagen, drie slaapkamers, een ruime woonkamer, moderne keuken en zonnig balkon biedt Dijkgraafplein 171 verrassend veel wooncomfort. Het vrije uitzicht, de lift, eigen berging en parkeermogelijkheid maken het compleet.
+
+Kom de ruimte zelf ervaren en plan een bezichtiging!
+--------------------------------------------------------------------------------------------------------------------------------------------------Dijkgraafplein 171 – Amsterdam
+
+Surprisingly spacious and bright maisonette with three bedrooms, a newly renovated kitchen, a sunny south-facing balcony and unobstructed green views. Arranged over two floors and complete with a lift, private storage room and parking facilities for residents.
+
+If you are looking for space in Amsterdam, this property is definitely worth viewing. Dijkgraafplein 171 is a wonderfully bright and spacious maisonette arranged over two floors, featuring a generous living and dining room, three full-sized bedrooms and a completely renovated kitchen from 2026.
+
+Large windows on both sides of the property provide an abundance of natural light throughout the day and enhance the open and spacious atmosphere. From the living room, double French doors lead directly onto the sunny south-facing balcony, where you can enjoy pleasant, unobstructed views over the surrounding greenery.
+
+The property has a calm, neutral finish, providing an excellent base that can easily be adapted to your own taste and style. With three bedrooms, the home is particularly suitable for families, couples looking for additional space, or anyone wishing to use one or more rooms as a home office, study or guest room.
+
+The apartment forms part of a well-maintained residential complex with a lift, a private storage room in the basement, a communal bicycle storage area and a secured parking area for residents.
+
+Layout
+Living floor – light, space and a pleasant connection with the outdoors
+
+The property can be accessed via both the communal staircase and the lift.
+
+Upon entering, you are welcomed into a spacious hallway. Here you will find a practical walk-in storage cupboard offering plenty of room for coats, shoes and other belongings. The cupboard is also fitted with automatic sensor lighting. The hallway provides access to the various rooms as well as a separate toilet with washbasin.
+
+The generous living and dining room is undoubtedly one of the highlights of the property. Its elongated layout and wide windows create a wonderful sense of space, with more than enough room for both a comfortable seating area and a large dining table.
+
+The light laminate flooring and predominantly neutral walls give the room a calm and contemporary appearance, while still offering plenty of opportunity to create an interior entirely to your own taste.
+
+Double French doors provide direct access to the south-facing balcony. This is a lovely place to sit outside and enjoy the relatively open and green surroundings as well as plenty of sunshine.
+
+Completely renovated kitchen
+
+On the opposite side of the living floor is the modern kitchen.
+
+The modern kitchen has been finished in an elegant grey tone and features a light composite worktop. Its generous U-shaped layout provides an impressive amount of worktop and storage space.
+
+The kitchen is equipped with various built-in appliances, including an induction hob, oven, microwave, refrigerator and extractor hood. The wide window above the worktop provides plenty of natural daylight while cooking and contributes to the bright and pleasant atmosphere.
+
+The kitchen connects directly to the dining area, creating a natural flow between cooking and dining.
+
+Bedroom floor – three full-sized rooms
+
+The internal staircase, finished with low-maintenance PVC, leads to the bedroom floor.
+
+Here you will find three well-proportioned bedrooms. The largest bedroom comfortably accommodates a double bed, bedside tables and a wardrobe and, thanks to its wide window, also benefits from plenty of natural light.
+
+The other two bedrooms are also practical in size, making the property highly flexible in terms of use. They are ideal as children&#x27;s bedrooms or guest rooms, but can equally be used as comfortable home offices or study rooms. Those who regularly work from home therefore do not have to compromise on living or sleeping space.
+
+Bathroom
+
+The bathroom has a practical layout and is finished in light tones. It features a shower with glass screen, washbasin with a modern wooden vanity unit, mirrored cabinet, second toilet and mechanical ventilation.
+
+Balcony and unobstructed views
+
+The south-facing balcony deserves special mention. Double French doors from the living room provide a direct connection between the indoor and outdoor spaces.
+
+Thanks to its position and relatively unobstructed views across the surrounding residential area and greenery, the balcony offers a pleasant combination of privacy and openness. It is an ideal spot for a morning coffee in the sunshine, an evening drink or simply relaxing outdoors.
+
+Storage, bicycles and parking
+
+The property includes a private storage room of approximately 5 m² in the basement, ideal for bicycles, suitcases, tools and other belongings.
+
+There is also a communal bicycle storage facility within the complex.
+
+Another practical advantage is the parking facility for residents. The complex has a secured residents&#x27; parking area, with access through a barrier operated by residents using a chip.
+
+Maintenance, Owners&#x27; Association and heating
+
+The windows at the rear of the property were renovated in 2024. According to the current planning of the Owners&#x27; Association (VvE), renovation of the windows at the front of the property is scheduled to take place within approximately one year.
+
+The current monthly contribution to the Owners&#x27; Association is approximately €249.14.
+
+The property is heated through a communal block heating system. The current advance payment for heating costs is approximately €134 per month.
+
+The property also has energy label A and mechanical ventilation.
+
+KEY FEATURES
+
+- Spacious maisonette arranged over two floors;
+- Three well-proportioned bedrooms;
+- Generous and exceptionally bright living/dining room;
+- Large windows on both sides of the property;
+- Plenty of natural daylight;
+- Sunny south-facing balcony;
+- Pleasant, unobstructed and green views;
+- Double French doors leading to the balcony;
+- A modern kitchen featuring elegant marble-look wall tiles
+- Modern kitchen with a generous U-shaped layout;
+- Light composite worktop;
+- Equipped with induction hob, oven, microwave, refrigerator and extractor hood;
+- Plenty of worktop and storage space;
+- Light laminate flooring on the living floor;
+- Internal staircase finished with low-maintenance PVC;
+- Practical walk-in storage cupboard with automatic sensor lighting;
+- Bathroom with shower, vanity unit, mirrored cabinet and second toilet;
+- Separate toilet on the living floor;
+- Mechanical ventilation;
+- Energy label A;
+- Communal block heating;
+- Lift available;
+- Private storage room of approximately 5 m² in the basement;
+- Communal bicycle storage;
+- Secured parking area for residents with barrier access;
+- Rear windows renovated in 2024;
+- Front window renovation scheduled by the Owners&#x27; Association within approximately one year, according to the current - planning;
+- Owners&#x27; Association contribution approximately €249.14 per month;
+- Advance payment for heating costs approximately €134 per month.
+
+Spacious, bright and ready to enjoy
+
+Dijkgraafplein 171 offers two floors, three bedrooms, a modern kitchen and a sunny south-facing balcony. Complete with green views, a lift, private storage and residents’ parking.
+
+Come and experience this wonderful home for yourself</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>LDB Makelaardij</strong> · LDB Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 46</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/785/886_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/778_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/796_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/768_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/806_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/874_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/797_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/893_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/867_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/846_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/892_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/859_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/885_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/769_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/807_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/764_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/880_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/858_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/847_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/894_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/809_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/786_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/838_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/776_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/856_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/785_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/795_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/929_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/914_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/786/149_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/902_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/786/082_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/785/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/786/061_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/786/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/786/143_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/786/017_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

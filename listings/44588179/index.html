@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duivelandselaan 47 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Duivelandselaan 47</h1>
+  <p class="sub">
+    <span>1181 JT Amstelveen</span>
+    <span>·</span>
+    <span>Vredeveldbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/028/862_1440x960.jpg" alt="Duivelandselaan 47 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">34 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€475.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.013/m² · 4.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">79 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1964</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amstelveen/appartement-duivelandselaan-47/44588179/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 475.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.013</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 194,50 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Gallery flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1964</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gemeubileerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>79 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>10 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>246 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Gedeeltelijk Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTELVEEN H 10132</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 194,50 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Vredeveldbuurt</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>2.255</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>26%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 5.714</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruim en licht hoek appartement van ca. 79m² met drie slaapkamers, vrij uitzicht over groen, een balkon over de volle breedte en een separate berging. 
+
+** See English translation below**
+
+Dit zeer goed onderhouden appartement is gelegen in de geliefde Prinses Ireneflat en is in 2021 grondig gerenoveerd en gemoderniseerd. Dankzij de hoekligging, de praktische indeling, grote raampartijen en de royale buitenruimte op het westen is dit een woning die direct een comfortabel en ruimtelijk gevoel geeft. Vanuit de woonkamer en vanaf het balkon kijkt u vrij uit over het aangrenzende park en het vele groen. Het complex beschikt daarnaast over twee liften en u heeft een privé berging in de onderbouw.
+
+Indeling
+Via de afgesloten centrale entree brengt de lift u naar de tweede verdieping waar het appartement gelegen is. De ruime hal biedt toegang tot alle vertrekken.
+
+De royale living vormt het hart van het appartement en is opgedeeld in wonen en eten. Het aantal meters biedt volop ruimte voor een comfortabele zithoek en een grote eettafel. Dankzij de brede raampartijen valt er veel natuurlijk licht naar binnen en is er vanuit de woonkamer een prachtig vrij uitzicht over het park en de groene omgeving. Vanuit de woonkamer is het balkon bereikbaar.
+
+Het appartement wordt bovendien volledig gemeubileerd aangeboden, waardoor het desgewenst vrijwel direct kan worden betrokken.
+
+Het balkon loopt over de volledige breedte van het appartement en biedt daardoor verrassend veel ruimte. Door de gunstige ligging op het westen kan hier volop genoten worden van veel zonuren (tot laat in de avond). 
+
+De separate keuken is praktisch ingericht en beschikt over een lichte keukenopstelling met veel werk- en  kastruimte. Ook vanuit de keuken is het balkon rechtstreeks bereikbaar, wat zorgt voor extra licht en een prettige verbinding met de buitenruimte met grote werkkast.
+
+Het appartement beschikt over drie slaapkamers. De slaapkamers zijn allen prettig van formaat en lenen zich naast het gebruik als slaapkamer ook uitstekend als werk-, hobby- , baby- of logeerkamer. Eén van de slaapkamers beschikt over een royale vaste kastenwand. De grote raampartijen zorgen ook hier voor een prettige lichtinval en een groen uitzicht.
+
+De verzorgde badkamer is uitgevoerd met een ruime inloopdouche en wastafel met meubel. Tevens bevinden zich hier de wasmachine- en droger, die bij de verkoop in de woning achterblijven. Het toilet bevindt zich separaat van de badkamer.
+
+Bij het appartement hoort een eigen berging, ideaal voor het stallen van fietsen en het opbergen van spullen die u niet dagelijks nodig heeft. Deze is voorzien van open opbergkasten. De berging bevindt zich in de onderbouw van het complex.
+
+Raadpleeg onze plattegronden voor de huidige indeling en de mogelijkheden van deze woning!
+
+Omgeving
+De Duivelandselaan ligt in een groene en centrale woonomgeving in Amstelveen. Voor de dagelijkse boodschappen kunt u terecht bij de winkels aan de Bourgondischelaan en de Rembrandtweg. Binnen 10 minuten bereikt u het luxe en overdekte Stadshart van Amstelveen met een groot assortiment aan diverse winkels, horeca, delicatessenzaken, de Schouwburg, Cobramuseum en het busstation. 
+De ligging van de International School of Amsterdam is op zeer korte afstand.
+
+Door de goede openbare voorzieningen bent u binnen enkele minuten met de sneltram of met de bus in het centrum van Amsterdam, Amsterdamse Bos en Schiphol. Tevens zijn de uitvalswegen (A2, A9 en ringweg A10) goed bereikbaar.
+
+Vereniging van Eigenaren
+- Het appartement maakt deel uit van de VvE &quot;Duivelandselaan&quot;. Het betreft een actieve        
+  vereniging;
+- De administratie wordt uitgevoerd door Fintec VvE Beheer;
+- De servicekosten bedragen € 194,50 per maand (exclusief het voorschot stookkosten van  € 65,90);
+- Er is een meerjarenonderhoudsplan aanwezig welke loopt t/m 2036.
+
+Bijzonderheden
+- Bouwjaar ca. 1964
+- Hoekappartement op de tweede verdieping
+- Woonoppervlakte ca. 79 m² (conform NEN 2580) 
+- Woning is voorzien van deels dubbele beglazing
+- Complex is voorzien van 2 liften en een trappenhuis
+- Blokverwarming
+- Warmwatervoorziening middels boiler
+- Energielabel C
+- Grondig gerenoveerd en gemoderniseerd in 2021
+- Volledig gemeubileerd te koop
+- In de koopakte zal een niet zelfbewoningsclausule opgenomen worden
+- Aanvaarding in overleg
+
+Meetinstructie
+Het verkochte is gemeten met gebruikmaking van de Meetinstructie, welke is gebaseerd op de normen zoals vastgelegd in NEN 2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit door bijvoorbeeld interpretatieverschillen, afrondingen en beperkingen bij het uitvoeren van een meting.
+
+De woning is gemeten door een betrouwbaar professioneel bedrijf en koper vrijwaart de medewerkers van Voorma &amp; Millenaar makelaars o.g. en de verkoper voor eventuele afwijkingen in de opgegeven maten. Koper verklaart in de gelegenheid te zijn gesteld om de het verkochte zelf te (laten) meten conform NEN 2580.
+
+*** This Property is listed by an MVA Certified Expat Broker ***
+
+Spacious and bright corner apartment of approximately 79 m² with three bedrooms, unobstructed views of greenery, a full-width balcony, and a separate storage room.
+
+This very well-maintained apartment is located in the popular Prinses Ireneflat and was thoroughly renovated and modernized in 2021. Thanks to its corner location, practical layout, large windows, and spacious west-facing outdoor area, this home immediately feels comfortable and airy. From the living room and the balcony, you enjoy unobstructed views of the adjacent park and the surrounding greenery. The complex also features two elevators, and you have a private storage room in the basement.
+
+Layout
+From the secure central entrance, the elevator takes you to the second floor, where the apartment is located. The spacious hallway provides access to all rooms.
+
+The generous living room forms the heart of the apartment and is divided into living and dining areas. Its generous size offers plenty of room for a comfortable lounge area and a large dining table. Thanks to the wide windows, plenty of natural daylight floods in, and the living room offers beautiful open views across the park and the green surroundings. The balcony is directly accessible from the living room.
+
+The apartment is offered fully furnished, meaning it can be moved into almost immediately if desired.
+
+The balcony spans the full width of the apartment, offering a surprising amount of outdoor living space. Thanks to its favorable west-facing orientation, you can enjoy plenty of sunshine here until late in the evening.
+
+The separate kitchen is practically laid out and features a bright kitchen set with plenty of counter and cabinet space. The balcony is also directly accessible from the kitchen, providing extra light and a pleasant connection to the outdoor space, which includes a large storage cupboard  useful for extra storage.
+
+The apartment has three bedrooms. The bedrooms are all a comfortable size and, in addition to serving as bedrooms, are also ideal as home offices, hobby rooms, nurseries, or guest rooms. One of the bedrooms features a spacious built-in wardrobe. The large windows here also provide plenty of natural light and a view of the greenery.
+
+The well-maintained bathroom features a spacious walk-in shower and a washbasin with vanity unit. The washer and dryer are also located here and will remain in the apartment after the sale. The toilet is separate from the bathroom.
+The apartment comes with a private storage room, ideal for storing bicycles and items you don’t need on a daily basis. It is equipped with open storage cabinets. The storage room is located on the lower ground floor of the complex.
+
+Check out our floor plans for the current layout and the possibilities this home offers!
+
+Surroundings
+Duivelandselaan is located in a green yet central residential area in Amstelveen. For your daily shopping needs, you can visit the stores on Bourgondischelaan and Rembrandtweg. Within 10 minutes, you can reach the luxurious, covered Stadshart of Amstelveen, which offers a wide variety of shops, restaurants, delicatessens, the Schouwburg theater, the Cobra Museum, and the bus station.
+
+The International School of Amsterdam is located very close to the apartment.
+Thanks to excellent public transportation, you can reach the center of Amsterdam, the Amsterdamse Bos, and Schiphol Airport in just a few minutes by express tram or bus. Major highways (A2, A9, and the A10 ring road) are also easily accessible.
+
+Homeowners’ Association
+- The apartment is part of the “Duivelandselaan” Homeowners’ Association. It is an 
+   active association;
+- Administration is professionally handled by Fintec VvE Beheer;
+- Service charges amount to €194.50 per month (excluding an advance payment for            
+  heating costs of €65.90);
+- A long-term maintenance plan (MJOP) is in place, valid through 2036.
+
+Details
+- Built circa 1964
+- Corner apartment on the second floor
+- Living area approx. 79 m² (in accordance with NEN 2580)
+- The apartment features partial double glazing
+- The complex has 2 elevators and a stairwell
+- Central heating
+- Hot water supplied by boiler
+- Energy certificate C
+- Thoroughly renovated and modernized in 2021
+- Offered fully furnished
+- A non-owner-occupancy clause will be included in the deed of sale
+- Move-in date to be agreed upon
+
+Measurement Guidelines
+The property has been measured in accordance with the Measurement Guidelines, which are based on the standards set forth in NEN 2580. The Measurement Guidelines are intended to establish a more uniform method of measurement for providing an indication of the usable area. The Measurement Guidelines do not completely rule out differences in measurement results due to, for example, differences in interpretation, rounding, and limitations in performing a measurement.
+
+The property was measured by a reputable professional firm, and the buyer releases the employees of Voorma &amp; Millenaar Real Estate Agents and the seller from liability for any discrepancies in the stated measurements. The buyer declares that they were given the opportunity to measure the property themselves or have it measured in accordance with NEN 2580.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Voorma &amp; Millenaar makelaars - taxateurs o.g.</strong> · Voorma &amp; Millenaar makelaars - taxateurs o.g.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 34</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/028/862_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/785_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/873_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/790_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/864_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/875_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/928_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/830_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/829_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/792_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/860_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/809_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/893_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/900_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/874_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/922_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/882_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/940_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/791_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/800_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/863_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/867_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/826_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/839_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/888_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/847_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/926_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/028/808_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

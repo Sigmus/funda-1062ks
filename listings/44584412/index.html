@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top Naefflaan 4 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Top Naefflaan 4</h1>
+  <p class="sub">
+    <span>1183 BR Amstelveen</span>
+    <span>·</span>
+    <span>Heldenbuurt</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/250/328_1440x960.jpg" alt="Top Naefflaan 4 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">43 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€775.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.624/m² · 5.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">5.0 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">117 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1964</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amstelveen/huis-top-naefflaan-4/44584412/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 775.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.624</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1964</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>117 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>144 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>394 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Dakraam, glasvezelkabel, natuurlijke ventilatie, schuifpui, TV cable, en zonnepanelen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTELVEEN I 2767</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>144 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>57 m² (10,00 m deep en 5,70 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het oosten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande stenen berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">In een rustige, groene en kindvriendelijke woonomgeving ligt deze verrassend ruime gezinswoning (ca. 117m²), verdeeld over maar liefst drie volwaardige woonlagen. De woning beschikt over een lichte doorzonwoonkamer met open haard, een moderne keuken, vier goed bemeten slaapkamers en volop bergruimte. De fraai aangelegde achtertuin biedt veel privacy en is een heerlijke plek om van het buitenleven te genieten. 
+
+**See English translation below**
+
+Indeling
+Begane grond
+Via de verzorgde voortuin bereikt u de entree van de woning. De hal met garderobe geeft toegang tot de meterkast, een praktische trapkast, het separate toilet en de trap naar de eerste verdieping.
+
+De ruime doorzonwoonkamer is heerlijk licht dankzij de grote raampartijen aan zowel de voor- als achterzijde. De sfeervolle open haard vormt een fraai middelpunt van de woonkamer en de glazen schuifpui aan de achterzijde zorgen voor een fijne verbinding met de tuin. Er is volop ruimte voor zowel een royale zithoek als een grote eettafel.
+Aan de achterzijde bevindt zich de moderne, neutrale keuken in hoekopstelling, voorzien van diverse inbouwapparatuur en een deur naar de achtertuin.
+
+De achtertuin is verzorgd aangelegd met een combinatie van terras, vlonders, vijver, fraaie beplanting en meerdere zitplekken. Achterin de tuin staat een vrijstaande stenen berging en is een handige achterom aanwezig.
+
+Eerste verdieping
+De overloop geeft toegang tot drie slaapkamers en de badkamer.
+Aan de achterzijde bevindt zich een royale slaapkamer met vaste kasten. De tweede ruime slaapkamer ligt aan de voorzijde en beschikt eveneens over een vaste kast. De derde slaapkamer is ideaal als kinder-, werk- of logeerkamer.
+
+De badkamer is uitgerust met een douche, wastafel met meubel en toilet.
+
+Tweede verdieping
+De tweede verdieping is verrassend ruim en biedt nog eens een royale slaapkamer. De slaapkamer is voorzien van een dakkapel, veel bergruimte achter de knieschotten en een eigen wastafel.
+
+Daarnaast bevindt zich op deze verdieping een separate technische-/bergruimte met de installaties. Ook onder de schuine kap is veel praktische bergruimte aanwezig.
+
+Omgeving
+De Top Naefflaan is gelegen in de geliefde en groene wijk Kostverloren, een rustige woonomgeving met alle dagelijkse voorzieningen binnen handbereik. 
+
+Direct achter de woning ligt de Middelpolder, een prachtig groen en waterrijk gebied waar u vanuit huis zo naartoe wandelt. Ideaal voor een ontspannen wandeling, een rondje hardlopen of een heerlijke fietstocht door het polderlandschap. Hier ervaart u iedere dag het gevoel van ruimte en groen, terwijl u toch dicht bij alle voorzieningen woont. 
+
+Ook voor sportliefhebbers is de locatie bijzonder aantrekkelijk. Sportpark ’t Loopveld ligt in de directe omgeving en biedt volop mogelijkheden voor verschillende sporten. Zo vindt u hier onder andere hockey- en voetbalverenigingen, cricket en golf. Een fijne plek voor zowel fanatieke sporters als voor wie graag actief bezig is in de buitenlucht. Ook het Amsterdamse Bos en diverse parken liggen op fietsafstand.
+
+De omgeving biedt gemak met het winkelcentrum Kostverlorenhof op loopafstand voor de dagelijkse boodschappen. Goed aangeschreven scholen (basis- en voortgezet onderwijs) zijn ruimschoots aanwezig in de buurt. 
+
+Tevens is de bereikbaarheid uitstekend. Via de nabijgelegen Beneluxbaan en A9 zijn Amsterdam, Schiphol en de rest van de Randstad snel bereikbaar. Daarnaast zijn er goede openbaar vervoersverbindingen met tram en bus richting Amsterdam en omliggende plaatsen.
+
+Bijzonderheden
+•	Woonoppervlakte ca. 117m²
+•	Bouwjaar ca. 1964
+•	Geïsoleerd d.m.v. dubbele beglazing
+•	Verwarming en warm water middels cv ketel
+•	9 zonnepanelen aanwezig
+•	Energielabel B
+•	Oplevering in overleg
+
+MEETINSTRUCTIE
+Het verkochte is gemeten met gebruikmaking van de Meetinstructie, welke is gebaseerd op de normen zoals vastgelegd in NEN 2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit door bijvoorbeeld interpretatieverschillen, afrondingen en beperkingen bij het uitvoeren van een meting. De woning is gemeten door een betrouwbaar professioneel bedrijf en koper vrijwaart de medewerkers van Voorma &amp; Millenaar makelaars o.g. en de verkoper voor eventuele afwijkingen in de opgegeven maten. Koper verklaart in de gelegenheid te zijn gesteld om de het verkochte zelf te (laten) meten conform NEN 2580.
+
+*** This Property is listed by an MVA Certified Expat Broker ***
+
+Located in a quiet, green, and child-friendly neighborhood, this surprisingly spacious family home (approx. 117 m²) is spread over no fewer than three full floors. The home features a bright, open-concept living room with a fireplace, a modern kitchen, four generously sized bedrooms, and plenty of storage space. The beautifully landscaped backyard offers plenty of privacy and is a wonderful place to enjoy the outdoors.
+
+Layout
+Ground Floor
+You reach the home’s entrance through the well-maintained front yard. The entryway, complete with a coat closet, provides access to the utility closet, a practical stairwell closet, the separate half-bath, and the staircase to the first floor.
+
+The spacious living room, which extends from one end of the house to the other, is wonderfully bright thanks to the large windows on both the front and back sides. The cozy fireplace serves as a beautiful focal point of the living room, and the sliding glass doors at the rear provide a pleasant connection to the backyard. There is plenty of space for both a generous seating area and a large dining table.
+At the rear is the modern, neutral-toned corner kitchen, equipped with various built-in appliances and a door leading to the backyard.
+
+The backyard is beautifully landscaped with a combination of a patio, decking, a pond, attractive plantings, and several seating areas. At the far end of the garden stands a freestanding stone shed, and there is a convenient back entrance.
+
+First Floor
+The landing provides access to three bedrooms and the bathroom.
+At the rear is a spacious bedroom with built-in closets. The second spacious bedroom is located at the front and also features a built-in closet. The third bedroom is ideal as a children’s room, home office, or guest room.
+
+The bathroom is equipped with a shower, a sink with vanity, and a toilet.
+
+Second Floor
+The second floor is surprisingly spacious and offers yet another spacious bedroom. The bedroom features a dormer window, plenty of storage space behind the knee walls, and its own sink.
+
+In addition, this floor features a separate utility/storage room housing the building systems. There is also plenty of practical storage space under the sloped roof.
+
+Surroundings
+Top Naefflaan is located in the popular and green Kostverloren neighborhood, a quiet residential area with all daily amenities within easy reach.
+
+Directly behind the home lies the Middelpolder, a beautiful green and water-rich area that you can easily walk to from home. It’s ideal for a relaxing stroll, a jog, or a delightful bike ride through the polder landscape. Here, you’ll experience a sense of space and greenery every day, while still living close to all amenities.
+
+The location is also particularly appealing to sports enthusiasts. Sportpark ’t Loopveld is right nearby and offers plenty of opportunities for various sports. Here you’ll find, among other things, hockey and soccer clubs, as well as cricket and golf. It’s a great spot for both avid athletes and those who simply enjoy being active outdoors. The Amsterdamse Bos and various parks are also within biking distance.
+
+The neighborhood offers convenience, with the Kostverlorenhof shopping center within walking distance for daily groceries. There are plenty of well-regarded schools (elementary and secondary) in the area.
+
+Accessibility is also excellent. Amsterdam, Schiphol, and the rest of the Randstad are quickly accessible via the nearby Beneluxbaan and A9. In addition, there are good public transportation connections by tram and bus to Amsterdam and surrounding areas.
+
+Details
+•    Living area approx. 117 m²
+•    Year built approx. 1964
+•    Insulated with double-pane windows
+•    Heating and hot water provided by a central heating boiler
+•    9 solar panels installed
+•    Energy efficiency rating: B
+•    Closing date to be agreed upon
+
+MEASUREMENT INSTRUCTIONS
+The property has been measured in accordance with the Measurement Instructions, which are based on the standards set forth in NEN 2580. The Measurement Instructions are intended to provide a more uniform method of measurement to give an indication of the usable area. The Measurement Instructions do not completely rule out differences in measurement results due to, for example, differences in interpretation, rounding, and limitations in performing a measurement. The property was measured by a reliable professional company, and the buyer indemnifies the employees of Voorma &amp; Millenaar Real Estate Agents and the seller against any discrepancies in the stated measurements. The buyer declares that they were given the opportunity to measure the property themselves or have it measured in accordance with NEN 2580.
+ Lees de volledige omschrijving</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Voorma &amp; Millenaar makelaars - taxateurs o.g.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 43</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/250/328_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/304_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/323_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/277_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/293_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/285_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/291_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/322_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/327_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/333_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/349_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/302_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/279_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/270_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/297_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/330_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/361_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/299_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/286_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/272_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/329_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/332_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/356_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/335_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/334_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/351_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/290_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/296_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/282_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/316_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/352_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/311_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/326_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/300_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/294_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/336_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/281_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/250/319_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

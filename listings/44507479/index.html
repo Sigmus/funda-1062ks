@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monte Viso 11 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Monte Viso 11</h1>
+  <p class="sub">
+    <span>1060 PE Amsterdam</span>
+    <span>·</span>
+    <span>De Aker-West</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/774/288_1440x960.jpg" alt="Monte Viso 11 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">81 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€725.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.331/m² · 4.4 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.4 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">136 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1996</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">4 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-monte-viso-11/44507479/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 725.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.331</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, hoekwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1996</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>136 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>28 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>155 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>491 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, Bathtub, toilet, Underfloor heating, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>4 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, natuurlijke ventilatie, schuifpui, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en gashaard</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Prestige (2009, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND G 2408</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>155 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 01-09-2044</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan water, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>31 m² (8,65 m deep en 3,62 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidwesten</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>On own property</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>De Aker-West</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>4.515</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>41%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 4.933</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">UNIEK WONEN AAN HET WATER IN AMSTERDAM
+
+Vrij uitzicht. Volledige privacy. Twee parkeerplaatsen. Een zonnige tuin aan het water. En dat allemaal in Amsterdam.
+
+Op een van de meest bijzondere plekken van De Aker ligt deze karakteristieke en hoogwaardig onderhouden split-level hoek dijkwoning aan Monte Viso 11. Gelegen aan een rustig woonerf zonder doorgaand verkeer en met geen directe buren achter en aan de rechterkant, biedt deze woning een zeldzame combinatie van rust, ruimte en privacy.
+
+Vanaf verschillende niveaus van de woning kijkt u vrij uit over het water en het omliggende groen. De zuidwestelijk gelegen achtertuin grenst direct aan het water en beschikt over een eigen vlonder. Boven heeft u een privé dakterras met opnieuw dat prachtige, vrije uitzicht.
+Dit is geen standaard woning. Dit is een plek die u moet ervaren.
+
+Comfortabel en verrassend wonen
+
+De woning beschikt over circa 136 m² woonoppervlakte op een perceel van 152 m² en heeft een bijzondere split-level indeling. De lichte centrale trap vormt de verbinding tussen de verschillende woonlagen, waarbij iedere verdieping zijn eigen sfeer en functie heeft.
+
+Op straatniveau bevindt zich de entree met een voortuin en ruimte voor twee auto&#x27;s op eigen terrein. Hier ligt ook de ruime woonkeuken van circa 15 m², voorzien van een U-vormige keuken met diverse inbouwapparatuur en een fraai uitzicht.  Aan de overkant van de gang, tegenover de keuken, vindt u een grote en praktische bijkeuken / kast / bergruimte van 11 m².
+
+Een niveau lager bevindt zich de groote en sfeervolle woonkamer van circa 28 m². De gashaard zorgt voor extra sfeer, terwijl de grote schuifpuien een directe verbinding vormen met de tuin en het water. Een heerlijke plek voor rustige avonden, lange diners of zomerse borrels en barbecues.
+
+De volledig privé achtertuin op het zuidwesten is circa 8,8 meter diep en biedt volop zon en privacy. Het terras ligt direct aan het water en de eigen vlonder maakt deze buitenruimte extra bijzonder.
+
+Ruimte voor wonen én werken
+
+Op de eerste verdieping bevinden zich twee comfortabele slaapkamers van circa 13m² en 16 m² en een complete badkamer van circa 7 m², voorzien van ligbad, separate douche, wastafel en toilet. Vanuit de slaapkamers aan de achterzijde kijkt u uit over de Ringvaart.
+
+De bovenste verdieping biedt nog meer mogelijkheden. De kamer van circa 15 m², momenteel ingericht als thuiswerkplek, kan bijvoorbeeld worden gebruikt als royale master bedroom, gastenverblijf, studio of hobbyruimte.
+
+Via deze verdieping bereikt u het privé dakterras van circa 14 m². Een heerlijke plek om de dag te beginnen met koffie in de ochtendzon of juist &#x27;s avonds te genieten van het weidse uitzicht over water en groen.
+
+Rustig wonen, stad dichtbij
+
+De woning ligt in het groene en kindvriendelijke De Aker, op korte loopafstand van de winkels aan het Ecuplein, waaronder een Jumbo supermarkt, en de tramhalte van lijn 1 richting het Leidseplein. Osdorpplein, station Lelylaan en het Hoofddorpplein zijn gemakkelijk per fiets bereikbaar. De A4, A5, A9 en A10 zijn met de auto in circa vijf minuten bereikbaar. Voor ontspanning en recreatie liggen Sloterplas, De Nieuwe Meer en het Amsterdamse Bos eveneens dichtbij.
+
+Bijzonderheden
+•	Bouwjaar 1996
+•	Circa 136 m² woonoppervlakte
+•	Perceel 152 m²
+•	Energielabel A
+•	Split-level dijkwoning
+•	Gelegen aan rustig woonerf zonder doorgaand verkeer
+•	Geen directe buren aan twee zijden
+•	Vrij uitzicht over water en groen
+•	Zuidwestelijke achtertuin met terras aan het water
+•	Privé dakterras
+•	Twee parkeerplaatsen op eigen terrein
+•	Circa 11 m² overige inpandige ruimte (bijkeuken &amp; garderobe of extra slaapkamer)
+•	Circa 3.75 m² externe bergruimte
+•	Waterontharder en gashaard aanwezig
+•	Erfpacht afgekocht tot september 2044. Daarna jaarlijkse canon van € 1.632,49
+
+Een woning met karakter, rust en een uitzicht dat u iedere dag opnieuw zult waarderen.
+Bent u op zoek naar een bijzondere woning in Amsterdam met veel privacy, eigen parkeergelegenheid én een unieke ligging aan het water? Dan nodigen wij u van harte uit om Monte Viso 11 zelf te komen ervaren.
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Makelaarsland</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 81</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/774/288_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/230_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/216_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/235_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/306_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/317_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/226_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/220_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/222_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/296_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/268_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/259_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/231_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/320_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/258_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/242_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/309_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/232_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/299_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/286_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/254_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/252_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/247_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/295_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/285_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/310_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/223_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/228_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/239_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/212_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/340_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/263_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/315_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/282_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/264_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/301_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/210_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/248_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/336_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/332_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/243_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/211_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/322_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/214_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/334_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/262_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/261_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/330_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/233_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/277_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/271_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/324_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/297_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/224_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/292_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/217_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/245_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/260_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/307_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/221_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/251_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/273_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/227_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/302_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/342_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/213_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/345_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/300_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/244_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/349_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/240_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/270_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/316_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/249_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/267_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/338_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/774/313_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

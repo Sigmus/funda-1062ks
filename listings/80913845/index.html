@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Philip Vingboonsstraat 13 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Philip Vingboonsstraat 13</h1>
+  <p class="sub">
+    <span>1067 BG Amsterdam</span>
+    <span>·</span>
+    <span>Ruys de Beerenbrouckbuurt</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/232/818/739_1440x960.jpg" alt="Philip Vingboonsstraat 13 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">36 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€475.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.793/m²
+    </div>
+    <div class="chips">
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">82 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1955</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-philip-vingboonsstraat-13/80913845/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 475.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.793</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1955</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>82 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>124 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>318 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation en natuurlijke ventilatie</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en HR-glas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Kombi Kompakt HRE 24/18A (gas-fired combi boiler uit 2021, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND I 4055</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>124 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*English below*
+
+Karaktervolle 5-kamer eengezinswoning met verrassend veel ruimte en een groene voor- en achtertuin in Geuzenveld
+
+Aan de Philip Vingboonsstraat 13 vind je deze charmante en goed ingedeelde  eengezinswoning met veel lichtinval en een heerlijke, groene achtertuin. Het betreft een tussenwoning met 4 slaapkamers, gelegen in een rustige en ruim opgezette straat. De lichte woonkamer is ruim van opzet en staat in directe verbinding met de tuin. Aan de voorzijde bevindt zich de open keuken met eetgedeelte, waardoor de begane grond een gezellige en praktische leefruimte vormt. 
+
+Op de eerste verdieping zijn vier kamers aanwezig, ideaal te gebruiken als slaapkamers, werkkamer, logeerkamer of hobbyruimte. Daarnaast beschikt de woning over een praktische zolderberging en een extra berging in de straat. 
+
+Kortom, een woning met karakter, ruimte en een bijzonder fijne tuin, gelegen op een rustige plek in Amsterdam-West.
+
+Ligging
+De Philip Vingboonsstraat ligt in Geuzenveld, een groene en ruim opgezette wijk in Amsterdam Nieuw-West. De straat heeft een rustige en vriendelijke uitstraling, met veel groen en eengezinswoningen in de directe omgeving.
+
+Alle dagelijkse voorzieningen zijn binnen handbereik. Winkels, scholen, speelvoorzieningen en openbaar vervoer bevinden zich op korte afstand. Ook voor liefhebbers van natuur, sport en ontspanning is dit een fijne plek: de Fruittuin van West ligt in de directe omgeving en zowel natuurgebied De Bretten als het Sloterpark en de Sloterplas zijn snel bereikbaar. Een heerlijke woonomgeving om te wandelen, sporten of ontspannen aan het water.
+
+De bereikbaarheid is uitstekend. Er is een goed netwerk van fietspaden en met de auto rijd je snel de Haarlemmerweg, de A5 of de A10 op. Hierdoor zijn onder andere het centrum van Amsterdam, Haarlem, Schiphol en Zaanstad goed bereikbaar. Ook het openbaar vervoer biedt goede verbindingen met de rest van de stad.
+
+Indeling
+Via de voortuin bereik je de entree van de woning. De hal geeft toegang tot het toilet, de trapopgang en de woonkamer. De woonkamer ligt aan de tuinzijde en heeft dankzij de grote raampartijen een mooie lichtinval. De rustige kleurstelling en het zicht op het groen zorgen voor een warme en ontspannen sfeer. 
+
+Aan de voorzijde bevindt zich de keuken met eetgedeelte. De keuken is praktisch ingericht, voorzien van veel kastruimte en staat in open verbinding met de woonkamer. Hierdoor ontstaat een fijne leefruimte waar koken, eten en wonen op een natuurlijke manier samenkomen. Vanuit de woonkamer stap je de beschutte achtertuin in. De tuin is sfeervol aangelegd met volwassen beplanting en een terras. Een heerlijke plek om buiten te eten, tot rust te komen en te genieten van het groen. 
+
+Eerste verdieping
+Op de eerste verdieping bevinden zich vier kamers en de badkamer. Dankzij de verschillende formaten zijn de kamers flexibel in te delen, bijvoorbeeld als hoofdslaapkamer, kinderkamer, werkkamer of logeerkamer. De badkamer is praktisch ingericht met een douche en wastafel. Er zijn diverse vaste kasten aanwezig, wat zorgt voor extra bergruimte.
+
+Zolder
+De zolder biedt praktische bergruimte voor koffers, seizoensartikelen en andere spullen die je graag uit het zicht bewaart. Met een vaste trap en dakkapel kan deze verdieping bovendien worden omgevormd tot een volwaardige extra kamer, waardoor meer bruikbare woonruimte ontstaat.
+
+Buitenruimte
+De woning beschikt over zowel een voortuin als een diepe, groene achtertuin. De achtertuin biedt veel privacy. Door de combinatie van terras, groen en volwassen beplanting voelt dit als een rustige plek midden in de stad.
+
+Erfpacht
+De woning is gelegen op erfpachtgrond van de gemeente Amsterdam. De canon is eeuwigdurend afgekocht. Er zijn nu en in de toekomst geen erfpachtkosten meer verschuldigd.
+
+Kenmerken
+- 5-kamer eengezinswoning met voor- en achtertuin 
+- Zolder met mogelijkheden voor een volwaardige extra kamer
+- Groene, beschutte achtertuin met terras (achterom bereikbaar)
+- Rustige ligging in een groene woonomgeving
+- Erfpacht is eeuwigdurend afgekocht 
+
+*English*
+
+Characterful 5-room family home with surprisingly generous space and a green front and rear garden in Geuzenveld
+
+At Philip Vingboonsstraat 13, you will find this charming and well-laid-out family home with plenty of natural light and a lovely green rear garden. This terraced house offers 4 bedrooms and is located on a quiet, spaciously laid-out street. The bright living room is generously proportioned and connects directly to the garden. At the front of the house is the open-plan kitchen with dining area, creating a cosy and practical living space on the ground floor.
+
+On the first floor, there are four rooms, ideal for use as bedrooms, a home office, guest room or hobby room. In addition, the property has a practical attic storage space and an additional storage unit in the street.
+
+In short, a home with character, space and a particularly pleasant garden, situated in a quiet location in Amsterdam-West.
+
+Location
+Philip Vingboonsstraat is located in Geuzenveld, a green and spaciously laid-out neighbourhood in Amsterdam Nieuw-West. The street has a quiet and friendly feel, with plenty of greenery and family homes in the immediate surroundings.
+
+Everyday amenities are within easy reach. Shops, schools, playgrounds and public transport are all located nearby. This is also an ideal location for nature lovers and those who enjoy sports and relaxation: Fruittuin van West is just around the corner, while the De Bretten nature reserve, Sloterpark and Sloterplas are all easily accessible. A wonderful residential setting for walking, exercising or relaxing by the water.
+
+Accessibility is excellent. There is a well-developed network of cycle paths, and by car you can quickly reach the Haarlemmerweg, A5 or A10 motorways. This provides easy access to Amsterdam city centre, Haarlem, Schiphol Airport and Zaanstad, among other destinations. Public transport also offers convenient connections to the rest of the city..
+
+Layout
+Through the front garden, you reach the entrance to the property. The hallway provides access to the toilet, staircase and living room. The living room is located on the garden side and benefits from beautiful natural light thanks to the large windows. The calm colour scheme and view of the greenery create a warm and relaxed atmosphere.
+
+At the front of the house is the kitchen with dining area. The kitchen is practically arranged, offers plenty of cupboard space and is open to the living room. This creates a pleasant living area where cooking, dining and relaxing naturally come together. From the living room, you step into the sheltered rear garden. The garden is attractively landscaped with mature planting and a terrace. A wonderful place to dine outside, unwind and enjoy the greenery.
+
+First floor
+The first floor comprises four rooms and the bathroom. Thanks to their varying sizes, the rooms can be flexibly arranged, for example as a principal bedroom, children’s room, home office or guest room. The bathroom is practically fitted with a shower and washbasin. There are several built-in cupboards, providing additional storage space.
+
+Attic
+The attic provides practical storage space for suitcases, seasonal items and other belongings you prefer to keep out of sight. By adding a permanent staircase and a dormer window, this floor could also be transformed into a fully functional additional room, creating more usable living space.
+
+Outdoor space
+The property has both a front garden and a deep, green rear garden. The rear garden offers plenty of privacy. With its combination of terrace, greenery and mature planting, it feels like a peaceful retreat in the middle of the city.
+
+Leasehold
+The property is situated on leasehold land owned by the Municipality of Amsterdam. The ground rent has been bought off in perpetuity. This means that no leasehold costs are due now or in the future.
+
+Features
+
+- Five-room family home with front and rear gardens
+- Attic with the possibility of creating a fully functional additional room
+- Green, sheltered rear garden with terrace and rear access
+- Quiet location in a leafy residential area
+- Ground lease has been bought out in perpetuity</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 36</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/232/818/739_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/715_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/738_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/744_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/734_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/718_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/701_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/742_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/745_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/735_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/743_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/730_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/706_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/725_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/818/711_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

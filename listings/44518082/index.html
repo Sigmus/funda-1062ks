@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nieuwe Osdorpergracht 269 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Nieuwe Osdorpergracht 269</h1>
+  <p class="sub">
+    <span>1068 HV Amsterdam</span>
+    <span>·</span>
+    <span>Osdorpplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/242/977_1440x960.jpg" alt="Nieuwe Osdorpergracht 269 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">64 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€795.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.265/m² · 2.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.5 km</span>
+      <span class="chip">6 bedrooms</span>
+      <span class="chip">151 m² living</span>
+      <span class="chip">7 rooms</span>
+      <span class="chip energy">Energy A+</span>
+      <span class="chip">Built 2016</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-nieuwe-osdorpergracht-269/44518082/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 795.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.265</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2016</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>151 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>13 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>103 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>525 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>7 rooms (6 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, 2 toiletten, 2 Washbasinmeubels, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, Mechanical ventilation, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, Wall insulation, Floor insulation en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating en gedeeltelijke Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN (NH) E 8890</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>103 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-11-2058</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN (NH) E 8897</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-11-2058</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>30 m² (6,65 m deep en 5,35 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidoosten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, On own property en parkeergarage</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Welkom aan de Nieuwe Osdorpergracht 269 in Amsterdam!  Deze uitstekend onderhouden en verrassend ruime uitgebouwde eengezinswoning biedt maar liefst circa 151 m² woonoppervlakte, een energielabel A+, een zonnige tuin op het zuiden én een eigen parkeerplaats in de parkeergarage. Met momenteel zes kamers, een praktische indeling en bovendien mogelijkheden voor een extra woonlaag is dit een woning die met je woonwensen kan meegroeien. Een comfortabel en duurzaam familiehuis, gelegen op een veelzijdige plek in Amsterdam Nieuw-West, op korte afstand van de Sloterplas, het Osdorpplein en uitstekende verbindingen met de rest van de stad.
+
+***ENGLISH TRANSLATION BELOW***
+
+INDELING: Bekijk de plattegronden in de fotobijlage voor een compleet overzicht van de indeling of maak een afspraak met URBAN MAKELAARS voor een bezichtiging.
+
+BEGANE GROND: Via de entree kom je binnen in de hal met meterkast, toiletruimte en trapopgang naar de verdiepingen. Vanuit de hal is er toegang tot de royale en lichte woonkamer. De begane grond vormt een prettige, open leefruimte waarin wonen, koken en samenzijn centraal staan. De open keuken is voorzien van diverse inbouwapparatuur en staat in directe verbinding met de woonkamer. Dankzij de grote raampartijen valt er veel natuurlijk licht naar binnen. De begane grond is voorzien van vloerverwarming, wat zorgt voor een aangenaam en gelijkmatig binnenklimaat. De woning beschikt daarnaast over stadsverwarming, passend bij het duurzame karakter van de woning. Via de woonkamer bereik je de zonnige achtertuin. De tuin ligt op het zuiden, beschikt over een achterom en biedt volop ruimte om te genieten van lange zomeravonden, te spelen of lekker buiten te eten. In de tuin staat een houten berging voor fietsen, gereedschap en andere spullen. Een bijzonder pluspunt is de mogelijkheid om een auto op eigen terrein in de achtertuin te parkeren. Dat biedt niet alleen extra gemak, maar maakt de woning ook interessant voor wie elektrisch rijdt en de auto dichtbij huis wil kunnen parkeren.
+
+EERSTE VERDIEPING: De eerste verdieping beschikt momenteel over twee royale slaapkamers. Dankzij de ruime opzet is het bovendien mogelijk om hier relatief eenvoudig een derde slaapkamer te realiseren. Hiervoor is een alternatieve indeling beschikbaar. De ruime badkamer is compleet uitgevoerd met een inloopdouche, wastafel met spiegel en tweede toilet.
+
+TWEEDE VERDIEPING: Ook de tweede verdieping biedt volop ruimte. Hier bevinden zich nog eens drie slaapkamers, waardoor de woning momenteel in totaal over maar liefst zes kamers beschikt die als slaap-, werk- of hobbyruimte kunnen worden gebruikt. Daarnaast is er een royale was- en technische ruimte met derde toilet en wastafelmeubel. Een praktische verdieping die uitstekend aansluit bij de wensen van een groter gezin, thuiswerkers of bewoners die behoefte hebben aan meerdere multifunctionele ruimtes.
+
+PARKEREN: In Amsterdam is parkeren een belangrijk pluspunt. Deze woning beschikt over een eigen parkeerplaats in de parkeergarage aan de Van Suchtelen van de Haarestraat. Daarnaast bestaat de mogelijkheid om een auto in de achtertuin te parkeren. Een uitzonderlijk comfortabele combinatie: parkeren in de garage én de mogelijkheid om de auto op eigen terrein achter de woning te zetten.
+
+ERFPACHT: Ook financieel biedt de woning duidelijkheid op de langere termijn: de erfpacht is afgekocht tot en met 15 november 2058.
+
+MOGELIJKHEDEN VOOR DE TOEKOMST: De woning biedt niet alleen veel ruimte voor vandaag, maar ook interessante mogelijkheden voor de toekomst. Er bestaat een mogelijkheid voor een dakopbouw / volledige extra woonlaag, uiteraard onder voorbehoud van de benodigde vergunningen en voorwaarden. Daarmee kan de woning desgewenst nog verder worden uitgebreid.
+
+WONEN IN OSDORP: De ligging combineert het gemak van de stad met verrassend veel mogelijkheden voor ontspanning en sport. Aan het einde van de straat ligt het levendige Osdorpplein, met een groot en gevarieerd aanbod aan winkels, supermarkten en speciaalzaken. Van dagelijkse boodschappen en speciaalzaken tot horeca en de Foodmarket met onder meer Turks, Italiaans, Surinaams, Afghaans en veganistisch aanbod: veel voorzieningen liggen letterlijk om de hoek. Ook de Sloterplas ligt dichtbij. Hier kun je hardlopen, zwemmen, zeilen, duiken of simpelweg genieten van het groen en het water. Sportpark Ookmeer ligt eveneens op korte fietsafstand en biedt een breed aanbod aan sportfaciliteiten. De omgeving is volop in ontwikkeling. De komende jaren wordt geïnvesteerd in de openbare ruimte en voorzieningen, waaronder de vernieuwing van station Lelylaan en de omgeving. Ook de culturele voorzieningen worden verder ontwikkeld, met onder meer de vernieuwing van De Meervaart en de komst van een Verhalenhuis met bibliotheek en bioscoop.
+
+UITSTEKENDE BEREIKBAARHEID: Ook voor forenzen is de locatie aantrekkelijk. Voor de deur bevinden zich diverse bus- en tramverbindingen, waaronder een rechtstreekse busverbinding richting Schiphol. Via groene en grotendeels vrijliggende fietspaden fiets je in ongeveer tien minuten naar het Vondelpark. Station Lelylaan ligt op korte afstand en biedt aansluitingen op trein, metro en tram. Tram 1 en 17 zijn eveneens vlakbij en brengen je in circa 20 minuten naar het centrum van Amsterdam. Met de auto zijn de belangrijkste uitvalswegen, waaronder de A4, A5, A9 en A10, binnen enkele minuten bereikbaar.
+
+Een extra ontwikkeling voor de directe omgeving: volgens de huidige berichtgeving van de gemeente staat de aanleg van de gracht voor de woning gepland voor begin 2027.
+
+BIJZONDERHEDEN:
+- Woonoppervlakte circa 151 m², conform NEN 2580 gemeten; meetrapport aanwezig.
+- Energielabel A+.
+- Bouwjaar 2016.
+- Uitgebouwde eengezinswoning.
+- 5 Slaapkamers met de mogelijkheid tot 6 slaapkamers. 
+- Mogelijkheid om op de eerste verdieping een derde slaapkamer te creëren.
+- Twee badkamers mogelijk.
+- Eigen parkeerplaats in de parkeergarage aan de Van Suchtelen van de Haarestraat.
+- Mogelijkheid tot parkeren in de achtertuin.
+- Zonnige achtertuin op het zuiden, met achterom.
+- Houten berging in de tuin.
+- Vloerverwarming op de begane grond.
+- Stadsverwarming.
+- Erfpacht afgekocht tot en met 15 november 2058.
+- Mogelijkheid voor een dakopbouw / volledige extra woonlaag, onder voorbehoud van vergunning.
+- Aanleg van de gracht voor de woning gepland voor begin 2027..
+- Aanvaarding in overleg, eventueel per direct.
+- Notaris naar keuze koper, mits koopakte conform Model Ring bij een notaris in Groot Amsterdam.
+- Vraagprijs: € 795.000,- k.k.
+
+Een ruime, duurzame en toekomstgerichte gezinswoning met zes kamers, zonnige tuin én parkeermogelijkheden op eigen terrein op een plek waar Amsterdamse voorzieningen, recreatie en bereikbaarheid samenkomen. Benieuwd naar de mogelijkheden van deze woning? Plan dan een bezichtiging met URBAN MAKELAARS.
+
+***ENGLISH***
+
+Welcome to Nieuwe Osdorpergracht 269 in Amsterdam! This exceptionally well-maintained and surprisingly spacious extended family home offers approximately 151 m² of living space, an A+ energy rating, a sunny south-facing garden, and a private parking space in the parking garage. Currently offering six rooms, a practical layout and the possibility of adding an additional floor, this is a home that can grow with your changing needs. A comfortable and sustainable family home in a versatile location in Amsterdam Nieuw-West, just a short distance from Sloterplas, Osdorpplein and excellent transport links to the rest of the city.
+
+LAYOUT: Please see the floor plans included in the photo section for a complete overview of the layout, or contact URBAN MAKELAARS to arrange a viewing.
+
+GROUND FLOOR: The entrance opens into a hallway with the meter cupboard, a separate toilet and stairs leading to the upper floors. From the hallway, you enter the spacious and bright living room. The ground floor forms a pleasant, open living space where living, cooking and spending time together are central. The open-plan kitchen is equipped with various built-in appliances and connects directly to the living room. Thanks to the large windows, the room benefits from plenty of natural light. The ground floor has underfloor heating, providing a comfortable and evenly distributed indoor climate. The property also benefits from district heating, in keeping with its sustainable character. From the living room, you can access the sunny rear garden. Facing south, the garden has a rear entrance and plenty of space to enjoy long summer evenings, play outdoors or dine al fresco. A wooden storage shed provides space for bicycles, tools and other belongings. A particularly attractive feature is the possibility of parking a car on private property in the rear garden. This not only provides additional convenience, but is also particularly appealing to electric-car owners who want to park close to home.
+
+FIRST FLOOR: The first floor currently comprises two generously sized bedrooms. Thanks to the spacious layout, it is also relatively easy to create a third bedroom on this floor. An alternative floor plan is available showing this option. The spacious bathroom is fully equipped with a walk-in shower, washbasin with mirror and second toilet.
+
+SECOND FLOOR: The second floor also offers plenty of space. Here you will find a further three bedrooms, meaning the property currently has a total of six rooms that can be used as bedrooms, home offices or hobby rooms. There is also a spacious laundry and utility room with a third toilet and washbasin unit. This practical floor is ideally suited to the needs of a larger family, people working from home or residents looking for several multifunctional spaces.
+
+PARKING: Parking is an important advantage in Amsterdam. This property comes with a private parking space in the parking garage on Van Suchtelen van de Haarestraat. In addition, there is the possibility of parking a car in the rear garden. This offers an exceptionally convenient combination: parking in the garage as well as the option to park a car on private property behind the house.
+
+LEASEHOLD: The property also offers long-term financial clarity: the leasehold has been bought off until and including 15 November 2058.
+
+FUTURE POSSIBILITIES: The property offers not only plenty of space for today, but also interesting possibilities for the future. There is potential to add a roof extension / complete additional floor, subject of course to obtaining the required permits and meeting the applicable conditions. This would allow the property to be expanded even further if desired.
+
+LIVING IN OSDORP: The location combines the convenience of city living with surprisingly many opportunities for recreation and sports. At the end of the street, you will find the lively Osdorpplein, offering a wide and varied selection of shops, supermarkets and specialist stores. From everyday groceries and speciality shops to restaurants and the Foodmarket, with options including Turkish, Italian, Surinamese, Afghan and vegan cuisine, many amenities are literally around the corner. Sloterplas is also nearby. Here you can go running, swimming, sailing or diving, or simply enjoy the surrounding greenery and water. Sportpark Ookmeer is also within a short cycling distance and offers a wide range of sports facilities. The surrounding area is undergoing considerable development. In the coming years, investments will be made in public spaces and amenities, including the redevelopment of Lelylaan station and its surroundings. Cultural facilities are also being further developed, including the redevelopment of De Meervaart and the planned arrival of a Verhalenhuis featuring a library and cinema.
+
+EXCELLENT ACCESSIBILITY: The location is also attractive for commuters. Various bus and tram connections are available nearby, including a direct bus connection to Schiphol Airport. Green and largely segregated cycle paths allow you to cycle to Vondelpark in approximately ten minutes. Lelylaan railway station is a short distance away and provides connections to trains, metro and trams. Tram lines 1 and 17 are also nearby and take you to the centre of Amsterdam in approximately 20 minutes. By car, the main arterial roads, including the A4, A5, A9 and A10 motorways, can be reached within a few minutes.
+
+An additional development for the immediate surroundings: according to the municipality&#x27;s current information, construction of the canal in front of the property is scheduled to begin in early 2027.
+
+KEY FEATURES:
+- Approximately 151 m² of living space, measured in accordance with NEN 2580; measurement report available.
+- A+ energy rating.
+- Built in 2016.
+- Extended family home.
+- 5 bedrooms, with the possibility of creating a 6th bedroom.
+- Possibility of creating a third bedroom on the first floor.
+- Possibility of having two bathrooms.
+- Private parking space in the parking garage on Van Suchtelen van de Haarestraat.
+- Possibility of parking a car in the rear garden.
+- Sunny south-facing rear garden with rear entrance.
+- Wooden storage shed in the garden.
+- Underfloor heating on the ground floor.
+- District heating.
+- Leasehold bought off until and including 15 November 2058.
+- Possibility of a roof extension / complete additional floor, subject to obtaining the required permit.
+- Construction of the canal in front of the property scheduled for early 2027.
+ Transfer date to be agreed, potentially immediately.
+- Notary of the buyer&#x27;s choice, provided the purchase agreement is drawn up in accordance with the Model Ring agreement by a notary in Greater Amsterdam.
+- Asking price: €795,000 buyer&#x27;s costs excluded (k.k.).
+
+A spacious, sustainable and future-oriented family home with six rooms, a sunny garden and private parking options, in a location where Amsterdam&#x27;s amenities, recreation and excellent accessibility come together.
+Curious about the possibilities this property has to offer? Arrange a viewing with URBAN MAKELAARS.
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 7 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 64</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/242/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/051_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/030_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/966_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/067_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/010_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/114_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/983_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/042_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/119_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/036_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/111_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/001_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/099_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/158_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/956_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/127_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/041_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/087_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/168_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/103_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/132_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/189_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/969_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/060_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/203_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/021_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/002_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/027_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/135_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/999_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/994_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/167_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/998_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/081_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/047_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/031_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/112_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/091_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/072_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/123_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/029_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/068_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/195_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/142_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/144_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/154_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/134_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/018_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/979_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/105_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/076_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/139_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/243/078_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/986_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

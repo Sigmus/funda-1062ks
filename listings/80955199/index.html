@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osdorpplein 196 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Osdorpplein 196</h1>
+  <p class="sub">
+    <span>1068 EP Amsterdam</span>
+    <span>·</span>
+    <span>Osdorpplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/527/710_1440x960.jpg" alt="Osdorpplein 196 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€500.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.263/m² · 2.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.3 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">95 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1998</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-osdorpplein-196/80955199/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 500.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.263</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 235,50 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Walk-up flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1998</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>95 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>10 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>300 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, en natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>12e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha Avanta HR ketel (gas-fired combi boiler uit 2016, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM E 6347</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold (einddatum Leasehold: 15-06-2046)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>City centre en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 235,50 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Osdorpplein e.o.</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>4.840</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>25%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 5.695</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*English below*
+Licht en stijlvol 4-kamerappartement met 3 slaapkamers, moderne open keuken, royaal balkon en weids uitzicht!
+
+Wonen met ruimte, licht én alle voorzieningen binnen handbereik! Op de twaalfde verdieping van het markante appartementencomplex Mirador, direct aan het Osdorpplein, ligt dit fraai afgewerkte 4-kamerappartement van circa 95 m². De woning beschikt over drie slaapkamers, een stijlvolle open keuken, een heerlijk balkon van circa 10 m² en een externe berging van circa 7 m². De woning is modern en sfeervol afgewerkt met een lichte laminaatvloer en neutrale kleuren. Dankzij de grote raampartijen in de woonkamer geniet je van veel natuurlijk licht en een prachtig weids uitzicht over de stad en het omliggende groen.
+
+Indeling
+Via de verzorgde gemeenschappelijke entree bereik je met de lift de woonverdieping. Eenmaal binnen kom je in de ruime hal, die toegang geeft tot vrijwel alle vertrekken.
+
+Aan het einde van de hal opent de woning zich naar de royale leefruimte. De woonkamer is heerlijk licht dankzij de brede raampartijen en biedt voldoende plaats voor zowel een ruime zithoek als een gezellige eethoek. Het weidse uitzicht vormt hier een fraai decor en geeft de ruimte een bijzonder vrij gevoel. 
+
+De moderne open keuken sluit perfect aan op de woonkamer en is strak uitgevoerd in lichte tinten. De keuken biedt volop werk- en kastruimte en is voorzien van diverse inbouwapparatuur, waaronder een BORA-kookplaat met geïntegreerde afzuiging. Het keramische werkblad en de koperkleurige kraan en spoelbak geven de keuken een stijlvolle uitstraling. Vanuit de leefruimte stap je direct het balkon van circa 10 m² op, gelegen op het westen. Hier geniet je van een weids uitzicht en prachtige zonsondergangen. Op heldere dagen reikt het uitzicht zelfs tot aan de duinen.
+
+Aan de achterzijde van het appartement bevinden zich drie slaapkamers, waardoor de woning uitstekend geschikt is voor een gezin, maar ook volop mogelijkheden biedt voor een comfortabele thuiswerkplek of logeerkamer. Verder heeft het appartement over een stijlvolle en complete badkamer, voorzien van een ligbad, een ruime inloopdouche en een dubbele wastafel met meubel en designspiegel. Ook is er een separaat tweede toilet aanwezig.
+
+Daarnaast beschikt de woning over een externe berging van circa 7 m², ideaal voor het opbergen van bijvoorbeeld seizoensspullen en overige zaken die niet dagelijks nodig zijn. Fietsen kunnen veilig en praktisch worden gestald in de separate gemeenschappelijke fietsenstalling op de begane grond van het complex. 
+
+Omgeving en bereikbaarheid
+Wonen aan het Osdorpplein betekent dat het dagelijkse leven zich letterlijk om de hoek afspeelt. Supermarkten, winkels, horeca, de bibliotheek en Theater De 
+Meervaart bevinden zich in de directe omgeving. Sportschool SportCity bevindt zich letterlijk om de hoek en is bereikbaar vanuit het complex via het parkeerdek op de derde verdieping. Tegelijkertijd ligt de Sloterplas vlakbij, met volop mogelijkheden om te wandelen, hardlopen, fietsen of ontspannen aan het water. Daarmee combineert deze locatie het gemak van stedelijk wonen met verrassend veel groen en recreatie. Het gebied rond het Osdorpplein wordt bovendien verder ontwikkeld tot het stadscentrum van Nieuw-West, met nieuwe woningen en voorzieningen en een groenere boulevard richting de Sloterplas. 
+
+Ook de bereikbaarheid is uitstekend. Tram- en bushaltes bevinden zich praktisch voor de deur en Station Amsterdam Lelylaan is snel bereikbaar; vanaf daar zijn er goede trein-, metro- en busverbindingen richting onder andere Amsterdam Centrum, de Zuidas en Schiphol. Met de auto zijn de belangrijke uitvalswegen A4, A9 en de ring A10 eenvoudig te bereiken. 
+
+Erfpacht
+De woning is gelegen op erfpachtgrond. De erfpachtcanon is afgekocht tot en met 15 juni 2046.
+
+Bijzonderheden
+•	Gelegen op de twaalfde verdieping
+•	Woonoppervlakte circa 95 m² (NEN 2580-meetrapport aanwezig)
+•	4 kamers, waarvan 3 slaapkamers 
+•	2 toiletten 
+•	Royaal balkon van circa 10 m² 
+•	Externe berging van circa 7 m² 
+•	Moderne open keuken met keramisch werkblad en diverse inbouwapparatuur 
+•	Stijlvolle badkamer
+•	Energielabel A
+•	Lift aanwezig 
+•	Bouwjaar 1998 
+•	VvE-bijdrage: € 235,30 per maand 
+•	Erfpacht afgekocht tot en met 15-06-2046 
+•	Oplevering: in overleg 
+
+Ruimte, licht, een fantastisch uitzicht en het gemak van alle voorzieningen direct om de hoek: Osdorpplein 196 heeft het allemaal. Een comfortabel appartement waar je midden in de stad woont en thuis tegelijkertijd volop rust en ruimte ervaart. Plan snel een bezichtiging en ontdek zelf hoe fijn het hier wonen is!
+
+*English*
+Bright and stylish four-room apartment with three bedrooms, a modern open-plan kitchen, a spacious balcony and panoramic views at Osdorpplein!
+
+Enjoy spacious living, an abundance of natural light and every amenity within easy reach. Located on the twelfth floor of the distinctive Mirador apartment complex, directly on Osdorpplein, this beautifully finished four-room apartment offers approximately 95 m² of living space. The property features three bedrooms, a stylish open-plan kitchen, a delightful balcony of approximately 10 m² and an external storage room of approximately 7 m².
+
+The apartment has been finished in a modern and inviting style, with light laminate flooring and neutral tones throughout. Thanks to the large windows in the living room, the apartment enjoys plenty of natural light as well as beautiful panoramic views across the city and surrounding greenery.
+
+Layout
+
+The well-maintained communal entrance provides access to the residential floor by lift. Upon entering the apartment, you arrive in the spacious hallway, which provides access to almost all rooms.
+
+At the end of the hallway, the apartment opens up into the generous living area. The living room is wonderfully bright thanks to the wide windows and offers ample space for both a comfortable seating area and a welcoming dining area. The panoramic views create a beautiful backdrop and give the room a wonderful sense of openness.
+
+The modern open-plan kitchen blends seamlessly with the living room and is sleekly finished in light tones. It offers plenty of worktop and storage space and is equipped with various integrated appliances, including a BORA hob with integrated extractor. The ceramic worktop, together with the copper-coloured tap and sink, gives the kitchen a stylish and contemporary look. From the living area, you step directly onto the approximately 10 m² west-facing balcony. Here you can enjoy panoramic views and beautiful sunsets. On clear days, the view even extends as far as the dunes.
+
+At the rear of the apartment are three bedrooms, making the property ideal for a family while also offering plenty of flexibility for a comfortable home office or guest room. The apartment also features a stylish and fully equipped bathroom with a bathtub, spacious walk-in shower and double washbasin with vanity unit and designer mirror. In addition, there is a separate second toilet.
+
+The property also includes an external storage room of approximately 7 m², ideal for storing seasonal items and other belongings that are not needed on a daily basis. Bicycles can be stored safely and conveniently in the separate communal bicycle storage area within the complex.
+
+Location and accessibility
+Living at Osdorpplein means having all your everyday amenities right on your doorstep. Supermarkets, shops, restaurants and cafés, the library and Theater De Meervaart are all located nearby. SportCity gym is literally around the corner and can be accessed from the complex via the parking deck on the third floor. 
+At the same time, the Sloterplas lake is close by, offering plenty of opportunities for walking, running, cycling or simply relaxing by the water. This location therefore combines the convenience of city living with a surprising amount of greenery and recreational space. The area around Osdorpplein is also being further developed into the urban centre of Amsterdam Nieuw-West, with new homes, additional amenities and a greener boulevard leading towards Sloterplas.
+
+Accessibility is excellent. Tram and bus stops are located practically on the doorstep, while Amsterdam Lelylaan Station can be reached quickly. From there, there are excellent train, metro and bus connections to destinations including Amsterdam city centre, the Zuidas business district and Schiphol Airport. By car, the A4, A9 and A10 ring road are all easily accessible.
+
+Leasehold
+The property is situated on leasehold land. The ground rent has been prepaid up to and including 15 June 2046.
+
+Key features
+• Located on the twelfth floor
+• Living area approximately 95 m² (NEN 2580 measurement report available)
+• 4 rooms, including 3 bedrooms
+• 2 toilets
+• Spacious balcony of approximately 10 m²
+• External storage room of approximately 7 m²
+• Modern open-plan kitchen with ceramic worktop and various integrated appliances
+• Stylish bathroom
+• Energy label A
+• Lift available
+• Year of construction: 1998
+• Owners’ association contribution: €235.30 per month
+• Ground rent prepaid up to and including 15 June 2046
+• Completion: by mutual agreement
+
+Space, light, fantastic views and the convenience of having every amenity right around the corner: Osdorpplein 196 has it all. A comfortable apartment where you can enjoy city living while experiencing peace, space and tranquillity at home. Schedule a viewing and discover for yourself just how enjoyable living here can be!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Vlindermolen Makelaardij</strong> · Vlindermolen Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/527/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/730_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/716_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/738_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/742_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/713_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/739_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/733_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/703_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/706_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/718_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/715_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/735_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/725_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/527/734_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

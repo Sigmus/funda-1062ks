@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cornelis van Alkemadestraat 17 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Cornelis van Alkemadestraat 17</h1>
+  <p class="sub">
+    <span>1065 AA Amsterdam</span>
+    <span>·</span>
+    <span>Emanuel van Meterenbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/721/955_1440x960.jpg" alt="Cornelis van Alkemadestraat 17 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">42 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€769.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.870/m² · 1.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.2 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">131 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1957</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-cornelis-van-alkemadestraat-17/44505292/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 769.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.870</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1957</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>131 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>18 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>102 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>473 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Rookkanaal, schuifpui, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Gedeeltelijk Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Combiketel uit 2024, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND D 4145</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>102 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 133,86 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>62 m² (10,73 m deep en 5,78 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde stenen berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Emanuel van Meterenbuurt</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>2.320</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>34%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 6.030</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**This Property is listed by a MVA Certified Expat Broker. See below for English translation** 
+
+Ruimte, licht en vooral heel veel mogelijkheden! Aan de Cornelis van Alkemadestraat 17 vind je deze royale eengezinswoning van circa 131m² woonoppervlakte, verdeeld over drie woonlagen. Met maar liefst vijf slaapkamers, een zonnige tuin, balkon op de eerste verdieping én inpandig terras op de tweede verdieping is er aan leef- en buitenruimte geen gebrek. Extra interessant is de mogelijkheid om op de tweede verdieping circa 18 m² aan de woonruimte toe te voegen door het inpandig terras dicht te maken. Zo biedt de huidige woning een mooie basis voor wie graag een huis volledig naar eigen smaak wil moderniseren. De woning staat op erfpachtgrond.
+
+WONEN EN KOKEN
+Bij binnenkomst in de hal zijn er twee toegangsdeuren, één met toegang tot een ruime bergruimte om bijvoorbeeld fietsen in te zetten, de andere deur geeft toegang tot een kleine gang naar de verschillende vertrekken en trap naar boven. De ruime woonkamer profiteert aan beide zijden van veel daglicht en biedt volop plaats voor een royale zithoek en een gezellige eethoek. De woonkamer is verder voorzien van een massief houten visgraat parketvloer en een open haard. Via de grote schuifpui stap je zo de zonnige achtertuin in. 
+De open keuken is eenvoudig uitgevoerd en kan gemoderniseerd worden. Dit biedt de kans om de living en de keuken volledig opnieuw vorm te geven en bijvoorbeeld flink te vergroten met een eventuele uitbouw.
+
+SLAPEN EN BADEN
+Vijf slaapkamers maken deze woning bijzonder geschikt voor een gezin én voor thuiswerken. Op de eerste verdieping bevinden zich drie slaapkamers: twee ruime kamers met inbouwkasten en een kleinere kamer die uitstekend dienst kan doen als kinder-, werk- of logeerkamer of als walk in closet. Alle kamers hebben grote ramen waardoor veel natuurlicht komt en één de kamers heeft een toegangsdeur naar het balkon. Op dezelfde verdieping ligt ook de badkamer, die gedateerd is. Wel is er een groot raam dat zorgt voor natuurlijk licht en ventilatie.
+
+Op de tweede verdieping zijn nog eens twee kamers, waarvan de grote kamer toegang geeft tot het terras. Van de kleine slaapkamer kan een tweede badkamer worden gemaakt,  
+
+BUITEN
+En dan buiten! De woning heeft verschillende plekken waar je fijn kunt buiten verblijven. De achtertuin met volwassen begroeiing ligt, evenals het balkon en het inpandige terras, op het zuiden. Vanaf het terras kijk je fraai uit over het groen van de buurt. 
+Bij de voordeur is een berging die vanuit de hal bereikbaar is.
+
+ERFPACHT
+De woning staat op erfpachtgrond. De jaarlijkse canon bedraagt € 133,86 en het huidige tijdvak loopt tot en met 30 november 2030. De Algemene Bepalingen voor voortdurende erfpacht 1937 zijn van toepassing. Er loopt een aanvraag voor overstappen naar eeuwigdurende erfpacht.
+
+LOCATIE
+Rustig wonen met de stad binnen handbereik. De woning ligt in de groene en kindvriendelijke Van Meterenbuurt in Amsterdam-West, op loopafstand van de Sloterplas en het Sloterpark. Een heerlijke omgeving om te wandelen, hardlopen, zwemmen of simpelweg aan het water te ontspannen. Het huis ligt heel rustig aan een doodlopend straatje. 
+In de directe omgeving vind je diverse basisscholen, speeltuinen, sportverenigingen en winkelcentra. Ook qua bereikbaarheid zit je hier goed. Station Lelylaan voor tram en trein ligt op loopafstand en biedt directe verbindingen richting het centrum en Schiphol. Met de auto bereik je binnen enkele minuten de A10.
+Parkeren kan betaald op de openbare weg. Bewoners kunnen een eigen parkeervergunning aanvragen; actuele informatie hierover is te vinden via de gemeente Amsterdam.
+
+HIGHLIGHTS
+- Bouwjaar 1956; 
+- Woonoppervlakte circa 131 m²;
+- Drie woonlagen;
+- Vijf slaapkamers;
+- Zonnige achtertuin, balkon en inpandig terras dat dichtgemaakt kan worden en voor circa
+  18 m² aan de woonruimte oplevert, alle gericht op het zuiden;
+- Erfpachtcanon € 133,86 per jaar, tijdvak tot en met 30 november 2030. Een aanvraag is gedaan voor overstap naar eeuwigdurende erfpacht;
+- Energielabel D;
+- Ouderdoms-, asbest en niet zelfbewoningsclausule van toepassing; 
+- Oplevering kan snel.
+
+&quot;Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten zijn ingemeten conform NEN 2580 en zijn indicatief. Wij adviseren u een makelaar in te schakelen, die u met zijn deskundigheid zal bijstaan in het aankoopproces. Indien u geen professionele begeleiding wenst in te schakelen, acht u zich volgens de wet deskundig genoeg om alle zaken, die van belang zijn, te kunnen overzien. De Algemene Consumentenvoorwaarden van de NVM zijn van toepassing”
+
+*English translation*
+
+SPACE, LIGHT AND, ABOVE ALL, PLENTY OF POTENTIAL!
+At Cornelis van Alkemadestraat 17, you will find this generously proportioned family home offering approximately 131 m² of living space arranged over three floors. With no fewer than five bedrooms, a sunny rear garden, a first-floor balcony and an integrated terrace on the second floor, there is certainly no shortage of indoor or outdoor space. An additional advantage is the potential to add approximately 18 m² to the living space on the second floor by enclosing the integrated terrace. The property therefore provides an excellent basis for anyone looking to modernise a home entirely to their own taste and requirements. The property is situated on leasehold land.
+
+LIVING AND KITCHEN
+Upon entering the property, the hallway has two doors. One provides access to a spacious storage area, ideal for bicycles, for example, while the other leads to a small hall providing access to the various rooms and the staircase to the upper floors. The spacious living room benefits from plenty of natural light from both sides and offers ample room for a generous seating area and a comfortable dining area. It features solid wood herringbone parquet flooring and a fireplace. Large sliding doors provide direct access to the sunny rear garden. The open-plan kitchen is simply fitted and would benefit from modernisation. This presents an excellent opportunity to redesign the kitchen and living space entirely to your own taste, with the possibility of creating considerably more space by adding an extension.
+
+BEDROOMS AND BATHROOM
+With five bedrooms, this property is particularly well suited to family life as well as working from home. The first floor has three bedrooms: two generously sized rooms with fitted wardrobes and a smaller room that would work perfectly as a child’s bedroom, home office, guest room or walk-in wardrobe. All bedrooms have large windows allowing plenty of natural light to enter, and one of the bedrooms provides access to the balcony. The bathroom is also located on this floor and, although dated, benefits from a large window providing natural light and ventilation. The second floor offers a further two rooms, with the larger bedroom providing access to the terrace. The smaller bedroom could potentially be converted into a second bathroom.
+
+OUTDOOR SPACE
+And then there is the outdoor space. The property offers several pleasant places to enjoy being outside. The rear garden, balcony and integrated terrace all face south, providing excellent exposure to the sun. The terrace also offers attractive views across the greenery of the surrounding neighbourhood. There is a storage room by the front entrance, which can be accessed directly from the hallway.
+
+LEASEHOLD
+The property is situated on leasehold land. The annual ground rent is €133.86 and the current leasehold period runs until 30 November 2030. The General Provisions for Continuous Leasehold 1937 apply. An application has been submitted to switch to perpetual leasehold.
+
+LOCATION
+Peaceful living with the city within easy reach. The property is situated in the green and family-friendly Van Meterenbuurt neighbourhood in Amsterdam-West, within walking distance of Sloterplas lake and Sloterpark. It is an ideal setting for walking, running, swimming or simply relaxing by the water. The house itself enjoys a particularly quiet position on a cul-de-sac. There are various primary schools, playgrounds, sports clubs and shopping centres in the immediate area. The property is also very well connected. Lelylaan Station, with both tram and train services, is within walking distance and provides direct connections to Amsterdam city centre and Schiphol Airport. The A10 ring road can be reached within just a few minutes by car. Paid parking is available on the public road. Residents can apply for their own parking permit; current information regarding permits is available from the Municipality of Amsterdam.
+
+HIGHLIGHTS
+-Built in 1956;
+-Approximately 131 m² of living space;
+-Three floors;
+-Five bedrooms;
+-Sunny south-facing rear garden, balcony and integrated terrace;
+-Potential to enclose the integrated terrace, creating approximately 18 m² of additional living space;
+-Annual ground rent of €133.86, with the current leasehold period running until 30 November 2030. An application has been submitted to switch to perpetual leasehold;
+-Energy label D;
+-Age, asbestos and non-owner-occupancy clauses apply;
+-Completion can take place at short notice.
+
+&quot;We have composed this information with due care. On our part, however, no liability whatsoever is accepted for any incompleteness, inaccuracy or otherwise, or its consequences. All specified sizes are measured in accordance with NEN 2580 and are indicative. We advise you to call in a broker who will assist you with his expertise in the purchase process. If you do not wish to take professional counseling, you are legally competent enough to oversee all matters that are of interest. The General Consumer conditions of the NVM are applicable &quot;
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 42</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/721/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/914_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/928_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/942_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/922_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/939_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/932_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/923_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/916_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/936_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/925_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/919_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/924_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/954_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/917_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/931_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/913_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/929_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/934_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/926_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/918_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/721/953_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

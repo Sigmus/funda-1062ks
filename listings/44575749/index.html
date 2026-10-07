@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluessenlaan 42 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Fluessenlaan 42</h1>
+  <p class="sub">
+    <span>1060 PP Amsterdam</span>
+    <span>·</span>
+    <span>De Aker-West</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/473/224_1440x960.jpg" alt="Fluessenlaan 42 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">42 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€675.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.963/m² · 4.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.2 km</span>
+      <span class="chip">6 bedrooms</span>
+      <span class="chip">136 m² living</span>
+      <span class="chip">7 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1998</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-fluessenlaan-42/44575749/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 675.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.963</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1998</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>136 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>138 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>481 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>7 rooms (6 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors en een zolder</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Combiketel</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Kadastraal perceel</dt><dd>SLOTEN G 3347</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>138 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 15-03-2047)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-03-2047</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>47 m² (9,00 m deep en 5,20 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het westen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Geen isolatie</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Direct online een bezichtiging inplannen? Ga naar onze website!
+
+ZONNIG WONEN IN DE AKER: RUIMTE, COMFORT EN EEN PRACHTIG UITZICHT
+Welkom in deze royale tussenwoning van maar liefst 136m², gelegen in de gewilde wijk De Aker! Deze heerlijke woning combineert ruimte, licht en moderne gemakken, perfect voor een gezin op zoek naar groei of dat nét even wat extra nodig heeft. Met vier ruime slaapkamers, een zonnige tuin op het westen en energielabel A is dit het thuis waar je dromen werkelijkheid worden. En het beste? Je geniet van vrij uitzicht aan de achterzijde! Een ideale combinatie voor jonge gezinnen en families die verlangen naar meer wooncomfort en een fijne buurt. Huiselijk, modern en met potentie voor de toekomst – dit is dé kans om jouw woondromen waar te maken!
+
+HIGHLIGHTS DIE JE MOET WETEN
+
+Energielabel A: Deze woning is niet alleen toekomstbestendig, maar ook energiezuinig, wat gunstig is voor de portemonnee én het klimaat.
+Vier ruime slaapkamers: Ideaal voor grote gezinnen of thuiswerkplekken – met zelfs nog uitbreidingsmogelijkheden.
+Zonnige tuin op het westen: Perfect voor lange zomeravonden, borrels en barbecues met volop zonneschijn.
+Vrij uitzicht achter: Geen directe achterburen, maar een vrije en groene blik naar buiten. Heerlijk rustig en ideaal voor privacy.
+Snelle oplevering: Geen lange wachttijd – je woont hier eerder dan je denkt!
+Ruime indelingsmogelijkheden: Van een open keuken tot meer slaapkamers, alles is aan te passen aan jouw smaak en behoeften.
+DE WONING: RUIMTE, LICHT EN MOGELIJKHEDEN
+Bij binnenkomst voelt het direct: dit huis leeft. De hal is ruim, biedt praktische opbergruimte en geeft toegang tot de dichte keuken aan de voorzijde. De keuken is gedateerd, maar biedt volop mogelijkheden voor renovatie – denk bijvoorbeeld aan een moderne open leefkeuken. Stel je een grote open ruimte voor waar koken, eten en leven samenkomen. Een perfecte setting voor lange diners met vrienden of bakmiddagen met de kids.
+
+De woonkamer strekt zich uit naar achteren en ontvangt heerlijk veel licht dankzij de grote raampartijen. Vanuit hier kijk je uit op de royale tuin gelegen op het westen. Dat betekent: zon, zon en nog eens zon! Hoe fijn is het om na een lange dag neer te ploffen op je loungeset met een goed glas wijn, terwijl de kinderen veilig en ongestoord spelen in de tuin? Extra pluspunt: doordat er aan de achterkant geen directe buren zijn, geniet je hier van absolute rust en privacy. Een vrij uitzicht dat écht uniek is in de buurt!
+
+Op de eerste verdieping vind je twee bijzonder ruime slaapkamers. Beide kamers zijn perfect voor een groot bed én een garderobekast. Heb je behoefte aan nóg een extra slaapkamer? Dan is dat hier eenvoudig te realiseren – flexibiliteit is het sleutelwoord. De badkamer is strak onderhouden en voorzien van alle gemakken: een douche, een wastafelmeubel en een tweede toilet.
+
+De bovenste verdieping verrast met wederom twee goed bemeten slaapkamers. Hier kun je ook alle kanten op: denk aan een logeerkamer, een thuiswerkplek of misschien wel een tweede badkamer? Er is zelfs een aparte wasruimte en extra bergruimte, zodat je al je seizoensspullen netjes kunt opbergen. En als je het nóg verder wilt uitbreiden, behoort dat zeker tot de mogelijkheden.
+
+De ligging van de woning is ideaal. Aan de rand van de wijk De Aker vind je de perfecte balans tussen stad en rust. Op loopafstand ligt winkelcentrum het Dukaat, waar je alles vindt wat je nodig hebt: supermarkten, speciaalzaken, een apotheek en meer. Denk hierbij ook aan scholen, sportterreinen en kindvriendelijke speelplekken in de directe omgeving. Bovendien zijn de openbaar vervoersverbindingen uitstekend en zit je in no-time in het hart van Amsterdam of elders in de regio.
+
+ONTDEK MEER: HOOGTEPUNTEN UITGESCHREVEN
+Deze woning biedt alles wat jij nodig hebt: ruimte, comfort en veelzijdigheid. Dankzij energielabel A ben je klaar voor een duurzame toekomst met lage energiekosten. Met vier slaapkamers en zelfs uitbreidingsmogelijkheden is dit de droomplek voor een groot of groeiend gezin. De tuin op het westen is de perfecte plek om met vrienden en familie te genieten van het buitenleven, terwijl je aan de achterzijde vrij uitzicht hebt. En met een snelle oplevering kun je sneller dan verwacht je nieuwe thuis betreden. Anticipeer op de eindeloze mogelijkheden en maak van deze woning jouw geheel eigen stijl!
+
+BIJZONDERHEDEN
+
+- Bouwjaar 1998;
+- Woonoppervlakte 136m2;
+- Energielabel A;
+- Vier slaapkamers, meerdere indelingsmogelijkheden;
+- Nabij alle voorzieningen;
+- Ruime tuin van ca. 45m2 met ligging op het westen;
+- De erfpacht is afgekocht tot 15-03-2047;
+- Aanvaarding in overleg;</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Hoekstra en Van Eck Amsterdam Centrum</strong></p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 42</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/473/224_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/018_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/052_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/140_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/472/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/068_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/129_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/025_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/109_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/017_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/113_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/139_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/115_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/472/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/007_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/064_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/155_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/158_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/149_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/472/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/021_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/006_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/152_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/159_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/029_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/019_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/063_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/075_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/020_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/031_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/472/980_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/472/991_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/141_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/210_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/204_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/235_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/189_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/138_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/473/230_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

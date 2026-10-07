@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oudenaardeplantsoen 63 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Oudenaardeplantsoen 63</h1>
+  <p class="sub">
+    <span>1066 TJ Amsterdam</span>
+    <span>·</span>
+    <span>Nieuw-Sloten-Noordwest</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/186/743_1440x960.jpg" alt="Oudenaardeplantsoen 63 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">31 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.417/m² · 2.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.6 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">120 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1995</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-oudenaardeplantsoen-63/44517630/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.417</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1995</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Lessenaardak</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>120 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>120 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>472 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Dakraam, Mechanical ventilation, en natuurlijke ventilatie</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, drieDouble glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD HOLLAND E 5948</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>120 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan park, On a quiet road, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>55 m² (11,60 m deep en 4,72 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het oosten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Dit ruime familiehuis van 120 m² is verdeeld over drie woonlagen en gelegen aan een rustig en autoluw plantsoen. De woning is de afgelopen jaren met zorg gerenoveerd: in 2025 zijn alle kozijnen vervangen en voorzien van triple glas, de badkamer en het toilet zijn vernieuwd en is de gehele woning voorzien van mooie houten vloeren. Extra prettig: de erfpacht is eeuwigdurend afgekocht. Een comfortabel en instapklaar huis waar je je direct thuis voelt!
+De woning ligt in het rustige en groene Nieuw-Sloten, nabij scholen, kinderopvang, speeltuinen, sportfaciliteiten en winkelcentrum Belgiëplein. Natuurpark De Vrije Geer, Oud-Sloten en recreatiegebied De Oeverlanden bevinden zich op korte afstand. 
+Met de auto ben je via de A4, A9, A5 en Ring A10 snel onderweg. Openbaar vervoer is uitstekend: tram 2 gaat rechtstreeks naar het centrum van Amsterdam, bus 369 naar Schiphol en Sloterdijk, en bus 247 naar Schiphol Zuid.
+
+Indeling:
+Begane grond:
+Entree met hal, ruime gangkast, meterkast en modern toilet met fonteintje. De lichte woonkamer staat in open verbinding met de keuken en het eetgedeelte aan de voorzijde.
+De open moderne keuken van Bulthaup is voorzien van diverse hoogwaardige inbouwapparatuur en heeft voldoende werkblad en bergruimte.
+De ruime achtertuin ligt op het Oosten met een schuur en een achterom voor aanwonenden. 
+
+Eerste verdieping
+Overloop met toegang tot twee ruime slaapkamers aan de voor- en achterzijde. De grote slaapkamer aan de achterzijde heeft een hoog plafond en twee dakramen met rolluiken (met afstandsbediening). De luxe badkamer beschikt over een ligbad met douche, een wastafelmeubel en een tweede toilet  met een design spiegel. 
+
+Tweede verdieping
+Hier bevinden zich nog twee goed bemeten slaapkamers met veel lichtinval en een praktische ruimte waar de wasmachine en de droger staan.  
+
+Erfpacht:
+De woning is gelegen op erfpachtgrond van de gemeente Amsterdam. De erfpacht is eeuwigdurend afgekocht. Dit betekent dat er geen periodieke erfpachtcanon verschuldigd is.
+
+Bijzonderheden:
+•	Bouwjaar 1995; 
+•	Energielabel A; 
+•	Erfpacht eeuwigdurend afgekocht; 
+•	Alle kozijnen voorzien van triple glas zijn in 2025 vervangen; 
+•	Badkamer en toilet zijn vernieuwd in 2025; 
+•	Gehele woning voorzien van houten vloeren; 
+•	Gestuukte wanden door de gehele woning; 
+•	Praktische inbouwkasten aanwezig;
+•	Achtertuin van 55 m² gelegen op het Oosten;
+•	Schuur van 7 m² met achterom; 
+•	Mechanische ventilatie; 
+•	Mogelijkheid voor 2 parkeervergunningen;
+•	Gelegen aan een rustig en autoluw plantsoen; 
+•	Oplevering in overleg. 
+
+This spacious family home of 120 m² is arranged over three floors and situated on a quiet, low-traffic street, directly next to a green park. The property has been carefully renovated in recent years: in 2025, all window frames were replaced and fitted with triple glazing, the bathroom and toilet were renovated, and beautiful wooden flooring was installed throughout the house. An additional benefit is that the ground lease has been bought off in perpetuity. A comfortable, move-in-ready family home where you will instantly feel at home.
+
+The property is located in the peaceful and green Nieuw-Sloten neighbourhood, close to schools, childcare facilities, playgrounds, sports facilities and the Belgiëplein shopping centre. Nature park De Vrije Geer, the historic village of Oud-Sloten and the De Oeverlanden recreational area are all within easy reach.
+By car, the A4, A9, A5 and A10 ring road provide excellent connections. Public transport is also very convenient: tram 2 runs directly to Amsterdam city centre, bus 369 connects to Schiphol Airport and Sloterdijk, and bus 247 runs to Schiphol South.
+
+Layout
+Ground floor
+Entrance hall with a spacious storage cupboard, meter cupboard and modern toilet with washbasin. The bright living room is connected to the kitchen and dining area at the front of the house.The modern open-plan kitchen from German brand bulthaup is equipped with various top-of-the-range built-in appliances and offers ample worktop and storage space.
+The spacious rear garden faces east and includes a storage shed and a rear entrance accessible to residents.
+
+First floor
+Landing provides access to two spacious bedrooms at the front and rear of the property. The large rear bedroom features a high ceiling and two skylights with roller blinds, both operated via remote control. The luxurious bathroom is fitted with a bathtub with shower, washbasin unit, second toilet and a designer mirror.
+
+Second floor
+The top floor offers two further well-proportioned bedrooms with plenty of natural light, as well as a practical utility area with space for the washing machine and dryer.
+
+Ground lease
+The property is situated on leasehold land owned by the Municipality of Amsterdam. The ground lease has been bought off in perpetuity, meaning that no periodic ground rent is payable.
+
+Key features
+•	Year of construction: 1995 
+•	Energy label A 
+•	Ground lease bought off in perpetuity 
+•	All window frames replaced and fitted with triple glazing in 2025 
+•	Bathroom and toilet renovated in 2025 
+•	Wooden flooring throughout 
+•	Plastered walls throughout the property 
+•	Practical built-in storage cupboards 
+•	East-facing rear garden of approximately 55 m² 
+•	Storage shed of approximately 7 m² with rear access 
+•	Mechanical ventilation 
+•	Possibility to obtain two parking permits 
+•	Situated on a quiet, low-traffic green 
+•	Completion date by mutual agreement
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Lichte living met Bulthaup
+
+Lichte woonkamer met open Bulthaup keuken en eetgedeelte.
+
+Ruime oostelijke achtertuin
+
+Achtertuin van 55 m² op het oosten met schuur en achterom.
+
+Triple glas en label A
+
+Alle kozijnen met triple glas, energielabel A, mechanische ventilatie.
+
+Is deze informatie behulpzaam?
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>DDB Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 31</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/186/743_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/739_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/738_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/725_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/735_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/189/394_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/756_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/746_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/730_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/734_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/713_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/716_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/715_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/186/737_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

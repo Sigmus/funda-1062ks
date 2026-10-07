@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elisabeth Boddaertstraat 30-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Elisabeth Boddaertstraat 30-3</h1>
+  <p class="sub">
+    <span>1066 BD Amsterdam</span>
+    <span>·</span>
+    <span>Staalmanbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/590/759_1440x960.jpg" alt="Elisabeth Boddaertstraat 30-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">30 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€480.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.316/m² · 0.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">0.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">76 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1959</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-elisabeth-boddaertstraat-30-3/44526304/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 480.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.316</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 167,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1959</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>76 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>249 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Walk-in shower, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, Mechanical ventilation, TV cable, en zonnepanelen</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en Wall insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND E 9570</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 31-03-2071)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-03-2071</dd></div>
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND E 9570</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 31-03-2071)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-03-2071</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 167,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Staalmanbuurt</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>3.835</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>34%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 5.909</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** English text below ***
+
+Dit fijne 4-kamerappartement van circa 76 m² is in 2021 volledig vernieuwd en verduurzaamd. Met een heerlijk lichte woonkamer, moderne keuken, drie slaapkamers, twee balkons en een eigen berging is dit een comfortabele woning waar je direct in kunt. Ook qua duurzaamheid is de woning helemaal bij de tijd. Het appartement heeft energielabel A, is gasloos en voorzien van stadsverwarming, WTW en zonnepanelen. Het complex is in 2021 zowel aan de binnen- als buitenzijde grootschalig gerenoveerd en verduurzaamd. Dit zorgt voor een hoog wooncomfort en relatief lage energielasten. De woning ligt in de vernieuwde Staalmanpleinbuurt in Slotervaart, een buurt die de afgelopen jaren zichtbaar is opgeknapt en steeds groener en levendiger wordt. Je woont hier rustig in een doodlopende straat, met de stad, winkels en veel groen binnen handbereik.
+
+Een instapklaar en volledig gelijkvloers appartement met energielabel A, hoog wooncomfort, drie slaapkamers en twee balkons. Bovendien is de erfpacht langdurig afgekocht tot en met 2071.
+
+LIGGING
+Rond het karakteristieke Staalmanplein vind je winkels, horeca en het vernieuwde Staalmanpark. Ook zijn er diverse scholen, kinderopvang en sportmogelijkheden in de buurt. Voor koffie, lunch of een borrel kun je onder andere terecht bij Grand Café Podieum, A Sentimento Pizzeria, Bar Lely, Benji’s en Lokaal van de Stad. Ook de Nieuwe Meer, het Amsterdamse Bos, Rembrandtpark, Sloterpark en Vondelpark liggen dichtbij.
+
+BEREIKBAARHEID
+Met de fiets ben je binnen circa 10 minuten bij het Vondelpark, Rembrandtpark en Amsterdam-Zuid. De Pijp, Zuidas, het Leidseplein en de Kinkerstraat bereik je in circa 15 minuten. Voor de dagelijkse boodschappen liggen het Sierplein, Delflandplein en Hoofddorpplein dichtbij. Tram, bus en metro zijn op loopafstand gelegen en met de auto zit je met 5 minuten op de Ring A10 en richting Schiphol.
+
+INDELING
+Begane grond:
+Afgesloten entree met bellentableau, brievenbussen, trappenhuis en toegang tot de bergingen. Hier bevindt zich ook de eigen privéberging.
+
+Derde verdieping:
+Via de centrale hal zijn alle vertrekken bereikbaar. De woonkamer is heerlijk licht en biedt vrij uitzicht en veel privacy. De moderne keuken is uitgevoerd in een lichte kleurstelling met composiet werkblad en voorzien van AEG inbouwapparatuur, waaronder een oven, magnetron, inductiekookplaat en koel-/vriescombinatie. Er zijn drie slaapkamers. De ruime ouderslaapkamer ligt aan de voorzijde en heeft toegang tot het balkon op het oosten, ideaal voor de ochtendzon. Aan de achterzijde bevinden zich twee werk-/slaapkamers, waarvan één toegang geeft tot het goed bemeten balkon op het westen. De badkamer is neutraal betegeld en voorzien van een inloopdouche en wastafelmeubel. Het toilet is separaat.
+
+VERENIGING VAN EIGENAREN
+Vereniging van Eigenaars van het gebouw gelegen aan Elisabeth Boddaertstraat 24 tot en met 38 (even nummers) en Wilhelmina Druckerstraat 7 tot en met 19 (oneven nummers) te Amsterdam is actief, het vastgoedbeheer wordt professioneel uitgevoerd door ‘Alliantie VvE diensten&#x27;, er wordt jaarlijks vergaderd, er is een MJOP (Meerjarenonderhoudsplan) en een Huishoudelijk Reglement aanwezig. Het complex is in 2021 gesplitst in appartementsrechten, de servicekosten bedragen € 167,- per maand.
+
+EIGENDOMSSITUATIE
+Het betreft een voortdurend recht van erfpacht, eigendom van de gemeente Amsterdam. De Algemene Bepalingen 2000 zijn van toepassing. De jaarlijkse canon is langdurig afgekocht en bij vooruitbetaling voldaan tot en met 31 maart 2071.
+
+INDICATIEVE AFMETINGEN
+• Bruto vloeroppervlakte woning: 96 m²
+• Gebruiksoppervlakte wonen: 76 m²
+• Gebouw gebonden buitenruimte: 8 m²
+• Externe bergruimte: 5 m²
+• Bruto inhoud woning: 249 m³
+
+BIJZONDERHEDEN
+• Energielabel: A
+• Funderingsrisico: niet verhoogd (A, B, C)
+• De woning heeft twee balkons
+• Verwarming en warm water middels stadswarmte
+• Parkeren is mogelijk op basis van betaald parkeren. Informatie over de mogelijkheden, wachttijden en kosten van een parkeervergunning is terug te vinden op de website van de gemeente.
+• Notaris: naar keuze koper, mits koopakte conform Model Ring bij notaris in Groot Amsterdam
+• Er is pas een overeenkomst indien zowel de particuliere koper en verkoper een schriftelijke koopovereenkomst hebben ondertekend
+• Verkoper behoudt zich het recht van gunning voor
+
+Oplevering: in overleg.
+
+Voorbehoud
+De Meetinstructie is gebaseerd op de NEN2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting.
+
+Alle verkoopinformatie is met de nodige zorgvuldigheid samengesteld. Wij aanvaarden geen enkele aansprakelijkheid voor onjuist verkregen (mondelinge) informatie, onvolledigheid of anderszins, dan wel de gevolgen daarvan en wijzen de koper nadrukkelijk op zijn wettelijke onderzoeksplicht.
+
+Interesse in dit huis?
+Schakel direct uw eigen NVM-aankoopmakelaar in.
+Uw NVM-aankoopmakelaar komt op voor úw belang en bespaart u tijd, geld en zorgen.
+Adressen van collega NVM-aankoopmakelaars vindt u op Funda.
+
+This lovely 4-room apartment of approximately 76 m² was completely renovated and made more energy-efficient in 2021. With a wonderfully bright living room, modern kitchen, three bedrooms, two balconies and a private storage unit, this is a comfortable home that is ready to move into. The apartment is also fully up to date in terms of sustainability. It has an energy label A, is gas-free and equipped with district heating, a heat recovery ventilation system (WTW) and solar panels. In 2021, the complex underwent extensive renovation and energy-efficiency improvements, both internally and externally. This provides a high level of living comfort and relatively low energy costs. The apartment is located in the renewed Staalmanpleinbuurt in Slotervaart, a neighbourhood that has visibly improved in recent years and is becoming increasingly green and vibrant. Here, you live peacefully on a cul-de-sac, with the city, shops and plenty of greenery all within easy reach.
+
+A move-in ready and fully single-level apartment with energy label A, a high level of living comfort, three bedrooms and two balconies. In addition, the ground lease has been bought out for an extended period, up to and including 2071.
+
+LIGGING
+Around the characteristic Staalmanplein you will find shops, restaurants and the renewed Staalmanpark. There are also several schools, childcare facilities and sports amenities nearby. For coffee, lunch or drinks, you can visit places such as Grand Café Podieum, A Sentimento Pizzeria, Bar Lely, Benji’s and Lokaal van de Stad. The Nieuwe Meer, Amsterdamse Bos, Rembrandtpark, Sloterpark and Vondelpark are also close by.
+
+BEREIKBAARHEID
+By bicycle, you can reach Vondelpark, Rembrandtpark and Amsterdam-Zuid within approximately 10 minutes. De Pijp, Zuidas, Leidseplein and Kinkerstraat are approximately 15 minutes away by bike. For your daily shopping, Sierplein, Delflandplein and Hoofddorpplein are all close by. Tram, bus and metro stops are within walking distance, while by car you can reach the A10 ring road and Schiphol within approximately 5 minutes.
+
+INDELING
+Ground floor:
+Secure entrance with doorbells, mailboxes, staircase and access to the storage units. The private storage unit belonging to the apartment is also located here.
+
+Third floor:
+All rooms are accessible from the central hallway. The living room is wonderfully bright and offers an unobstructed view and plenty of privacy. The modern kitchen is finished in a light colour scheme with a composite worktop and is equipped with AEG built-in appliances, including an oven, microwave, induction hob and fridge-freezer combination. There are three bedrooms. The spacious master bedroom is located at the front and provides access to the east-facing balcony, ideal for enjoying the morning sun. At the rear are two work/bedrooms, one of which provides access to the generously sized west-facing balcony. The bathroom is neutrally tiled and features a walk-in shower and vanity unit. The toilet is separate.
+
+VERENIGING VAN EIGENAREN
+The Homeowners’ Association (VvE) for the building located at Elisabeth Boddaertstraat 24 to 38 (even numbers) and Wilhelmina Druckerstraat 7 to 19 (odd numbers) in Amsterdam is active. The property is professionally managed by ‘Alliantie VvE Diensten’. The association holds an annual general meeting, has a Long-Term Maintenance Plan (MJOP) and a House Rules document. The complex was legally divided into apartment rights in 2021. The service charges are €167 per month.
+
+EIGENDOMSSITUATIE
+The property is subject to a perpetual right of ground lease, owned by the Municipality of Amsterdam. The General Provisions 2000 apply. The annual ground rent has been bought out for an extended period and paid in advance up to and including 31 March 2071.
+
+INDICATIEVE AFMETINGEN
+• Gross floor area of apartment: 96 m²
+• Usable residential area: 76 m²
+• Building-related outdoor space: 8 m²
+• External storage space: 5 m²
+• Gross volume of apartment: 249 m³
+
+BIJZONDERHEDEN
+• Energy label: A
+• Foundation risk: not elevated (A, B, C)
+• The apartment has two balconies
+• Heating and hot water via district heating
+• Paid parking applies. Information about the options, waiting times and costs of a parking permit can be found on the municipality’s website.
+• Notary: buyer’s choice, provided the purchase agreement is prepared in accordance with the Model Ring at a notary in the Greater Amsterdam area
+• An agreement is only concluded once both the private buyer and seller have signed a written purchase agreement
+• The seller reserves the right to award the sale
+
+Transfer: by mutual agreement.
+
+Voorbehoud
+The Measurement Instruction is based on NEN2580. The Measurement Instruction is intended to provide a more uniform method of measuring the usable floor area for indication purposes. The Measurement Instruction does not completely exclude differences in measurement results, for example due to differences in interpretation, rounding or limitations when carrying out the measurement.
+
+All sales information has been compiled with due care. We accept no liability whatsoever for incorrectly obtained (oral) information, incompleteness or otherwise, or for the consequences thereof, and expressly draw the buyer’s attention to their statutory duty to investigate.
+
+Interesse in dit huis?
+Instruct your own NVM-certified buying agent directly.
+Your NVM-certified buying agent represents your interests and saves you time, money and worries.
+You can find the contact details of fellow NVM-certified buying agents on Funda.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>De Makelaers | Amsterdam</strong> · De Makelaers | Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 30</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/590/759_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/843_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/836_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/814_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/760_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/849_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/777_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/840_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/806_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/847_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/791_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/766_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/841_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/797_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/784_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/802_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/795_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/786_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/801_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/825_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/829_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/787_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/768_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/774_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/789_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/816_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/590/807_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

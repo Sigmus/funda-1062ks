@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biesbosch 207 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Biesbosch 207</h1>
+  <p class="sub">
+    <span>1181 JC Amstelveen</span>
+    <span>·</span>
+    <span>Vredeveldbuurt</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/320/611_1440x960.jpg" alt="Biesbosch 207 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">29 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€375.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.412/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">85 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1966</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amstelveen/appartement-biesbosch-207/44595260/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 375.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.412</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 257,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Gallery flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1966</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>85 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>268 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>4e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTELVEEN H 11390</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 257,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruim appartement (ca.  85m²) met drie slaapkamers, een zonnig balkon en volop mogelijkheden om er helemaal je eigen plek van te maken. 
+
+**See English translation below**
+
+Aan de Biesbosch 207 in Amstelveen ligt dit praktische appartement met een prettige indeling, een brede buitenruimte en een vrij uitzicht richting het groen. De woning is gedateerd en biedt daarmee juist alle ruimte voor een nieuwe eigenaar om de woning naar eigen smaak en wensen te moderniseren.
+
+Indeling
+Via de entree kom je in de hal, die toegang biedt tot de verschillende vertrekken van de woning. De woonkamer is ruim van opzet en beschikt over grote raampartijen en een directe verbinding met het balkon. Dankzij de ligging aan de achterzijde kijk je hier uit over de groene omgeving.
+
+De dichte keuken bevindt zich aan de voorzijde van het appartement en is voorzien van een eenvoudig keukenblok. Vanuit de keuken is er eveneens zicht en toegang richting de buitenruimte aan de galerijzijde.
+
+Het appartement beschikt over drie slaapkamers. De grootste slaapkamer ligt aan de balkonzijde en heeft, net als de woonkamer, een deur naar het balkon. De overige twee slaapkamers bevinden zich aan de voorzijde van de woning en zijn door hun formaat uitstekend geschikt als slaap-, werk- of hobbykamer.
+
+De badkamer is functioneel ingericht met een wastafel en douche. Daarnaast beschikt het appartement over een separate toiletruimte.
+
+Buitenruimte
+Een van de fijne kenmerken van dit appartement is het brede balkon van circa 7 meter breed. Er is voldoende ruimte om een gezellige zithoek te creëren en dankzij de ligging op het zonnige zuidwesten en aan de groene zijde van het gebouw geniet je hier van een vrij uitzicht en veel privacy. Een heerlijke plek om buiten te zitten, een kop koffie te drinken of aan het einde van de dag nog even van de zon te genieten.
+
+Een separate bergruimte vindt u in de onderbouw van het complex. 
+
+Omgeving
+Het complex is gelegen in de rustige en groene wijk Elsrijk met in de nabijheid diverse goede scholen en verschillende supermarkten voor de dagelijkse boodschappen. In en rondom het nabije luxe overdekte winkelcentrum “Stadshart van Amstelveen” bevinden zich ook o.a. de Schouwburg, het museum en leuke en gevarieerde horecagelegenheden. Amsterdam Zuid is met de auto binnen een paar minuten te bereiken via de Beneluxbaan, die ook directe aansluiting biedt naar de A1, A2, A4 of A9. De halte voor de lijnen 5 en 51 is tegenover het complex gelegen.
+
+De Vereniging van Eigenaars
+- De VvE bestaat uit 88 appartementsrechten. 
+- De maandelijkse servicekosten bedragen € 257,- per maand
+- Er is een meerjarenonderhoudsplan aanwezig welke loopt t/m 2038.
+- De administratie wordt gevoerd door VvE Beheer Amsterdam. 
+
+Bijzonderheden
+- Woonoppervlakte ca. 85m² (conform NEN 2580)
+- Bouwjaar ca. 1966
+- Verwarming door middel van blokverwarming, warm water door middel van boiler
+- Extra breed balkon op het zuidwesten
+- Ruime berging bevindt zich in de onderbouw van het complex
+- Projectnotaris Bellaar te Amstelveen
+- Asbest-, ouderdoms- en niet zelfbewoningsclausule zijn van toepassing
+- Aanvaarding in overleg 
+
+Meetinstructie
+Het verkochte is gemeten met gebruikmaking van de Meetinstructie, welke is gebaseerd op de normen zoals vastgelegd in NEN 2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit door bijvoorbeeld interpretatieverschillen, afrondingen en beperkingen bij het uitvoeren van een meting.
+
+De woning is gemeten door een betrouwbaar professioneel bedrijf en koper vrijwaart de medewerkers van Voorma &amp; Millenaar makelaars o.g. en de verkoper voor eventuele afwijkingen in de opgegeven maten. Koper verklaart in de gelegenheid te zijn gesteld om de het verkochte zelf te (laten) meten conform NEN 2580.
+
+*** This Property is listed by an MVA Certified Expat Broker ***
+
+Spacious apartment (approx. 85 m²) with three bedrooms, a sunny balcony, and plenty of opportunities to make it your own.
+
+Located at Biesbosch 207 in Amstelveen, this practical apartment features a pleasant layout, a spacious outdoor area, and an unobstructed view of the greenery. The home is dated, which means it offers plenty of room for a new owner to modernize it according to their own taste and preferences.
+
+Layout
+The entryway leads into the hallway, which provides access to the various rooms of the apartment. The living room is spacious and features large windows and direct access to the balcony. Thanks to its rear-facing location, you can enjoy views of the green surroundings from here.
+
+The separate kitchen is located at the front of the apartment and is equipped with a simple kitchen unit. From the kitchen, there is also a view of and access to the outdoor space on the balcony side.
+
+The apartment has three bedrooms. The master bedroom is on the balcony side and, like the living room, has a door leading to the balcony. The other two bedrooms are located at the front of the apartment and, due to their size, are ideal as bedrooms, home offices, or hobby rooms.
+
+The bathroom is functionally designed with a sink and shower. In addition, the apartment has a separate toilet.
+
+Outdoor Space
+One of the nice features of this apartment is the wide balcony, approximately 7 meters wide. There is plenty of space to create a cozy seating area, and thanks to its sunny southwest-facing location on the green side of the building, you can enjoy an unobstructed view and plenty of privacy here. It’s a wonderful spot to sit outside, have a cup of coffee, or enjoy the sun for a little while at the end of the day.
+
+A separate storage room is located in the basement of the complex.
+
+Surroundings
+The complex is located in the quiet and green Elsrijk neighborhood, with several good schools and various supermarkets for daily shopping nearby. In and around the nearby luxury indoor shopping center “Stadshart van Amstelveen,” you’ll also find the theater, the museum, and a variety of charming dining options. Amsterdam Zuid is just a few minutes away by car via the Beneluxbaan, which also offers direct access to the A1, A2, A4, and A9 highways. The bus stop for lines 5 and 51 is located across from the complex.
+
+The Homeowners’ Association
+- The Homeowners’ Association consists of 88 apartment units.
+- The monthly service fees amount to €257 per month
+- A long-term maintenance plan is in place, valid through 2038.
+- The administration is handled by VvE Beheer Amsterdam.
+
+Details
+- Living area approx. 85 m² (in accordance with NEN 2580)
+- Year built: approx. 1966
+- Heating provided by central heating system; hot water provided by a water heater
+- Extra-wide balcony facing southwest
+- Spacious storage room located in the basement of the complex
+- Project notary Bellaar in Amstelveen
+- Asbestos, age, and non-owner-occupancy clauses apply
+- Closing date to be agreed upon
+
+Measurement Guidelines
+The property has been measured in accordance with the Measurement Guidelines, which are based on the standards set forth in NEN 2580. The Measurement Guidelines are intended to provide a more uniform method of measurement for estimating the usable floor area. The Measurement Instructions do not completely rule out differences in measurement results due to, for example, differences in interpretation, rounding, and limitations in performing a measurement.
+
+The property was measured by a reputable professional firm, and the buyer releases the employees of Voorma &amp; Millenaar Real Estate Agents and the seller from liability for any discrepancies in the stated measurements. The buyer declares that they were given the opportunity to measure the property themselves or have it measured in accordance with NEN 2580.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Voorma &amp; Millenaar makelaars - taxateurs o.g.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 29</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/320/611_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/629_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/617_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/321/324_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/586_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/321/316_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/569_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/623_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/620_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/605_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/618_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/593_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/579_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/599_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/612_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/608_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/590_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/628_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/570_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/585_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/588_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/591_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/578_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/614_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/582_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/320/592_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

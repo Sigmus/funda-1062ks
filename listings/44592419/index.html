@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heintje Hoekssteeg 5-M · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Heintje Hoekssteeg 5-M</h1>
+  <p class="sub">
+    <span>1012 GR Amsterdam</span>
+    <span>·</span>
+    <span>Kop Zeedijk</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/564/147_1440x960.jpg" alt="Heintje Hoekssteeg 5-M — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">19 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.311/m² · 4.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.7 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">103 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1991</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-heintje-hoekssteeg-5-m/44592419/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.311</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 413,41 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1991</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>103 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>297 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors en een vliering</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Gas gestookt uit 2011, huur</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM G 8029</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM G 8030</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>City centre</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 413,41 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*ENGLISH BELOW* 
+Dit unieke bovenhuis is verdeeld over twee verdiepingen en combineert authentiek karakter met modern comfort. Kenmerkend zijn de prachtige balkenplafonds en de recent gerenoveerde badkamer met Japans toilet, separaat toilet en trapopgang (2025). Het appartement maakt deel uit van een goed onderhouden complex (bouwjaar 1991), bereikbaar via de charmante Heintje Hoekssteeg. De steeg is afgesloten en wordt &#x27;s avonds vergrendeld, wat zorgt voor een veilige en besloten toegang tot de woning. Aan de voorzijde geniet u van uitzicht op de levendige Warmoesstraat, terwijl u aan de achterzijde uitkijkt op een rustige en aangename binnenplaats.
+
+Hier wonen betekent alles wat Amsterdam te bieden heeft direct voor de deur hebben. Binnen slechts 7 minuten lopen bereikt u Centraal Station, met directe verbindingen naar trein, tram en metro die u overal in de stad of door heel Nederland brengen. De directe omgeving biedt een bruisende mix van cafés, restaurants, culturele podia, bioscopen en musea zoals Ons&#x27; Lieve Heer op Solder, evenals de Nieuwmarkt en het Waterlooplein.
+
+De indeling is flexibel en biedt meerdere mogelijkheden. De woonverdieping beschikt over een lichte woonkamer met karakteristieke houten balken en een open keuken (gerenoveerd in 2018) voorzien van inbouwapparatuur. Aan de achterzijde bevindt zich een gezellige zitkamer met uitzicht op de binnenplaats, die eenvoudig kan worden ingericht als extra slaapkamer of thuiskantoor.
+
+De bovenverdieping omvat twee ruime slaapkamers, een moderne badkamer (gerenoveerd in 2025) met inloopdouche, toilet en wastafelmeubel, en een extra ruimte die dienst kan doen als werkkamer, logeerkamer of kleedruimte. Dankzij de hoge plafonds is er tevens potentieel voor een loft-achtige sfeer. Via een vlizotrap is een berging op zolderniveau bereikbaar, en het appartement beschikt over een eigen berging van 6 m² op de begane grond.
+
+Het appartement maakt deel uit van een actieve en goed georganiseerde VvE met een sterke betrokkenheid van de bewoners. De vereniging wordt professioneel beheerd en heeft een Meerjarenonderhoudsplan (MJOP) opgesteld. De maandelijkse servicekosten bedragen €413,41.
+
+Kortom, dit is een zeldzame kans om te wonen in een ruime en karaktervolle woning op een van de meest centrale en goed bereikbare locaties van Amsterdam, met bruisend stadsleven en een rustige toevlucht midden in dat alles.
+
+Algemeen:
+-	103 m² woonoppervlakte
+-	Externe berging van 6 m² op de begane grond
+-	Gelegen op eigen grond
+-	Betreft een Rijksmonument
+-	Gemeenschappelijk gebruik van de binnentuin
+-	Diverse indelingsmogelijkheden
+-	Remeha Cv-ketel van 2011
+-	Servicekosten €413,41 per maand
+-	MJOP aanwezig
+-	Projectnotaris: NVA Notaris
+-	Het appartement is momenteel niet gemeubileerd
+-	Oplevering kan snel
+
+Deze woning is gemeten volgens de Meetinstructie. De Meetinstructie is gebaseerd op de NEN2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting. Hoewel wij de woning met veel zorg hebben opgemeten kan het zijn dat er verschillen zijn in de afmetingen. Noch verkoper noch de makelaar accepteert enige aansprakelijkheid voor deze verschillen. De maatvoeringen worden door ons gezien als zuiver indicatief. Indien de exacte maatvoering voor jou van belang is, raden wij jou aan de maten zelf te (laten) meten.
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Van toepassing zijn de NVM voorwaarden.
+
+---------------------------
+ENGLISH DESCRIPTION
+---------------------------
+This unique upper-level home is spread over two floors and combines authentic character with modern comfort, featuring beautiful beamed ceilings and a recently renovated bathroom with Japanese toilet, separate toilet, and staircase (2025). The apartment is part of a well-maintained complex (built in 1991), accessible via the charming Heintje Hoekssteeg. The alley is gated and closed in the evenings, offering a safe and private entrance to the property. At the front, you enjoy views over the lively Warmoesstraat, while at the rear you overlook a quiet and pleasant inner courtyard.
+
+Living here means having everything Amsterdam has to offer right on your doorstep. Within just a 7-minute walk you reach Central Station, providing direct access to trains, trams, and metro connections that take you anywhere in the city or across the Netherlands. The immediate surroundings offer a vibrant mix of cafés, restaurants, cultural venues, cinemas, and museums such as Our Lord in the Attic, as well as the Nieuwmarkt and Waterlooplein.
+
+The layout is flexible and offers multiple possibilities. The main living floor features a bright living room with characteristic wooden beams and an open kitchen (renovated in 2018) equipped with built-in appliances. At the rear, a cozy sitting room overlooks the courtyard and can easily be used as an additional bedroom or home office.
+
+The upper floor comprises two spacious bedrooms, a modern bathroom (renovated in 2025) with walk-in shower, toilet and vanity unit, and an additional room that can serve as a home office, guest room or dressing area. Thanks to the high ceilings, there is also potential to create a loft-style feel. A storage attic is accessible via a loft ladder, and the apartment includes a private 6 m² storage unit on the ground floor.
+
+The property is part of an active and well-organized VvE with a strong sense of community and regular resident involvement. The association is professionally managed and has a Multi-Year Maintenance Plan (MJOP) in place. Monthly service costs are €413.41.
+
+In short, this is a rare opportunity to live in a spacious and characterful home in one of Amsterdam’s most central and well-connected locations, offering both vibrant city life and a peaceful retreat in the middle of it all.
+
+General
+-	103 m² living area
+-	External storage room of 6 m² on the ground floor
+-	Situated on freehold land
+-	Designated National Monument
+-	Communal use of the courtyard garden
+-	Various layout possibilities
+-	Remeha central heating boiler (2011)
+-	Service charges: €413.41 per month
+-	Long-term maintenance plan available
+-	Project notary: NVA Notaris
+-	The apartment is currently unfurnished
+-	Quick delivery possible
+
+This property has been measured in accordance with the Measurement Instruction, which is based on the NEN2580 standard. The Measurement Instruction is intended to provide a more uniform method of measuring in order to give an indication of the usable floor area. Differences in measurement outcomes cannot be fully excluded due to interpretation differences, rounding or limitations during the measurement process. Although the property has been measured with due care, discrepancies in dimensions may occur. Neither the seller nor the estate agent accepts any liability for such differences. All stated measurements are purely indicative. If exact measurements are of importance to you, we advise you to verify the dimensions independently.
+
+This information has been compiled with due care. However, we accept no liability for any incompleteness, inaccuracy or otherwise, nor for the consequences thereof. All stated sizes and surface areas are indicative. The NVM terms and conditions apply.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Makelaardij De Nederlanden</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 19</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/564/147_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/156_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/162_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/160_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/161_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/155_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/144_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/146_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/143_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/280_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/346_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/320_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/302_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/174_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/167_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/273_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/188_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/564/164_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

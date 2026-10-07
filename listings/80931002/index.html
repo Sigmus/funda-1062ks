@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zuid-Hollandstraat 48-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Zuid-Hollandstraat 48-2</h1>
+  <p class="sub">
+    <span>1082 EL Amsterdam</span>
+    <span>·</span>
+    <span>Buitenveldert-Zuid-Midden</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/540/060_1440x960.jpg" alt="Zuid-Hollandstraat 48-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">43 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€500.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.494/m² · 3.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">77 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1963</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-zuid-hollandstraat-48-2/17204739/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 500.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.494</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 197,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1963</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>77 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>259 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler (huur)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Kadastraal perceel</dt><dd>AMSTERDAM AK 3610</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 16-04-2035</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 197,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Licht en verzorgd 4-kamer hoek appartement met twee balkons nabij Gelderlandplein en de Zuidas in een groene woonomgeving.
+
+In het geliefde Amsterdam Buitenveldert bieden wij dit verzorgde 4-kamerappartement van circa 77 m² aan, gelegen op de tweede verdieping van een goed onderhouden appartementencomplex. De woning beschikt over drie slaapkamers, twee balkons, een eigen berging in de onderbouw en een gunstige ligging op korte afstand van het Gelderlandplein, de Zuidas, het Amstelpark en diverse voorzieningen.
+
+Dankzij de nette afwerking kan de woning vrijwel direct worden betrokken.
+
+Indeling
+
+Via het gemeenschappelijke trappenhuis bereikt u de tweede verdieping. De entree van de woning biedt toegang tot de hal, van waaruit vrijwel alle vertrekken bereikbaar zijn.
+
+De woonkamer bevindt zich aan de achterzijde van de woning en geniet dankzij de grote raampartijen aan twee zijden van een prettige hoeveelheid daglicht. Aansluitend bevindt zich de open keuken (2022), voorzien van een composiet aanrechtblad en diverse inbouwapparatuur, waaronder een inductiekookplaat, geïntegreerde afzuigkap, vaatwasser, koelkast en vriezer.
+
+Vanuit de woonkamer is één van de twee balkons bereikbaar, waar u kunt genieten van de middag- en avondzon.
+
+De woning beschikt over drie slaapkamers. De moderne badkamer is voorzien van een inloopdouche, wastafelmeubel en designradiator. Daarnaast is er een separate toiletruimte met wandcloset. Verder beschikt de woning over een aparte wasruimte met aansluitingen voor de wasmachine en een kast waarin de boiler voor de warmwatervoorziening is opgesteld.
+
+Op de begane grond bevindt zich een praktische privéberging.
+
+Omgeving
+
+De woning is gelegen in het populaire Buitenveldert, een rustige en groene woonomgeving met alle voorzieningen binnen handbereik. Winkelcentrum Groot Gelderlandplein bevindt zich op loopafstand en biedt een uitgebreid aanbod aan winkels, supermarkten en horecagelegenheden. Ook de Zuidas, het Amstelpark, diverse sportfaciliteiten, openbaar vervoerverbindingen en uitvalswegen zijn uitstekend bereikbaar. In de omgeving zijn er meerdere opstap punten voor het OV. Via station Zuid zijn er directe verbindingen naar bijvoorbeeld Amsterdam Oost en West.
+
+Bijzonderheden:
+
+-Woonoppervlakte circa 77 m²
+-Gelegen op de tweede verdieping
+-Hoek appartement
+-Drie slaapkamers
+-Twee balkons
+-Eigen berging in de onderbouw
+-Moderne keuken en badkamer
+-Verwarming middels blokverwarming
+-Servicekosten circa € 197,- per maand, 272,82 inclusief voorschot stookkosten
+-Lease boiler, 46,- per maand
+-Erfpacht afgekocht tot 16 april 2035
+-Eeuwigdurende erfpacht reeds vastgeklikt onder gunstige voorwaarden
+-Keuken en vloer vervangen in 2022
+-Gunstige ligging nabij Gelderlandplein, de Zuidas en het Amstelpark
+
+Een verzorgd appartement met een praktische indeling, twee buitenruimtes, eigen berging en een uitstekende ligging in Amsterdam Buitenveldert. Een bezichtiging is zeker de moeite waard.
+
+Bright and Well-Maintained Corner Apartment with Three Bedrooms, Two Balconies, Near Gelderlandplein and the Zuidas in a Green Residential Area
+
+Located in the popular district of Amsterdam Buitenveldert, we are pleased to offer this well-maintained four-room corner apartment of approximately 77 m², situated on the second floor of a well-kept apartment complex. The property features three bedrooms, two balconies, a private storage unit in the basement, and an excellent location close to Gelderlandplein Shopping Centre, the Zuidas, Amstelpark, and various amenities.
+
+Thanks to its neat finish, the apartment is ready for immediate occupancy.
+
+Layout
+
+Via the communal staircase, you reach the second floor. The entrance hall provides access to virtually all rooms within the apartment.
+
+The living room is located at the rear of the property and benefits from large windows on two sides, creating a bright and pleasant living space. Adjacent to the living room is the open-plan kitchen (2022), featuring a composite worktop and various built-in appliances, including an induction hob, integrated extractor system, dishwasher, refrigerator, and freezer.
+
+From the living room, one of the two balconies can be accessed, offering a pleasant outdoor space to enjoy the afternoon and evening sun.
+
+The apartment offers three bedrooms. The modern bathroom is equipped with a walk-in shower, vanity unit, and designer radiator. In addition, there is a separate toilet with a wall-mounted toilet. The property also includes a separate laundry area with connections for a washing machine and a storage cupboard housing the hot water boiler.
+
+A practical private storage room is located on the ground floor.
+
+Location
+
+The apartment is situated in the sought-after Buitenveldert district, a peaceful and green residential area with all amenities within easy reach. Gelderlandplein Shopping Centre is within walking distance and offers a wide range of shops, supermarkets, and restaurants.
+
+The Zuidas business district, Amstelpark, sports facilities, public transport connections, and major roads are all easily accessible. Several public transport stops are located nearby, and Amsterdam Zuid Station provides direct connections to various parts of the city, including Amsterdam East and West.
+
+Key Features:
+
+-Living area approximately 77 m²
+-Located on the second floor
+-Corner apartment
+-Three bedrooms
+-Two balconies
+-Private storage unit in the basement
+-Modern kitchen and bathroom
+-Heating via block heating
+-Service charges approximately €197 per month (€272.82 per month including advance heating costs)
+-Leased hot water boiler: €46 per month
+-Ground lease prepaid until 16 April 2035
+-Perpetual ground lease terms have already been secured under favourable conditions
+-Kitchen and flooring renewed in 2022
+-Excellent location near Gelderlandplein, the Zuidas, and Amstelpark
+
+A well-maintained apartment with a practical layout, two outdoor spaces, private storage, and an excellent location in Amsterdam Buitenveldert. Viewing is highly recommended.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Collectief Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 43</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/540/060_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/133_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/052_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/039_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/155_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/110_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/081_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/113_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/135_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/158_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/098_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/141_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/154_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/062_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/159_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/105_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/099_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/129_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/160_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/045_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/069_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/149_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/085_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/071_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/106_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/144_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/142_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/044_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/051_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/146_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/042_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/161_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/127_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/123_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/058_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/079_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/109_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/056_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/057_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/131_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/064_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/540/162_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

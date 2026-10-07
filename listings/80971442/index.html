@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eurokade 22 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Eurokade 22</h1>
+  <p class="sub">
+    <span>1060 RZ Amsterdam</span>
+    <span>·</span>
+    <span>De Aker-Oost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/193/794_1440x960.jpg" alt="Eurokade 22 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">41 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€670.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.653/m² · 3.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.6 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">144 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1999</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">4 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-eurokade-22/80971442/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 670.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.653</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1999</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Lessenaardak bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>144 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>100 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>510 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 2 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>4 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Vaillant ecuTEC plus (gas gestookt uit 2014, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND G 3854</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>100 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>36 m² (8,00 m deep en 4,50 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**English version below**
+
+Wonen in een rustige, groene en kindvriendelijke buurt én tegelijkertijd alle voorzieningen van Amsterdam binnen handbereik. Deze royale eengezinswoning van 144 m² woonoppervlakte beschikt over vier volwaardige woonlagen, een zonnige tuin op het zuiden, een vrijstaande berging én een fantastische multifunctionele indeling. De woning is ontworpen door het gerenommeerde Amsterdamse architectenbureau Heren 5 Architecten, bekend om zijn eigentijdse architectuur en hoogwaardige woonconcepten. Uniek aan deze woning is de afgesloten, goed verzorgde gemeenschappelijke binnentuin met speeltuin. De erfpachtcanon is afgekocht tot 1 januari 2047. De overstap (onder de gunstige voorwaarden) naar eeuwigdurende erfpacht op basis van jaarlijkse canon is reeds geregeld.
+
+Wat deze woning extra bijzonder maakt, is de flexibiliteit. Zoek je een groot familiehuis? Een woning met praktijk- of kantoorruimte aan huis? Of juist een huis waarin je eenvoudig extra slaapkamers of een tweede badkamer creëert? Hier kan het allemaal.
+
+Indeling:
+
+Begane grond: via de overdekte entree kom je binnen in de hal van de woning. Hier vind je een separaat toilet en toegang tot de royale en lichte tuinkamer die over de volledige diepte van de woning loopt. Dankzij de grote raampartijen en openslaande deuren aan de tuinzijde voelt deze ruimte heerlijk licht en ruim aan. Een ideale plek als tweede woonkamer, werkruimte, atelier of luxe woonkeuken. De zonnige achtertuin ligt op het zuiden, waardoor je hier vrijwel de hele dag van de zon geniet. Achterin vind je een vrijstaande houten berging en een handige achterom naar de afgesloten gemeenschappelijke binnentuin. Een fijne, groene ontmoetingsplek voor bewoners en kinderen uit de buurt.
+
+Eerste verdieping: hier bevindt zich de huidige woonkamer met halfopen woonkeuken. Grote raampartijen zorgen voor veel licht en een prettig uitzicht over zowel de binnentuin als de straatzijde en het Ecuplein. De keuken biedt volop werk- en opbergruimte. In de woonkamer ligt een massief Frans eikenhouten (6mm dik) vloer.
+
+Tweede verdieping: op deze verdieping bevinden zich twee ruime slaapkamers, een badkamer met ligbad, douche en wastafel en een separaat toilet.
+
+Derde verdieping: op de bovenste verdieping bevindt zich nog een royale slaapkamer met extra hoge nok. Hierdoor ontstaat niet alleen een heerlijk ruimtelijk gevoel, maar ook de mogelijkheid voor een entresol of extra bergruimte. Daarnaast is hier eenvoudig een tweede badkamer te realiseren en/of een extra slaapkamer door het plaatsen van een dakkapel. Tevens is hier een ruime berging waar de cv-ketel geplaatst is en de aansluiting voor de wasmachine.
+
+Kenmerken:
+
+•	Royale eengezinswoning van ca. 144 m² woonoppervlakte 
+•	Vier woonlagen met veel indelingsmogelijkheden 
+•	Zonnige achtertuin op het zuiden
+•	Vrijstaande berging van ca. 7 m² 
+•	5 slaapkamers mogelijk 
+•	Mogelijkheid voor praktijk/kantoor aan huis 
+•	Tweede badkamer realiseerbaar 
+•	Energielabel B 
+•	Volledig geïsoleerd.
+•	Hr+ glas op begane grond en eerste verdieping
+•	Afgesloten gemeenschappelijke binnentuin 
+•	Erfpachtcanon afgekocht tot 1 januari 2047 
+•	Overstap naar eeuwigdurende erfpacht op basis van jaarlijkse canon reeds geregeld 
+•	Glasvezel aanwezig (doorgetrokken naar 2de verdieping)
+•	Rustige, kindvriendelijke woonomgeving met veel groen 
+
+Omgeving:
+
+De woning ligt in de geliefde Europese Muntenwijk in De Aker. Een ruim opgezette woonwijk met veel groen, speelplekken en een fijne sfeer. Basisscholen, kinderopvang, gezondheidscentrum en winkelcentrum Dukaat bevinden zich op loopafstand. Ook qua bereikbaarheid zit je hier uitstekend: tram 1 brengt je rechtstreeks naar het centrum van Amsterdam en met de auto bereik je binnen enkele minuten de A4, A5, A9 en A10.
+
+Plan snel een bezichtiging in. MakelaarFRANK laat je deze woning graag zien.
+
+**English version**
+
+Living in a peaceful, green, and family-friendly neighbourhood while having all the amenities of Amsterdam within easy reach. This spacious family home offers 144 m² of living space and features four full floors, a sunny south-facing garden, a detached storage shed, and a fantastic multifunctional layout. The property was designed by the renowned Amsterdam-based architectural firm Heren 5 Architecten, known for its contemporary architecture and high-quality residential concepts. A unique feature of this home is the enclosed and well-maintained communal courtyard garden with a playground. The ground lease has been prepaid until 1 January 2047, and the transition to perpetual leasehold under the favourable conditions with an annual ground rent has already been arranged.
+
+What makes this home particularly special is its flexibility. Are you looking for a large family home? A property with space for a home office or professional practice? Or a house where additional bedrooms or a second bathroom can be created with ease? Here, all of these possibilities are within reach.
+
+Layout
+
+Ground floor
+Through the covered entrance, you enter the hallway of the home. Here, you will find a separate toilet and access to the spacious and light-filled garden room that extends across the full depth of the property. Thanks to the large windows and French doors opening onto the garden, this space feels exceptionally bright and spacious. It is ideal as a second living room, home office, studio, or luxury kitchen-diner. The sunny rear garden faces south, allowing you to enjoy the sun for most of the day. At the back of the garden, you will find a detached wooden storage shed and convenient rear access to the enclosed communal courtyard garden. This green and welcoming space is a wonderful meeting place for residents and neighbourhood children alike.
+
+First floor
+The current living room and semi-open-plan kitchen are located on this level. Large windows provide an abundance of natural light and pleasant views over both the courtyard garden and the street side, including Ecuplein. The kitchen offers ample workspace and storage. The living room features solid French oak flooring (6 mm thick).
+
+Second floor
+This floor comprises two generously sized bedrooms, a bathroom with a bathtub, shower, and washbasin, as well as a separate toilet.
+
+Third floor
+The top floor features another spacious bedroom with an extra-high vaulted ceiling. This not only creates a wonderful sense of space but also offers the possibility of adding a mezzanine level or extra storage space. In addition, a second bathroom can easily be installed and/or an additional bedroom created by adding a dormer window. This floor also houses a generous storage room containing the central heating boiler and connections for a washing machine.
+
+Key Features
+
+•	Spacious family home with approximately 144 m² of living space
+•	Four floors with numerous layout possibilities
+•	Sunny south-facing rear garden
+•	Detached storage shed of approximately 7 m²
+•	Potential for up to five bedrooms
+•	Suitable for a home office or professional practice
+•	Possibility to create a second bathroom
+•	Energy label B
+•	Fully insulated
+•	HR+ glazing on the ground and first floors
+•	Enclosed communal courtyard garden
+•	Ground lease prepaid until 1 January 2047
+•	Transition to perpetual leasehold with annual ground rent already arranged
+•	Fibre-optic internet installed (extended to the second floor)
+•	Quiet, family-friendly residential area with abundant greenery
+
+Location
+
+The property is situated in the popular Europese Muntenwijk neighbourhood in De Aker. This spacious residential area is characterised by its greenery, playgrounds, and pleasant atmosphere. Primary schools, childcare facilities, a health centre, and Dukaat Shopping Centre are all within walking distance. Accessibility is excellent: Tram 1 provides a direct connection to Amsterdam city centre, while the A4, A5, A9, and A10 motorways can all be reached within minutes by car.
+
+Schedule a viewing soon. MakelaarFRANK will be delighted to show you this wonderful property.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Royale woning met vier lagen
+
+Eengezinswoning van 144 m² met vier volwaardige woonlagen.
+
+Zonnige tuin en binnentuin
+
+Zuidgerichte achtertuin, vrijstaande berging en afgesloten binnentuin.
+
+Groene buurt met tram 1
+
+Groene woonwijk met scholen, winkels en tram 1 nabij.
+
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>makelaarFRANK</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 41</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/193/794_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/765_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/772_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/743_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/809_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/745_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/812_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/766_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/818_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/779_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/774_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/761_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/789_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/287/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/802_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/791_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/817_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/825_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/759_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/770_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/826_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/777_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/796_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/746_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/755_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/820_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/805_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/823_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/822_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/763_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/815_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/193/816_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/446/231_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/577/984_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/599/857_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

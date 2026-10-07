@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eerste Hugo de Grootstraat 45 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Eerste Hugo de Grootstraat 45</h1>
+  <p class="sub">
+    <span>1052 KN Amsterdam</span>
+    <span>·</span>
+    <span>Frederik Hendrikbuurt-Zuidoost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/037/132_1440x960.jpg" alt="Eerste Hugo de Grootstraat 45 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">36 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€625.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.117/m² · 3.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.3 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">77 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1932</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-eerste-hugo-de-grootstraat-45/44503241/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 625.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.117</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 103,65 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Ground-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1932</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>77 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>198 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors en een kelder</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>Begane grond</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Elektrische verwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler en elektrische boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM Q 7700</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en Open views</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 103,65 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Wist je dat je ook zelf een bezichtiging in kan plannen? Klik op de oranje button en ontvang direct een link om een afspraak in te plannen. INDELING De woning is verdeeld over twee woonlagen en heeft een eigen entree op de begane grond. Bij binnenkomst stap je direct de living in, waar de hoekligging meteen opvalt. Dankzij de vele raampartijen is de ruimte heerlijk licht en ontstaat er een prettige indeling met voldoende plek voor zowel een comfortabele zit- als eethoek. De brede stoep voor de woning biedt bovendien de mogelijkheid om op een zonnige dag heerlijk buiten te zitten en de dag te beginnen met een kop koffie. De keuken is uitgevoerd in neutrale tinten en voorzien van diverse inbouwapparatuur, waaronder een spoelbak, vaatwasser, koel-/vriescombinatie, kookplaat met afzuigkap en volop opbergruimte. Vanuit de hal zijn verschillende vertrekken bereikbaar. Hier bevinden zich het separate toilet met fonteintje en de praktische wasruimte met aansluitingen voor de wasmachine en droger. De badkamer is efficiënt ingedeeld en beschikt over een wastafel en inloopdouche. De eerste slaapkamer is van goed formaat en biedt ruimte voor een tweepersoonsbed en een kledingkast. Via de trap in de living bereik je het souterrain. Hier kom je uit in de hal, die toegang geeft tot de twee slaapkamers. Beide kamers beschikken dankzij de aanwezige dakramen over natuurlijke lichtinval. Ook deze slaapkamers zijn ruim genoeg voor een tweepersoonsbed en kastruimte. Een fijne woning op een TOP locatie. Ben jij nieuwsgierig geworden? Neem dan snel contact met ons op voor het inplannen van een afspraak. OMGEVING De Frederik Hendrikbuurt is een heerlijke plek om te wonen, precies tussen de Jordaan en het Westerpark. Op loopafstand vind je het Hugo de Grootplein, de gezellige Westerstraat, de Noordermarkt en natuurlijk de sfeervolle grachten van de Jordaan. De Bloemgracht bereik je zelfs binnen twee minuten lopen. Ook in het straatje zelf is genoeg te beleven: op slechts een paar deuren afstand zit het sfeervolle Italiaanse restaurantje YamYam. Aan de Gilles van Ledenberchstraat vind je de hippe Molen De Otter en daarnaast koffietentje en bakkerij Louf. Het Westerpark ligt om de hoek voor sport, cultuur en ontspanning, terwijl je met de fiets zo in het Vondelpark bent. Ook qua bereikbaarheid zit je hier goed: openbaar vervoer is dichtbij en de A10 is binnen enkele minuten bereikbaar. Een levendige, gezellige en typisch Amsterdamse buurt, met alles wat je nodig hebt binnen handbereik. VERENIGING VAN EIGENAREN De Vereniging van Eigenaren genaamd &#x27;Gillis van Ledenberchstraat 77&#x27; bestaat uit 4 leden en wordt professioneel beheerd door VvE&#x27;tje Beheer. De maandelijkse servicekosten bedragen €103,65 euro. ERFPACHT De woning is gelegen op EIGEN grond, dus er is géén sprake van erfpacht, ideaal toch! BIJZONDERHEDEN
+- Gelegen in de geliefde Frederik Hendrikbuurt;
+- Woonoppervlakte 77m2;
+- EIGEN grond, dus geen sprake van erfpacht;
+- Servicekosten €103,65;
+- 3 goed bemeten slaapkamers;
+- Voorzien van dubbel glas;
+- Voorzien van een parketvloer;
+- Oplevering kan snel;
+- Niet-zelfbewonings- en ouderdomsclausule van toepassing;
+- Projectnotaris KB notarissen.
+DISCLAIMER
+Deze informatie is met zorg samengesteld. Aan de inhoud kunnen echter geen rechten worden ontleend. Alle opgegeven maten en oppervlakten zijn indicatief. Een koper heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Wij adviseren een eigen makelaar in te schakelen. NEN-CLAUSULE De gebruiksoppervlakte is berekend conform de door de branche vastgestelde NEN 2580-norm. De oppervlakte kan derhalve afwijken van vergelijkbare panden en/of oude referenties. Dit heeft vooral te maken met deze (nieuwe) rekenmethode. Koper verklaart voldoende te zijn geïnformeerd over de hiervoor gemelde normering. ENGLISH TRANSLATION A charming and surprisingly spacious home in a prime location in the popular Frederik Hendrikbuurt, featuring a private entrance, two floors and an abundance of natural light thanks to its corner position and numerous windows. With three spacious bedrooms, a comfortable living area, fully equipped kitchen and a practical layout, this property offers plenty of comfort and possibilities. And all of this within walking distance of the Jordaan, Westerpark and some of Amsterdam’s best hotspots. Come inside! Did you know you can schedule a viewing yourself? Click the orange button and you will immediately receive a link to book an appointment. LAYOUT The property is spread over two floors and has its own private entrance on the ground floor. Upon entering, you step directly into the living area, where the corner position immediately stands out. Thanks to the many windows, the space is wonderfully bright and offers a pleasant layout with plenty of room for both a comfortable seating area and dining area. The wide pavement in front of the property also provides the opportunity to sit outside on a sunny day and start your morning with a cup of coffee. The kitchen is finished in neutral tones and equipped with various built-in appliances, including a sink, dishwasher, fridge/freezer, hob with extractor hood and plenty of storage space. Several rooms can be accessed from the hallway. Here you will find the separate toilet with a small washbasin and the practical laundry room with connections for a washing machine and dryer. The bathroom is efficiently laid out and features a washbasin and walk-in shower. The first bedroom is a good size and offers enough space for a double bed and wardrobe. The staircase in the living area leads to the basement level. Here, the hallway provides access to the two bedrooms. Both rooms benefit from natural light thanks to the skylights. These bedrooms are also spacious enough to accommodate a double bed and wardrobe space. A wonderful home in a PRIME location. Curious to see more? Contact us to schedule a viewing. SURROUNDINGS The Frederik Hendrikbuurt is a wonderful place to live, perfectly situated between the Jordaan and Westerpark. Within walking distance you will find Hugo de Grootplein, the lively Westerstraat, Noordermarkt and, of course, the charming canals of the Jordaan. The Bloemgracht can even be reached within just two minutes on foot. There is also plenty to enjoy in the street itself: just a few doors down you will find the charming Italian restaurant YamYam. On Gilles van Ledenberchstraat, you will find the historic De Otter windmill as well as coffee shop and bakery Louf. Westerpark is just around the corner for sports, culture and relaxation, while Vondelpark is only a short bike ride away. Accessibility is also excellent, with public transport nearby and the A10 ring road reachable within just a few minutes. A lively, welcoming and typically Amsterdam neighbourhood with everything you need within easy reach. HOMEOWNERS’ ASSOCIATION The Homeowners’ Association named ‘Gillis van Ledenberchstraat 77’ consists of 4 members and is professionally managed by VvE’tje Beheer. The monthly service charges amount to €103.65. GROUND LEASE The property is situated on FREEHOLD land, meaning there is no ground lease – ideal! DETAILS
+- Located in the popular Frederik Hendrikbuurt;
+- Living area of 77 m²;
+- FREEHOLD land, so no ground lease;
+- Service charges €103,65;
+- 3 well-proportioned bedrooms;
+- Double glass;
+- Parquet flooring;
+- Transfer possible at short notice;
+- Non-owner-occupancy clause and age clause apply;
+- Designated civil-law notary: KB Notarissen.
+DISCLAIMER
+This information has been compiled with due care. However, no rights can be derived from its contents. All measurements and surface areas are indicative. Buyers are responsible for conducting their own investigations into matters that may be important to them. We recommend engaging your own real estate agent. NEN CLAUSE The usable floor area has been calculated in accordance with the industry-standard NEN 2580 measurement guidelines. As a result, the stated surface area may differ from comparable properties and/or older references, mainly due to this method of measurement. The buyer declares to have been sufficiently informed regarding the aforementioned standard.</div>
+    <p class="note">English paraphrase of the listing text. Original Dutch omschrijving is in the source JSON.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Daphne Haakman</strong> · La Maison Makelaars &amp; Taxateurs B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 36</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/037/132_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/287_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/146_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/159_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/447/805_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/254_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/301_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/222_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/447/810_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/273_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/221_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/286_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/281_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/252_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/285_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/245_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/253_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/223_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/256_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/265_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/316_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/290_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/303_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/139_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/251_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/298_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/238_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/229_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/307_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/264_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/315_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/037/294_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

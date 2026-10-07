@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nieuwemeerdijk 291 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Nieuwemeerdijk 291</h1>
+  <p class="sub">
+    <span>1171 NS Badhoevedorp</span>
+    <span>·</span>
+    <span>Badhoevedorp Nieuwe Meer</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/310/684_1440x960.jpg" alt="Nieuwemeerdijk 291 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">50 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€775.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.916/m² · 3.4 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.4 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">131 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1970</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/badhoevedorp/huis-nieuwemeerdijk-291/44561057/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 775.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.916</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, geschakelde woning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1970</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gedeeltelijk gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>131 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>2 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>46 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>565 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>508 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors en een zolder</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Buitenzonwering en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation en Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HR Vaillant ( combiketel uit 2021, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>HAARLEMMERMEER H 4863</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>505 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>owned belast met opstal</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>HAARLEMMERMEER H 11671</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>60 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a busy road, aan water en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>265 m² (12,15 m deep en 27,38 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidwesten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Vrijstaande stenen garage</dd></div>
+        <div class="frow"><dt>Capaciteit</dt><dd>1 auto</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>On own property</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Mooi! Vrijstaand wonen praktisch aan De Nieuwe Meer, met eigen aanlegsteiger, royale tuin, vrij uitzicht én een vrijstaande garage! Uniek wonen aan het water én bijna direct aan de golfbaan! Op een prachtige locatie aan de Nieuwemeerdijk in Badhoevedorp staat deze vrijstaande woning van ca. 131 m² op een royaal perceel van maar liefst 505 m², met daarnaast een eigen aanlegsteiger van ca. 59 m².
+
+De woning beschikt over drie slaapkamers, een royale eetkeuken, een sfeervolle L-vormige woonkamer met open haard, een bijkeuken én een eigen aanlegsteiger aan De Nieuwe Meer.
+Aan de achterzijde grenst de tuin direct aan de golfbaan van The International, waardoor u ook hier geniet van een bijzonder vrije en groene ligging. Aan de voorzijde kijkt u vrij uit over het water en de omgeving van De Nieuwe Meer.
+
+Alsof dat nog niet bijzonder genoeg is, beschikt de woning over een vrijstaande garage van ca. 8 x 4 meter met elektrische garagedeur, bereikbaar via de Veldweg. Een unieke plek voor wie ruimte, vrijheid, water, groen en een centrale ligging wil combineren!
+
++++ English text below +++
+
+W A T E R L I E F H E B B E R S O P G E L E T
+Hier draait het buitenleven om water. Vanuit uw eigen woning loopt u zo naar de oever van De Nieuwe Meer, waar u beschikt over een eigen aanlegsteiger. Of u nu wilt varen, suppen, vissen of simpelweg wilt genieten van een mooie zomeravond aan het water: hier krijgt het buitenleven een extra dimensie.
+De ligging is helemaal bijzonder door de combinatie van vrij uitzicht aan de voorzijde over De Nieuwe Meer en een vrije, groene ligging aan de achterzijde met direct uitzicht op de golfbaan van The International.
+
+L O C A T I E
+De Nieuwemeerdijk ligt op een unieke plek tussen Badhoevedorp, Amsterdam en De Nieuwe Meer. Vanuit hier zijn Amsterdam, Amstelveen en Schiphol uitstekend bereikbaar en ook de belangrijkste uitvalswegen liggen op korte afstand.
+Voor natuurliefhebbers, watersporters én golfers is de locatie bijzonder aantrekkelijk. Het water, de groene omgeving, het Amsterdamse Bos en de direct achter de woning gelegen golfbaan zorgen voor een heerlijke woonomgeving.
+Tegelijkertijd zijn dagelijkse voorzieningen, winkels, scholen en sportfaciliteiten vanuit Badhoevedorp goed bereikbaar.
+
+I N D E L I N G
+Begane grond
+Via de entree komt u in de hal met toegang tot de verschillende vertrekken.
+De L-vormige woonkamer is een sfeervolle leefruimte met veel ramen en een karakteristieke open haard. De verschillende zit- en eetgedeelten zorgen voor een prettige en veelzijdige indeling.
+
+Aan de achterzijde bevindt zich de royale eetkeuken, met volop ruimte voor een grote eettafel en een gezellige keukenopstelling. Vanuit de keuken is er een fijne verbinding met de tuin en het buitenleven.
+Daarnaast beschikt de begane grond over een praktische bijkeuken, een separaat toilet en diverse bergruimte.
+
+Eerste verdieping
+Op de eerste verdieping bevinden zich drie slaapkamers. De kamers zijn praktisch ingedeeld en bieden voldoende ruimte voor een gezin, thuiswerken of een logeerkamer.
+De badkamer is compact maar functioneel en beschikt over de benodigde sanitaire voorzieningen.
+
+B U I T E N L E V E N
+Het perceel van ca. 505 m² biedt rondom de woning volop ruimte. De groene en verzorgde tuin beschikt over verschillende plekken om te zitten en van de zon en het buitenleven te genieten.
+De absolute blikvanger is natuurlijk de ligging aan De Nieuwe Meer, met een eigen aanlegsteiger. Een bootje voor de deur, &#x27;s avonds nog even het water op of gewoon genieten van het uitzicht en de rust: het kan hier allemaal.
+
+Aan de achterzijde grenst de tuin direct aan de golfbaan van The International. Hierdoor heeft u ook vanuit de achtertuin een bijzonder vrij en groen uitzicht.
+In de tuin staat bovendien een houten schuur, ideaal voor extra bergruimte voor fietsen, tuinspullen en andere zaken.
+
+G A R A G E
+Via de Veldweg bereikt u de vrijstaande garage van maar liefst ca. 8 x 4 meter. De garage is voorzien van een elektrische garagedeur en biedt volop ruimte voor een auto, boot, fietsen, hobby&#x27;s en opslag.
+De combinatie van een ruime garage, eigen toegang, royale tuin én aanlegsteiger maakt deze woning bijzonder compleet.
+
+C O M F O R T
+De woning is grotendeels voorzien van kunststof kozijnen en HR++ glas, wat zorgt voor een comfortabele en onderhoudsvriendelijke woning.
+
+B I J Z O N D E R H E D E N
+•	Vrijstaand woonhuis
+•	Woonoppervlakte ca. 131 m²
+•	Perceel ca. 505 m²
+•	Eigen aanlegsteiger van ca. 59 m²
+•	Externe bergruimte van ca. 46 m²
+•       De jaarlijkse retributie voor dit perceel is € 546,60 per jaar, eind 2026 wordt deze herzien
+•	Gelegen aan De Nieuwe Meer
+•	Vrij uitzicht aan de voorzijde
+•	Vrije en groene ligging aan de achterzijde
+•	Direct gelegen aan de golfbaan van The International
+•	Vrijstaande garage van ca. 8 x 4 meter
+•	Garage met elektrische garagedeur
+•	Garage bereikbaar via de Veldweg
+•	3 slaapkamers
+•	L-vormige woonkamer met open haard
+•	Royale eetkeuken
+•	Praktische bijkeuken
+•	Grotendeels kunststof kozijnen
+•	Grotendeels HR++ glas
+•	Houten schuur in de tuin
+•	Amsterdam, Schiphol en Amstelveen op korte afstand
+
+Vraagprijs: € 775.000,- k.k.
+Oplevering: In overleg
+
++++++++++++++++++++++++++++++++++++++
+
+Detached living practically on the shores of De Nieuwe Meer, with a private jetty, spacious garden, unobstructed views and a detached garage! Unique waterfront living, almost directly adjacent to the golf course! Located in a beautiful setting on the Nieuwemeerdijk in Badhoevedorp, this detached home offers approx. 131 m² of living space on a generous plot of no less than 505 m², together with a private jetty of approx. 59 m².
+
+The property features three bedrooms, a spacious eat-in kitchen, an atmospheric L-shaped living room with fireplace, a utility room and, of course, its own private jetty on De Nieuwe Meer.
+As if that were not special enough, the garden directly borders The International golf course at the rear, providing a wonderfully open and green setting. At the front, you enjoy unobstructed views over the water and the surrounding area of De Nieuwe Meer.
+
+The property also comes with a detached garage of approx. 8 x 4 metres, equipped with an electric garage door and accessible via the Veldweg. A unique place for those looking to combine space, freedom, water, greenery and a central location!
+
+W A T E R L O V E R S T A K E N O T E
+Here, outdoor living is all about the water. From your own home, you can simply walk to the shore of De Nieuwe Meer, where you have your own private jetty. Whether you enjoy boating, paddleboarding, fishing or simply relaxing by the water on a beautiful summer evening, the waterfront lifestyle here offers something truly special.
+The location is particularly unique thanks to the combination of unobstructed views over De Nieuwe Meer at the front and an open, green setting at the rear, with direct views of The International golf course.
+
+L O C A T I O N
+The Nieuwemeerdijk occupies a unique location between Badhoevedorp, Amsterdam and De Nieuwe Meer. Amsterdam, Amstelveen and Schiphol Airport are all easily accessible, while the main arterial roads are also within easy reach.
+The location is particularly attractive for nature lovers, water sports enthusiasts and golfers. The water, surrounding greenery, Amsterdamse Bos and the golf course directly behind the property create a wonderful living environment.
+At the same time, everyday amenities, shops, schools and sports facilities are all easily accessible from Badhoevedorp.
+
+L A Y O U T
+Ground floor
+Through the entrance, you enter the hallway with access to the various rooms.
+The L-shaped living room is an atmospheric living space with plenty of windows and a characteristic fireplace. The different seating and dining areas create a pleasant and versatile layout.
+At the rear is the spacious eat-in kitchen, with plenty of room for a large dining table and a comfortable kitchen layout. The kitchen also provides a wonderful connection to the garden and outdoor living.
+The ground floor also features a practical utility room, a separate toilet and various storage spaces.
+
+First floor
+The first floor comprises three bedrooms. The rooms are practically laid out and offer plenty of space for a family, home office or guest room.
+The bathroom is compact but functional and includes all the necessary sanitary facilities.
+
+O U T D O O R L I V I N G
+The approx. 505 m² plot offers plenty of space around the house. The green and well-maintained garden provides several places to sit and enjoy the sunshine and outdoor living.
+The absolute highlight is, of course, the location on De Nieuwe Meer, complete with a private jetty. Keep a boat right outside your home, head out onto the water in the evening or simply enjoy the views and tranquillity — it is all possible here.
+At the rear, the garden directly borders The International golf course, providing a wonderfully open and green outlook from the garden as well.
+There is also a wooden shed in the garden, ideal for additional storage for bicycles, garden equipment and other belongings.
+
+G A R A G E
+Via the Veldweg, you can access the detached garage measuring approx. 8 x 4 metres. The garage is equipped with an electric garage door and offers plenty of space for a car, boat, bicycles, hobbies and storage.
+The combination of a spacious garage, private access, generous garden and private jetty makes this property particularly complete.
+
+C O M F O R T
+The property is largely fitted with uPVC window frames and HR++ double glazing, providing a comfortable and relatively low-maintenance home.
+
+K E Y F E A T U R E S
+•	Detached house 
+•	Approx. 131 m² of living space 
+•	Approx. 505 m² plot 
+•	Private jetty of approx. 59 m² 
+•	Approx. 46 m² of external storage space 
+•	Located directly on De Nieuwe Meer 
+•	Unobstructed views at the front 
+•	Open and green setting at the rear 
+•	Directly adjacent to The International golf course 
+•	Detached garage approx. 8 x 4 metres 
+•	Garage with electric garage door 
+•	Garage accessible via the Veldweg 
+•	3 bedrooms 
+•	L-shaped living room with fireplace 
+•	Spacious eat-in kitchen 
+•	Practical utility room 
+•	Mainly uPVC window frames 
+•	Mainly HR++ double glazing 
+•	Wooden garden shed 
+•	Amsterdam, Schiphol and Amstelveen within easy reach 
+
+Asking price: €775,000 costs payable by buyer
+Completion: By mutual agreement</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Stefan Reijsoo</strong> · Mooi Makelaardij B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 50</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/310/684_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/557_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/559_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/588_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/536_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/675_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/600_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/609_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/567_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/561_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/618_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/659_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/686_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/677_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/689_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/633_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/529_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/590_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/664_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/538_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/654_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/546_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/647_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/598_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/550_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/624_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/604_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/537_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/694_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/584_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/524_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/632_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/542_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/526_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/615_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/523_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/640_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/642_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/657_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/608_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/552_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/650_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/667_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/310/644_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

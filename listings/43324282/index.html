@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klaas Katerstraat 88 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Klaas Katerstraat 88</h1>
+  <p class="sub">
+    <span>1069 RT Amsterdam</span>
+    <span>·</span>
+    <span>Zuidwestkwadrant-Zuid</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/230/130/693_1440x960.jpg" alt="Klaas Katerstraat 88 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">67 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€685.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.660/m² · 3.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.0 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">147 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2003</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-klaas-katerstraat-88/43324282/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 685.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.660</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 341,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2003</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>147 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>36 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>499 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub, toilet, 2 Washbasinmeubels, en douche</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation, natuurlijke ventilatie, schuifpui, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (2017, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND E 7058</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Erfpacht</dt><dd>Lasten</dd></div>
+        <div class="frow"><dt>Eeuwigdurend afgekocht</dt><dd>SLOTEN NOORD-HOLLAND E 7058</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND E 7058</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Erfpacht</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Sun terrace</dd></div>
+        <div class="frow"><dt>Sun terrace</dt><dd>160 m² (16,00 m deep en 10,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidwesten</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking en parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 341,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Wonen in het groenste stadsdeel Amsterdam met uitstekende bereikbaarheid
+Op zoek naar een zeer ruime woning (6 kamers) van 147,4m² met een gigantisch dakterras op een strategische locatie?
+
+De woning met volledig afgekochte erfpacht in Amsterdam is gelegen aan de rand van de snel opkomende, groene en volledig gemoderniseerde wijk Osdorp-Midden in stadsdeel Nieuw-West. 
+Hier geniet je van de ruimte en rust van een kindvriendelijke buurt met alle voorzieningen en de levendigheid van het geactualiseerde Osdorpplein en het Leidseplein binnen handbereik. Op reis? Schiphol is met 15 minuten te bereiken.
+
+Algemeen
+Deze zeer ruime maisonnette woning met eigen entree op de begane grond heeft een woonoppervlakte van liefst 147,4m² met vijf slaapkamers en 2 badkamers. Het royale dakterras van 160m² is gelegen op de 1e verdieping en op het zuidwesten. 
+
+De mogelijkheden met deze woning zijn divers: thuiswerken, kantoor aan huis of woning delen met meerdere mensen? Het is allemaal mogelijk!
+Deze woning is daarom perfect voor gezinnen, thuiswerkers, professionals met kantoor aan huis, woningdelers of expats die het stadsleven optimaal willen beleven. 
+
+N.B. Deze woning is ook zeer interessant voor vastgoedbeleggers. De woning kan intern worden gescheiden door het plaatsen van een deur, waardoor twee
+gebruikszones ontstaan binnen dezelfde zelfstandige woning: een studio van 42m² en een appartement van 105m².
+(Dit betreft géén woningsplitsing en er ontstaan géén zelfstandige woonruimtes.)
+
+Daarnaast is er een omzettingsvergunning verkregen waardoor kamergewijze verhuur (5 personen) mogelijk is.
+
+Ligging &amp; voorzieningen 
+Voor de dagelijkse boodschappen zijn er de Albert Heijn en de Jumbo op loopafstand. 
+Verder zijn er de winkels aan de Osdorperban of Nieuw Sloten op fietsafstand (6 minuten).
+Voor een dagje ontspanning zijn er winkelcentrum Osdorpplein (2 km) en de Akerpoort Outlet &amp; Megastores (1,6 km). Er zijn hier winkels, horecagelegenheden en cultuur. Het Leidseplein is met de tram met 20 minuten te bereiken.
+
+Onderwijs &amp; kinderopvang 
+De woning is perfect voor gezinnen: de basisscholen De Odyssee en de Openbare Dalton school en ook middelbare scholen liggen om de hoek of op fietsafstand (3 minuten). 
+De British School of Amsterdam is op fietsafstand (17 minuten). 
+Kinderopvanglocaties zijn er al op 3 minuten loopafstand.
+Voor studerenden: de Vrije Universiteit is met 25 minuten fietsen te bereiken, 35 minuten met het o.v. 
+
+Sport &amp; vrije tijd
+In de buurt zijn er volop mogelijkheden voor sport en ontspanning. Naast een sportclub op de hoek van het complex zijn er veel mogelijkheden om te sporten in de omgeving: voetbal, golfen, baseball, wielrennen, zwemmen, etc. Alle op maximaal 15 minuten fietsen.
+
+Zin in wat natuur en/of water? Het Sloterpark, het Slotermeer en de Nieuwe Meer zijn vlakbij. Perfect voor wandelen, fietsen en sporten.
+
+Openbaar vervoer &amp; bereikbaarheid
+De woning is de ideale uitvalbasis. De bereikbaarheid is perfect. Of u nu met de auto, het openbaar vervoer of de fiets reist, u bent altijd snel waar u moet zijn.
+
+Op 1 minuut lopen is de tramhalte van lijn 1. Deze is in 10 minuten bij Station Lelylaan en 22 minuten bij het  Leidseplein. Vanaf Station Lelylaan is het 16 minuten naar Station Zuid-WTC, 10 minuten naar Station Sloterdijk en 8 minuten naar Schiphol.
+Met de auto is de A10/A4 binnen 10 minuten te bereiken en zowel Schiphol of de Zuidas binnen 15 minuten. Kantorenpark Riekerpolder is op 8 minuten rijden.
+Een keer laat?: de halte van nachtbus N83 is op 1 minuut lopen. Deze bus komt van / gaat naar Amsterdam Centrum.
+
+Indeling 
+-Begane grond: entree, hal, slaapkamer van 22m², badkamer (bad, wastafel en toilet), opstelplaats wasmachine/droger
+-Eerste verdieping: vier slaapkamers (2 voorste eventueel samen te voegen), badkamer (douchecabine, wastafel), toilet met fontein, woonkamer, dakterras van 160m².
+
+Bijzonderheden
+-Energielabel A
+-HR dubbelglas ramen (gehele woning)
+-Afgekocht erfpacht!
+-Totale gebruiksoppervlakte: 147,4m²!
+-Eenvoudig op te delen in een studio van 42m² en een appartement van 105m² door plaatsen van 1 deur 
+-6 kamers (woonkamer en 5 slaapkamers)
+
+-Twee kamers (10m²) aan de voorkant zijn eenvoudig samen te voegen tot één kamer van 20m²!
+-Woonkamer (37m²) met open keuken voorzien van inbouwapparatuur (koelvriescombinatie, oven/magnetron, inductiekookplaten, vaatwasmachine, afzuigkap)
+-Twee badkamers, twee toiletten
+-Terras van 160m²: volledige betegeld en voorzien van verlichting en elektrapunt
+-Terras te bereiken via schuifpui woonkamer of via (zij)kamers (10,4m² en 17,4m²).
+-Iedere kamer voorzien van internetaansluiting
+
+-Bergruimte in het complex: 5,8m²
+-In de overdekte en afgesloten parkeergarage is eventueel een parkeerplaats bij te kopen voor Eur 30.000.
+
+Live in Amsterdam&#x27;s greenest borough with excellent accessibility
+Looking for a very spacious 6-room home of 147.4m² with a gigantic roof terrace in a strategic location?
+
+This property with fully redeemed leasehold in Amsterdam is situated on the edge of the rapidly emerging, green and fully modernized Osdorp-Midden neighbourhood in the Nieuw-West borough.
+Here you can enjoy the space and tranquillity of a child-friendly area with all amenities, while the liveliness of the revitalized Osdorpplein and Leidseplein are within easy reach. Travelling?: Schiphol Airport is just 15 minutes away.
+
+General Description
+This very spacious maisonette with its own entrance on the ground floor has a living area of a generous 147.4m² with five bedrooms and 2 bathrooms. The spacious 160m² roof terrace is located on the 1st floor and faces southwest.
+
+The possibilities with this property are diverse: working from home, office at home or sharing it with multiple people? It&#x27;s all possible!
+
+This house is therefore perfect for families, remote workers, professionals with office at home, house-sharers or expats who want to experience city life to the fullest.
+
+Note: This property is also very interesting for real estate investors. The property can be internally separated by installing a door, creating two usage zones within the same self-contained dwelling: a 42 m² studio and a 105 m² apartment. 
+(This does not constitute a dwelling split, and no independent residential units are created.) 
+
+In addition, a conversion permit has been obtained, making room-by-room rental (5 persons) possible.
+
+Location &amp; Amenities
+For daily groceries, the Albert Heijn and Jumbo supermarkets are within walking distance.
+Furthermore, the shops at Osdorperban or Nieuw Sloten are a short bike ride away (6 minutes).
+For a day of relaxation, there is the Osdorpplein shopping centre (2 km) and the Akerpoort Outlet &amp; Megastores (1.6 km). These offer shops, catering establishments and culture. Leidseplein is reachable by tram in 20 minutes.
+
+Education &amp; Childcare
+The property is perfect for families: the primary schools De Odyssee and the Openbare Dalton school, as well as secondary schools, are around the corner or a short bike ride away (3 minutes).
+The British School of Amsterdam is a 17-minute bike ride away.
+Childcare locations are just a 3-minute walk away.
+For students: the Vrije Universiteit is a 25-minute bike ride away or 35 minutes by public transport.
+
+Sports &amp; Leisure
+The area offers plenty of opportunities for sports and relaxation. Besides a sports club on the corner of the complex, there are many possibilities for sports in the vicinity: soccer, golf, baseball, cycling, swimming, etc., all within a maximum 15-minute bike ride.
+Looking for nature and/or water? The Sloterpark, the Slotermeer and the Nieuwe Meer are nearby. Perfect for walking, cycling and sports.
+
+Public Transport &amp; Accessibility
+The property is an ideal base. The accessibility is perfect. Whether you travel by car, public transport or bicycle, you can always quickly get where you need to be.
+A 1-minute walk away is the tram stop for line 1. This tram line takes you to Lelylaan Station in 10 minutes and to Leidseplein in 22 minutes. From Lelylaan Station, it’s 16 minutes to Zuid-WTC Station, 10 minutes to Sloterdijk Station and 8 minutes to Schiphol Airport.
+By car, the A10/A4 motorway can be reached within 10 minutes and both Schiphol and the Zuidas business district are within 15 minutes. The Riekerpolder business park is an 8-minute drive away.
+Hanging out late?: The night bus N83 stop is a 1-minute walk away. This bus runs to/from Amsterdam City Centre.
+
+Layout
+-Ground floor: entrance, hall, bedroom (22m²), bathroom (bathtub, washbasin and toilet), space for washer/dryer.
+-First floor: four bedrooms (the 2 front rooms can potentially be combined), bathroom, shower cabin, washbasin), separate toilet with washbasin, living room, 160m² roof terrace.
+
+Features
+• Energy Label A
+• HR double-glazed windows (throughout the entire property)
+• Fully redeemed leasehold!
+• Total usable area: 147.4m²!
+• Easy to separate into a 42m² studio and a 105m² apartment by installing 1 door
+• 6 rooms (living room and 5 bedrooms)
+• Two front rooms (10m² each) can easily be combined into one 20m² room!
+• Living room (37m²) with open-plan kitchen featuring built-in appliances (fridge-freezer, oven/microwave, induction hob, dishwasher, extractor hood)
+• Two bathrooms, two toilets
+• Terrace of 160m²: fully tiled and equipped with lighting and an electrical outlet
+• Terrace accessible via the living room&#x27;s sliding door or via the (side) rooms (10.4m² and 17.4m²)
+• Every room has an internet connection
+• Storage room in the complex: 5.8m²
+• A parking space can optionally be purchased for EUR 30,000 in the covered and enclosed parking garage.
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Makelaarsland</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 67</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/230/130/693_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/673_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/694_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/791_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/765_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/653_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/678_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/794_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/762_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/782_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/787_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/681_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/828_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/766_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/683_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/767_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/784_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/819_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/799_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/738_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/809_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/824_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/744_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/688_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/669_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/664_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/763_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/701_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/814_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/677_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/768_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/805_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/739_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/663_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/733_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/820_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/718_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/715_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/781_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/822_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/130/826_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

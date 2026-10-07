@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Mairekade 163 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Le Mairekade 163</h1>
+  <p class="sub">
+    <span>1013 CC Amsterdam</span>
+    <span>·</span>
+    <span>Spaarndammerbuurt-Noordoost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/242/358_1440x960.jpg" alt="Le Mairekade 163 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">37 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€585.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.573/m² · 4.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">89 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1984</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-le-mairekade-163/44518076/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 585.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.573</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 182,93 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Walk-up flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1984</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>89 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>282 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 separate toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas kombi kompakt hre 24/18 (gas-fired combi boiler, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM X 2181</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 15-06-2035)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-06-2035</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>No</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruimte, drie slaapkamers én een balkon op een fijne plek in Amsterdam-West! Dit ruime 4-kamerappartement van ca. 89 m² ligt op de tweede verdieping en biedt volop mogelijkheden om helemaal naar eigen smaak te worden ingericht. Met een royale woonkamer, drie slaapkamers, een separate keuken, balkon en eigen berging heb je hier een verrassend complete woning.
+
+***English version below***
+
+Omgeving
+De Le Mairekade ligt in Amsterdam-West, in de populaire Spaarndammerbuurt en op korte afstand van de Houthavens. Een fijne omgeving waar je rustig woont, maar tegelijkertijd alles wat Amsterdam zo aantrekkelijk maakt binnen handbereik hebt.
+Voor de dagelijkse boodschappen kun je terecht bij de winkels en supermarkten in de buurt. Ook aan gezellige cafés, restaurants en terrassen is geen gebrek. Voor groen en ontspanning ligt het Westerpark dichtbij. Een rondje wandelen of hardlopen, een terrasje pakken bij de Westergas of in het weekend richting de Jordaan: vanuit hier kan het allemaal.
+Met de fiets ben je bovendien snel in het centrum van Amsterdam en ook Amsterdam Centraal is goed bereikbaar. Daarnaast zijn er diverse openbaarvervoersverbindingen in de omgeving en rijd je met de auto gemakkelijk richting de Ring A10.
+
+Indeling
+Via de gemeenschappelijke entree bereik je het appartement op de tweede verdieping.
+Je komt binnen in de centrale hal, die toegang geeft tot vrijwel alle vertrekken van de woning.
+De woonkamer is royaal van formaat en valt direct op door de bijzondere vorm en de brede raampartijen. Hierdoor komt er prettig veel daglicht naar binnen en heb je verschillende mogelijkheden om een ruime zit- en eethoek te creëren.
+naast de woonkamer bevindt zich de separate keuken met vaste kast en stookruimte. Hier kun je een keuken realiseren die helemaal aansluit bij jouw eigen smaak en wensen. Vanuit de woonkamer heb je direct toegang tot het balkon gelegen op het westen. De woning beschikt over maar liefst drie slaapkamers. Twee slaapkamers liggen naast elkaar aan de achterzijde van de woning en de derde slaapkamer bevindt zich aan de zijkant. Daarmee is er niet alleen voldoende ruimte om comfortabel te slapen, maar ook voor bijvoorbeeld een thuiswerkplek, kinderkamer of logeerkamer. Daarnaast is er een praktische vaste kast tussen twee van de slaapkamers.
+De badkamer en het separate toilet zijn vanuit de hal bereikbaar. 
+
+Balkon
+Vanuit de woonkamer stap je direct het balkon op. Met een oppervlakte van ca. 5 m² is dit een fijne buitenruimte en is gelegen op het westen.
+
+Berging
+Op de begane grond beschikt de woning over een eigen separate berging van ca. 6 m².
+
+Bijzonderheden
+- Per direct beschikbaar;
+- Woonoppervlakte ca. 89 m²;
+- Energielabel C;
+- Bouwjaar 1984;
+- Voormalige huurwoning van De Key;
+- Projectnotaris Spier en Hazenberg notarissen;
+- Anti-speculatiebeding van 2 jaar van toepassing;
+- Niet-zelfbewoningsclausule van toepassing;
+- De woning kan geheel naar eigen smaak worden verbouwd;
+- Uitsluitend te koop voor zelfbewoning (of ouders voor kinderen);
+- Erfpacht afgekocht tot en met 15-06-2035;
+- Parkeren: vergunningenstelsel op de openbare weg. Voor meer informatie kijk op website van de gemeente Amsterdam;
+- Voorrangregeling voor sociale huurders niet van toepassing, voor meer informatie verwijzen wij je door naar de website van woonstichting Lieven de Key; 
+- Oplevering kan snel.
+
+Heeft deze woning jouw interesse gewekt? 
+Dan nodigen we je graag uit om de mogelijkheden zelf te komen bekijken tijdens een bezichtiging!
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn slechts indicatief.
+De Meetinstructie is gebaseerd op de BBMI. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting.
+
+***English version***
+
+Space, three bedrooms, and a balcony in a great spot in Amsterdam-West! This spacious 4-room apartment (approx. 89 m²) is located on the second floor and offers plenty of potential to be fitted out entirely to your own taste. With a generous living room, three bedrooms, a separate kitchen, a balcony, and a private storage unit, this is a surprisingly complete home.
+
+Surroundings
+Le Mairekade is located in Amsterdam-West, in the popular Spaarndammerbuurt neighborhood and just a short distance from the Houthavens. It is a pleasant area offering a peaceful living environment while keeping everything that makes Amsterdam so attractive within easy reach.
+You can find shops and supermarkets nearby for your daily groceries. There is also no shortage of cozy cafés, restaurants, and terraces. For greenery and relaxation, Westerpark is close by. Whether you want to go for a walk or a run, enjoy a drink on a terrace at Westergas, or head to the Jordaan on the weekend—it’s all possible from here.
+By bike, you can quickly reach Amsterdam city center, and Amsterdam Central Station is easily accessible as well. Additionally, there are various public transport connections in the area, and you can easily drive onto the A10 ring road.
+
+Layout
+You reach the second-floor apartment via the communal entrance.
+You enter into a central hallway that provides access to almost every room in the home.
+The living room is generously sized and immediately stands out due to its unique shape and wide windows. This allows for plenty of pleasant natural light and offers various possibilities for creating a spacious seating and dining area.
+Next to the living room is the separate kitchen, which includes a built-in cupboard and a utility closet for the heating system. Here, you can create a kitchen that perfectly matches your own taste and preferences. The living room offers direct access to the west-facing balcony. The property features no fewer than three bedrooms. Two bedrooms are situated side-by-side at the rear of the home, while the third is located on the side. This provides ample space not only for comfortable sleeping arrangements but also for a home office, children&#x27;s room, or guest room. Additionally, there is a practical built-in closet located between two of the bedrooms.
+The bathroom and separate toilet are accessible from the hallway.
+
+Balcony
+You can step directly onto the balcony from the living room. With an area of approximately 5 m², it offers a pleasant west-facing outdoor space.
+
+Storage
+The property includes a private, separate storage unit of approximately 6 m² on the ground floor.
+
+Key details
+- Available immediately;
+- Living area approx. 89 m²;
+- Energy label C;
+- Year of construction: 1984;
+- Former rental property owned by De Key;
+- Designated notary: Spier en Hazenberg Notarissen;
+- 2-year anti-speculation clause applies;
+- Non-occupancy clause applies;
+- The property can be renovated entirely to your own taste;
+- For sale exclusively for owner-occupancy (or purchase by parents for their children);
+- Leasehold ground rent prepaid until June 15, 2035;
+- Parking: on-street permit system; please check the Municipality of Amsterdam&#x27;s website for details;
+- Priority scheme for social housing tenants does not apply; please refer to the Lieven de Key housing association website for more information;
+- Quick handover possible.
+
+Has this property sparked your interest?
+We would be happy to invite you to view the property and see the possibilities for yourself!
+
+We have compiled this information with the utmost care. However, we accept no liability for any incompleteness, inaccuracy, or otherwise, nor for the consequences thereof. All stated dimensions and surface areas are indicative only.
+The measurement instructions are based on the BBMI standard. These instructions are intended to provide a more uniform method for indicating the usable floor area. The measurement instructions do not entirely rule out discrepancies in measurement results—for instance, due to differences in interpretation, rounding, or limitations encountered during the measurement process.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 37</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/242/358_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/494_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/362_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/448_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/476_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/464_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/456_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/345_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/471_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/430_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/487_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/350_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/501_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/409_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/385_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/463_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/491_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/470_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/351_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/372_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/422_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/479_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/402_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/419_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/495_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/352_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/489_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/381_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/440_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/429_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/366_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/371_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/462_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/404_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/346_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/242/425_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nieuwemeerdijk 39 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Nieuwemeerdijk 39</h1>
+  <p class="sub">
+    <span>1171 NB Badhoevedorp</span>
+    <span>·</span>
+    <span>Badhoevedorp Dijk</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/700/753_1440x960.jpg" alt="Nieuwemeerdijk 39 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">60 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€495.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €3.992/m² · 3.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.7 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">124 m² living</span>
+      <span class="chip">7 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1937</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">4 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/badhoevedorp/huis-nieuwemeerdijk-39/44529291/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 495.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 3.992</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning (dijkwoning)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1937</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>124 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>43 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>17 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>134 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>644 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>7 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 Bathtuben, 2 toiletten, en 2 Washbasins</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>4 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HRe (gas-fired combi boiler, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>HAARLEMMERMEER H 7336</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>134 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Opstal</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan vaarwater, aan water, open ligging en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>21 m² (7,00 m deep en 3,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidwesten</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Badhoevedorp Dijk</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>530</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>40%</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">WONEN AAN DE DIJK, MET EEN EIGEN STEIGER VOOR DE DEUR!
+
+Verrassend ruim, heerlijk aan het water en op een bijzonder fijne plek vlak bij het centrum van Badhoevedorp.
+
+Aan de geliefde Nieuwemeerdijk staat deze karakteristieke jaren ’30-woning met een totale gebruiksoppervlakte van maar liefst circa 167(!) m², een mooi aangelegde STEIGER AAN HET WATER, een zonnig terras, een kleine tuin en een verrassend ruime indeling.
+
+En dan het uitzicht: vanuit huis kijk je prachtig richting de Molen van Sloten. Een plek met sfeer, water en historie, terwijl het dorp en alle dagelijkse voorzieningen gewoon dichtbij liggen.
+
+De woning is  35 jaar in handen van dezelfde eigenaresse geweest en dat zie je terug. Er is altijd met liefde gewoond en goed voor het huis gezorgd. Het schilderwerk is netjes, de basis is degelijk en de woning maakt een verzorgde indruk. Geen volledig gemoderniseerd huis waar alles gisteren is vernieuwd, maar wél een huis dat in de basis gewoon goed voor elkaar is en waar een volgende eigenaar weer heel veel van kan maken.
+
+VERRASSEND VEEL RUIMTE
+
+Het oorspronkelijke woonhuis is met circa 124 m² woonoppervlakte al behoorlijk ruim. In de loop der jaren is het achterste gedeelte echter vrijwel volledig bebouwd, waardoor er nog eens circa 40 m² extra ruimte is ontstaan.
+
+Dit gedeelte is thans ingericht als een separaat bereikbare studio. Die kan qua afwerking wel wat aandacht gebruiken, maar is in de basis degelijk gebouwd en maakt het huis juist extra interessant. Denk aan werken of een praktijk aan huis, een atelier, logeerruimte of ruimte voor een ouder kind. Uiteraard voor zover het beoogde gebruik publiekrechtelijk is toegestaan.
+
+Het totaal komt daarmee op bijna 167 m² aan gebruiksoppervlakte – en dat verwacht je aan de buitenzijde eigenlijk niet.
+
+FIJNE WOONVERDIEPING
+
+Op de begane grond bevinden zich de woonkamer en keuken, met aansluitend het terras en de kleine tuin. Het is een prettige leefruimte waarbij het karakter van de dijkwoning goed behouden is gebleven.
+
+En natuurlijk speelt het water hier een hoofdrol. Direct voor de woning ligt een fraai aangelegde steiger: een heerlijke plek om aan het einde van de dag aan het water te zitten en simpelweg te genieten van de bijzondere ligging.
+
+Op de eerste verdieping bevinden zich drie slaapkamers en de badkamer. De tweede verdieping biedt een gezellige zolderverdieping, ideaal als extra slaapkamer, werkplek, speelruimte of gewoon als fijne bonusruimte. Hier is een extra douche en een sauna aanwezig!
+
+EN DAN DE LIGGING...
+
+De Nieuwemeerdijk combineert eigenlijk twee werelden. Je woont hier aan het water, met het karakter en de vrijheid van een dijkwoning, terwijl het centrum van Badhoevedorp met winkels, scholen, horeca en andere voorzieningen vlakbij ligt. En vergeet niet dat je natuurlijk op Amsterdam kijkt en op slechts 20 minuten fietsen van het Vondelpark zit. 
+
+Ook Amsterdam, Schiphol en de belangrijkste uitvalswegen zijn uitstekend bereikbaar. En met de Molen van Sloten in het zicht heeft deze plek iets wat je bij een doorsnee woonstraat simpelweg niet krijgt.
+
+FUNDERING – WEL EVEN GOED LEZEN
+
+Zoals vaker voorkomt bij oudere woningen langs de dijk, staat de woning onder een hellingshoek in de richting van de dijk. Deze scheefstand is zichtbaar en hoort bij het karakter van de woning en haar type fundatie uit 1937 op een dijklichaam. De eigenaresse, die de woning sinds 1992 in bezit had, heeft gedurende haar eigendomsperiode geen merkbare toename van deze helling waargenomen. Recent is de fundering onderzocht en daarbij is een middenrisico vastgesteld, waarbij periodieke monitoring wordt geadviseerd. Het volledige funderingsattest is voor geïnteresseerden beschikbaar.
+
+OPSTALRECHT
+
+De woning staat op grond van het Hoogheemraadschap van Rijnland. De erfpacht is EEUWIGDUREND geregeld onder gunstige condities. De huidige (fiscaal in box 1 aftrekbare) canon bedraagt € 837,- per jaar en wordt iedere vijf jaar met 5% geïndexeerd (dus 1% per jaar). 
+
+Vanwege verkoop vanuit een nalatenschap zal in de koopovereenkomst een niet-bewoningsclausule worden opgenomen.
+
+DE PLUSPUNTEN OP EEN RIJ
+Karakteristieke jaren ’30-woning aan de Nieuwemeerdijk
+167 m² gebruiksoppervlakte in totaal
+NEN 2580 meters bedragen 124 m² en betreffen het originele woonhuis.
+Aanvullende, separaat bereikbare studio van circa 40 m² met eigen tuintje.
+Schilderwerk uit 2025
+HR CV Ketel intergas HRE
+Volledig dubbel glas
+Eigen fraai aangelegde steiger voor de deur
+Mooi uitzicht richting de Molen van Sloten
+Woonkamer en keuken met terras
+Drie slaapkamers op de eerste verdieping
+Gezellige en multifunctionele zolderverdieping
+Kleine tuin/patio en terras
+Goed onderhouden en nette basis
+Zeer gunstig gelegen ten opzichte van het dorp, Amsterdam, Schiphol en uitvalswegen
+Eeuwigdurende erfpacht; huidige canon € 837,- per jaar
+
+Een verrassend groot en karaktervol huis op een plek die je niet snel nog een keer tegenkomt. Water voor de deur, je eigen steiger, de Molen van Sloten in het vizier én het dorp dichtbij. Hier koop je niet alleen vierkante meters, maar vooral een heel bijzondere woonplek.
+
+LIVING ON THE DIKE, WITH YOUR OWN PRIVATE JETTY RIGHT IN FRONT OF YOUR HOME!
+
+Surprisingly spacious, wonderfully situated by the water and in a fantastic location close to the centre of Badhoevedorp.
+
+Located on the popular Nieuwemeerdijk, this characteristic 1930s home offers an impressive total usable floor area of approximately 167(!) m², a beautifully constructed PRIVATE JETTY ON THE WATER, a sunny terrace, a small garden and a surprisingly spacious layout.
+
+And then there is the view. From the house, you have a wonderful outlook towards the historic Molen van Sloten windmill. It is a location full of atmosphere, water and history, while the village centre and all everyday amenities remain conveniently close by.
+
+The property was owned by the same owner for 35 years, and it shows. It has clearly been a much-loved home and has been carefully maintained over the years. The exterior paintwork is neat, the fundamentals are solid and the property presents itself well. This is not a completely modernised home where everything was replaced yesterday, but rather a well-maintained and solid house offering plenty of opportunity for its next owner to make it their own.
+
+SURPRISINGLY SPACIOUS
+
+The original house already offers approximately 124 m² of living space. Over the years, however, the rear section has been almost entirely built out, creating approximately 40 m² of additional usable space.
+
+This area is currently arranged as a separately accessible studio. It could benefit from some cosmetic updating, but it is solidly constructed and adds considerable versatility to the property. It could potentially be used as a home office or practice, studio, guest accommodation or space for an older child, subject of course to the intended use being permitted under applicable public-law regulations.
+
+Altogether, the property offers almost 167 m² of usable floor area – considerably more space than you might expect from the outside.
+
+A WONDERFUL MAIN LIVING FLOOR
+
+The ground floor accommodates the living room and kitchen, with direct access to the terrace and small garden. It is a pleasant and comfortable living space in which the character of the original dike house has been carefully retained.
+
+And, of course, the water plays a starring role here. Directly in front of the property is a beautifully constructed private jetty – a wonderful place to sit by the water at the end of the day and simply enjoy this very special setting.
+
+The first floor offers three bedrooms and a bathroom. The second floor features a charming and versatile attic level, ideal as an additional bedroom, home office, playroom or simply valuable extra space. There is even an additional shower and a sauna on this floor!
+
+AND THEN THERE IS THE LOCATION...
+
+Nieuwemeerdijk offers the best of two worlds. You live directly by the water, enjoying the character and sense of freedom that comes with a traditional dike house, while the centre of Badhoevedorp – with its shops, schools, restaurants and everyday amenities – is just a short distance away.
+
+And Amsterdam is remarkably close: you are looking towards the city and can reach Vondelpark in approximately 20 minutes by bicycle.
+
+Amsterdam, Schiphol Airport and the main arterial roads and motorways are all easily accessible. And with the Molen van Sloten windmill in view, this location offers something you simply will not find in an ordinary residential street.
+
+FOUNDATION – IMPORTANT INFORMATION
+
+As is more commonly seen with older properties along the dike, the house stands at a visible angle towards the dike. This inclination is part of the character of the property and relates to its type of foundation, dating from 1937 and constructed on a dike embankment.
+
+The previous owner, who owned the property from 1992, did not observe any noticeable increase in this inclination during her period of ownership.
+
+The foundation was recently inspected and classified as presenting a medium risk, with periodic monitoring recommended. The complete foundation report is available to interested parties.
+
+LAND AND LEASEHOLD
+
+The property is situated on land belonging to the Rijnland Water Authority (Hoogheemraadschap van Rijnland). The leasehold has been arranged IN PERPETUITY on favourable terms. The current annual ground rent, which may be tax-deductible in Box 1 subject to the buyer&#x27;s personal tax situation, amounts to €837 per year and is indexed by 5% every five years (equivalent to an average of approximately 1% per year).
+
+As the property is being sold from an estate, a non-occupancy clause will be included in the purchase agreement.
+
+KEY FEATURES
+
+Characteristic 1930s home on Nieuwemeerdijk
+
+Approximately 167 m² of total usable floor area
+
+NEN 2580 measured living area of 124 m² for the original house
+
+Additional separately accessible studio of approximately 40 m² with its own small garden
+
+Exterior paintwork completed in 2025
+
+Intergas HRE high-efficiency central heating boiler
+
+Fully fitted with double glazing
+
+Beautiful private jetty directly in front of the property
+
+Attractive views towards the Molen van Sloten windmill
+
+Living room and kitchen with access to the terrace
+
+Three bedrooms on the first floor
+
+Charming and multifunctional attic floor
+
+Additional shower and sauna in the attic
+
+Small garden/patio and terrace
+
+Well maintained with a solid overall basis
+
+Conveniently located for Badhoevedorp, Amsterdam, Schiphol Airport and major roads
+
+Perpetual leasehold; current annual ground rent €837
+
+A surprisingly spacious and characterful home in a location that is difficult to replicate. Water right outside your door, your own private jetty, views towards the Molen van Sloten and the village centre close by.
+
+Here, you are not simply buying square metres – you are buying a truly special place to live.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Urban Makelaars</strong> · Urban Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 60</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/700/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/648_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/675_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/725_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/757_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/625_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/647_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/747_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/667_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/755_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/635_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/668_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/645_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/769_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/685_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/654_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/782_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/652_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/678_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/768_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/738_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/656_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/765_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/679_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/739_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/688_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/646_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/764_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/642_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/669_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/638_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/687_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/653_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/628_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/716_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/676_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/633_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/629_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/779_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/715_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/655_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/663_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/700/742_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gasthuismolensteeg 10-D · Funda prototype</title>
+<title>Gasthuismolensteeg 10-D · Funda near 1062KS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
@@ -35,6 +35,10 @@
     font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
     padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
   }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
   main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
   .hero {
     position: relative; border-radius: 14px; overflow: hidden;
@@ -135,12 +139,12 @@
     <span>1016 AN Amsterdam</span>
     <span>·</span>
     <span>Felix Meritisbuurt</span>
-    <span class="status">Available</span>
+    <span class="status ok">Available</span>
   </p>
 </header>
 <main>
   <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
-    <img src="photos/01.jpg" alt="Gasthuismolensteeg 10-D — main photo">
+    <img src="https://cloud.funda.nl/valentina_media/234/815/933_1440x960.jpg" alt="Gasthuismolensteeg 10-D — main photo">
     <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
   </div>
 
@@ -150,8 +154,7 @@
       <div class="price-note">asking · buyer pays costs (k.k.)</div>
     </div>
     <div class="meta-line">
-      €9.917/m²
-       · 3.8 km from 1062KS
+      €9.917/m² · 3.8 km from 1062KS
     </div>
     <div class="chips">
       <span class="chip dist">3.8 km</span>
@@ -215,7 +218,7 @@
         <div class="frow"><dt>Insulation</dt><dd>Double glazing and floor insulation</dd></div>
         <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
         <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
-        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas-fired combi boiler from 2019, owned)</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas-fired combi boiler uit 2019, owned)</dd></div>
         </dl>
       </section>
       <section class="fgroup">
@@ -230,7 +233,7 @@
         <dl class="flist">
         <div class="frow"><dt>Location</dt><dd>City centre with open views</dd></div>
         <div class="frow"><dt>Garden / terrace</dt><dd>Sun terrace</dd></div>
-        <div class="frow"><dt>Sun terrace</dt><dd>7 m² (3,51 m deep and 2,00 m wide)</dd></div>
+        <div class="frow"><dt>Sun terrace</dt><dd>7 m² (3,51 m deep en 2,00 m wide)</dd></div>
         <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
         </dl>
       </section>
@@ -282,7 +285,7 @@ Highlights:
 
 Disclaimer: Information carefully compiled by Engel &amp; Völkers; no rights may be derived from it. Measurements follow NEN2580; buyers may arrange their own NEN2580 survey.</div>
     <p class="note">English paraphrase of the listing text. Original Dutch omschrijving is in the source JSON.</p>
-    <p class="note">Floor plans were listed on Funda (3) but were not scraped for this prototype — no floorplan images invented here.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
   </section>
 
   <section class="section">
@@ -302,13 +305,14 @@ Disclaimer: Information carefully compiled by Engel &amp; Völkers; no rights ma
 </div>
 
 <script>
-const PHOTOS = ["photos/01.jpg", "photos/02.jpg", "photos/03.jpg", "photos/04.jpg", "photos/05.jpg", "photos/06.jpg", "photos/07.jpg", "photos/08.jpg", "photos/09.jpg", "photos/10.jpg", "photos/11.jpg", "photos/12.jpg", "photos/13.jpg", "photos/14.jpg", "photos/15.jpg", "photos/16.jpg", "photos/17.jpg", "photos/18.jpg", "photos/19.jpg", "photos/20.jpg", "photos/21.jpg", "photos/22.jpg", "photos/23.jpg", "photos/24.jpg", "photos/25.jpg", "photos/26.jpg", "photos/27.jpg", "photos/28.jpg", "photos/29.jpg", "photos/30.jpg", "photos/31.jpg", "photos/32.jpg", "photos/33.jpg", "photos/34.jpg", "photos/35.jpg", "photos/36.jpg", "photos/37.jpg", "photos/38.jpg", "photos/39.jpg"];
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/815/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/932_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/822_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/918_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/816/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/922_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/816/035_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/816/020_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/816/030_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/786_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/664_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/816/023_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/655_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/635_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/781_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/931_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/792_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/807_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/800_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/886_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/816/033_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/815/656_1440x960.jpg"];
 let idx = 0;
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
 const lbCap = document.getElementById('lbCap');
 
 function openLb(i) {
+  if (!PHOTOS.length) return;
   idx = (i + PHOTOS.length) % PHOTOS.length;
   lbImg.src = PHOTOS[idx];
   lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
@@ -323,11 +327,17 @@ function closeLb() {
 }
 function step(d) { openLb(idx + d); }
 
-document.getElementById('hero').addEventListener('click', () => openLb(0));
-document.getElementById('hero').addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
-});
-document.getElementById('heroBadge').addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
 document.getElementById('lbClose').addEventListener('click', closeLb);
 document.getElementById('lbPrev').addEventListener('click', () => step(-1));
 document.getElementById('lbNext').addEventListener('click', () => step(1));

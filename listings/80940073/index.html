@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paramaribostraat 50-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Paramaribostraat 50-2</h1>
+  <p class="sub">
+    <span>1058 VM Amsterdam</span>
+    <span>·</span>
+    <span>Paramariboplein e.o.</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/926/486_1440x960.jpg" alt="Paramaribostraat 50-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€750.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.500/m² · 1.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.2 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">100 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1930</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-50-2/80940073/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 750.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.500</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 243,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1930</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>100 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>408 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors en een vliering</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>HR-glas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha Tzerra CW 5 (gas-fired combi boiler uit 2021, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND M 1535</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 243,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Eigen grond, circa 100 m² woonoppervlakte en sfeervol wonen verdeeld over twee woonlagen Welkom aan de Paramaribostraat 50-2 in Amsterdam.
+Plan eenvoudig zelf een bezichtiging via de website van Snoep Makelaardij. Ga naar Ons aanbod en klik op Plan direct je bezichtiging.
+Een sfeervolle bovenwoning van circa 100 m², verdeeld over twee woonlagen, met vier kamers waaronder drie slaapkamers, circa 3 m² buitenruimte en twee afzonderlijke vlieringen van samen circa 9 m² overig inpandige ruimte. En een belangrijk pluspunt in Amsterdam: de woning is gelegen op eigen grond.
+De woning maakt deel uit van een monumentaal pand uit 1930, ontworpen in de kenmerkende architectuur van de Amsterdamse School. Grote raampartijen, de erker met zitmogelijkheid, zichtbare houten balken en oorspronkelijke architectonische details zorgen voor veel sfeer. Tegelijkertijd is de indeling praktisch, met drie slaapkamers, een aparte wasruimte en volop bergruimte.
+Waarom deze woning bijzonder is:
+Met circa 100 m² woonoppervlakte verdeeld over twee woonlagen, drie slaapkamers én eigen grond biedt Paramaribostraat 50-2 een combinatie die in Amsterdam-West steeds lastiger te vinden is.
+Vooral de royale woonkamer aan de voorzijde valt direct op. De grote raampartijen zorgen voor veel natuurlijk licht en de erker vormt een fijne zitplek met uitzicht op de straat. Een deel van het plafond is geopend, waardoor de oorspronkelijke houten balkconstructie zichtbaar is gebleven en de ruimte extra karakter krijgt.
+Indeling:
+Aan de voorzijde bevindt zich de royale woonkamer, met volop ruimte voor zowel een comfortabele zithoek als een grote eettafel. De brede raampartijen en erker zorgen voor een lichte en prettige leefruimte.
+Ook de keuken bevindt zich op deze verdieping, evenals de eerste ruime slaapkamer. Vanuit deze slaapkamer geven openslaande deuren toegang tot het balkon van circa 3 m².
+Via de interne trap bereik je de bovenste woonlaag. Hier bevinden zich nog twee slaapkamers en de badkamer, waarmee de woning in totaal over drie volwaardige slaapkamers beschikt.
+De badkamer is volledig betegeld en netjes afgewerkt. Daarnaast is er een aparte wasruimte, waardoor de wasmachine en droger een eigen vaste plek hebben Een praktisch extra pluspunt zijn de twee afzonderlijke vlieringen, beide met een eigen toegang en samen circa 9 m² overig inpandige ruimte. De ruimtes zijn al voorzien van een vloer en stucwerk en worden momenteel gebruikt als bergruimte. Daarmee bieden ze meer mogelijkheden dan een standaard onafgewerkte vliering.
+Energielabel en techniek:
+De woning beschikt over energielabel D. De uitslag ligt dicht tegen energielabel C aan, waardoor met relatief beperkte verduurzamingsmaatregelen mogelijk een hoger energielabel kan worden behaald. Een toekomstige labelklasse is uiteraard afhankelijk van de dan geldende opname en beoordeling. De cv-ketel dateert uit 2021 en betreft een CW5-installatie. In 2024 is de elektrameter vervangen.
+VvE en onderhoud:
+De woning maakt deel uit van een actieve Vereniging van Eigenaars. De VvE beschikt over een kasreserve van circa €148.000 en er wordt goed gespaard voor toekomstig onderhoud. Er is een Meerjarenonderhoudsplan (MJOP) aanwezig en de benodigde VvE-documentatie is beschikbaar. In 2024 zijn de platte daken vernieuwd, zijn de overige dakdelen onderhouden en is de voorzijde van het pand geschilderd.
+Eigendomssituatie:
+Een belangrijk pluspunt van de woning is dat deze is gelegen op eigen grond. Er is dus geen sprake van erfpacht en daarmee ook niet van een canon of toekomstige erfpachtverplichtingen.
+De buurt:
+De Paramaribostraat ligt in de West-Indische Buurt in Amsterdam-West, op een aantrekkelijke locatie tussen het Surinameplein, De Baarsjes en Oud-West.
+Je woont hier in een prettige Amsterdamse woonbuurt met een breed aanbod aan voorzieningen binnen handbereik. Zowel het Vondelpark als het Rembrandtpark liggen dichtbij, ideaal voor een wandeling, rondje hardlopen of een ontspannen middag buiten.
+Ook aan winkels, koffiezaken en restaurants is geen gebrek. De Overtoom, Postjesweg, Kinkerstraat en Jan Pieter Heijestraat zijn eenvoudig bereikbaar en bieden een uitgebreid aanbod. De Hallen en de vele horecagelegenheden van Oud-West liggen eveneens op korte fietsafstand.
+De ligging biedt daarmee een mooie balans tussen de levendigheid en voorzieningen van Amsterdam en het prettige karakter van een echte woonbuurt.
+Bereikbaarheid:
+De woning is uitstekend bereikbaar. Via het nabijgelegen Surinameplein zijn de belangrijkste uitvalswegen en de ring A10 snel te bereiken.
+Met het openbaar vervoer zijn er goede verbindingen richting het centrum, Station Lelylaan en andere delen van Amsterdam. Ook Oud-West, het Vondelpark en het centrum zijn eenvoudig per fiets bereikbaar.
+Volgens de momenteel beschikbare informatie is voor de woning mogelijk één parkeervergunning verkrijgbaar.
+Beschikbaarheid, wachttijden en kosten zijn afhankelijk van de regelgeving van de gemeente Amsterdam en dienen door koper zelf te worden gecontroleerd.
+Kenmerken:
+• Circa 100 m² woonoppervlakte
+• Circa 9 m² overig inpandige ruimte verdeeld over twee afzonderlijke vlieringen
+• Vier kamers, waaronder drie slaapkamers
+• Verdeeld over twee woonlagen
+• Balkon van circa 3 m²
+• Gelegen op eigen grond
+• Monumentaal pand uit 1930
+• Kenmerkende Amsterdamse School-architectuur
+• Royale en lichte woonkamer met erker en zitmogelijkheid
+• Zichtbare oorspronkelijke houten balken
+• Aparte wasruimte
+• Energielabel D, met mogelijkheden voor verbetering
+• CW5 cv-ketel uit 2021
+• Elektrameter vervangen in 2024
+• Platte daken vernieuwd en overige dakdelen onderhouden in 2024
+• Voorzijde van het pand geschilderd in 2024
+• VvE met een kasreserve van circa €148.000
+• Gunstige ligging nabij Vondelpark, Rembrandtpark, Oud-West en Surinameplein Een royale en sfeervolle bovenwoning met drie slaapkamers, twee woonlagen en eigen grond, op een aantrekkelijke plek in Amsterdam-West.
+Plan eenvoudig zelf een bezichtiging via de website van Snoep Makelaardij. Ga naar Ons aanbod en klik op Plan direct je bezichtiging.
+NEN-meetclausule:
+De gebruiksoppervlakte is gemeten conform de branchebrede meetinstructie gebaseerd op NEN 2580. Deze meetinstructie is bedoeld om een meer eenduidige methode van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. Verschillen in meetuitkomsten kunnen niet volledig worden uitgesloten, bijvoorbeeld door interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting.
+Verkoper en Snoep Makelaardij aanvaarden geen aansprakelijkheid voor afwijkingen in de opgegeven maten.
+Disclaimer:
+Deze informatie is met de nodige zorgvuldigheid samengesteld. Aan de inhoud kunnen echter geen rechten worden ontleend. Alle opgegeven maten, oppervlakten en overige informatie zijn indicatief. Koper heeft een eigen onderzoeksplicht ten aanzien van alle zaken die voor hem of haar van belang zijn.
+See English version below:
+Freehold property, approx. 100 m² of living space and distinctive living across two floors Welcome to Paramaribostraat 50-2 in Amsterdam.
+Easily schedule your viewing via the Snoep Makelaardij website. Go to Our Properties and click Schedule your viewing directly.
+An inviting upper-floor apartment of approximately 100 m², arranged over two residential floors and offering four rooms, including three bedrooms, approximately 3 m² of outdoor space and two separate attic spaces totalling approximately 9 m² of other internal space. An additional major advantage: the property is situated on freehold land.
+The apartment forms part of a monumental building dating from 1930, designed in the distinctive Amsterdam School architectural style. Large windows, a bay window with built-in window seat, exposed wooden beams and the original architectural details give the property plenty of atmosphere, while the three bedrooms, separate laundry room and generous storage options make it equally practical.
+Why this property is special:
+With approximately 100 m² of living space spread across two floors, three bedrooms and freehold ownership, Paramaribostraat 50-2 offers a combination that is increasingly difficult to find in Amsterdam-West.
+The spacious living room at the front is particularly appealing. Large windows provide plenty of natural daylight, while the bay window creates an attractive built-in window seat overlooking the street. Part of the ceiling has been opened to reveal the original wooden beam structure, adding another distinctive element to the interior.
+Layout:
+At the front is the generous living room, with ample space for both a comfortable seating area and a large dining table. The wide windows and bay window create a bright and pleasant living environment.
+The kitchen is also located on this floor, as is the first spacious bedroom. French doors from this bedroom open onto the balcony of approximately 3 m².
+The internal staircase leads to the upper residential floor, where two further bedrooms and the bathroom are located, bringing the total to three full-sized bedrooms.
+The bathroom is fully tiled and neatly finished. A separate laundry room provides a dedicated place for the washing machine and dryer.
+The property also includes two separate attic spaces with their own entrances, together measuring approximately 9 m² of other internal space. Both already have flooring and plasterwork and are currently used for storage. This makes them useful additional spaces with more possibilities than standard unfinished attic storage.
+Energy label and technical features:
+The property has energy label D. The rating is close to energy label C, meaning that relatively limited energyefficiency improvements may potentially result in a higher energy label. Any future energy label will, of course, depend on the applicable assessment and regulations at that time. The central heating boiler dates from 2021 and is a CW5 installation. The electricity meter was replaced in 2024.
+Owners’ Association and maintenance:
+The property forms part of an active Owners’ Association (VvE). The VvE has cash reserves of approximately €148,000 and is building up reserves for future maintenance. A long-term maintenance plan (MJOP) is in place and the required VvE documentation is available. In 2024, the flat roofs were renewed, the remaining roof sections were serviced and the front of the building was painted.
+Ownership situation:
+An important advantage of the property is that it is situated on freehold land. There is therefore no ground lease (erfpacht), meaning there are no ground rent payments or future ground lease obligations.
+The neighbourhood:
+Paramaribostraat is situated in the Westindische Buurt in Amsterdam-West, conveniently located between Surinameplein, De Baarsjes and Oud-West.
+It is a pleasant residential neighbourhood with a wide range of amenities nearby. Both Vondelpark and Rembrandtpark are within easy reach, while Overtoom, Postjesweg, Kinkerstraat and Jan Pieter Heijestraat offer an extensive selection of shops, coffee bars and restaurants.
+De Hallen and the lively hospitality scene of Oud-West are also just a short bike ride away.
+The location therefore combines the convenience and energy of Amsterdam with the atmosphere of an established residential neighbourhood.
+Accessibility:
+The apartment is very well connected. Via nearby Surinameplein, the main arterial roads and the A10 ring road can be reached quickly.
+Public transport offers convenient connections towards the city centre, Station Lelylaan and other parts of Amsterdam. Vondelpark, Oud-West and the city centre are also easily accessible by bicycle.
+According to the information currently available, one parking permit may be possible for the property.
+Availability, waiting times and costs are subject to the regulations of the Municipality of Amsterdam and should be verified by the buyer.
+Key features:
+• Approx. 100 m² of living space
+• Approx. 9 m² of other internal space divided over two separate attic spaces
+• Four rooms, including three bedrooms
+• Arranged over two residential floors
+• Approx. 3 m² balcony
+• Situated on freehold land
+• Monumental building dating from 1930
+• Amsterdam School architecture
+• Spacious and bright living room with bay window and built-in window seat
+• Original exposed wooden beams
+• Separate laundry room
+• Energy label D, with potential for improvement
+• CW5 central heating boiler from 2021
+• Electrical meter replaced in 2024
+• Flat roofs renewed and remaining roof sections serviced in 2024
+• Front of the building painted in 2024
+• Owners’ Association with approx. €148,000 in cash reserves
+• Convenient location near Vondelpark, Rembrandtpark, Oud-West and Surinameplein A spacious and distinctive upper-floor apartment with three bedrooms, two residential floors and freehold ownership, in an attractive part of Amsterdam-West.
+Schedule your viewing via the Snoep Makelaardij website and experience Paramaribostraat 50-2 for yourself.
+NEN measurement clause:
+The usable floor area has been measured in accordance with the industry-wide NEN 2580 measurement instruction. This measurement instruction is intended to provide a uniform method of indicating usable floor area. Differences in measurement results may nevertheless occur due to interpretation differences, rounding or limitations when carrying out the measurement. Neither the seller nor Snoep Makelaardij accepts liability for
+deviations in the stated measurements.
+Disclaimer:
+This information has been compiled with due care. Nevertheless, no rights can be derived from it. All stated dimensions, surface areas and other information are indicative. Buyers are responsible for carrying out their own investigation into all matters that are important to them.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/926/486_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/597_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/448_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/420_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/653_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/657_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/646_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/566_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/452_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/530_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/681_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/419_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/583_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/546_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/519_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/682_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/509_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/421_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/975/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/975/828_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/975/776_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/975/889_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/975/749_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/975/860_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/535_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/635_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/487_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/594_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/541_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/490_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/703_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/599_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/543_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/510_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/926/719_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

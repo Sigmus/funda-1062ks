@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hertspieghelweg 18-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Hertspieghelweg 18-3</h1>
+  <p class="sub">
+    <span>1055 KM Amsterdam</span>
+    <span>·</span>
+    <span>Bosleeuw</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/956/421_1440x960.jpg" alt="Hertspieghelweg 18-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">32 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€525.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.500/m² · 3.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">70 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1950</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-hertspieghelweg-18-3/44502479/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 525.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.500</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 250,71 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1950</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>70 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>253 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Nefit (gas-fired combi boiler uit 2024, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND C 11030</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 250,71 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Bosleeuw</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>5.980</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>24%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 7.319</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Stijlvol, licht en instapklaar! Dit in 2024 smaakvol gerenoveerde 3-kamerappartement van circa 70 m² is verdeeld over de derde en vierde verdieping. De woning beschikt over twee slaapkamers, met de mogelijkheid een derde te creëren, een ruime woonkeuken, veel lichtinval en vrij uitzicht. De erfpacht is bovendien eeuwigdurend afgekocht.
+
+Kom binnen en ontdek jouw nieuwe thuis!
+
+Omgeving:
+De Hertspieghelweg ligt in het geliefde Bos en Lommer in Amsterdam-West: een buurt waar je rustig woont, maar de levendigheid van de stad altijd binnen handbereik hebt. De straat heeft een aangenaam woonkarakter en ligt gunstig ten opzichte van zowel groen, winkels en horeca als het centrum van Amsterdam.
+
+Voor de dagelijkse boodschappen hoef je de buurt nauwelijks uit. Aan de nabijgelegen Bos en Lommerweg en rondom het Bos en Lommerplein vind je een breed aanbod aan supermarkten, speciaalzaken en winkels. Ook op culinair gebied is er steeds meer te ontdekken. In de omgeving bevinden zich verschillende gezellige cafés en restaurants, waaronder No Man’s Art Gallery &amp; Bar, Abbey en Fuku Espresso Bar.
+
+Wie graag de drukte verruilt voor groen, zit hier eveneens goed. Het Erasmuspark ligt op korte afstand en vormt met zijn grasvelden, water en fraaie beplanting een heerlijke plek voor een wandeling, picknick of een ontspannen middag in de zon. Ook het Westerpark is eenvoudig per fiets bereikbaar en biedt naast volop groen een gevarieerd aanbod aan horeca, cultuur en evenementen.
+
+De ligging is bovendien bijzonder centraal. Met de fiets bereik je binnen korte tijd de Jordaan, De Hallen, Oud-West en het centrum van Amsterdam. Station Sloterdijk ligt op slechts enkele minuten fietsen en ook het openbaar vervoer in de directe omgeving zorgt voor goede verbindingen met de rest van de stad. Met de auto rijd je via de S104 binnen enkele minuten de Ring A10 op.
+
+Indeling: 
+Via het gemeenschappelijke trappenhuis bereik je dit heerlijke appartement, gelegen op de derde verdieping van het pand. Je betreedt de woning in de centrale hal, die toegang geeft tot de verschillende vertrekken.
+
+Aan de voorzijde bevindt zich de royale en bijzonder lichte woonkamer. Direct valt het open karakter van de ruimte op. In 2024 hebben de huidige eigenaren ervoor gekozen om de voormalige derde slaapkamer bij de woonkamer te betrekken, waardoor een ruime leefverdieping is ontstaan met volop plaats voor zowel een comfortabele zithoek als een royaal eetgedeelte. De grote raampartijen zorgen voor veel natuurlijke lichtinval en bieden een fraai, groen uitzicht over de wijk. Wie behoefte heeft aan een extra slaapkamer, kan het huidige eetgedeelte weer relatief eenvoudig afscheiden en zo opnieuw een derde slaapkamer creëren.
+
+Vanuit de woonkamer loop je door naar de keuken aan de achterzijde van de woning. Deze is in 2024 volledig vernieuwd en uitgevoerd in een moderne, rustige stijl. De keuken beschikt over veel werk- en kastruimte en is voorzien van onder andere een inductiekookplaat, RVS-afzuigkap, oven, afwasmachine en een aansluiting voor witgoed. Via de openslaande deuren stap je direct het balkon op, waar je heerlijk beschut buiten kunt zitten met uitzicht op het groen.
+
+Naast de keuken bevindt zich de ruime hoofdslaapkamer. Dankzij de prettige afmetingen is hier voldoende ruimte voor een groot tweepersoonsbed en een royale kastopstelling. Via de inpandige trap in de woonkamer bereik je de vierde verdieping, waar zich de tweede slaapkamer bevindt. Deze lichte ruimte kan ook uitstekend worden gebruikt als werk- of logeerkamer. In 2024 zijn hier nieuwe raampartijen met dubbele beglazing geplaatst, waardoor er veel daglicht binnenvalt en je ook hier geniet van een prettig groen uitzicht.
+
+Centraal in de woning bevindt zich de smaakvol gerenoveerde badkamer. Deze is voorzien van een ruime inloop-regendouche, een breed wastafelmeubel en een handdoekradiator. De combinatie van rustige tegels, houtaccenten en de ronde spiegel geeft de badkamer een moderne en warme uitstraling. Het toilet is separaat gelegen en eveneens netjes afgewerkt.
+
+Vereniging van Eigenaren: 
+Het betreft een gezonde en actieve vereniging van eigenaren genaamd ‘VvE Hertspieghelweg 4-90 en Wiltzanghlaan 5-7’. De VvE wordt professioneel beheerd door VvE Metea, er wordt jaarlijks vergaderd en de vereniging beschikt over een meerjaren onderhoudsplan. De maandelijkse bijdrage is € 250,71. 
+
+Eigendomssituatie: 
+De woning is gelegen op gemeentelijke erfpachtgrond, waarbij de erfpacht eeuwigdurend is afgekocht. De Algemene Bepalingen uit 2000 zijn van toepassing.
+
+Bijzonderheden: 
+- Heerlijk wonen in West! 
+- Woonoppervlakte van 70 m² (NEN gemeten);
+- 2 slaapkamers, met de mogelijkheid om een derde slaapkamer te creëren;
+- Erfpacht eeuwigdurend afgekocht;
+- Gezonde en actieve vereniging van eigenaren;
+- Energielabel E;
+- Balkon;
+- Verwarming en warm water middels eigen CV-ketel;
+- Service kosten VvE € 250,71,- per maand;
+- Woningdeelvergunning aanwezig;
+- Parkeren via vergunningsstelsel, veel parkeergelegenheid in de directe omgeving;
+- Oplevering in overleg;
+- Er is pas een overeenkomst als de koopakte is getekend;
+- De koopakte wordt opgemaakt door een notaris in Amsterdam.
+
+DISCLAIMER
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien. Van toepassing zijn de NVM voorwaarden.
+
+**ENGLISH**
+
+Stylish, bright, and move-in ready! This stylishly renovated 3-room apartment of approximately 70 sqm, renovated in 2024, is arranged over the third and fourth floors. The property features two bedrooms, with the possibility of creating a third, a spacious kitchen, plenty of natural light, and unobstructed views. In addition, the ground lease has been bought off in perpetuity.
+
+Step inside and discover your new home!
+
+Location:
+Hertspieghelweg is located in the popular Bos en Lommer neighbourhood in Amsterdam-West: a pleasant residential area where you can enjoy a peaceful living environment while still having the vibrancy of the city within easy reach. The street itself has an attractive residential character and is conveniently situated close to green spaces, shops, cafés and restaurants, as well as Amsterdam city centre.
+
+For your daily groceries, there is hardly any need to leave the neighbourhood. Along the nearby Bos en Lommerweg and around Bos en Lommerplein, you will find a wide range of supermarkets, specialist shops and other amenities. The area also has plenty to offer when it comes to food and drinks, with several inviting cafés and restaurants nearby, including No Man’s Art Gallery &amp; Bar, Abbey and Fuku Espresso Bar.
+
+If you prefer greenery and relaxation, this is also an excellent location. Erasmuspark is just a short distance away and, with its lawns, water features and attractive landscaping, is a wonderful place for a walk, picnic or relaxing afternoon in the sun. Westerpark is also easily reached by bicycle and combines extensive green spaces with a varied selection of restaurants, cultural venues and events.
+
+The location is exceptionally central. By bike, you can quickly reach the Jordaan, De Hallen, Oud-West and Amsterdam city centre. Sloterdijk Station is only a few minutes away by bicycle, while the nearby public transport connections provide easy access to the rest of the city. By car, the S104 takes you to the A10 ring road within just a few minutes.
+
+Layout:
+Via the communal staircase, you reach this delightful apartment, situated on the third floor of the building. You enter the property through the central hallway, which provides access to the various rooms.
+
+At the front of the apartment is the spacious and exceptionally bright living room. The open and airy character of the space is immediately noticeable. In 2024, the current owners chose to incorporate the former third bedroom into the living room, creating a generous open-plan living space with plenty of room for both a comfortable seating area and a large dining table. The large windows allow an abundance of natural light to enter and offer attractive green views across the neighbourhood. For those who require an additional bedroom, the current dining area can relatively easily be separated again to recreate a third bedroom.
+
+From the living room, you continue through to the kitchen at the rear of the apartment. Completely renovated in 2024, the kitchen has been finished in a modern and understated style. It offers ample worktop and storage space and is equipped with an induction hob, stainless-steel extractor hood, oven, dishwasher and a connection for laundry appliances. French doors provide direct access to the balcony, where you can sit outside in a sheltered setting while enjoying views of the greenery.
+
+Next to the kitchen is the spacious main bedroom. Thanks to its generous proportions, there is plenty of room for a large double bed as well as extensive wardrobe space. An internal staircase in the living room leads to the fourth floor, where the second bedroom is located. This bright room is also perfectly suited as a home office or guest room. New window frames with double glazing were installed here in 2024, allowing plenty of daylight to enter while also providing pleasant green views.
+
+Centrally positioned within the apartment is the beautifully renovated bathroom. It features a spacious walk-in rain shower, a wide washbasin unit and a heated towel rail. The combination of soft-toned tiles, wooden accents and the round mirror gives the bathroom a modern yet warm appearance. The toilet is separate and has also been neatly finished.
+
+Owners’ Association:
+The apartment forms part of a healthy and active Owners’ Association named ‘VvE Hertspieghelweg 4-90 en Wiltzanghlaan 5-7’. The association is professionally managed by VvE Metea, holds annual meetings, and has a long-term maintenance plan in place. The monthly service charge is €250.71.
+
+Ownership:
+The property is situated on municipal leasehold land. The ground lease has been bought off in perpetuity. The General Provisions of 2000 apply.
+
+Details:
+- Wonderful living in Amsterdam-West;
+- Living area of approximately 70 sqm, measured in accordance with NEN standards;
+- 2 bedrooms, with the possibility of creating a third bedroom;
+- Ground lease bought off in perpetuity;
+- Healthy and active Owners’ Association;
+- Energy label E;
+- Balcony;
+- Heating and hot water provided by a private central heating boiler;
+- VvE service charges of €250.71 per month;
+- Permit for partial rental of the property in place;
+- Parking via a permit system, with ample parking opportunities in the immediate area;
+- Transfer date in consultation;
+- An agreement is only concluded once the purchase agreement has been signed;
+- The purchase agreement will be drawn up by a civil-law notary in Amsterdam.
+
+DISCLAIMER
+This information has been compiled by us with due care. However, we accept no liability for any incompleteness, inaccuracy, or otherwise, or for the consequences thereof. All stated dimensions and surface areas are indicative. The buyer has the obligation to investigate all matters of importance to them. The real estate agent is acting as the seller&#x27;s advisor for this property. We advise you to engage an expert (NVM) real estate agent to guide you through the purchase process. If you have specific wishes regarding the property, we advise you to inform your purchasing agent in a timely manner and to conduct your own independent investigation. If you do not engage an expert representative, you are legally considered sufficiently expert to be able to oversee all important matters. The NVM terms and conditions apply.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Your Home Makelaars Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 32</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/956/421_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/420_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/427_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/424_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/448_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/435_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/436_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/455_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/444_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/429_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/445_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/434_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/440_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/437_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/454_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/426_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/453_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/441_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/447_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/431_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/415_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/423_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/425_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/438_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/417_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/416_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/419_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/418_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/422_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/956/449_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

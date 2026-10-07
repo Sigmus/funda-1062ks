@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slauerhoffstraat 44-1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Slauerhoffstraat 44-1</h1>
+  <p class="sub">
+    <span>1064 TG Amsterdam</span>
+    <span>·</span>
+    <span>Dichtersbuurt</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/553/126_1440x960.jpg" alt="Slauerhoffstraat 44-1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">38 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€350.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.147/m² · 2.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">68 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1953</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-slauerhoffstraat-44-1/44591137/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 350.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.147</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 275,25 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1953</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>68 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>15 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>232 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en gedeeltelijke Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HR (gas-fired combi boiler uit 2015, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN (N.H.) D 9399</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        <div class="frow"><dt>SLOTEN (N.H.) D 9339</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        <div class="frow"><dt>SLOTEN (N.H.) D 9339</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 275,25 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**This property is listed by a MVA Certified Expat Broker** - English version below!
+
+Nieuw in de verkoop bij Wester Makelaars: Slauerhoffstraat 44-1 te Amsterdam!
+
+Ben je op zoek naar een ruim en goed ingedeeld appartement op een groene en rustige locatie, maar wél dichtbij de stad? Dan is deze woning precies wat je zoekt. Dit appartement van ca. 68 m² beschikt over een fijne indeling met meerdere kamers, twee buitenruimtes en volop mogelijkheden om het geheel naar eigen wens aan te passen.
+
+De woning biedt een ideale combinatie van ruimte, licht en flexibiliteit. Momenteel is er een aparte woonkamer en eetkamer, maar het is eenvoudig mogelijk om hier een derde slaapkamer te realiseren. Hierdoor is de woning perfect geschikt voor zowel eigen bewoning als bijvoorbeeld woningdelers of een thuiswerkcombinatie.
+
+Wat direct opvalt is het vrije en groene uitzicht aan zowel de voor- als achterzijde. De woning beschikt over een balkon op het zuidwesten aan de voorzijde waar je heerlijk van de middag- en avondzon geniet, én een loggia aan de achterzijde. Daarnaast zijn er maar liefst twee bergingen aanwezig: een praktische berging in de onderbouw (ca. 6 m²) en een ruime berging op de zolderverdieping (ca. 8 m²).
+
+De ligging is bijzonder prettig: rustig wonen met veel groen, maar met alle voorzieningen binnen handbereik.
+
+HIGHLIGHTS
+- Woonoppervlakte ca. 68 m² (NEN2580 BBMI) 
+- Gelegen in een rustige en groene omgeving in Amsterdam Nieuw-West
+- Buurt die volop in ontwikkeling is
+- Vrij uitzicht aan zowel de voor- als achterzijde 
+- Balkon op het zuidwesten (voorzijde) 
+- Loggia aan de achterzijde 
+- Twee bergingen: onderbouw (ca. 6 m²) en zolder (ca. 8 m²) 
+- Praktische indeling met mogelijkheid tot 3 slaapkamers 
+- Ruime woonkamer aan de voorzijde 
+- Gelegen op de eerste verdieping 
+- Energielabel D 
+- Erfpacht eeuwigdurend afgekocht (woning én bergingen) 
+- Grote, actieve en professioneel beheerde VvE (Pro VvE Beheer) 
+- Maandelijkse servicekosten bedragen € 275,25
+- MJOP en documentatie beschikbaar 
+- Rustig wonen net buiten de ring A10 
+- Goede bereikbaarheid met OV en auto 
+- Niet-zelfbewonings-, asbest- en ouderdomsclausule van toepassing.
+- Oplevering in overleg 
+
+Indeling (zie ook interactieve plattegronden)
+Via het gemeenschappelijke trappenhuis bereik je de woning op de eerste verdieping. Entree, hal met toegang tot vrijwel alle vertrekken.
+
+De woonkamer is gelegen aan de voorzijde van de woning en biedt een vrij uitzicht op het groen. Dankzij de grote raampartijen is het een lichte en aangename ruimte. Vanuit de woonkamer heb je direct toegang tot het balkon op het zuidwesten.
+
+Aan de achterzijde bevindt zich de ruime hoofdslaapkamer, rustig gelegen en met uitzicht op het groen. Deze kamer biedt voldoende ruimte voor een groot bed en kastenwand. De eetkamer bevindt zich eveneens aan de achterzijde en staat in verbinding met de woonkamer. Deze ruimte is eenvoudig af te sluiten, waardoor hier een volwaardige derde slaapkamer kan worden gerealiseerd. Aan de voorzijde bevindt zich nog een kamer die perfect dienst kan doen als slaapkamer, werkkamer of kinderkamer.
+
+De keuken is centraal gelegen en praktisch ingedeeld, met toegang tot de loggia aan de achterzijde. De badkamer is voorzien van een douche en wastafel. Separaat toilet aanwezig in de hal.
+
+Buitenruimte
+De woning beschikt over twee fijne buitenruimtes. Het balkon aan de voorzijde ligt op het zuidwesten, waardoor je hier heerlijk kunt genieten van de zon in de middag en avond. Aan de achterzijde bevindt zich een loggia, een fijne extra buitenruimte die op verschillende momenten van de dag te gebruiken is.
+
+Bergingen
+De woning beschikt over twee bergingen: een berging in de onderbouw van ca. 6 m² en een tweede berging op de zolderverdieping van ca. 8 m². Ideaal voor extra opslagruimte.
+
+VvE
+De woning maakt deel uit van de VvE Slauerhoffstraat 2 t/m 74 te Amsterdam. De VvE is groot, actief en wordt professioneel beheerd door Pro VvE Beheer. Er is een meerjarenonderhoudsplan (MJOP) aanwezig en de administratie is goed op orde. Verdere documentatie is op aanvraag beschikbaar. De maandelijkse servicekosten bedragen € 275,25
+
+Erfpacht
+De woning is gelegen op erfpachtgrond van de gemeente Amsterdam, waarbij de erfpacht eeuwigdurend is afgekocht. Dit geldt zowel voor de woning als de bijbehorende berging. Er zijn dus geen jaarlijkse erfpachtkosten verschuldigd.
+
+Locatie
+De woning is gelegen in het groene en ruim opgezette Amsterdam Nieuw-West, op korte afstand van de Sloterplas. Hier kun je heerlijk wandelen, sporten of ontspannen aan het water.
+Ook Plein ’40-’45 ligt in de directe omgeving, met een divers aanbod aan winkels, supermarkten en horeca.
+
+De bereikbaarheid is uitstekend. Station Sloterdijk is binnen circa 10 minuten fietsen bereikbaar en biedt snelle verbindingen richting onder andere Amsterdam Centraal, Schiphol en de Zuidas. Ook Amsterdam Centraal is met de fiets in ongeveer 15-20 minuten te bereiken.
+
+Daarnaast zijn er diverse tram- en busverbindingen in de buurt en ben je met de auto binnen enkele minuten op de ring A10.
+
+Kortom; een ruim en flexibel in te delen appartement met twee buitenruimtes, veel groen en een uitstekende ligging net buiten de ring van Amsterdam. Maak snel een afspraak voor een bezichtiging, want voor je het weet is deze woning verkocht.
+
+De verkoopinformatie is met grote zorgvuldigheid samengesteld, maar voor de juistheid van de inhoud kunnen wij niet instaan. Er kunnen derhalve geen rechten aan worden ontleend. De inhoud is puur informatief en mag niet worden beschouwd als een aanbod. Daar waar gesproken wordt over inhoud, oppervlakten of afmetingen moeten deze worden beschouwd als indicatief en als circa maten. Je dient als koper zelf onderzoek te verrichten naar zaken die voor jou van belang zijn. Wij raden je in dat verband aan je eigen NVM-makelaar in te schakelen.
+
+---------
+
+English translation:
+
+**This property is listed by a MVA Certified Expat Broker**
+
+Newly listed for sale with Wester Makelaars: Slauerhoffstraat 44-1 in Amsterdam!
+
+Are you looking for a spacious and well-laid-out apartment in a green and quiet location, yet close to the city? Then this property could be exactly what you are looking for. This apartment of approximately 68 m² offers a practical layout with multiple rooms, two outdoor spaces, and plenty of possibilities to adapt the space to your own wishes.
+
+The property offers an ideal combination of space, light, and flexibility. Currently, there is a separate living room and dining room, but it is easy to convert this layout into a third bedroom. This makes the apartment perfectly suitable for owner-occupiers, but also for sharers or a home-office combination.
+
+What immediately stands out is the unobstructed green view at both the front and rear of the property. The apartment features a southwest-facing balcony at the front, where you can enjoy the afternoon and evening sun, as well as a loggia at the rear. In addition, there are two storage units: a practical storage room in the basement (approx. 6 m²) and a spacious storage unit in the attic (approx. 8 m²).
+
+The location is particularly pleasant: quiet living surrounded by greenery, while all amenities are within easy reach.
+
+HIGHLIGHTS
+- Living area approx. 68 m² (NEN2580 BBMI)
+- Located in a quiet and green area in Amsterdam Nieuw-West
+- A neighborhood undergoing rapid development
+- Unobstructed views at both the front and rear
+- Southwest-facing balcony (front side)
+- Loggia at the rear
+- Two storage units: basement (approx. 6 m²) and attic (approx. 8 m²)
+- Practical layout with possibility to create 3 bedrooms
+- Spacious living room at the front
+- Located on the first floor
+- Energy label D
+- Leasehold perpetually bought off (apartment and storage units)
+- Large, active and professionally managed HOA (Pro VvE Beheer)
+- Monthly service charges: €275.25
+- Long-term maintenance plan (MJOP) and documentation available
+- Quietly located just outside the A10 ring road
+- Excellent accessibility by public transport and car
+- Non-owner-occupancy, asbestos and age clauses apply
+- Delivery in consultation
+- Layout (see also interactive floor plans)
+
+Through the communal staircase you reach the apartment on the first floor. Entrance, hallway with access to all rooms.
+
+The living room is located at the front of the property and offers a pleasant, unobstructed view of the greenery. Large windows provide plenty of natural light. From the living room you have direct access to the southwest-facing balcony.
+
+At the rear you will find the spacious master bedroom, quietly situated and overlooking greenery. This room offers ample space for a large bed and wardrobes. The dining room is also located at the rear and is connected to the living room. This space can easily be separated to create a full third bedroom. At the front there is an additional room, ideal as a bedroom, home office, or children’s room.
+
+The kitchen is centrally located and practically laid out, with access to the loggia at the rear. The bathroom is equipped with a shower and washbasin. There is a separate toilet in the hallway.
+
+Outdoor space
+The apartment features two pleasant outdoor spaces. The balcony at the front faces southwest, allowing you to enjoy the sun in the afternoon and evening. At the rear, there is a loggia, offering an additional sheltered outdoor space.
+
+Storage
+The property includes two storage units: one in the basement (approx. 6 m²) and a second in the attic (approx. 8 m²), ideal for extra storage.
+
+Homeowners Association (HOA)
+The apartment is part of the HOA Slauerhoffstraat 2–74 in Amsterdam. The HOA is large, active, and professionally managed by Pro VvE Beheer. A long-term maintenance plan (MJOP) is in place and the administration is well organized. Additional documentation is available upon request. The monthly service charges are €275.25.
+
+Leasehold
+The property is situated on municipal leasehold land, which has been bought off in perpetuity. This applies to both the apartment and the storage units, meaning there are no annual leasehold payments.
+
+Location
+The apartment is located in the green and spaciously designed Amsterdam Nieuw-West, close to the Sloterplas, where you can enjoy walking, sports, or relaxing by the water. Plein ’40-’45 is also nearby, offering a wide range of shops, supermarkets, and restaurants.
+
+Accessibility is excellent. Sloterdijk Station can be reached within approximately 10 minutes by bike, providing fast connections to Amsterdam Central Station, Schiphol Airport, and the Zuidas business district. Amsterdam Central Station is about 15–20 minutes by bike. In addition, there are several tram and bus connections nearby, and by car you can reach the A10 ring road within minutes.
+
+In short; a spacious and flexible apartment with two outdoor spaces, plenty of greenery, and an excellent location just outside the Amsterdam ring road. Schedule a viewing soon before it’s gone.
+
+This information has been compiled with the utmost care. However, we cannot guarantee the accuracy of the information provided. No rights can be derived from this information. All stated measurements and surfaces are indicative. Buyers are responsible for conducting their own due diligence regarding matters that are important to them. We recommend engaging your own (NVM) real estate agent.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Jesper Kiestra</strong> · Wester Makelaars B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 38</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/553/126_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/149_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/136_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/098_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/119_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/132_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/142_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/138_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/096_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/080_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/065_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/066_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/125_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/088_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/145_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/040_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/134_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/106_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/147_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/071_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/070_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/091_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/046_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/139_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/060_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/069_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/063_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/127_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/102_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/121_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/112_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/059_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/105_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/148_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/051_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/118_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/151_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/553/109_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

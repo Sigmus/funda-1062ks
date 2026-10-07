@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nicolaas Anslijnstraat 148 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Nicolaas Anslijnstraat 148</h1>
+  <p class="sub">
+    <span>1068 WX Amsterdam</span>
+    <span>·</span>
+    <span>Osdorpplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/705/258_1440x960.jpg" alt="Nicolaas Anslijnstraat 148 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">41 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€450.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €3.913/m² · 2.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.2 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">115 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1963</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nicolaas-anslijnstraat-148/44505743/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 555 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 450.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 3.913</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1963</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>115 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>10 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>381 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>5e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND E 3751</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 31-07-2037)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 139,00 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Direct online een bezichtiging inplannen? Ga naar onze website!
+
+IDEALE STARTERSWONING IN HARTJE OSDORP: RUIM, LICHT EN INSTAPKLAAR
+Ben jij op zoek naar een moderne, instapklare starterswoning in de bruisende omgeving van Osdorp? Dan is deze royale maisonnette precies wat je zoekt. Gelegen op de vijfde en zesde verdieping heb je hier niet alleen een zee aan ruimte, maar ook een fijn balkon op het oosten waar je kunt genieten van een weids uitzicht over de Sloterplas. Met drie ruime slaapkamers, een moderne badkamer en een lichte, goed ingedeelde woonkamer voelt dit appartement als thuiskomen. Een topplek voor jonge gezinnen, tweepersoonshuishoudens of iedereen die wil genieten van alles wat de stad te bieden heeft.
+
+WONINGKENMERKEN DIE ERAAN TOE DOEN
+-Balkon op het oosten: Begin je dag in de ochtendzon met een prachtig uitzicht over de Sloterplas.
+-Twee woonlagen:  appartement offers ca. 115 m² woonoppervlakte, verdeeld over twee verdiepingen.
+-Drie ruime slaapkamers: Ideaal voor een gezin, stel of voor wie extra ruimte zoekt voor een werkplek of hobbykamer.
+-Inclusief berging: Extra opbergruimte op de tussenverdieping, handig en veilig.
+-Uitzicht op de Sloterplas: Genieten van groen en water, elke dag opnieuw.
+
+LICHT EN RUIM WONEN
+Bij binnenkomst in het appartement valt direct de ruimtelijke en lichte indeling op. De woonkamer op de vijfde verdieping vormt het hart van het huis. Grote raampartijen zorgen niet alleen voor een overvloed aan daglicht, maar bieden ook een weids uitzicht over de groene omgeving. Hier voel je je meteen thuis. Neem plaats in een comfortabele zithoek, deel de ruimte op met een gezellige eettafel en maak van dit huis jouw unieke plek.
+
+De moderne halfopen keuken is strak afgewerkt en praktisch ingericht. Met veel opbergruimte, moderne inbouwapparatuur en een handige indeling is koken hier een waar genoegen. Bereid een snelle maaltijd na een drukke werkdag, of kook uitgebreid voor vrienden en familie. Dankzij de open verbinding met de woonkamer sta je altijd in contact met je gezelschap.
+
+Grenzend aan de woonkamer ligt het balkon. Het uitzicht vanaf hier is werkelijk uniek: je kijkt uit over de serene Sloterplas en omliggende natuur. Dankzij de ligging op het oosten word je hier wakker met de ochtendzon. Of je nu even buiten wilt zitten om een frisse neus te halen of gewoon wilt genieten van de rust: dit fijne balkon voelt aan als jouw persoonlijke buitenruimte.
+
+FUNCTIONEEL EN MODERN
+Boven, op de zesde verdieping, vind je de drie ruime slaapkamers van deze woning. De master bedroom is royaal opgezet, heerlijk licht en biedt een vrij uitzicht; de perfecte plek om je even terug te trekken en tot rust te komen. De overige twee kamers zijn flexibel in te delen; creëer een gezellige kinderkamer, een inspirerend thuiskantoor of een praktische logeerkamer. Wat je behoeften ook zijn, dit appartement biedt je de ruimte om jouw leven hier vorm te geven.
+
+De badkamer maakt het plaatje compleet. Dit moderne, strak ingerichte vertrek is voorzien van een ruime inloopdouche, een wastafelmeubel met opbergruimte en een tweede toilet. De combinatie van functionaliteit en hedendaagse stijl zorgt ervoor dat je je dagelijkse routine hier moeiteloos én in comfort uitvoert.
+
+OSDORP: DE PERFECTE COMBINATIE VAN STAD EN NATUUR
+De locatie van dit appartement is een absoluut pluspunt. Gelegen in het hart van Osdorp zit je om de hoek van het Osdorpplein, waar je terechtkunnt voor al je dagelijkse boodschappen, winkels en een diverse selectie aan horeca. Of je nu een kop koffie wilt drinken, gezellig wilt winkelen of een boodschap moet doen: alles ligt op loopafstand. Voor cultuurliefhebbers is er ook een breed scala aan culturele activiteiten in de buurt, zoals Theater De Meervaart.
+
+En laten we de natuur niet vergeten. De Sloterplas ligt letterlijk op een steenworp afstand van je voordeur. Hier kun je wandelen, hardlopen of neerstrijken op een bankje om te genieten van de rust en het water. Ook liefhebbers van watersport komen aan hun trekken; kanoën of bootje varen over de plas behoort hier tot de mogelijkheden.
+
+De bereikbaarheid is uitstekend. Met openbaar vervoer en uitvalswegen dichtbij ben je snel in het centrum van Amsterdam of op andere plekken in de stad. Of je nu voor werk, familie of ontspanning onderweg bent, vanaf deze locatie zit je overal dichtbij.
+
+BIJZONDERHEDEN
+-Bouwjaar 1963;
+-Woonoppervlakte ca. 115 m²;
+-Energielabel B;
+-Fijn balkon op het oosten met ochtendzon en uitzicht op de Sloterplas;
+-Inclusief eigen berging op de tussenverdieping;
+-Gelegen in het hart van Osdorp, met het Osdorpplein en openbaar vervoer voor de deur;
+-Servicekosten bedragen ca. € 555,- per maand (exclusief €132-,  voorschot stookkosten) ;
+-De jaarlijkse erfpachtcanon bedraagt € 138,85 (huidig tijdvak loopt t/m 31-07-2037), erna is een aanvraag gedaan voor het vastzetten van de canon, en dit bedrag is €2.055,28 per jaar exclusief inflatie. Dit moet nog vastgelegd worden bij de notaris. 
+-Aanvaarding in overleg.
+
+JE DROOMWONING STAAT OP JE TE WACHTEN
+Dit appartement is de perfecte combinatie van ruimte, stijl en locatie. Of je nu een starter bent, een jong stel of een gezin, hier begin je jouw volgende hoofdstuk in een huis dat meteen goed voelt. Licht, ruim en praktisch — precies wat je zoekt.
+
+Plan vandaag nog een bezichtiging in en ontdek zelf waarom dit appartement je nieuwe thuis moet worden!
+__________________________________________
+
+Schedule an online viewing right away? Visit our website!
+
+IDEAL STARTER HOME IN THE HEART OF OSDORP: SPACIOUS, BRIGHT, AND MOVE-IN READY
+Are you looking for a modern, move-in ready starter home in the vibrant area of Osdorp? Then this generous maisonette is exactly what you are looking for. Located on the fifth and sixth floors, you not only get an abundance of space here, but also a lovely east-facing balcony where you can enjoy wide views over the Sloterplas. With three spacious bedrooms, a modern bathroom, and a bright, well-designed living room, this apartment instantly feels like home. A top spot for young families, two-person households, or anyone wanting to enjoy everything the city has to offer.
+
+KEY FEATURES THAT MATTER
+-East-facing balcony: Start your day in the morning sun with a beautiful view over the Sloterplas.
+-Two living levels: The apartment offers approx. 115 m² of living space, split across two floors.
+-Three spacious bedrooms: Ideal for a family, couple, or anyone looking for extra space for a home office or hobby room.
+-Includes storage room: Extra storage space located on the mezzanine floor—convenient and secure.
+-Views of the Sloterplas: Enjoy greenery and water, every single day.
+
+BRIGHT AND SPACIOUS LIVING
+Upon entering the apartment, you immediately notice the spacious and bright layout. The living room on the fifth floor forms the heart of the home. Large windows not only bring in an abundance of daylight but also offer expansive views over the green surroundings. You’ll feel right at home here. Set up a comfortable seating area, arrange a cozy dining table, and make this space uniquely yours.
+
+The modern semi-open kitchen is sleekly finished and practically laid out. With plenty of storage space, modern built-in appliances, and a smart layout, cooking here is a true pleasure. Prepare a quick meal after a busy workday or cook an elaborate dinner for friends and family. Thanks to the open connection with the living room, you are always connected with your guests.
+
+Adjacent to the living room is the balcony. The view from here is truly unique: you overlook the serene Sloterplas and the surrounding nature. Thanks to its eastern exposure, you wake up to the morning sun. Whether you want to step outside for a breath of fresh air or simply enjoy the tranquility, this lovely balcony feels like your own private outdoor sanctuary.
+
+FUNCTIONAL AND MODERN
+Upstairs, on the sixth floor, you will find the property&#x27;s three spacious bedrooms. The master bedroom is generously sized, wonderfully light, and offers unobstructed views—the perfect place to retreat and unwind. The other two rooms can be used flexibly: create a cozy child&#x27;s bedroom, an inspiring home office, or a practical guest room. Whatever your needs, this apartment gives you the space to shape your lifestyle.
+
+The bathroom completes the picture. This modern, sleekly designed room features a spacious walk-in shower, a washbasin vanity with storage space, and a second toilet. The combination of functionality and contemporary style ensures you can go through your daily routine effortlessly and in comfort.
+
+OSDORP: THE PERFECT COMBINATION OF CITY AND NATURE
+The location of this apartment is a major asset. Situated in the heart of Osdorp, you are just around the corner from Osdorpplein, where you can find all your daily groceries, shops, and a diverse selection of dining options. Whether you want to grab a coffee, go shopping, or run an errand, everything is within walking distance. For culture lovers, there is also a wide range of cultural activities nearby, such as Theater De Meervaart.
+
+And let&#x27;s not forget nature: the Sloterplas is literally a stone&#x27;s throw from your front door. Here you can go for a walk, run, or sit on a bench to enjoy the peace and the water. Water sports enthusiasts will also feel right at home, with canoeing and boating on the lake among the possibilities.
+
+Accessibility is excellent. With public transport and major highways nearby, you can quickly reach the center of Amsterdam or other parts of the city. Whether traveling for work, family, or leisure, everything is within easy reach from this location.
+
+PARTICULARITIES
+-Year of construction: 1963
+-Living area: approx. 115 m²
+-Energy label: B
+-Balcony: Lovely east-facing balcony with morning sun and views of the Sloterplas
+-Storage: Includes private storage room on the mezzanine floor
+-Location: Situated in the heart of Osdorp, with Osdorpplein and public transport right outside
+-Service charges amount to approximately €555 per month (excluding €132 in advance payments for heating costs);
+-Balcony facing Sloterplas has triple glass;
+-Kitchen is new with Siemens appliances;
+-Ground lease: The annual ground rent (erfpachtcanon) is € 138.85 (current period runs until 31-07-2037) The annual ground rent is €138.85 until July 31, 2037. After this date, an application has been submitted to set the fee at €2,055.28 per year (excluding inflation). This still needs to be finalized with the notary.
+-Transfer: In consultation
+
+YOUR DREAM HOME IS WAITING FOR YOU
+This apartment offers the perfect combination of space, style, and location. Whether you are a first-time buyer, a young couple, or a family, you can start your next chapter here in a home that feels right straight away. Bright, spacious, and practical—exactly what you are looking for.
+
+Schedule a viewing today and discover for yourself why this apartment should be your new home!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 41</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/705/258_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/552_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/440_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/233_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/480_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/438_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/444_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/235_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/487_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/413_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/373_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/560_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/528_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/553_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/231_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/367_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/478_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/264_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/543_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/514_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/309_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/260_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/547_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/370_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/254_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/564_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/563_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/340_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/519_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/286_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/353_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/317_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/457_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/419_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/210_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/515_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/705/371_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

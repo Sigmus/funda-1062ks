@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paramaribostraat 105-1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Paramaribostraat 105-1</h1>
+  <p class="sub">
+    <span>1058 VJ Amsterdam</span>
+    <span>·</span>
+    <span>Paramariboplein e.o.</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/229/067/453_1440x960.jpg" alt="Paramaribostraat 105-1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€795.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.112/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">98 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1930</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramaribostraat-105-1/44452757/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 795.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.112</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 130,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1930</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met bitumineuze dakbedekking en tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>98 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>330 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, dubbele Washbasin, Bathtub, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha (gas-fired combi boiler uit 2021, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN M 1510</dt><dd>ownedssituatie</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking, parkeergarage en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 130,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">JA! Charmant en instapklaar appartement met een woonoppervlakte van ca. 98 m², in het leukste gedeelte van De Baarsjes. Het appartement is gelegen op eigen grond en nabij zowel het Rembrandtpark als het Vondelpark. Het pand is ontworpen door Piet Kramer, een toonaangevende architect van de Amsterdamse School.
+
+De woning beschikt over een eigen entree via het portiek. Het appartement heeft een lichte, sfeervolle en zonnige woon- en eetkamer met en-suite deuren en een moderne ruime halfopen keuken met hoogwaardige apparatuur. De drie slaapkamers zijn van goed formaat en de woning heeft een comfortabele en ruime badkamer die van alle gemakken is voorzien. De eetkamer heeft twee openslaande deuren naar het zonnige, op het westen gelegen, balkon met uitzicht op de groene binnentuin waar je vanaf de middag tot de avond kan genieten van de zon, wat deze fijne woning compleet maakt.
+
+INDELING 
+EERSTE VERDIEPING
+- Middels het portiek met stenen buitentrap wordt de entree van de woning bereikt;
+- Binnenkomst in de ruime hal met een separaat toilet en een bergkast waarin de cv-ketel is geplaatst;
+- De lichte doorzonwoonkamer beschikt over karakteristieke en-suite deuren, waarmee de zitkamer van de eetkamer kan worden gescheiden;
+- Aansluitend aan de eetkamer bevindt zich de ruime, halfopen woonkeuken die volledig is verbouwd in 2021. Deze voorzien van greeploze witte keukenkasten en inbouwapparatuur van AEG, zoals een koelkast met vriezer, oven, vaatwasser en inductiekookplaat met RVS-afzuigkap en een Quooker.
+- Openslaande deuren aan de achterzijde van de woning in de eetkamer, geven toegang tot het op het westen gelegen balkon met uitzicht op de groene binnentuin;
+- De eerste slaapkamer, thans in gebruik als werkkamer, bevindt zich aan de voorzijde en beschikt over een inbouwkast.
+- De eerste verdieping heeft een mooie houten vloer in goede staat.  
+
+DERDE VERDIEPING 
+- Middels een interne trap is de derde verdieping vanaf de eerste verdieping te bereiken;
+- Op deze derde verdieping bevindt zich de tweede en derde slaapkamer, beiden van goed formaat; 
+- Boven de trap bevindt zich nog extra bergruimte;
+
+BADKAMER
+- De woning beschikt over een nette ruime badkamer die is verbouwd in 2019;
+- De moderne badkamer is voorzien van een inloopdouche, ligbad, wastafelmeubel, toilet en aansluiting voor witgoed.
+
+WOONOPPERVLAKTE 
+- De woonoppervlakte bedraagt circa 97,5 m²;
+- De gebouwgebonden buitenruimte bedraagt circa 3,10 m²;
+NB. De opgegeven oppervlakte is door een gespecialiseerd bedrijf gemeten conform NEN2580. 
+
+BOUWAARD &amp; TECHNISCHE INFORMATIE
+- De woning is gelegen in een pand dat omstreeks 1930 is gebouwd;
+- Het betreft een gemeentelijk monument, ontworpen door Piet Kramer, een toonaangevende architect van de Amsterdamse School;
+- Traditionele bouwstijl;
+- Deels houten (voorzijde) en deels kunststof (achterzijde) kozijnen, voorzien van dubbele
+beglazing;
+- Verwarming en warm water middels cv-ketel, merk: Remeha, bouwjaar: 2021.
+
+KADASTER &amp; SPLITSING 
+- Kadastrale aanduiding Sloten M 1510 A23; 
+- Het pand is op 31 augustus 1977  gesplitst in 24 appartementsrechten;
+- Op 8 februari 1984 en 6 juli 2001 hebben er wijzigingen plaatsgevonden; 
+- Het appartementsrecht A23 is voor 9/204e aandeel in de gemeenschap gerechtigd.
+
+EIGEN GROND
+- De woning is gelegen op eigen grond.
+
+VERENIGING VAN EIGENAREN
+- De VvE bestaat uit 24 leden en wordt professioneel beheerd door Rappange;
+- De servicekosten bedragen thans € 130,- per maand;
+- Er is een MJOP beschikbaar;
+- Het betreft een actieve en financieel gezonde VvE;
+- De woning is in 2024 aan de voorzijde geschilderd en in 2025 heeft er grootschalige renovatie van het gehele dak plaatsgevonden.
+
+LOCATIE
+- Dit dubbele bovenhuis gelegen in een rustige en kindvriendelijke straat in De Baarsjes in stadsdeel West, met verschillende kinderdagverblijven en basisscholen op loopafstand;
+- Voor de dagelijkse boodschappen zijn er een Albert Heijn en Jumbo supermarkt op loopafstand.
+- In de nabijgelegen Kinkerstraat en op de Overtoom is een ruim aanbod aan leuke winkels;
+- Diverse leuke koffietentjes en cafés om de hoek (o.a. Tweede Thuys, Kosta, Mundi, Coffee &amp; Juices);
+- Versproducten zijn te vinden op de nabijgelegen Ten Katemarkt;
+- Ook de Food- en Filmhallen liggen dichtbij;
+- Voor ontspanning en recreatie liggen het Vondelpark en het Rembrandtpark om de hoek;
+- Op de fiets is binnen 10 minuten de gezellige Jordaan te bereiken.
+
+BEREIKBAARHEID EN PARKEREN
+- Het appartement is per auto uitstekend bereikbaar via de ringweg A-10 (afslag S106);
+- Op nog geen 15 minuten rijden van Schiphol;
+- NS- en metrostation Lelylaan bevinden zich op ongeveer 8 minuten fietsafstand;
+- Er zijn diverse tram- en bushaltes in de buurt;
+- Op de openbare weg geldt betaald parkeren van maandag tot en met zaterdag van 9:00 uur tot 0:00 uur;
+- Voor informatie over parkeervergunningen, zie de website van de Gemeente Amsterdam.
+
+BIJZONDERHEDEN
+- Heerlijk appartement verdeeld over twee verdiepingen: 
+- Woonoppervlakte bedraagt circa 98 m2; 
+- De woning beschikt over drie slaapkamers;
+- Op het westen gelegen balkon met uitzicht op de groene binnentuin;
+- Optie om een dakterras te realiseren;
+- Gelegen op EIGEN GROND.
+- Uitstekende ligging in Amsterdam West met alle voorzieningen binnen handbereik;
+- Kortom; een charmant instap klaar huis!
+
+OPLEVERING
+De oplevering zal plaatsvinden in overleg.
+
+OP AANVRAAG BESCHIKBAAR
+- Eigendomsakte
+- Energielabel C
+- Splitsingsakte
+- Stukken VvE
+- Meetrapport
+
+---------------------------------------------
+
+YES! A charming, move-in-ready apartment with approximately 98 m² of living space, located in the most desirable part of De Baarsjes. The apartment is situated on freehold land and is close to both Rembrandtpark and Vondelpark. The building was designed by Piet Kramer, a leading architect of the Amsterdam School.
+
+The home features a private entrance via the porch. The apartment has a bright, cozy, and sunny living and dining room with French doors and a modern, spacious semi-open kitchen equipped with high-quality appliances. The three bedrooms are a good size, and the home features a comfortable and spacious bathroom equipped with all modern conveniences. The dining room has two French doors leading to the sunny, west-facing balcony overlooking the green courtyard garden, where you can enjoy the sun from midday through the evening, making this lovely home truly complete. 
+
+LAYOUT 
+FIRST FLOOR
+- The entrance to the home is accessed via the porch with a stone exterior staircase;
+- The spacious entryway features a separate toilet and a storage closet housing the boiler;
+- The bright, open-concept living room features characteristic French doors that can be used to separate the living area from the dining room;
+- Adjacent to the dining room is the spacious, semi-open kitchen, which was completely renovated in 2021. It features handle-less white kitchen cabinets and AEG built-in appliances, including a refrigerator with freezer, oven, dishwasher, and induction cooktop with a stainless steel range hood and a Quooker.
+- French doors at the rear of the house in the dining room provide access to the west-facing balcony with a view of the green courtyard garden;
+- The first bedroom, currently used as a home office, is located at the front and features a built-in closet.
+- The first floor has beautiful hardwood flooring in good condition.  
+THIRD FLOOR 
+- The third floor is accessible from the first floor via an internal staircase;
+- The third floor features the second and third bedrooms, both of which are a good size; 
+- There is additional storage space above the staircase;
+
+BATHROOM
+- The home features a neat, spacious bathroom that was renovated in 2019;
+- The modern bathroom is equipped with a walk-in shower, bathtub, vanity unit, toilet, and connections for appliances.
+
+LIVING AREA 
+- The living area is approximately 97,5 m²;
+- The building-related outdoor space is approximately 3,10 m²;
+Note: The stated area was measured by a specialized company in accordance with NEN2580. 
+
+CONSTRUCTION &amp; TECHNICAL INFORMATION
+- The home is located in a building constructed around 1930;
+- It is a municipal monument, designed by Piet Kramer, a leading architect of the Amsterdam School;
+- Traditional architectural style;
+- Partly wooden (front) and partly vinyl (rear) window frames, fitted with double
+glazing;
+- Heating and hot water via a central heating boiler, brand: Remeha, year of manufacture: 2021.
+
+LAND REGISTRY &amp; SUBDIVISION 
+- Land registry designation: Sloten M 1510 A23; 
+- The property was subdivided into 24 condominium units on August 31, 1977;
+- Amendments were made on February 8, 1984, and July 6, 2001; 
+- Apartment unit A23 is entitled to a 9/204th share in the common property.
+
+FREEHOLD
+- The property is situated on freehold land.
+
+HOUSING OWNERS’ ASSOCIATION
+- The HOA consists of 24 members and is professionally managed by Rappange;
+- Service charges currently amount to €130 per month;
+- A long-term maintenance plan is available;
+- This is an active and financially sound Homeowners’ Association;
+- The front of the property was painted in 2024, and a major renovation of the entire roof took place in 2025.
+
+LOCATION
+- This two-story townhouse is located on a quiet, child-friendly street in De Baarsjes in the West district, with several daycare centers and elementary schools within walking distance;
+- For daily groceries, there is an Albert Heijn and a Jumbo supermarket within walking distance.
+- The nearby Kinkerstraat and Overtoom offer a wide selection of great shops;
+- Several charming coffee shops and cafés are just around the corner (including Tweede Thuys, Kosta, Mundi, and Coffee &amp; Juices);
+- Fresh produce can be found at the nearby Ten Katemarkt;
+- The Food and Filmhallen are also nearby;
+- For relaxation and recreation, the Vondelpark and Rembrandtpark are just around the corner;
+- The lively Jordaan neighborhood is a 10-minute bike ride away.
+
+ACCESSIBILITY AND PARKING
+- The apartment is easily accessible by car via the A-10 ring road (exit S106);
+- Less than a 15-minute drive from Schiphol Airport;
+- The Lelylaan train and metro station is about an 8-minute bike ride away;
+- There are several tram and bus stops nearby;
+- Paid parking applies on public streets from Monday through Saturday from 9:00 AM to midnight;
+- For information about parking permits, see the City of Amsterdam website.
+
+SPECIAL FEATURES
+- Lovely two-story apartment: 
+- Living area of approximately 98 m²; 
+- The home features three bedrooms;
+- West-facing balcony overlooking the green courtyard garden;
+- Option to build a rooftop terrace;
+- Located on FREEHOLD PROPERTY.
+- Excellent location in Amsterdam West with all amenities within easy reach;
+- In short: a charming, move-in ready home!
+
+DELIVERY
+Delivery will take place by mutual agreement.
+
+AVAILABLE UPON REQUEST
+- Deed of ownership
+- Energy label C
+- Deed of division
+- Homeowners’ association documents
+- Survey report</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/229/067/453_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/487_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/373_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/462_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/342_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/296_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/407_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/285_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/496_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/374_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/350_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/396_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/281_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/416_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/430_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/419_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/421_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/286_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/489_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/495_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/577_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/698_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/640_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/500_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/656_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/637_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/541_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/538_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/565_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/699_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/502_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/680_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/498_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/690_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/067/558_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

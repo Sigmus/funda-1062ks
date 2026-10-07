@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frankenstraat 20 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Frankenstraat 20</h1>
+  <p class="sub">
+    <span>1060 SE Amsterdam</span>
+    <span>·</span>
+    <span>De Aker-Oost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/155/519_1440x960.jpg" alt="Frankenstraat 20 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">50 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€645.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.287/m² · 3.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.8 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">122 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1998</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-frankenstraat-20/44581272/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 645.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.287</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1998</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met bitumineuze dakbedekking en tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>122 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>127 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>408 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 2 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors en een vliering</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, Mechanical ventilation, natuurlijke ventilatie, en rolluiken</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha (2012, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND G 2995</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>127 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>53 m² (9,46 m deep en 5,56 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het noorden bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">(ENGLISH BELOW)
+Frankenstraat 20 – Amsterdam
+
+Een heerlijk gezinshuis met vier slaapkamers, een zonnige tuin én een unieke binnentuin waar de kinderen veilig kunnen spelen. De erfpacht is reeds eeuwigdurend afgekocht!
+
+Op zoek naar een ruime en sfeervolle eengezinswoning waar binnen én buiten alle ruimte is om volop van het leven te genieten? Dan is Frankenstraat 20 absoluut een bezichtiging waard. Deze fijne woning heeft circa 122 m² woonoppervlakte, beschikt over vier slaapkamers, heeft energielabel B en biedt naast een eigen achtertuin ook toegang tot een fantastische, afgesloten gezamenlijke binnentuin. Een plek waar kinderen vrij kunnen spelen, fruit kunnen plukken en waar buren elkaar vanzelf ontmoeten.
+
+Indeling
+Via de voortuin bereik je de entree van de woning. Eenmaal binnen valt direct de royale hal op. Vanuit hier heb je toegang tot alle vertrekken op de begane grond. De hal beschikt over een modern, separaat toilet en een fraaie stalen deur die zorgt voor een stijlvolle overgang naar het hart van de woning: het woon en kookgedeelte.
+
+Aan de voorzijde bevindt zich de gezellige woonkamer. Dankzij de grote ramen geniet je hier van een prettige hoeveelheid daglicht en een fijne verbinding met het straatbeeld. Aan de achterzijde ligt de hoekkeuken, direct in verbinding met het eetgedeelte. Hier komt het gezin samen voor het ontbijt, een uitgebreid diner of een gezellig moment met vrienden.
+De echte verrassing bevindt zich aan de achterzijde. Via de openslaande deuren stap je vanuit het eetgedeelte rechtstreeks de tuin in. Zo haal je op mooie dagen het buitenleven letterlijk naar binnen.
+De achtertuin beschikt over een achterom en een dubbele berging. Praktisch voor fietsen, speelgoed, tuinmeubilair en allerhande spullen die je graag een eigen plek geeft.
+
+En dan misschien wel één van de grootste extra pluspunten van deze woning: vanuit de tuin bereik je de afgesloten gezamenlijke binnentuin.
+Deze bijzondere binnentuin is uitsluitend toegankelijk voor bewoners en vormt een heerlijke groene ontmoetingsplek. De kinderen kunnen er spelen op de speeltoestellen, terwijl de fruitbomen zorgen voor een sfeervolle en natuurlijke omgeving. Voor ouders is het een fijne plek om elkaar te ontmoeten en voor kinderen een veilige omgeving om samen buiten te zijn.
+
+Via de vaste trap bereik je de eerste verdieping. De overloop geeft toegang tot drie slaapkamers, de badkamer en een separaat toilet.
+Aan de straatzijde bevindt zich de royale master bedroom. Aan de rustige tuinzijde liggen nog twee slaapkamers, ideaal als kinder-, werk- of hobbykamer.
+De badkamer is compleet uitgevoerd met een ligbad met douche en wastafel. Het tweede toilet op deze verdieping is natuurlijk extra comfortabel voor een gezin.
+
+Op de bovenste verdieping bevindt zich de vierde slaapkamer, een heerlijke extra ruimte die ook uitstekend dienst kan doen als werkkamer, tienerkamer, logeerkamer of hobbyruimte.
+
+Locatie
+De Frankenstraat bevindt zich in de populaire Europese Muntenwijk, een van de sfeervolle en aantrekkelijke buurten van De Aker. De wijk is ruim opgezet, heeft veel groen en biedt kinderen volop mogelijkheden om buiten te spelen. Daarmee is het een fijne woonomgeving voor gezinnen die waarde hechten aan rust, veiligheid en het gemak van voorzieningen dichtbij.
+Voor de dagelijkse boodschappen hoeft u niet ver te gaan. Op loopafstand ligt winkelcentrum Dukaat, waar u alles vindt wat u nodig heeft. Van supermarkt Jumbo, bakker en slager tot drogist, kaas- en viswinkel, bloemenzaak, fietswinkel en stomerij. Ook voor andere voorzieningen kunt u hier terecht, zoals het gezondheidscentrum, de apotheek, een kapper en kinderopvang.
+Gezinnen hebben bovendien keuze uit drie basisscholen in de wijk en verschillende sportverenigingen bevinden zich op korte afstand. Voor een uitgebreider aanbod aan winkels, restaurants en ontspanning fietst u eenvoudig naar winkelcentrum Osdorpplein. Hier vindt u bekende winkels zoals Albert Heijn, Blokker, Douglas, Etos, Hema en WE, aangevuld met diverse boetiekjes en horecazaken.
+Liefhebbers van lekker eten kunnen terecht bij food court Westmarket, waar gerechten uit uiteenlopende internationale keukens worden geserveerd. Ook theater De Meervaart en de Openbare Bibliotheek bevinden zich hier. Het Osdorpplein ligt bovendien direct aan de Sloterplas, een ideale plek om te wandelen, fietsen, zwemmen of te genieten van verschillende watersporten. Langs het water zijn daarnaast diverse restaurants te vinden.
+
+Uitstekende bereikbaarheid
+Ook qua bereikbaarheid is de Frankenstraat gunstig gelegen. Met de auto bereikt u binnen circa 10 minuten de snelwegen A4, A5, A9 en A10. Schiphol is in ongeveer 15 minuten bereikbaar.
+Met tram 1 reist u rechtstreeks naar het centrum van Amsterdam. Station Lelylaan bereikt u met deze tram in ongeveer 10 minuten. Daarnaast zorgen buslijnen 61 en 69 voor een goede verbinding met onder andere Station Sloterdijk en Schiphol. Ook na een avond in de stad is thuiskomen eenvoudig: nachtbus N83 brengt u &#x27;s nachts terug naar de wijk.
+
+Bijzonderheden op een rij
+
+- Erfpacht eeuwigdurend afgekocht
+- Circa 122 m² woonoppervlakte
+- Energielabel B
+- Vier slaapkamers
+- Royale woonkamer met veel natuurlijke lichtinval
+- Hoekkeuken met aangrenzend eetgedeelte
+- Fraaie stalen deur tussen hal en woon-/kookgedeelte
+- Openslaande deuren naar de achtertuin
+- Achtertuin met achterom
+- Dubbele berging
+- Badkamer met ligbad, douche en wastafel
+- Twee separate toiletten
+- Toegang tot een afgesloten gezamenlijke binnentuin
+- Binnentuin met speeltoestellen en fruitbomen
+- Een ideale en kindvriendelijke woonomgeving
+- Een heerlijke combinatie van ruimte, comfort, groen en gezelligheid
+
+Frankenstraat 20 is een woning die je vooral moet ervaren. De combinatie van de royale leefruimte, vier slaapkamers, de eigen tuin, praktische bergingen en de bijzondere gezamenlijke binnentuin maakt dit een bijzonder compleet gezinshuis.
+Een woning waar je &#x27;s ochtends samen aan de ontbijttafel zit, waar de deuren bij mooi weer wagenwijd open kunnen, waar de kinderen na schooltijd veilig buiten kunnen spelen en waar je &#x27;s avonds heerlijk tot rust komt in je eigen huis.
+Kortom: een sfeervol en verrassend ruim gezinshuis met alles wat je nodig hebt  én dat beetje extra dat je niet iedere dag tegenkomt.
+
+NOTARIS
+De koper heeft de keuze voor een Amsterdamse notaris welke een koopakte zal opstellen conform Amsterdams Model.
+
+Disclaimer: Deze beschrijving dient ter informatie en is niet bindend. Aan de verstrekte informatie kunnen geen rechten worden ontleend.
+
+Frankenstraat 20 – Amsterdam
+A wonderful family home with four bedrooms, a sunny garden and a unique communal courtyard where children can play safely. The ground lease has already been bought out in perpetuity!
+
+Are you looking for a spacious and atmospheric family home with plenty of room both indoors and outdoors to enjoy life to the fullest? Then Frankenstraat 20 is definitely worth viewing. This lovely property offers approximately 122 m² of living space, four bedrooms, an energy rating of B and, in addition to its own rear garden, access to a fantastic, secure communal courtyard. A place where children can play freely, pick fruit and where neighbours naturally come together.
+
+Layout
+You enter the property via the front garden. Once inside, the generous hallway immediately catches the eye. From here, you have access to all rooms on the ground floor. The hallway features a modern separate toilet and an attractive steel door, creating a stylish transition to the heart of the home: the living and kitchen area.
+
+At the front of the house is the cosy living room. Thanks to the large windows, the room benefits from plenty of natural daylight and has a pleasant connection with the street outside. At the rear is the corner kitchen, directly connected to the dining area. This is where the family comes together for breakfast, an elaborate dinner or a relaxed get-together with friends.
+
+The real surprise is at the rear of the property. Through the French doors, you can step directly from the dining area into the garden. On sunny days, this allows you to bring the outdoor lifestyle literally into your home.
+
+The rear garden has a rear entrance and a double storage shed. Practical for bicycles, toys, garden furniture and all those other items that you like to keep neatly stored away.
+
+And perhaps one of the property&#x27;s biggest additional advantages: from the garden, you have direct access to the secure communal courtyard.
+
+This special courtyard is exclusively accessible to residents and provides a wonderful green space for the community. Children can play on the play equipment, while the fruit trees create an attractive and natural setting. For parents, it is a lovely place to meet and socialise, while children have a safe environment in which to play outdoors together.
+
+A fixed staircase leads to the first floor. The landing provides access to three bedrooms, the bathroom and a separate toilet.
+
+At the front of the house is the spacious master bedroom. At the quiet rear, overlooking the garden, are two further bedrooms, ideal as children&#x27;s rooms, a home office or hobby room.
+
+The bathroom is fully equipped with a bathtub with shower and a washbasin. The second toilet on this floor is an added convenience for a family.
+
+The top floor features the fourth bedroom, a wonderful additional space that could also serve perfectly as a home office, teenager&#x27;s bedroom, guest room or hobby room.
+
+Location
+Frankenstraat is located in the popular Europese Muntenwijk, one of the pleasant and attractive neighbourhoods of De Aker. The area is spaciously laid out, has plenty of greenery and offers children lots of opportunities to play outdoors. It is therefore a wonderful residential environment for families who value peace, safety and the convenience of having amenities close by.
+
+For everyday shopping, you do not have to go far. Within walking distance is Dukaat shopping centre, where you will find everything you need. From Jumbo supermarket, a bakery and butcher to a drugstore, cheese and fish shop, florist, bicycle shop and dry cleaner. Other amenities are also available here, including a health centre, pharmacy, hairdresser and childcare facilities.
+
+Families also have a choice of three primary schools in the neighbourhood, while various sports clubs are located nearby. For a wider range of shops, restaurants and leisure activities, Osdorpplein shopping centre is just an easy cycle ride away. Here you will find well-known retailers such as Albert Heijn, Blokker, Douglas, Etos, Hema and WE, complemented by a variety of boutiques and restaurants.
+
+Food lovers can visit Westmarket food court, where dishes from a wide range of international cuisines are served. Theatre De Meervaart and the public library are also located here. Osdorpplein is situated directly beside Sloterplas lake, an ideal place for walking, cycling, swimming or enjoying various water sports. There are also several restaurants along the waterfront.
+
+Excellent accessibility
+Frankenstraat is also conveniently located in terms of accessibility. By car, you can reach the A4, A5, A9 and A10 motorways within approximately 10 minutes. Schiphol Airport is around 15 minutes away by car.
+
+Tram 1 provides a direct connection to Amsterdam city centre. Lelylaan railway station can be reached by tram in approximately 10 minutes. Bus routes 61 and 69 also provide good connections to, among others, Sloterdijk railway station and Schiphol Airport. Even after an evening in the city, getting home is easy: night bus N83 brings you back to the neighbourhood at night.
+
+Key features
+- Ground lease bought out in perpetuity
+- Approximately 122 m² of living space
+- Energy rating B
+- Four bedrooms
+- Spacious living room with plenty of natural daylight
+- Corner kitchen with adjoining dining area
+- Attractive steel door between the hallway and living/kitchen area
+- French doors leading to the rear garden
+- Rear garden with rear entrance
+- Double storage shed
+- Bathroom with bathtub, shower and washbasin
+- Two separate toilets
+- Access to a secure communal courtyard
+- Communal courtyard with play equipment and fruit trees
+- Ideal and child-friendly residential environment
+- A wonderful combination of space, comfort, greenery and community
+
+Frankenstraat 20 is a home that really needs to be experienced. The combination of generous living space, four bedrooms, a private garden, practical storage facilities and the unique communal courtyard makes this an exceptionally complete family home.
+
+A home where you can sit together at the breakfast table in the morning, open the doors wide when the weather is beautiful, where the children can safely play outside after school and where you can unwind in your own home in the evening.
+
+In short: an atmospheric and surprisingly spacious family home with everything you need — plus that little something extra that you do not come across every day.
+
+NOTARY
+The buyer is free to choose an Amsterdam-based notary, who will prepare the purchase agreement in accordance with the Amsterdam Model.
+
+Disclaimer: This description is for information purposes only and is not legally binding. No rights may be derived from the information provided.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Makelaarsland</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 50</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/155/519_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/554_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/657_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/558_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/535_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/578_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/640_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/647_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/517_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/651_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/529_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/527_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/637_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/581_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/659_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/546_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/524_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/547_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/607_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/665_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/643_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/623_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/602_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/676_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/633_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/544_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/645_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/652_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/568_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/548_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/599_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/654_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/567_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/648_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/591_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/593_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/683_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/682_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/530_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/680_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/555_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/520_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/617_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/667_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/155/610_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

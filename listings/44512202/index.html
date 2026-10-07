@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinkerstraat 64-D · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Kinkerstraat 64-D</h1>
+  <p class="sub">
+    <span>1053 DZ Amsterdam</span>
+    <span>·</span>
+    <span>Da Costabuurt-Noord</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/422/298_1440x960.jpg" alt="Kinkerstraat 64-D — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">41 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€625.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.328/m² · 2.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.7 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">67 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1893</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-kinkerstraat-64-d/44512202/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 625.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.328</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 237,54 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1893</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Monument</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>67 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>315 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Gas gestookt, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM Q 9069</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 31-10-2061)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 2.145,30 per Yesar met optie tot afkopen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 237,54 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">SPEELS, RUIMTELIJK EN LICHT! KOM KIJKEN BIJ DIT HEERLIJKE DUBBELE BOVENHUIS MET 3 RUIME (SLAAP)KAMERS OP HET LEUKSTE STUK VAN DE KINKERSTRAAT!
+
+Midden in het bruisende Oud-West wonen, maar thuis juist verrassend rustig? Dat kan hier. Dit lichte en sfeervolle dubbele bovenhuis van circa 67 m² ligt in een prachtig monumentaal pand uit 1893 en is verdeeld over twee woonlagen. De woning is goed onderhouden en daardoor direct te betrekken. Met drie slaapkamers, een fijne open keuken, een ruime badkamer en een heerlijk lichte woonkamer is het bovendien verrassend compleet. De hoge plafonds, authentieke balken en het uitzicht richting de gracht van de Da Costakade geven de woning extra karakter. Tel daarbij energielabel B, volop bergruimte en De Hallen, Ten Katemarkt en het Vondelpark vlakbij op en je hebt hier echt een heerlijke plek midden in Oud-West!
+
+INDELING &amp; OMSCHRIJVING
+
+Via het gemeenschappelijke trappenhuis bereik je op de tweede verdieping je eigen voordeur. Hier bevindt zich de meterkast en via je eigen trap loop je naar de woonverdieping.
+
+Op de derde verdieping kom je uit in de woonkamer aan de voorzijde. Door de twee grote raampartijen en hoge plafonds is deze ruimte heerlijk licht en ruimtelijk. Wat meteen opvalt, is hoe rustig het hier binnen is. Buiten heb je alle gezelligheid en levendigheid van de Kinkerstraat, terwijl je daar in de woning verrassend weinig van merkt. Vanuit de woonkamer kijk je richting de gracht van de Da Costakade. Een heerlijk Amsterdams uitzicht!
+
+Er is voldoende ruimte voor een comfortabele zithoek en een grote eettafel. De keuken staat in open verbinding met de woonkamer, waardoor je tijdens het koken gezellig contact houdt met de rest van de ruimte. Ideaal voor samen koken, een uitgebreide brunch in het weekend of een diner met vrienden. De keuken is netjes uitgevoerd, voorzien van diverse inbouwapparatuur en beschikt over voldoende werk- en opbergruimte. Ook de badkamer bevindt zich op deze verdieping en is lekker ruim. Deze is voorzien van een douche, wastafel en toilet. Aan de achterzijde ligt een kamer van circa 11 m². Deze is momenteel in gebruik als eetkamer, maar kan net zo goed worden ingericht als slaapkamer, werkkamer of logeerkamer. 
+
+Via de mooie open trap bereik je de bovenste verdieping. De hoge, open kap met authentieke balken geeft deze verdieping veel sfeer en een verrassend ruimtelijk gevoel. Hier bevinden zich nog twee slaapkamers van circa 13 m² en 9 m² en een praktische was- en bergruimte met aansluiting voor de wasmachine. Ook aan bergruimte geen gebrek. De ruimte onder de schuine kap is slim benut en biedt volop extra opslag die niet is meegenomen in de gebruiksoppervlakte. Ideaal voor koffers, je wintergarderobe en alle andere spullen die je liever uit het zicht houdt. Nog meer ruimte nodig? Dan zou eventueel onderzocht kunnen worden of het mogelijk is om een vliering te realiseren, uiteraard onder voorbehoud van de benodigde toestemmingen.
+
+De woning is goed onderhouden en netjes afgewerkt, waardoor je hier zonder grote werkzaamheden kunt intrekken. En goed om te weten: hoewel het officiële woonoppervlak circa 67 m² bedraagt, beschikt de woning over een bruto vloeroppervlak van maar liefst circa 76 m². Door de schuine kap telt de ruimte onder de 1,50 meter hoogte niet mee in het woonoppervlak, maar deze meters zijn in de praktijk zeker wél bruikbaar. Denk aan extra bergruimte, lage kasten of andere slimme oplossingen. Hierdoor voelt de woning een stuk ruimer aan dan de 67 m² op papier doet vermoeden.
+
+HET PAND
+
+De woning maakt deel uit van Vinkenzicht, een karakteristieke rij panden aan de Kinkerstraat en Da Costakade, in 1893 ontworpen door architect J.S. Driessen in Hollandse neorenaissancestijl. Kenmerkend zijn de fraaie gevels en historische details die het complex zijn karakteristieke uitstraling geven. Het complex is een gemeentelijk monument en is in 2012-2013 volledig gerenoveerd. Daarbij is de monumentale gevel zorgvuldig gerestaureerd met behoud van de oorspronkelijke zandstenen ornamenten. Karakter van toen wordt hier gecombineerd met het wooncomfort van nu, goed geïsoleerd en energielabel B.
+
+OMGEVING &amp; BEREIKBAARHEID
+
+Hier woon je midden in het populaire Oud-West en heb je eigenlijk alles om de hoek. Voor je eerste koffie, een goede lunch of een gezellige borrel hoef je de buurt niet uit. De Hallen en Foodhallen liggen op een paar minuten lopen en voor verse boodschappen wandel je zo naar de Ten Katemarkt. Daarnaast vind je rondom de Kinkerstraat volop leuke winkels, koffietentjes, restaurants en cafés. Ook het Vondelpark ligt vlakbij voor een rondje hardlopen, een wandeling of een zomerse picknick. En wil je richting de Jordaan, Elandsgracht of Negen Straatjes? Dan ben je er binnen een paar minuten op de fiets.
+
+De bereikbaarheid is uitstekend. Op korte loopafstand stoppen verschillende trams richting onder andere het centrum en Amsterdam Centraal. Met de fiets bereik je vrijwel alles in en rond het centrum snel en ook de Ring A10 is met de auto goed bereikbaar.
+
+VERENIGING VAN EIGENAREN (VvE)
+
+De woning maakt deel uit van de Vereniging van Eigenaars Kinkerstraat 64, bestaande uit vijf appartementsrechten. De VvE wordt professioneel beheerd, beschikt over een meerjarenonderhoudsplan en er wordt jaarlijks vergaderd. De maandelijkse servicekosten bedragen € 237,54.
+
+EIGENDOMSSITUATIE
+
+Het appartement is gelegen op erfpachtgrond van de gemeente Amsterdam, onder de Algemene Bepalingen 2000. De erfpachtcanon is fiscaal aftrekbaar en betaal je jaarlijks in twee termijnen, omgerekend betaal je netto circa € 115 per maand (bruto circa € 180 per maand), afhankelijk van je inkomen. Het huidige tijdvak loopt tot en met 31 oktober 2061.
+
+OPEN HUIZEN DAG – 3 OKTOBER
+Deze woning doet mee aan de Open Huizen Dag op zaterdag 3 oktober. Benieuwd hoe dit heerlijke dubbele bovenhuis in het echt voelt? Loop gezellig binnen tussen 11.00 en 15.00 uur en kom de woning zelf bekijken!
+
+PLUSPUNTEN OP EEN RIJ:
+• Speels dubbel bovenhuis verdeeld over twee woonlagen
+• Circa 67 m² woonoppervlakte en maar liefst circa 76 m² bruto vloeroppervlak
+• Slim benutbare ruimte onder de schuine kap
+• Drie goede ruime slaapkamers
+• Goed onderhouden en direct te betrekken
+• Heerlijk lichte woonkamer 
+• Uitzicht richting de gracht van de Da Costakade
+• Open keuken voorzien van diverse inbouwapparatuur
+• Ruime badkamer met douche, wastafel en toilet
+• Authentieke balken en sfeervolle open kap
+• Complex in 2012-2013 volledig gerenoveerd
+• Energielabel B
+• Verrassend rustig wonen midden in bruisend Oud-West
+• Professioneel beheerde VvE met MJOP
+• Servicekosten € 237,54 per maand
+• Erfpachtcanon circa € 180 bruto per maand, indicatief circa € 115 netto
+• De Hallen, Ten Katemarkt en het Vondelpark vlakbij
+• Uitstekende openbaarvervoerverbindingen
+• Oplevering in overleg
+• Plan snel en eenvoudig je bezichtiging in via Funda
+
+Een heerlijk licht en speels dubbel bovenhuis vol karakter, midden in een van de leukste buurten van Amsterdam. Ik vertel je er graag alles over tijdens een bezichtiging. Tot snel! Anne.
+
+Disclaimer
+Deze informatie is met de grootst mogelijke zorg samengesteld. Toch kunnen wij niet altijd voorkomen dat de informatie enigszins afwijkt van hetgeen u in of rond de woning ziet of heeft gezien. Aan deze presentatie kunnen dan ook geen rechten worden ontleend. Maten, oppervlakten en bedragen zijn indicatief. Informatie over erfpacht, fiscale voordelen en/of financieringsmogelijkheden is eveneens indicatief; kopers wordt geadviseerd dit zelf te verifiëren bij de gemeente, Belastingdienst en/of hun financieel adviseur. Het genoemde netto maandbedrag van de erfpachtcanon is een indicatie op basis van de fiscale tarieven van 2026 en is afhankelijk van de persoonlijke situatie van de koper, waaronder inkomen en hypotheek. De actuele canon en voorwaarden blijken uit de gemeentelijke erfpachtgegevens.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Speels dubbel bovenhuis
+
+Dubbel bovenhuis met drie ruime slaapkamers en twee woonlagen.
+
+Lichte woonkamer met keuken
+
+Heerlijk lichte woonkamer met open keuken en ruime badkamer.
+
+Monumentaal pand uit 1893
+
+Gemeentelijk monument in Hollandse neorenaissancestijl, volledig gerenoveerd in 2012-2013.
+
+Is deze informatie behulpzaam?
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Anne Pruiksma</strong> · Max de Makelaer Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 41</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/422/298_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/210_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/199_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/268_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/261_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/293_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/195_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/256_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/269_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/236_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/250_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/237_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/194_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/213_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/290_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/211_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/200_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/189_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/191_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/219_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/190_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/300_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/238_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/235_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/249_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/227_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/280_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/205_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/240_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/187_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/193_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/302_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/203_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/183_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/186_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/207_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/242_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/182_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/266_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/422/272_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

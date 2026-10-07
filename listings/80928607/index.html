@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wolbrantskerkweg 93 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Wolbrantskerkweg 93</h1>
+  <p class="sub">
+    <span>1069 CL Amsterdam</span>
+    <span>·</span>
+    <span>Botteskerkbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/437/229_1440x960.jpg" alt="Wolbrantskerkweg 93 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">65 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€720.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.373/m² · 3.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">134 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-wolbrantskerkweg-93/80928607/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 172 per maand</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 720.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.373</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, hoekwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Bouwperiode</dt><dd>2001-2010</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>134 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>79 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>474 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 2 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Kadastraal perceel</dt><dd>SLOTEN NOORD-HOLLAND I 5084</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 16-07-2057)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 16-07-2057</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en City centre</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden, zijtuin en Sun terrace</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>58 m² (5,99 m deep en 9,66 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het noorden</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra en verwarming</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation en Wall insulation</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder en parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking en Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">WONEN MET RUIMTE, ZON EN VRIJ UITZICHT — MIDDEN IN AMSTERDAM
+
+Een zonnige, recent aangelegde daktuin, een riant dakterras, circa 135 m² woonoppervlakte én een eigen overdekte parkeerplaats met laadpaal: aan de Wolbrantskerkweg 93 komen ruimte, comfort en praktisch gemak op een bijzondere manier samen.
+
+Deze moderne hoekwoning uit 2009 ligt rustig in een autovrij hofje tussen het Botterskerkpark en Stadspark Osdorp. Dankzij de drie woonlagen, drie ruime slaapkamers en de mogelijkheid om eenvoudig een vierde slaapkamer te creëren, is dit een huis dat moeiteloos meegroeit met verschillende woonwensen. Werken aan huis, een extra kinderkamer of juist een royale gastenverdieping? De ruimte is er.
+
+De woning is onlangs grondig opgefrist. De PVC-vloeren zijn vernieuwd en ook het stuc- en schilderwerk is recent uitgevoerd. Daarnaast is de daktuin pas aangelegd. Hierdoor presenteert de woning zich fris, verzorgd en instapklaar. Met energielabel A, volledige isolatie, HR++ glas en 14 zonnepanelen is bovendien volop aandacht besteed aan comfortabel en energiezuinig wonen.
+
+BINNEN EN BUITEN LOPEN HIER MOOI IN ELKAAR OVER
+
+De lichte doorzonwoonkamer vormt het hart van het huis. De vernieuwde PVC-vloer, het recente stuc- en schilderwerk, de stijlvolle stalen deuren en de openslaande deuren naar de daktuin geven deze verdieping een frisse en eigentijdse uitstraling. De moderne keuken staat in directe verbinding met de woonkamer en beschikt over diverse inbouwapparatuur en een marmeren aanrechtblad.
+
+Zodra de zon zich laat zien, verplaatst het dagelijks leven zich gemakkelijk naar buiten. De daktuin is recent aangelegd, ligt op het zuiden en biedt meerdere terrassen, een gazon en groene borders. Door de verhoogde ligging en de houten erfafscheiding geniet u hier van veel privacy. Alles is al gedaan: u hoeft alleen nog uw tuinmeubels neer te zetten.
+
+Een verdieping hoger wacht nog een tweede buitenruimte: een betegeld dakterras van circa 22 m², eveneens op het zuiden en met vrij uitzicht. Een heerlijke plek voor een lange zomeravond, een rustig ontbijt of simpelweg een moment in de zon.
+
+PARKEREN ZONDER ZOEKEN
+Geen rondjes rijden of afhankelijk zijn van een plek op straat. Direct naast de woning bevindt zich een eigen parkeerplaats in de afgesloten en overdekte parkeergarage. De laadpaal is inbegrepen en via de berging is de garage rechtstreeks vanuit de woning bereikbaar.
+
+INDELING
+
+Begane grond
+Entree met hal, meterkast, toilet met fonteintje en praktische trapkast. Op deze verdieping bevinden zich twee ruime slaapkamers, waarvan één met vaste inbouwkast. Verder is er een badkamer met douche en wastafel en een berging met aansluitingen voor wasmachine en droger. Vanuit de berging bereikt u rechtstreeks de parkeergarage en de eigen parkeerplaats met laadpaal.
+
+Aan de voorzijde beschikt de woning over een eigen vlonderterras bij de entree. Rondom de woning ligt een verzorgde geveltuin.
+
+Eerste verdieping
+Overloop met stijlvolle stalen deuren naar de ruime en lichte doorzonwoonkamer. De moderne open keuken is uitgerust met een 4-pits inductiekookplaat, vaatwasser, afzuigkap, koelkast, vriezer, koffiemachine, combi-oven/magnetron en een marmeren aanrechtblad.
+
+Via de openslaande deuren bereikt u de royale, recent aangelegde daktuin op het zuiden. Deze beschikt over een terras, gazon, groenborders en een tweede terras achter in de tuin.
+
+Tweede verdieping
+Overloop, royale slaap-/werkkamer en een tweede badkamer met ligbad, douche, toilet en wastafelmeubel. De grote kamer kan worden gesplitst, waardoor een vierde slaapkamer kan worden gerealiseerd.
+
+Vanaf deze verdieping heeft u toegang tot het betegelde dakterras van circa 22 m² op het zuiden, met vrij uitzicht.
+
+De ramen aan de straatzijde zijn voorzien van spiegelende, zonwerende folie. Dit biedt extra privacy zonder dat daarvoor daglicht hoeft te worden ingeleverd.
+
+RUSTIG WONEN MET DE STAD BINNEN BEREIK
+De woning ligt tussen het Botterskerkpark en Stadspark Osdorp, in een levendige buurt met dagelijkse voorzieningen dichtbij. Voor winkels kunt u terecht aan Tussen Meer en op het Osdorpplein. Ook scholen, kinderopvang, gezondheidscentra en verschillende horecagelegenheden zijn in de omgeving aanwezig.
+
+Binnen ongeveer vijf minuten fietst u naar het Sloterpark en de Sloterplas. Ook De Tuinen van West, recreatiegebied Spaarnwoude, het Nieuwe Meer en het Amsterdamse Bos zijn goed bereikbaar.
+
+Met de fiets, tram, bus of auto bereikt u het centrum van Amsterdam in circa 25 minuten. Schiphol en de uitvalswegen A10, A4, A5 en A9 zijn eveneens snel bereikbaar.
+
+DUURZAAM EN COMFORTABEL
+
+De woning is gasloos, volledig geïsoleerd en aangesloten op stadsverwarming. De aluminium kozijnen zijn voorzien van HR++ glas. Op het dak liggen 14 zonnepanelen, geplaatst in 2019. Dit alles draagt bij aan energielabel A.
+
+ERFPACHT
+De erfpachtcanon is afgekocht tot 2057. Daarnaast heeft de eigenaar onder gunstige voorwaarden een aanvraag gedaan voor afkoop van de eeuwigdurende erfpacht.
+
+VERENIGING VAN EIGENAARS
+De woning maakt deel uit van een actieve, professioneel beheerde Vereniging van Eigenaars. In 2020 zijn de gevels geschilderd en de aluminium kozijnen gereinigd. De maandelijkse VvE-bijdrage bedraagt € 172, inclusief opstalverzekering.
+
+BIJZONDERHEDEN
+• Hoekwoning uit 2009  
+• Circa 135 m² woonoppervlakte; meetrapport aanwezig  
+• Drie ruime slaapkamers  
+• Mogelijkheid om een vierde slaapkamer te realiseren  
+• Recent vernieuwde PVC-vloeren  
+• Recent uitgevoerd stuc- en schilderwerk  
+• Recent aangelegde daktuin op het zuiden  
+• Balkon en dakterras op het zuiden  
+• Dakterras van circa 22 m² met vrij uitzicht  
+• Eigen parkeerplaats in een afgesloten, overdekte parkeergarage  
+• Parkeerplaats direct bij de achterdeur  
+• Elektrische laadpaal inbegrepen  
+• Energielabel A  
+• Volledig geïsoleerd  
+• Aluminium kozijnen met HR++ glas  
+• Gasloos en aangesloten op stadsverwarming  
+• 14 zonnepanelen, geplaatst in 2019  
+• Glasvezelaansluiting aanwezig  
+• Erfpachtcanon afgekocht tot 2057  
+• Actieve en professioneel beheerde VvE  
+• VvE-bijdrage € 172 per maand, inclusief opstalverzekering  
+• Gelegen in een rustig, autovrij hofje  
+• Aanvaarding in overleg  
+
+Wolbrantskerkweg 93 is een woning voor wie in Amsterdam royaal wil wonen zonder te kiezen tussen binnenruimte, buitenleven en praktisch gemak. De belangrijkste afwerking is recent vernieuwd en ook de zonnige daktuin is pas aangelegd. Hier krijgt u drie woonlagen, twee royale buitenruimtes, vrij uitzicht en een eigen parkeerplaats met laadpaal — allemaal op één adres.
+
+Nieuwsgierig hoe dat in het echt voelt? Wij nodigen u graag uit voor een bezichtiging.
+
+DISCLAIMER
+Deze informatie is met zorg samengesteld op basis van gegevens van de verkoper en/of derden. Aan de inhoud kunnen geen rechten worden ontleend. Wij kunnen geen aansprakelijkheid aanvaarden voor eventuele onjuistheden, onvolledigheden of verouderde informatie. Geïnteresseerden wordt geadviseerd de verstrekte gegevens zelf te controleren en zich desgewenst te laten bijstaan door een eigen NVM- of Vastgoed Nederland-makelaar. Wij aanvaarden geen verantwoordelijkheid voor de inhoud van websites waarnaar wordt verwezen.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 65</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/437/229_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/391_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/318_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/158_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/168_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/452_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/366_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/015_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/117_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/111_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/304_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/218_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/190_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/173_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/113_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/246_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/187_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/264_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/038_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/400_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/349_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/373_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/108_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/140_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/130_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/292_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/381_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/135_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/438_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/414_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/459_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/129_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/154_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/411_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/372_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/144_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/462_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/147_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/127_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/466_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/451_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/086_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/225_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/467_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/042_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/325_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/236_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/198_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/078_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/075_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/369_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/336_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/046_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/219_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/048_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/193_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/217_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/030_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/176_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/066_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/437/394_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

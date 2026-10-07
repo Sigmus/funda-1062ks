@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burmandwarsstraat 1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Burmandwarsstraat 1</h1>
+  <p class="sub">
+    <span>1091 SL Amsterdam</span>
+    <span>·</span>
+    <span>Weesperzijde-Midden/Zuid</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/242/805_1440x960.jpg" alt="Burmandwarsstraat 1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">37 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€760.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.170/m² · 4.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">106 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1984</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-burmandwarsstraat-1/44583242/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 760.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.170</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 408,45 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1984</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>106 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>11 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>22 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>348 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, Bathtub, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation en zonnepanelen</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Gas gestookt uit 2021, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM W 8188</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en City centre</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking en parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 408,45 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">RUIM MAISONNETTE-APPARTEMENT MET 3 SLAAPKAMERS VERDEELD OVER TWEE WOONLAGEN – NABIJ DE AMSTEL EN MET AFGEKOCHTE ERFPACHT TOT 2051
+
+OPEN HUIZEN DAG – ZATERDAG 3 OKTOBER | 11:00 – 15:00 UUR
+
+Welkom aan de Burmandwarsstraat 1. Deze verrassend ruime maisonnette combineert circa 105 m² woonoppervlakte, drie slaapkamers en twee volwaardige woonlagen met een balkon over de gehele breedte. De duidelijke scheiding tussen de leefverdieping en slaapverdieping zorgt voor het comfort en de praktische indeling van een woning, midden in Amsterdam.
+
+De woning werd in 2021, als onderdeel van de grootschalige vernieuwing van De Burman, volledig gemoderniseerd. Energielabel A, HR++ beglazing, vloerverwarming, een moderne keuken en badkamer én funderingsindicatiecode A maken het geheel bijzonder compleet. De woning staat op voortdurende erfpachtgrond van de gemeente Amsterdam. De canon is afgekocht tot en met 31 augustus 2051.
+
+De Amstel, scholen, kinderopvang, speeltuinen, sportvoorzieningen, supermarkten en het Oosterpark bevinden zich op korte afstand. Ook De Pijp, de Wibautstraat en het centrum van Amsterdam zijn snel bereikbaar. Een privéparkeerplaats in de ondergelegen parkeergarage kan optioneel en separaat worden aangekocht. Ruim en comfortabel wonen met de indeling van een familiehuis, op een centrale plek met het stadsleven én de Amstel vrijwel voor de deur.
+
+K E N M E R K E N
+
+• Circa 105 m² woonoppervlakte (NEN2580), verdeeld over twee volwaardige woonlagen
+• Drie goed bemeten slaapkamers en een complete badkamer op de bovenverdieping
+• Voortdurende erfpacht; de canon is afgekocht tot en met 31 augustus 2051
+• Gelegen op korte loopafstand van de Amstel en de Weesperzijde
+• Energielabel A, geldig tot oktober 2031
+• In de beschikbare funderingsinformatie is voor het complex indicatiecode A vermeld
+• Complex De Burman is in 2021 grootschalig vernieuwd en verduurzaamd
+• Uitstekend geschikt voor gezinnen, stellen en thuiswerkers die ruim en centraal willen wonen
+• Moderne keuken uit 2021, compleet voorzien van inbouwapparatuur
+• Badkamer uit 2021 met ligbad, separate inloopdouche, tweede toilet en wastafelmeubel
+• Lichte en ruime woonkamer met brede schuifpui naar het balkon
+• Riant balkon op het zuidwesten met ruimte voor een comfortabele zithoek en beplanting
+• Aluminium kozijnen met HR++ beglazing
+• Vloerverwarming op de onderste woonlaag
+• Eigen HR-combiketel uit 2021
+• Privéberging in de onderbouw, binnendoor bereikbaar
+• Afgesloten fietsenstalling bij het complex
+• Mogelijkheid tot het plaatsen van zonnepanelen op het dak, uitsluitend na toestemming van de VvE en voor zover technisch en juridisch toegestaan
+• Privéparkeerplaats in de ondergelegen parkeergarage optioneel en separaat aan te kopen
+
+A R C H I T E C T U U R &amp; V E R N I E U W I N G
+
+De woning maakt deel uit van De Burman, een bijzonder vernieuwd wooncomplex aan de Burmandwarsstraat in Amsterdam-Oost. De grootschalige transformatie van het oorspronkelijke jaren ’80-complex tot het huidige woongebouw vormt een mooi voorbeeld van duurzame en toekomstgerichte stedelijke herontwikkeling.
+
+Tijdens de vernieuwing in 2021 zijn onder meer de gevels en kozijnen vervangen, de isolatie en ventilatie verbeterd en de balkons en galerijen vernieuwd. Ook werd een lift gerealiseerd en is de toegankelijkheid van het complex verbeterd.
+
+Daarnaast zijn onder meer de cv-installatie, de cv-, water- en afvoerleidingen en de elektrische installaties vernieuwd. Deze ingrepen hebben geresulteerd in een comfortabel en energiezuinig woongebouw. De woning beschikt dan ook over energielabel A.
+In de beschikbare funderingsinformatie is voor het complex indicatiecode A vermeld. De relevante stukken zijn beschikbaar in het woningdossier.
+
+De aanpak van De Burman staat bovendien beschreven in de Architectuurgids van ARCAM, de gids van het architectuurcentrum van Amsterdam waarin relevante en duurzame bouwprojecten in de stad worden gedocumenteerd.
+
+I N D E L I N G
+
+Entree
+Via de eigen entree betreedt u de hal met garderoberuimte, meterkast en separaat modern toilet. Vanuit de hal hebt u toegang tot de woonkamer en de interne trap naar de bovenverdieping.
+
+Woonkamer
+De woonkamer bevindt zich aan de achterzijde en strekt zich uit over de volledige breedte van de woning. Dankzij de grote glazen schuifpui en brede raampartijen geniet de ruimte van een uitstekende lichtinval.
+Er is volop plaats voor een comfortabele zithoek en een royale eettafel. De open en efficiënte indeling zorgt voor een prettige verbinding tussen de woonkamer, keuken en buitenruimte.
+
+Balkon
+Via de brede schuifpui bereikt u het balkon op het zuidwesten, dat zich uitstrekt over de volle breedte van de woning.
+Ook de strook voor het balkon biedt mogelijkheden voor groen, zoals klimplanten of bloeiende beplanting. Een heerlijke plek om te ontspannen en uitgebreid van de middag- en avondzon te genieten.
+
+Keuken
+Aan de voorzijde bevindt zich de moderne keuken in een praktische U-opstelling, met een totale aanrechtlengte van circa 6 meter. De keuken is uitgevoerd in een lichte kleurstelling en voorzien van diverse inbouwapparatuur, waaronder een koel-/vriescombinatie, oven, inductiekookplaat, RVS-afzuigkap en vaatwasser.
+Het ruime werkblad en de vele kasten zorgen voor optimaal gebruiksgemak en maken de keuken bijzonder geschikt voor dagelijks gebruik door een gezin.
+
+Bovenverdieping
+Via de interne trap bereikt u de bovenverdieping. Vanaf de centrale overloop zijn de drie slaapkamers, de badkamer en de interne berging toegankelijk.
+
+Slaapkamer I – achterzijde
+De ruime hoofdslaapkamer aan de achterzijde biedt meer dan voldoende plaats voor een tweepersoonsbed en een grote kledingkast. De brede raampartij zorgt voor een prettige lichtinval.
+
+Slaapkamer II – achterzijde
+De tweede slaapkamer is goed bemeten en uitstekend geschikt als kinder-, werk- of logeerkamer.
+
+Slaapkamer III – voorzijde
+De derde slaapkamer is eveneens van een praktisch formaat en kan flexibel worden ingericht als kinder-, werk- of logeerkamer.
+
+Badkamer
+Aan de voorzijde bevindt zich de strak en tijdloos afgewerkte badkamer. Deze is voorzien van een ligbad, separate inloopdouche, wastafelmeubel en zwevend toilet. De combinatie van lichte wandtegels en antracietkleurige vloertegels zorgt voor een eigentijdse uitstraling.
+
+Interne berging
+Op de bovenverdieping bevindt zich een praktische interne berging met aansluitingen voor de wasmachine en droger. In deze ruimte is ook de cv-installatie opgesteld. Daarnaast is er voldoende ruimte voor huishoudelijke apparatuur en aanvullende opslag.
+
+Externe berging
+In de kelder van het complex bevindt zich een separate privéberging, ideaal voor fietsen, seizoenspullen en aanvullende opslag. De berging is binnendoor bereikbaar.
+
+Optioneel aan te kopen parkeerplaats
+Bij de woning kan separaat een privéparkeerplaats in de ondergelegen parkeergarage worden aangekocht. De parkeergarage is bereikbaar vanaf de Wibautstraat via een eigen oprit en toegankelijk met een afstandsbediening.
+Een waardevolle en comfortabele voorziening op deze centrale locatie in Amsterdam.
+
+V E R E N I G I N G V A N E I G E N A A R S
+
+De woning maakt deel uit van de Vereniging van Eigenaars Burmandwarsstraat 1 tot en met 91 (oneven) en 7A te Amsterdam.
+
+De VvE wordt professioneel beheerd door Stedeplan B.V. Er wordt periodiek vergaderd en er is een gezamenlijke opstalverzekering aanwezig.
+• KvK-nummer: 34382548
+• Appartementsindex woning: A-72
+• Aandeel woning met balkon en berging: 105/3658e deel
+• Appartementsindex parkeerplaats: A-70
+• Aandeel parkeerplaats: 12/3658e deel
+• Maandelijkse VvE-bijdrage voor de woning: € 408,45
+• Maandelijkse VvE-bijdrage voor de parkeerplaats: € 43,54, uitsluitend van toepassing bij aankoop van de parkeerplaats
+• In de VvE-bijdrage voor de woning is een bijdrage voor rente en aflossing van de gezamenlijke renovatielening opgenomen. In 2025 bedroeg deze bijdrage € 2.079,62
+• Het rentedeel van de VvE-lening kan, afhankelijk van de persoonlijke fiscale situatie en de geldende voorwaarden, fiscaal aftrekbaar zijn
+
+E R F P A C H T
+
+De woning staat op voortdurende erfpachtgrond van de gemeente Amsterdam.
+• De Algemene Bepalingen voor voortdurende erfpacht 2000 Amsterdam zijn van toepassing
+• De erfpachtcanon is afgekocht tot en met 31 augustus 2051
+• Voor de periode vanaf 1 september 2051 wordt de canon opnieuw vastgesteld volgens de geldende erfpachtvoorwaarden
+
+C O N D I T I E S
+
+• Vraagprijs woning: € 760.000 k.k.
+• Privéparkeerplaats in de ondergelegen parkeergarage optioneel en separaat aan te kopen: € 40.000 k.k.
+• Waarborgsom/bankgarantie: 10% van toepassing
+• Overdracht: in overleg
+• Notaris: keuze koper, mits gevestigd binnen een straal van 15 km van de woning
+• Clausules: NEN2580-clausule, ouderdomsclausule en niet-zelfbewoningsclausule
+
+L O C A T I E &amp; O M G E V I N G
+
+Burmandwarsstraat 1 ligt in de populaire Weesperzijdebuurt in Amsterdam-Oost. In de directe omgeving vindt u diverse basisscholen, kinderopvanglocaties, speeltuinen en sportvoorzieningen. Ook supermarkten en andere dagelijkse winkels zijn eenvoudig lopend of met de fiets bereikbaar. Voor spelen, wandelen en ontspannen in het groen liggen onder meer het Oosterpark en verschillende kleinere buurtpleinen op korte afstand.
+De Amstel bevindt zich op enkele minuten lopen. Langs het water kunt u wandelen, hardlopen of fietsen, terwijl de roeiverenigingen, terrassen en restaurants aan de Weesperzijde zorgen voor een levendige en ontspannen sfeer. Aan de overzijde van de Amstel ligt De Pijp, met de Albert Cuypmarkt en een uitgebreid aanbod aan winkels, cafés, restaurants en speciaalzaken.
+Ook de bereikbaarheid is uitstekend. Verschillende metro- en tramhaltes en het Amstelstation liggen dichtbij. Met de fiets bereikt u binnen korte tijd het centrum van Amsterdam en met de auto bent u binnen enkele minuten op de Ring A10.
+Hier komen ruimte, gezinsvriendelijke voorzieningen, bereikbaarheid en het Amsterdamse stadsleven op een bijzonder prettige manier samen.
+
+B I E D E N
+
+Bieden op deze woning doet u via het digitale biedformulier van Eerlijk Bieden. Na de bezichtiging ontvangt u een uitnodiging en toegang tot het online woningdossier.
+Alle biedingen zijn onder voorbehoud van de volgende voorwaarden:
+• De vermelde vraagprijs is uitsluitend een uitnodiging tot het uitbrengen van een bod
+• De verkoper behoudt zich uitdrukkelijk het recht van gunning voor
+• Tussentijdse verkoop voorbehouden
+• Het uitbrengen van een bod betekent niet automatisch dat u in onderhandeling bent
+Wij hebben deze informatie met de grootst mogelijke zorgvuldigheid samengesteld. Wij aanvaarden echter geen aansprakelijkheid voor eventuele onvolledigheden, onjuistheden of andere fouten, noch voor de gevolgen daarvan. De woning is gemeten volgens de branchebrede meetinstructie, gebaseerd op de NEN 2580-norm.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>NEWCURB Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 37</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/242/805_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/833_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/819_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/822_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/889_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/842_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/905_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/820_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/861_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/876_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/815_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/826_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/806_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/992_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/243/055_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/243/096_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/243/048_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/243/035_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/906_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/243/074_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/243/012_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/914_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/243/057_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/243/060_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/243/014_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/923_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/981_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/873_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/802_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/843_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/830_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/894_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/897_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/242/801_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

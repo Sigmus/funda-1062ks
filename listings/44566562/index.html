@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esther de Boer-van Rijkstraat 104-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Esther de Boer-van Rijkstraat 104-2</h1>
+  <p class="sub">
+    <span>1065 GR Amsterdam</span>
+    <span>·</span>
+    <span>Louis Crispijnbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/071/613_1440x960.jpg" alt="Esther de Boer-van Rijkstraat 104-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€550.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.741/m² · 0.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">0.9 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">116 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1957</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-esther-de-boer-van-rijkstraat-104-2/44566562/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Aanvaarding</dd></div>
+        <div class="frow"><dt>In overleg</dt><dd>Vraagprijs</dd></div>
+        <div class="frow"><dt>€ 550.000 kosten koper</dt><dd>Vraagprijs per m²</dd></div>
+        <div class="frow"><dt>€ 4.741</dt><dd>Status</dd></div>
+        <div class="frow"><dt>Beschikbaar</dt><dd>Bijdrage VvE</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1957</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>116 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>377 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Dakraam, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Grotendeels dubbelglas en HR-glas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND D 7925</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijk eigendom belast met erfpacht</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 214,84 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">***English translation***
+
+Royale maisonnette van 116m² met vier slaapkamers, twee balkons en ruime berging in de onderbouw!
+
+Op een centrale en goed bereikbare locatie in Amsterdam Nieuw-West ligt deze verrassend ruime maisonnette, verdeeld over de bovenste twee verdiepingen van het complex. De woning beschikt over maar liefst vier volwaardige slaapkamers, twee balkons op het noorden en zuiden en een ruime separate berging op de begane grond voorzien van elektra. Dankzij de royale maatvoering, de praktische indeling en de vele gebruiksmogelijkheden is dit een ideale woning voor gezinnen, woningdelers of tweeverdieners die veel vanuit huis werken. Bovendien is de erfpachtcanon afgekocht tot en met 15 oktober 2080.
+
+OMGEVING EN BEREIKBAARHEID
+Amsterdam Nieuw-West heeft zich de afgelopen jaren ontwikkeld tot een geliefd woongebied van de stad. De combinatie van veel groen, uitstekende voorzieningen en een centrale ligging ten opzichte van zowel het stadscentrum als Schiphol maakt deze wijk bijzonder aantrekkelijk.
+Voor de dagelijkse boodschappen ligt het Sierplein op slechts enkele minuten loopafstand. Hier bevindt zich een gevarieerd aanbod aan winkels en iedere woensdag vindt er een gezellige weekmarkt plaats. Voor een uitgebreider winkelaanbod zijn zowel het Osdorpplein als de binnenstad van Amsterdam eenvoudig bereikbaar. Op het Osdorpplein bevinden zich diverse winkels, supermarkten, restaurants en theater De Meervaart.
+
+Een van de grootste pluspunten van de omgeving is het nabijgelegen Sloterpark met de Sloterplas. Dit uitgestrekte recreatiegebied biedt het hele jaar door volop mogelijkheden om te wandelen, hardlopen, fietsen, zwemmen, varen of ontspannen aan het water. Rondom de Sloterplas liggen diverse populaire horecagelegenheden, waaronder Buiten Strandcafé &amp; Restaurant, Kaap West en Restaurant Oeverzicht. Daarnaast beschikt het gebied over een kinderboerderij, natuurspeeltuin en het vernieuwde Sloterstrand. Ook het Sloterparkbad, één van de grootste zwemaccommodaties van Nederland, bevindt zich in de directe omgeving.
+
+De bereikbaarheid is uitstekend. Op slechts enkele minuten fietsen ligt Station Lelylaan, met directe treinverbindingen naar onder meer Amsterdam Centraal, Sloterdijk, Schiphol en Den Haag. Daarnaast vertrekken hier diverse metro-, tram- en busverbindingen. Het Vondelpark en de binnenstad van Amsterdam zijn binnen circa tien minuten fietsen bereikbaar. Ook met de auto is de ligging gunstig dankzij de snelle aansluiting op de A4, A9 en A10. Met een parkeervergunning, waarvoor momenteel geen wachttijd geldt, kan direct voor de deur worden geparkeerd.
+
+INDELING
+Begane Grond
+Afgesloten entree met bellentableau en toegang tot het gemeenschappelijke trappenhuis. Eveneens bevindt zich hier een eigen berging van ca. 7m² voorzien van elektra. 
+
+Tweede Verdieping
+Entree tot het appartement. Hal met toegang tot de keuken, een separate toiletruimte, de woonkamer, twee slaapkamers en de meterkast. 
+De woonkamer is royaal van formaat, heeft genoeg ruimte voor een eet- en zitgedeelte en beschikt over handige trapkast. Verder is de woonkamer heerlijk licht dankzij de grote raampartijen in zowel de voor- als achtergevel. Middels een enkele deur is er vanuit de woonkamer toegang tot een balkon op het zuiden. Hier is het heerlijk om met een hapje of drankje te genieten van de zon. Eveneens bevinden zich aan de achterzijde van het complex twee slaapkamers met genoeg ruimte voor een tweepersoonsbed. 
+De moderne en tijdloze keuken is uitgevoerd in een stijlvolle zwart-witte kleurstelling met een hardstenen werkblad en beschikt over diverse inbouwapparatuur, waaronder: een 5-pits gaskookplaat met wokbrander, oven, koel-vriescombinatie en kleine vaatwasser. Vanuit de keuken is de badkamer bereikbaar. Deze is voorzien van een inloopdouche, wastafelmeubel, wasmachineaansluiting en geeft toegang tot het tweede balkon aan de voorzijde van het appartement. De separate toiletruimte beschikt over een staand toilet en fonteintje. 
+
+Derde Verdieping
+Via een vaste trap in de woonkamer is de bovenste verdieping te bereiken. Hier zijn in het verleden twee dakkapellen geplaatst, die twee bijzonder ruime slaapkamers hebben gecreëerd. Daarnaast beschikt deze verdieping over een ruime praktische berging, waar eveneens de CV-ketel is geïnstalleerd. Eveneens bevindt zich op de overloop een extra wastafel. 
+
+BIJZONDERHEDEN
+• Bouwjaar 1957
+• Woonoppervlakte ca. 116 m² (meetrapport aanwezig)
+• Maisonnette gelegen op de twee bovenste verdiepingen
+• Twee balkons op het zuiden en noorden
+• Doorzonwoonkamer met genoeg ruimte voor een eet- en zitgedeelte
+• Moderne en tijdloze keuken
+• Vier slaapkamers
+• Privéberging van ca. 7 m² op de begane grond
+• Actieve en professioneel beheerde VvE
+• Servicekosten € 214,84 per maand
+• Verwarming en warm water middels eigen CV-installatie
+• Erfpachtcanon afgekocht tot en met 15 oktober 2080
+• Uitstekende bereikbaarheid met openbaar vervoer en auto
+• Niet-zelfbewoningsclausule van toepassing op deze koop
+• De koopakte wordt opgemaakt bij een notaris in Amsterdam, Diemen of Amstelveen, volgens Amsterdams Ringmodel
+• Oplevering in overleg, kan desgewenst snel
+
+Interesse in deze woning? Maak dan snel een afspraak!
+Wij plannen graag een moment voor je in voor de bezichtiging van dit appartement. Onze makelaar vertelt je graag van alles over dit appartement terwijl je rondkijkt. Zien we jou binnenkort?
+
+Deze informatie is door ons met zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan.
+
+***English translation***
+
+Spacious 116 m² Maisonette with four bedrooms, two balconies and a large storage room!
+
+Situated in a central and well-connected location in Amsterdam Nieuw-West, this surprisingly spacious maisonette occupies the top two floors of the building. The property offers no fewer than four full-sized bedrooms, two balconies facing north and south, and a generous private storage room on the ground floor equipped with electricity. Thanks to its substantial living space, practical layout and versatile possibilities, this is an ideal home for families, house sharers or professionals who work extensively from home. In addition, the ground lease has been prepaid until 15 October 2080.
+
+AREA AND ACCESSIBILITY
+Over the past few years, Amsterdam Nieuw-West has developed into one of the city&#x27;s most sought-after residential areas. The combination of abundant green spaces, excellent amenities and a central location relative to both the city centre and Schiphol Airport makes this neighbourhood particularly attractive. For daily shopping, Sierplein is just a few minutes’ walk away, offering a wide variety of shops and a lively weekly market every Wednesday. For a more extensive retail experience, both Osdorpplein and Amsterdam’s city centre are easily accessible. Osdorpplein features numerous shops, supermarkets, restaurants and the renowned De Meervaart Theatre.
+
+One of the area&#x27;s greatest assets is the nearby Sloterpark and Sloterplas. This expansive recreational area offers year-round opportunities for walking, jogging, cycling, swimming, boating or simply relaxing by the water. Around Sloterplas you will find several popular restaurants and cafés, including Buiten Strandcafé &amp; Restaurant, Kaap West and Restaurant Oeverzicht. The area also features a petting zoo, a nature playground and the recently renovated Sloterstrand. In addition, the Sloterparkbad, one of the largest swimming facilities in the Netherlands, is located nearby.
+
+Accessibility is excellent. Lelylaan Station is only a few minutes away by bicycle and provides direct train connections to Amsterdam Central Station, Sloterdijk, Schiphol Airport and The Hague. Various metro, tram and bus lines also depart from here. Both the Vondelpark and Amsterdam city centre can be reached within approximately ten minutes by bike. By car, the property benefits from quick access to the A4, A9 and A10 motorways. A parking permit currently has no waiting list, allowing residents to park directly in front of the building.
+
+LAYOUT
+Ground Floor
+Secure entrance with intercom system and access to the communal staircase. The property also includes a private storage room of approximately 7 m², equipped with electricity.
+
+Second Floor
+Entrance to the apartment. Hallway providing access to the kitchen, separate toilet, living room, two bedrooms and the meter cupboard. The living room is generously proportioned, offering ample space for both a seating and dining area. A practical under-stair storage cupboard is also available. Large windows at both the front and rear create a bright and airy living environment throughout the day. A door from the living room provides access to the sunny south-facing balcony, an ideal spot to enjoy the sun with a drink or a meal. At the rear of the apartment are two bedrooms, both large enough to accommodate a double bed.
+The modern and timeless kitchen is finished in a stylish black-and-white colour scheme with a natural stone countertop. It is equipped with various built-in appliances, including a five-burner gas hob with wok burner, oven, fridge-freezer combination and a compact dishwasher. The bathroom is accessible from the kitchen and features a walk-in shower, vanity unit, washing machine connection and access to the second balcony at the front of the apartment. The separate toilet is fitted with a toilet and washbasin.
+
+Third Floor
+The top floor is reached via a fixed staircase from the living room. Two dormer windows were added in the past, creating two exceptionally spacious bedrooms. This floor also offers a large practical storage room where the central heating boiler is installed. An additional washbasin is located on the landing.
+
+HIGHLIGHTS
+• Built in 1957
+• Living area approximately 116 m² (measurement report available)
+• Maisonette spread over the top two floors
+• Two balconies facing south and north
+• Bright through-living room with ample space for both dining and seating areas
+• Modern and timeless kitchen
+• Four bedrooms
+• Private storage room of approximately 7 m² on the ground floor
+• Active and professionally managed Homeowners’ Association (VvE)
+• Service charges: €214.84 per month
+• Heating and hot water via private central heating system
+• Ground lease prepaid until 15 October 2080
+• Excellent accessibility by public transport and car
+• Non-owner-occupancy clause applies
+• Purchase agreement to be executed through a notary in Amsterdam, Diemen or Amstelveen in accordance with the Amsterdam Ring Model
+• Transfer date in consultation, with a quick completion possible
+
+Interested? Schedule a viewing!
+
+We would be delighted to arrange a viewing of this apartment for you. Our real estate agent will be happy to show you around and provide detailed information about the property while you explore it. We look forward to welcoming you soon.
+
+Disclaimer:
+This information has been compiled with due care. However, no liability is accepted for any inaccuracies, omissions or consequences thereof.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegrond(en), not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/071/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/630_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/742_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/659_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/779_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/757_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/643_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/612_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/662_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/654_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/739_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/631_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/622_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/646_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/627_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/764_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/775_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/747_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/687_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/614_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/784_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/664_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/615_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/754_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/690_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/645_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/618_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/071/745_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

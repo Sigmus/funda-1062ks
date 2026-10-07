@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bilderdijkkade 850 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Bilderdijkkade 850</h1>
+  <p class="sub">
+    <span>1053 VX Amsterdam</span>
+    <span>·</span>
+    <span>Borgerbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/523/555_1440x960.jpg" alt="Bilderdijkkade 850 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">32 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€750.000</div>
+      <div class="price-note">asking · seller pays transfer costs (v.o.n.)</div>
+    </div>
+    <div class="meta-line">
+      €8.152/m² · 2.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">92 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 2002</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-bilderdijkkade-850/44525608/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 750.000 seller pays transfer costs (v.o.n.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.152</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Woonboot, vrijstaande woning (waterwoning)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2002</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>92 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>92 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>427 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Ecomline excellent HR22 (gas-fired combi boiler uit 2002, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oppervlakte</dt><dd>92 m² (deelperceel)</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gebruik en bewoning</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan vaarwater en aan water</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**Please find the English translation below**
+
+Deze sfeervolle en lichte woonark, genaamd Saoirse, ligt aan de Bilderdijkkade in het geliefde Amsterdam Oud West. De praktisch ingedeelde woning combineert het unieke karakter van vrijstaand wonen met de levendigheid van de stad. Door de grote raampartij aan de waterzijde geniet je van een licht huis en vrij uitzicht over het water. Ramen rondom, houten balken en karakteristieke details zoals de stalen deuren en lichtkoepels geven de woning een eigen en eigentijdse uitstraling. Een ark van 20 x 5 meter, met meerdere slaapkamers, een open keuken en een royale woonkamer is zeldzaam in deze stad, en maakt dit een bijzonder woonhuis voor wie op zoek is naar iets anders dan anders.
+
+Nieuwsgierig geworden? Bel ons voor het maken van een afspraak, één van onze makelaars leidt je graag rond!
+
+LOCATIE
+De Saoirse ligt aan de Bilderdijkkade in het populaire Amsterdam Oud West. Hier woon je direct aan het water en tegelijkertijd midden in een van de meest levendige buurten van Amsterdam. Vanuit de woning wandel je eenvoudig richting de Jordaan, met zijn karakteristieke grachten, gezellige cafés, restaurants en bijzondere winkels. Ook De Hallen liggen in de directe omgeving. Hier vind je onder andere de Foodhallen, Filmhallen, winkels, horeca en verschillende culturele voorzieningen.
+
+Voor de dagelijkse boodschappen en een gezellig rondje over de markt kun je terecht bij de Ten Katemarkt en de winkels aan de Kinkerstraat, Bilderdijkstraat en De Clercqstraat. De Ten Katemarkt is een echte buurtmarkt met een uitgebreid aanbod aan verse producten, delicatessen en verschillende eetkraampjes.
+
+Ook voor ontspanning en groen zit je hier goed. Het Vondelpark ligt op korte afstand en biedt volop mogelijkheden om te wandelen, hardlopen, sporten of gewoon te genieten van het groen. In Oud West vind je daarnaast tal van gezellige cafés, restaurants, terrassen en bijzondere winkels.
+
+De bereikbaarheid is uitstekend. Vanuit Oud West zijn zowel het centrum als de omliggende stadsdelen goed bereikbaar met de fiets en het openbaar vervoer. De centrale ligging zorgt ervoor dat je veel van Amsterdam eenvoudig te voet of per fiets kunt bereiken.
+
+INDELING
+Via de entree aan de steiger kom je binnen in de hal. Vanuit de hal zijn verschillende vertrekken bereikbaar. Aan de achterzijde bevindt zich een slaapkamer en daarnaast een praktische bergruimte waar ook de technische installaties zich bevinden. Ook de badkamer en het separate toilet bevinden zich in dit gedeelte van de woonark.
+
+De badkamer is in 2022 vernieuwd en stijlvol afgewerkt. De ruimte beschikt over een ruime douche met stortdouche, een mooie wastafel met bijpassend wasmeubel. Het toilet is vanuit zowel de badkamer als de hal toegankelijk, wat zorgt voor extra gemak en een praktische indeling.
+
+Vanuit de hal betreed je de keuken, eetkamer en ruime woonkamer. Dankzij de vele ramen valt er ruimschoots daglicht naar binnen. De woonkamer heeft een hoogte van circa 2,52 meter en vormt samen met de eetkamer een royale leefruimte. De keuken is praktisch ingedeeld en beschikt over voldoende opbergruimte. Een bijzonder detail zijn de houten balken die zich over de breedte van de woning uitstreken.
+
+Naast de woonkamer bevinden zich nog twee ruime slaapkamers, waarvan één ook uitstekend als werkkamer kan worden gebruikt. Hierdoor beschikt de woning over meerdere mogelijkheden voor slapen, werken en hobby&#x27;s.
+
+De woning beschikt daarnaast over meerdere lichtkoepels, een mooie zwart-stalen pui en veel ramen rondom. Deze elementen zorgen niet alleen voor een karakteristieke uitstraling, maar versterken ook het ruimtelijke en lichte gevoel in de woning.
+
+De woonark is voorzien van een ruim, dat toegankelijk is via vijf verschillende toegangsluiken. De hoogte van het ruim kent een deel van circa 68 cm vrije hoogte en een kleiner deel van 29 cm hoogte, en zijn ideaal te gebruiken als bergingen.
+
+Over de een gehele lengte van de woonboot bevindt zich buiten een loop-rooster, waardoor je met een stap uit de schuifpui zo in het water duikt of in je bootje stapt. Aan de voorzijde van de woonboot bevindt zich op de steiger een bankje, dat een fijne plek biedt om ’s middags heerlijk in de zon te zitten en van het buitenleven te genieten.
+
+Voor de indeling verwijzen we je tevens graag door naar de plattegronden, deze zijn te bekijken in 2D en in 3D en zijn te vinden onder het kopje &quot;plattegrond&quot;.
+
+DUURZAAMHEID
+In augustus 2026 is de dakbedekking vernieuwd en is het dak extra geïsoleerd. Daarnaast zijn alle ramen voorzien van HR++ glas. De woning beschikt over energielabel C. De woning wordt verwarmd door middel van een Nefit cv ketel en cv boiler, type Ecomline Excellent HR22 uit 2002. Het systeem is op 18 september 2026 voor het laatst onderhouden door GOK Amsterdam.
+
+Er zijn al enkele voorbereidingen getroffen op verdere verduurzaming. Aanwezig zijn;
+- 3x25A elektriciteits aansluiting, genoeg voor een warmtepomp en (zwaar uitgevoerde) inductieplaat (waarvoor in de keuken reeds een Perilex aansluiting is neergelegd),
+- lage-temperatuur radiatoren (sinds 2022) met voldoende (over)capaciteit voor verwarmen met een warmtepomp,
+- er is voldoende ruimte voor een (water-water) warmtepomp met buffervat, als de huidige CV installatie vervangen wordt.
+
+BIJZONDERHEDEN
+• Woonoppervlakte (NEN2580) 92 m²
+• Bouwjaar 2001
+• Energielabel C
+• Liggeld € 1.500,- per jaar
+• Steiger met ligging op het noordoosten
+• Grote schuifpuien met uitzicht over het water
+• Badkamer vernieuwd in 2022
+• Ruime berging in het ruim van de woonboot, toegankelijk via vijf luiken
+• Volledige isolatie
+• Dakbedekking vernieuwd en extra geïsoleerd in augustus 2026
+• Alle ramen voorzien van HR++ glas
+• Nefit CV ketel en CV boiler, type Ecomline Excellent HR22 uit 2002
+• Verkoop Vrij op naam, kosten notaris voor koper
+• Voor de op te nemen clausules verwijzen we je door naar het formulier &quot;op te nemen clausules in de koopakte&quot;
+• Oplevering in overleg
+
+De informatie op deze pagina geeft een globale omschrijving van het aangeboden object. Aan de inhoud kunnen geen rechten worden ontleend. Vermelding van afmetingen en oppervlakten is slechts als aanduiding bedoeld en niet als gegarandeerde eigenschap. Alle zich in deze aanbieding bevindende informatie is door ons met grote zorgvuldigheid samengesteld, echter met betrekking tot deze informatie aanvaarden wij geen enkele aansprakelijkheid, noch kan aan vermelde informatie enig recht worden ontleend. Een woonboot is een roerend goed waarbij de bedenktijd van 3 dagen niet van toepassing is en een mondelinge overeenkomst bindend is.
+
+=====English=====
+
+This charming and bright houseboat, named Saoirse, is located on the Bilderdijkkade in the popular Amsterdam Oud West neighbourhood. The practically laid-out home combines the unique character of detached living with the vibrancy of the city. Thanks to the large windows on the waterside, the home is filled with natural light and offers unobstructed views over the water. Windows throughout, wooden beams and characteristic details such as the steel doors and skylights give the home its own contemporary character. A houseboat measuring 20 x 5 metres, with several bedrooms, an open-plan kitchen and a spacious living room, is a rare find in this city and makes this a truly special home for those looking for something different.
+
+Curious to see more? Give us a call to schedule a viewing; one of our estate agents will be happy to show you around!
+
+LOCATION
+Saoirse is located on the Bilderdijkkade in the popular Amsterdam Oud West neighbourhood. Here, you live directly on the water while being right in the heart of one of Amsterdam&#x27;s most vibrant neighbourhoods. From the houseboat, you can easily walk towards the Jordaan, with its characteristic canals, cosy cafés, restaurants and unique shops. De Hallen is also located nearby, offering the Foodhallen, Filmhallen, shops, restaurants and various cultural facilities.
+
+For your daily groceries and a pleasant stroll through the market, you can visit the Ten Katemarkt and the shops along Kinkerstraat, Bilderdijkstraat and De Clercqstraat. The Ten Katemarkt is a true neighbourhood market, offering a wide range of fresh produce, delicacies and various food stalls.
+
+The area also offers plenty of opportunities for relaxation and enjoying nature. Vondelpark is just a short distance away and is ideal for walking, running, exercising or simply enjoying the greenery. Oud West is also home to numerous cosy cafés, restaurants, terraces and unique shops.
+
+Accessibility is excellent. From Oud West, both the city centre and the surrounding neighbourhoods are easily accessible by bicycle and public transport. Thanks to its central location, many parts of Amsterdam can be reached easily on foot or by bike.
+
+LAYOUT
+Through the entrance on the jetty, you enter the hallway. Several rooms can be accessed from the hallway. At the rear is a bedroom, as well as a practical storage room where the technical installations are located. The bathroom and separate toilet are also located in this part of the houseboat.
+
+The bathroom was renovated in 2022 and has been stylishly finished. It features a spacious shower with a rainfall showerhead and a beautiful washbasin with matching vanity unit. The toilet can be accessed from both the bathroom and the hallway, providing additional convenience and a practical layout.
+
+From the hallway, you enter the kitchen, dining room and spacious living room. Thanks to the many windows, plenty of daylight enters the home. The living room has a ceiling height of approximately 2.52 metres and, together with the dining room, forms a generous living space. The kitchen is practically laid out and offers ample storage space. A distinctive detail is the wooden beams extending across the width of the houseboat.
+
+Next to the living room are two further spacious bedrooms, one of which could also be ideally used as a home office. This provides several possibilities for sleeping, working and pursuing hobbies.
+
+The houseboat also features several skylights, a beautiful black steel-framed façade and numerous windows throughout. These elements not only add to the characteristic appearance but also enhance the spacious and bright feeling of the home.
+
+The houseboat has a spacious crawl space, accessible through five separate access hatches. The crawl space has approximately 68 cm of headroom in one section and approximately 29 cm in a smaller section, making it ideal for use as storage space.
+
+A walkable grating runs along the entire length of the houseboat on the outside, allowing you to step straight into the water from the sliding doors or easily get into your boat. At the front of the houseboat, there is a bench on the jetty, providing a lovely spot to sit in the afternoon sun and enjoy outdoor living.
+
+For the layout, we also kindly refer you to the floor plans, which are available in both 2D and 3D and can be found under the heading &quot;floor plan&quot;.
+
+SUSTAINABILITY
+In August 2026, the roof covering was renewed and the roof was additionally insulated. All windows are also fitted with HR++ glazing. The property has an energy label C. The houseboat is heated by a Nefit central heating boiler and hot water boiler, type Ecomline Excellent HR22 from 2002. The system was last serviced by GOK Amsterdam on 18 September 2026.
+
+Several preparations have already been made for further improvements in sustainability. These include:
+
+3x25A electricity connection, sufficient for a heat pump and a high-powered induction hob (for which a Perilex connection has already been installed in the kitchen);
+low-temperature radiators (installed in 2022) with sufficient additional capacity for heating with a heat pump;
+sufficient space for a (water-to-water) heat pump with buffer tank, should the current central heating system be replaced.
+
+PARTICULARS
+• Living area (NEN2580): 92 m²
+• Year of construction: 2001
+• Energy label: C
+• Mooring fee: €1,500 per year
+• Jetty facing northeast
+• Large sliding doors with views over the water
+• Bathroom renovated in 2022
+• Spacious storage area in the crawl space of the houseboat, accessible through five hatches
+• Fully insulated
+• Roof covering renewed and additionally insulated in August 2026
+• All windows fitted with HR++ glazing
+• Nefit central heating boiler and hot water boiler, type Ecomline Excellent HR22 from 2002
+• Sale free of transfer costs, notary fees payable by the buyer
+• For the applicable clauses to be included, please refer to the form &quot;clauses to be included in the purchase agreement&quot;
+• Completion in consultation
+
+The information on this page provides a general description of the property offered. No rights may be derived from the contents. The dimensions and surface areas stated are intended for indication purposes only and are not guaranteed characteristics. All information contained in this offer has been compiled by us with great care; however, we accept no liability whatsoever in relation to this information, nor can any rights be derived from the information provided. A houseboat is movable property, meaning that the statutory three-day cooling-off period does not apply and that a verbal agreement is legally binding.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Wonen aan het water
+
+Unieke woonark aan de Bilderdijkkade in Oud West.
+
+Lichte ruime leefruimte
+
+Open keuken, eetkamer en woonkamer met veel ramen.
+
+Goed geïsoleerde woonark
+
+Volledige isolatie, HR++ glas en vernieuwde dakisolatie.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 32</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/523/555_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/689_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/530_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/615_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/773_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/594_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/806_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/657_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/652_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/682_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/638_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/576_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/516_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/770_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/633_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/699_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/609_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/584_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/569_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/787_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/603_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/529_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/586_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/675_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/796_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/520_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/589_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/746_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/523/716_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

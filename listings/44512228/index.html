@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ferdinand Bolstraat 51-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Ferdinand Bolstraat 51-2</h1>
+  <p class="sub">
+    <span>1072 LB Amsterdam</span>
+    <span>·</span>
+    <span>Sarphatiparkbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/423/033_1440x960.jpg" alt="Ferdinand Bolstraat 51-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">33 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€725.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.841/m² · 3.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">82 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1885</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ferdinand-bolstraat-51-2/44512228/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 725.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.841</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 189,69 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1885</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>82 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>2 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>350 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM R 7240</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, City centre, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 189,69 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Midden in De Pijp, met het plein aan je voeten en de ruimte boven je hoofd. Dit recent gerenoveerde bovenhuis van circa 82 m² combineert een nieuwe keuken en badkamer met een prachtige visgraatvloer, drie slaapkamers en een hoge nok met zichtbare balken. Je kijkt vrij uit over het pleintje, hebt geen directe inkijk van overburen en niemand woont boven je. En dat op eigen grond, aan het autovrije deel van de Ferdinand Bolstraat, met metrostation De Pijp letterlijk voor de deur.
+
+Hier kun je meteen beginnen met wonen. De verbouwing is net achter de rug, de wijnklimaatkast wacht op je favoriete flessen en voor een goede kop koffie hoef je alleen maar naar beneden.
+
+INDELING
+De eigen entree ligt op de eerste verdieping, vanwaar de trap naar de woonverdieping leidt. Hier valt meteen het licht op. De grote ramen aan de voorzijde bieden een heerlijk open uitzicht over het plein en de bomen. Je kunt hier echt even van je af kijken. De woonkamer biedt plek voor een comfortabele zithoek en een eettafel bij de open keuken. Op het balkon aan de voorzijde zit je midden in het Amsterdamse leven, met je eigen plek boven de straat.
+
+De nieuwe keuken is uitgevoerd in rustige, lichte tinten en sluit mooi aan op de warme visgraatvloer. De strakke afwerking en ingebouwde wijnklimaatkast geven het geheel een luxe uitstraling. Een fijne plek om uitgebreid te koken en met vrienden aan tafel te blijven hangen.
+
+Aan de voorzijde ligt een extra kamer, die je als derde slaapkamer kunt gebruiken, maar die ook heel geschikt is als werkplek. Zo werk je thuis met uitzicht over het plein en kan de deur na je laatste afspraak gewoon dicht. Op deze verdieping bevindt zich ook een separaat toilet.
+
+Via de interne trap bereik je de bovenste verdieping. Hier geeft de hoge nok met de zichtbare houten balken het huis zijn bijzondere karakter. Vooral in de grote slaapkamer komt die hoogte prachtig tot zijn recht. De combinatie van de kapconstructie, de lichte wanden en de visgraatvloer maakt dit een ontzettend sfeervolle ruimte.
+
+Aan de achterzijde ligt de tweede slaapkamer. Daartussen bevinden zich de vernieuwde badkamer en praktische berging met genoeg ruimte voor een wasmachine, droger en droogrek. Daarnaast is er op deze verdieping, boven de hal, een zolderberging aanwezig. De badkamer is stijlvol afgewerkt met grote tegels in een warme tint, een inloopdouche met regendouche, zwarte accenten en een wastafelmeubel. Het dakraam zorgt voor prettig daglicht.
+
+KARAKTER EN COMFORT
+Het fijne aan deze woning is dat de renovatie het karakter van het huis alle ruimte heeft gegeven. De balken en de hoge kap zorgen voor sfeer, terwijl de nieuwe keuken, badkamer en vloeren het comfort van een fris gerenoveerde woning bieden. Met twee woonlagen, drie slaapkamers en geen bovenburen voelt dit echt als een eigen huis boven de stad.
+
+DE BUURT
+Verse boodschappen halen op de Albert Cuypmarkt, een borrel bij Bar Bellini of uitgebreid tafelen bij Brasserie Lolita: hier liggen je favoriete adressen gewoon in je eigen straat. Ook de terrassen rond het Gerard Douplein en het Marie Heinekenplein zijn dichtbij. Van goede koffiezaken en kleine speciaalwinkels tot restaurants waar je graag nog eens terugkomt: dit is De Pijp op zijn best. Voor een wandeling of een middag op het gras loop je naar het Sarphatipark.
+
+Dit deel van de Ferdinand Bolstraat is autovrij. Je stapt naar buiten en staat midden in het Amsterdamse leven, terwijl je boven juist geniet van het vrije uitzicht en de privacy van je eigen huis.
+
+Ook de bereikbaarheid is uitstekend. De ingang van metrostation De Pijp ligt letterlijk voor de deur en met de Noord/Zuidlijn reis je rechtstreeks richting de Zuidas of het Centraal Station. Daarnaast zijn er verschillende tramverbindingen in de directe omgeving. Bewoners kunnen met de daarvoor geldige parkeervergunning ook gebruikmaken van de Albert Cuypgarage en parkeergarage Heinekenplein.
+
+EIGENDOM
+Het appartement staat op eigen grond!
+
+VVE
+De vereniging van eigenaars bestaat uit drie leden en omvat uitsluitend dit pand. Het beheer wordt professioneel verzorgd door Delair Vastgoedbeheer. Er is een meerjarenonderhoudsplan aanwezig en de servicekosten bedragen € 189,69 per maand.
+
+ENERGIELABEL
+De woning heeft energielabel C.
+
+BIJZONDERHEDEN
+* Woonoppervlakte circa 82 m², verdeeld over twee woonlagen;
+* Drie slaapkamers, waarvan één op de woonverdieping;
+* Recent voor de verkoop gerenoveerd;
+* Ruime berging met ruimte voor een wasmachine en een wasrek;
+* Extra zolderberging;
+* Nieuwe keuken met wijnklimaatkast;
+* Nieuwe badkamer met inloopdouche;
+* Fraaie visgraatvloer;
+* Hoge nok met zichtbare houten balken;
+* Vrij uitzicht over het pleintje en geen directe inkijk van overburen;
+* Balkon aan de voorzijde;
+* Geen bovenburen;
+* Gelegen aan het autovrije deel van de Ferdinand Bolstraat;
+* Metrostation De Pijp voor de deur;
+* Eigen grond;
+* Funderingsherstel uitgevoerd in 2003;
+* Energielabel C;
+* VvE met drie leden, professioneel beheerd en voorzien van een MJOP;
+* Servicekosten € 189,69 per maand.
+
+-----------English version------------
+
+Right in the heart of De Pijp, with the square at your feet and an impressive sense of space above. This recently renovated upper-floor apartment of approximately 82 m² combines a brand-new kitchen and bathroom with a beautiful herringbone floor, three bedrooms and a high pitched ceiling with exposed beams. The apartment enjoys unobstructed views across the square, with no direct overlooking from neighbouring properties and no upstairs neighbours. All this on freehold land, on the car-free section of Ferdinand Bolstraat, with De Pijp metro station literally on the doorstep.
+
+The apartment is ready to move straight into. The renovation has just been completed, the wine cooler is waiting for your favourite bottles and for a good cup of coffee, all you need to do is head downstairs.
+
+LAYOUT
+The private entrance is located on the first floor, with stairs leading up to the main living level. The abundance of natural light immediately catches the eye. The large windows at the front offer wonderfully open views across the square and the trees, creating a real sense of space. The living room provides plenty of room for a comfortable seating area and a dining table beside the open-plan kitchen. The front-facing balcony puts you right in the middle of Amsterdam life, while still offering your own private spot above the street.
+
+The new kitchen is finished in calm, light tones that complement the warm herringbone floor beautifully. Its sleek design and integrated wine cooler give the space a luxurious feel. It is a wonderful place to cook at length and enjoy lingering dinners with friends.
+
+At the front of the apartment is an additional room that can be used as a third bedroom, but would also make an excellent home office. Here, you can work with views across the square and simply close the door after your final meeting of the day. A separate toilet is also located on this floor.
+
+The internal staircase leads to the upper floor, where the high pitched ceiling and exposed wooden beams give the home its distinctive character. The impressive ceiling height is particularly striking in the principal bedroom. The combination of the roof structure, light-coloured walls and herringbone floor creates a wonderfully inviting atmosphere.
+
+The second bedroom is situated at the rear. Between the two bedrooms are the renovated bathroom and a practical storage room with ample space for a washing machine, tumble dryer and drying rack. This floor also offers additional loft storage above the hallway. The bathroom is stylishly finished with large tiles in a warm shade, a walk-in shower with rainfall showerhead, black details and a washbasin unit. A skylight provides pleasant natural light.
+
+CHARACTER AND COMFORT
+What makes this apartment so appealing is the way the renovation has allowed its original character to shine. The exposed beams and high pitched ceiling create atmosphere, while the new kitchen, bathroom and floors provide all the comfort of a freshly renovated home. With two living levels, three bedrooms and no upstairs neighbours, it truly feels like a private home above the city.
+
+THE NEIGHBOURHOOD
+Pick up fresh produce at the Albert Cuyp Market, enjoy drinks at Bar Bellini or settle in for dinner at Brasserie Lolita: your favourite places are all right on your doorstep. The terraces around Gerard Douplein and Marie Heinekenplein are also nearby. From excellent coffee bars and independent shops to restaurants you will want to visit time and again, this is De Pijp at its very best. For a walk or a relaxing afternoon on the grass, Sarphatipark is just a short stroll away.
+
+This section of Ferdinand Bolstraat is car-free. Step outside and you are immediately immersed in Amsterdam city life, while upstairs you can enjoy the open views and privacy of your own home.
+
+Public transport connections are excellent. The entrance to De Pijp metro station is literally on the doorstep and the North/South metro line takes you directly to the Zuidas business district or Amsterdam Central Station. Several tram services also operate in the immediate vicinity. Residents with a valid parking permit can also use the Albert Cuyp and Heinekenplein car parks.
+
+OWNERSHIP
+The apartment is situated on freehold land.
+
+OWNERS’ ASSOCIATION
+The owners’ association consists of three members and covers this building only. It is professionally managed by Delair Vastgoedbeheer. A long-term maintenance plan is in place and the monthly service charges are €189.69.
+
+ENERGY LABEL
+The apartment has energy label C.
+
+KEY FEATURES
+* Approximately 82 m² of living space across two floors;
+* Three bedrooms, one of which is located on the main living level;
+* Recently renovated for sale;
+* Spacious storage room with room for a washing machine and drying rack;
+* Additional loft storage;
+* New kitchen with integrated wine cooler;
+* New bathroom with walk-in shower;
+* Beautiful herringbone flooring;
+* High pitched ceiling with exposed wooden beams;
+* Unobstructed views across the square and no direct overlooking from neighbouring properties;
+* Front-facing balcony;
+* No upstairs neighbours;
+* Situated on the car-free section of Ferdinand Bolstraat;
+* De Pijp metro station on the doorstep;
+* Freehold property;
+* Foundation repairs completed in 2003;
+* Energy label C;
+* Owners’ association with three members, professional management and a long-term maintenance plan;
+* Monthly service charges of €189.69.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Lichte living met balkon
+
+Open woonkamer met nieuwe keuken, balkon en veel licht.
+
+Luxe keuken met wijnkast
+
+Nieuwe keuken in lichte tinten met ingebouwde wijnklimaatkast.
+
+Autovrij en metro voor deur
+
+Aan autovrije Ferdinand Bolstraat, metro De Pijp direct naast.
+
+Is deze informatie behulpzaam?
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Voortman &amp; Fransen Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 33</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/423/033_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/099_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/056_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/058_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/048_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/069_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/041_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/046_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/080_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/068_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/108_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/070_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/031_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/109_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/119_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/116_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/057_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/079_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/073_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/078_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/037_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/062_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/106_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/112_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/090_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/075_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/059_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/115_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/063_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/082_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/038_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/423/072_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

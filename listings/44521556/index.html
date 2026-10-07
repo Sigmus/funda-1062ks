@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berceusestraat 6 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Berceusestraat 6</h1>
+  <p class="sub">
+    <span>1061 HX Amsterdam</span>
+    <span>·</span>
+    <span>Kolenkitbuurt-Noord</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/755/021_1440x960.jpg" alt="Berceusestraat 6 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€525.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.609/m² · 2.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">69 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2019</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-berceusestraat-6/44521556/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 525.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.609</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 158,31 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2019</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>69 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>225 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, lift, Mechanical ventilation, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating en gehele Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND N 933</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en open ligging</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 158,31 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Kolenkitbuurt-Noord</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>4.650</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>33%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 6.767</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** English text below ***
+
+Zeer goed ingedeeld 4-kamer-appartement met balkon op het zuiden, vloerverwarming, eigen berging, A-label en EEUWIGDUREND AFGEKOCHTE ERFPACHT. De woning maakt deel uit van fraai modern complex gebouwd in 2019 en voorzien van een lift. De actieve en gezonde Vereniging van Eigenaren wordt professioneel beheerd. De woning ligt aan een brede, groene en met bomen omzoomde straat in de populaire wijk &quot;Bos en Lommer&quot;. Je woont hier uiterst centraal ten opzichte van alle voorzieningen, openbaar vervoer, diverse parken en het centrum.
+
+LIGGING
+Berceusestraat 6 ligt op een aantrekkelijke plek in Amsterdam-West, aan een groene en rustige straat in de populaire en levendige wijk &quot;Bos en Lommer&quot;. Voor de dagelijkse boodschappen, speciaalzaken en diverse horecagelegenheden kun je terecht aan de Bos en Lommerweg en op het Bos en Lommerplein. Ook op culinair gebied valt er in de omgeving steeds meer te ontdekken, met geliefde adressen als The Villy, Mas Mais en diverse koffiezaken en restaurants. Aan groen is eveneens geen gebrek. Het Erasmuspark, Westerpark en Rembrandtpark bieden volop ruimte om te wandelen, sporten of ontspannen. Scholen, kinderopvang, sportfaciliteiten, supermarkten en andere dagelijkse voorzieningen bevinden zich allemaal in de nabije omgeving.
+BEREIKBAARHEID
+De centrale ligging is een absoluut pluspunt. Metrostation De Vlugtlaan bevindt zich op slechts enkele minuten lopen en ook NS-station Amsterdam Sloterdijk is snel bereikbaar. Vanaf hier zijn er uitstekende verbindingen met onder meer Amsterdam Centraal, Schiphol en de rest van Nederland. Met de fiets sta je binnen circa een kwartier in het centrum van Amsterdam en ook populaire delen van West, zoals de Jordaan, Oud-West en Westerpark, zijn gemakkelijk bereikbaar.Ook met de auto is de ligging bijzonder praktisch: de Ring A10 ligt om de hoek, waardoor je binnen enkele minuten op weg bent richting de A4, A5, A8 en A10.
+
+ENERGIEZUINIG
+De woning is uitstekend geïsoleerd (energielabel A) en biedt een hoog wooncomfort en lage energiekosten alsmede een rentevoordeel voor de koper.
+
+INDELING
+Begane grond:
+Afgesloten entree met bellentableau en brievenbussen; verzorgde centrale hal met liftinstallatie en trappenhuis.
+
+Eerste verdieping:
+Entree appartement; hal met toilet, praktische was-/bergruimte, meterkast en stookruimte; woonkamer met toegang tot het royale balkon op het zonnige zuiden; moderne open keuken voorzien van granieten werkblad en de benodigde inbouwapparatuur (A-merken); drie prima slaapkamers; badkamer voorzien van inloopdouche, wastafel en handdoekenradiator.
+
+VERENIGING VAN EIGENAREN
+Vereniging van Eigenaars ‘Komrij’ is actief en bestaat uit 50 leden. Het vastgoedbeheer wordt professioneel uitgevoerd door ‘Twinq V.v.E. Beheer’, er wordt jaarlijks vergaderd en er is een MJOP (Meerjarenonderhoudsplan) en een Huishoudelijk regelement aanwezig. Het complex is in 2019 gesplitst in appartementsrechten; dit appartementsrecht maakt het 81/4767-ste aandeel uit in de gemeenschap, de servicekosten bedragen € 158,31 per maand.
+
+EIGENDOMSSITUATIE
+De erfpacht is eeuwigdurend afgekocht.
+
+INDICATIEVE AFMETINGEN
+• Bruto vloeroppervlakte woning: 85,7 m².
+• Gebruiksoppervlakte wonen: ca 69 m².
+• Gebouw gebonden buitenruimte: 5,8 m².
+• Externe bergruimte: 4,7 m².
+• Bruto inhoud woning: 225 m³.
+
+BIJZONDERHEDEN
+• 4-kamer-appartement met berging.
+• Instapklaar, bouwjaar 2019.
+• Het balkon op het zuiden.
+• Geheel voorzien van vloerverwarming.
+• Energielabel A.
+• Lift aanwezig.
+• Erfpacht EEUWIG DUREND AFGEKOCHT.
+• Professioneel beheerde, actieve en gezonde V.v.E.
+• Parkeren is mogelijk op basis van betaald parkeren.
+• Notaris: naar keuze koper, mits koopakte conform Model Ring bij notaris in Groot Amsterdam.
+• Er is pas een overeenkomst indien zowel de particuliere koper en verkoper een schriftelijke
+ koopovereenkomst hebben ondertekend.
+• Verkoper behoudt zich het recht van gunning voor.
+
+Oplevering: in overleg.
+
+Voorbehoud
+De Meetinstructie is gebaseerd op de NEN2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting.
+
+Alle verkoopinformatie is met de nodige zorgvuldigheid samengesteld. Wij aanvaarden geen enkele aansprakelijkheid voor onjuist verkregen (mondelinge) informatie, onvolledigheid of anderszins, dan wel de gevolgen daarvan en wijzen de koper nadrukkelijk op zijn wettelijke onderzoeksplicht.
+
+Interesse in dit huis?
+Schakel direct uw eigen NVM-aankoopmakelaar in.
+Uw NVM-aankoopmakelaar komt op voor úw belang en bespaart u tijd, geld en zorgen.
+Adressen van collega NVM-aankoopmakelaars vindt u op Funda.
+
+**********************************************************************************************
+
+Well-presented four-room apartment with a south-facing balcony, underfloor heating, private storage unit, energy rating A and perpetual ground lease fully bought out. The property forms part of an attractive modern residential complex built in 2019 and equipped with a lift. The active and financially healthy Owners’ Association is professionally managed. The apartment is situated on a wide, leafy, tree-lined street in the popular Bos en Lommer neighbourhood, with excellent access to local amenities, public transport, parks and Amsterdam city centre.
+
+LOCATION
+Berceusestraat 6 enjoys an attractive setting in Amsterdam-West, on a quiet, green street in the popular and lively Bos en Lommer neighbourhood.
+
+For everyday shopping, specialist stores and a wide range of cafés and restaurants, Bos en Lommerweg and Bos en Lommerplein are both close by. The area also has an increasingly diverse culinary scene, with popular spots such as The Villy and Mas Mais, as well as a variety of coffee bars and restaurants.
+
+There is plenty of greenery nearby too. Erasmuspark, Westerpark and Rembrandtpark all offer ample opportunities for walking, exercising or simply relaxing outdoors. Schools, childcare facilities, sports amenities, supermarkets and other everyday conveniences are all within easy reach.
+
+ACCESSIBILITY
+The central location is a major advantage. De Vlugtlaan metro station is just a few minutes&#x27; walk away, while Amsterdam Sloterdijk railway station is also easily accessible. From here, there are excellent connections to Amsterdam Centraal, Schiphol Airport and destinations throughout the Netherlands.
+
+By bicycle, Amsterdam city centre can be reached in approximately 15 minutes. Popular areas of Amsterdam-West, including the Jordaan, Oud-West and Westerpark, are also within easy cycling distance.
+
+The property is equally convenient by car, with the A10 Amsterdam ring road just around the corner. From here, the A4, A5 and A8 motorways can be reached within minutes.
+
+ENERGY EFFICIENCY
+The apartment is exceptionally well insulated and has an energy rating of A, providing a high level of living comfort and helping to keep energy costs low. The energy-efficient nature of the property may also provide mortgage interest benefits for the purchaser.
+
+LAYOUT
+Ground floor:
+Secure communal entrance with doorbell panel and letterboxes, leading to a well-maintained central hall with lift and staircase.
+
+First floor:
+Entrance to the apartment, hallway with separate WC, practical utility/storage room, meter cupboard and heating installation. The bright living room provides direct access to the generously sized south-facing balcony.
+
+The modern open-plan kitchen features a granite worktop and a range of built-in appliances from reputable A-brands. The apartment further comprises three well-proportioned bedrooms and a bathroom with walk-in shower, washbasin and heated towel rail.
+
+OWNERS’ ASSOCIATION
+The Owners’ Association, VvE ‘Komrij’, is active and comprises 50 members. The property is professionally managed by Twinq VvE Beheer. General meetings are held annually and a long-term maintenance plan (MJOP) and house rules are in place.
+
+The complex was legally divided into apartment rights in 2019. This apartment represents a 81/4767 share of the community. The monthly service charge is €158.31.
+
+OWNERSHIP
+The ground lease has been perpetually bought out, meaning no ground rent is payable.
+
+APPROXIMATE MEASUREMENTS
+Gross floor area: 85.7 m²
+Usable residential floor area: approx. 69 m²
+Outdoor area: 5.8 m²
+External storage: 4.7 m²
+Volume: 225 m³
+
+KEY FEATURES
+Well-appointed four-room apartment with private storage unit
+Move-in ready
+Built in 2019
+South-facing balcony
+Underfloor heating throughout
+Energy rating A
+Lift
+Perpetual ground lease fully bought out
+Professionally managed, active and financially healthy Owners’ Association
+Paid on-street parking applies
+Notary of the purchaser’s choice, provided the purchase agreement is drawn up in accordance with the Model Ring agreement by a notary in the Greater Amsterdam area
+No agreement will be binding until both the private purchaser and seller have signed a written purchase agreement
+The seller reserves the right to approve or reject a prospective purchaser
+
+Completion: by mutual agreement.
+
+DISCLAIMER
+The measurement report has been prepared in accordance with the NEN 2580 standard. The measurement guidelines are intended to provide a more uniform method of determining and indicating the usable floor area. Differences in measurements cannot be completely excluded, for example due to differences in interpretation, rounding or limitations when carrying out the measurement.
+
+All sales information has been compiled with due care. No liability is accepted for information obtained orally, inaccuracies, omissions or otherwise, nor for any consequences arising from this. Prospective purchasers are expressly reminded of their statutory duty to conduct their own investigations.
+
+INTERESTED IN THIS PROPERTY?
+We recommend engaging your own NVM registered buying agent at an early stage.
+Your NVM buying agent will represent your interests throughout the purchase process and can help you save time, money and unnecessary concerns.
+Details of fellow NVM buying agents can be found on Funda.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>De Makelaers | Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/755/021_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/906_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/755/015_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/970_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/755/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/899_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/755/012_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/872_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/755/024_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/889_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/898_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/895_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/912_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/888_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/885_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/755/028_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/997_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/755/030_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/873_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/755/008_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/972_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/755/027_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/755/031_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/878_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/754/900_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/777/226_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/777/253_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/777/387_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/757/526_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/757/434_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vätternkade 67 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Vätternkade 67</h1>
+  <p class="sub">
+    <span>1060 PK Amsterdam</span>
+    <span>·</span>
+    <span>De Aker-West</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/414/247_1440x960.jpg" alt="Vätternkade 67 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">44 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€530.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.569/m² · 4.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">116 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1999</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-vatternkade-67/80952202/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 530.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.569</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 137,50 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1999</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>116 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>13 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>354 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>HR-glas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Zonneboiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN G 2802</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 137,50 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">***English below***
+Ruime en lichte maisonnette van ca. 116 m² met 3 slaapkamers en royaal terras in De Aker
+
+Welkom bij Vätternkade 67. In de groene en ruim opgezette woonwijk De Aker ligt deze ruime maisonnette met eigen entree, drie slaapkamers en circa 116 m² woonoppervlakte. De slaapkamers bevinden zich op de tweede verdieping en de volledige leefruimte is gesitueerd op de verdieping erboven. Dankzij deze indeling geniet de woonkamer van veel natuurlijk licht, privacy en een vrij uitzicht. Vanuit de keuken geven openslaande deuren toegang tot het ruime terras.
+
+De woning heeft energielabel A, de erfpacht is eeuwigdurend afgekocht en een snelle oplevering is mogelijk. Een comfortabele woning voor wie ruim en rustig wil wonen met het stadscentrum binnen handbereik.
+
+Omgeving
+
+De Vätternkade ligt in De Aker, een rustige en ruim opgezette woonwijk in Amsterdam Nieuw-West, met veel groen, water en brede straten.
+
+In de directe omgeving bevinden zich diverse winkels, scholen, kinderopvang, sportvoorzieningen en speelgelegenheden. Voor dagelijkse boodschappen kun je terecht bij winkelcentrum De Dukaat. Voor een uitgebreider winkelaanbod ligt Osdorpplein op korte afstand. Ook de Sloterplas en het Sloterpark zijn dichtbij.
+
+De bereikbaarheid is uitstekend. Diverse tram- en busverbindingen zorgen voor een goede verbinding met Station Lelylaan en de rest van Amsterdam. Met de auto zijn de Ring A10 en de A4, A5 en A9 snel bereikbaar. Ook Schiphol, Haarlem, Hoofddorp en Amstelveen zijn goed aan te rijden.
+
+Indeling
+
+Begane grond
+Eigen entree met hal en trapopgang naar de woonverdiepingen.
+
+Tweede verdieping
+Via de centrale hal zijn de drie slaapkamers, de badkamer en de bergruimte met aansluiting voor de wasmachine bereikbaar. De slaapkamers zijn goed van formaat en beschikken over royale raampartijen. De grootste slaapkamer heeft een ruime inloopkast met volop garderobe- en opbergruimte. De badkamer is voorzien van een ruime inloopdouche, wastafelmeubel en toilet.
+
+Derde verdieping
+Op de bovenste verdieping bevindt zich de volledige leefruimte. De royale woonkamer aan de voorzijde heeft een brede raampartij en biedt voldoende ruimte voor een comfortabele zithoek en grote eettafel. Dankzij de ligging op de bovenste verdieping is er veel licht en privacy. De open keuken aan de achterzijde is uitgevoerd in een moderne zwart-witte kleurstelling en biedt veel werk- en bergruimte. Het bar-/eetgedeelte zorgt voor een prettige verbinding met de woonkamer. Via openslaande deuren bereik je het royale dakterras van circa 13 m², met voldoende ruimte voor een eettafel, loungehoek en groen. Vanaf het terras heb je een weids uitzicht over de omgeving. Op deze verdieping bevinden zich daarnaast een separaat toilet en extra bergruimte.
+Berging
+Bij de woning hoort een separate externe berging van circa 7 m², geschikt voor fietsen en overige opslag.
+
+Bijzonderheden
+• Woonoppervlakte circa 116 m²
+• Gelegen op de bovenste woonlagen
+• 3 slaapkamers, waarvan 1 met inloopkast
+• 2 toiletten
+• Dakterras van circa 13 m²
+• Externe berging van circa 7 m²
+• Energielabel A
+• Erfpacht eeuwigdurend afgekocht
+• Servicekosten € 137,50 per maand
+• Oplevering in overleg, snelle oplevering mogelijk
+
+Een ruime en lichte maisonnette met drie slaapkamers, veel bergruimte en een fijne leefverdieping met royaal terras. Nieuwsgierig geworden? Maak een afspraak voor een bezichtiging en ervaar zelf de ruimte, het licht en het wooncomfort van Vätternkade 67.
+
+***English***
+Spacious and bright maisonette of approx. 116 m² with 3 bedrooms and a generous terrace in De Aker
+
+Welcome to Vätternkade 67. Located in the green and spacious residential neighbourhood of De Aker, this generous maisonette offers a private entrance, three bedrooms and approximately 116 m² of living space. The bedrooms are situated on the second floor, with the entire living area located on the floor above. Thanks to this layout, the living room benefits from plenty of natural light, privacy and open views. French doors from the kitchen provide access to the spacious terrace.
+
+The property has an energy label A, the ground lease has been bought out in perpetuity, and a quick completion is possible. A comfortable home for those looking for spacious and peaceful living while keeping Amsterdam city centre within easy reach.
+
+Location
+
+Vätternkade is located in De Aker, a quiet and spacious residential neighbourhood in Amsterdam Nieuw-West, characterised by plenty of greenery, water and wide streets. The immediate area offers a variety of shops, schools, childcare facilities, sports amenities and playgrounds. For everyday groceries, De Dukaat shopping centre is nearby, while Osdorpplein offers a wider range of shops and services just a short distance away. Sloterplas lake and Sloterpark are also close by.
+
+Accessibility is excellent. Several tram and bus connections provide convenient links to Lelylaan Station and the rest of Amsterdam. By car, the A10 ring road and the A4, A5 and A9 motorways can all be reached quickly. Schiphol Airport, Haarlem, Hoofddorp and Amstelveen are also easily accessible.
+
+Layout
+
+Ground floor
+Private entrance with hallway and stairs leading to the residential floors.
+
+Second floor
+The central hallway provides access to the three bedrooms, the bathroom and a storage room with a connection for the washing machine. The bedrooms are all well proportioned and feature large windows. The largest bedroom has a spacious walk-in wardrobe, offering plenty of room for clothing and additional storage. The bathroom is fitted with a generous walk-in shower, washbasin with vanity unit and toilet.
+
+Third floor
+The entire living area is located on the top floor. The spacious living room at the front features a wide expanse of windows and offers ample space for a comfortable seating area and a large dining table. Its top-floor position provides plenty of natural light and privacy. The open-plan kitchen at the rear features a modern black-and-white colour scheme and offers generous worktop and storage space. The breakfast bar/dining area creates a natural connection with the living room. French doors open onto the generous roof terrace of approximately 13 m², with ample space for a dining table, lounge area and plants. From the terrace, you can enjoy wide, open views across the surrounding area. This floor also features a separate toilet and additional storage space.
+
+Storage
+The property includes a separate external storage unit of approximately 7 m², ideal for bicycles and additional storage.
+
+Key features
+• Approx. 116 m² of living space
+• Situated on the upper residential floors
+• 3 bedrooms, including 1 with a walk-in wardrobe
+• 2 toilets
+• Roof terrace of approx. 13 m²
+• External storage unit of approx. 7 m²
+• Energy label A
+• Ground lease bought out in perpetuity
+• Monthly service charges: €137.50
+• Completion by mutual agreement; quick completion possible
+
+A spacious and bright maisonette with three bedrooms, plenty of storage space and a pleasant living floor with a generous terrace. Curious to see more? Arrange a viewing and experience the space, natural light and comfortable living atmosphere of Vätternkade 67 for yourself.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Vlindermolen Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 44</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/414/247_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/136_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/212_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/299_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/215_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/187_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/177_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/272_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/295_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/179_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/267_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/164_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/204_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/106_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/173_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/281_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/302_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/217_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/225_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/226_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/189_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/206_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/130_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/209_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/306_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/320_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/214_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/146_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/129_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/175_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/291_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/127_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/126_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/280_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/142_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/185_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/116_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/262_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/293_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/103_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

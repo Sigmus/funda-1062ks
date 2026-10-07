@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antony Moddermanstraat 14 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Antony Moddermanstraat 14</h1>
+  <p class="sub">
+    <span>1063 LP Amsterdam</span>
+    <span>·</span>
+    <span>Jan de Louterbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/597/832_1440x960.jpg" alt="Antony Moddermanstraat 14 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">28 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€350.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.605/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">76 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1959</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-antony-moddermanstraat-14/80956831/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 350.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.605</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1959</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>76 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>252 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND D 10527</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 15-03-2033)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-03-2033</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan water, in woonwijk en Open views</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Antony Moddermanstraat 14 – Amsterdam
+
+Licht en praktisch ingedeeld 4-kamerappartement van circa 76 m² met drie slaapkamers, balkon, eigen berging en lift, gelegen in een groene woonomgeving in Amsterdam Nieuw-West.
+
+Aan de Antony Moddermanstraat 14 ligt dit prettig ingedeelde appartement met een woonoppervlakte van circa 76 m². De woning beschikt over een ruime en lichte woonkamer, een aparte moderne keuken, maar liefst drie slaapkamers, een balkon van circa 5 m² en een externe berging van circa 7 m².
+
+Dankzij de grote raampartijen valt er veel natuurlijk licht naar binnen. De houtlook vloer die door een groot deel van de woning is doorgelegd, vormt samen met de lichte wandafwerking een rustige en verzorgde basis.
+
+Het appartement bevindt zich op de eerste woonlaag van een bestaand appartementencomplex uit 1959. Het complex beschikt over een centrale entree, trappenhuis en lift. De combinatie van de praktische indeling, drie slaapkamers en goede bereikbaarheid maakt de woning geschikt voor verschillende doelgroepen.
+
+INDELING
+
+Via de gemeenschappelijke en verzorgde entree met brievenbussen, trappenhuis en lift bereikt u de woning.
+
+Bij binnenkomst komt u in de hal, vanwaar de verschillende vertrekken van het appartement bereikbaar zijn.
+
+De woonkamer is ruim opgezet en valt direct op door de grote raampartij over vrijwel de volledige breedte van de kamer. Hierdoor komt er veel daglicht binnen en ontstaat een aangename woonruimte. Er is voldoende plaats voor zowel een comfortabele zithoek als een royale eettafel, waardoor de woonkamer zich uitstekend leent voor ontspannen wonen en gezellig tafelen met familie en vrienden.
+
+De separate keuken is uitgevoerd in een moderne, donkere kleurstelling en beschikt over veel kastruimte en een royaal werkblad. De keuken is voorzien van diverse apparatuur, waaronder een oven, kookplaat en afzuigkap. Het grote raam boven het werkblad zorgt voor extra daglicht en geeft de keuken een prettige, open uitstraling.
+
+De woning beschikt over drie slaapkamers, waardoor er naast de hoofdslaapkamer volop mogelijkheden zijn voor bijvoorbeeld een kinder-, werk-, logeer- of hobbykamer. Dit maakt de indeling flexibel en praktisch voor zowel stellen als gezinnen en thuiswerkers.
+
+Daarnaast beschikt het appartement over circa 5 m² gebouwgebonden buitenruimte. Hier kunt u op aangename dagen even buiten zitten en genieten van de buitenlucht.
+
+Bij de woning behoort bovendien een externe berging van circa 7 m², uitgevoerd in steen en voorzien van elektra. Ideaal voor het stallen van fietsen en het opbergen van overige spullen.
+
+COMFORT EN VOORZIENGEN
+
+Het appartement heeft een woonoppervlakte van circa 76 m² en een inhoud van circa 252 m³. De woning is voorzien van blokverwarming en warm water wordt verkregen via een eigen elektrische boiler. Tevens is mechanische ventilatie aanwezig.
+
+De woning beschikt over energielabel D.
+
+COMPLEX
+
+De woning maakt deel uit van een bestaand appartementencomplex uit 1959. Het complex beschikt over een centrale entree, brievenbusseninstallatie, trappenhuis en lift.
+
+Het appartement is gelegen op de eerste woonlaag en is daardoor comfortabel bereikbaar. Bij het appartement behoort tevens de eerdergenoemde externe stenen berging van circa 7 m² met elektra.
+
+LIGGING
+
+De Antony Moddermanstraat ligt in Amsterdam Nieuw-West, in een groene woonomgeving met volwassen bomen en veel groen rondom het complex. Een prettige locatie voor wie rustig wil wonen en tegelijkertijd de voorzieningen en bereikbaarheid van Amsterdam binnen handbereik wil hebben.
+
+In de directe en nabije omgeving bevinden zich diverse winkels, supermarkten, scholen, sportvoorzieningen en openbaarvervoersverbindingen. Ook zijn verschillende parken en recreatiemogelijkheden in Amsterdam Nieuw-West goed bereikbaar.
+
+Met de fiets en het openbaar vervoer zijn andere delen van Amsterdam eenvoudig te bereiken. Ook voor automobilisten is de ligging gunstig dankzij de goede aansluiting op de belangrijkste uitvalswegen.
+
+Parkeren vindt plaats via betaald parkeren en het vergunningenstelsel van de gemeente Amsterdam.
+
+BIJZONDERHEDEN
+
+Woonoppervlakte circa 76 m²;
+
+- Inhoud circa 252 m³;
+- 4 kamers, waarvan 3 slaapkamers;
+- Ruime en lichte woonkamer met grote raampartijen;
+- Separate moderne keuken in donkere kleurstelling; (2025)
+- Keuken voorzien van diverse apparatuur;
+- Ruimte voor een royale zit- én eethoek;
+- Buitenruimte/balkon van circa 5 m²;
+- Externe stenen berging van circa 7 m², voorzien van elektra;
+-Appartement bereikbaar per lift;
+-Erfpacht afgekocht t/m 15-03-2033 (jaarlijks canon €68)
+- Energielabel D;
+- Blokverwarming;
+- Warm water via eigen elektrische boiler;
+- Mechanische ventilatie;
+- Gelegen in een groene woonomgeving;
+- Betaald parkeren en parkeervergunningen van toepassing;
+- Goede bereikbaarheid per fiets, auto en openbaar vervoer;
+- Diverse dagelijkse voorzieningen in de nabije omgeving;
+- Oplevering in overleg.
+
+Kortom: een licht en praktisch ingedeeld appartement met drie slaapkamers, balkon en eigen berging op een groene en goed bereikbare locatie in Amsterdam Nieuw-West. Met circa 76 m² woonoppervlakte biedt de woning verrassend veel ruimte en flexibiliteit.
+
+Ben je geïnteresseerd?
+Neem dan contact met ons op voor het inplannen van een bezichtiging. We laten je de woning graag persoonlijk zien!
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Antony Moddermanstraat 14 – Amsterdam
+
+Bright and practically laid-out 4-room apartment of approximately 76 m² featuring three bedrooms, a balcony, private storage room and lift, situated in a green residential area of Amsterdam Nieuw-West.
+
+Located at Antony Moddermanstraat 14, this pleasantly laid-out apartment offers approximately 76 m² of living space. The property features a spacious and bright living room, a separate modern kitchen, no fewer than three bedrooms, a balcony of approximately 5 m² and an external storage room of approximately 7 m².
+
+The large windows allow plenty of natural light to enter the apartment. The wood-look flooring, which extends throughout much of the property, combined with the light-coloured walls, creates a calm and well-maintained interior.
+
+The apartment is situated on the first residential level of an existing apartment complex dating from 1959. The building features a central entrance, staircase and lift. The combination of a practical layout, three bedrooms and excellent accessibility makes this property suitable for a variety of buyers.
+
+LAYOUT
+
+The apartment is accessed via the well-maintained communal entrance with mailboxes, staircase and lift.
+
+Upon entering the apartment, the hallway provides access to the various rooms.
+
+The living room is generously proportioned and immediately stands out due to the large windows extending across almost the entire width of the room. These provide an abundance of natural daylight and create a pleasant living environment. There is ample space for both a comfortable seating area and a large dining table, making this an ideal room for relaxing as well as entertaining family and friends.
+
+The separate kitchen features a modern dark colour scheme and offers plenty of cupboard space and a generous worktop. It is equipped with various appliances, including an oven, hob and extractor hood. The large window above the worktop provides additional natural light and gives the kitchen a pleasant and open feel.
+
+The apartment offers three bedrooms, providing plenty of flexibility in addition to the main bedroom. The additional rooms can be used as children&#x27;s bedrooms, a home office, guest room or hobby room. This practical layout makes the apartment suitable for couples, families and those working from home.
+
+The apartment also benefits from approximately 5 m² of outdoor space/balcony, providing a pleasant place to sit outside and enjoy the fresh air.
+
+In addition, the property comes with a private external storage room of approximately 7 m², constructed in brick and equipped with electricity. This is ideal for storing bicycles and other belongings.
+
+COMFORT AND AMENITIES
+
+The apartment has a living area of approximately 76 m² and a volume of approximately 252 m³. Heating is provided through a communal block heating system, while hot water is supplied by a private electric boiler. The apartment is also equipped with mechanical ventilation.
+
+The property has an energy label D.
+
+APARTMENT COMPLEX
+
+The property forms part of an existing apartment complex built in 1959. The building features a central entrance, mailboxes, staircase and lift.
+
+The apartment is located on the first residential level and is therefore conveniently accessible. The property also includes the aforementioned private external brick storage room of approximately 7 m², equipped with electricity.
+
+LOCATION
+
+Antony Moddermanstraat is situated in Amsterdam Nieuw-West, in a green residential environment surrounded by mature trees and plenty of greenery. It is an attractive location for those looking for peaceful living while still having Amsterdam&#x27;s amenities and excellent transport connections within easy reach.
+
+Various shops, supermarkets, schools, sports facilities and public transport connections can be found in the immediate and surrounding area. Several parks and recreational areas in Amsterdam Nieuw-West are also easily accessible.
+
+Other parts of Amsterdam can be reached conveniently by bicycle and public transport. The location is also favourable for motorists, with good connections to the city&#x27;s main arterial roads.
+
+Parking is subject to paid parking and the municipal parking permit system.
+
+KEY FEATURES
+
+- Living area approximately 76 m²;
+- Volume approximately 252 m³;
+- 4 rooms, including 3 bedrooms;
+- Spacious and bright living room with large windows;
+- Separate modern kitchen in a dark colour scheme; (2025)
+- Kitchen equipped with various appliances;
+- Ample space for both a generous seating and dining area;
+- Balcony/outdoor space of approximately 5 m²;
+- Private external brick storage room of approximately 7 m², equipped with electricity;
+- Apartment accessible by lift;
+- Groundlease fixed untill 15-03-2033 (yearly payment €68)
+- Energy label D;
+-Communal block heating;
+- Hot water supplied by a private electric boiler;
+- Mechanical ventilation;
+- Situated in a green residential environment;
+- Paid parking and parking permit system applicable;
+- Good accessibility by bicycle, car and public transport;
+- Various everyday amenities nearby;
+- Transfer date in consultation.
+
+In short: a bright and practically laid-out apartment with three bedrooms, a balcony and private storage room, situated in a green and well-connected location in Amsterdam Nieuw-West. With approximately 76 m² of living space, the property offers a surprising amount of space and flexibility.
+
+Interested?
+Please contact us to schedule a viewing. We would be delighted to show you the property in person!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 28</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/597/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/676_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/662_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/525_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/792_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/630_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/703_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/772_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/656_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/766_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/769_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/529_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/796_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/640_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/687_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/554_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/743_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/611_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/795_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/569_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/567_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/853_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/597/599_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

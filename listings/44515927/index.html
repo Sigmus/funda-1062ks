@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruys de Beerenbrouckstraat 119-E · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Ruys de Beerenbrouckstraat 119-E</h1>
+  <p class="sub">
+    <span>1067 BP Amsterdam</span>
+    <span>·</span>
+    <span>Ruys de Beerenbrouckbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/118/044_1440x960.jpg" alt="Ruys de Beerenbrouckstraat 119-E — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">33 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€550.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.500/m² · 3.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">100 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2006</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ruys-de-beerenbrouckstraat-119-e/44515927/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 221 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd></dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 550.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.500</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2006</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>100 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>9 m²</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>buitenruimte</h3>
+        <dl class="flist">
+        <div class="frow"><dt>External storage</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>332 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, dubbele Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>4e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas gestookt uit 2016, huur)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND I</dt><dd></dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Kadastrale kaart</h3>
+        <dl class="flist">
+        <div class="frow"><dt>4411</dt><dd></dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-09-2054</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">***ENGLISH TEXT BELOW***
+Direct online een bezichtiging inplannen? Ga naar onze website!
+RUSTIG WONEN MET ALLE VOORZIENINGEN BINNEN HAND BEREIK
+Ben je op zoek naar een plek waar je het beste van twee werelden kunt ervaren? Dit ruime en lichte appartement biedt je zowel de rust van een groene buurt als de dynamiek van stedelijke voorzieningen binnen handbereik. Met drie goed bemeten slaapkamers, een zonnig balkon en een energielabel A is deze woning een uitstekende keuze voor mensen die comfortabel en duurzaam willen wonen. Of je nu een jong gezin bent, vanuit huis werkt of simpelweg een fijne woonplek zoekt, hier vind je alles wat je nodig hebt. KENMERKEN VAN DE WONING IN EEN OOGOPSLAG
+- Zonnig en ruim balkon: Een heerlijke plek om te ontspannen met een kop koffie of een goed gesprek, ongeacht het moment van de dag.
+- Drie slaapkamers: Ruimte genoeg voor een gezin, een werkplek of logeerkamer.
+- Lichte woonkamer: Grote raampartijen zorgen voor een aangename en natuurlijke lichtinval.
+- Moderne badkamer en keuken: In 2015 gerenoveerd en nog steeds in uitstekende staat, met alles wat je nodig hebt voor comfortabel wonen.
+- Energielabel A: Duurzaam en energiebewust wonen met lage energiekosten.
+- Uitstekende locatie: Je woont op korte afstand van winkels, scholen, parken en uitvalswegen, ideaal voor het dagelijkse leven. MODERNE EN RUIME WONING IN EEN GROENE, STADSSE RAND Bij binnenkomst valt direct op hoe prettig de woning aanvoelt. De grote en lichte woonkamer is perfect om samen te ontspannen of gasten te ontvangen. Of je nu een avondje op de bank doorbrengt of samen eet aan de eettafel, deze ruimte voelt direct huiselijk. De keuken vormt het hart van de woning en is vernieuwd in 2015 – modern, slim ingericht en voorzien van alle gemakken. Denk hierbij aan een inbouw koelkast, een praktische vaatwasser, een kookplaat en een strakke afzuigkap. Alles zodat je met plezier een maaltijd bereidt. Ook de vloer is in 2015 vernieuwd en daarbij is het appartement destijds geschilderd. Het appartement beschikt over drie slaapkamers die je naar eigen inzicht kunt inrichten. Een lichte hoofdslaapkamer, een extra kamer voor een hobby of een logeerkamer, en niet te vergeten: een ideale ruimte om prettig thuis te werken. De badkamer, ook vernieuwd in 2015, biedt luxe in alle eenvoud met een dubbele wastafel en een praktische inloopdouche. Hier kom je relaxed de dag door. Een van de hoogtepunten van dit appartement is het balkon. Ruim, zonnig en uitnodigend – deze buitenruimte vormt de ideale plek om te genieten van frisse lucht, een moment van rust of zelfs een paar groene planten om het gezellig te maken. De woning is goed onderhouden en voorzien van energielabel A, wat niet alleen prettig is voor het milieu, maar ook voordelig voor jouw energiekosten. De mechanische ventilatie is bovendien onlangs, in 2026, vernieuwd. Dit betekent dat je hier niet alleen heerlijk woont, maar ook slim en comfortabel. Geuzenveld in Amsterdam Nieuw-West is een rustige, ruim opgezette wijk met veel groen, zoals het Eendrachtspark, Park de Kuil en de nabijgelegen Sloterplas. Hier kun je heerlijk wandelen, sporten of ontspannen. Voor dagelijkse boodschappen en meer kun je terecht bij winkelcentra zoals Lambertus Zijlplein, Plein &#x27;40-&#x27;45 en Osdorpplein, die allemaal makkelijk te bereiken zijn. De wijk kent ook een goede mix aan voorzieningen voor gezinnen, zoals basisscholen, speeltuintjes en sportclubs. Kortom, een prettige woonomgeving voor verschillende levensfasen. Qua bereikbaarheid zit je hier uitstekend. De Ring A10 bereik je binnen enkele minuten, maar ook met het openbaar vervoer sta je zo op station Sloterdijk, Amsterdam Centraal of in de rest van de stad dankzij de goede verbindingen. Dit alles maakt het werken, wonen en ontspannen hier eenvoudig en aangenaam. Bijzonderheden:
+- Extenre bergruimte aanwezig.
+- Vaste notaris Albers en van Tienen notaris inclusief opmaak koopakte volgens Amsterdams Ringmodel.
+******
+Want to schedule a viewing directly online? Visit our website!
+QUIET LIVING WITH ALL AMENITIES WITHIN REACH
+Are you looking for a place where you can experience the best of both worlds? This spacious and bright apartment offers you both the tranquility of a green neighborhood and the dynamism of urban amenities within easy reach. With three generously sized bedrooms, a sunny balcony, and an energy label A, this home is an excellent choice for those who want to live comfortably and sustainably. Whether you are a young family, work from home, or are simply looking for a nice place to live, you will find everything you need here. PROPERTY FEATURES AT A GLANCE
+- Sunny and spacious balcony: A lovely spot to relax with a cup of coffee or a good conversation, regardless of the time of day.
+- Three bedrooms: Plenty of room for a family, a workspace, or a guest room.
+- Bright living room: Large windows provide pleasant and natural light. - Modern bathroom and kitchen: Renovated in 2015 and still in excellent condition, with everything you need for comfortable living.
+- Energy label A: Sustainable and energy-conscious living with low energy costs.
+- Excellent location: You live a short distance from shops, schools, parks, and arterial roads, ideal for daily life. MODERN AND SPACIOUS HOME ON A GREEN, URBAN EDGE Upon entering, the home&#x27;s pleasant feel is immediately apparent. The large and bright living room is perfect for relaxing together or entertaining guests. Whether you are spending an evening on the sofa or dining together at the dining table, this space feels instantly homey. The kitchen forms the heart of the home and was renovated in 2015 – modern, smartly designed, and equipped with every convenience. Think of a built-in refrigerator, a practical dishwasher, a hob, and a sleek extractor hood. Everything so you enjoy preparing a meal. The flooring was also renewed in 2015, and the apartment was painted at the same time. The apartment features three bedrooms that you can furnish according to your own taste. A bright master bedroom, an extra room for a hobby or a guest room, and not to forget: an ideal space for working comfortably from home. The bathroom, also renovated in 2015, offers luxury in all simplicity with a double sink and a practical walk-in shower. Here you can spend the day relaxing. One of the highlights of this apartment is the balcony. Spacious, sunny, and inviting – this outdoor space is the ideal place to enjoy fresh air, a moment of peace, or even a few green plants to make it cozy. The property is well-maintained and has an energy label A, which is not only good for the environment but also beneficial for your energy costs. Furthermore, the mechanical ventilation was recently renewed in 2026. This means that you not only live wonderfully here, but also smartly and comfortably. Geuzenveld in Amsterdam Nieuw-West is a quiet, spacious neighborhood with plenty of greenery, such as Eendrachtspark, Park de Kuil, and the nearby Sloterplas. Here you can enjoy walking, exercising, or relaxing. For daily groceries and more, you can visit shopping centers such as Lambertus Zijlplein, Plein &#x27;40-&#x27;45, and Osdorpplein, all of which are easily accessible. The neighborhood also offers a good mix of amenities for families, such as primary schools, playgrounds, and sports clubs. In short, a pleasant living environment for various stages of life. In terms of accessibility, you are in an excellent position here. You can reach the A10 ring road within minutes, and thanks to good connections, you can also easily get to Sloterdijk Station, Amsterdam Central Station, or the rest of the city by public transport. All of this makes working, living, and relaxing here simple and pleasant. Special features:
+- External storage space available.
+- Designated notary Albers en van Tienen notary, including drafting of the purchase deed according to the Amsterdam Ring Model.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 1 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Hoekstra en Van Eck</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 33</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/118/044_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/776_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/118/007_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/903_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/876_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/765_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/969_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/777_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/988_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/118/004_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/118/018_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/118/012_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/118/015_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/118/001_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/118/051_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/992_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/984_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/118/048_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/118/027_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/895_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/907_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/802_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/117/696_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

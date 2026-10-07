@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Melis Stokehof 46 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Melis Stokehof 46</h1>
+  <p class="sub">
+    <span>1064 JE Amsterdam</span>
+    <span>·</span>
+    <span>Lodewijk van Deysselbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/230/642/915_1440x960.jpg" alt="Melis Stokehof 46 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">51 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€550.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.074/m² · 3.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.2 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">135 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2004</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-melis-stokehof-46/44491829/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 208 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 550.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.074</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2004</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>135 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>480 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, 2 Washbasins, Bathtub, en toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en warmte terugwininstallatie</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Kombi kompakt HRE 28/24 A (TSK/RGK) (gas gestookt uit 2023, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND D 8330</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 15-05-2053)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-05-2053</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Direct online een bezichtiging inplannen? Ga naar onze website!
+
+WELKOM THUIS: HET BESTE VAN TWEE WERELDEN
+Dit bijzondere appartement gelegen in Amsterdam Geuzenveld-Slotermeer heeft alles wat je zoekt: ruimte, licht en een slimme indeling. Met drie slaapkamers, twee badkamers, een moderne keuken en een zonnig terras op het westen, biedt deze woning alle comfort die je wenst. Ideaal voor jonge gezinnen, stellen of rustzoekers die tegelijkertijd graag dichtbij het bruisende stadsleven willen zijn. Dankzij de centrale ligging en goede verbindingen met het OV vind je alles wat je nodig hebt op steenworp afstand. Laat je verleiden door dit unieke thuis: klaar om in te trekken, klaar om te genieten!
+
+DE HIGHLIGHTS VAN DIT PRACHTIGE HUIS
+
+- Unieke indeling en geweldige plafondhoogte: De woonkamer op de eerste verdieping straalt dankzij de hoge plafonds en brede raampartijen. Het daglicht danst hier echt naar binnen.
+- Drie slaapkamers en twee badkamers: Genoeg ruimte voor jou en de kids of een thuiskantoor. De badkamer boven biedt ontspanning met een ligbad, en beneden is er een tweede voor extra gemak.
+- Terras op het westen: Geniet van de avondzon terwijl je lekker borrelt of een boek leest op je eigen terras.
+- Praktijkruimte op de begane grond: Perfect om thuis te werken, voor hobby’s of om gasten te ontvangen. Flexibele mogelijkheden!
+- Centrale ligging in een dynamische wijk: Tussen twee winkelpleinen in, dichtbij tram 13 en met alle stadsvoorzieningen binnen handbereik.
+- Direct klaar voor gebruik: Voorzien van een moderne keuken, eigen berging en een actieve VvE.
+
+LICHT, RUIMTE EN LUXE – JOUW NIEUWE THUIS IN SLOTERMEER
+
+Van het moment dat je de woning binnenstapt, voelt het meteen als een warme omarming. Dit appartement weet moeiteloos het beste van twee werelden te combineren: luxe en comfort in combinatie met een gezellige stadsomgeving. Laten we je even meenemen.
+
+Wanneer je de eerste verdieping binnenkomt, word je begroet door een fantastische open woonkamer, waar ruimte en licht de boventoon voeren. Doordat de plafonds hoger zijn dan je gewend bent, ontstaat er een bijna loft-achtig gevoel. Grote ramen laten het daglicht rijkelijk binnenstromen. Een heerlijk boek op de bank lezen of met vrienden de dag bespreken tijdens een gezellige borrel? Dit is absoluut de plek waar je samenkomt en ontspant.
+
+Aan de gezellige woonkamer grenst de moderne keuken. Strak én functioneel, met ingebouwde apparatuur om koken tot een feestje te maken. Zie jij je al staan, terwijl de zonsondergang door het raam achter je weerspiegeld wordt? Hier zet je moeiteloos de lekkerste gerechten op tafel. Nog op dezelfde woonlaag vind je een fijne slaapkamer – misschien wel jouw nieuwe master bedroom – en de eerste luxe badkamer. De badkamer nodigt uit voor een verkwikkende start van de dag of juist een rustmoment in het ligbad na het werk.
+
+En dat was nog maar de eerste verdieping! Op de begane grond word je verrast door een zeer ruime tweede slaapkamer. Een oase van rust, waar je heerlijk kunt ontsnappen aan de hectiek van de dag. Daarnaast vind je hier een zeer praktische tweede badkamer: alles binnen handbereik én geen ochtendstress meer bij een druk huishouden – want wie hoeft niet soms even te haasten in de ochtend? Maar dat is niet alles: de praktijkruimte maakt dit huis buitengewoon veelzijdig. Of je nu een eigen salon, kantoor of hobbyruimte nodig hebt, deze extra ruimte kun je helemaal naar eigen wens inrichten.
+
+Het terras – gelegen op het westen – is een absolute droom. Heerlijk breed en uitnodigend, ideaal voor genieten in de avondzon, gezellige barbecue-avonden of gewoon lekker loungen terwijl je de vogels hoort fluiten in de rustige omgeving. Selecteer een goed glas wijn (of verse muntthee) en relax terwijl je je nieuwe leefomgeving in je opneemt.
+
+In de woning bevind zich nog een ruime opslag waar de witgoedaansluiting zit en waar je veel opbergruimte hebt!
+
+Bij dit appartement hoort bovendien een ruime eigen berging. Handig voor fietsen, seizoensspullen of juist om alles netjes op te slaan. En met een actieve VvE is niet alleen de woning zelf, maar ook het hele gebouw uitstekend onderhouden.
+
+HET BUITENLEVEN BINNEN HANDBEREIK
+Geuzenveld-Slotermeer bewijst zich steeds meer als een dynamische hotspot binnen Amsterdam. In de buurt wordt hard gewerkt aan vergroening en stedelijke vernieuwing, wat betekent dat je nu instapt in een wijk vol toekomst. De ligging is ideaal: je zit tussen twee winkelpleinen in, voor al je dagelijkse boodschappen of een snelle shop. Daarnaast stopt tram 13 om de hoek op de Burgemeester van Leeuwenlaan, waarmee je binnen no-time in hartje Centrum staat of de overstap kunt maken naar de metro richting Station Sloterdijk, Schiphol of zelfs de Zuidas. Ook zijn er volop recreatiemogelijkheden – of je nu graag een wandeling maakt, gaat hardlopen of liever een kop koffie drinkt op een zonnig terras, je hoeft de buurt niet uit om fijne plekken te vinden.
+
+En dat alles met een actieve en professioneel beheerde VvE, zodat jij zorgeloos kunt wonen in dit prachtige hoekje van Amsterdam. Tot en met 15 mei 2053 zit je zelfs goed met een afbetaalde erfpacht; financieel een grote zorg minder!
+
+Bijzonderheden:
+- Energielabel A
+- Eigen berging binnen en buiten de woning;
+- Hoge plafonds;
+- Oplevering in overleg, kan spoedig.
+_____________________________________
+
+Would you like to schedule a viewing online immediately? Visit our website!
+
+WELCOME HOME: THE BEST OF BOTH WORLDS
+This unique apartment located in Amsterdam Geuzenveld-Slotermeer has everything you’re looking for: space, light, and smart layout. With three bedrooms, two bathrooms, a modern kitchen, and a sunny west-facing terrace, this home offers all the comfort you desire. It’s ideal for young families, couples, or those seeking quiet while still wanting to be close to the vibrant city life. Thanks to its central location and excellent public transport connections, you’ll find everything you need just a stone’s throw away. Let yourself be seduced by this unique home – ready to move in and ready to be enjoyed!
+
+THE HIGHLIGHTS OF THIS BEAUTIFUL HOME
+
+Unique layout and impressive ceiling heights: The living room on the first floor shines with high ceilings and large windows. Natural daylight truly dances its way in.
+Three bedrooms and two bathrooms: Plenty of space for you and the kids or even a home office. The bathroom upstairs offers relaxation with a bathtub, while downstairs there’s a second bathroom for extra convenience.
+West-facing terrace: Enjoy the evening sun as you unwind with a drink or lose yourself in a book on your own terrace.
+Multi-functional space on the ground floor: Perfect for working from home, pursuing hobbies, or hosting guests. Flexible possibilities!
+Central location in a dynamic neighborhood: Nestled between two shopping squares, close to tram 13, and with all urban amenities at your fingertips.
+Move-in ready: Featuring a modern kitchen, private storage, and an active homeowners’ association.
+LIGHT, SPACE, AND LUXURY – YOUR NEW HOME IN SLOTERMEER
+
+From the moment you step inside, this apartment feels like a warm embrace. It effortlessly combines the best of both worlds: luxury and comfort paired with a vibrant urban environment. Let us take you on a tour.
+
+As you enter the first floor, you are greeted by a fantastic open-plan living room where space and light dominate. With ceilings higher than what you’re used to, an almost loft-like ambiance is created. Large windows allow daylight to pour in abundantly. Whether you want to curl up with a good book or catch up with friends over a relaxed drink, this is the perfect place to gather and unwind.
+
+Adjacent to the inviting living room is the modern kitchen. Sleek and functional, it comes with built-in appliances that make cooking a joy. Can you already picture yourself standing there while the sunset reflects through the window behind you? Here, you can effortlessly prepare the tastiest dishes. On the same level, you’ll also find a cozy bedroom – perhaps your new master bedroom – and the first luxurious bathroom. This bathroom invites you to start your day refreshed or to unwind in the tub after a long day.
+
+And that’s just the first floor! On the ground floor, you’ll be delighted by a very spacious second bedroom. This serene retreat offers a perfect escape from the day’s hustle and bustle. Alongside it is a highly practical second bathroom: everything within reach and no more morning rush in a busy household – because who doesn’t sometimes need to hurry in the morning? But there’s even more: the multi-functional space makes this home extraordinarily versatile. Whether you need your own salon, office, or hobby room, you can tailor this extra space exactly to your needs.
+
+The west-facing terrace is an absolute dream. Spacious and inviting, it’s ideal for enjoying the evening sun, hosting cozy barbecue nights, or simply lounging while you listen to the birds singing in the peaceful surroundings. Grab a glass of good wine (or a fresh cup of mint tea) and relax as you take in your new living environment.
+
+Additionally, the apartment features a generous storage area equipped with a utility hookup for the washing machine, offering plenty of storage space.
+
+This apartment also comes with a spacious private storage room – perfect for bikes, seasonal items, or simply keeping everything neatly stored away. With an active homeowners’ association, not only is the apartment itself well maintained, but so is the entire building.
+
+THE OUTDOOR LIFE AT YOUR FINGERTIPS
+Geuzenveld-Slotermeer is increasingly proving itself as a dynamic hotspot within Amsterdam. The neighborhood is undergoing significant greening and urban renewal efforts, meaning you’re moving into a district with bright prospects. Its location is ideal: you’re set between two shopping squares for all your daily needs. Additionally, tram 13 stops just around the corner at Burgemeester van Leeuwenlaan, allowing you to be in the very heart of the city in no time or easily connect to the metro towards Station Sloterdijk, Schiphol, or even the Zuidas. There are also plenty of recreational possibilities – whether you enjoy taking walks, running, or simply savoring a coffee on a sunny terrace, you won’t have to leave the neighborhood to find delightful spots.
+
+All of this comes with an active and professionally managed homeowners’ association, so you can live worry-free in this beautiful corner of Amsterdam. Furthermore, with the leasehold paid off until May 15, 2053, financial worries are significantly reduced!
+
+Details:
+
+- Energy label A
+- Private storage both inside and outside the apartment;
+- High ceilings;
+- Move-in date negotiable, available soon.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Hoekstra en Van Eck Amsterdam West</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 51</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/230/642/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/068_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/791_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/906_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/067_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/805_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/909_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/914_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/988_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/834_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/850_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/907_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/840_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/042_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/903_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/064_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/913_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/942_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/957_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/844_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/929_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/058_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/815_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/029_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/981_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/825_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/066_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/796_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/842_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/872_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/811_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/004_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/875_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/919_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/036_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/643/065_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/785_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/818_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/642/997_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

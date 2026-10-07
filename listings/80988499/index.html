@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nederhoven 8 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Nederhoven 8</h1>
+  <p class="sub">
+    <span>1083 AN Amsterdam</span>
+    <span>·</span>
+    <span>Buitenveldert-Zuidoost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/880/289_1440x960.jpg" alt="Nederhoven 8 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">50 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€795.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.599/m² · 4.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.5 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">142 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1962</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-nederhoven-8/80988499/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 795.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.599</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning (drive-in woning)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1962</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>142 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>18 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>17 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>107 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>566 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 2 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin en Walk-in shower</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM AK 1335</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>107 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 163,81 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>48 m² (8,68 m deep en 5,53 m wide)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Capaciteit</dt><dd>1 auto</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra en verwarming</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">ROYALE GEZINSWONING MET VIJF SLAAPKAMERS TUIN EN MEERDERE BUITENRUIMTES IN GROEN BUITENVELDERT
+
+*English below*
+
+Omgeving
+Op een rustige, groene locatie in Buitenveldert staat deze verrassend ruime eengezinswoning van bijna 142 m². De woning is verdeeld over drie woonlagen en beschikt over maar liefst vijf slaapkamers, een zonnige tuin en twee balkons. Een ideale woning voor gezinnen, thuiswerkers of iedereen die op zoek is naar veel leefruimte op een fijne locatie.
+
+Ligging
+De woning ligt aan een rustige woonstraat in Buitenveldert-Zuidoost, een geliefde wijk met veel groen, brede straten en alle dagelijkse voorzieningen binnen handbereik. Voor de woning is een eigen parkeerplek en aan de achterzijde grenst de tuin aan een groene strook met volwassen bomen, waardoor je hier veel privacy ervaart. Op korte loopafstand ligt bovendien een speelveld met speeltoestellen.
+
+Voor ontspanning zijn het Gijsbrecht van Aemstelpark, een wandeling langs de Amstel en het Amstelpark dichtbij. De sportvelden voor voetbal, hockey en tennis liggen op korte fietsafstand. 
+
+Tegelijkertijd ben je binnen circa tien minuten op de Zuidas en op station Amsterdam Zuid. Ook de VU, diverse scholen, winkels en het winkelcentrum Groot Gelderlandplein liggen dichtbij. Op loopafstand is een klein winkelcentrum voor de dagelijkse boodschappen. Juist die combinatie van rust, ruimte en groen, gecombineerd met de nabijheid van de Zuidas en de uitstekende ligging ten opzichte van de A10, is wat Buitenveldert zo geliefd maakt.
+
+Indeling
+Begane grond
+Via de overdekte entree kom je binnen in de hal, die toegang geeft tot de verschillende vertrekken. Op deze verdieping bevinden zich twee ruime slaapkamers aan de tuinzijde. Beide kamers hebben een directe deur naar de tuin en zijn ook uitstekend geschikt als werkkamer, hobbyruimte of logeerkamer.
+
+Daarnaast zijn er twee praktische inpandige bergingen aanwezig, waarvan één met aansluiting voor de wasmachine. De achtertuin van circa 48 m² is volledig bestraat, onderhoudsvriendelijk aangelegd en grenst aan groen, waardoor u hier heerlijk beschut kunt genieten van rust en privacy.
+
+Eerste verdieping
+Op de eerste verdieping bevindt zich de royale woonkamer van bijna 42 m² en strekt zich uit over de volledige diepte van de woning en is dankzij de grote ramen aan beide zijden heerlijk licht. Aan de achterzijde opent een brede schuifpui naar het balkon. Zo kun je op elk moment van de dag van de buitenruimte genieten. De open keuken bevindt zich aan de voorzijde en biedt alle mogelijkheden om een eigentijdse droomkeuken te realiseren. Op deze verdieping is een vernieuwd separaat toilet aanwezig.
+
+Tweede verdieping
+De tweede verdieping telt drie ruime en lichte slaapkamers. De grootste slaapkamer beslaat de volledige breedte van de woning, is circa 19 m² groot en beschikt over een eigen balkon. De moderne badkamer is voorzien van een ruime inloopdouche, een dubbel wastafelmeubel, vloerverwarming en een designradiator. Ook het separate toilet op deze verdieping is recent vernieuwd.
+
+Tuin
+Deze woning beschikt over een ruime achtertuin van maar liefst 48 m². Een heerlijke plek voor zomerse barbecues, lange avonden buiten of gewoon om te genieten van je eigen stukje buitenruimte in Amsterdam.
+
+Bijzonderheden
+- Woonoppervlakte: 141,90 m², gemeten conform NEN 2580
+- Overige inpandige ruimte: 18,00 m²
+- Gebouwgebonden buitenruimte: 17,30 m²
+- Bruto inhoud: 566 m³
+- Perceeloppervlakte: 107 m²
+- Bouwjaar: 1962
+- Energielabel E
+- Vijf slaapkamers, verdeeld over twee woonlagen
+- Woonkamer van bijna 42 m²
+- Ruim balkon op de eerste verdieping
+- Extra balkon bij de grootste slaapkamer
+- Gemoderniseerde badkamer
+- Twee separate, vernieuwde toiletten
+- Twee inpandige bergingen, waarvan één met wasmachineaansluiting
+- Tuin van circa 48 m², grenzend aan groen
+- Parkeerplek direct voor de woning
+- Erfpacht: huidige canon € 163,81 per jaar, vastgezet tot 15 september 2035
+- Vanaf 15 september 2035 bedraagt de eeuwigdurende canon € 2.026,10 per jaar, jaarlijks geïndexeerd- 
+- Niet zelfbewoningsclausule van toepassing
+- Oplevering op kort termijn mogelijk
+
+Een woning met volop mogelijkheden Met bijna 142 m² woonoppervlakte, vijf slaapkamers, een royale woonkamer en meerdere buitenruimtes biedt deze woning uitzonderlijk veel ruimte. Dankzij de vernieuwde badkamer en toiletten is een goede basis al aanwezig, terwijl u de overige ruimtes geheel naar eigen smaak kunt afwerken. Zo creëert u een eigentijds familiehuis op een rustige, groene locatie in Amsterdam.
+
+English
+
+SPACIOUS FAMILY HOME WITH FIVE BEDROOMS, GARDEN AND MULTIPLE OUTDOOR SPACES IN GREEN BUITENVELDERT
+
+Area
+Located in a quiet and green setting in Buitenveldert, this surprisingly spacious family home offers almost 142 m² of living space. The property is spread over three floors and features no fewer than five bedrooms, a sunny garden and two balconies. An ideal home for families, those working from home or anyone looking for generous living space in a pleasant location.
+
+Location
+The property is situated on a quiet residential street in Buitenveldert-Zuidoost, a popular neighbourhood known for its greenery, wide streets and excellent range of everyday amenities. There is a private parking space directly in front of the house, while the rear garden borders a green strip with mature trees, providing plenty of privacy. A small playground with play equipment is also within easy walking distance.
+
+For recreation, the Gijsbrecht van Aemstelpark, a walk along the Amstel and Amstelpark are all close by. Football, hockey and tennis facilities are just a short bike ride away.
+
+At the same time, the Zuidas business district and Amsterdam Zuid railway station can be reached within approximately ten minutes. The VU University Amsterdam, various schools, shops and the Groot Gelderlandplein shopping centre are also nearby. A small shopping centre for daily groceries is within walking distance. It is precisely this combination of peace, space and greenery, together with the proximity to the Zuidas and excellent access to the A10 motorway, that makes Buitenveldert such a popular place to live.
+
+Layout
+Ground floor
+Through the covered entrance, you enter the hallway, which provides access to the various rooms. This floor features two spacious bedrooms at the rear of the property, both overlooking the garden. Both rooms have direct access to the garden and are also ideally suited as a home office, hobby room or guest bedroom.
+
+There are also two practical internal storage rooms, one of which has a washing machine connection. The approximately 48 m² rear garden is fully paved, low-maintenance and borders a green area, creating a pleasant and sheltered outdoor space where you can enjoy peace and privacy.
+
+First floor
+The first floor features the generous living room of almost 42 m², extending across the full depth of the property. Thanks to the large windows at both the front and rear, the room is wonderfully bright. At the rear, wide sliding doors open onto the balcony, allowing you to enjoy the outdoor space throughout the day.
+
+The open-plan kitchen is located at the front and offers plenty of possibilities to create a contemporary dream kitchen. This floor also features a separate, recently renovated toilet.
+
+Second floor
+The second floor comprises three spacious and bright bedrooms. The largest bedroom spans the full width of the property, measures approximately 19 m² and has its own balcony. The modern bathroom features a spacious walk-in shower, double washbasin unit, underfloor heating and a designer radiator. The separate toilet on this floor has also recently been renovated.
+
+Garden
+This property features a spacious rear garden of approximately 48 m². A wonderful place for summer barbecues, long evenings outdoors or simply enjoying your own private outdoor space in Amsterdam.
+
+Details
+- Living area: 141.90 m², measured in accordance with NEN 2580
+- Other internal space: 18.00 m²
+- Building-related outdoor space: 17.30 m²
+- Volume: 566 m³
+- Plot size: 107 m²
+- Year of construction: 1962
+- Energy label E
+- Five bedrooms spread over two floors
+- Living room of almost 42 m²
+- Spacious balcony on the first floor
+- Additional balcony adjoining the master bedroom
+- Modernised bathroom
+- Two separate, recently renovated toilets
+- Two internal storage rooms, one with washing machine connection
+- Rear garden of approximately 48 m², bordering a green area
+- Private parking space directly in front of the property
+- Ground lease: current annual ground rent of €163.81, fixed until 15 September 2035
+- From 15 September 2035, the perpetual ground rent will be €2,026.10 per year, subject to annual indexation
+- Non-owner-occupancy clause applicable
+- Short-term completion possible
+
+A home with plenty of possibilities. With almost 142 m² of living space, five bedrooms, a generous living room and multiple outdoor spaces, this property offers an exceptional amount of space. Thanks to the modernised bathroom and toilets, a solid foundation is already in place, while the remaining spaces can be finished entirely according to your own taste. This allows you to create a contemporary family home in a quiet and green location in Amsterdam.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Verkoopmakelaar Bas B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 50</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/880/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/186_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/164_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/267_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/307_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/169_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/190_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/311_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/256_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/310_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/295_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/225_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/261_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/296_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/202_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/198_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/309_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/367_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/178_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/172_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/251_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/176_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/327_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/221_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/242_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/332_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/317_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/315_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/340_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/348_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/359_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/312_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/329_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/328_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/357_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/362_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/337_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/366_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/369_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/336_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/368_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/333_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/326_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/352_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/343_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/370_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/880/354_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

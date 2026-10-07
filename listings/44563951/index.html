@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admiraal De Ruijterweg 348-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Admiraal De Ruijterweg 348-3</h1>
+  <p class="sub">
+    <span>1055 NA Amsterdam</span>
+    <span>·</span>
+    <span>Gibraltarbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/394/692_1440x960.jpg" alt="Admiraal De Ruijterweg 348-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">21 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€475.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.090/m² · 3.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">67 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy F</span>
+      <span class="chip">Built 1926</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-admiraal-de-ruijterweg-348-3/44563951/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>Per Immediate Available</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 475.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.090</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 140,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1926</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>67 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>217 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>F</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Vaillant Ecofit CW4 High Efficiency Combi Boiler (gas-fired combi boiler uit 2022, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND C 11019</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 31-12-2050)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 327,77 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>City centre en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 140,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Gibraltarbuurt</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>4.135</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>19%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 8.015</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Licht en goed ingedeeld 4-kamerappartement van ca. 67m² met een balkon over de gehele breedte op het oosten. Een heerlijke woning op een toplocatie, op loopafstand van het Westerpark.
+
+**ENGLISH VERSION BELOW**
+
+LOCATIE
+De woning is gelegen in het populaire stadsdeel &quot;Bos en Lommer&quot; in Amsterdam-West. Een gezinsvriendelijke buurt met grote speeltuinen, kinderopvang en basisscholen om de hoek. In de directe omgeving is een gevarieerd aanbod van supermarkten en speciaalzaken voor de dagelijkse boodschappen. Ook is er veel horeca in de omgeving zoals Abbey, Café-Restaurant Amsterdam en Farine boulangerie&amp;café. Voor inspanning of ontspanning, kunt u terecht in het Westerpark, gelegen op loopafstand van de woning. Het groene en ruim opgezette Westerpark staat bekend om de velen evenementen die er jaarlijks worden gehouden zoals de Sunday Market, food -en wijnfestivals, klassieke openluchtconcerten en muziekfestivals. Daarnaast zijn er gezellige horecagelegenheden midden in het park. 
+De toegangsweg naar de ring A10 ligt eveneens op korte afstand en de openbaar vervoer verbindingen zijn zeer goed te noemen. Parkeren kan middels een parkeervergunning of betaald parkeren (op zondag gratis). Kortom een hele fijne plek om te wonen!
+
+INDELING
+Via het gemeenschappelijke trappenhuis bereikt u de woning op de derde en tevens bovenste verdieping van het complex. De lichte woonkamer aan de voorzijde beschikt over grote raampartijen die zorgen voor een prettige hoeveelheid daglicht en een vrij uitzicht. Aan de achterzijde bevindt zich de keuken, voorzien van diverse inbouwapparatuur. Zowel de keuken als de twee goed bemeten slaapkamers geven toegang tot het balkon op het oosten, waar u heerlijk kunt genieten van de ochtendzon. De badkamer is praktisch ingedeeld en beschikt over een douche, wastafel en toilet. De derde slaapkamer is gelegen aan de voorzijde.
+
+ERFPACHT
+De woning is gelegen op gemeentelijke erfpacht. De jaarlijkse canon bedraagt € 327,77 en is aftrekbaar voor de inkomstenbelasting. De Algemene Bepalingen voor voortdurende erfpacht 2000 zijn van toepassing en het huidige tijdvak loopt tot 31 december 2050.
+
+VERENIGING VAN EIGENAREN
+Vereniging van Eigenaars ‘Admiraal De Ruijterweg 348’ is actief en bestaat uit 4 leden. Het wordt professioneel uitgevoerd, er wordt jaarlijks vergaderd, er is een Meerjaren Onderhoudsplan (MJOP) aanwezig. De servicekosten bedragen € 140,- per maand en er zit ca. € 7.500,- in kas.
+
+WOONOPPERVLAKTE CONFORM NEN2580 NORM
+Bruto vloeroppervlak woning: 66,9m²
+Gebruiksoppervlakte wonen: 66,6m²
+Gebouwgebonden buitenruimte: 7,2m²
+
+BIJZONDERHEDEN
+- 3 slaapkamers en een breed balkon;
+- Mogelijkheid tot aanleg van een dakterras;
+- Geheel voorzien van dubbel glas;
+- CV Vaillant Ecofit CW4 2022
+- Veel opbergruimte in de (slaap)kamers;
+- Oplevering kan snel
+
+VOORBEHOUD
+Deze projectinformatie is met de grootste zorgvuldigheid samengesteld. Er wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Koper heeft zijn eigen onderzoekplicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Van toepassing zijn de NVM-voorwaarden.
+
+**ENGLISH VERSION**
+
+Bright and well-laid-out 4-room apartment of approx. 67m² with a full-width east-facing balcony. A delightful home in a prime location, within walking distance of Westerpark.
+
+LOCATION
+The apartment is located in the popular “Bos en Lommer” district in Amsterdam-West. A family-friendly neighborhood with large playgrounds, daycare centers, and elementary schools just around the corner. The immediate area offers a wide variety of supermarkets and specialty shops for your daily shopping needs. There are also many dining options nearby, such as Abbey, Café-Restaurant Amsterdam, and Farine boulangerie&amp;café. For exercise or relaxation, head to Westerpark, located within walking distance of the home. The green and spacious Westerpark is known for the many events held there annually, such as the Sunday Market, food and wine festivals, classical open-air concerts, and music festivals. There are also cozy dining and drinking spots right in the middle of the park. 
+The access road to the A10 ring road is also a short distance away, and public transportation connections are excellent. Parking is available with a parking permit or via paid parking (free on Sundays). In short, a wonderful place to live!
+
+LAYOUT
+You reach the apartment on the third and top floor of the building via the shared stairwell. The bright living room at the front features large windows that provide plenty of natural light and an unobstructed view. At the rear is the kitchen, equipped with various built-in appliances. Both the kitchen and the two generously sized bedrooms open onto the east-facing balcony, where you can enjoy the morning sun. The bathroom has a practical layout and features a shower, sink, and toilet. The third bedroom is located at the front.
+
+LEASEHOLD
+The property is situated on a municipal leasehold. The annual ground lease is €327.77 and is deductible for income tax purposes. The General Provisions for Continuing Leaseholds 2000 apply, and the current term runs until December 31, 2050.
+
+ASSOCIATION OF OWNERS
+The “Admiraal De Ruijterweg 348” Homeowners’ Association is active and consists of 4 members. It is professionally managed, holds annual meetings, and has a Long-Term Maintenance Plan (MJOP) in place. The service fees amount to €140 per month, and there is approximately €7,500 in the association’s fund.
+
+LIVING AREA IN ACCORDANCE WITH NEN2580 STANDARD
+Gross floor area: 66.9m²
+Usable living area: 66.6m²
+Building-related outdoor space: 7.2m²
+
+DETAILS
+- 3 bedrooms and a spacious balcony;
+- Possibility of building a rooftop terrace;
+- Fully double-glazed;
+- Vaillant Ecofit CW4 central heating system (2022);
+- Plenty of storage space in the (bed)rooms;
+- Available for immediate move-in
+
+RESERVATION
+This project information has been compiled with the utmost care. However, no liability is accepted for any incompleteness, inaccuracy or otherwise, or the consequences thereof. The buyer has his own duty to investigate all matters that are important to him or her. With regard to this property, the broker is the advisor to the seller. The NVM conditions apply.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Ouwehand v/d Meijden Makelaars B.V.</strong> · Ouwehand v/d Meijden Makelaars B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 21</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/394/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/756_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/685_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/675_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/749_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/691_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/734_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/699_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/760_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/688_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/673_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/657_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/684_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/394/721_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

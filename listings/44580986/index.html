@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heathrowstraat 350 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Heathrowstraat 350</h1>
+  <p class="sub">
+    <span>1043 CH Amsterdam</span>
+    <span>·</span>
+    <span>Sloterdijk Stationskwartier</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/097/972_1440x960.jpg" alt="Heathrowstraat 350 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">44 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€795.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.098/m² · 3.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">112 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A+++</span>
+      <span class="chip">Built 2024</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-heathrowstraat-350/44580986/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 795.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.098</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 315,87 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2024</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>112 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>30 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>369 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, Walk-in shower, Bathtub, toilet, en Underfloor heating</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, zonnecollectoren, en zonnepanelen</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>17e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+++</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, drieDouble glazing, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Warmtepomp</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN K 4570</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 3.328,00 per Yesar</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD HOLLAND K 4570A</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 31-03-2071)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 48,54 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan water, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Capaciteit</dt><dd>1 auto</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Verwarming</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 315,87 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">** ENGLISH TEXT BELOW **
+Wonen op hoog niveau, letterlijk en figuurlijk. Dit indrukwekkende hoekappartement van ca. 112 m² ligt op de 16e verdieping en wordt omringd door een royaal terras van ca. 30 m². Hier geniet je van een fenomenaal uitzicht over de skyline van Amsterdam, van de Westertoren tot ver over het Westelijk Havengebied.
+Dit recent opgeleverde penthouse (2024) in het project The Floating Gardens combineert luxe, comfort en duurzaamheid op een manier die je direct voelt zodra je binnenstapt. Met energielabel A+++ en een hoogwaardige afwerking is dit een woning die klaar is voor de toekomst.
+Indeling
+De stijlvolle entree van het gebouw geeft toegang tot de woning via lift of trap.
+Binnen word je direct gegrepen door het uitzicht. De living vormt het kloppend hart van het appartement, met grote raampartijen en directe toegang tot het rondom gelegen terras. De stad ligt hier letterlijk aan je voeten.
+Overdag een levendig panorama, ’s avonds een spectaculair lichtspel.
+De afwerking is strak en warm tegelijk, met een elegante visgraatvloer en comfortabele vloerverwarming én vloerkoeling door de gehele woning.
+De open keuken in lichtgrijs design vormt een natuurlijke ontmoetingsplek. Uitgerust met hoogwaardige inbouwapparatuur zoals een Bora inductiekookplaat, Quooker, combi-oven, koelkast, vriezer en vaatwasser. Een plek waar koken en samenzijn moeiteloos samenkomen.
+De woning beschikt over drie goed bemeten slaapkamers, allemaal met toegang tot het terras. Ideaal voor wie binnen en buiten naadloos wil laten overlopen.
+De badkamer is stijlvol en compleet, met een ruime inloopdouche, ligbad en dubbele wastafel. Daarnaast zijn er twee separate toiletten en een praktische inpandige berging met wasmachine- en drogeraansluiting.
+In de onderbouw beschik je over een separate berging, en een parkeerplaats is separaat te koop.
+Gemeenschappelijke voorzieningen:
+The Floating Gardens onderscheidt zich niet alleen door zijn architectuur en afwerking, maar ook door de bijzondere gemeenschappelijke voorzieningen die bijdragen aan een gevoel van comfort en verbondenheid.
+Op de vijfde verdieping bevinden zich diverse fraai ontworpen gedeelde ruimtes exclusief voor bewoners. Zo is er een stijlvolle logeerkamer die gereserveerd kan worden voor gasten, een gezamenlijke woonkamer met televisie voor bijvoorbeeld sportwedstrijden of filmavonden, en een compleet uitgeruste kookstudio waar workshops en diners georganiseerd kunnen worden. Daarnaast zijn er meerdere vergaderruimtes, een pingpongtafel, twee groene daktuinen en een sfeervolle patiotuin. Het reserveren van de verschillende ruimtes verloopt eenvoudig via de VvE.
+Omgeving
+Sloterdijk ontwikkelt zich in rap tempo tot een van de meest dynamische woongebieden van Amsterdam. Met de grootschalige gebiedsontwikkeling Havenstad krijgt de buurt de komende jaren een volledig nieuw karakter:
+levendig, groen en stedelijk tegelijk.
+De bereikbaarheid is uitzonderlijk. Station Sloterdijk ligt op slechts 3 minuten lopen. Van daaruit sta je binnen 5 minuten op Amsterdam Centraal en binnen 12 minuten op Schiphol.
+Voor ontspanning en natuur liggen onder andere het Westerpark, de Bretten en de Sloterplas binnen handbereik. Een perfecte balans tussen stad en rust.
+Bijzonderheden
+• Luxe hoekappartement van 112m2;
+• Met zonnig terras van 30 m2 rondom de gehele woning;
+• Gelegen op de 16e verdieping;
+• Adembenemend uitzicht over de skyline van Amsterdam;
+• Eigen parkeerplaats in de onderbouw is separaat te koop;
+• Separate berging van ca. 3 m2;
+• Gemeenschappelijke interne fietsenstalling;
+• Duurzame woning met energielabel A+++;
+• Stijlvolle visgraatvloer met vloerverwarming en vloerkoeling door de gehele woning;
+• Modern nieuwbouwcomplex (2024) The Floating Gardens ;
+• De erfpachtcanon van de woning en parkeerplaats bedraagt totaal € 3376 per jaar en het huidige tijdvak loopt tot 31-03-2071;
+• Gezonde en actieve VVE;
+• Maandelijkse servicekosten van €315,87;
+• Oplevering in overleg.
+---Living at a high level, both literally and figuratively. This impressive corner apartment of approx. 112 m² is situated on the 16th floor and is surrounded by a generous terrace of approx. 30 m². Here, you can enjoy phenomenal views over the Amsterdam skyline, from the Westertoren all the way across the Western Docklands.
+This recently completed penthouse (2024) in the project The Floating Gardens combines luxury, comfort and sustainability in a way you immediately feel upon entering. With an A+++ energy label and high-quality finishes, this is a home that is truly future-proof.
+Layout
+The stylish entrance of the building provides access to the apartment via elevator or staircase.
+Upon entering, you are instantly drawn to the view. The living area forms the beating heart of the apartment, featuring large windows and direct access to the wraparound terrace. The city quite literally lies at your feet. A
+vibrant panorama by day, and a spectacular display of lights by night.
+The finishes are both sleek and warm, with an elegant herringbone floor and comfortable underfloor heating and cooling throughout the entire apartment.
+The open-plan kitchen in light grey design serves as a natural gathering space. It is equipped with high-end built-in appliances such as a Bora induction hob, Quooker, combination oven, refrigerator, freezer and dishwasher. A place where cooking and socialising effortlessly come together.
+The apartment offers three well-proportioned bedrooms, all with access to the terrace. Ideal for those who want to seamlessly blend indoor and outdoor living.
+The bathroom is stylish and complete, featuring a spacious walk-in shower, bathtub and double vanity. In addition, there are two separate toilets and a practical internal storage room with connections for a washing machine and dryer.
+In the basement, you will find a private storage unit, and a parking space is available for purchase separately.
+Shared amenities
+The Floating Gardens stands out not only for its architecture and high-quality finish, but also for its exceptional shared amenities that create a true sense of comfort and community. Located on the fifth floor, residents have access to a variety of beautifully designed communal spaces. These include a stylish guest suite that can be reserved for visitors, a shared living room with television ideal for movie nights or sporting events, and a fully equipped cooking studio for workshops and private dinners. In addition, there are several meeting rooms, a ping pong table, two landscaped rooftop gardens and an inviting patio garden. Reservations for the various spaces can easily be arranged through the homeowners’ association.
+Surroundings
+Sloterdijk is rapidly developing into one of Amsterdam’s most dynamic residential areas. With the large-scale Havenstad development, the neighbourhood will transform in the coming years into a vibrant, green and urban environment.
+Accessibility is exceptional. Sloterdijk Station is just a 3-minute walk away. From there, you can reach Amsterdam Central Station within 5 minutes and Schiphol Airport within 12 minutes.
+For relaxation and nature, Westerpark, De Bretten and the Sloterplas are all within easy reach. A perfect balance between city life and tranquillity.
+Key features
+• Luxurious corner apartment of approx. 112 m²
+• Sunny wraparound terrace of approx. 30 m²
+• Located on the 16th floor
+• Breathtaking views over the Amsterdam skyline
+• Private parking space in the basement available for purchase separately
+• Separate storage unit of approx. 3 m²
+• Internal bike storage, for residents only
+• Sustainable home with A+++ energy label
+• Stylish herringbone flooring with underfloor heating and underfloor cooling throughout
+• Modern new-build complex (2024) The Floating Gardens
+• Annual ground lease (erfpacht) for apartment and parking space totals €3376, current period runs until 31-032071
+• Healthy and active homeowners’ association (VvE)
+• Monthly service charges of €315,87
+• Multiple share amenities
+• Delivery in consultation</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 1 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Mick ten Bosch</strong> · Another Real Estate Agency (AREA)</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 44</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/097/972_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/973_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/961_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/978_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/956_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/957_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/970_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/966_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/979_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/984_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/969_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/981_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/967_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/983_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/975_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/987_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/980_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/954_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/097/971_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

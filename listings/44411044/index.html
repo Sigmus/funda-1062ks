@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joop Eijlstraat 7 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Joop Eijlstraat 7</h1>
+  <p class="sub">
+    <span>1063 EM Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/231/416/521_1440x960.jpg" alt="Joop Eijlstraat 7 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">47 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€695.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.096/m²
+    </div>
+    <div class="chips">
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">114 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1954</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-joop-eijlstraat-7/44411044/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 695.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.096</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1954</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>114 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>101 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>386 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 2 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Airconditioning</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en gedeeltelijke Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Gas gestookt uit 2019, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN D 2520</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>101 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>45 m² (9,00 m deep en 5,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidoosten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde stenen berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruime, lichte gezinswoning | 114 m² | 4 slaapkamers | dakopbouw | volledig gerenoveerd | eeuwigdurend afgekochte erfpacht | voor- én achtertuin | Slotermeer
+
+Bent u op zoek naar een ruim en veelzijdig gezinshuis in Amsterdam?
+De woning heeft drie woonlagen, met 4 slaapkamers (meerdere mogelijk), meerdere leefruimtes én een tuin aan zowel de voor- als achterzijde. Dankzij de ligging aan twee kanten is er altijd wel een plekje in de zon of schaduw te vinden. Ideaal voor gezinnen of wie graag thuis werkt met voldoende ruimte om zich heen.
+
+Een slimme indeling met volop licht en comfort. Deze goed onderhouden en volledig gerenoveerde tussenwoning voelt dankzij de vele ramen en de schuifpui op de begane grond aangenaam en open aan. 
+
+Begane grond
+De voorzijde kijkt uit op een rustig plantsoen. Via de entreehal, met toilet en meterkast, bereikt u de royale woonkamer met luxe open keuken. De SieMatic-keuken (2020) is voorzien van diverse inbouwapparatuur. Via de schuifpui en de aangrenzende berging/bijkeuken stapt u zo de zonnige achtertuin in, compleet met achterom en overkapping.
+
+Eerste verdieping
+De eerste verdieping biedt drie slaapkamers en een badkamer met douche, wastafel en tweede toilet. Één slaapkamer doet momenteel dienst als inloopkast, maar is eenvoudig terug te brengen naar slaap- of werkkamer.
+
+Tweede verdieping
+In 2019 werd de woning uitgebreid met een volwaardige dakopbouw. Deze bovenste verdieping biedt een ruime kamer van maar liefst 35 m², een toiletruimte, een wasruimte en airconditioning, uiterst comfortabel en volledig op zichzelf. De ruimte is bovendien eenvoudig onder te verdelen in twee volwaardige slaapkamers. Ideaal voor logés, tieners of een royale thuiswerkplek.
+
+Omgeving en bereikbaarheid
+Slotermeer is een kindvriendelijke, groene buurt met speelpleintjes en uitstekende voorzieningen. Op loopafstand liggen winkelcentrum Plein &#x27;40-&#x27;45 (inclusief markt), diverse scholen, openbaar vervoer en station Sloterdijk. Sportvelden, volkstuinen en natuurgebied De Bretten zijn eveneens dichtbij. Met de fiets bent u zo in Bos en Lommer of het Westerpark; met de auto bent u binnen enkele minuten op de A10.
+
+Praktische informatie
+Parkeergelegenheid/vergunning
+Voldoende parkeergelegenheid op de openbare weg middels bewonersvergunning. 
+
+Erfpacht
+Het pand is gelegen op erfpachtgrond. De canon is door de huidige eigenaar reeds eeuwigdurende afgekocht.
+
+Berging
+De woning beschikt over een eigen stenen berging aan de achterzijde van e woning.
+
+Energielabel
+De woning heeft een energielabel C
+
+Meetrapport
+De woning is ingemeten conform NEN 2580 en heeft een woonoppervlakte van 114,00 m2. Een meetrapport is uiteraard beschikbaar.
+
+Dakopbouw en renovatie
+De woning is tussen 2019 en 2020 vergroot middel een dakopbouw en volledig gerenoveerd. 
+
+Kortom
+Een heerlijk licht en ruim gezinshuis, volledig gerenoveerd, met vier slaap- of werkkamers, een zonnige tuin en een unieke ligging in een rustige, groene buurt. Plan snel een bezichtiging — dit is er een die u niet wilt missen.
+
+----
+
+Spacious, light-filled family home | 114 m² | 4 bedrooms | roof extension | fully renovated | perpetually redeemed leasehold | front &amp; rear garden | Slotermeer
+
+Are you looking for a spacious and versatile family home in Amsterdam? This fully renovated mid-terrace house in the green neighbourhood of Slotermeer is a rare find.
+
+The property spans three floors with four bedrooms (more possible), multiple living areas and gardens at both the front and rear. Thanks to this dual orientation, there is always a spot in the sun or shade to enjoy. Perfect for families or those who work from home and value plenty of space around them. Large windows and sliding doors on the ground floor give the home a bright, open feel throughout.
+
+Ground floor
+The front of the house looks out onto a quiet green square. Through the entrance hall — with guest toilet and meter cupboard — you enter the generous living room with its luxury open-plan kitchen. The SieMatic kitchen (2020) is fitted with a range of built-in appliances. Sliding doors lead from the living room through the adjoining storage room/utility room directly into the sunny rear garden, complete with a back entrance and covered terrace.
+
+First floor
+The first floor offers three bedrooms and a bathroom with shower, washbasin and a second toilet. One bedroom is currently used as a walk-in wardrobe but can easily be converted back into a bedroom or home office.
+
+Second floor
+In 2019 the property was extended with a full roof storey. This top floor features a spacious room of no less than 35 m², a toilet room, a laundry room and air conditioning — supremely comfortable and entirely self-contained. The space can also easily be divided into two full-sized bedrooms. Ideal for guests, teenagers or a generous home office.
+
+Surroundings and accessibility
+Slotermeer is a child-friendly, green neighbourhood with playgrounds and excellent amenities. Within walking distance you will find shopping centre Plein &#x27;40-&#x27;45 (including a market), various schools, public transport and Sloterdijk railway station. Sports fields, allotment gardens and nature reserve De Bretten are also close by. By bike you can reach Bos en Lommer or Westerpark in no time; by car you are on the A10 ring road within minutes.
+
+Practical information
+
+— Parking: ample street parking available via residents&#x27; permit
+— Leasehold: the property is situated on leasehold land; the ground rent has been perpetually redeemed by the current owner
+— Storage: private brick storage room at the rear of the property
+— Energy label: C
+— Floor area: 114.00 m² (measured in accordance with NEN 2580; measurement report available on request)
+— Roof extension &amp; renovation: the property was enlarged by means of a roof extension and fully renovated between 2019 and 2020
+
+In short
+A wonderfully bright and spacious family home, fully renovated, with four bedrooms or home offices, a sunny garden and a prime location in a quiet, green neighbourhood. Schedule a viewing soon — this is one you won&#x27;t want to miss.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Kolt Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 47</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/231/416/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/470_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/573_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/614_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/530_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/516_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/541_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/604_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/482_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/621_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/462_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/489_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/562_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/498_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/467_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/501_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/607_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/493_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/531_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/550_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/605_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/576_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/625_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/618_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/464_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/574_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/451_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/577_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/578_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/588_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/565_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/485_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/452_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/553_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/454_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/580_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/487_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/506_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/600_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/523_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/481_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/416/510_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

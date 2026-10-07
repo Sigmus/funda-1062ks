@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wattstraat 11 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Wattstraat 11</h1>
+  <p class="sub">
+    <span>1171 BR Badhoevedorp</span>
+    <span>·</span>
+    <span>Badhoevedorp Bouwlust</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/213/933_1440x960.jpg" alt="Wattstraat 11 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">37 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€750.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.808/m² · 4.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.8 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">156 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1967</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/badhoevedorp/huis-wattstraat-11/44517259/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 750.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.808</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, 2-onder-1-kapwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1967</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>156 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>238 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>563 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches, Bathtub, toilet, 2 Washbasins, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Airconditioning, dakraam, glasvezelkabel, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en gedeeltelijke Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd></dd></div>
+        <div class="frow"><dt>Boiler</dt><dd></dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas-fired combi boiler uit 2020, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>HAARLEMMERMEER H 6812</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>238 m²</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>77 m² (8,50 m deep en 9,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het noordwesten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Aangebouwde stenen garage</dd></div>
+        <div class="frow"><dt>Capaciteit</dt><dd>1 auto</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>On own property en Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**This property is sold by a certified MVA expat broker**For English translation see below Dutch text**
+
+Welkom in dit heerlijke familiehuis, waar ruimte, licht en gezelligheid samenkomen en waar ieder gezinslid zich meteen thuis voelt. Deze ruime, uitgebouwde twee-onder-een-kapwoning met maar liefst 156 m² woonoppervlakte ligt in een rustige, kindvriendelijke omgeving waar kinderen veilig kunnen spelen en buren elkaar nog kennen. Een fijne plek om samen te wonen, te groeien en mooie herinneringen te maken.
+
+De woning beschikt over een lichte, sfeervolle woonkamer met een praktische en gezinsvriendelijke indeling en een zonnige achtertuin waar volop ruimte is voor spelende kinderen, ontspannen middagen en gezellige avonden met familie en vrienden. Met vijf slaapkamers en twee badkamers biedt dit huis alle ruimte die een gezin zich kan wensen, zowel nu als in de toekomst.
+
+Bij binnenkomst ervaar je direct de warme sfeer en de royale leefruimte. De uitgebouwde woonkamer is verrassend licht dankzij de lichtkoepels en grote raampartijen. Een groot deel van de voormalige garage is bij de woning betrokken en vormt nu een fijne extra leefruimte binnen het woon- en eetgedeelte, waardoor een open en gezellige plek is ontstaan waar het hele gezin samenkomt.
+
+Indeling
+Binnenkomst in de ruime hal met de meterkast, toiletruimte met zwevend toilet en fonteintje uitgevoerd met beige tegels, vaste trap naar de eerste verdieping en toegang tot de woonkamer. 
+De uitgebouwde woonkamer is voorzien van een nette beige natuurstenen vloer met vloerverwarming, diverse lichtkoepels voor extra daglicht toetreding, inbouwspots en een sfeervolle elektrische open haard. Via de openslaande deuren kun je   naar de ruime achtertuin. 
+Vanuit de woonkamer heeft u toegang tot de open keuken in een L- vorm opstelling, welke is voorzien van houten kastjes en lades en een zwart granieten werkblad met een bar voor een speels effect. 
+De keuken beschikt over diverse inbouwapparatuur:
+- 5 pits inductie kookplaat (Siemens);
+- RVS Afzuigkap ( Siemens);
+- Vaatwasser ( Bosch);
+- Magnetron ( Siemens);
+- Compact oven ( Siemens);
+- Losse koelkast met vriezer.
+
+Eerste verdieping
+Via een vaste trap kom je op de eerste verdieping met drie slaapkamers en een badkamer. 
+Aan de voorzijde van de woning bevinden zich twee ruime en lichte slaapkamers voorzien van een grijze laminaatvloer. Aan de achterzijde van de woning bevindt zich de master bedroom met een vaste inbouwkast en airconditioning, voorzien van vloerbedekking. Hier is eventueel de mogelijkheid tot het creëren van een balkon. 
+De badkamer, uitgevoerd in de kleurstelling zwart met wit is voorzien van een douchecabine, ligbad, wastafel, wit badkamermeubel en zwevend toilet. De bovenraampjes zorgen voor natuurlijke ventilatie en daglicht toetreding. Op de overloop is er tevens een aparte kast met de wasmachine en droger opstelling.
+
+Tweede verdieping
+Deze verdieping bereikbaar via een vast trap heeft twee slaapkamers en een tweede badkamer.
+Overloop met aparte bergruimte, tweede badkamer met een douche, wastafel, raam en inbouwspots uitgevoerd in gekleurd mozaïek. De C.V. ketel is netjes achter een schot weggewerkt. 
+Op deze verdieping bevinden zich door het aanbrengen van dakkapellen nog twee ruime slaapkamers voorzien van inbouwspots en vloerbedekking.
+
+Tuin
+De riante achtertuin gelegen op het noordwesten is een heerlijke plek om van lange zomeravonden te genieten. Dankzij de overkapping kunt u hier vrijwel het hele jaar door buiten zitten. Achterin de tuin staat een praktische houten schuur voor extra opslagruimte of hobby’s.
+De netjes betegelde voortuin biedt parkeergelegenheid voor minimaal één auto op eigen terrein. Het overgebleven deel van de garage fungeert nu als handige schuur met volop opbergmogelijkheden.
+
+De locatie
+Dit woonhuis in de Wattstraat van Badhoevedorp is centraal gelegen ten opzichte van het gezellige centrum van Badhoevedorp. De buurt is zeer kindvriendelijk en centraal ten opzichte van scholen, crèches en sportaccommodaties. U woont hier tevens centraal ten opzichte van diverse uitvalswegen, zoals de A4, A5, A9 en de A10.
+
+Verkoopvoorwaarden
+
+Roerende zaken
+Volgens lijst
+
+Oplevering
+In overleg
+
+Clausules
+Ouderdomsclausule
+
+Koopakte en notaris
+Een mondelinge overeenstemming tussen de particuliere verkoper en de particuliere koper is niet rechtsgeldig. Met andere woorden: er is geen koop. Er is pas sprake van een rechtsgeldige koopovereenkomst als de particuliere verkoper en de particuliere koper de koopovereenkomst hebben ondertekend. Koper dient binnen twee werkdagen na het bereiken van de mondelinge overeenstemming inzake de koopsom en de voorwaarden, een notaris aan te wijzen binnen een straal van 15 km van het ter verkoop aangeboden object, opdat uiterlijk 1 week na deze mondelinge overeenstemming de koopakte ondertekend kan worden. Indien koper binnen deze periode geen notaris heeft aangewezen, heeft verkoper het recht deze aan te wijzen.
+***************************************************************************************************Welcome to this delightful family home, where space, light, and coziness converge, and where every family member will instantly feel at home. This spacious, extended semi-detached house, boasting an impressive 156 m² of living space, is situated in a quiet, family-friendly neighborhood where children can play safely and neighbors still know each other. A wonderful place to live together, grow, and create beautiful memories.
+
+The house features a bright, inviting living room with a practical, family-friendly layout and a sunny backyard with ample space for children to play, relaxing afternoons, and cozy evenings with family and friends. With five bedrooms and two bathrooms, this house offers all the space a family could wish for, both now and in the future.
+
+Upon entering, you&#x27;ll immediately experience the warm atmosphere and spacious living space. The extended living room is surprisingly bright thanks to skylights and large windows. A large part of the former garage has been incorporated into the house and now forms a pleasant additional living space within the living and dining area, creating an open and inviting space where the whole family can gather.
+
+Layout
+Enter the spacious hall with the meter cupboard, toilet with wall-hung toilet and sink finished with beige tiles, staircase to the first floor, and access to the living room.
+
+The extended living room features a neat beige natural stone floor with underfloor heating, several skylights for additional daylight, recessed spotlights, and an inviting electric fireplace. French doors lead to the spacious back garden.
+From the living room, you have access to the open-plan L-shaped kitchen, which features wooden cabinets and drawers and a black granite countertop with a bar for a playful effect. The kitchen is equipped with various built-in appliances:
+- 5-burner induction hob (Siemens);
+- Stainless steel extractor hood (Siemens);
+- Dishwasher (Bosch);
+- Microwave (Siemens);
+- Compact oven (Siemens);
+- Separate refrigerator with freezer.
+
+First Floor
+A fixed staircase leads to the first floor, which features three bedrooms and a bathroom.
+
+At the front of the house are two spacious and bright bedrooms with gray laminate flooring. At the rear of the house is the master bedroom with a built-in wardrobe and air conditioning, and carpeted flooring. There is also the possibility of creating a balcony here.
+The bathroom, finished in black and white, is equipped with a shower, bathtub, sink, white vanity, and wall-hung toilet. Skylights provide natural ventilation and natural light. On the landing, there is also a separate closet with the washing machine and dryer.
+
+Second Floor
+This floor, accessible via a fixed staircase, has two bedrooms and a second bathroom.
+The landing offers separate storage space and a second bathroom with a shower, sink, window, and recessed lighting in colored mosaic. The central heating boiler is neatly concealed behind a bulkhead.
+
+This floor also features two more spacious bedrooms with recessed lighting and carpeted flooring, thanks to the addition of dormer windows.
+
+Garden
+The spacious northwest-facing backyard is a wonderful place to enjoy long summer evenings. Thanks to the covered patio, you can sit outside almost year-round. At the back of the garden is a practical wooden shed for extra storage or hobbies.
+The neatly paved front garden offers parking for at least one car on the property. The remaining part of the garage currently serves as a handy shed with ample storage space.
+
+Location
+This house on Wattstraat in Badhoevedorp is centrally located near the charming town center. The neighborhood is very child-friendly and close to schools, daycare centers, and sports facilities. You&#x27;ll also be conveniently located near various highways, such as the A4, A5, A9, and A10.
+
+Terms and Conditions
+
+Moveable Property
+According to List
+
+Delivery Date
+In consultation
+
+Clauses
+Age Clause
+
+Purchase agreement and notary
+A verbal agreement between the private seller and the private buyer is not legally valid. In other words, there is no sale. A legally valid purchase agreement only exists once the private seller and the private buyer have signed the purchase agreement. Within two business days of reaching the verbal agreement on the purchase price and the terms and conditions, the buyer must appoint a notary within a 15 km radius of the property for sale, so that the purchase agreement can be signed no later than one week after this verbal agreement. If the buyer has not appointed a notary within this period, the seller has the right to appoint one.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Lichte woonkamer met haard
+
+Uitgebouwde woonkamer met lichtkoepels, vloerverwarming en elektrische haard.
+
+Ruime tuin met overkapping
+
+Noordwest tuin met overkapping, houten schuur en parkeerruimte op eigen erf.
+
+Gezinswoning met vijf kamers
+
+Twee-onder-een-kap met 156 m² woonruimte, 5 slaapkamers en 2 badkamers.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 37</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/213/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/214/002_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/936_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/898_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/906_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/214/009_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/214/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/973_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/887_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/900_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/939_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/214/014_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/881_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/917_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/214/023_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/972_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/901_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/214/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/925_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/893_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/213/903_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

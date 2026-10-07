@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admiraal De Ruijterweg 162-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Admiraal De Ruijterweg 162-3</h1>
+  <p class="sub">
+    <span>1056 GW Amsterdam</span>
+    <span>·</span>
+    <span>Trompbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/835/508_1440x960.jpg" alt="Admiraal De Ruijterweg 162-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">38 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€775.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.936/m² · 2.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.6 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">78 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1911</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-admiraal-de-ruijterweg-162-3/80987134/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 775.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.936</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 232,42 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1911</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>78 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>287 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, Mechanical ventilation, en natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, HR-glas, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Kombi Kompakt (gas gestookt uit 2025, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM L 3304</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 232,42 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">— ENGLISH TRANSLATION BELOW —
+
+Wij bieden dit lichte, recent geheel gerenoveerde en sfeervolle 3-slaapkamerappartement aan, gelegen op de derde verdieping op een centrale locatie in Amsterdam-West. De woning is met veel aandacht afgewerkt en combineert originele details met modern wooncomfort.
+
+Indeling
+
+Via het recent gerenoveerde gemeenschappelijke trappenhuis bereikt u het appartement op de derde verdieping. U komt binnen in de centrale hal, vanwaar de verschillende vertrekken bereikbaar zijn. Hier bevindt zich ook het separate toilet, uitgevoerd in dezelfde stijl als de badkamer.
+
+Aan de voorzijde kan via de stalen taatsdeuren de ruime en riante woonkamer bereikt worden. Hier zorgen de hoge plafonds en de grote raampartijen voor veel natuurlijk licht. Via de openslaande deuren is het balkon aan de voorzijde bereikbaar, een fijne plek om buiten te zitten en over de straat uit te kijken.
+
+De open keuken sluit direct aan op de woonkamer en is modern uitgevoerd. De keuken is voorzien van diverse inbouwapparatuur, waaronder een inductiekookplaat, combi-oven, Quooker, vaatwasser, koelkast en aparte vriezer.
+
+De ruime hoofdslaapkamer ligt aan de achterzijde en beschikt over veel natuurlijk licht. Hier is voldoende ruimte gelaten voor het plaatsen van inbouwkasten kastruimte en/of een werkplek. 
+
+De tweede slaapkamer bevindt zich aan de voorzijde. Ook hier is veel aandacht besteed aan het maatwerk, met het plaatsen van kasten en een bureau. 
+
+De derde slaapkamer is gelegen aan de rustige achterzijde en is goed te gebruiken als werk, walkin clost en/of kinder kamer. 
+
+De badkamer is uitgevoerd in lichte, rustige tinten, voorzien van natuursteen en beschikt over een ruime inloopdouche met regendouche, een strak dubbel wastafelmeubel en het tweede toilet. 
+
+Locatie
+
+De woning ligt aan de Admiraal De Ruijterweg in Amsterdam-West, vlak bij De Baarsjes en het Erasmuspark. Een fijne en centrale locatie met een ruim aanbod aan winkels, koffiezaken, cafés en restaurants in de directe omgeving.
+Voor groen en ontspanning ligt het Erasmuspark op korte afstand. Ook het Westerpark, Oud-West en de Jordaan zijn gemakkelijk per fiets bereikbaar.
+De bereikbaarheid is uitstekend. Diverse tram- en busverbindingen bevinden zich in de directe omgeving en met de fiets bent u binnen korte tijd in het centrum van Amsterdam. Ook de Ring A10 is snel bereikbaar.
+
+Bijzonderheden
+
+- Woonoppervlakte 78 m² (NEN2580);
+- Energielabel A;
+- Volledig gerenoveerd in 2026; 
+- Moderne open keuken met diverse inbouwapparatuur;
+- Moderne badkamer met inloop- en regendouche;
+- Gelegen op eigen grond, dus geen erfpacht;
+- Kleinschalig professioneel beheerde VvE bestaande uit 5 leden;
+- De servicekosten bedragen € 232,42,- per maand;
+- Centrale ligging in Amsterdam-West;
+- Oplevering in overleg, kan snel.
+
+DISCLAIMER
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief.
+
+— ENGLISH TRANSLATION —
+
+We are offering this bright, atmospheric 3-bedroom apartment—recently fully renovated—located on the third floor in a central part of Amsterdam-West. The property has been finished with great care, combining original details with modern living comforts.
+
+Layout
+
+You reach the third-floor apartment via the recently renovated communal stairwell. You enter into a central hallway that provides access to the various rooms. The separate toilet—finished in the same style as the bathroom—is also located here.
+
+Steel pivot doors lead from the hallway into the spacious, airy living room. High ceilings and large windows flood the space with natural light. French doors open onto the front balcony, a lovely spot to sit outside and look out over the street.
+
+The modern open-plan kitchen connects directly to the living room. It is equipped with various built-in appliances, including an induction cooktop, combination oven, Quooker tap, dishwasher, refrigerator, and separate freezer.
+
+The spacious master bedroom is located at the rear and enjoys plenty of natural light. There is ample space here for built-in wardrobes and/or a workspace.
+
+The second bedroom is situated at the front. Here, too, great attention has been paid to custom features, including built-in cabinetry and a desk.
+
+The third bedroom is located at the quiet rear of the apartment and is ideal for use as a home office, walk-in closet, and/or children&#x27;s room.
+
+The bathroom is decorated in light, calm tones, features natural stone and has a spacious walk-in shower with rain shower, a sleek double washbasin and the second toilet.
+
+The property is located on Admiraal De Ruijterweg in Amsterdam-West, close to De Baarsjes and Erasmuspark. It is a pleasant, central location with a wide range of shops, coffee bars, cafés, and restaurants in the immediate vicinity.
+For greenery and relaxation, Erasmuspark is just a short distance away. Westerpark, Oud-West, and the Jordaan are also easily accessible by bicycle.
+Accessibility is excellent. Various tram and bus connections are nearby, and you can reach Amsterdam city center quickly by bike. The A10 ring road is also easily accessible.
+
+Key features
+
+- Living area: 78 m² (NEN2580);
+- Energy label A;
+- Fully renovated in 2026;
+- Modern open-plan kitchen with various built-in appliances;
+- Modern bathroom with walk-in shower and rain shower;
+- Freehold property (no leasehold);
+- Small-scale, professionally managed Homeowners&#x27; Association (VvE) consisting of 5 members;
+- Service charges: €232.42 per month;
+- Central location in Amsterdam-West;
+- Delivery in consultation; quick handover possible.
+
+DISCLAIMER
+This information has been compiled by us with due care. However, we accept no liability for any incompleteness, inaccuracies or otherwise, nor for the consequences thereof. All stated dimensions and surface areas are indicative.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>BIC Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 38</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/835/508_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/466_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/330_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/409_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/503_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/404_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/358_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/356_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/470_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/931/001_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/318_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/480_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/482_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/423_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/492_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/436_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/498_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/438_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/406_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/459_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/309_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/422_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/368_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/430_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/359_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/372_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/297_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/455_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/420_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/481_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/483_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/597_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/595_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/534_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/835/537_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

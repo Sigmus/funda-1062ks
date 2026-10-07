@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ottho Heldringstraat 27-R · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Ottho Heldringstraat 27-R</h1>
+  <p class="sub">
+    <span>1066 XT Amsterdam</span>
+    <span>·</span>
+    <span>Staalmanbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/229/425/588_1440x960.jpg" alt="Ottho Heldringstraat 27-R — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">49 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€649.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.500/m² · 0.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">0.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">118 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy A+</span>
+      <span class="chip">Built 2010</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ottho-heldringstraat-27-r/44461973/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oorspronkelijke vraagprijs</dt><dd>€ 679.500 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 649.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.500</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 368,22 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2010</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gedeeltelijk gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>118 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>389 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, Walk-in shower, Bathtub, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>4e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing, Floor insulation en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN E 8434</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijke erfpacht</dt><dd>Lasten</dd></div>
+        <div class="frow"><dt>Afgekocht tot 15-12-2058</dt><dd>SLOTEN E 8434</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-12-2058</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder en parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 368,22 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**English translation below**
+
+Zoekt u naar een moderne, ruime en goed ingedeelde woning met 3 à 4 slaapkamers, een riant balkon, liftinstallatie, eigen parkeerplaats en een separate berging? Dan is deze woning zeker uw bezichtiging waard!
+
+Enkele kenmerken van deze woning:
+- Energielabel A+ geldig tot 11-07-2033
+- Voorzien van een liftinstallatie en trappenhuis
+- Woonoppervlakte: ca. 118 m²
+- Riante 4-kamer (voorheen 5-kamer) 2-laags woning met zonnig en riant balkon (Z/W)
+- Thans 3 ruime slaapkamer, een 4e slaapkamer is mogelijk
+- Moderne halfopen keuken voorzien van inbouwapparatuur
+- Inpandige berging met wasmachineaansluiting
+- Moderne badkamer met ligbad, inloopdouche en dubbele wastafel
+- Separate berging in de onderbouw
+- Eigen parkeerplaats in afgesloten parkeergarage in de onderbouw
+- De woning is volledig geïsoleerd conform bouwjaar 2010
+- Verwarming via stadsverwarming
+- Erfpacht afgekocht t/m 15 december 2058
+- Overstap naar eeuwigdurende erfpacht onder de gunstige voorwaarden heeft plaatsgevonden 2021
+- De jaarcanon per 16 december 2058 is € 573,87 per jaar, exclusief inflatiecorrectie
+- Bouwjaar 2010
+- Maandelijkse servicekosten: € 368,22
+- Oplevering in overleg, kan spoedig
+
+INDELING
+Voor een volledig overzicht van deze ideale gezinswoning verwijzen wij u graag naar de digitale plattegronden, de foto’s, de video en de eigen website van deze woning: otthoheldringstraat27r. nl.
+
+Via een centrale hal met lift en trap komt u op de vierde verdieping waar zich de entree van het appartement bevindt.
+
+HET APPARTEMENT
+U komt binnen in de hal met een trap naar de bovenste verdieping en toegang tot de zeer ruime slaapkamer en de badkamer. De badkamer is voorzien van een ligbad, dubbele wastafel met meubel en een inloopdouche.
+Via de trap komt u op de overloop met toegang tot twee slaapkamers, separaat toilet met fonteintje en de open keuken. De twee slaapkamers zijn licht en ruim.
+De open keuken is modern en voorzien van diverse inbouwapparatuur zoals een inductiekookplaat, oven, koelkast en vaatwasser. Daartegenover bevindt zich een ruime berging met wasmachineaansluiting en ruimte voor een droger.
+De woonkamer is heerlijk licht en ruim met openslaande deuren naar het balkon op het zuidwesten met uitzicht. Hier kunt u bijna de gehele dag van de zon genieten. Door de vele raampartijen is het een superlichte woning met ruimte voor een grote eettafel en zithoek.
+De woonkamer heeft een zijkamer, perfect voor een werkplek, maar waar ook zeer goed een 4e slaapkamer gemaakt kan worden.
+
+BERGING – PARKEERPLAATS
+In de onderbouw bevindt zich een externe berging en een eigen parkeerplaats voor één auto.
+
+LIGGING
+Het complex ligt aan een rustige straat in een groene buurt met voldoende parkeergelegenheid. Op fietsafstand bevinden zich meerdere winkelcentra zoals het Delflandplein, Belgiëplein en Hoofddorpplein met diverse speciaalzaken, supermarkten en horecagelegenheden. Voor recreatiemogelijkheden ligt het Staalmanpark nabij, maar ook het Vondelpark is op 10 minuten fietsafstand. En een heerlijk dagje strand? Dat kan aan een van de strandjes aan de Nieuwe Meer. De omliggende steden zijn gemakkelijk bereikbaar via diverse snelwegen, zoals de A4 en A10. Ook het openbaar vervoer is goed bereikbaar, tramlijn 2, buslijn 62 en de metrolijnen 50 en 51 liggen op loopafstand.
+
+BIJZONDERHEDEN
+- Projectnotaris Amson &amp; Kolhoff Notarissen
+- Koopovereenkomst conform ringmodel Amsterdam
+- Niet zelfbewoningsclausule van toepassing
+
+INTERESSE
+Bent u ook enthousiast over deze woning? Maak dan een afspraak voor het Open Huis of neem contact op met ons kantoor voor een bezichtiging of, nog beter, neem contact op met uw aankoopmakelaar!
+
+**Translation**
+
+Are you looking for a modern, spacious and well-designed home with 3 to 4 bedrooms, a large balcony, lift, private parking space and separate storage room? Then this property is definitely worth viewing!
+
+Some features of this property:
+
+- Energy label A+ valid until 11 July 2033
+- Equipped with a lift and staircase
+- Living area: approx. 118 m²
+- Spacious 4-room (formerly 5-room) maisonnette with sunny and spacious balcony (S/W)
+- Currently 3 spacious bedrooms, a 4th bedroom is possible
+- Modern semi-open kitchen with built-in appliances
+- Indoor storage room with washing machine connection
+- Modern bathroom with bath, walk-in shower and double washbasin
+- Separate storage room in the basement
+- Private parking space in enclosed parking garage in the basement
+- The property is fully insulated in accordance with the 2010 building regulations
+- Heating via district heating
+- Leasehold purchased until 15 December 2058
+- Switch to perpetual leasehold under favorable conditions took place in 2021
+- The annual ground rent as of 16 December 2058 is € 573,87 per year, excluding inflation adjustment
+- Year of construction 2010
+- Monthly service charges: € 368,22
+- Completion in consultation, can be soon
+
+LAYOUT
+For a complete overview of this ideal family home, please refer to the digital floor plans, photos, video and the property&#x27;s own website: otthohelderingstraat27R.nl.
+
+A central hall with lift and stairs leads to the fourth floor, where the entrance to the flat is located.
+
+THE APARTMENT
+You enter the hall with a staircase to the top floor and access to the very spacious bedroom and bathroom. The bathroom has a bath, double washbasin with vanity unit and a walk-in shower.
+The staircase leads to the landing with access to two bedrooms, a separate toilet with washbasin and the open-plan kitchen. The two bedrooms are bright and spacious.
+The open-plan kitchen is modern and equipped with various built-in appliances such as an induction hob, oven, refrigerator and dishwasher. Opposite is a spacious storage room with washing machine connection and space for a dryer.
+The living room is wonderfully light and spacious with French doors to the south-west facing balcony with a view. Here you can enjoy the sun almost all day long. The many windows make it a super light home with space for a large dining table and sitting area.
+The living room has a side room, perfect for a workspace, but which could also easily be converted into a 4th bedroom.
+
+STORAGE ROOM – PARKING SPACE
+In the basement, there is an external storage room and a private parking space for one car.
+
+LOCATION
+The complex is located on a quiet street in a green neighborhood with ample parking. Several shopping centres are within cycling distance, such as Delflandplein, Belgiëplein and Hoofddorpplein, with various specialist shops, supermarkets and restaurants. For recreational opportunities, the Staalmanpark is nearby, but the Vondelpark is also a 10-minute cycle away. Fancy a lovely day at the beach? You can do that at one of the beaches on the Nieuwe Meer. The surrounding towns are easily accessible via various motorways such as the A4 and A10. Public transport is also easily accessible, with tram line 2, bus line 62 and metro lines 50 and 51 within walking distance.
+
+SPECIAL FEATURES
+- Project solicitor Amson &amp; Kolhoff Notarissen
+- Purchase agreement in accordance with the Amsterdam ring model
+- Non-owner-occupancy clause applies
+
+INTEREST
+Are you also enthusiastic about this property? Then contact our office for a viewing or, even better, contact your buying agent!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Erwin Breukel</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 49</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/229/425/588_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/654_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/571_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/541_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/621_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/622_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/685_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/575_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/679_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/581_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/577_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/593_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/578_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/703_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/604_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/563_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/574_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/668_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/540_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/631_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/559_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/603_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/552_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/650_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/609_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/656_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/612_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/620_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/684_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/689_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/564_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/667_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/607_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/594_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/627_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/598_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/643_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/614_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/560_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/687_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/425/610_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rooseveltlaan 120-1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Rooseveltlaan 120-1</h1>
+  <p class="sub">
+    <span>1078 NP Amsterdam</span>
+    <span>·</span>
+    <span>Scheldebuurt-Midden</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/000/751_1440x960.jpg" alt="Rooseveltlaan 120-1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€800.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.000/m² · 4.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.2 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">100 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1930</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-rooseveltlaan-120-1/44503426/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 800.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.000</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 259,13 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1930</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met bitumineuze dakbedekking en tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>100 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>333 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, Bathtub, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing, grotendeels dubbelglas en voorzetramen</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Kombi Kompakt HRE (gas-fired combi boiler uit 2013, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM V 12048</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-07-2063</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 259,13 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">***English translation below***
+Royale bovenwoning in de geliefde Rivierenbuurt in Amsterdam-Zuid! De woning heeft maar liefst 100m2 aan woonoppervlakte, ruime woon- en eetkamer, 3 slaapkamers en balkon op het zuidoosten!
+Ontdek dit mooie karakteristieke appartement in het hart van de Rivierenbuurt, waar authentieke details zoals glas-in-lood schuifdeuren bewaart zijn gebleven en waar in 2020 een groot deel van de woning is gemoderniseerd. Een greep uit de werkzaamheden die zijn verricht: de woning is voorzien van een moderne en tijdloze keuken en badkamer, de elektra en de groepenkast is vervangen, er is een fraaie laminaatvloer gelegd.
+Daarbij zijn alle enkelglas ramen in de achtergevel voorzien van voorzetramen. Maar dit is niet alles; de woning is gelegen nabij de Zuidas, het Europaplein en de levendige Maasstraat. Kortom een perfecte balans tussen wooncomfort en stedelijke dynamiek.
+Omgeving en bereikbaarheid
+Het appartement ligt op een prachtige locatie aan de groene Rooseveltlaan, om de hoek van de Maasstraat. De Rooseveltlaan maakt deel uit van het Plan Zuid en is door het unieke karakter aangewezen als beschermd stadsgezicht. Het voorzieningenniveau ligt ongekend hoog: de Maasstraat ligt op 2 minuten loopafstand en biedt een tal van winkels voor de dagelijkse boodschappen en delicatessen. Zo vind je hier onder andere een Albert Heijn, Patisserie Tout, Ekoplaza, Kruidvat en een drogisterij. Eveneens zijn er veel gezellige restaurants, cafés en lunchrooms op loopafstand te vinden, zoals: Mi Sueño, The Traveller Zuid, KAIA, Brandmeesters Amsterdam, Orandaya, TapZuid en Grammes. In de directe omgeving zijn diverse goede basis- en middelbare scholen en kinderopvang centra aanwezig. Voor sport en ontspanning kun je terecht in het Amstelpark, het Beatrixpark of langs de Amstel.
+Het appartement is op 5 minuten fietsafstand van de Zuidas gelegen en is goed bereikbaar met het openbaar vervoer (o.a. metrostation Europaplein, tram 4 en 23, bus 62, 245 en N84). Met de auto ben je in een mum van tijd op de Ringweg A-10 (afslag RAI).
+Indeling
+Eerste verdieping
+Eigen entree tot de woning, tochtportaal, hal, vanwaar er toegang is tot alle vertrekken. Aan de voorzijde bevindt zich de ruime woonkamer en-suite met erker. De woonkamer is ruim 12 meter diep en middels authentieke glas in lood deuren op te splitsen in een eet- en zitgedeelte. De moderne woonkeuken bevindt zich aan de achterzijde van de woning en biedt genoeg ruimte voor een grote eettafel, waar met familie of vrienden kan worden getafeld. De moderne keuken is in 2020 geplaatst en beschikt over diverse luxe inbouwapparatuur, waaronder: 4-pits inductiekookplaat, Quooker, vaatwasser, afzuigkap, combi-oven, koel-vriescombinatie, aansluiting voor wasmachine en droger en veel kastruimte. De moderne badkamer (bj. 2020) is eveneens aan de achterzijde gelegen en beschikt over een inloopdouche, ligbad, breed wastafelmeubel met twee tapkranen en de opstellingsplaats voor de CV-installatie. Direct naast de badkamer bevindt zich de hoofdslaapkamer voorzien van inloopkast met aansluiting voor een wasmachine. De slaapkamer is heerlijk ruim en biedt genoeg Rooseveltlaan ruimte voor een120-1 tweepersoonsbed. Vanuit de slaapkamer is er eveneens toegang tot de meterkast.
+Aan de op
+Neem contact
+€ 800.000van
+k.k.de woning bevinden zich nog twee slaapkamers. Vanuit beide slaapkamers is er toegang tot het voorzijde
+
+balkon op het zonnige zuidoosten. Hier is het heerlijk om gedurende de ochtend en middag te genieten van een kop koffie of thee in de zon. Ten slotte, is via de hal nog een separate toiletruimte met wandcloset en fontein en een bergkast te bereiken. Kortom een heerlijk compleet appartement op een uitstekende locatie!
+Bijzonderheden
+• Woonoppervlakte 100 m2 (meetrapport aanwezig)
+• Gelegen op de eerste verdieping
+• In 2020 grotendeels gerenoveerd, o.a. keuken, badkamer, elektra en vloer vernieuwd
+• 3 slaapkamers met veel natuurlijk lichtinval
+• Ruim 12 meter diepe en-suite woonkamer
+• Woonkamer te verdelen in één ruim zit- en eetgedeelte
+• Veel authentieke details als paneel- en glas in lood deuren
+• Energielabel B
+• De erfpachtcanon is afgekocht tot en met 31 juli 2063. Verkoper is overgestapt naar het eeuwigdurende erfpachtstelsel. Vanaf 1 augustus 2063 wordt een canon van € 2128,89 berekend op basis van jaarlijkse indexatie, te rekenen vanaf 2026 • Moderne en tijdloze keuken en badkamer • Complex gesplitst in 2013 • Servicekosten € 259,13 per maand • Professioneel door MVGM beheerde VvE • Fantastische centrale locatie in de Rivierenbuurt • Op 5 minuten fietsen van de Zuidas en om de hoek van de gezellige Maasstraat, met een scala aan winkels, restaurants en cafés • Niet zelfbewonings- en ouderdomsclausule van toepassing op deze koop • De koopakte wordt opgemaakt bij een notaris in Amsterdam, Diemen of Amstelveen, volgens Amsterdams Ringmodel • Oplevering in overleg, kan desgewenst spoedig Interesse in deze bovenwoning? Maak dan snel een afspraak!
+Wij plannen graag een moment voor je in voor de bezichtiging van dit appartement. Onze makelaar vertelt je graag van alles over dit appartement terwijl je rondkijkt. Zien we jou binnenkort?
+Deze informatie is door ons met zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan.
+***English translation***
+Spacious apartment in the highly sought-after Rivierenbuurt, Amsterdam Zuid! Offering no less than 100 m² of living space, this spacious apartment features a generous living and dining room, three bedrooms, and a southeast facing balcony.
+Discover this beautiful character apartment in the heart of the popular Rivierenbuurt, where authentic features such as original stained-glass en-suite doors have been carefully preserved, while a substantial partcontact of the op Neem € 800.000 k.k. property was modernised in 2020. Improvements include a stylish, contemporary kitchen and bathroom,
+
+renewed electrical wiring and fuse box, new laminate flooring, and secondary glazing installed on all singleglazed rear windows. To complete the picture, the apartment enjoys a prime location close to the Zuidas business district, Europaplein, and the lively Maasstraat. In short, this home offers the perfect balance between modern comfort and vibrant city living.
+Location &amp; Accessibility
+The apartment enjoys a beautiful location on the green Rooseveltlaan, just around the corner from the Maasstraat. Rooseveltlaan forms part of the renowned Plan Zuid development and, due to its unique architectural character, has been designated a protected cityscape. The neighbourhood offers an exceptional range of amenities. Within a two-minute walk, Maasstraat provides everything for daily shopping as well as a variety of speciality stores, including Albert Heijn, Patisserie Tout, Ekoplaza, Kruidvat, and several pharmacies.
+The area also boasts an excellent selection of restaurants, cafés and lunch spots, including Mi Sueño, The Traveller Zuid, KAIA, Brandmeesters Amsterdam, Orandaya, TapZuid and Grammes. Several highly regarded primary and secondary schools, as well as childcare facilities, are located nearby. For sports and recreation, residents can enjoy the Amstelpark, Beatrixpark or the scenic banks of the River Amstel. The Zuidas business district is just a five-minute bike ride away. Public transport connections are excellent, with Europaplein metro station, tram lines 4 and 23, and bus lines 62, 245 and N84 all within easy reach. By car, the A10 Ring Road (RAI exit) can be reached within minutes.
+Layout
+First Floor
+Private entrance leading to the vestibule and central hallway, providing access to all rooms. At the front of the apartment is the spacious en-suite living room with attractive bay window. Measuring over 12 metres in depth, the living area can easily be divided into separate sitting and dining rooms by means of the original stainedglass sliding doors. The contemporary open-plan kitchen is situated at the rear and offers ample space for a large dining table, making it an ideal setting for entertaining family and friends. Installed in 2020, the kitchen is equipped with high-quality built-in appliances, including: four-burner induction hob, Quooker boiling water tap, dishwasher, extractor hood, combination oven, fridge-freezer, connection for washing machine and dryer and generous storage space. The stylish bathroom, also renovated in 2020, is located at the rear of the apartment and features a walk-in shower, bathtub, wide vanity unit with double washbasins, and the central heating boiler.
+Adjacent to the bathroom is the spacious principal bedroom, complete with a walk-in wardrobe incorporating connections for a washing machine. The bedroom easily accommodates a double bed and also provides access to the meter cupboard. At the front of the apartment are two further bedrooms. Both rooms have direct access to the sunny south-east facing balcony, a wonderful spot to enjoy your morning coffee or afternoon tea in the sunshine. Finally, the hallway provides access to a separate toilet with wall-mounted WC and washbasin, as well as a practical storage cupboard. In short, this is a wonderfully complete apartment in an outstanding location.
+Key Features
+• Approx. 100 m² of living space (NEN measurement report available)
+• Located on the first floor
+• Largely renovated in 2020, including kitchen, bathroom, electrical installation and flooring • Three bright bedrooms • Spacious en-suite living room measuring over 12 metres in depth € 800.000 k.k.
+• Flexible layout with separate living and dining areas
+
+• Beautiful original features, including panel doors and stained-glass doors
+• Energy label B
+• Leasehold ground rent prepaid until 31 July 2063. Seller has already switched to the perpetual leasehold system. From 1 August 2063, an annual ground rent of €2,128.89 will apply, subject to annual indexation from 2026 • Modern, timeless kitchen and bathroom • Building subdivided into apartment rights in 2013 • Service charges: €259.13 per month • Professionally managed Owners&#x27; Association (VvE) by MVGM • Prime central location in the popular Rivierenbuurt • Just five minutes by bicycle from the Zuidas and around the corner from the vibrant Maasstraat with its wide range of shops, restaurants and cafés • Non-owner occupancy clause and age clause apply • Deed of sale to be executed by a civil-law notary in Amsterdam, Diemen or Amstelveen, in accordance with the Amsterdam Ring Model • Transfer date in consultation; available at short notice if desired Interested? Would you like to view this spacious upper-floor apartment?
+We would be delighted to arrange a viewing. Our real estate agent will be happy to show you around and tell you everything this wonderful apartment has to offer. We look forward to welcoming you soon.
+Disclaimer:
+This information has been compiled with due care. However, no liability is accepted for any inaccuracies, omissions or the consequences thereof.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Plattegronden present on page, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Metropool Makelaars</strong> · Metropool Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/000/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/838_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/805_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/849_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/808_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/801_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/767_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/875_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/824_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/823_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/866_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/835_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/831_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/814_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/794_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/762_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/840_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/857_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/884_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/862_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/802_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/796_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/861_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/881_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/852_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/777_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/822_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/863_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/797_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/882_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/889_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/872_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/836_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/826_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/851_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/000/892_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

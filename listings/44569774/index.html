@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waalstraat 22-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Waalstraat 22-3</h1>
+  <p class="sub">
+    <span>1078 BT Amsterdam</span>
+    <span>·</span>
+    <span>IJselbuurt-West</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/204/429_1440x960.jpg" alt="Waalstraat 22-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€700.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.216/m² · 4.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.2 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">97 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1925</span>
+      <span class="chip">Balcony</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-waalstraat-22-3/44569774/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Other</h3>
+        <dl class="flist">
+        <div class="frow"><dt>- Woonoppervlakte 97 m²;</dt><dd>- Eigen entree vanaf de tweede etage;</dd></div>
+        <div class="frow"><dt>- Verdeeld over de derde en vierde verdieping;</dt><dd>- Momenteel ingedeeld met vijf rooms;</dd></div>
+        <div class="frow"><dt>- Mogelijkheid om de indeling te wijzigen;</dt><dd>- Open keuken met inbouwapparatuur;</dd></div>
+        <div class="frow"><dt>- Gelegen in de populaire Rivierenbuurt;</dt><dd>- Balkon aan de achterzijde;</dd></div>
+        <div class="frow"><dt>- Onder voorbehoud definitieve splitsing;</dt><dd>- In de koopakte zal ouderdomsclausule en een niet-zelfbewoningsclausule worden opgenomen;</dd></div>
+        <div class="frow"><dt>- Projectnotaris: Schut van Os;</dt><dd>- Aanvaarding By arrangement.</dd></div>
+        <div class="frow"><dt>Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft zijn eigen onderzoek plicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien. Van toepassing zijn de NVM voorwaarden.</dt><dd>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</dd></div>
+        <div class="frow"><dt>UNIQUE AND VERSATILE TWO-LEVEL UPPER-FLOOR APARTMENT WITH NO FEWER THAN FIVE ROOMS IN THE POPULAR RIVIERENBUURT</dt><dd>Live on a charming street in the popular Rivierenbuurt, with plenty of space and numerous layout possibilities. This two-level upper-floor apartment of approximately 97 m² is arranged over two residential floors and currently offers no fewer than five rooms, two bathrooms and a balcony. Thanks to its practical layout, the property is ideal for larger families, those working from home, or buyers looking for a home with multiple bedrooms. In addition, the property offers attractive possibilities for altering the layout and creating a spacious living floor by removing several non-load-bearing internal walls.</dd></div>
+        <div class="frow"><dt>Layout</dt><dd>Second floor</dd></div>
+        <div class="frow"><dt>The entrance to the apartment is reached via the communal staircase on the second floor. From the hallway, the stairs lead to the third floor.</dt><dd>Third floor</dd></div>
+        <div class="frow"><dt>At the front of the property is a spacious bedroom. This floor also features a second and third (living) room, making it ideal for anyone looking for a home with plenty of separate rooms. At the rear is the open-plan kitchen, fitted with built-in appliances.</dt><dd>For those who prefer a more open living space, this floor offers attractive possibilities. By altering the internal walls, a significantly larger living area with an open-plan kitchen can be created, fully tailored to the new owner&#x27;s preferences.</dd></div>
+        <div class="frow"><dt>Centrally located within the property are the separate toilet and bathroom. The bathroom provides space for a shower and washbasin. At the rear is the living room with adjoining kitchen. The kitchen provides access to the balcony, a pleasant spot to sit outside.</dt><dd>Fourth floor</dd></div>
+        <div class="frow"><dt>The fourth floor features a spacious landing providing access to a further two well-proportioned rooms. A second bathroom is also located on this floor, providing additional comfort for larger households or residents who appreciate having extra facilities. There are also several practical storage spaces beneath the sloping roof.</dt><dd>Possibilities</dd></div>
+        <div class="frow"><dt>The current layout makes this a particularly versatile property. With several bedrooms spread across two floors, the apartment is ideal for buyers looking for a home with multiple rooms. By combining several spaces on the third floor, it is possible to create a generous living floor with a spacious living room and open-plan kitchen.</dt><dd>Location</dd></div>
+        <div class="frow"><dt>The property is situated in the highly desirable Amsterdam-Zuid district, one of the city&#x27;s most sought-after residential areas. The immediate surroundings offer a wide variety of welcoming cafés, excellent restaurants and specialist shops. For everyday shopping, both Maasstraat and Scheldestraat are within easy reach and offer a varied selection of shops.</dt><dd>Accessibility is excellent. Amsterdam RAI Station and Amsterdam Zuid Station (Zuidas) are both a short bicycle ride away and provide fast connections to the rest of the city and beyond. Various tram and bus connections are also within walking distance. By car, the A10 ring road can be reached within just a few minutes.</dd></div>
+        <div class="frow"><dt>For relaxation and recreation, Beatrixpark and the Amstel River are both nearby, ideal for walking, exercising or simply enjoying a quiet moment. In short, this property offers the perfect combination of peaceful residential living with all the vibrancy of the city within easy reach.</dt><dd>Subdivision &amp; Owners&#x27; Association (VvE)</dd></div>
+        <div class="frow"><dt>The building is in the process of being subdivided into four apartment rights. The sale is subject to the finalisation of the subdivision. The Owners&#x27; Association (VvE) is currently being established and will be professionally managed, contributing to a well-organised and hassle-free future. The municipality has now granted the subdivision permit.</dt><dd>Ground Lease</dd></div>
+        <div class="frow"><dt>The property at Waalstraat 22 is situated on land subject to a ground lease issued by the Municipality of Amsterdam. The current ground lease period runs until 30 September 2049. An annual ground rent is payable and the General Provisions of 1994 (AB 1994) apply. The definitive ground rent for each apartment will be determined following the subdivision.</dt><dd>Based on an estimate provided by the MVA Ground Lease Adviser, the following indicative information is available:</dd></div>
+        <div class="frow"><dt>For the current ground lease period, the estimated annual ground rent is approximately €610.</dt><dd>These figures are indicative only. The definitive calculation will be made following the subdivision, and no rights may be derived from the above information.</dd></div>
+        <div class="frow"><dt>Key Features</dt><dd>- Living area of approximately 97 m²;</dd></div>
+        <div class="frow"><dt>- Private entrance from the second floor;</dt><dd>- Arranged over the third and fourth floors;</dd></div>
+        <div class="frow"><dt>- Currently arranged as five rooms;</dt><dd>- Possibility to alter the existing layout;</dd></div>
+        <div class="frow"><dt>- Open-plan kitchen with built-in appliances;</dt><dd>- Located in the popular Rivierenbuurt;</dd></div>
+        <div class="frow"><dt>- Balcony at the rear;</dt><dd>- Sale subject to final subdivision;</dd></div>
+        <div class="frow"><dt>- An age clause and a non-owner-occupancy clause will be included in the purchase agreement;</dt><dd>- Project civil-law notary: Schut van Os;</dd></div>
+        <div class="frow"><dt>- Completion by mutual agreement.</dt><dd>This information has been compiled by us with due care. However, we accept no liability whatsoever for any incompleteness, inaccuracies or otherwise, nor for the consequences thereof. All stated dimensions and surface areas are indicative. The buyer has a duty to conduct their own investigation into all matters that may be of importance to them. With regard to this property, the estate agent acts as the seller&#x27;s adviser. We recommend engaging a professional (NVM) estate agent to assist you throughout the purchasing process. If you have any specific requirements regarding the property, we recommend informing your purchasing agent of these in good time and carrying out, or arranging to have carried out, your own investigation into these matters. If you choose not to engage a professional representative, you are deemed by law to have sufficient expertise to assess all matters relevant to the purchase. The NVM terms and conditions apply.</dd></div>
+        <div class="frow"><dt>Dit huis in het kort</dt><dd>AI-gegenereerd uit de omschrijving</dd></div>
+        <div class="frow"><dt>Ruim dubbel bovenhuis</dt><dd>Double upper house van circa 97 m² met vijf rooms.</dd></div>
+        <div class="frow"><dt>Open keuken met balkon</dt><dd>Open keuken met inbouwapparatuur en toegang tot balkon.</dd></div>
+        <div class="frow"><dt>Toplocatie Rivierenbuurt</dt><dd>In Amsterdam-Zuid, nabij Maasstraat, Scheldestraat en parken.</dd></div>
+        <div class="frow"><dt>Advertentie</dt><dd>Kenmerken</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 700.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.216</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 230,62 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1925</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met bitumineuze dakbedekking en tiles</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>97 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>334 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM A 9594</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 30-09-2049)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Lasten</h3>
+        <dl class="flist">
+        <div class="frow"><dt>€ 610,00 per jaar met optie tot afkopen</dt><dd>Buitenruimte</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Ligging</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aan rustige weg en in woonwijk</dt><dd>Bergruimte</dd></div>
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>No</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 230,62 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">UNIEK EN VEELZIJDIG DUBBEL BOVENHUIS MET MAAR LIEFST VIJF KAMERS IN DE GELIEFDE RIVIERENBUURT
+
+Wonen in een karakteristieke straat in de populaire Rivierenbuurt, met volop ruimte en talloze indelingsmogelijkheden. Dit dubbele bovenhuis van circa 97 m² is verdeeld over twee woonlagen en beschikt momenteel over maar liefst vijf kamers, twee badkamers en een balkon. Dankzij de praktische indeling is de woning ideaal voor grote gezinnen, thuiswerkers of kopers die op zoek zijn naar een woning met meerdere slaapkamers. Daarnaast biedt de woning interessante mogelijkheden om de indeling aan te passen en een royale woonverdieping te creëren door enkele niet-dragende binnenwanden te verwijderen.
+
+Indeling
+
+Tweede verdieping
+Via het gemeenschappelijke trappenhuis bereikt u de entree van de woning op de tweede verdieping. Vanuit de hal leidt de trap naar de derde verdieping.
+
+Derde verdieping
+Aan de voorzijde bevindt zich een ruime slaapkamer. Daarnaast beschikt deze verdieping over een tweede en derde (woon)kamer, ideaal voor wie op zoek is naar een een woning met vele kamers. Aan de achterzijde bevindt zich de open keuken voorzien van inbouwapparatuur. 
+
+Voor wie meer open leefruimte wenst, biedt deze verdieping aantrekkelijke mogelijkheden. Door het aanpassen van binnenwanden kan een aanzienlijk grotere woonruimte met open keuken worden gerealiseerd, geheel afgestemd op de woonwensen van de nieuwe eigenaar.
+
+Centraal in de woning bevinden zich het separate toilet en de badkamer. De badkamer biedt ruimte voor een douche en wastafel. Aan de achterzijde ligt de woonkamer met aangrenzende keuken. Vanuit de keuken is er toegang tot het balkon, een fijne plek om buiten te zitten.
+
+Vierde verdieping
+De vierde verdieping beschikt over een ruime overloop met toegang tot nog eens twee goed bemeten kamers.Tevens bevindt zich op deze verdieping een tweede badkamer, wat extra comfort biedt voor grotere huishoudens of bewoners die graag over extra voorzieningen beschikken. Daarnaast zijn er diverse praktische bergruimtes aanwezig onder de schuine kap.
+
+Mogelijkheden
+De huidige indeling maakt de woning bijzonder veelzijdig. Met meerdere slaapkamers verdeeld over twee verdiepingen is de woning ideaal voor kopers die op zoek zijn naar een woning met meerdere kamers. Door het samenvoegen van enkele ruimtes op de derde verdieping kan eenvoudig een royale woonverdieping met een ruime woonkamer en open keuken worden gecreëerd.
+
+Omgeving
+De woning is gelegen in het geliefde Amsterdam-Zuid, een van de meest gewilde woongebieden van de stad. In de directe omgeving vindt u een breed aanbod aan gezellige cafés, goede restaurants en diverse speciaalzaken. Voor uw dagelijkse boodschappen liggen onder andere de Maasstraat en Scheldestraat op korte afstand, met een gevarieerd winkelaanbod.
+
+Ook de bereikbaarheid is uitstekend: Station Amsterdam RAI en Station Zuid (Zuidas) bevinden zich op korte fietsafstand en bieden snelle verbindingen met de rest van de stad en daarbuiten. Daarnaast zijn er diverse tram- en busverbindingen op loopafstand. Met de auto bent u binnen enkele minuten op de Ring A10.
+
+Voor ontspanning en recreatie liggen het Beatrixpark en de Amstel in de nabije omgeving, ideaal voor een wandeling, sport of een moment van rust. Kortom, een perfecte combinatie van rustig wonen met alle dynamiek van de stad binnen handbereik.
+
+Splitsing &amp; VvE
+Het pand wordt gesplitst in vier appartementsrechten. De verkoop vindt plaats onder voorbehoud van de definitieve splitsing. De VvE is in oprichting en zal professioneel worden beheerd, wat bijdraagt aan een zorgeloze en goed georganiseerde toekomst. De splitsingsvergunning is inmiddels door de gemeente afgegeven. 
+
+Erfpacht
+De woning aan de Waalstraat 22 is gelegen op erfpacht van de Gemeente Amsterdam. Het huidige tijdvak loopt tot en met 30-09-2049, is er een jaarlijkse canon verschuldigd en gelden de algemene bepalingen van AB 1994. De definitieve canonberekening per appartement zal worden vastgesteld na de splitsing. 
+
+Op basis van een indicatie van de MVA Erfpachtadviseur zijn de volgende indicatiegegevens beschikbaar:
+- Voor het huidige tijdvak geldt een lage jaarlijkse canon van circa € 610,-. 
+
+Dit zijn indicatiegegevens de definitieve berekening zal plaatsvinden na de splitsing, op basis van bovenstaande kunnen geen rechten worden ontleend.  
+
+Kenmerken
+- Woonoppervlakte 97 m²;
+- Eigen entree vanaf de tweede etage;
+- Verdeeld over de derde en vierde verdieping;
+- Momenteel ingedeeld met vijf kamers;
+- Mogelijkheid om de indeling te wijzigen;
+- Open keuken met inbouwapparatuur;
+- Gelegen in de populaire Rivierenbuurt;
+- Balkon aan de achterzijde;
+- Onder voorbehoud definitieve splitsing;
+- In de koopakte zal ouderdomsclausule en een niet-zelfbewoningsclausule worden opgenomen;
+- Projectnotaris: Schut van Os;
+- Aanvaarding in overleg.
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft zijn eigen onderzoek plicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien. Van toepassing zijn de NVM voorwaarden.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+UNIQUE AND VERSATILE TWO-LEVEL UPPER-FLOOR APARTMENT WITH NO FEWER THAN FIVE ROOMS IN THE POPULAR RIVIERENBUURT
+
+Live on a charming street in the popular Rivierenbuurt, with plenty of space and numerous layout possibilities. This two-level upper-floor apartment of approximately 97 m² is arranged over two residential floors and currently offers no fewer than five rooms, two bathrooms and a balcony. Thanks to its practical layout, the property is ideal for larger families, those working from home, or buyers looking for a home with multiple bedrooms. In addition, the property offers attractive possibilities for altering the layout and creating a spacious living floor by removing several non-load-bearing internal walls.
+
+Layout
+Second floor
+The entrance to the apartment is reached via the communal staircase on the second floor. From the hallway, the stairs lead to the third floor.
+
+Third floor
+At the front of the property is a spacious bedroom. This floor also features a second and third (living) room, making it ideal for anyone looking for a home with plenty of separate rooms. At the rear is the open-plan kitchen, fitted with built-in appliances.
+
+For those who prefer a more open living space, this floor offers attractive possibilities. By altering the internal walls, a significantly larger living area with an open-plan kitchen can be created, fully tailored to the new owner&#x27;s preferences.
+
+Centrally located within the property are the separate toilet and bathroom. The bathroom provides space for a shower and washbasin. At the rear is the living room with adjoining kitchen. The kitchen provides access to the balcony, a pleasant spot to sit outside.
+
+Fourth floor
+The fourth floor features a spacious landing providing access to a further two well-proportioned rooms. A second bathroom is also located on this floor, providing additional comfort for larger households or residents who appreciate having extra facilities. There are also several practical storage spaces beneath the sloping roof.
+
+Possibilities
+The current layout makes this a particularly versatile property. With several bedrooms spread across two floors, the apartment is ideal for buyers looking for a home with multiple rooms. By combining several spaces on the third floor, it is possible to create a generous living floor with a spacious living room and open-plan kitchen.
+
+Location
+The property is situated in the highly desirable Amsterdam-Zuid district, one of the city&#x27;s most sought-after residential areas. The immediate surroundings offer a wide variety of welcoming cafés, excellent restaurants and specialist shops. For everyday shopping, both Maasstraat and Scheldestraat are within easy reach and offer a varied selection of shops.
+
+Accessibility is excellent. Amsterdam RAI Station and Amsterdam Zuid Station (Zuidas) are both a short bicycle ride away and provide fast connections to the rest of the city and beyond. Various tram and bus connections are also within walking distance. By car, the A10 ring road can be reached within just a few minutes.
+
+For relaxation and recreation, Beatrixpark and the Amstel River are both nearby, ideal for walking, exercising or simply enjoying a quiet moment. In short, this property offers the perfect combination of peaceful residential living with all the vibrancy of the city within easy reach.
+
+Subdivision &amp; Owners&#x27; Association (VvE)
+The building is in the process of being subdivided into four apartment rights. The sale is subject to the finalisation of the subdivision. The Owners&#x27; Association (VvE) is currently being established and will be professionally managed, contributing to a well-organised and hassle-free future. The municipality has now granted the subdivision permit.
+
+Ground Lease
+The property at Waalstraat 22 is situated on land subject to a ground lease issued by the Municipality of Amsterdam. The current ground lease period runs until 30 September 2049. An annual ground rent is payable and the General Provisions of 1994 (AB 1994) apply. The definitive ground rent for each apartment will be determined following the subdivision.
+
+Based on an estimate provided by the MVA Ground Lease Adviser, the following indicative information is available:
+
+For the current ground lease period, the estimated annual ground rent is approximately €610.
+
+These figures are indicative only. The definitive calculation will be made following the subdivision, and no rights may be derived from the above information.
+
+Key Features
+- Living area of approximately 97 m²;
+- Private entrance from the second floor;
+- Arranged over the third and fourth floors;
+- Currently arranged as five rooms;
+- Possibility to alter the existing layout;
+- Open-plan kitchen with built-in appliances;
+- Located in the popular Rivierenbuurt;
+- Balcony at the rear;
+- Sale subject to final subdivision;
+- An age clause and a non-owner-occupancy clause will be included in the purchase agreement;
+- Project civil-law notary: Schut van Os;
+- Completion by mutual agreement.
+
+This information has been compiled by us with due care. However, we accept no liability whatsoever for any incompleteness, inaccuracies or otherwise, nor for the consequences thereof. All stated dimensions and surface areas are indicative. The buyer has a duty to conduct their own investigation into all matters that may be of importance to them. With regard to this property, the estate agent acts as the seller&#x27;s adviser. We recommend engaging a professional (NVM) estate agent to assist you throughout the purchasing process. If you have any specific requirements regarding the property, we recommend informing your purchasing agent of these in good time and carrying out, or arranging to have carried out, your own investigation into these matters. If you choose not to engage a professional representative, you are deemed by law to have sufficient expertise to assess all matters relevant to the purchase. The NVM terms and conditions apply.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Visch &amp; van Zeggelaar</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/204/429_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/514_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/424_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/430_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/459_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/489_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/568_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/544_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/530_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/440_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/527_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/487_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/569_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/491_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/481_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/503_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/427_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/524_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/564_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/523_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/462_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/567_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/443_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/464_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/526_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/541_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/479_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/454_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/480_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/483_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/495_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/507_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/435_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/536_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/204/486_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

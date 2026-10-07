@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dwarswatering 11 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Dwarswatering 11</h1>
+  <p class="sub">
+    <span>1069 RM Amsterdam</span>
+    <span>·</span>
+    <span>Dijkgraafpleinbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/132/272_1440x960.jpg" alt="Dwarswatering 11 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">60 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€599.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.910/m² · 3.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.5 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">122 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1982</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-dwarswatering-11/44515381/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 599.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.910</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, geschakelde woning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1982</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>122 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>106 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>446 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, Walk-in shower, toilet, en Underfloor heating</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors en een vliering</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation, natuurlijke ventilatie, schuifpui, en TV</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Grotendeels dubbelglas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en open haard</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HRE (2016, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND G</dt><dd></dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Kadastrale kaart</h3>
+        <dl class="flist">
+        <div class="frow"><dt>1624</dt><dd></dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>106 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 01-11-2031</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan water, beschutte ligging en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>53 m² (9,45 m deep en 5,57 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra en stromend water</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">(english below)
+DWARSWATERING 11, RUIME EN LICHTE 5-KAMERWONING MET HEERLIJKE ACHTERTUIN.
+Eengezinswoning met een woonoppervlak van circa 122 m² met 4 slaapkamers en inpandige berging/bijkeuken van 6m². Dus in totaal tesamen 128 m². Heerlijk rustig en omringd door groen gelegen geschakelde woning met achtertuin grenzend aan water, in de wijk de Punt van Nieuw-West op de grens met de Aker. De woning kan/wordt gemeubileerd worden opgeleverd, u kunt er zo direct intrekken. Deze woning ligt aan een autovrij plein, waardoor het altijd rustig is voor de deur en uw kinderen heerlijk vrij kunnen buitenspelen. De ideale ligging zorgt voor extra privacy en comfort. De afwerking van de woning heeft hier en daar nog wat liefde en aandacht nodig, maar daarna zult u in deze fijne familiewoning op deze prachtige plek, met heel veel plezier kunnen wonen. Erfpacht is reeds eeuwigdurend afgekocht t/m 31/10/2031, daarna onder gunstige voorwaarden jaarlijks canon € 588,97. Energielabel C. INDELING Begane grond Entree, binnenkomst in de hal met een smaakvolle tegelvloer, meterkast en hangend toilet met fonteintje, toegangsdeuren naar de inpandige berging/bijkeuken (6 m²) aan de woning met een grote koel/vries combinatie. Toegang tot de royale en tuingerichte woonkamer met open haard waarvan de ombouw met prachtige zwart granieten tegels is bekleed met bijpassende granieten Salontafel. De woonkamer heeft een stijlvolle lambrisering. De vloer van woonkamer/open keuken is bekleed met een massief eiken houten parket. Tevens is er een mooie royale houten eetkamertafel aanwezig met daarboven een mooie industriële lamp. Via een grote schuifpui is de zonnige op het zuidoosten tuin te betreden waar ook een nette terrasset. De open keuken ligt aan de voorzijde van het huis en is opgesteld in een L-vorm en voorzien van een groot raam met zicht op de straat. Het aanrechtblad is van prachtig zwart graniet. Verder beschikt de keuken over een grote Boretti oven, 6 pits gaskookplaat, afzuigkap, ingebouwde vaatwasmachine en koelkast. Onder de trap bevindt zich nog een voorraad/opbergkast met voldoende ruimte. 1e verdieping Via de hal deur en de trap naar de eerste verdieping. Ruime overloop, bekleed met laminaat en een zeer royale PAX kledingkast, dus genoeg opbergruimte. 3 slaapkamers op de 1e verdieping. Een grote slaapkamer aan de achterzijde. Hiernaast ligt een kleinere slaapkamer en aan de voorzijde eveneens een ruime slaapkamer. Er is een tweepersoonsbed alsmede een 1 persoons bed aanwezig De ruim opgezette badkamer ligt aan de voorzijde en heeft een kanteldakraam. De badkamer voorziet in een inloopdouche, dubbele wastafel, hangend toilet en er is tevens een wasmachine en wasdroger aanwezig. Deze kunnen eventueel in de berging beneden worden geplaatst waardoor er ruimte ontstaat om eventueel een ligbad erbij te plaatsen. Zolderverdieping en vliering Vanaf de overloop de trap naar de zolderverdieping. Overloop en toegang tot een grote slaapkamer met dakkapel aan de achterzijde en twee openslaande ramen. Deze ruimte is multifunctioneel te gebruiken als slaapkamer, logeerkamer, werkkamer of hobbykamer. Ook hier is een 2 persoons bed aanwezig. Er is een afgescheiden ruimte met de cv-ketel d.m.v. grote schuifdeuren aan beide zijden van deze zeer ruime slaapkamer met veel bergruimte. Tevens is er ook een kleine vliering, ideaal te gebruiken als bergruimte. Berging/bijkeuken De berging/bijkeuken (6 m²) aan de voorzijde van het huis is zowel binnen als buitenom te bereiken, ideaal om bijvoorbeeld fietsen te stallen en/of de wasmachine en droger. Er staat in de berging ook een koel/vries combinatie en een opbergstelling. De dorpse sfeer komt hier goed tot uiting door de rust en de gezamenlijke activiteiten met de buren rondom het hof. Parkeren Ruime parkeerplaatsen op de Dwarswatering, is sinds kort een vergunningsgebied, voor de bewoners is een gunstig tarief van 40,02 per 6 maanden. Er is ook een mogelijkheid voor een 2e auto. Omgeving De woning is gelegen in de wijk De Punt, in Nieuw-West. Praktisch de hele wijk is opgeknapt en hier is veel aandacht aan besteed. De openbare ruimte is planmatig aangepakt en opgefrist: de straten zijn opnieuw aangelegd en alle hofjes hebben een opfrisbeurt gekregen. Verder is de wijk uitgebreid met nieuwe eengezinswoningen met tuin. Die mix van oud en nieuw heeft van De Punt een gevarieerde, moderne en groene woonwijk gemaakt! In de directe omgeving zijn vele faciliteiten te vinden. Op korte afstand vindt u diverse winkelcentra: De Dukaat aan het Ecu plein, Dijkgraafplein, Akerpoort en Osdorpplein. Op het Osdorpplein vindt u tevens theater De Meervaart en de Openbare Bibliotheek. Ook de winkelstraten Pieter Calandlaan en Tussen Meer liggen op korte afstand. In de omgeving bevinden zich meerdere sportverenigingen en recreëren kunt u aan de rand van de Sloterplas, de Nieuwe Meer en het Amsterdamse Bos. Op de fiets of met tramlijn 1 of 17 bent u binnen een half uur in het centrum van Amsterdam. Met de auto rijdt u binnen enkele minuten de A4, A5, A9 en A10 op. Kortom: De Punt is een woonwijk met een dorps karakter. De wijk is autoluw en zeer geschikt voor gezinnen met jonge kinderen die op zoek zijn naar rust en ruimte. Wat u ook wilt weten
+- Eengezinswoning met 3 woonlagen en achtertuin
+- Bouwjaar 1982
+- Woonoppervlak circa 122 m² (conform meetrapport)
+- Berging/bijkeuken van nog eens 6m² dus tesamen 128m2
+- Achtertuin op het zuidoosten van 53m² (9,4m diep en 5,6m breed)
+- Inpandige berging
+- Tuingerichte woonkamer voorzien van een massieve parketvloer en open haard
+- Open keuken aan de voorzijde
+- 3 slaapkamers op de 1e verdieping en 1 (slaap)kamer op de zolderverdieping
+- Verwarming en warm water middels CV-ketel (type Intergas, bouwjaar 2016)
+- Grotendeels dubbel glas, achterpui HR++
+- Energielabel C
+- Voortdurend recht van erfpacht van toepassing, de canon is afgekocht tot en met 31 oktober 2031. Na dit tijdvak is de erfpachtcanon eeuwigdurend vastgezet onder de gunstige voorwaarden. DWARSWATERING 11 – SPACIOUS AND LIGHT 5-ROOM FAMILY HOME WITH NICE GARDEN. This spacious family home offers approximately 122 m² (1,313 sq ft) of living space, including an integrated storage room/utility room of 6 m²,m² so in total together 128 m² , and features 4 bedrooms. Situated in a peaceful, green setting in De Punt neighborhood of Amsterdam Nieuw-West, on the border of De Aker, this semi-detached home enjoys a rear garden overlooking the water. The property is optionally offered fully furnished, allowing you to move in immediately. Located on a car-free courtyard, the home benefits from a quiet, safe environment where children can play freely outside. Its ideal location provides additional privacy and comfort. While the property could benefit from some cosmetic updating in places, it offers an excellent opportunity to create a wonderful family home in a beautiful setting. The leasehold has been bought off until 31 October 2031. After this date, the annual ground rent has been fixed under favourable perpetual leasehold conditions at €588,97 per year. Energy label: C. LAYOUT Ground Floor Entrance hall with an attractive tiled floor, utility meter cupboard and a modern wall-mounted toilet with hand basin. The hallway provides access to the integrated storage room/utility room (6m²), which currently houses a large fridge-freezer. The spacious, garden-facing living room features a beautiful fireplace finished with elegant black granite tiles and includes a matching granite coffee table. Decorative wall panelling adds character to the space. The living room and open-plan kitchen are finished with a solid oak parquet floor. A large wooden dining table and an industrial-style pendant light are also included. Large sliding doors open onto the sunny south-east facing garden, where you will find a patio table with chairs. The open kitchen is located at the front of the house and is arranged in an L-shaped layout with a large window overlooking the street. It features a luxurious black granite countertop and is equipped with: Large Boretti oven, Six-burner gas hob, Extractor hood, Built-in dishwasher, Refrigerator. A generous storage cupboard is located beneath the staircase. First Floor The staircase leads to a spacious landing finished with laminate flooring and fitted with a large IKEA PAX wardrobe, providing ample storage. This floor offers three bedrooms: A spacious master bedroom overlooking the rear garden, A smaller bedroom adjacent to it. A generously sized bedroom at the front of the house The property includes one double bed and one single bed. The spacious bathroom is situated at the front of the property and benefits from a roof window. It includes: Walk- in shower, Double washbasin, Wall-mounted toilet, Washing machine, Tumble dryer. If preferred, the washing machine and dryer can be relocated to the storage room downstairs, creating enough space to install a bathtub. Second Floor (Attic) The staircase leads to the attic landing and a large bedroom with a rear dormer window and two opening windows. This versatile space can be used as: Master bedroom, Guest room, Home office, Hobby room A double bed is also included. A separate utility area houses the central heating boiler behind large sliding doors on both sides, while offering extensive storage space. There is also a small loft, ideal for additional storage. Storage Room/Utility Room The integrated storage room/utility room (approximately 6 m²) is accessible both from inside and outside the house, making it ideal for storing bicycles or accommodating the washing machine and dryer. It also contains: Large fridge-freezer and Storage shelving. The peaceful village atmosphere is enhanced by the quiet surroundings and the friendly community activities organised with neighbours around the courtyard. Parking There is ample parking available along Dwarswatering. The area has recently become a permit parking zone. Residents can obtain a parking permit at a favourable rate of €40.02 per six months, with the possibility of obtaining a permit for a second vehicle. Location The property is located in De Punt, one of the most attractive residential areas of Amsterdam Nieuw-West. Almost the entire neighbourhood has recently undergone extensive renovation and redevelopment. Public spaces have been redesigned, streets have been renewed, and the courtyards have been upgraded. In addition, many new family homes with gardens have been built, creating a modern, green and varied residential area that successfully combines old and new. The surrounding area offers numerous amenities, including shopping centres such as: De Dukaat (Ecuplein), Dijkgraafplei, Akerpoort, Osdorpplein Osdorpplein also features Theater De Meervaart and the public library. The shopping streets Pieter Calandlaan and Tussen Meer are also within easy reach. Several sports clubs are located nearby, while recreational opportunities abound at Sloterplas, Nieuwe Meer and the Amsterdamse Bos. Amsterdam city centre can be reached within approximately 30 minutes by bicycle or via tram lines 1 and 17. By car, the A4, A5, A9 and A10 motorways are just a few minutes away. In short, De Punt offers a peaceful, village-like atmosphere within Amsterdam and is an ideal neighbourhood for families looking for space, greenery and tranquillity. Key Features
+- Spacious family home with three floors
+- Approximately 122 m² of living space (measured according to NEN standards)
+- Integrated storage room/utility room of 6 m². together a total of 128 m²
+- Built in 1982
+- Four bedrooms
+- Sunny south-east facing rear garden of 53m² (9,4m deep and 5,6m wide)
+- Garden-facing living room with solid oak parquet flooring and fireplace
+- Open-plan kitchen at the front of the property
+- Three bedrooms on the first floor and one bedroom on the attic floor
+- Central heating and hot water via an Intergas boiler (2016)
+- Predominantly double glazing; rear façade fitted with HR++ glazing
+- Energy label C
+Leasehold bought off until 31 October 2031
+Thereafter, the annual ground rent has been fixed under favourable perpetual leasehold conditions at €588.97 per year Offered fully furnished and ready for immediate occupancy</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Makelaarsland</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 60</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/132/272_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/099_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/303_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/189_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/195_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/113_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/291_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/135_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/253_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/199_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/066_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/236_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/063_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/214_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/238_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/213_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/084_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/348_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/172_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/087_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/219_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/294_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/117_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/092_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/352_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/208_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/273_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/260_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/341_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/261_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/141_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/292_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/090_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/151_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/155_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/251_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/107_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/367_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/061_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/078_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/285_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/358_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/112_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/244_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/237_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/368_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/297_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/366_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/140_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/216_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/062_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/235_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/129_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/102_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/132/133_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

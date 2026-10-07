@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Houthalenstraat 83 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Houthalenstraat 83</h1>
+  <p class="sub">
+    <span>1066 LS Amsterdam</span>
+    <span>·</span>
+    <span>Nieuw-Sloten-Noordoost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/437/275_1440x960.jpg" alt="Houthalenstraat 83 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">43 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€779.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.902/m² · 1.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.9 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">132 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-houthalenstraat-83/80928154/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 779.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.902</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Bouwperiode</dt><dd>1991-2000</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>132 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>11 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>99 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>491 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Kadastraal perceel</dt><dd>SLOTEN NOORD-HOLLAND E 4829</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>99 m²</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">RUIME EN SFEERVOLLE EENGEZINSWONING MET VIJF SLAAPKAMERS, TWEE BADKAMERS EN EEN ZONNIGE TUIN IN AMSTERDAM
+
+In een prettige woonomgeving in Amsterdam bevindt zich deze verrassend ruime en sfeervolle eengezinswoning aan de Houthalenstraat 83. Met een woonoppervlakte van circa 132 m², maar liefst vijf slaapkamers, twee badkamers, een royale woonkamer met open keuken en een zonnige achtertuin op het westen met vrijstaande berging, biedt deze woning volop ruimte voor gezinnen die comfortabel en veelzijdig willen wonen.
+
+De woning beschikt over een bijzonder ruime leefverdieping, waarbij de woonkamer en keuken op natuurlijke wijze met elkaar verbonden zijn. De grote raampartijen zorgen voor een prettige lichtinval en geven de woning een ruimtelijk karakter. De open keuken vormt samen met de woonkamer het centrale hart van het huis en biedt volop ruimte voor gezellig tafelen en samenzijn.
+
+Met drie slaapkamers op de eerste verdieping en nog eens twee slaapkamers op de tweede verdieping is de woning uitstekend geschikt voor een groot gezin, thuiswerkers of mensen die behoefte hebben aan extra kamers voor gasten, hobby&#x27;s of kantoorruimte.
+EEN WONING MET RUIMTE EN VEELZIJDIGE MOGELIJKHEDEN
+
+De begane grond is ontworpen rondom een royale open leefruimte. De woonkamer strekt zich over een groot gedeelte van de woning uit en biedt verschillende mogelijkheden voor het creëren van een comfortabele zithoek en een ruime eethoek.
+
+De open keuken is praktisch opgesteld en vormt een directe verbinding met de woonkamer. Vanuit de leefruimte is er een prettige relatie met de tuin, waardoor binnen en buiten op natuurlijke wijze in elkaar overlopen.
+
+De woning beschikt daarnaast over twee badkamers, waarbij zowel de eerste als de tweede verdieping over een eigen badkamer beschikt. Dit zorgt voor extra comfort en privacy en maakt de woning bijzonder geschikt voor een groter huishouden.
+
+INDELING
+
+BEGANE GROND
+
+Via de entree bereikt u de hal met toegang tot de verschillende vertrekken, het toilet en de trapopgang naar de verdiepingen.
+
+De royale woonkamer vormt het centrale hart van de woning. Dankzij de grote raampartijen valt er veel natuurlijk daglicht naar binnen. De ruimte biedt volop mogelijkheden voor een ruime zithoek, een grote eettafel en een comfortabele gezinsindeling.
+
+Aan de achterzijde bevindt zich de open keuken. De praktische keukenopstelling beschikt over voldoende werk- en kastruimte en sluit direct aan op de woonkamer.
+
+Vanuit de leefruimte is er toegang tot de achtertuin, waardoor de begane grond een prettige verbinding heeft met de buitenruimte.
+
+EERSTE VERDIEPING
+
+De eerste verdieping beschikt over drie slaapkamers en een badkamer.
+
+De drie slaapkamers zijn praktisch van formaat en bieden verschillende gebruiksmogelijkheden. De kamers kunnen uiteraard worden ingericht als slaapkamers, maar zijn eveneens geschikt als werkkamer, hobbyruimte of logeerkamer.
+
+De badkamer is praktisch ingericht en voorzien van een douche, toilet en wastafel.
+
+TWEEDE VERDIEPING
+
+Op de tweede verdieping bevinden zich nog eens twee slaapkamers en een tweede badkamer.
+
+Deze verdieping biedt daarmee een uitstekende mate van privacy en flexibiliteit. De twee slaapkamers kunnen ideaal worden gebruikt als master bedroom, kinderkamers, werkkamers of logeerruimtes.
+
+Ook deze badkamer is compleet uitgerust met een douche, toilet en wastafel. Dankzij de tweede badkamer beschikt de woning over een bijzonder praktische indeling voor grotere gezinnen en biedt iedere verdieping extra comfort en privacy.
+
+BUITENRUIMTE
+
+De woning beschikt over een fijne en zonnige achtertuin op het westen, die vanuit de woning bereikbaar is. Dankzij de ligging op het westen kunt u hier heerlijk genieten van de middag- en avondzon.
+
+De tuin biedt ruimte voor een terras, een comfortabele zithoek en groenvoorziening en vormt daarmee een heerlijke plek om buiten te genieten. De buitenruimte kan geheel naar eigen smaak worden ingericht en optimaal worden benut.
+
+Achter in de tuin bevindt zich een vrijstaande berging, ideaal voor het stallen van fietsen, tuingereedschap en overige spullen.
+
+LOCATIE
+
+De Houthalenstraat bevindt zich in Amsterdam en biedt een prettige combinatie van rustig wonen en de nabijheid van diverse voorzieningen. In de omgeving bevinden zich winkels, scholen, sportvoorzieningen en openbaar vervoer.
+
+Winkelcentrum Belgiëplein bevindt zich op loopafstand, waardoor dagelijkse boodschappen en diverse andere voorzieningen gemakkelijk binnen handbereik zijn.
+
+Ook Kasterleepark bevindt zich in de omgeving en biedt een fijne plek voor ontspanning en recreatie. Daarnaast is er in de omgeving voldoende parkeergelegenheid.
+
+Het centrum van Amsterdam en andere delen van de stad zijn goed bereikbaar. Daarmee vormt deze woning een aantrekkelijke uitvalsbasis voor gezinnen en voor mensen die graag rustig wonen, maar de voorzieningen en dynamiek van Amsterdam binnen handbereik willen hebben.
+
+BIJZONDERHEDEN
+
+- Ruime en sfeervolle eengezinswoning
+- Woonoppervlakte circa 132 m²
+- Vloerverwarming aanwezig
+- Vijf slaapkamers
+- Twee badkamers
+- Royale woonkamer met open keuken
+- Veel natuurlijke lichtinval
+- Zonnige achtertuin op het westen
+- Vrijstaande berging in de tuin
+- Praktische indeling voor gezinnen
+- Veel mogelijkheden voor thuiswerken, hobby&#x27;s en gasten
+- Energielabel A
+- Erfpacht afgekocht tot 30-09-2040
+- Voldoende parkeergelegenheid in de omgeving
+- Winkelcentrum Belgiëplein op loopafstand
+- Kasterleepark in de omgeving
+- Oplevering in overleg
+
+***IN ENGLISH BELOW***
+
+SPACIOUS AND ATMOSPHERIC FAMILY HOME WITH FIVE BEDROOMS, TWO BATHROOMS AND A SUNNY GARDEN IN AMSTERDAM
+
+Located in a pleasant residential area of Amsterdam, this surprisingly spacious and atmospheric family home can be found at Houthalenstraat 83. With a living area of approximately 132 m², no fewer than five bedrooms, two bathrooms, a generous living room with an open-plan kitchen, and a sunny west-facing rear garden with a detached storage shed, this home offers plenty of space for families looking for comfortable and versatile living.
+
+The property features a particularly spacious living floor, with the living room and kitchen naturally connected. The large windows provide plenty of natural light and create a spacious feel throughout the home. The open-plan kitchen, together with the living room, forms the central heart of the house and offers plenty of room for dining and spending quality time together.
+
+With three bedrooms on the first floor and another two bedrooms on the second floor, the property is ideally suited to a large family, people working from home, or anyone looking for additional rooms for guests, hobbies or a home office.
+
+A HOME WITH SPACE AND VERSATILE POSSIBILITIES
+
+The ground floor is centred around a generous open-plan living area. The living room extends across a large part of the property and offers various possibilities for creating a comfortable seating area and a spacious dining area.
+
+The open-plan kitchen is practically arranged and provides a direct connection to the living room. From the living area, there is a pleasant connection to the garden, allowing the indoor and outdoor spaces to flow naturally into one another.
+
+The property also features two bathrooms, with both the first and second floors having their own bathroom. This provides additional comfort and privacy and makes the home particularly suitable for a larger household.
+
+LAYOUT
+
+GROUND FLOOR
+
+Through the entrance, you reach the hallway, which provides access to the various rooms, the toilet and the staircase leading to the upper floors.
+
+The generous living room forms the central heart of the home. Thanks to the large windows, plenty of natural daylight enters the room. The space offers ample possibilities for a spacious seating area, a large dining table and a comfortable family layout.
+
+At the rear of the property is the open-plan kitchen. The practical kitchen layout provides sufficient workspace and storage and connects directly to the living room.
+
+The living area provides access to the rear garden, creating a pleasant connection between the ground floor and the outdoor space.
+
+FIRST FLOOR
+
+The first floor features three bedrooms and a bathroom.
+
+The three bedrooms are practical in size and offer a variety of possible uses. Naturally, they can be furnished as bedrooms, but they are equally suitable as a home office, hobby room or guest room.
+
+The bathroom is practically arranged and equipped with a shower, toilet and washbasin.
+
+SECOND FLOOR
+
+The second floor features two additional bedrooms and a second bathroom. This floor offers an excellent level of privacy and flexibility. The two bedrooms can ideally be used as a master bedroom, children&#x27;s bedrooms, home offices or guest rooms.
+
+This bathroom is also fully equipped with a shower, toilet and washbasin. Thanks to the second bathroom, the property offers a particularly practical layout for larger families, with additional comfort and privacy on each floor.
+
+OUTDOOR SPACE
+
+The property features a pleasant and sunny west-facing rear garden, which can be accessed directly from the house. Thanks to its west-facing orientation, the garden is an ideal place to enjoy the afternoon and evening sun.
+
+The garden offers space for a terrace, comfortable seating area and greenery, making it a wonderful place to enjoy the outdoors. The outdoor space can be arranged entirely according to your own taste and used to its full potential.
+At the rear of the garden is a detached storage shed, ideal for storing bicycles, gardening tools and other belongings.
+
+LOCATION
+
+Houthalenstraat is located in Amsterdam and offers a pleasant combination of peaceful residential living and proximity to a wide range of amenities. Shops, schools, sports facilities and public transport can all be found in the surrounding area.
+
+Belgiëplein shopping centre is within walking distance, making everyday shopping and various other amenities easily accessible.
+
+Kasterleepark is also located nearby and offers a pleasant place for relaxation and recreation. There is also ample parking available in the surrounding area.
+
+Amsterdam city centre and other parts of the city are easily accessible. This makes the property an attractive home for families and for those who enjoy peaceful residential living while still wanting Amsterdam&#x27;s amenities and vibrant city life close at hand.
+
+KEY FEATURES
+
+- Spacious and atmospheric family home
+- Living area of approximately 132 m²
+- Five bedrooms
+- Two bathrooms
+- Floor heating is available
+- Generous living room with open-plan kitchen
+- Plenty of natural daylight
+- Sunny west-facing rear garden
+- Detached storage shed in the garden
+- Practical layout for families
+- Plenty of possibilities for working from home, hobbies and guests
+- Energy label A
+- Ground lease (erfpacht) fully paid until 30 September 2040
+- Ample parking available in the surrounding area
+- Belgiëplein shopping centre within walking distance
+- Kasterleepark nearby
+- Completion by mutual agreement</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>ESTATEC Makelaars</strong></p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 43</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/437/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/801_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/814_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/681_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/701_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/713_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/764_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/813_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/761_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/767_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/760_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/685_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/776_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/742_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/691_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/811_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/786_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/789_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/797_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/734_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/792_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/817_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/778_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/808_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/803_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/417/708_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

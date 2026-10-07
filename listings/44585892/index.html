@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heemstedestraat 20-1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Heemstedestraat 20-1</h1>
+  <p class="sub">
+    <span>1058 NM Amsterdam</span>
+    <span>·</span>
+    <span>Westlandgrachtbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/901/771_1440x960.jpg" alt="Heemstedestraat 20-1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">25 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€465.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.455/m² · 0.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">0.7 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">55 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1928</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-heemstedestraat-20-1/44585892/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 465.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.455</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 158,24 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1928</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met bitumineuze dakbedekking en tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>55 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>179 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Airconditioning, Mechanical ventilation, en natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>HR-glas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Kompakt HRE (gas-fired combi boiler uit 2015, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN O 2863</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>City centre, in woonwijk, open ligging en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 158,24 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Charmant, licht en sfeervol 4-kamerappartement (van ca. 55m2) op de Heemstedestraat in de Hoofddorppleinbuurt met fijn en zonnig woningbreed balkon (van ca. 6m2) op het Noordwesten. Door de ligging ten opzichte van de Stolwijkstraat, heb je een vrij uitzicht. De riante woonkamer wordt fijn verlicht door de grote raampartijen die voorzien zijn van HR++. De woning heeft een moderne ruime keuken, nette badkamer, twee ruime slaapkamer met toegang tot het balkon. Door de keuken naar de woonkamer te verplaatsen, ontstaat de ruimte om twee gelijkwaardige slaapkamers te creëren. 
+
+De woning maakt deel uit van een kleine, gezonde VvE met onderhoudsplan en is gelegen op eigen grond! 
+
+Tevens is er de mogelijkheid om het balkon te verdiepen, waardoor je een riant terras kan creëren. 
+
+Hoofddorppleinbuurt
+De woning is gelegen in een gewilde woonomgeving. Op loopafstand van diverse winkels, supermarkten en horecagelegenheden aan het Hoofddorpplein, Zeilstraat en Amstelveenseweg. In de directe omgeving zijn er verschillende recreatiegebieden te vinden: het Vondelpark, het Nieuwe Meer, het Amsterdamse Bos en het Rembrandtpark. Ook zijn er diverse sportvoorzieningen in de buurt gelegen zoals sportscholen, Sportpark De Schinkel, voetbalclub AVV Swift en hockeyclubs Amsterdam, Hurley en Pinoké (Amsterdamse Bos). 
+De basisscholen “de Notenkraker” “de Nautilus”  zitten aan de Theophile de Bockstraat. Tevens ligt de British School of Amsterdam in de directe omgeving (Schinkelbuurt). Ook zijn er rondom het Hoofddorpplein verschillende kinderopvangen aanwezig. 
+
+Bereikbaarheid
+Het openbaar vervoer is ruimschoots aanwezig: NS stations Amsterdam Zuid en Lelylaan, tramlijnen 1, 2 en 17, de metro en diverse buslijnen zijn dichtbij gelegen. Met eigen vervoer is de Ringweg A10 om de hoek, waardoor b.v. Schiphol binnen 10 minuten te bereiken is. 
+
+Indeling
+Begane grond: Gemeenschappelijke entree. U deelt het trappenhuis met slechts twee andere appartementen. De voordeur van de woning bevindt zich op de eerste etage.
+
+Eerste etage: U komt binnen in de hal die direct toegang biedt tot alle vertrekken binnen de woning. In de hal is voldoende ruimte voor een garderobe. 
+
+Aan de voorzijde is de ruime woon- en eetkamer gelegen, door de grote raampartijen is deze ruimte voorzien van veel natuurlijk licht en de kozijnen zijn uitgevoerd in HR++ beglazing. De zijkamer wordt gebruikt als fijne werkkamer, deze bied tevens ook genoeg ruimte voor een eettafel. De woonkamer is ruim opgezet en bied voldoende kastruimte en ruimte voor een gezellige zithoek.  
+
+Aan de achterzijde is de keuken gelegen, voorzien van beige kasten, wit werkblad en diverse inbouwapparatuur: 4-pitsgasfornuis, afzuigkap, vaatwasser, koelkast en combi-oven. Vanuit de keuken kunt u het balkon op het Noordwesten bereiken. Het balkon is over de gehele breedte van de woning. 
+
+Tevens kan het balkon uitgebreid worden tot een terras. De vve heeft hier toestemming voor gegeven. 
+
+De hoofdslaapkamer (ca. 3,98m x 2,19m) beschikt over veel natuurlijk licht en er genoeg ruimte voor een tweepersoonsbed, kasten en bureau. De tweede slaapkamer heeft afmetingen van (ca. 2,99m x 1,82m) en is voorzien van vaste kasten en een wasmachine-aansluiting. Middels openslaande deuren bereikt u via beiden slaapkamers het Balkon op het Oosten. Hier kunt u de ochtend van de zon genieten. 
+
+In het midden is de fraaie badkamer gelegen die voorzien is van een inloopdouche, wastafel met meubel en toilet. 
+
+De hele woning is netjes afgewerkt met een laminaatvloer en volledig voorzien van isolerende beglazing ( Hr++ aan de voorzijde en Hr aan de achterzijde. 
+
+Door de keuken naar de woonkamer te verplaatsen, ontstaat de mogelijkheid om twee gelijkwaardige slaapkamers te creëren. 
+
+Kerngegevens woning
+Oppervlakte: ca. 55 m² (NEN 2580 rapportage aanwezig)
+Aantal kamers: 3 waarvan 2 slaapkamers 
+Buitenruimte: 6,2 m² 
+Separate berging: 
+Energielabel:  C geldend tot 11-08-2036
+Bouwjaar: 1928
+Verwarming: Intergas Kompakt HRE uit 2015 
+
+Kadastrale gegevens
+Gemeente : Sloten
+Sectie + nummer: O 2863 A10
+Aandeel: 65/1560
+Eigen grond
+
+VVE
+Aantal leden:  11 leden
+Professioneel  beheer
+Servicekosten: € 158.24 -- per maand ( per 20..)
+Reserve Groot onderhoud per 2025 € 57.391,79,- 
+
+Overig
+Ouderdomsclausule is van toepassing 
+Notaris : ring Amsterdam
+Oplevering in overleg 
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft de eigen onderzoekplicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundig genoeg om alle zaken die van belang zijn te kunnen voorzien.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floor plans were listed on Funda (1) but were not scraped for this page — no floorplan images invented here.</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 25</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/901/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/757_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/770_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/786_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/761_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/776_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/784_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/774_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/735_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/725_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/772_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/780_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/747_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/766_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/775_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/756_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/777_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/901/711_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

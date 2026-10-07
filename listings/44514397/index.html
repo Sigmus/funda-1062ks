@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Van Noordtkade 18-B · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Van Noordtkade 18-B</h1>
+  <p class="sub">
+    <span>1013 BZ Amsterdam</span>
+    <span>·</span>
+    <span>Spaarndammerbuurt-Noordoost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/511/139_1440x960.jpg" alt="Van Noordtkade 18-B — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">46 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€630.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.079/m² · 4.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">89 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1992</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-noordtkade-18-b/44514397/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 630.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.079</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 228,65 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1992</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>89 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>245 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift en Mechanical ventilation</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha (gas gestookt uit 2012, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM X 2107</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan vaarwater, beschutte ligging, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking, parkeergarage en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 228,65 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Praktisch ingedeeld appartement met 3 slaapkamers en zonnig balkon in de populaire Spaarndammerbuurt. Bijzonder in deze prijsklasse zijn de 3 goed bemeten slaapkamers (ideaal voor thuiswerken), de woonkeuken en het zonnige balkon op het zuiden.
+De woning beschikt over een ruime badkamer en woonkeuken die je eventueel in je eigen stijl kunt aanpassen. In combinatie met de berging in de kelder, de mogelijkheid om een parkeerplek te huren in de ondergelegen parkeergarage is dit appartement bijzonder in deze prijsklasse. Parkeren op straat is ook mogelijk, daarbij kan ook worden geparkeerd in de Pontsteigergarage (3 minuten lopen) met een parkeervergunning.
+Locatie: wonen in de Spaarndammerbuurt betekent is ideaal; de binnenstad ligt op loopafstand maar je woont buiten het toeristisch circuit. De Spaarndammerbuurt heeft voldoende supermarkten, trendy cafe’s en restaurants. In de Houthavens is een steiger aangelegd waar je kunt zwemmen op een warme zomerdag. De pont naar het NDSM-terrein (3 minuten lopen) brengt je naar Pllek en nog meer restaurants en cafe’s. De zaterdagse markt aan de Lindengracht is dichtbij net als de biologische Noordermarkt. In de Haarlemmerstraat zijn nog meer kwaliteitswinkels te vinden. Echt een toplocatie.
+Bereikbaarheid: De ring A10 is 8 minuten met de auto. Het Centraal Station is 7 minuten fietsen. Indeling. Entree vanaf de lift, hal met toegang tot alle ruimten; 3 slaapkamers (11,5, 8,2 en 8.5 m2), badkamer met douche, wastafel en wasmachineaansluiting en toilet. Alle slaapkamers zijn op het noorden gesitueerd, dat is prettig koel slapen in de zomer. Ruime, lichte woonkamer (30 m2) met ramen aan beide zijden van de woonkamer. Direct toegang tot het zonnige balkon op het zuiden. De woonkeuken (11,5m2) biedt alle mogelijkheden voor een alternatieve indeling. Woonkamer en keuken zijn gescheiden door een glazen wand. De 3 slaapkamers (uniek in dit segment) en de woonkamer bieden zicht op de Lemairegracht. Een eigen bootje aan de kade is mogelijk!
+Beneden in de kelder is een eigen berging, bijvoorbeeld voor fietsen. Ook een parkeerplek (te huren van Lieven de Stad, circa € 145,-/maand) is mogelijk.
+Bijzonderheden:
+- woonoppervlakte 89 m2;
+- bouwjaar 1992;
+- betonnen fundering;
+- gelegen op erfpachtgrond, afgekocht tot 1 juni 2043;
+- vanaf 2043 is de erfpacht € 1521,67 met jaarlijkse indexatie (prijspeil 2025)
+- vastgeklikt onder gunstige voorwaarden;
+- servicekosten € 228,71 per maand;
+- actieve VVE en buurtapp;
+- berging in de kelder, met eventueel een parkeerplek;
+- 3 slaapkamers en een zonnig balkon;
+- dubbel glas;
+- volledig geïsoleerd;
+- verwarming en warm water met CV-ketel (Remeha 2012);
+- energielabel A;
+- oplevering in overleg, kan snel.
+Een aantal van de foto&#x27;s zijn impressiefoto&#x27;s en dienen ter illustratie. De foto&#x27;s geven een sfeerimpressie en zijn niet altijd een exacte weergave van de uiteindelijke situatie.
+Algemene informatie
+Vraag altijd naar de lijst van zaken; niet alle in de brochure genoemde items behoren standaard tot de woning. Deze woning is gemeten volgens de Meetinstructie. De Meetinstructie is gebaseerd op de NEN2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van de gebruiks-oppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting.
+Hoewel wij de woning met veel zorg en naar eer en geweten hebben opgemeten, kan het zijn dat er verschillen zijn in de afmetingen. De opgegeven maten zijn indicatief, er kunnen kleine verschillen zijn. Afhankelijk van de moeilijkheidsgraad van het te meten specifieke object kunnen deze verschillen groter of kleiner zijn. Indien de exacte maatvoering voor u van belang is, raden wij u aan de maten zelf te (laten) meten.
+Alle genoemde jaartallen zijn bij benadering en indicatief.
+De NVM-koopakte bevat (indien van toepassing) aanvullende clausules zoals de ouderdoms-, asbest-, meet- en niet-bewonersclausule, alsmede een voorbehoud van akkoord van de hypotheekverstrekker van verkoper. Hoewel deze informatie met zorg is samengesteld, aanvaarden wij geen aansprakelijkheid voor onjuistheden, onvolledigheden of de gevolgen daarvan.
+Well-laid-out apartment with 3 bedrooms and a sunny south-facing balcony in the popular Spaarndammerbuurt. What makes this apartment stand out in its price range are the three well-proportioned bedrooms (ideal for working from home), the spacious kitchen-diner, and the sunny south-facing balcony.
+The property features a generous bathroom and a large kitchen-dining area, both of which can be customized to suit your personal style. Combined with a private storage unit in the basement and the option to rent a parking space in the underground garage, this apartment offers exceptional value in its category. Street parking is also available, and residents can use the nearby Pontsteiger garage (a 3-minute walk) with a parking permit. Location
+Living in the Spaarndammerbuurt is ideal: the city center is within walking distance, yet the area remains outside the main tourist crowds. The neighborhood offers plenty of supermarkets, trendy cafés, and restaurants. In the nearby Houthavens, a jetty has been created where you can enjoy a swim on warm summer days. A ferry (just a 3-minute walk away) takes you to the NDSM Wharf, home to hotspots like Pllek and many other restaurants and cafés.
+The popular Saturday market at Lindengracht is close by, as is the organic Noordermarkt. For more high-quality shops, you can visit Haarlemmerstraat. Truly a prime location.
+Accessibility
+• A10 ring road: 8 minutes by car
+• Central Station: 7 minutes by bike
+Layout
+Entrance via the lift leads to a hallway with access to all rooms:
+• 3 bedrooms (11.5 m², 8.2 m², and 8.5 m²)
+• Bathroom with shower, sink, washing machine connection, and toilet
+All bedrooms face north, ensuring a pleasantly cool temperature during summer nights.
+The spacious and bright living room (30 m²) features windows on both sides, allowing plenty of natural light. From here, you have direct access to the sunny south-facing balcony.
+The kitchen-diner (11.5 m²) offers flexibility for alternative layouts. The living room and kitchen are separated by a glass partition.
+Both the living room and the three bedrooms (unique for this segment) overlook the Lemairegracht canal. There is even the possibility of mooring your own boat along the quay.
+Additional Features
+• Private storage room in the basement (ideal for bicycles)
+• Optional parking space available for rent (approx. €145/month via Lieven de Stad)
+Key Details
+• Living area: 89 m²
+• Year of construction: 1992
+• Solid concrete foundation
+• Leasehold land, prepaid until June 1, 2043
+• From 2043: annual ground lease approx. €1,521.67 (indexed, 2025 level)
+• Favorable long-term lease conditions secured
+• Service charges: €228.71 per month
+• Active homeowners’ association (VvE) and neighborhood app
+• Double glazing and fully insulated
+• Heating and hot water via central heating boiler (Remeha, 2012)
+• Energy label A
+• Delivery date flexible, can be arranged quickly</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Makelaar1 Internetmakelaar - Zelf uw huis verkopen</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 46</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/511/139_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/475_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/399_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/152_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/509_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/304_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/149_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/181_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/155_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/258_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/396_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/449_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/168_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/367_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/159_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/269_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/164_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/339_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/502_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/376_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/287_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/369_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/338_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/299_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/451_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/415_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/493_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/203_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/239_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/474_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/419_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/489_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/273_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/478_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/330_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/322_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/481_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/365_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/165_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/250_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/432_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/392_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/477_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/511/508_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

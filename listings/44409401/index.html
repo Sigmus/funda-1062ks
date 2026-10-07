@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Henegouwselaan 43 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Henegouwselaan 43</h1>
+  <p class="sub">
+    <span>1181 CV Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/230/924/522_1440x960.jpg" alt="Henegouwselaan 43 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">30 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€795.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.795/m²
+    </div>
+    <div class="chips">
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">117 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1960</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amstelveen/huis-henegouwselaan-43/44409401/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 795.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.795</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, geschakelde 2-onder-1-kapwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1960</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>117 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>2 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>251 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>365 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Dakraam, glasvezelkabel, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en open haard</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTELVEEN H 8957</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>186 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTELVEEN H 12523</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>65 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden, Front garden en zijtuin</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>111 m² (13,00 m deep en 8,50 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het westen bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">In Randwijck, de meest noordelijke wijk van Amstelveen en direct grenzend aan Amsterdam, mogen wij u deze nette geschakelde twee-onder-een-kapwoning aanbieden.
+
+For English translation see below!
+
+De woning verkeert in een goede staat, biedt veel licht en ruimte en beschikt over een diepe achtertuin op het westen. In de huidige opzet is het al een fijne gezinswoning, maar dankzij de uitstekende uitbouwmogelijkheden heeft deze woning nog veel extra potentie. In de wijk wordt hier veelvuldig gebruik van gemaakt, waardoor zeer ruime woningen ontstaan die zich direct in een hoger marktsegment bevinden.
+
+Kortom: volop mogelijkheden om hier uw droomhuis te realiseren! Bel ons snel voor een vrijblijvende bezichtiging.
+
+Perfecte bereikbaarheid en voorzieningen
+De woning heeft een uitstekende centrale ligging, met snelle toegang tot de uitvalswegen richting Amsterdam en Schiphol. Binnen 15 minuten bereikt u met de fiets of het openbaar vervoer het hart van Amsterdam of de Zuidas. De omgeving biedt een breed scala aan scholen, waaronder diverse internationale scholen, en sportverenigingen. Voor de dagelijkse boodschappen zijn er verschillende winkels in de directe omgeving. Daarnaast liggen zowel winkelcentrum Stadshart Amstelveen als Groot Gelderlandplein in Buitenveldert binnen handbereik. Ook het Amsterdamse Bos en het Amstelpark, beide met volop recreatiemogelijkheden, bevinden zich op korte afstand.
+
+Indeling
+Begane grond
+Via de diepe voortuin bereikt u de entree van de woning. Binnen komt u in de hal met toiletruimte, meterkast en garderobe. Vervolgens betreedt u de ruime woonkamer, die dankzij de grote raampartijen aangenaam licht is. De woonkamer is voorzien van een parketvloer en beschikt over een sfeervolle open haard.
+
+De keuken is momenteel afgesloten, maar kan eenvoudig bij de woonkamer worden betrokken om een royale leefruimte te creëren. Daarnaast beschikt de woning over een praktische en ruime bijkeuken met de opstelling van de cv-ketel en aansluitingen voor een wasmachine en droger. Vanuit de bijkeuken heeft u tevens toegang tot de zijtuin en voortuin.
+
+Zowel vanuit de woonkamer als vanuit de keuken heeft u toegang tot de riante achtertuin (circa 13 meter diep en 8,5 meter breed). Deze ligt op het westen, waardoor u hier volop van de middag- en avondzon kunt genieten. Een ideale plek voor liefhebbers van tuinieren én zonaanbidders.
+
+Verdieping
+Vanuit de woonkamer geeft een spiltrap toegang tot de overloop. Hier bevinden zich vier slaapkamers, waarvan één beschikt over een balkon. De nette badkamer is recent vernieuwd en voorzien van een toilet, douche en wastafelmeubel.
+
+Bijzonderheden
+Geschakelde twee-onder-een-kapwoning
+Woonoppervlakte ca. 117 m²
+Perceeloppervlakte 251 m²
+Vier slaapkamers
+Veel mogelijkheden voor uitbouw
+Diepe achtertuin op het westen
+Centrale ligging nabij Amsterdam
+Tram 25 op circa 10 minuten loopafstand
+
+In Randwijck, the northernmost neighbourhood of Amstelveen, bordering Amsterdam, we are pleased to offer this well-maintained semi-detached house.
+
+The property is in good condition, offers plenty of natural light and living space, and features a deep west-facing garden. In its current layout, it is already a comfortable family home, but thanks to the excellent extension possibilities, it also offers significant future potential. Many homes in the neighbourhood have been extended in this way, creating substantially larger properties that move into a higher market segment.
+
+In short, this home offers endless opportunities to create your dream house. Contact us today to arrange a viewing.
+
+Excellent accessibility and amenities
+The property enjoys a highly convenient location with quick access to major roads leading to Amsterdam and Schiphol Airport. The centre of Amsterdam and the Zuidas business district can both be reached within 15 minutes by bicycle or public transport.
+
+The area offers a wide range of schools, including several international schools, as well as numerous sports clubs and recreational facilities. For daily shopping, there are various local shops nearby. In addition, both Stadshart Amstelveen and Groot Gelderlandplein shopping centre in Buitenveldert are within easy reach. The Amsterdamse Bos and Amstelpark, both offering extensive recreational opportunities, are also located close by.
+
+Layout
+Ground floor
+The property is accessed via a deep front garden. Upon entering, you arrive in the entrance hall, which provides access to the guest toilet, meter cupboard and cloakroom area.
+
+The spacious living room is pleasantly bright thanks to its large windows and features a parquet floor and a charming open fireplace as its focal point.
+
+The kitchen is currently separated from the living room but can easily be incorporated into the main living area to create a large open-plan space. A particularly practical feature is the generous utility room, which houses the central heating boiler and connections for a washing machine and dryer. From the utility room, there is also access to the side garden and front garden.
+
+Both the living room and the kitchen provide direct access to the spacious rear garden (approximately 13 meters deep and 8.5 meters wide). Facing west, the garden enjoys plenty of afternoon and evening sunshine, making it the perfect place for gardening enthusiasts and sun lovers alike.
+
+First floor
+A spiral staircase leads from the living room to the first-floor landing. Here you will find four bedrooms, one of which has access to a balcony.
+
+The neatly finished bathroom has recently been renovated and is equipped with a toilet, walk-in shower and vanity unit.
+
+Key features
+Semi-detached house
+Living area approximately 117 m²
+Plot size 251 m²
+Four bedrooms
+Excellent extension possibilities
+Deep west-facing rear garden
+Convenient location close to Amsterdam
+Tram line 25 within approximately a 10-minute walk
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Roeleveld Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 30</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/230/924/522_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/407_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/436_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/400_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/434_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/456_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/465_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/585_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/607_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/409_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/490_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/415_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/664_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/492_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/651_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/547_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/444_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/540_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/511_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/416_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/568_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/633_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/527_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/556_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/634_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/414_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/588_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/924/584_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

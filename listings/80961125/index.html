@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elfendansstraat 30 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Elfendansstraat 30</h1>
+  <p class="sub">
+    <span>1061 BR Amsterdam</span>
+    <span>·</span>
+    <span>Kolenkitbuurt-Noord</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/775/634_1440x960.jpg" alt="Elfendansstraat 30 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">37 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€750.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.881/m² · 2.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">109 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy A+</span>
+      <span class="chip">Built 2020</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-elfendansstraat-30/80961125/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 750.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.881</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, geschakelde woning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2020</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gestoffeerd</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>109 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>18 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>13 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>342 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation en natuurlijke ventilatie</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing, HR-glas, Floor insulation en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM N 934</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold (einddatum Leasehold: 15-09-2068)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-09-2068</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>On own property en Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Sommige woningen zijn gebouwd voor het leven zoals het écht geleefd wordt. De schitterende woning aan de Elfendansstraat 30 voldoet hier volledig aan. Een gloednieuwe, volledig gasloze stadswoning in een van de meest veelbelovende buurten van Amsterdam, ontworpen met het moderne stadsleven als uitgangspunt: comfortabel, ruim en tot in detail doordacht. Als onderdeel van het Vinkenoog-complex in de Kolenkitbuurt staat dit huis aan een rustige, autovrije straat waar kinderen alle ruimte hebben om buiten te spelen en het stadse leven zich precies op de juiste afstand bevindt. Verdeeld over drie royale verdiepingen biedt de woning volop leefruimte: een spectaculaire open woonkeuken, een lichte woonkamer met schuifpui naar het ruime zonneterras en een eigen overdekte parkeerplaats op het afgesloten binnenterrein, voorzien van een EV-Tesla-lader. Een bijzondere combinatie die je in Amsterdam niet vaak tegenkomt. En als ze er is, staat ze niet lang te koop. 
+
+De woning
+Bij binnenkomst merk je direct dat deze woning met aandacht is ontworpen. Verdeeld over drie volwaardige woonverdiepingen en circa 109 m² is de indeling logisch en veelzijdig: beneden koken en samenkomen, op de eerste verdieping leven en ontspannen, boven slapen en terugtrekken. 
+
+Begane grond
+Via de voordeur aan de rustige, autovrije Elfendansstraat kom je in de entreehal met garderobe. Vanuit hier loopt de woning door naar het hart van de verdieping: de royale open woonkeuken, ontworpen met het gezinsleven in gedachten. Het keukeneiland met barkrukken, de ruime eethoek en de vele ingebouwde kasten zorgen voor volop ruimte en gezelligheid. De moderne, compleet uitgeruste keuken beschikt over een inductiekookplaat, vaatwasser, combi-oven, koelkast, vriezer en Quooker. Een aparte gasten-WC maakt deze verdieping compleet. Aan de achterzijde biedt een deur rechtstreeks toegang tot de grote, private inpandige berging, tevens in te richten als volwaardige kamer. Vanuit hier loop je direct door naar de overdekte privéparkeerplaats met EV-lader: praktisch, droog en bijzonder comfortabel. 
+
+Eerste verdieping
+Een verdieping hoger bevindt zich de lichte woonkamer, met brede schuifpui naar het ruime zonneterras. Op mooie dagen vloeien binnen en buiten hier moeiteloos in elkaar over. Dit is de plek voor lange avonden, een rustig ontbijt in de zon of een gezellige borrel met vrienden. Op deze verdieping bevindt zich daarnaast een ruime slaapkamer, momenteel ingericht als thuiskantoor voor twee. Dankzij het formaat en de ligging is deze ruimte ook uitstekend te gebruiken als logeer-, speel- of derde slaapkamer.
+
+Bovenste verdieping
+De bovenste verdieping vormt het meer private gedeelte van de woning. De masterbedroom strekt zich uit over de volle breedte en beschikt over een prachtige, ingebouwde kastenwand. Vanaf de centrale overloop zijn de badkamer, tweede slaapkamer en aparte was- en bergruimte bereikbaar. De volwaardige badkamer is voorzien van een toilet, douche en wastafel. De separate was- en bergruimte houdt de praktische kant van het dagelijks leven netjes uit het zicht.
+
+Het terras
+Vanuit de woonkamer op de eerste verdieping openen brede schuifpui naar het ruime zonneterras. Verhoogd boven straatniveau, privé en heerlijk zonnig, voelt het als een natuurlijke verlenging van de woonkamer en geeft het deze verdieping extra ruimte en vrijheid. Hier begint de dag met koffie in de ochtendzon, schuiven op warme zomeravonden de deuren volledig open voor een diner en lopen gezellige avonden vanzelf naar buiten. Een heerlijke plek om te genieten van rust, zon en het buitenleven midden in Amsterdam.
+
+Duurzaamheid
+De woning is gebouwd in 2020 en voorzien van alle moderne duurzame voorzieningen. Door de gehele woning ligt vloerverwarming, verdeeld over alle verdiepingen. Radiatoren zijn daarmee verleden tijd. De op het zuiden gerichte zonnepanelen met een vermogen van 1.920 Wp dragen bij aan een laag energieverbruik. De woning is aangesloten op stadsverwarming, volledig gasloos en heeft energielabel A+. De afwerking wordt compleet gemaakt door de parketvloeren door de hele woning, rolgordijnen in de slaapkamers en een goed onderhouden mechanisch ventilatiesysteem.
+
+De buurt
+Elfendansstraat 30 ligt in de Kolenkitbuurt, een levendige en volop in ontwikkeling zijnde buurt in het hart van Bos en Lommer, Amsterdam-West. Waar vroeger oude woonblokken stonden, is de afgelopen jaren een zorgvuldig ontworpen, nieuwe buurt ontstaan met autovrije straten, gedeelde groene binnentuinen en een sterk gevoel van gemeenschap. Vlakbij staat de iconische Kolenkitkerk, met haar 48 meter hoge, schuin afgesneden toren.
+
+In de buurt vind je diverse winkels en leuke horecagelegenheden voor koffie, ontbijt, lunch en diner, zoals The Villy, Oficina, Mas Mais en Terrasmus. Ook voor de dagelijkse boodschappen hoef je niet ver: het Bos en Lommerplein en de Bos en Lommerweg bieden volop mogelijkheden. Verder vind je in de buurt basisscholen, naschoolse opvang, kinderopvang, een bibliotheek, diverse sportscholen en een zwembad. Op loopafstand liggen sportvelden, speeltuinen en verschillende parken, ideaal voor een ochtendrun, een groene wandeling of een ontspannen middag buiten met de kinderen. Dit is een buurt die steeds meer mensen bewust kiezen.
+
+Bereikbaarheid
+Ondanks de rustige ligging is Elfendansstraat 30 uitstekend bereikbaar. Metrostation De Vlugtlaan, de buslijnen 15, 21, 80 en 161 en tram 7 liggen op loopafstand van de voordeur. Ook de NS-stations Sloterdijk en Lelylaan zijn praktisch om de hoek, waardoor je snel en eenvoudig verbonden bent met de rest van de stad en het land. Met de fiets sta je binnen 15 minuten in het bruisende hart van Amsterdam, voor werk, studie of een gezellige avond uit. Dankzij de gunstige ligging ben je bovendien binnen enkele minuten met de auto op de A10, A5 of Haarlemmerweg, waardoor Schiphol, Haarlem en de rest van de Randstad eenvoudig te bereiken zijn. En natuurlijk staat de auto met een eigen parkeerplaats op het afgesloten binnenterrein altijd veilig en opgeladen klaar. 
+
+Erfpacht
+De woning is belast met voortdurende erfpacht van de Gemeente Amsterdam, geregeld onder de Algemene bepalingen voor voortdurende erfpacht 2000 (AB2000). De erfpachtcanon is volledig afgekocht tot en met 15 september 2068. Ruim 42 jaar volledige financiële zekerheid, zonder jaarlijkse canon en zonder heronderhandeling. De erfpacht omvat ook de privé-parkeerplaats (appartementsindex 7), waarvan de canon eveneens is afgekocht tot dezelfde datum. Voor een koper die op zoek is naar langdurige gemoedsrust: dit is erfpacht zoals het in Amsterdam zelden zo overzichtelijk is.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Plattegronden present on page, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Urban Homies - Your Independent Real Estate Agency</strong> · Urban Homies - Your Independent Real Estate Agency</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 37</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/775/634_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/475_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/482_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/829_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/954_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/799_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/743_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/677_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/875_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/843_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/699_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/849_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/868_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/803_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/905_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/881_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/701_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/759_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/690_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/809_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/439_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/487_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/957_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/898_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/884_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/668_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/775/942_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

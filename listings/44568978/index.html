@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pieter Calandlaan 489 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Pieter Calandlaan 489</h1>
+  <p class="sub">
+    <span>1068 NM Amsterdam</span>
+    <span>·</span>
+    <span>Osdorp-Zuidoost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/168/865_1440x960.jpg" alt="Pieter Calandlaan 489 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">49 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.577/m² · 2.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.3 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">142 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1969</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-pieter-calandlaan-489/44568978/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Other</h3>
+        <dl class="flist">
+        <div class="frow"><dt>- Woonoppervlakte: 142 m²</dt><dd>- BouwYesar: 1969</dd></div>
+        <div class="frow"><dt>- Eigendom belast met erfpacht, AB2000 - 1 jaarlijkse indexering € 571,23 betreft periode 1 mei 2026 t/m 30 april 2027</dt><dd>- Doorzonwoonroom</dd></div>
+        <div class="frow"><dt>- Vier slaapkamers</dt><dd>- Mogelijkheid om een 5e room te creëren</dd></div>
+        <div class="frow"><dt>- Luxe badkamer</dt><dd>- Diepe Back garden</dd></div>
+        <div class="frow"><dt>- Vrijstaand bijgebouw/studio</dt><dd>- Centrale ligging in Amsterdam Nieuw-West</dd></div>
+        <div class="frow"><dt>- Goede bereikbaarheid met openbaar vervoer en auto</dt><dd>- In de koopakte worden de volgende clausules opgenomen: metrageclausule, bepaling inzake verontreiniging, onderzoeksplicht koper en funderings- en funderingsrisico-indicator Available.</dd></div>
+        <div class="frow"><dt>Afsluiting</dt><dd>Bent u op zoek naar een ruime gezinswoning met 4 bedrooms, een luxe bathroom, een multifunctioNol bijgebouw en volop mogelijkheden voor de toekomst? Dan is Pieter Calandlaan 489 absoluut een bezichtiging waard.</dd></div>
+        <div class="frow"><dt>***</dt><dd>Pieter Calandlaan 489, Amsterdam</dd></div>
+        <div class="frow"><dt>Spacious family home with four bedrooms and a multifunctional detached guesthouse</dt><dd>142 m² LIVING AREA – 4 BEDROOMS – LUXURY BATHROOM – MULTIFUNCTIONAL DETACHED OUTBUILDING WITH BEDROOM AND BATHROOM – DEEP BACK GARDEN</dd></div>
+        <div class="frow"><dt>Running out of space is unlikely in this generous family home. The property offers four bedrooms with the possibility of creating a fifth, a luxurious bathroom, a deep rear garden, and a detached outbuilding with its own sanitary facilities. Together, these features provide exceptional comfort and flexibility.</dt><dd>The bright through-living room extends almost the full depth of the house and, together with the kitchen, creates a pleasant space for everyday living. The upper floors provide four bedrooms, offering ample room for family life, working from home, or hobbies, while the bathroom adds a contemporary and luxurious touch.</dd></div>
+        <div class="frow"><dt>The detached outbuilding makes this home particularly unique. Equipped with a bedroom and private bathroom, it offers much more than simple storage or hobby space. It could serve as guest accommodation, a home office, or even independent living quarters for family care. Combined with the spacious garden and central location in Amsterdam Nieuw-West, this is a property that not only offers generous square footage but also excellent future possibilities.</dt><dd>Ground Floor</dd></div>
+        <div class="frow"><dt>Through the covered entrance, you enter the hallway with a utility meter cupboard and a modern toilet with washbasin. The adjoining corridor provides access to the staircase, a practical storage cupboard, the kitchen, and the living room.</dt><dd>The living room spans almost the entire depth of the property and benefits from abundant natural light thanks to large windows at both the front and rear. This creates a bright living space with plenty of room for a spacious seating area at the front and a large dining area overlooking the garden. The attractive flooring, exposed beam ceiling, and well-maintained finish provide a calm foundation that can easily be adapted to your personal style.</dd></div>
+        <div class="frow"><dt>The kitchen is located at the rear of the house. Finished in light tones, it features various appliances, including an induction cooktop, extractor hood, oven, and dishwasher, as well as ample workspace and storage. Direct access to the garden makes outdoor dining and relaxation easily accessible.</dt><dd>AdYescent to the kitchen is the attached storage room, ideal for bicycles, supplies, and other belongings you prefer to keep out of sight.</dd></div>
+        <div class="frow"><dt>First Floor</dt><dd>The landing provides access to two bedrooms (2.55 x 3.01 m and 3.19 x 7.90 m) and the bathroom.</dd></div>
+        <div class="frow"><dt>The largest bedroom was created by combining two rooms and therefore offers exceptional space. If desired, the original layout can be restored relatively easily, creating an additional bedroom. The second bedroom is also generously sized and includes a modern workspace with two built-in wardrobes.</dt><dd>The bathroom is undoubtedly one of the highlights of the property. It features large-format marble-look tiles, stylish brass-colored accents, a spacious walk-in shower, a modern vanity unit with countertop basin and illuminated mirror, and practical built-in niches. The overall finish is of a high standard and immediately impressive.</dd></div>
+        <div class="frow"><dt>Second Floor</dt><dd>The second floor also offers surprisingly generous space. The landing accommodates the laundry appliances and technical installations, making the floor both practical and efficiently arranged.</dd></div>
+        <div class="frow"><dt>Two additional bedrooms are located on this floor and are connected by en-suite doors. Thanks to the dormer window, both rooms benefit from ample daylight and fully usable living space. Additional storage is available behind the knee walls.</dt><dd>As a result, the property offers a total of four bedrooms, making it especially suitable for larger families or households requiring extra workspace or hobby rooms.</dd></div>
+        <div class="frow"><dt>Outdoor Space</dt><dd>The rear garden is a significant asset of this home. Its generous size provides plenty of room to create attractive seating areas, while the largely paved design keeps maintenance to a minimum.</dd></div>
+        <div class="frow"><dt>At the back of the garden stands the multifunctional detached outbuilding. This studio includes its own kitchenette, shower, and toilet. Such a feature is rarely found and offers numerous possibilities. It can be used as guest accommodation, a practice room, home office, or even a private retreat.</dt><dd>In addition, the property includes a practical storage room Immediately attached to the house.</dd></div>
+        <div class="frow"><dt>Neighborhood / Parking</dt><dd>The property is located on Pieter Calandlaan in Amsterdam Nieuw-West, a district known for its combination of urban amenities and abundant green spaces. The immediate area offers various shops, supermarkets, schools, sports facilities, and restaurants.</dd></div>
+        <div class="frow"><dt>For recreation, the Sloterplas lake and several parks are within easy reach. Accessibility is excellent, with multiple tram and bus connections nearby, while Lelylaan Station and Sloterdijk Station are easily accessible. By car, the A4, A5, A9, and A10 motorways can be reached quickly.</dt><dd>Parking facilities are available in the immediate vicinity.</dd></div>
+        <div class="frow"><dt>Features</dt><dd>- Living area: 142 m²</dd></div>
+        <div class="frow"><dt>- Year built: 1969</dt><dd>- owned belast met Leasehold, AB2000 - 1 Yesarlijkse indexering € 571,23 betreft periode 1 mei 2026 t/m 30 april 2027</dd></div>
+        <div class="frow"><dt>- Bright through-living room</dt><dd>- Four bedrooms</dd></div>
+        <div class="frow"><dt>- Possibility to create a fifth bedroom</dt><dd>- Luxury bathroom</dd></div>
+        <div class="frow"><dt>- Deep rear garden</dt><dd>- Detached outbuilding/studio</dd></div>
+        <div class="frow"><dt>- Central location in Amsterdam Nieuw-West</dt><dd>- Excellent accessibility by public transport and car</dd></div>
+        <div class="frow"><dt>- The purchase agreement will include the following clauses: measurement clause, environmental contamination clause, buyer&#x27;s duty to investigate, and availability of a foundation and foundation risk indicator report.</dt><dd>Conclusion</dd></div>
+        <div class="frow"><dt>Are you looking for a spacious family home with four bedrooms, a luxury bathroom, a multifunctional detached guesthouse, and plenty of potential for the future? Then Pieter Calandlaan 489 is definitely worth viewing.</dt><dd>Dit huis in het kort</dd></div>
+        <div class="frow"><dt>AI-gegenereerd uit de omschrijving</dt><dd>Ruime doorzonwoonroom</dd></div>
+        <div class="frow"><dt>Lichte woonkamer over bijna volledige diepte van het huis.</dt><dd>Diepe Back garden met studio</dd></div>
+        <div class="frow"><dt>Ruime, grotendeels bestrate tuin met vrijstaand bijgebouw.</dt><dd>Centrale ligging Nieuw-West</dd></div>
+        <div class="frow"><dt>Dicht bij Sloterplas, parken, OV en uitvalswegen.</dt><dd>Is deze informatie behulpzaam?</dd></div>
+        <div class="frow"><dt>Advertentie</dt><dd>Kenmerken</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.577</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1969</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>142 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>108 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>540 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HR (gas-fired combi boiler uit 2024, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND E 3556</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>108 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 30-04-2068)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Lasten</h3>
+        <dl class="flist">
+        <div class="frow"><dt>€ 571,23 per jaar</dt><dd>Buitenruimte</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Ligging</h3>
+        <dl class="flist">
+        <div class="frow"><dt>In woonwijk</dt><dd>Tuin</dd></div>
+        <div class="frow"><dt>Achtertuin en voortuin</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>73 m² (10,96 meter diep en 6,66 meter breed)</dt><dd>Ligging tuin</dd></div>
+        <div class="frow"><dt>Gelegen op het zuiden bereikbaar via achterom</dt><dd>Bergruimte</dd></div>
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra, verwarming en stromend water</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** ENGLISH BELOW ***
+
+Pieter Calandlaan 489, Amsterdam
+Ruime gezinswoning met vier slaapkamers én multifunctioneel bijgebouw
+
+142 M² WOONOPPERVLAKTE - 4 SLAAPKAMERS - LUXE BADKAMER - MULTIFUNCTIONEEL BIJGEBOUW MET SLAAPKAMER EN BADKAMER - DIEPE ACHTERTUIN
+
+Ruimte te kort? Dat zal hier niet snel gebeuren. Deze royale gezinswoning beschikt over vier slaapkamers en mogelijkheid tot een vijfde, een luxe badkamer, een diepe achtertuin en een vrijstaand bijgebouw met eigen sanitaire voorzieningen. Een combinatie die zorgt voor verrassend veel wooncomfort en flexibiliteit.
+
+De doorzonwoonkamer strekt zich uit over vrijwel de volledige diepte van de woning en vormt samen met de keuken een prettige plek voor het dagelijks leven. Op de verdiepingen zorgen de vier slaapkamers ervoor dat er ruimte is voor een gezin, thuiswerken of hobby’s, terwijl de badkamer een eigentijdse en luxe uitstraling toevoegt.
+
+Het vrijstaande bijgebouw maakt deze woning extra bijzonder. Dankzij de aanwezigheid van een slaapkamer en een eigen badkamer biedt deze ruimte mogelijkheden die verder gaan dan alleen opslag of hobbygebruik. Denk aan een gastenverblijf, werkruimte aan huis of een plek voor mantelzorg. In combinatie met de ruime achtertuin en de centrale ligging in Amsterdam Nieuw-West ontstaat hier een woning die niet alleen veel vierkante meters biedt, maar vooral veel mogelijkheden voor de toekomst.
+
+Begane grond
+Via de overdekte entree komt u binnen in de hal met meterkast en een modern afgewerkt toilet met fonteintje. Vanuit de aansluitende gang zijn de trapopgang naar de verdiepingen, een praktische bergkast, de keuken en de woonkamer bereikbaar.
+
+De woonkamer beslaat vrijwel de volledige diepte van de woning en profiteert van een prettige lichtinval dankzij de grote raampartijen aan zowel de voor- als achterzijde. Hierdoor ontstaat een lichte leefruimte met volop mogelijkheden voor een royale zithoek aan de straatzijde en een ruime eethoek richting de tuin. De fraaie vloerafwerking, balkenplafond en de verzorgde uitstraling zorgen voor een rustige basis die eenvoudig naar eigen smaak is in te richten.
+
+Aan de achterzijde bevindt zich de keuken. Deze is uitgevoerd in een lichte kleurstelling en beschikt over diverse apparatuur (inductiekookplaat, vlakscherm afzuigkap, oven en vaatwasser) en veel werk- en bergruimte. Dankzij de directe verbinding met de tuin is ook buiten eten of ontspannen binnen handbereik.
+
+Grenzend aan de keuken bevindt zich de aangebouwde berging, ideaal voor fietsen, voorraad en andere spullen die u graag uit het zicht bewaart.
+
+Eerste verdieping
+De overloop biedt toegang tot twee slaapkamers (2,55 x 3,01 m &amp; 3,19 x 7,90 m) en de badkamer.
+
+De grootste slaapkamer is ontstaan door het samenvoegen van twee kamers en biedt daardoor bijzonder veel ruimte. Indien gewenst kan de oorspronkelijke indeling relatief eenvoudig worden hersteld, waardoor een extra slaapkamer ontstaat. De tweede slaapkamer is eveneens ruim opgezet en beschikt over een moderne werkplek met twee inbouwkasten.
+
+De badkamer vormt zonder twijfel één van de blikvangers van de woning. De ruimte is luxe uitgevoerd met grootformaat marmerlook tegels, stijlvolle messingkleurige accenten, een royale inloopdouche, een modern wastafelmeubel met opbouwkom en verlichte spiegel, en praktische ingebouwde nisjes. Het geheel heeft een hoogwaardige uitstraling die direct in het oog springt.
+
+Tweede verdieping
+Ook de tweede verdieping biedt verrassend veel ruimte. Op de overloop is plaats voor de wasapparatuur en de installaties zijn hier opgesteld, waardoor deze verdieping niet alleen praktisch maar ook efficiënt is ingericht.
+
+Verder zijn hier nog twee slaapkamers gerealiseerd, die aan elkaar zijn gekoppeld middels en suitedeuren. Dankzij de dakkapel beschikken beide kamers over prettig daglicht en een volwaardig gebruiksoppervlak. De aanwezige bergruimte achter de knieschotten zorgt voor extra opbergruimte.
+
+Hierdoor telt de woning in totaal vier slaapkamers, wat deze woning bijzonder geschikt maakt voor grotere gezinnen of huishoudens die behoefte hebben aan extra werk- of hobbyruimte.
+
+Buitenruimte
+De achtertuin vormt een belangrijk onderdeel van deze woning. Dankzij de ruime afmetingen is er genoeg plek om een gezellige zitplek te creëren, terwijl de grotendeels bestrate aanleg zorgt voor relatief weinig onderhoud.
+
+Achter in de tuin staat het multifunctionele bijgebouw. Deze studio beschikt over een eigen pantry, douche en toilet. Daarmee biedt het gebouw mogelijkheden die u niet vaak tegenkomt. Het kan dienen als gastenverblijf, praktijkruimte, thuiswerkplek of misschien wel een mancave.
+
+Daarnaast beschikt de woning over een praktische berging die direct aan de woning grenst.
+
+Buurt/parkeren
+De woning ligt aan de Pieter Calandlaan in Amsterdam Nieuw-West. Dit stadsdeel staat bekend om de combinatie van stedelijke voorzieningen en veel openbaar groen. In de directe omgeving bevinden zich diverse winkels, supermarkten, scholen, sportverenigingen en horecagelegenheden.
+
+Voor recreatie liggen onder andere de Sloterplas en verschillende parken op korte afstand. Ook de bereikbaarheid is uitstekend. Diverse tram- en busverbindingen bevinden zich in de directe omgeving, terwijl Station Lelylaan en Station Sloterdijk eenvoudig bereikbaar zijn. Met de auto zijn bovendien de A4, A5, A9 en A10 snel te bereiken.
+
+In de directe omgeving zijn parkeermogelijkheden.
+
+Kenmerken
+- Woonoppervlakte: 142 m²
+- Bouwjaar: 1969
+- Eigendom belast met erfpacht, AB2000 - 1 jaarlijkse indexering € 571,23 betreft periode 1 mei 2026 t/m 30 april 2027
+- Doorzonwoonkamer
+- Vier slaapkamers
+- Mogelijkheid om een 5e kamer te creëren
+- Luxe badkamer
+- Diepe achtertuin
+- Vrijstaand bijgebouw/studio
+- Centrale ligging in Amsterdam Nieuw-West
+- Goede bereikbaarheid met openbaar vervoer en auto
+- In de koopakte worden de volgende clausules opgenomen: metrageclausule, bepaling inzake verontreiniging, onderzoeksplicht koper en funderings- en funderingsrisico-indicator beschikbaar.
+
+Afsluiting
+Bent u op zoek naar een ruime gezinswoning met 4 slaapkamers, een luxe badkamer, een multifunctioneel bijgebouw en volop mogelijkheden voor de toekomst? Dan is Pieter Calandlaan 489 absoluut een bezichtiging waard.
+
+***
+
+Pieter Calandlaan 489, Amsterdam
+Spacious family home with four bedrooms and a multifunctional detached guesthouse
+
+142 m² LIVING AREA – 4 BEDROOMS – LUXURY BATHROOM – MULTIFUNCTIONAL DETACHED OUTBUILDING WITH BEDROOM AND BATHROOM – DEEP BACK GARDEN
+
+Running out of space is unlikely in this generous family home. The property offers four bedrooms with the possibility of creating a fifth, a luxurious bathroom, a deep rear garden, and a detached outbuilding with its own sanitary facilities. Together, these features provide exceptional comfort and flexibility.
+
+The bright through-living room extends almost the full depth of the house and, together with the kitchen, creates a pleasant space for everyday living. The upper floors provide four bedrooms, offering ample room for family life, working from home, or hobbies, while the bathroom adds a contemporary and luxurious touch.
+
+The detached outbuilding makes this home particularly unique. Equipped with a bedroom and private bathroom, it offers much more than simple storage or hobby space. It could serve as guest accommodation, a home office, or even independent living quarters for family care. Combined with the spacious garden and central location in Amsterdam Nieuw-West, this is a property that not only offers generous square footage but also excellent future possibilities.
+
+Ground Floor
+Through the covered entrance, you enter the hallway with a utility meter cupboard and a modern toilet with washbasin. The adjoining corridor provides access to the staircase, a practical storage cupboard, the kitchen, and the living room.
+
+The living room spans almost the entire depth of the property and benefits from abundant natural light thanks to large windows at both the front and rear. This creates a bright living space with plenty of room for a spacious seating area at the front and a large dining area overlooking the garden. The attractive flooring, exposed beam ceiling, and well-maintained finish provide a calm foundation that can easily be adapted to your personal style.
+
+The kitchen is located at the rear of the house. Finished in light tones, it features various appliances, including an induction cooktop, extractor hood, oven, and dishwasher, as well as ample workspace and storage. Direct access to the garden makes outdoor dining and relaxation easily accessible.
+
+Adjacent to the kitchen is the attached storage room, ideal for bicycles, supplies, and other belongings you prefer to keep out of sight.
+
+First Floor
+The landing provides access to two bedrooms (2.55 x 3.01 m and 3.19 x 7.90 m) and the bathroom.
+The largest bedroom was created by combining two rooms and therefore offers exceptional space. If desired, the original layout can be restored relatively easily, creating an additional bedroom. The second bedroom is also generously sized and includes a modern workspace with two built-in wardrobes.
+The bathroom is undoubtedly one of the highlights of the property. It features large-format marble-look tiles, stylish brass-colored accents, a spacious walk-in shower, a modern vanity unit with countertop basin and illuminated mirror, and practical built-in niches. The overall finish is of a high standard and immediately impressive.
+
+Second Floor
+The second floor also offers surprisingly generous space. The landing accommodates the laundry appliances and technical installations, making the floor both practical and efficiently arranged.
+Two additional bedrooms are located on this floor and are connected by en-suite doors. Thanks to the dormer window, both rooms benefit from ample daylight and fully usable living space. Additional storage is available behind the knee walls.
+
+As a result, the property offers a total of four bedrooms, making it especially suitable for larger families or households requiring extra workspace or hobby rooms.
+
+Outdoor Space
+The rear garden is a significant asset of this home. Its generous size provides plenty of room to create attractive seating areas, while the largely paved design keeps maintenance to a minimum.
+
+At the back of the garden stands the multifunctional detached outbuilding. This studio includes its own kitchenette, shower, and toilet. Such a feature is rarely found and offers numerous possibilities. It can be used as guest accommodation, a practice room, home office, or even a private retreat.
+
+In addition, the property includes a practical storage room directly attached to the house.
+
+Neighborhood / Parking
+The property is located on Pieter Calandlaan in Amsterdam Nieuw-West, a district known for its combination of urban amenities and abundant green spaces. The immediate area offers various shops, supermarkets, schools, sports facilities, and restaurants.
+
+For recreation, the Sloterplas lake and several parks are within easy reach. Accessibility is excellent, with multiple tram and bus connections nearby, while Lelylaan Station and Sloterdijk Station are easily accessible. By car, the A4, A5, A9, and A10 motorways can be reached quickly.
+
+Parking facilities are available in the immediate vicinity.
+
+Features
+- Living area: 142 m²
+- Year built: 1969
+- Eigendom belast met erfpacht, AB2000 - 1 jaarlijkse indexering € 571,23 betreft periode 1 mei 2026 t/m 30 april 2027
+- Bright through-living room
+- Four bedrooms
+- Possibility to create a fifth bedroom
+- Luxury bathroom
+- Deep rear garden
+- Detached outbuilding/studio
+- Central location in Amsterdam Nieuw-West
+- Excellent accessibility by public transport and car
+- The purchase agreement will include the following clauses: measurement clause, environmental contamination clause, buyer&#x27;s duty to investigate, and availability of a foundation and foundation risk indicator report.
+
+Conclusion
+Are you looking for a spacious family home with four bedrooms, a luxury bathroom, a multifunctional detached guesthouse, and plenty of potential for the future? Then Pieter Calandlaan 489 is definitely worth viewing.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>VLIEG Makelaars Amsterdam OG</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 49</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/168/865_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/932_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/878_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/886_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/875_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/984_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/896_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/907_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/919_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/923_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/870_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/912_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/873_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/895_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/880_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/924_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/883_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/906_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/887_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/929_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/864_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/925_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/934_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/926_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/911_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/900_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/917_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/881_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/168/933_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

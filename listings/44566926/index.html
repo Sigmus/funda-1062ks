@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dwarswatering 10 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Dwarswatering 10</h1>
+  <p class="sub">
+    <span>1069 RM Amsterdam</span>
+    <span>·</span>
+    <span>Dijkgraafpleinbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/091/077_1440x960.jpg" alt="Dwarswatering 10 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">44 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€595.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.760/m² · 3.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.5 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">125 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1982</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-dwarswatering-10/44566926/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Aanvaarding</dd></div>
+        <div class="frow"><dt>In overleg</dt><dd>Vraagprijs</dd></div>
+        <div class="frow"><dt>€ 595.000 kosten koper</dt><dd>Vraagprijs per m²</dd></div>
+        <div class="frow"><dt>€ 4.760</dt><dd>Status</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1982</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gedeeltelijk gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>125 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>110 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>526 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Buitenzonwering, dakraam, glasvezelkabel, Mechanical ventilation, rolluiken, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler en elektrische boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HR (gas-fired combi boiler uit 2014, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN (N.H.) G 1625</dt><dd>Oppervlakte</dd></div>
+        <div class="frow"><dt>110 m²</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijk eigendom belast met erfpacht</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>32 m² (6,35 m deep en 5,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking en Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruim wonen aan een rustig en kindvriendelijk woonerf, met een zonnige tuin op het zuiden. Op een rustige en groene locatie in Amsterdam Nieuw-West ligt deze verrassend ruime eengezinswoning met een woonoppervlakte van circa 125 m², vier (slaap)kamers en een heerlijke, rustig gelegen achtertuin op het zuiden. Een fijne eengezinswoning met volop leefruimte, een praktische indeling en veel mogelijkheden om geheel naar eigen smaak te moderniseren.
+De woning beschikt over een royale, tuingerichte woonkamer met parketvloer en openslaande deuren naar de achtertuin en een ruime open keuken. Op de eerste verdieping bevinden zich drie slaapkamers, met uitbouw, en een complete badkamer met o.a. ligbad, douche en zwevend toilet, ruimtelijk door de aanwezige dakkapel (2020). Op de tweede verdieping is aan de achterzijde eveneens een dakkapel geplaatst (2020). Deze verdieping is ingedeeld met een ruime voorzolder, bergruimte en een extra een vierde (slaap)kamer. De zonnige en groen aangelegde achtertuin vormt een heerlijke plek om in alle rust van het buitenleven te genieten, en is bovendien voorzien van een ruim houten tuinhuis. Aan de voorzijde bevindt zich een ruime (fietsen)berging.
+Met energielabel B en een rustige ligging nabij winkels, scholen, openbaar vervoer en uitvalswegen biedt deze woning een uitstekende basis voor jarenlang comfortabel woonplezier.
+
+Locatie: 
+De woning ligt in de rustige en groene wijk De Punt in Amsterdam Nieuw-West, nabij water en op korte afstand van het Dijkgraafplein. Winkels voor de dagelijkse boodschappen, scholen, sportvoorzieningen en openbaar vervoer bevinden zich in de directe omgeving. Via de S106 zijn de A9, A4, A5 en de Ring A10 goed bereikbaar. Een prettige, ruim opgezette woonomgeving met volop groen, terwijl ook het centrum van Amsterdam en Schiphol gemakkelijk te bereiken zijn.
+
+Parkeren:                                                                                                                                                                                               
+Parkeren kan in de directe omgeving op de openbare weg. Voor dit deel van Amsterdam Nieuw-West geldt betaald parkeren van maandag tot en met zaterdag van 09.00 tot 19.00 uur. Bewoners kunnen één of twee, indien zij aan de gemeentelijke voorwaarden voldoen, parkeervergunningen aanvragen. Voor bezoek is een bezoekersvergunning met korting beschikbaar. Tarieven en voorwaarden volgens opgave van de gemeente Amsterdam.
+
+Bijzonderheden:
+
+Inhoud/ Woonoppervlakte
+De bruto inhoud van de woning bedraagt circa 526 m³, de woonoppervlakte bedraagt circa 125 m², de overige inpandige bergruimte circa 7 m² en de externe bergruimte circa 7 m². Er is een NEN2580 Meetrapport aanwezig uitgevoerd door een extern bureau, conform de meetinstructies BBMI.
+
+Bouwjaar
+Het pand is omstreeks 1982 gebouwd. 
+
+Onderhoud
+De woning is aan de buiten- en binnenzijde redelijk tot goed onderhouden. Het schilderwerk aan de buitenzijde heeft in 2023 plaats gevonden. In 2020 is er in de badkamer en op de zolderverdieping een nieuwe dakkapel geplaatst. De rolluiken aan de achterzijde op de eerste verdieping zijn in 2022 aangebracht.       
+
+Verwarming/ Warmwater
+Verwarming en warmwater via een Intergas HR Cv-ketel (bouwjaar 2014). De Cv-ketel wordt jaarlijks onderhouden. In de keuken bevindt zich een close-in boiler (2023).  
+
+Isolatie
+De woning is uitgevoerd met dak-, vloer- en gevelisolatie vanaf de bouw. De woning is voorzien van dubbele beglazing (m.u.v. het raam van de slaapkamer aan de voorzijde). Deels houten en deels kunststof kozijnen.
+
+Energielabel
+Voor de woning is een Energielabel B afgegeven, geldig tot 8 juni 2036. 
+
+Berging                                                                                           
+Aan de voorzijde bevindt zich een berging (overige inpandige bergruimte van circa 7 m²), voorzien van elektra en een gevelraam (enkel glas). Op de vloer ligt een bruine tegelvloer.
+
+Elektra
+De meterkast is uitgevoerd met voldoende groepen voor het huidige gebruik. In 2023 is de meterkast voorzien van extra groepen. Glasvezelaansluiting aanwezig.     
+
+Kadastrale gegevens
+Gemeente Sloten Noord-Holland, sectie G, nummer 1625, grootte 110 centiare.  
+
+Erfpacht eeuwigdurend
+Op de erfpacht, uitgegeven door de gemeente Amsterdam, zijn de Algemene Bepalingen voor eeuwigdurende erfpacht 2016 Amsterdam van toepassing. De canon is voor het huidige tijdvak (t/m 31-10-2031) afgekocht. Voor de periode daarna is de canon reeds vastgelegd per 06-10-2022, de canon voor na 31-10-2031 wordt jaarlijks geïndexeerd en bedraagt thans € 768,77 (2026).
+
+WOZ-waarde 2026
+€ 635.000 (peildatum 1.1.2025)
+
+Milieu/ Asbest
+Bij verkoper en de Omgevingsdienst Noorzeekanaal-gebied zijn geen (olie)tank en/of bezwarende bodemverontreinigingen bekend. 
+Verkoper is niet bekend met de aanwezigheid van asbesthoudende materialen.
+
+Recht van gunning
+Verkoper behoudt zich het recht van gunning voor.
+
+Roerende zaken
+Conform lijst, de koel/vriescombinatie (2023) blijft achter. 
+
+Oplevering
+In overleg.
+
+Algemene Voorwaarden:
+Op onze verkoopprocedure zijn onze Algemene Voorwaarden van toepassing, deze zijn opvraagbaar via ons kantoor. Verder willen wij u erop attenderen dat koper binnen 2 werkdagen na het bereiken van de mondelinge overeenstemming inzake de koopsom en de voorwaarden, een notaris dient aan te wijzen in de omgeving van verkochte opdat uiterlijk 1 week na deze mondelinge overeenstemming de koopakte ondertekend kan worden. Indien koper binnen deze periode geen notaris heeft aangewezen, heeft verkoper het recht deze aan te wijzen. Een mondelinge overeenstemming tussen de particuliere verkoper en de particuliere koper is niet rechtsgeldig. Met andere woorden: er is geen koop. Er is pas sprake koopovereenkomst als de particuliere verkoper van een rechtsgeldige en de particuliere koper de koopovereenkomst hebben ondertekend. In de koopakte zal een Ouderdomsclausule, een Asbestclausule en een Toelichtingsclausule NEN2580, een Energielabelclausule en een Funderingsrisico clausule opgenomen worden. De formulering van deze clausules is opvraagbaar via ons kantoor, en is beschikbaar in uw Move-account na aanmelding.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 44</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/091/077_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/034_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/019_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/767/123_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/032_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/026_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/047_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/005_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/069_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/038_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/031_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/088_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/028_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/039_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/009_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/006_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/057_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/093_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/008_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/089_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/078_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/073_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/260_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/152_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/095_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/211_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/253_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/097_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/128_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/091/198_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/718_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/674_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/697_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/677_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/742_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/499/687_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

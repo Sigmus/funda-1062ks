@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pieter van der Werfstraat 135 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Pieter van der Werfstraat 135</h1>
+  <p class="sub">
+    <span>1067 EM Amsterdam</span>
+    <span>·</span>
+    <span>Ruys de Beerenbrouckbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/213/848_1440x960.jpg" alt="Pieter van der Werfstraat 135 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">43 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€440.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.731/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">93 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2006</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">7 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-pieter-van-der-werfstraat-135/80947219/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 440.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.731</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 208,11 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Gallery flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2006</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        <div class="frow"><dt>Toegankelijkheid</dt><dd>Toegankelijk voor mensen met een beperking en toegankelijk voor ouderen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>93 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>16 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>307 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 separate toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>7 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>CCTV, glasvezelkabel, lift, Mechanical ventilation, natuurlijke ventilatie, rookkanaal, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en Wall insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Kompakt HR 107 (gas-fired combi boiler uit 2007, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM I 4411</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 30-09-2054)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-09-2054</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Wall insulation</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 208,11 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*English text below*
+
+PIETER VAN DER WERFSTRAAT 135
+
+Licht, ruimte en comfortabel wonen aan een groene binnentuin
+
+Ruimte, licht en rust komen op een verrassende manier samen in dit uitstekend ingedeelde vierkamerappartement van circa 93 m² in het moderne appartementencomplex Ripperdahof. Met drie slaapkamers, een fijne loggia, een prachtige besloten binnentuin en de mogelijkheid een parkeerplaats in de afgesloten parkeergarage te huren, biedt deze woning alles voor comfortabel wonen in Amsterdam Nieuw-West.
+
+Het appartement is gelegen op de tweede verdieping van een verzorgd appartementencomplex uit 2006 en beschikt over energielabel A, waardoor je profiteert van een uitstekend geïsoleerde en energiezuinige woning. Een ideale combinatie van wooncomfort, ruimte en een centrale ligging.
+
+Indeling
+Via de verzorgde centrale entree met lift bereik je de brede galerij, die uitkijkt over de fraai aangelegde binnentuin. De rustige opzet van het complex zorgt direct voor een prettige eerste indruk.
+
+Bij binnenkomst kom je in een ruime hal die toegang geeft tot vrijwel alle vertrekken van de woning.
+Aan het einde van de hal bevindt zich de royale woonkamer. Dankzij de grote raampartijen geniet deze ruimte van een prachtige natuurlijke lichtinval gedurende de dag en is er volop ruimte voor zowel een comfortabele zithoek als een royale eettafel.
+
+De open keuken sluit naadloos aan op de woonkamer en is praktisch ingedeeld met veel werk- en bergruimte.
+De woning beschikt over drie slaapkamers. De ruime hoofdslaapkamer biedt volop plaats aan een tweepersoonsbed en een grote kledingkast. De tweede slaapkamer is uitstekend geschikt als kinder-, werk- of logeerkamer. De derde kamer is ingericht als slaap-/loggiakamer en beschikt over een volledig te openen accordeonpui. Hierdoor ontstaat een heerlijke plek waar binnen en buiten op natuurlijke wijze in elkaar overlopen. De loggia is beschut en daardoor vrijwel het hele jaar door een aangename plek om te ontspannen of rustig te werken.
+
+Verder beschikt de woning over een verzorgde badkamer, een separaat toilet en een praktische wasruimte met extra bergruimte.
+
+In de onderbouw bevindt zich bovendien een eigen berging.
+
+Het complex
+Ripperdahof is een modern appartementencomplex met een verzorgde uitstraling, liftvoorzieningen en een prachtige afgesloten binnentuin die uitsluitend toegankelijk is voor bewoners. De combinatie van veel groen, rust en veiligheid maakt het een bijzonder prettige woonomgeving voor jong en oud.
+
+De Vereniging van Eigenaars is actief en wordt professioneel beheerd. Er is een meerjarenonderhoudsplan aanwezig en het planmatige onderhoud wordt structureel uitgevoerd. De maandelijkse servicekosten bedragen € 208,11.
+
+Voor wie met de auto reist, bestaat de mogelijkheid een parkeerplaats te huren in de afgesloten parkeergarage onder het complex. De huidige maandelijkse huur bedraagt € 90,97.
+
+Omgeving
+De woning is gelegen in de rustige en groene Ruys de Beerenbrouckbuurt in Amsterdam Nieuw-West. Deze wijk staat bekend om haar ruime opzet, veel groen en uitstekende bereikbaarheid.
+
+Voor de dagelijkse boodschappen ligt een kleinschalig winkelcentrum met onder andere een Lidl op korte loopafstand. Daarnaast bevinden zich het Lambertus Zijlplein en winkelcentrum Plein &#x27;40-&#x27;45 in de directe omgeving, waar een uitgebreid aanbod aan supermarkten, speciaalzaken, horecagelegenheden en overige voorzieningen te vinden is.
+
+Voor gezinnen is de ligging ideaal. Op steenworp afstand bevinden zich meerdere basisscholen, kinderopvanglocaties en diverse speelvoorzieningen. De fraai aangelegde, besloten binnentuin vormt daarnaast een veilige plek waar kinderen onbezorgd kunnen spelen.
+
+Ook recreatief heeft de omgeving veel te bieden. De Sloterplas, het Sloterpark en diverse sport- en recreatievoorzieningen liggen op korte afstand en bieden volop mogelijkheden om te wandelen, hardlopen, fietsen of heerlijk van het groen te genieten.
+
+De bereikbaarheid is uitstekend. Diverse busverbindingen, waaronder bus 21, bevinden zich op loopafstand en tram 13 brengt je rechtstreeks richting het centrum van Amsterdam. Ook Station Sloterdijk en Station Lelylaan zijn snel bereikbaar. Met de auto rijd je binnen enkele minuten via de S104 of S106 naar de Ring A10, de A5 en de A9, waardoor onder meer Schiphol, Haarlem, Utrecht en Den Haag uitstekend bereikbaar zijn.
+
+Bijzonderheden
+•	Woonoppervlakte ca. 93 m²;
+•	Drie slaapkamers;
+•	Royale en lichte woonkamer;
+•	Derde slaapkamer met beschutte loggia voorzien van een volledig te openen accordeonpui;
+•	Moderne open keuken;
+•	Verzorgde badkamer;
+•	Praktische inpandige wasruimte;
+•	Eigen berging van ca. 5 m²
+•	Mogelijkheid tot het huren van een parkeerplaats in de afgesloten parkeergarage;
+•	Energielabel A;
+•	Bouwjaar 2006;
+•	Lift aanwezig;
+•	Actieve en professioneel beheerde VvE;
+•	Servicekosten € 208,11 per maand;
+•	Meerjarenonderhoudsplan aanwezig;
+•	Afgesloten groene binnentuin exclusief voor bewoners;
+•	Erfpacht afgekocht tot en met 30 september 2054;
+•	Oplevering in overleg
+
+PIETER VAN DER WERFSTRAAT 135
+
+Light, Space and Comfortable Living Overlooking a Beautiful Green Courtyard
+Space, natural light and tranquillity come together beautifully in this well-designed four-room apartment of approximately 93 m², located in the modern Ripperdahof apartment complex. Featuring three bedrooms, a delightful loggia, a beautifully landscaped private courtyard and the opportunity to rent a parking space in the secure underground parking garage, this apartment offers everything you need for comfortable living in Amsterdam Nieuw-West.
+
+Situated on the second floor of a well-maintained apartment building completed in 2006, the property benefits from Energy Label A, providing excellent insulation and energy efficiency. A perfect combination of comfort, generous living space and a central location.
+
+Layout
+The well-maintained central entrance with elevator provides access to the wide gallery overlooking the beautifully landscaped communal courtyard. The peaceful setting immediately creates a welcoming first impression.
+
+Upon entering the apartment, you are welcomed by a spacious entrance hall providing access to nearly all rooms.
+At the end of the hallway you will find the generous living room. Large windows flood the space with natural daylight throughout the day, creating a bright and inviting atmosphere with ample room for both a comfortable seating area and a spacious dining table.
+
+The open-plan kitchen connects seamlessly to the living area and has been designed with practicality in mind, offering generous worktop space and plenty of storage.
+
+The apartment features three bedrooms. The spacious master bedroom easily accommodates a double bed and a large wardrobe. The second bedroom is ideal as a children&#x27;s room, home office or guest bedroom. The third bedroom incorporates the loggia and features fully opening folding glass doors, creating a wonderful transition between indoor and outdoor living. Thanks to its sheltered position, the loggia can be enjoyed comfortably throughout much of the year, making it the perfect place to relax or work from home.
+
+The apartment further benefits from a well-maintained bathroom, a separate toilet and a practical internal laundry room with additional storage space.
+
+A private storage unit is located on the ground floor.
+
+The Building
+Ripperdahof is a modern apartment complex with a well-maintained appearance, elevator facilities and a beautifully landscaped private courtyard exclusively accessible to residents. The combination of greenery, tranquillity and security creates a particularly pleasant living environment for residents of all ages.
+
+The Owners&#x27; Association (VvE) is active and professionally managed. A long-term maintenance plan is in place and planned maintenance is carried out on a structural basis. Monthly service charges amount to €208.11.
+
+For those travelling by car, there is the opportunity to rent a parking space in the secure underground parking garage beneath the complex. The current monthly rental fee is €90.97 (subject to availability and approval by the landlord).
+
+Location
+The apartment is situated in the quiet and green Ruys de Beerenbrouck neighbourhood in Amsterdam Nieuw-West, an area known for its spacious layout, abundance of greenery and excellent accessibility.
+
+For everyday shopping, a local shopping centre including a Lidl supermarket is just a short walk away. In addition, Lambertus Zijlplein and Plein &#x27;40-&#x27;45 shopping centre offer a wide variety of supermarkets, specialty stores, cafés and other daily amenities.
+
+Families will appreciate the excellent location, with several primary schools, childcare facilities and playgrounds within walking distance. The beautifully landscaped private courtyard also provides a safe place where children can play freely.
+For recreation, the nearby Sloterplas Lake, Sloterpark and various sports facilities offer excellent opportunities for walking, running, cycling and enjoying the outdoors.
+
+Accessibility is outstanding. Several bus lines, including bus 21, are within walking distance, while tram line 13 provides a direct connection to Amsterdam city centre. Both Sloterdijk Station and Lelylaan Station are easily accessible, and by car you can reach the S104 and S106 within minutes, providing excellent access to the A10 Ring Road, A5 and A9 motorways, with convenient connections to Schiphol Airport, Haarlem, Utrecht and The Hague.
+
+Key Features
+•	Approximately 93 m² of living space;
+•	Three bedrooms;
+•	Bright and spacious living room;
+•	Third bedroom featuring a sheltered loggia with fully opening folding glass doors;
+•	Modern open-plan kitchen;
+•	Well-maintained bathroom;
+•	Practical internal laundry room;
+•	Private storage unit on the ground floor;
+•	Opportunity to rent a parking space in the secure underground parking garage;
+•	Energy Label A;
+•	Built in 2006;
+•	Elevator available;
+•	Active and professionally managed Owners&#x27; Association (VvE);
+•	Monthly service charges: €208.11;
+•	Long-term maintenance plan in place;
+•	Beautiful private landscaped courtyard exclusively for residents;
+•	Ground lease prepaid until 30 September 2054;
+•	Transfer date to be agreed in mutual consultation.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 43</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/213/848_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/834_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/829_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/844_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/836_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/845_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/833_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/856_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/831_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/855_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/830_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/826_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/846_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/822_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/851_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/843_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/825_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/827_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/821_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/814_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/839_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/841_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/838_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/853_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/815_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/835_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/816_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/820_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/850_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/817_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/837_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/847_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/828_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/842_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/857_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/852_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/819_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/849_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/824_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/823_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/213/840_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

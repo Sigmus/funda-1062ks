@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burgemeester Van de Pollstraat 2-B · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Burgemeester Van de Pollstraat 2-B</h1>
+  <p class="sub">
+    <span>1064 PA Amsterdam</span>
+    <span>·</span>
+    <span>Noordoever Sloterplas</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/886/760_1440x960.jpg" alt="Burgemeester Van de Pollstraat 2-B — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">29 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€475.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.786/m² · 1.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">70 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1987</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-burgemeester-van-de-pollstraat-2-b/44585564/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 475.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.786</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 135,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1987</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>70 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>218 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>CV Combiketel (gas-fired combi boiler uit 2010, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN D 10135</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-12-2036</dd></div>
+        <div class="frow"><dt>SLOTEN D 10135</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 01-12-2036</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en open ligging</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 135,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Noordoever Sloterplas</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>3.365</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>26%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 6.270</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Modern 3-kamerappartement met zonnig balkon en vrij uitzicht op de Sloterplas
+Wonen aan het water, omringd door groen én op korte afstand van het bruisende Amsterdam? Dit moderne en comfortabele 3-kamerappartement van circa 70 m² ligt op de eerste verdieping van een verzorgd appartementencomplex uit 1987. De woning heeft een lichte woonkamer, een zonnig balkon op het zuiden met vrij uitzicht over de Sloterplas, een nette keuken, twee slaapkamers én een extra kamer die momenteel in gebruik is als walk-in closet. Daarnaast beschikt de woning over een handige (fietsen)berging op de begane grond.
+Een heerlijke combinatie van rust, ruimte, groen en de stad binnen handbereik – ideaal voor een jong stel, expat of iemand die comfortabel wil wonen in Amsterdam zonder midden in de drukte te zitten.
+
+Wonen met de Sloterplas als achtertuin
+De ligging is zonder twijfel één van de grote pluspunten. Het appartement ligt net buiten de Ring A10, op een rustige en groene locatie die volledig wordt omringd door water en groen. Vanuit de woning loop je zo naar de Sloterplas en het Sloterpark, waar je kunt wandelen, hardlopen, sporten of simpelweg genieten van de buitenlucht.
+Tegelijkertijd ben je verrassend snel in het centrum van Amsterdam. Met de fiets of tram bereik je de Dam in circa 20 minuten en ook populaire stadsdelen zoals De Baarsjes en Bos en Lommer zijn eenvoudig bereikbaar.
+Voor de dagelijkse boodschappen en voorzieningen kun je terecht in de directe omgeving. Ook aan openbaar vervoer geen gebrek: diverse tram-, bus- en metroverbindingen bevinden zich op loopafstand. De NS-stations Amsterdam Lelylaan en Amsterdam Sloterdijk zijn bovendien snel per fiets bereikbaar. Met de auto rijd je via de nabijgelegen Ring A10 eenvoudig richting alle uitvalswegen.
+
+INDELING
+Via de gemeenschappelijke entree op de begane grond bereik je het ruime trappenhuis en de entree van de woning op de eerste verdieping.
+De hal biedt toegang tot de verschillende vertrekken en beschikt over een meterkast en modern toilet.
+De lichte woonkamer vormt het hart van de woning en heeft dankzij de grote raampartijen een prettige, open uitstraling. Vanuit de woonkamer stap je rechtstreeks het zonnige balkon op het zuiden op. Hier geniet je in alle rust van de zon en het vrije uitzicht richting de Sloterplas.
+De separate keuken is ruim opgezet en voorzien van diverse inbouwapparatuur, waaronder een 5-pits SMEG-gasfornuis, afzuigkap, oven, vaatwasser en koel-/vriescombinatie.
+De woning beschikt over twee volwaardige slaapkamers. Eén van de kamers biedt toegang tot het tweede balkon. Daarnaast is er een extra kamer die momenteel praktisch wordt gebruikt als walk-in closet, maar uiteraard ook voor andere doeleinden kan worden ingericht.
+De badkamer is voorzien van een douche, wastafelmeubel en aansluiting voor de wasmachine.
+Op de begane grond bevindt zich een praktische berging/fietsenberging.
+
+BIJZONDERHEDEN
+- Woonoppervlakte circa 70 m²; meetrapport beschikbaar;
+- Modern afgewerkt en comfortabel 3-kamerappartement;
+- Zonnig balkon op het zuiden met uitzicht richting de Sloterplas;
+- Tweede balkon;
+- Twee slaapkamers plus een extra kamer, momenteel ingericht als walk-in closet;
+- Nette separate keuken met diverse inbouwapparatuur;
+- Verwarming en warm water via een CV-combiketel (2010);
+- Gelegen op erfpachtgrond van de gemeente Amsterdam;
+- Erfpachtcanon is afgekocht tot 2036 en daarna eeuwigdurend vastgeklikt met jaarlijkse indexering; huidige canon € 151,36 per jaar;
+- Servicekosten circa € 135,- per maand;
+- Gezonde en professioneel georganiseerde VvE;
+- VvE beschikt over een Meerjarenonderhoudsplan (MJOP);
+- Funderingsklasse A/B/C – geen verhoogd risico;
+- Praktische berging op de begane grond;
+- Uitstekende ligging nabij de Sloterplas, Sloterpark, openbaar vervoer en Ring A10;
+- Oplevering in overleg.
+
+De woonoppervlakte is vastgesteld conform de Meetinstructie van de NVM. Deze Meetinstructie is gebaseerd op de NEN 2580 en is bedoeld om een meer eenduidige manier van meten toe te passen voor het bepalen van de gebruiksoppervlakte. Verschillen in meetuitkomsten kunnen niet volledig worden uitgesloten, bijvoorbeeld door interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting.
+Alle informatie is door ons met de nodige zorgvuldigheid samengesteld op basis van gegevens van de verkoper en/of derden. Aan de verstrekte informatie kunnen geen rechten worden ontleend. Wij aanvaarden geen aansprakelijkheid voor eventuele onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. De koper heeft nadrukkelijk een wettelijke onderzoeksplicht.
+Interesse?
+Zie jij jezelf hier al wonen? Plan dan snel een bezichtiging en ontdek zelf de combinatie van comfortabel wonen, groen, water en de stad binnen handbereik.
+Wij adviseren geïnteresseerden om een eigen NVM-aankoopmakelaar in te schakelen. Een aankoopmakelaar behartigt uitsluitend jouw belangen, begeleidt je tijdens het aankoopproces en kan helpen bij onder andere de beoordeling van de woning, onderhandelingen en het koopcontract.
+Adressen van collega NVM-aankoopmakelaars zijn te vinden op Funda.
+
+Modern 3-Room Apartment with Sunny Balcony and Unobstructed Views of Sloterplas
+Looking for a home by the water, surrounded by greenery and within easy reach of vibrant Amsterdam? This modern and comfortable 3-room apartment of approximately 70 m² is located on the first floor of a well-maintained apartment complex dating from 1987. The property features a bright living room, a sunny south-facing balcony with unobstructed views over Sloterplas, a well-appointed kitchen, two bedrooms and an additional room currently used as a walk-in closet. A convenient private storage/bicycle storage unit is also located on the ground floor.
+The perfect combination of peace, space, greenery and the city within easy reach – ideal for a young couple, expat or anyone looking to enjoy comfortable living in Amsterdam without being in the middle of the hustle and bustle.
+
+Living with Sloterplas as Your Backyard
+The location is undoubtedly one of the property&#x27;s key features. Situated just outside the A10 ring road, the apartment enjoys a peaceful and green setting, surrounded by water and greenery. From your front door, you can walk straight to Sloterplas and Sloterpark, where you can enjoy walking, running, sports or simply spending time outdoors.
+At the same time, Amsterdam city centre is surprisingly close. By bicycle or tram, you can reach Dam Square in approximately 20 minutes. Popular neighbourhoods such as De Baarsjes and Bos en Lommer are also easily accessible.
+For everyday shopping and amenities, everything you need can be found nearby. Public transport is excellent, with various tram, bus and metro connections within walking distance. Amsterdam Lelylaan and Amsterdam Sloterdijk railway stations are also easily and quickly accessible by bicycle. By car, the nearby A10 ring road provides convenient access to the city&#x27;s main roads and motorways.
+
+Layout
+The communal entrance on the ground floor leads to a spacious staircase and the entrance to the apartment on the first floor.
+The hallway provides access to the various rooms and features a meter cupboard and modern separate toilet.
+The bright living room is the heart of the home and benefits from large windows that create a pleasant and spacious atmosphere. From the living room, you have direct access to the sunny south-facing balcony. Here, you can relax in the sunshine and enjoy the unobstructed views towards Sloterplas.
+The separate kitchen is generously sized and equipped with a range of built-in appliances, including a 5-burner SMEG gas cooker, extractor hood, oven, dishwasher and fridge/freezer combination.
+The apartment has two good-sized bedrooms. One of the bedrooms provides access to the second balcony. In addition, there is a separate room currently used as a practical walk-in closet, which could of course also be used for another purpose.
+The bathroom features a shower, vanity unit and washing machine connection.
+A practical private storage/bicycle storage unit is located on the ground floor.
+
+Key Features
+- Approximately 70 m² of living space; measurement report available;
+- Modern and comfortable 3-room apartment;
+- Sunny south-facing balcony with views towards Sloterplas;
+- Second balcony;
+- Two bedrooms plus an additional room currently used as a walk-in closet;
+- Separate, well-appointed kitchen with various built-in appliances;
+- Heating and hot water provided by a central heating combi boiler (2010);
+- Situated on leasehold land owned by the Municipality of Amsterdam;
+- Ground lease has been bought off until 2036 and subsequently fixed in perpetuity, subject to annual indexation; current ground lease payment €151.36 per year;
+- Service charges approximately €135 per month;
+- Healthy and professionally managed Owners&#x27; Association (VvE);
+- The VvE has a Long-Term Maintenance Plan (MJOP);
+- Foundation classification A/B/C – no increased risk;
+- Practical private storage unit on the ground floor;
+- Excellent location near Sloterplas, Sloterpark, public transport and the A10 ring road;
+- Transfer date to be agreed upon.
+
+The living area has been determined in accordance with the NVM Measurement Instruction. This Measurement Instruction is based on NEN 2580 and is intended to provide a more uniform method of measuring the usable floor area. Differences in measurement results cannot be completely ruled out, for example due to differences in interpretation, rounding or limitations when carrying out the measurement.
+All information has been compiled by us with due care based on information provided by the seller and/or third parties. No rights may be derived from the information provided. We accept no liability for any incompleteness, inaccuracies or other discrepancies, nor for any consequences thereof. Buyers are expressly reminded of their statutory duty to investigate the property themselves.
+Interested?
+Can you already picture yourself living here? Schedule a viewing soon and experience for yourself the combination of comfortable living, greenery, water and the city right at your doorstep.
+We recommend that prospective buyers appoint their own NVM-certified purchasing agent. A purchasing agent exclusively represents your interests, guides you throughout the buying process and can assist with, among other things, assessing the property, negotiations and the purchase agreement.
+Contact details of NVM purchasing agents can be found on Funda.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>BenS Makelaars</strong> · BenS Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 29</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/886/760_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/857_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/830_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/772_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/891_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/860_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/866_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/756_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/762_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/851_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/911_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/809_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/853_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/871_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/907_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/786_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/072_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/077_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/063_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/027_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/048_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/994_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/978_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/926_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

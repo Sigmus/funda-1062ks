@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinkerstraat 243-E · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Kinkerstraat 243-E</h1>
+  <p class="sub">
+    <span>1053 EP Amsterdam</span>
+    <span>·</span>
+    <span>Borgerbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/658/906_1440x960.jpg" alt="Kinkerstraat 243-E — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">45 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€750.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.500/m² · 2.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.1 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">100 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1982</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-kinkerstraat-243-e/44594602/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 750.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.500</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 318,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1982</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>100 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>335 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 separate toiletten</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas-fired combi boiler uit 2015, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM T 2863</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>City centre en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 318,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Borgerbuurt</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>2.815</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>18%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 8.204</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** For English below ***
+
+Dubbele bovenwoning met 4 slaapkamers, moderne woonkeuken en 3 balkons in bruisend Oud-West!
+
+Ruimte, licht, vier slaapkamers en maar liefst drie balkons, midden in het geliefde Amsterdam Oud-West. Aan de Kinkerstraat 243E vind je deze royale dubbele bovenwoning, verdeeld over de derde en vierde verdieping. Een heerlijke woning voor wie comfortabel wil wonen en tegelijkertijd wil genieten van alles wat Amsterdam te bieden heeft.
+
+De combinatie van een ruime woonverdieping, vier slaapkamers en maar liefst drie buitenruimtes maakt deze woning bijzonder veelzijdig. En dat alles op een fantastische locatie in Oud-West, met de Kinkerstraat, Ten Katemarkt, De Hallen, winkels, cafés en restaurants letterlijk om de hoek.
+
+Bereikbaarheid
+De woning ligt aan de bekende en levendige Kinkerstraat, midden in het populaire Amsterdam Oud-West. Vanuit hier heb je werkelijk alles binnen handbereik.
+
+Voor de dagelijkse boodschappen zijn er volop winkels en supermarkten in de directe omgeving. De gezellige Ten Katemarkt ligt op korte loopafstand en biedt een grote variatie aan verse producten, bloemen en lekkernijen.
+
+Ook De Hallen bevindt zich vlakbij. Dit voormalige tramremisecomplex is uitgegroeid tot een van de populaire hotspots van Oud-West en biedt onder andere de Foodhallen, restaurants, cafés, winkels, een bioscoop en diverse culturele voorzieningen. Even lunchen, borrelen, uit eten of naar de film? Je hoeft er nauwelijks de fiets voor te pakken.
+
+Voor ontspanning en groen ligt het Vondelpark op korte fietsafstand. Ook de Jordaan en het centrum van Amsterdam zijn eenvoudig per fiets te bereiken.
+
+De bereikbaarheid met het openbaar vervoer is uitstekend. In de directe omgeving bevinden zich verschillende tram- en bushaltes met verbindingen naar diverse delen van de stad. Ook Amsterdam Centraal en andere belangrijke stations zijn goed bereikbaar. Met de auto zijn de uitvalswegen richting de A10 eveneens goed te bereiken.
+
+De globale indeling van de woning is als volgt:
+Via het gemeenschappelijke trappenhuis bereik je de entree van de woning op de derde verdieping. Vanuit de hal zijn de verschillende vertrekken toegankelijk en bevindt zich de vaste trap naar de vierde verdieping.
+
+Derde verdieping
+De derde verdieping vormt het hart van de woning.
+
+Bij binnenkomst valt direct de prettige hoeveelheid ruimte en het vele natuurlijke licht op. De ruime woonkamer biedt volop mogelijkheden voor een royale zithoek en een grote eettafel. Dankzij de grote raampartijen heeft de ruimte een lichte en open uitstraling.
+
+De moderne open keuken met kookeiland sluit mooi aan op de woonkamer. De strakke keuken biedt veel werk- en bergruimte en vormt tegelijkertijd een gezellige plek om aan te zitten. Hierdoor zijn koken, eten en ontspannen hier op een natuurlijke manier met elkaar verbonden.
+
+De woonkamer biedt voldoende ruimte om met familie en vrienden te tafelen, terwijl er ook alle gelegenheid is om een comfortabele zithoek te creëren.
+
+Op deze verdieping bevinden zich tevens twee slaapkamers. De kamers zijn van goed formaat en kunnen uiteraard volledig naar eigen wens worden ingericht. Naast slaapkamers zijn ze bijvoorbeeld uitstekend geschikt als kinderkamer, werkkamer, logeerkamer of hobbyruimte.
+
+Vanuit de keuken is toegang tot een klein balkon. Daarnaast bevindt zich aan de achterzijde, bij één van de slaapkamers, een tweede balkon. Hierdoor beschikt deze woonverdieping over twee verschillende buitenruimtes.
+
+Vierde verdieping
+Via de vaste trap bereik je de vierde verdieping. Hier bevinden zich de derde en vierde slaapkamer.
+
+Beide kamers zijn prettig van formaat en bieden volop mogelijkheden voor de inrichting. De verdieping kan hierdoor echt als slaap- en rustverdieping worden gebruikt, met voldoende ruimte voor een hoofdslaapkamer, kinderkamer, werkkamer of logeerkamer.
+
+Bij één van de slaapkamers bevindt zich bovendien een klein balkon, waardoor ook de vierde verdieping beschikt over een fijne buitenruimte.
+
+Op deze verdieping bevindt zich tevens de luxe badkamer.
+
+Luxe badkamer
+De badkamer is stijlvol en modern uitgevoerd en vormt een fijne plek om even tot rust te komen. De ruimte beschikt over een vrijstaand ligbad, inloopdouche en een royale wastafel met twee waskommen en moderne kranen.
+
+De combinatie van de rustige tegelafwerking, warme tinten en moderne verlichting geeft de badkamer een luxe en tijdloze uitstraling.
+
+Een heerlijk ligbad na een lange dag? Hier kan het gewoon.
+
+Drie balkons
+Een van de grote pluspunten van deze woning is de beschikking over maar liefst drie balkons.
+
+Op de derde verdieping bevindt zich vanuit de keuken een klein balkon. Aan de achterzijde, bij een van de slaapkamers, ligt een tweede balkon. Op de vierde verdieping bevindt zich bij een van de slaapkamers een derde, eveneens compact balkon.
+
+Dankzij deze verschillende buitenruimtes kun je op meerdere plekken in en rondom de woning even naar buiten. Zet de deuren open voor wat frisse lucht, geniet van een kop koffie in de ochtend of sluit de dag af met een drankje.
+
+Met wat groen, sfeerverlichting en een comfortabel zitje maak je van de balkons eenvoudig fijne buitenplekken midden in de stad.
+
+Wonen in bruisend Oud-West
+Wie in Oud-West woont, weet hoe prettig het is om alles dichtbij te hebben. De buurt combineert de karakteristieke sfeer van Amsterdam met een enorme keuze aan winkels, horeca en voorzieningen.
+
+De Kinkerstraat zelf is levendig en veelzijdig. Je vindt er allerlei winkels en speciaalzaken en vanuit de woning loop je zo richting de Ten Katemarkt. De markt vormt samen met De Hallen en de vele cafés en restaurants een belangrijk onderdeel van de gezellige sfeer van de buurt.
+
+Ook voor een avondje uit hoef je niet ver. Een hapje eten, een drankje doen, naar de Foodhallen of een film pakken bij De Hallen: het kan allemaal op loopafstand.
+
+En wil je juist de rust opzoeken? Dan fiets je zo richting het Vondelpark. Ook de Jordaan, de Amsterdamse grachten en het centrum zijn dichtbij.
+
+Oud-West is daarmee een ideale woonomgeving voor wie graag midden in Amsterdam woont, met alle levendigheid binnen handbereik, maar ook waarde hecht aan groen, ontspanning en een fijne woonomgeving.
+
+Bijzonderheden
+- Royale dubbele bovenwoning verdeeld over de 3e en 4e verdieping
+- Maar liefst 4 slaapkamers
+- Drie balkons: een klein balkon bij de keuken, een balkon aan de achterzijde bij een slaapkamer en een klein balkon op de vierde verdieping bij een slaapkamer
+- Gelegen in het populaire Amsterdam Oud-West, Ten Katemarkt en De Hallen op korte afstand, Vondelpark, Jordaan en centrum goed bereikbaar
+- Goede verbindingen met het openbaar vervoer
+- Erfpacht afgekocht tot 15 maart 2035, nadien EEUWIGDUREND afgekocht
+- Servicekosten € 318,- per maand, professioneel beheerde VvE
+- Oplevering in overleg
+
+Benieuwd naar de ruimte, sfeer en mogelijkheden van deze woning? Kom kijken en ervaar zelf wat Kinkerstraat 243E te bieden heeft!
+
+---------------------------------------------------------------------------------------------------------------------------------
+Double upper-floor apartment with 4 bedrooms, modern open-plan kitchen and 3 balconies in vibrant Oud-West
+
+Space, natural light, four bedrooms and no fewer than three balconies, right in the heart of popular Amsterdam Oud-West. At Kinkerstraat 243E you will find this spacious double upper-floor apartment, spread over the third and fourth floors. A wonderful home for those looking for comfortable living while enjoying everything Amsterdam has to offer.
+
+The combination of a spacious living floor, four bedrooms and three outdoor spaces makes this home particularly versatile. All this in a fantastic location in Oud-West, with Kinkerstraat, Ten Katemarkt, De Hallen, shops, cafés and restaurants literally around the corner.
+
+Location and accessibility
+The property is located on the well-known and lively Kinkerstraat, right in the heart of popular Amsterdam Oud-West. From here, everything you need is within easy reach.
+
+For daily groceries, there are plenty of shops and supermarkets in the immediate area. The lively Ten Katemarkt is just a short walk away and offers a wide variety of fresh produce, flowers and treats.
+De Hallen is also nearby. This former tram depot has developed into one of Oud-West’s most popular hotspots and is home to the Foodhallen, restaurants, cafés, shops, a cinema and various cultural facilities. Whether you want to have lunch, enjoy a drink, go out for dinner or see a film, you barely need to get on your bike.
+For relaxation and greenery, Vondelpark is just a short bike ride away. The Jordaan and the centre of Amsterdam are also easily accessible by bicycle.
+Public transport connections are excellent. Several tram and bus stops are located nearby, providing connections to various parts of the city. Amsterdam Central Station and other major railway stations are also easily accessible. By car, the main roads leading to the A10 ring road can also be reached easily.
+
+The general layout of the property is as follows
+
+Via the communal staircase, you reach the entrance to the apartment on the third floor. From the hallway, the various rooms can be accessed, as well as the staircase leading to the fourth floor.
+
+Third floor
+The third floor forms the heart of the home.
+Upon entering, the generous amount of space and abundance of natural light immediately stand out. The spacious living room offers plenty of room for a large seating area and a generous dining table. Thanks to the large windows, the room has a bright and open feel.
+
+The modern open-plan kitchen with island connects beautifully with the living room. The sleek kitchen offers plenty of workspace and storage, while also creating a welcoming place to sit and enjoy a meal. Cooking, dining and relaxing naturally come together here.
+The living room provides ample space for dining with family and friends, while also offering plenty of opportunity to create a comfortable seating area.
+There are also two bedrooms on this floor. Both rooms are a good size and can naturally be furnished entirely according to your own wishes. In addition to bedrooms, they would also be ideal as a child’s room, home office, guest room or hobby room.
+
+The kitchen provides access to a small balcony. In addition, there is a second balcony at the rear, next to one of the bedrooms. This means the living floor benefits from two separate outdoor spaces.
+
+Fourth floor
+The staircase leads to the fourth floor, where the third and fourth bedrooms are located.
+Both rooms are a comfortable size and offer plenty of possibilities for furnishing. This floor can therefore be used as a dedicated sleeping and relaxation level, with sufficient space for a main bedroom, child’s room, home office or guest room.
+One of the bedrooms also has access to a small balcony, meaning the fourth floor has its own outdoor space as well.
+
+The luxurious bathroom is also located on this floor.
+
+Luxurious bathroom
+The bathroom has been stylishly and modernly finished and provides a wonderful place to unwind. It features a freestanding bathtub, walk-in shower and a generous vanity with two basins and modern taps.
+The combination of calm tiling, warm tones and contemporary lighting gives the bathroom a luxurious and timeless feel.
+A relaxing bath after a long day? You can do just that here.
+
+Three balconies
+One of the major features of this property is the presence of no fewer than three balconies.
+
+On the third floor, there is a small balcony accessible from the kitchen. At the rear, next to one of the bedrooms, there is a second balcony. On the fourth floor, one of the bedrooms has access to a third, equally compact balcony.
+Thanks to these different outdoor spaces, you can step outside in several places throughout the home. Open the doors to let in some fresh air, enjoy a morning coffee or finish the day with a drink.
+
+With some greenery, atmospheric lighting and a comfortable seating area, the balconies can easily be transformed into pleasant outdoor spaces in the heart of the city.
+
+Living in vibrant Oud-West
+Anyone living in Oud-West knows how convenient it is to have everything close by. The neighbourhood combines the characteristic atmosphere of Amsterdam with an enormous choice of shops, restaurants, cafés and other amenities.
+Kinkerstraat itself is lively and diverse. You will find all kinds of shops and specialist stores here, and from the property you can easily walk towards Ten Katemarkt. Together with De Hallen and the many cafés and restaurants, the market is an important part of the welcoming atmosphere of the neighbourhood.
+
+You also do not have to go far for an evening out. Enjoy a meal, have a drink, visit the Foodhallen or see a film at De Hallen, all within walking distance.
+And if you are looking for some peace and quiet, you can cycle to Vondelpark in no time. The Jordaan, Amsterdam’s canals and the city centre are also close by.
+Oud-West is therefore an ideal place to live for those who enjoy being in the heart of Amsterdam, with all the city’s vibrancy close at hand, while also appreciating greenery, relaxation and a pleasant living environment.
+
+Key features:
+- Spacious double upper-floor apartment spread over the third and fourth floors
+- Four bedrooms
+- Three balconies: a small balcony adjoining the kitchen, a rear balcony next to one of the bedrooms and a small balcony on the fourth floor next to one of the bedrooms
+- Located in popular Amsterdam Oud-West, with Ten Katemarkt and De Hallen within walking distance and Vondelpark, the Jordaan and the city centre easily accessible
+- Excellent public transport connections
+- Ground lease paid off until 15 March 2035, after which it is paid off in perpetuity
+- Service charges of €318 per month, professionally managed owners’ association
+- Transfer date by mutual agreement
+- Curious about the space, atmosphere and possibilities this home has to offer? Come and take a look and experience for yourself what Kinkerstraat 243E has to offer.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Lichte woonverdieping met eiland
+
+Ruime woonkamer met moderne open keuken en kookeiland.
+
+Drie fijne balkons
+
+Drie balkons bij keuken en slaapkamers voor buitenzit.
+
+Toplocatie in Oud-West
+
+In Amsterdam Oud-West, bij Ten Katemarkt en De Hallen.
+
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 45</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/658/906_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/102_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/096_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/980_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/874_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/969_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/917_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/089_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/082_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/038_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/014_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/674/632_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/674/512_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/054_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/103_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/088_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/316_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/206_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/097_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/107_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/094_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/091_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/894_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/991_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/299_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/035_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/298_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/098_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/898_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/975_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/929_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/075_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/658/914_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/118_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/247_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/659/199_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

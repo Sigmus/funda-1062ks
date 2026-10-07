@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P. Hans Frankfurthersingel 216 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>P. Hans Frankfurthersingel 216</h1>
+  <p class="sub">
+    <span>1060 TP Amsterdam</span>
+    <span>·</span>
+    <span>De Aker-Oost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/246/793_1440x960.jpg" alt="P. Hans Frankfurthersingel 216 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">63 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€795.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.098/m² · 3.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.3 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">194 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy A+++</span>
+      <span class="chip">Built 2003</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">4 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-p-hans-frankfurthersingel-216/44518182/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 795.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.098</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2003</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>194 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>25 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>13 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>127 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>822 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 2 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, dubbele Washbasin, en Bathtub</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>4 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Buitenzonwering, frans balkon, glasvezelkabel, Mechanical ventilation, en zonnepanelen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+++</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NH G 4743</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>127 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan vaarwater, aan water, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd></dd></div>
+        <div class="frow"><dt>Back garden</dt><dd></dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>63 m² (11,00 m deep en 5,70 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het noordwesten</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Capaciteit</dt><dd>1 auto</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">&quot;This property is listed by a MVA Certified Expat Broker&quot; See English translation below. ***
+
+Vier verdiepingen, zes kamers, een inpandige garage én een tuin aan het water. Een bijzonder compleet familiehuis met volop ruimte, mogelijkheden, privacy en een heerlijk vrij uitzicht over water, bomen en groen. Ook voor een kantoor of praktijk aan huis is deze woning bijzonder geschikt. De kamer in het souterrain is momenteel ingericht als praktijkruimte, maar kan met wat aanpassingen ook heel goed gebruikt worden als semi-zelfstandige woonruimte voor een kind wat graag wat meer privacy wil. Ook de begane grond biedt volop mogelijkheden omdat deze via de entree direct bereikbaar is en je de overige woonverdiepingen hoeft te betreden. 
+
+Direct achter de woning liggen de Tuinen van West, een uitgestrekt groen- en recreatiegebied waar je kunt wandelen en fietsen. Het oude Sloten met zijn molen ligt in het gebied aan de overkant van het water. De woning is voorzien van energielabel A+++, 15 zonnepanelen en een hybride warmtepomp en de erfpacht is eeuwigdurend afgekocht!
+
+INDELING
+Begane grond
+Entree, hal met meterkast en separaat toilet met fonteintje. Vanuit de hal is er toegang tot de inpandige garage. Aan de achterzijde bevindt zich een ruime kamer, die momenteel is opgedeeld in twee gedeelten en beschikt over een breed balkon met zonwering. 
+De vloer is voorzien van een pvc vloer. 
+
+Souterrain
+Via de trap bereik je de verdieping daaronder, waar zich een fijne ruimte bevindt die momenteel in gebruik is als werk-/praktijkruimte. Vanuit deze ruimte geven openslaande deuren toegang tot de rustige groene tuin aan het water waar je kunt genieten van de middag en avondzon. De vloer is voorzien van een marmoleum vloer.  
+
+Eerste verdieping 
+De royale woonverdieping bevindt zich op de eerste verdieping. De ruime keuken is voorzien van diverse inbouwapparatuur, waaronder een koel-vriescombinatie, vaatwasser en kookplaat met afzuigkap en oven en biedt veel opbergmogelijkheden. Aan de voorzijde zorgen openslaande deuren naar het Franse balkon voor een prachtig uitzicht over het water, de bomen en het groen. Zowel de voor- als de achterzijde is voorzien van elektrische zonwering. Deze verdieping is voorzien van een kersenhouten vloer. 
+
+Tweede verdieping 
+De bovenste verdieping beschikt over drie slaapkamers  die door hun  bijzondere hoogte erg licht zijn en een badkamer. Aan de achterzijde bevindt zich een slaapkamer met vide en de badkamer, voorzien van een bad, separate douche, dubbele wastafel en een radiator voor de handdoeken. Aan de voorzijde liggen twee slaapkamers, waarvan één eveneens beschikt over een vide met een dakraam die zich uitstekend leent als slaap-, werk- of bergruimte. Beide kamers hebben toegang tot het ruime balkon met waar je rustig kunt kunt genieten van een kop koffie in de ochtendzon en het groene uitzicht. Daarnaast is er op deze verdieping een separaat toilet met fonteintje en een praktische bergkast met de cv-ketel, hybride warmtepomp en wasmachineopstelling. Deze verdieping is voorzien van een marmoleum vloer. 
+
+DE BUURT 
+De woning ligt in de groene en ruim opgezette woonwijk De Aker, aan een rustige doodlopende straat. Vanuit de woning kijk je uit over de Akersluis, waar de Slotervaart en Ringvaart samenkomen. Langs het water loopt een groene fiets- en wandelroute en ook voor liefhebbers van varen zijn er volop mogelijkheden, met routes richting onder andere de Nieuwe Meer en het Amsterdamse Bos. Met je bootje kun je naar de Nieuwe Meer of de binnenstad varen, terwijl het water voor de deur ook uitnodigt om te zwemmen of te suppen.
+
+In de omgeving vind je veel groen zoals de Vrije Geer, het Sloterpark, de Sloterplas en recreatiemogelijkheden zoals de karakteristieke Molen van Sloten, de kaasboerderij, de manege en Brouwerij de 7 Deugden. Voor de dagelijkse boodschappen zijn de biologische fruittuin, de Stadsgroenteboer, winkelcentrum de Dukaat, het Belgiëplein en Badhoevedorp dichtbij. Ook scholen en sportverenigingen zijn goed bereikbaar.
+
+De A4, A5, A9 en A10 zijn snel bereikbaar en met het openbaar vervoer zijn zowel de binnenstad als Schiphol goed te bereiken. Parkeren kan in de eigen inpandige garage. Er zijn twee parkeervergunning aan te vragen bij de gemeente.
+
+ERFPACHT
+De grond is door de gemeente uitgegeven in erfpacht en is eeuwigdurend afgekocht! De Algemene bepalingen van 2016 zijn van toepassing. 
+
+BIJZONDERHEDEN 
+- Een familiehuis met mogelijkheden. 
+- Bijzonder geschikt voor het houden van kantoor of praktijk aan huis.
+- De woning beschikt over veel opbergmogelijkheden.
+- Erfpacht is eeuwigdurend afgekocht.
+- Energielabel A +++ 
+- 15 zonnepanelen. Deze zijn recent gereinigd en rondom voorzien van vogelwerende afsluiting ( 5 jaar garantie).
+- Hybride warmtepomp. 
+- Vrij uitzicht over groen aan de voorzijde waar je tegen betaling een bootje aan kunt meren.
+- Zwemmen en suppen voor de deur
+- Groene tuin met een vlonder aan het water. De vlonder moet worden vervangen. 
+- Inpandige garage. 
+- Mogelijkheid voor aanvragen twee parkeervergunningen. 
+- Meetinstructie:
+De woning is opgemeten conform de branchebrede meetinstructie. De meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting. Koper vrijwaart verkoper alsmede de medewerkers van Knap makelaardij van alle aansprakelijkheid terzake van eventueel later te constateren verschillen in maatvoering van zowel het gebruiksoppervlakte als inhoud van de woning.
+Het staat een koper vrij om de woning na te meten (bij voorkeur tijdens de bouwkundige keuring).
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan.
+Alle opgegeven maten en oppervlakten zijn indicatief het staat een ieder vrij om het appartement na te meten. Van toepassing zijn de NVM voorwaarden.
+
+&quot;This property is listed by a MVA Certified Expat Broker&quot;
+
+Four floors, six rooms, an integrated garage and a garden directly on the water. A wonderfully complete family home offering plenty of space, flexibility and privacy, with lovely unobstructed views over the water, trees and greenery. The property is also particularly well suited for a home office or practice. The room in the lower ground floor is currently set up as a practice room, but with some modifications it could also be very well suited as semi-independent living accommodation for a child who would like a little more privacy. The ground floor also offers plenty of possibilities, as it can be accessed directly from the entrance without having to pass through the other residential floors.
+
+The Tuinen van West, an extensive green and recreational area, are located directly behind the property, offering plenty of opportunities for walking and cycling. Historic Sloten, with its iconic windmill, is situated across the water. The property has an A+++ energy rating, 15 solar panels and a hybrid heat pump. The leasehold has been bought off in perpetuity.
+
+LAYOUT
+
+Ground floor
+Entrance hall with meter cupboard and separate toilet with washbasin. The hall provides access to the integral garage. At the rear is a spacious room, currently divided into two separate areas, with access to a wide balcony fitted with an awning. The floor is finished with PVC flooring.
+
+Garden level
+A staircase leads down to the basement, where there is a comfortable room currently used as a home office/practice room. French doors provide access to the quiet, green garden overlooking the water, where you can enjoy the afternoon and evening sun. The floor is finished with Marmoleum flooring.
+
+First floor
+The spacious main living floor is located on the first floor. The generous kitchen is fitted with a range of built-in appliances, including a fridge-freezer, dishwasher, hob with extractor hood and oven, and offers plenty of storage space. At the front, French doors open onto a Juliet balcony, offering beautiful views across the water, trees and greenery. Both the front and rear of this floor are fitted with electric awnings. The floor is finished with cherry wood flooring.
+
+Second floor
+The top floor features three bedrooms and a bathroom. Thanks to the impressive ceiling height, the bedrooms are exceptionally light. At the rear is a bedroom with a mezzanine level, as well as the bathroom, which is fitted with a bathtub, separate shower, double washbasin and heated towel radiator. At the front are two bedrooms, one of which also has a mezzanine level with a skylight, making it ideal as a sleeping area, home office or storage space. Both bedrooms provide access to the spacious balcony, where you can enjoy a quiet cup of coffee in the morning sun while taking in the green surroundings.
+
+This floor also features a separate toilet with washbasin and a practical storage cupboard housing the central heating boiler, hybrid heat pump and washing machine connection. The floor is finished with Marmoleum flooring.
+
+THE NEIGHBOURHOOD
+The property is located in the green and spacious residential neighbourhood of De Aker, on a quiet cul-de-sac. From the property, you look out over the Akersluis, where the Slotervaart and Ringvaart waterways meet. A green cycling and walking route runs along the water, while boating enthusiasts are also well catered for, with routes leading towards the Nieuwe Meer and Amsterdamse Bos. From here, you can take your boat to the Nieuwe Meer or even into the city centre, while the water directly in front of the property also invites you to go swimming or stand-up paddleboarding.
+
+The surrounding area offers plenty of greenery, including the Vrije Geer, Sloterpark and Sloterplas, as well as a range of recreational amenities such as the characteristic Molen van Sloten windmill, a local cheese farm, riding school and Brouwerij De 7 Deugden brewery. For everyday shopping, the organic fruit garden, Stadsgroenteboer, Dukaat shopping centre, Belgiëplein and Badhoevedorp are all close by. Schools and sports clubs are also easily accessible.
+
+The A4, A5, A9 and A10 motorways can be reached quickly, while public transport provides easy access to both Amsterdam city centre and Schiphol Airport. Parking is available in the private integral garage. Two residents&#x27; parking permits can be applied for through the municipality.
+
+LEASEHOLD
+The land is issued by the municipality on a leasehold basis and the ground rent has been bought off in perpetuity. The General Provisions of 2016 apply.
+
+KEY FEATURES
+- A versatile family home offering plenty of possibilities.
+- Particularly suitable for a home office or practice.
+- Plenty of storage space throughout the property.
+- Leasehold bought off in perpetuity.
+- A+++ energy rating.
+- 15 solar panels, recently cleaned and fitted with bird-proofing around the panels (5-year warranty).
+- Hybrid heat pump.
+- Unobstructed green views at the front, with the possibility of mooring a small boat for a fee.
+- Swimming and stand-up paddleboarding directly in front of the property.
+- Green garden with a waterside deck. The deck needs to be replaced.
+- Integral garage.
+- Possibility to apply for two residents&#x27; parking permits.
+- Measurement Guidelines:
+The property has been measured in accordance with industry-wide measurement guidelines. These guidelines are intended to ensure a more consistent method of measurement for providing an indication of the usable area. The measurement guidelines do not completely rule out differences in measurement results, due, for example, to differences in interpretation, rounding, or limitations in performing the measurement. The buyer warrants the seller and the employees of Knap makelaardij against all liability regarding any differences in dimensions—whether in usable floor area or the volume of the property—that may be discovered at a later date.
+The buyer is free to remeasure the property (preferably during the structural inspection).
+
+This information has been compiled by us with due care. However, no liability is accepted on our part for any incompleteness, inaccuracies or other errors, nor for any consequences thereof.
+
+All measurements and floor areas stated are indicative. Buyers are free to have the property measured independently. The NVM terms and conditions apply.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Tuin en balkon aan water
+
+Groene tuin en brede balkons direct aan het water.
+
+Zeer energiezuinige woning
+
+Energielabel A+++, 15 zonnepanelen en hybride warmtepomp.
+
+Eigen garage en parkeren
+
+Inpandige garage en optie voor twee parkeervergunningen.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 63</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/246/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/853_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/857_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/912_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/790_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/794_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/789_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/889_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/831_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/888_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/791_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/809_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/786_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/862_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/923_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/808_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/843_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/784_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/798_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/842_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/848_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/873_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/902_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/747_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/878_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/817_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/829_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/802_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/781_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/847_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/818_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/904_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/810_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/874_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/868_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/893_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/924_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/869_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/833_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/891_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/931_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/820_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/884_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/767_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/811_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/760_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/876_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/744_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/898_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/932_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/246/938_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

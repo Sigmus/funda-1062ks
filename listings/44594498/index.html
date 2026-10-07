@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Achillesstraat 109-H · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Achillesstraat 109-H</h1>
+  <p class="sub">
+    <span>1076 RA Amsterdam</span>
+    <span>·</span>
+    <span>Van Tuyllbuurt</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/649/270_1440x960.jpg" alt="Achillesstraat 109-H — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">45 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€635.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.038/m² · 2.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">79 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1930</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-achillesstraat-109-h/44594498/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 635.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.038</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 280,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Ground-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1930</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met bitumineuze dakbedekking en tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>79 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>11 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>316 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, 2 Washbasins, Bathtub, en toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>Begane grond</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler uit 2022, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM AB 2485</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 671,77 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>55 m² (8,10 m deep en 6,80 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidoosten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 280,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Van Tuyllbuurt</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>4.140</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>21%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 8.802</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Unieke begane grond woning met tuin, veranda én royaal tuinhuis in de geliefde Stadionbuurt!
+
+Wonen in een karakteristieke woning uit 1930, met een heerlijke tuin op het zuidoosten én een verrassend royaal tuinhuis van circa 24 m². Deze sfeervolle begane grond woning aan de Achillesstraat combineert de charme van Oud-Zuid met verrassend veel extra ruimte en mogelijkheden.
+
+De woning heeft een woonoppervlakte van circa 55 m² en beschikt over een prettige en praktische indeling met een slaapkamer, een moderne keuken met inbouwapparatuur, houten vloeren, een sfeervolle open haard en authentieke details zoals glas-in-lood. Vanuit de woning stap je direct de groene tuin in, waar de overdekte veranda een heerlijke plek vormt om een groot deel van het jaar van het buitenleven te genieten.
+
+Achter in de tuin bevindt zich het royale tuinhuis van circa 24 m². Het beschikt over een eigen cv-installatie, eigen riolering, een badkamer met ligbad, toilet en wastafel en twee open ruimtes met lichtinval van boven. Daarmee biedt het tuinhuis tal van mogelijkheden: van een comfortabele werk- of praktijkruimte tot een gastenverblijf, atelier of hobbyruimte. De twee open ruimtes kunnen bijvoorbeeld ook worden ingericht als ouderslaapkamer met aangrenzende babykamer – een indeling die de huidige bewoners zelf met veel plezier hebben gebruikt toen hun kinderen jonger waren.
+
+De woning
+De woning uit 1930 ademt de karakteristieke sfeer die zo kenmerkend is voor deze buurt. Authentieke elementen worden gecombineerd met hedendaags wooncomfort en zorgen voor een warme en sfeervolle woonomgeving.
+De woonkamer is dankzij de houten vloer en open haard een heerlijke plek om thuis te komen. De moderne keuken is vergroot, praktisch ingericht en voorzien van diverse inbouwapparatuur. Verder beschikt de woning over een slaapkamer en een verzorgde badkamer. Dankzij de slimme indeling wordt de beschikbare ruimte optimaal benut.
+
+De tuin
+Een van de grote pluspunten van de woning is de groene en sfeervolle achtertuin. Vanuit de woning loop je direct naar buiten en onder de overdekte veranda is het op veel momenten van het jaar heerlijk zitten.
+De tuin ligt op het zuidoosten en heeft volop zon in de ochtend en het begin van de middag, waardoor het een heerlijke plek is om de dag rustig te beginnen met een kop koffie in de zon. In de zomer zorgen de druivenrank met druiventrosjes en de vijgenboom voor een sfeervolle, bijna mediterrane uitstraling, terwijl verschillende wintergroene planten ervoor zorgen dat de tuin ook in de koudere maanden mooi groen blijft. Achter in de tuin ligt het royale tuinhuis, dat met zijn circa 24 m² een bijzondere hoeveelheid extra gebruiksruimte biedt en daarmee echt iets toevoegt aan de woning.
+
+De omgeving: de Stadionbuurt op z&#x27;n best
+De woning ligt aan de Achillesstraat in de geliefde Stadionbuurt van Amsterdam-Zuid: een groene en karakteristieke woonomgeving waar rust en stedelijke gezelligheid prettig samenkomen.
+Wie graag naar buiten gaat, woont hier ideaal: vrijwel midden tussen het Vondelpark, het Beatrixpark en het Amsterdamse Bos. Voor een wandeling, een rondje hardlopen, sporten, een picknick of gewoon even ontspannen in het groen zijn er daardoor volop mogelijkheden in de directe omgeving.
+
+Ook voor jonge gezinnen is dit een heerlijke buurt. Op nog geen vijf minuten lopen zijn maar liefst vier speeltuinen te vinden en op het nabijgelegen Stadionplein bevindt zich WOPL! (World of Play &amp; Learning), een grote indoor speel- en ontdekplek voor jonge kinderen. Ook verschillende basisscholen liggen op loopafstand, waaronder de Olympiaschool, de Tweede Openluchtschool en de Geert Groote School.
+
+Het Stadionplein vormt samen met het Olympiaplein een levendig middelpunt van de buurt. Iedere zaterdag is hier de gezellige Stadionpleinmarkt voor onder meer verse en biologische producten en bloemen. Voor winkels, koffie, vers brood of een avond uit hoef je de buurt evenmin uit. In de directe omgeving vind je onder andere NENI, Wils, Jack Dish, Spaghetteria en de geliefde Franse bakker Le Fournil de Sébastien.
+
+Ook qua bereikbaarheid ligt de woning bijzonder gunstig. Het Olympisch Stadion, de Zuidas en station Amsterdam Zuid met trein- en metroverbindingen zijn snel bereikbaar en ook de Ring A10 ligt dichtbij. Daarmee ben je zowel met het openbaar vervoer als met de auto snel onderweg binnen én buiten Amsterdam. Parkeren kan middels een vergunning; volgens het huidige vergunningenstelsel kunnen voor het adres twee parkeervergunningen worden aangevraagd.
+
+Kortom
+Een karaktervolle beganegrondwoning in de geliefde Stadionbuurt, waar de woning en het royale tuinhuis samen circa 79 m² aan woon- en gebruiksruimte bieden. Met een groene tuin met zon in de ochtend en het begin van de middag, een overdekte veranda, authentieke details én bijzonder veel extra gebruiksmogelijkheden is dit een woning die veel meer biedt dan de vierkante meters van het hoofdverblijf alleen doen vermoeden. En dat alles op een groene, levendige en bijzonder fijne plek in Amsterdam-Zuid.
+
+Specificaties
+•	Gelegen in de geliefde Stadionbuurt in Amsterdam-Zuid;
+•	Woonoppervlakte woning circa 55 m² en oppervlakte tuinhuis circa 24 m², samen circa 79 m² aan 
+        woon- en gebruiksruimte conform de meting;
+•	Energielabel D;
+•	Geheel voorzien van dubbele beglazing;
+•	Groene achtertuin op het zuidoosten met zon in de ochtend en het begin van de middag;
+•	Overdekte veranda en royaal tuinhuis;
+•	Erfpachtcanon bedraagt € 671,77 per jaar tot en met 2055 en wordt jaarlijks geïndexeerd;
+•	Omzetting naar eeuwigdurende erfpacht heeft reeds plaatsgevonden en is notarieel vastgelegd;
+•	Het dak is in 2024 geheel vernieuwd;
+•	Sfeervolle open haard, ingebouwd door de huidige eigenaren in december 2022; het rookkanaal is 
+        sindsdien jaarlijks geveegd en hiervan is een certificaat aanwezig;
+•	Actieve Vereniging van Eigenaars, professioneel beheerd door MVGM VvE Beheer;
+•	Servicekosten bedragen € 280,- per maand;
+•	Meerjarenonderhoudsplan aanwezig;
+•	Binnen de VvE is reeds toestemming verleend voor een uitbouw aan de achterzijde van 2,5 meter, 
+        de gemeentelijke vergunning moet nog worden aangevraagd;
+•	Oplevering in overleg.
+
+================================================
+
+A unique ground-floor apartment with a garden, veranda and a spacious garden shed in the popular Stadionbuurt neighbourhood!
+
+Live in a characterful property dating from 1930, with a lovely south-east-facing garden and a surprisingly spacious garden shed of approximately 24 m². This charming ground-floor flat on Achillesstraat combines the charm of Oud-Zuid with a surprising amount of extra space and potential.
+
+The property has a living area of approximately 55 m² and features a pleasant and practical layout with a bedroom, a modern kitchen with built-in appliances, wooden floors, a cosy open fireplace and authentic details such as stained-glass windows. From the house, you step straight into the leafy garden, where the covered veranda provides a lovely spot to enjoy the outdoors for much of the year.
+
+At the back of the garden stands the spacious garden house of approximately 24 m². It has its own central heating system, its own sewerage connection, a bathroom with a bath, toilet and washbasin, and two open-plan areas with natural light streaming in from above. This means the garden house offers a wealth of possibilities: from a comfortable home office or practice space to a guest house, studio or hobby room. The two open-plan areas could, for example, also be converted into a master bedroom with an adjoining nursery – a layout that the current residents themselves enjoyed using when their children were younger.
+
+The property
+Built in 1930, the property exudes the characteristic charm so typical of this neighbourhood. Authentic features are combined with contemporary living comfort, creating a warm and cosy living environment.
+Thanks to the wooden floor and open fireplace, the living room is a lovely place to come home to. The modern kitchen has been extended, is practically laid out and fitted with various built-in appliances. The property also features a bedroom and a well-maintained bathroom. Thanks to the clever layout, the available space is utilised to the full.
+
+The garden
+One of the property’s major highlights is the lush and charming back garden. You can step straight out of the house into the garden, and the covered veranda is a lovely place to sit at many times of the year.
+The garden faces south-east and enjoys plenty of sunshine in the morning and early afternoon, making it a wonderful spot to start the day peacefully with a cup of coffee in the sun. In summer, the grapevine with its clusters of grapes and the fig tree create an atmospheric, almost Mediterranean feel, whilst various evergreen plants ensure the garden remains beautifully green even in the colder months. At the back of the garden stands the spacious garden shed, which, at approximately 24 m², offers a remarkable amount of extra usable space and thus really adds something special to the property.
+
+The neighbourhood: 
+The Stadionbuurt at its best
+The property is situated on Achillesstraat in the much-loved Stadionbuurt neighbourhood of Amsterdam-Zuid: a green and characterful residential area where tranquillity and urban vibrancy blend harmoniously.
+For those who love the outdoors, this is the ideal place to live: practically right in the middle of the Vondelpark, the Beatrixpark and the Amsterdamse Bos. Whether you fancy a walk, a run, some exercise, a picnic or simply relaxing in the countryside, there are plenty of options right on your doorstep.
+
+This is also a wonderful neighbourhood for young families. Within a five-minute walk, you’ll find no fewer than four playgrounds, and on the nearby Stadionplein is WOPL! (World of Play &amp; Learning), a large indoor play and discovery centre for young children. Several primary schools are also within walking distance, including the Olympiaschool, the Tweede Openluchtschool and the Geert Groote School.
+
+Stadionplein, together with Olympiaplein, forms a lively heart of the neighbourhood. Every Saturday, the lively Stadionplein market takes place here, offering fresh and organic produce and flowers, amongst other things. You don’t need to leave the neighbourhood for shops, coffee, fresh bread or a night out either. In the immediate vicinity, you’ll find NENI, Wils, Jack Dish, Spaghetteria and the much-loved French bakery Le Fournil de Sébastien, amongst others.
+
+The property is also exceptionally well connected. The Olympic Stadium, the Zuidas business district and Amsterdam Zuid station, with its train and metro connections, are all within easy reach, and the A10 ring road is also nearby. This means you can get around quickly both within and outside Amsterdam, whether by public transport or by car. Parking is available with a permit; under the current permit scheme, two parking permits can be applied for at this address.
+
+In short
+A characterful ground-floor flat in the popular Stadionbuurt neighbourhood, where the flat and the spacious garden shed together offer approximately 79 m² of living and usable space. With a green garden that catches the sun in the morning and early afternoon, a covered veranda, authentic features and a wealth of additional uses, this is a property that offers far more than the square metres of the main living area alone would suggest. And all this in a green, lively and exceptionally pleasant location in Amsterdam-Zuid.
+
+Specifications
+•    Situated in the popular Stadionbuurt neighbourhood in Amsterdam-Zuid;
+•    Living area of the property approximately 55 m² and garden shed area approximately 24 m², totalling approximately 79 m² of
+      living and utility space as per the survey;
+•    Energy rating D;
+•    Fully fitted with double glazing;
+•    Green south-east facing back garden with sun in the morning and early afternoon;
+•    Covered veranda and spacious garden shed;
+•    The ground rent is € 671,77 per year until 2055 and is indexed annually;
+•    Conversion to a perpetual leasehold has already taken place and has been notarised;
+•    The roof was completely replaced in 2024;
+•    Charming open fireplace, fitted by the current owners in December 2022; the flue has
+      been swept annually since then and a certificate to this effect is available;
+•    Active Owners’ Association, professionally managed by MVGM VvE Beheer;
+•    Service charges amount to € 280,- per month;
+•    Long-term maintenance plan in place;
+•    Permission has already been granted by the Owners’ Association for a 2.5-metre extension at the rear;
+      the municipal planning permission has yet to be applied for;
+•    Handover by mutual agreement.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Groene tuin met veranda
+
+Groene zuidoosttuin met overdekte veranda en zon
+
+Begane grond met tuinhuis
+
+Beganegrondwoning plus royaal tuinhuis van 24 m²
+
+Karakter uit 1930
+
+Woning uit 1930 met glas-in-lood en open haard</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Jasmijn de Jong</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 45</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/649/270_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/266_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/290_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/232_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/213_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/254_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/224_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/201_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/253_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/204_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/262_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/202_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/217_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/285_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/221_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/272_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/283_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/230_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/223_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/296_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/275_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/244_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/292_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/265_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/245_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/226_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/256_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/206_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/208_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/282_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/280_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/209_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/242_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/241_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/219_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/269_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/249_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/273_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/234_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/261_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/237_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/205_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/210_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/649/291_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

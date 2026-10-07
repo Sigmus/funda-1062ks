@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>President Kennedylaan 128-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>President Kennedylaan 128-2</h1>
+  <p class="sub">
+    <span>1079 NJ Amsterdam</span>
+    <span>·</span>
+    <span>Rijnbuurt-Oost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/138/104_1440x960.jpg" alt="President Kennedylaan 128-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">20 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€525.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.500/m² · 4.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">70 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy F</span>
+      <span class="chip">Built 1931</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-president-kennedylaan-128-2/44567180/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Aanvaarding</dd></div>
+        <div class="frow"><dt>In overleg</dt><dd>Vraagprijs</dd></div>
+        <div class="frow"><dt>€ 525.000 kosten koper</dt><dd>Vraagprijs per m²</dd></div>
+        <div class="frow"><dt>€ 7.500</dt><dd>Status</dd></div>
+        <div class="frow"><dt>Beschikbaar</dt><dd>Bijdrage VvE</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Tussenverdieping (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Bouwperiode</dt><dd>1931-1944</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>70 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>210 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches, 2 toiletten, en 2 Washbasins</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>F</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation en Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Kombi kompact HRE Hybrid (gas-fired combi boiler uit 2026, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM V 11324</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijke erfpacht</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 188,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">LICHT HOEKAPPARTEMENT MET DRIE SLAAPKAMERS EN TWEE BADKAMERS IN DE RIVIERENBUURT
+
+Op de hoek van de President Kennedylaan en de Rijnstraat ligt dit lichte en praktisch ingedeelde appartement van 70 m². De woning beschikt over drie slaapkamers en twee badkamers, verdeeld over de tweede en vierde verdieping. Dankzij de hoekligging en de lichtinval vanuit het zuiden voelt het appartement aangenaam ruim en licht.
+
+LOCATIE
+De woning ligt in de geliefde Rivierenbuurt, met het uitgebreide winkelaanbod van de Rijnstraat direct om de hoek. Hier vindt u winkels voor de dagelijkse boodschappen, speciaalzaken, restaurants en gezellige buurtcafés. Ook de Scheldestraat, Maasstraat en Waalstraat bieden volop keuze aan winkels en horeca.
+Binnen enkele minuten wandelt u naar de Amstel, het Martin Luther Kingpark of het De Mirandabad. Met de fiets bereikt u het Vondelpark en het Museumplein in circa tien minuten. Het Amstelstation bevindt zich op loopafstand en er zijn diverse tram- en busverbindingen in de omgeving.
+Ook met de auto is de bereikbaarheid uitstekend: de Ring A10 en de A2 richting Utrecht zijn binnen enkele minuten bereikbaar.
+
+INDELING
+Via het verzorgde gemeenschappelijke trappenhuis bereikt u de eigen entree. De hal geeft toegang tot alle vertrekken op deze verdieping.
+De woonkamer is opvallend licht en profiteert optimaal van de hoekligging en de ramen op het Zuiden, aansluitend de keuken met een lekker groot fornuis en aansluiting voor de wasmachine. Op deze verdieping bevinden zich daarnaast de twee ruime slaapkamers en een badkamer met douche, wastafel en WC. en inbouwkasten. 
+Op de vierde verdieping bevindt zich de derde slaapkamer met een eigen badkamer, voorzien van een douche, wastafel en toilet. Deze verdieping biedt een fijne, zelfstandige ruimte voor bijvoorbeeld een ouder kind, logé of au pair.
+
+WOONOPPERVLAKTE
+De woonoppervlakte op de tweede verdieping bedraagt 52 m². De slaapkamer en badkamer op de vierde verdieping hebben samen een oppervlakte van 18 m². De totale woonoppervlakte bedraagt daarmee 70 m².
+De woning is ter plaatse ingemeten door een extern bureau conform NEN 2580. Het meetrapport is beschikbaar.
+
+GEBOUW
+Het appartement maakt deel uit van een pand uit 1934. Het gebouw is in 2007 gesplitst.
+
+ERFPACHT
+De woning staat op grond van de gemeente Amsterdam. De Algemene Bepalingen 2016 voor eeuwigdurende erfpacht zijn van toepassing. De jaarlijkse canon bedraagt € 1099,99. en wordt jaarlijks geïndexeerd.
+
+VERENIGING VAN EIGENAARS
+Het appartement maakt deel uit van de Vereniging van Eigenaars President Kennedylaan 128/Rijnstraat 239 te Amsterdam. De VvE is actief en wordt professioneel beheerd. De maandelijkse servicekosten bedragen € 188.
+
+BEREIKBAARHEID EN PARKEREN
+De woning is goed bereikbaar met zowel de auto als het openbaar vervoer. In de omgeving bevinden zich diverse tram- en bushaltes, RAI en het Amstelstation ligt op loopafstand. Parkeren op straat vindt plaats via het vergunningenstelsel van de gemeente Amsterdam. Actuele informatie hierover is te vinden op de website van de gemeente.
+
+BIJZONDERHEDEN
+•	Hoek-appartement met veel natuurlijke lichtinval
+•	Drie slaapkamers en twee badkamers
+•	Woonoppervlakte van 70 m², verdeeld over twee verdiepingen
+•	NEN 2580-meetrapport beschikbaar
+•	Bouwjaar gebouw: 1934
+•	Splitsing: 2007
+•	Voorzien van dubbele beglazing
+•	Eigen cv-ketel uit 2026 Hybrid
+•	Energielabel F
+•	Eeuwigdurende erfpacht onder de Algemene Bepalingen 2016
+•	Jaarlijkse erfpachtcanon: € 1099,99
+•	Actieve en professioneel beheerde VvE
+•	Servicekosten: € 188 per maand
+•	Oplevering in overleg
+
+BRIGHT CORNER APARTMENT WITH THREE BEDROOMS AND TWO BATHROOMS IN THE RIVIERENBUURT
+
+This bright and efficiently laid-out 70 m² apartment is situated on the corner of President Kennedylaan and Rijnstraat. The property offers three bedrooms and two bathrooms, divided between the second and fourth floors. Thanks to its corner position and south-facing windows, the apartment feels pleasantly bright and spacious.
+
+LOCATION
+
+The property is situated in the popular Rivierenbuurt, with the extensive range of shops on Rijnstraat just around the corner. Here you will find everything you need for your daily shopping, as well as specialist shops, restaurants and welcoming neighbourhood cafés. Scheldestraat, Maasstraat and Waalstraat also offer a wide variety of shops and places to eat and drink.
+
+The Amstel River, Martin Luther Kingpark and De Mirandabad swimming pool are all within a few minutes’ walk. Vondelpark and Museumplein can be reached by bicycle in approximately ten minutes. Amstel Station is within walking distance, and several tram and bus connections are available nearby.
+
+The property is also easily accessible by car, with the A10 ring road and the A2 motorway towards Utrecht just a few minutes away.
+
+LAYOUT
+
+The private entrance is reached via the well-maintained communal staircase. The hallway provides access to all rooms on this floor.
+
+The living room is exceptionally bright and makes the most of the corner position and south-facing windows. Adjacent to the living room is the kitchen, which features a generously sized cooker and a connection for a washing machine.
+
+This floor also comprises two spacious bedrooms with built-in wardrobes and a bathroom fitted with a shower, washbasin and toilet.
+
+The third bedroom is located on the fourth floor and has its own bathroom with a shower, washbasin and toilet. This floor provides a pleasant and private space, ideal for an older child, a guest or an au pair.
+
+FLOOR AREA
+
+The living area on the second floor measures 52 m². The bedroom and bathroom on the fourth floor have a combined area of 18 m², bringing the total living area to 70 m².
+
+The property has been measured on site by an independent surveying company in accordance with the NEN 2580 measurement standard. The measurement report is available.
+
+BUILDING
+
+The apartment forms part of a building dating from 1934. The building was legally divided into apartment rights in 2007.
+
+GROUND LEASE
+
+The property is situated on land owned by the Municipality of Amsterdam. The 2016 General Provisions for perpetual ground lease apply. The annual ground rent is €1,099.99 and is indexed annually.
+
+OWNERS’ ASSOCIATION
+
+The apartment forms part of the Owners’ Association President Kennedylaan 128/Rijnstraat 239 in Amsterdam. The owners’ association is active and professionally managed. The monthly service charges are €188.
+
+ACCESSIBILITY AND PARKING
+
+The property is easily accessible by both car and public transport. Several tram and bus stops are located nearby, while Amsterdam RAI and Amstel Station are within walking distance.
+
+On-street parking is regulated through the City of Amsterdam’s parking permit system. Up-to-date information is available on the municipality’s website.
+
+KEY FEATURES
+
+• Bright corner apartment with abundant natural light
+• Three bedrooms and two bathrooms
+• Total living area of 70 m², divided between two floors
+• NEN 2580 measurement report available
+• Building constructed in 1934
+• Legally divided into apartment rights in 2007
+• Double glazing
+• Private hybrid central-heating boiler installed in 2026
+• Energy label F
+• Perpetual ground lease under the 2016 General Provisions
+• Annual ground rent: €1,099.99
+• Active and professionally managed owners’ association
+• Monthly service charges: €188
+• Transfer date by mutual agreement
+
+DISCLAIMER
+
+This information has been compiled with due care; however, no rights can be derived from it. All measurements and details are indicative and subject to errors or omissions. This presentation does not constitute a legally binding offer. Buyers are responsible for conducting their own due diligence.
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 20</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/138/104_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/945_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/138/012_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/905_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/138/083_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/138/095_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/138/067_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/138/057_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/978_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/902_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/918_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/138/033_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/138/044_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/138/007_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/137/998_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vaartstraat 48-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Vaartstraat 48-3</h1>
+  <p class="sub">
+    <span>1075 RR Amsterdam</span>
+    <span>·</span>
+    <span>Schinkelbuurt-Zuid</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/688/696_1440x960.jpg" alt="Vaartstraat 48-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">35 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€750.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.576/m² · 1.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">99 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1913</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-vaartstraat-48-3/44505461/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 130 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 750.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.576</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1913</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gedeeltelijk gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>99 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>11 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>312 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, Walk-in shower, en toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>4e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas ( combiketel, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM U 10352</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>No</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>No</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Schinkelbuurt-Zuid</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>1.340</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>12%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 9.286</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Vaartstraat 48, Amsterdam
+Karakteristieke dubbele bovenwoning met twee balkons in de geliefde Schinkelbuurt, Oud-Zuid.
+
+Op een mooie locatie in Amsterdam Oud-Zuid bevindt zich deze charmante en karakteristieke dubbele bovenwoning, gelegen op de derde en vierde verdieping van een fraai pand. De woning beschikt over twee balkons, een praktische indeling en biedt een unieke combinatie van rust, ruimte en het bruisende stadsleven binnen handbereik.
+
+Wonen in de populaire Schinkelbuurt.
+De Vaartstraat is een rustige, groene straat midden in de geliefde Schinkelbuurt, één van de meest gewilde woonwijken van Amsterdam Zuid. Hier woont u in een vriendelijke en levendige omgeving met alle voorzieningen op loopafstand.
+
+Voor de dagelijkse boodschappen kunt u terecht in de nabijgelegen Zeilstraat, aan de Amstelveenseweg en op het Hoofddorpplein, waar diverse supermarkten, speciaalzaken en winkels gevestigd zijn. Ook liefhebbers van verse producten komen hier volop aan hun trekken met verschillende bakkers, slagers, viswinkels en groentespeciaalzaken in de directe omgeving.
+
+De buurt staat daarnaast bekend om haar uitstekende horeca-aanbod. Gezellige cafés, trendy koffiebars en populaire restaurants zoals Bar Bonnie, Ron Gastrobar, Anne &amp; Max, Van Mechelen, Gent aan de Schinkel en diverse andere hotspots bevinden zich letterlijk om de hoek.
+
+Groen, sport en ontspanning
+Het iconische Vondelpark ligt op slechts enkele minuten lopen en vormt de perfecte plek voor een wandeling, een rondje hardlopen of een ontspannen middag in het groen. Ook het Museumplein, het Olympisch Stadion, de Schinkel en het Amsterdamse Bos zijn eenvoudig per fiets bereikbaar.
+
+Uitstekende bereikbaarheid
+De woning is uitstekend bereikbaar, zowel met de auto als met het openbaar vervoer. Het Haarlemmermeerstation bevindt zich op loopafstand en biedt diverse tram- en busverbindingen richting het centrum, Station Zuid, Schiphol en andere delen van de stad. Station Amsterdam Zuid en Station Lelylaan zijn bovendien binnen enkele fietsminuten bereikbaar.
+
+Met de auto bent u via de nabijgelegen uitvalswegen snel op de Ring A10, de A4 en de A2. Hierdoor zijn zowel de Zuidas als Schiphol uitstekend bereikbaar.
+
+Globale indeling:
+
+Tweede verdieping: entree woning met kleine hal en trapopgang naar de derde verdieping. 
+
+Derde verdieping: gang, toilet met fonteintje, de ruime en lichte woonkamer is voorzien van een fraaie houten vloer; aan de voorzijde van de woonkamer is via openslaande deuren het Franse balkon bereikbaar. Het balkon aan de achterzijde is eveneens bereikbaar via openslaande deuren. De open keuken is geplaatst in een U-opstelling en is voorzien van diverse inbouw apparatuur waaronder een vaatwasser, oven, magnetron en een koel-/vries combinatie. 
+
+Vierde verdieping: op deze verdieping bevinden zich een drietal goed bemeten slaapkamers. De kamer aan de voorzijde is in gebruik als logeerkamer en de royale ouderslaapkamer is aan de achterzijde gesitueerd met openslaande deuren naar het tweede balkon. Tevens is er nog ruime werkkamer. Op deze verdieping bevindt zich ook de compleet uitgevoerde badkamer die voorzien is van een tweede toilet, dubbele wastafelmeubel,  douche en spiegelkast.
+Kortom een sfeervolle dubbele bovenwoning met twee balkons op een toplocatie in Amsterdam Oud-Zuid. Rustig wonen in een karakteristieke straat, terwijl alle denkbare voorzieningen, gezellige horeca, winkels, openbaar vervoer en het Vondelpark zich op steenworp afstand bevinden. Een unieke kans om te wonen in één van de meest geliefde buurten van Amsterdam.
+
+Bijzonderheden:
+
+Eigen grond;
+98.9 m2 woonoppervlak, meetrapport aanwezig;
+Kleinschalige VvE bestaande uit vier leden;
+Servicekosten € 130,- p.m.;
+Houten vloer;
+Oplevering in overleg, kan spoedig;
+
+**** English translation ****
+
+Vaartstraat 48, Amsterdam
+
+Located in the appealing area of Amsterdam Oud-Zuid, this charming and characterful duplex apartment occupies the third and fourth floors of an attractive building. The property features two balconies, a practical layout, and offers a unique combination of peace, space, and vibrant city living within easy reach.
+
+Living in the popular Schinkelbuurt
+
+The Vaartstraat is a quiet, tree-lined street in the heart of the highly sought-after Schinkelbuurt, one of the more desirable residential neighborhoods in Amsterdam South. Here, you can enjoy living in a friendly and lively environment with all amenities within walking distance.
+
+For daily shopping, the nearby Zeilstraat, Amstelveenseweg, and Hoofddorpplein offer a wide range of supermarkets, specialty stores, and shops. Lovers of fresh produce will also appreciate the excellent selection of bakeries, butcher shops, fishmongers, and greengrocers in the immediate area.
+
+The neighborhood is also renowned for its excellent dining and café scene. Cozy cafés, trendy coffee bars, and popular restaurants such as Bar Bonnie, Ron Gastrobar, Anne &amp; Max, Van Mechelen, Gent aan de Schinkel, and many other local hotspots are literally just around the corner.
+
+Green Spaces, Sports, and Recreation
+
+The iconic Vondelpark is only a few minutes’ walk away and provides the perfect setting for a stroll, a run, or a relaxing afternoon surrounded by greenery. Museumplein, the Olympic Stadium, the Schinkel canal, and the Amsterdamse Bos are also easily accessible by bicycle.
+
+Excellent Accessibility
+
+The property enjoys excellent accessibility by both car and public transport. Haarlemmermeerstation is within walking distance and offers various tram and bus connections to the city center, Amsterdam Zuid Station, Schiphol Airport, and other parts of the city. Amsterdam Zuid Station and Amsterdam Lelylaan Station can also be reached within a few minutes by bicycle.
+
+By car, the nearby arterial roads provide quick access to the A10 Ring Road, the A4, and the A2 motorways, ensuring excellent connections to both the Zuidas business district and Schiphol Airport.
+
+Layout
+
+Second Floor
+Private entrance to the apartment with a small hallway and staircase leading to the third floor.
+
+Third Floor
+Hallway, separate toilet with washbasin. The spacious and bright living room features an attractive wooden floor. At the front, French doors open onto a charming French balcony. At the rear, another set of French doors provides access to the balcony. The open-plan kitchen is arranged in a U-shaped layout and is equipped with various built-in appliances, including a dishwasher, oven, microwave, and fridge-freezer combination.
+
+Fourth Floor
+This floor comprises three well-proportioned bedrooms. The front room is currently used as a guest bedroom, while the spacious master bedroom is located at the rear and features French doors opening onto the second balcony. There is also a generous study/home office. The fully equipped bathroom includes a second toilet, a double washbasin vanity unit, a shower, and a mirrored cabinet.
+
+Summary
+
+A charming and characterful duplex apartment with two balconies in a prime location in Amsterdam Oud-Zuid. Enjoy peaceful living on a picturesque street while having every conceivable amenity, excellent restaurants and cafés, shops, public transport, and Vondelpark just a stone’s throw away. A unique opportunity to live in one of Amsterdam’s most beloved neighborhoods.
+
+Key Features
+Freehold property (no leasehold);
+Living area: 98.9 m² (measurement report available);
+Small-scale Homeowners’ Association (VvE) consisting of four members;
+Service charges: €130 per month;
+Attractive wooden flooring;
+Transfer date by mutual agreement; quick completion possible.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Gewilde groene Schinkelbuurt
+
+Rustige, groene straat met winkels, horeca en Vondelpark om de hoek.
+
+Dubbele bovenwoning met ruimte
+
+Karakteristieke dubbele bovenwoning op derde en vierde verdieping met praktische indeling.
+
+Twee balkons en Frans balkon
+
+Twee balkons en Frans balkon bereikbaar via openslaande deuren.
+
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 35</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/688/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/628_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/660_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/607_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/659_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/677_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/688_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/608_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/654_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/594_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/683_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/601_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/678_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/735_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/642_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/650_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/754_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/657_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/655_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/668_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/640_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/641_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/688/695_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

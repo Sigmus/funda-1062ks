@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Henegouwenstraat 98 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Henegouwenstraat 98</h1>
+  <p class="sub">
+    <span>1066 DH Amsterdam</span>
+    <span>·</span>
+    <span>Nieuw-Sloten-Zuidwest</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/159/711_1440x960.jpg" alt="Henegouwenstraat 98 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€525.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.412/m² · 2.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.3 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">97 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1993</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-henegouwenstraat-98/80922303/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 525.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.412</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 315,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1993</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gedeeltelijk gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>97 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>300 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Buitenzonwering, lift, Mechanical ventilation, en natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation en Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>VR (gas-fired combi boiler uit 2008, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN E 4343</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk, open ligging en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 315,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">OPEN HUIS ZATERDAG 3 OKTOBER 2026 VAN 11:00 T/M 12:30 UUR
+
+******FOR ENGLISH SEE BELOW******
+
+Ruime en lichte 4-kamer maisonnette met drie slaapkamers, balkon op het westen en vrij uitzicht
+
+**Henegouwenstraat 98, 1066 DH Amsterdam**
+
+Ben je op zoek naar een ruime en lichte woning met drie slaapkamers, een zonnig balkon en een praktische indeling? Dan is deze 4-kamer maisonnette op de tweede en derde verdieping aan de Henegouwenstraat 98 zeker een bezichtiging waard.
+
+De woning is gebouwd in 1993, volledig geïsoleerd en beschikt over energielabel B, door vervangen van de CV wordt het al een A. Dankzij de grote raampartijen en de gunstige lichtinval is het appartement opvallend licht en ruimtelijk. Daarnaast profiteer je van een balkon op het westen met een vrij uitzicht.
+
+Wonen verdeeld over twee verdiepingen
+
+De centrale, afgesloten entree van het complex is voorzien van een intercomsysteem en biedt toegang tot de lift, de trappen en de bergingen.
+
+Op de tweede verdieping bevindt zich de entree van de woning. Vanuit de hal heb je toegang tot drie ruime slaapkamers, de badkamer en de trap naar de derde verdieping. De drie slaapkamers bieden volop mogelijkheden voor een gezin, een thuiswerkplek of hobbyruimte.
+
+De derde verdieping vormt het hart van de woning. Aan de voorzijde bevindt zich de ruime woonkamer. Door de royale lichtinval is dit een aangename en lichte leefruimte. Aan de achterzijde ligt de keuken, met voldoende ruimte voor een praktische keukenopstelling en een gezellige eethoek.
+
+Op deze verdieping bevinden zich tevens het separate toilet en een praktische kast met aansluitingen voor de wasmachine en droger.
+
+Vanuit de keuken is bovendien het balkon bereikbaar. Het balkon ligt op het westen, waardoor je hier heerlijk van de middag- en avondzon kunt genieten. Het vrije uitzicht zorgt daarbij voor een extra gevoel van ruimte.
+
+Centrale en gunstige ligging
+
+De woning ligt op een centrale locatie in Amsterdam Nieuw-West. Op korte loopafstand bevinden zich diverse winkels en voorzieningen, waaronder het winkelcentrum Belgiëplein voor de dagelijkse boodschappen.
+
+Nieuw-Sloten is een prettige woonwijk waar rust, groen en comfort samenkomen. Gezinnen vinden hier alles wat zij nodig hebben: van diverse basisscholen en kinderopvang tot volop speelgelegenheden voor kinderen. Ook sportliefhebbers hebben ruime keuze dankzij de verschillende sportverenigingen en faciliteiten in de omgeving.
+
+Wie graag de drukte van de stad afwisselt met natuur en ontspanning, zit hier uitstekend. Het karakteristieke dorp Sloten ligt vlakbij, evenals de groene gebieden De Vrije Geer, de Oeverlanden en De Nieuwe Meer. Voor een wandeling, fietstocht of ontspannen dag buiten zijn er volop mogelijkheden. En wilt u toch de levendigheid van de stad opzoeken? Het Vondelpark en het centrum van Amsterdam zijn vanaf Nieuw-Sloten eenvoudig bereikbaar.
+
+Ook de bereikbaarheid is uitstekend. Met de auto zijn de belangrijke uitvalswegen A9, A10 en A4 snel bereikbaar. Schiphol Airport ligt op circa 10 minuten rijden. Ook met het openbaar vervoer zijn er goede verbindingen richting onder andere het centrum van Amsterdam en omliggende stadsdelen. Goede verbindingen naar o.a. Sloterdijk, Lelylaan en de Zuidas 
+
+Kenmerken
+
+* 4-kamer maisonnette verdeeld over de 2e en 3e verdieping
+* 3 ruime slaapkamers
+* Ruime en lichte woonkamer
+* Balkon op het westen met vrij uitzicht
+* separaat toilet
+* Separate wasmachine-/droger kast
+* Externe berging
+* Centrale afgesloten entree met intercomsysteem
+* Lift aanwezig
+* VvE-bijdrage appartement € 315,- per maand (VvE is gezond en professioneel beheerd, Meerjarenonderhoudsplan, begroting etc. aanwezig)
+* Parkeervergunning 6 maanden ca € 45,-
+* Energielabel B (Door vervangen van de CV krijg je A)
+* Bouwjaar 1993
+* Erfpacht eeuwigdurend afgekocht
+* Centrale ligging nabij winkels, openbaar vervoer en uitvalswegen
+* A9, A10 en A4 snel bereikbaar
+* Schiphol op circa 10 minuten rijden
+
+Een woning met ruimte, licht en comfort
+
+Deze maisonnette combineert een praktische indeling met veel woonruimte en een uitstekende ligging. Met drie ruime slaapkamers, een lichte woonkamer, een balkon op het westen en een vrij uitzicht is dit een woning die zowel voor gezinnen als voor mensen die behoefte hebben aan extra ruimte aantrekkelijk is.
+
+Benieuwd naar de mogelijkheden van deze woning? Plan dan snel een bezichtiging en ervaar zelf de ruimte, lichtinval en prettige ligging van de Henegouwenstraat 98.
+
+--------------------------------------------
+
+OPEN HOUSE SATURDAY, OCTOBER 3, 2026, FROM 11:00 AM TO 12:30 PM
+
+Spacious and Bright 4-Room Maisonette with Three Bedrooms, West-Facing Balcony and Unobstructed Views.
+
+**Henegouwenstraat 98, 1066 DH Amsterdam**
+
+Are you looking for a spacious and bright home with three bedrooms, a sunny balcony and a practical layout? Then this 4-room maisonette apartment, spread over the third and fourth floors, at Henegouwenstraat 98 is definitely worth viewing.
+
+Built in 1993, the property is fully insulated and currently has an energy label B. Replacing the central heating boiler (CV) is to improve the energy rating to label A. Thanks to the large windows and excellent natural light, the apartment feels particularly bright and spacious. In addition, the property benefits from a west-facing balcony with unobstructed views.
+
+Living Across Two Floors
+
+The centrally located, secure entrance of the building is equipped with an intercom system and provides access to the elevator, stairwell and private storage areas.
+The entrance to the apartment is located on the third floor. From the hallway, you have access to three spacious bedrooms, the bathroom and the staircase leading to the fourth floor. The three bedrooms offer plenty of possibilities for a family, a home office or hobby room.
+
+The fourth floor forms the heart of the home. The spacious living room is located at the front of the apartment. Thanks to the generous amount of natural light, this is a pleasant and bright living space. The kitchen is located at the rear and offers sufficient space for a practical kitchen layout and a comfortable dining area.
+This floor also features a separate toilet and a practical utility cupboard with connections for a washing machine and tumble dryer.
+
+The balcony is also accessible from the apartment. Facing west, it is the perfect place to enjoy the afternoon and evening sun. The unobstructed view further enhances the feeling of space and openness.
+
+Central and Convenient Location
+
+The property is centrally located in Amsterdam Nieuw-West. Various shops and amenities are within easy walking distance, including Belgiëplein shopping centre, which offers everything you need for your daily groceries and shopping.
+
+Nieuw-Sloten is a pleasant residential neighbourhood where peace, greenery, and comfort come together. Families will find everything they need here, from several primary schools and childcare facilities to plenty of playgrounds and recreational areas for children. Sports enthusiasts are also well catered for, with various sports clubs and facilities in the surrounding area.
+For those who enjoy combining the vibrancy of city life with nature and relaxation, Nieuw-Sloten is an excellent place to live. The charming historic village of Sloten is nearby, as are the green areas of De Vrije Geer, the Oeverlanden, and De Nieuwe Meer. Whether you enjoy walking, cycling, or simply spending a relaxing day outdoors, there are plenty of opportunities to do so. And when you want to enjoy the energy of the city, the Vondelpark and Amsterdam city centre are both easily accessible from Nieuw-Sloten.
+
+The property is also excellently connected by both car and public transport. The major motorways A9, A10 and A4 are easily accessible. Schiphol Airport is approximately a 10-minute drive away. Public transport connections are also excellent, providing easy access to Amsterdam city centre and surrounding districts. Good connections to Sloterdijk, Lelylaan and the Zuidas, among others.
+
+Key Features
+* 4-room maisonette apartment spread over the 3rd and 4th floors
+* 3 spacious bedrooms
+* Spacious and bright living room
+* West-facing balcony with unobstructed views
+* Separate toilet
+* Separate cupboard for washing machine and tumble dryer
+* Private external storage unit
+* Secure communal entrance with intercom system
+* Elevator
+* HOA contribution apartment € 315 per month (HOA is sound and professionally managed, multi-year plan, budget, etc. available)
+* Parking permit 6 months approx. €45
+* Energy label B (expected to improve to A after replacement of the central heating boiler)
+* Built in 1993
+* Perpetual leasehold fully bought off
+* Centrally located near shops, public transport and major roads
+* Easy access to A9, A10 and A4
+* Schiphol Airport approximately 10 minutes by car
+
+A Home Offering Space, Light and Comfort
+This maisonette combines a practical layout with generous living space and an excellent location. With three spacious bedrooms, a bright living room, a west-facing balcony and unobstructed views, this is an attractive home for families as well as anyone looking for additional living or working space.
+
+Interested in this property? Schedule a viewing and experience the generous space, natural light and convenient location of Henegouwenstraat 98 for yourself.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>QB makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/159/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/172/539_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/725_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/701_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/755_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/706_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/688_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/689_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/698_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/730_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/691_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/693_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/756_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/159/754_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rustenburgerdwarsstraat 2-F · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Rustenburgerdwarsstraat 2-F</h1>
+  <p class="sub">
+    <span>1074 JJ Amsterdam</span>
+    <span>·</span>
+    <span>Willibrordusbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/974/485_1440x960.jpg" alt="Rustenburgerdwarsstraat 2-F — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">38 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€765.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.500/m² · 4.4 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.4 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">102 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1997</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-rustenburgerdwarsstraat-2-f/44587647/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 765.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.500</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 440,87 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Double lower house (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1997</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht en gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        <div class="frow"><dt>Toegankelijkheid</dt><dd>Toegankelijk voor mensen met een beperking en toegankelijk voor ouderen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>102 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>19 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>376 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation en natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Komi Kompakt HR (gas-fired combi boiler uit 2014, huur)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 9972</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 9980</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 9972</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, City centre en in woonwijk</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parkeerkelder</dt><dd>Soort parkeergelegenheid</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 440,87 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">(Please scroll down for English)
+Ruimte, licht en verrassend appartement met veel mogelijkheden in het hart van De Pijp!
+Maak kennis met deze ruime en speels ingedeelde maisonnette van maar liefst 102,20 m², gelegen aan de rustige Rustenburgerdwarsstraat. De woning combineert een verrassende split-level indeling met volop leefruimte, twee slaapkamers, een royale berging én de mogelijkheid om eenvoudig een derde slaapkamer te creëren.
+De maisonnette is gelegen in een modern complex uit 1997, beschikt over energielabel A, ligt op EIGEN GROND en biedt bovendien de mogelijkheid om een eigen parkeerplaats aan te kopen. Dankzij de grote raampartijen, de open indeling en de verschillende woonniveaus is dit een bijzonder appartement met een fijne balans tussen ruimte, comfort en flexibiliteit.
+Wonen op verschillende niveaus
+Via de gemeenschappelijke entree en de verzorgde binnenplaats bereik je de woning op de begane grond.
+Hier kom je direct binnen in de lichte en royale woonkamer. Dankzij de ruime opzet is er volop plek voor een comfortabele zithoek én een grote eettafel, waardoor dit echt een fijne plek is om te wonen en gasten te ontvangen.
+De open keuken sluit mooi aan op de woonkamer en is voorzien van een fornuis met oven, vaatwasser en een koelkast met vriezer. De open verbinding zorgt voor een prettige interactie tussen koken, tafelen en wonen.
+Een bijzonder element van de woning is de glazen loopbrug, die de verschillende delen van het appartement met elkaar verbindt en tegelijkertijd voor een speels en ruimtelijk effect zorgt.
+Op deze verdieping bevindt zich de eerste ruime slaapkamer. Daarnaast zijn hier de badkamer en een separaat toilet gelegen. De badkamer is voorzien van een ligbad, douche en wastafel met meubel.
+Souterrain met volop mogelijkheden
+Via de trap bereik je het souterrain. Deze verdieping is recent opgefrist. Momenteel beschikt deze woonlaag over een ruime slaapkamer met een royale inloopkast. De grootte en praktische indeling maken deze verdieping echter bijzonder flexibel. Zo bestaat de mogelijkheid om de ruimte op te delen in twee goed bemeten slaapkamers, waardoor de woning eenvoudig kan worden aangepast naar eigen wens.
+Ook de huidige inloopkast biedt interessante mogelijkheden. Deze ruimte kan desgewenst worden benut voor het realiseren van een tweede badkamer. Daarmee biedt het souterrain verschillende indelingsmogelijkheden en kan de woning eenvoudig meegroeien met veranderende woonwensen.
+Wonen in het hart van De Pijp
+De Rustenburgerdwarsstraat is een rustige en sfeervolle straat, gelegen midden in het levendige hart van De
+Pijp. Ondanks de centrale ligging biedt de straat een verrassende rust. Alle denkbare voorzieningen bevinden zich op loopafstand: van supermarkten en speciaalzaken tot gezellige cafés, restaurants en terrasjes. Voor sport- en recreatiemogelijkheden zijn er diverse sportscholen, speeltuinen, kinderopvang en parken in de nabije omgeving, waaronder het bekende Sarphatipark, ideaal voor een wandeling of ontspanning in de buitenlucht.
+Ook op het gebied van bereikbaarheid scoort de locatie hoog. Metrostation De Pijp (Noord/Zuidlijn) ligt om de hoek, net als meerdere tram- en busverbindingen, waardoor je snel in het centrum van Amsterdam of op andere belangrijke locaties bent. De ligging combineert daarmee het beste van twee werelden: een rustige woonomgeving middenin een bruisende, stedelijke wijk met alles wat je nodig hebt binnen handbereik.
+Bijzonderheden
+- Woonoppervlakte van 102,20 m² en een externe berging van 6,30 m², conform meetinstructie NEN 2580;
+- 2 slaapkamers, met de mogelijkheid om een derde slaapkamer te creëren;
+- Mogelijkheid om de benedenverdieping verder in te delen naar eigen wens;
+- Parkeerplaats beschikbaar voor € 80.000 k.k.;
+- Gelegen op eigen grond;
+- Energielabel A;
+- De VvE wordt professioneel beheerd. De servicekosten bedragen € 359,80 per maand voor de woning en berging, plus € 81,07 per maand voor de parkeerplaats. Er is een MJOP aanwezig.
+- Oplevering in overleg.
+***
+Space, Light and a Unique Apartment with Endless Possibilities in the Heart of De Pijp!
+Discover this spacious and playfully designed maisonette of no less than 102.20 m², located on the quiet Rustenburgerdwarsstraat. The property combines a distinctive split-level layout with generous living space, two bedrooms, a spacious storage unit and the possibility to easily create a third bedroom.
+The maisonette is situated in a modern residential complex built in 1997, has an energy label A, is located on FREEHOLD LAND, and also offers the opportunity to purchase a private parking space. Thanks to the large windows, open layout and different living levels, this is a truly unique apartment offering an excellent balance of space, comfort and flexibility.
+Living Across Different Levels
+Through the communal entrance and the well-maintained courtyard, you reach the apartment on the ground floor. Here, you enter directly into the bright and spacious living room. The generous layout offers plenty of space for a comfortable seating area as well as a large dining table, making it an ideal space for both everyday living and entertaining guests.
+The open-plan kitchen connects seamlessly to the living area and is equipped with a cooker with oven, dishwasher and a fridge-freezer. The open layout creates a pleasant connection between cooking, dining and relaxing.
+A distinctive feature of the property is the glass walkway, which connects the different areas of the apartment while creating a playful and spacious effect.
+The first spacious bedroom is also located on this level. In addition, there is a separate toilet and a bathroom equipped with a bathtub, shower and washbasin with vanity unit.
+Basement Level with Plenty of Possibilities
+The basement level can be reached via the staircase and has recently been refreshed. It currently features a spacious bedroom with a generous walk-in wardrobe.
+However, the size and practical layout make this level particularly flexible. There is the possibility to divide the space into two well-proportioned bedrooms, allowing the property to be easily adapted to suit your personal requirements.
+The current walk-in wardrobe also offers interesting possibilities. If desired, this space could potentially be used to create a second bathroom. As a result, the basement level offers several layout options and allows the property to adapt to changing lifestyle and living requirements.
+Living in the Heart of De Pijp
+Rustenburgerdwarsstraat is a quiet and charming street located in the vibrant heart of De Pijp. Despite its central location, the street offers a surprising sense of peace and tranquillity.
+All imaginable amenities are within walking distance, from supermarkets and specialist shops to lively cafés, restaurants and terraces. There are also numerous sports and recreational facilities nearby, including gyms, playgrounds, childcare facilities and parks. The popular Sarphatipark is just a short distance away and is perfect for a walk or relaxing outdoors.
+The location also offers excellent accessibility. De Pijp metro station, part of the North/South metro line, is just around the corner, along with several tram and bus connections, providing quick and easy access to Amsterdam city centre and other important locations throughout the city.
+This location truly combines the best of both worlds: a peaceful residential setting in the middle of one of Amsterdam&#x27;s most vibrant neighbourhoods, with everything you need right on your doorstep.
+Details
+- Living area of 102.20 m² and an external storage unit of 6.30 m², measured in accordance with the NEN 2580 measurement guidelines;
+- 2 bedrooms, with the possibility to create a third bedroom;
+- Flexible layout options for the lower level;
+- Private parking space available for €80,000 costs buyer;
+- Located on freehold land;
+- Energy label A;
+- Professionally managed Owners&#x27; Association (VvE). The monthly service charges are €359.80 for the apartment and storage unit, plus €81.07 per month for the parking - space. A long-term maintenance plan
+(MJOP) is available;
+- Completion date in consultation.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 38</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/974/485_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/380_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/385_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/387_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/545_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/478_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/576_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/508_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/577_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/394_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/427_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/363_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/514_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/474_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/528_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/460_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/581_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/550_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/582_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/425_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/495_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/519_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/515_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/476_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/540_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/406_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/506_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/480_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/467_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/572_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/436_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/583_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/468_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/461_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/477_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/452_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/974/491_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

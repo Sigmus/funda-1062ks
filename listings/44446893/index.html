@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vätternkade 87 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Vätternkade 87</h1>
+  <p class="sub">
+    <span>1060 PK Amsterdam</span>
+    <span>·</span>
+    <span>De Aker-West</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/232/321/590_1440x960.jpg" alt="Vätternkade 87 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€725.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.801/m² · 3.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">151 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy A+</span>
+      <span class="chip">Built 1999</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">4 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-vatternkade-87/44446893/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 725.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.801</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Herenhuis, tussenwoning (drive-in woning)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1999</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>151 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>21 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>110 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>552 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, Walk-in shower, Bathtub, toilet, Underfloor heating, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>4 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Airconditioning, buitenzonwering, glasvezelkabel, Mechanical ventilation, schuifpui, TV cable, en zonnepanelen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en gedeeltelijke Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler en elektrische boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Vaillant Eco-Plus 35-38 (gas-fired combi boiler uit 2017, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN G 3576</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>110 m² (deelperceel)</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 15-03-2047)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 14-03-2047</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde houten berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Carport</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, On own property, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**This Property is listed by a MVA Certified Expat Broker. See below for English translation** 
+
+Wat een verrassend ruim en volledig gemoderniseerd split-level herenhuis in de geliefde woonwijk De Aker! Deze royale gezinswoning is in 2021 van top tot teen en zeer smaakvol gerenoveerd, waarbij werkelijk alles is vernieuwd. Met drie ruime slaapkamers, een zonnige tuin op het zuidwesten, parkeren op eigen terrein onder de carport, 17 zonnepanelen, vloerverwarming, airconditioning en energielabel A+ is dit een woning waar comfort en duurzaamheid perfect samenkomen.
+De woning ligt in een rustige, kindvriendelijke buurt, vlakbij winkelcentrum De Dukaat, openbaar vervoer, scholen, recreatiegebieden en uitvalswegen richting Amsterdam, Schiphol, Haarlem en Amstelveen.
+Kortom: een instapklaar familiehuis waar de komende jaren werkelijk niets meer aan hoeft te gebeuren.
+
+WONEN EN KOKEN
+Een trapje leidt naar de ruime, lichte woonkeuken. Deze heeft over de hele breedte een schuifpui die toegang geeft tot de lager gelegen tuin en is daardoor licht en zonnig. De keuken heeft een keukeneiland met spoelbak en een baropstelling. Hier kan uitgebreid gekookt worden terwijl familie en vrienden gezellig plaats nemen aan het eiland.
+Alle denkbare inbouwapparatuur is aanwezig: een 5-pits gastoestel met moderne afzuigkap, een koelkast, een vriezer, een vaatwasser en twee combi-ovens.  Er is veel kastruimte en veel werkruimte op het keramiek werkblad. 
+Op deze etage is ook het gastentoilet met fontein. Deze gehele ruimte is voorzien van vloerverwarming en pvc vloer.
+
+Nog trapje hoger ligt de royale woonkamer aan de voorzijde van de woning. Dankzij de speelse split-level indeling krijgt deze ruimte een bijzonder karakter. De grote raampartijen laten het daglicht rijkelijk binnenstromen en bieden een fraai uitzicht op de kade. Hier is volop ruimte voor een royale zithoek waar je heerlijk kunt ontspannen, lezen of gezellig samen kunt zijn. De comfortabele vloerverwarming met pvc vloer zorgt hier voor extra wooncomfort.
+Een trapje hoger bevindt zich de sfeervolle eetkamer aan de achterzijde van de woning. Deze ruimte biedt alle gelegenheid voor lange diners met familie en vrienden. De huidige werkplek maakt de kamer bovendien multifunctioneel en ideaal voor thuiswerken. 
+
+SLAPEN 
+Via het volgende trapje wordt de royale slaapkamer aan de voorzijde van de woning bereikt. Deze ruime slaapkamer biedt met gemak plaats aan een groot tweepersoonsbed en een royale garderobekast. 
+De twee overige slaapkamers bevinden zich op de derde verdieping en zijn eveneens verrassend ruim van formaat. De slaapkamer aan de achterzijde is voorzien van airconditioning voor extra comfort.
+Op de overloop bevindt zich een praktische technische ruimte met de Vaillant cv-ketel (2017), de mechanische ventilatie, een elektrische boiler 110 liter en de aansluitingen voor de wasmachine en droger. Daarnaast is er voldoende bergruimte aanwezig.
+
+BADEN
+De stijlvolle badkamer is in 2021 volledig vernieuwd en uitgevoerd in een moderne, tijdloze stijl. Er is een comfortabel whirlpoolbad, een inloopdouche, een royaal wastafelmeubel met dubbele waskommen met veel bergruimte en een tweede toilet. De comfortabele vloerverwarming maakt de badkamer extra aangenaam.
+
+TUIN
+De beschutte achtertuin ligt op het zonnige zuidwesten. Hierdoor kan optimaal worden genoten van de middag- en avondzon. De tuin is onderhoudsarm aangelegd.
+Via de praktische achterom is de tuin gemakkelijk bereikbaar. De houten berging met elektra biedt volop ruimte voor fietsen, tuinmeubilair en gereedschap. Op warme zomerdagen zorgt de elektrische zonwering voor een aangename plek in de schaduw.
+
+LOCATIE
+Woonwijk De Aker is een sociaal veilige en rustige buurt.  De vele groenvoorzieningen en speelmogelijkheden maken het een geliefde woonbestemming voor ouders met kinderen. Alle benodigde voorzieningen, zoals winkels, scholen, openbaar vervoer e.d. zijn in de buurt aanwezig.
+Voor uw boodschappen is er het op loopafstand gelegen winkelcentrum De Dukaat. Hier zijn vele winkels aan waaronder een Jumbo supermarkt met slijterij, bakker, slager, fietsenwinkel, kinderdagverblijf en een gezondheidscentrum met apotheek. Ook op loopafstand is de tramhalte voor lijn 1, waarmee in ca 25 minuten hartje Amsterdam bereikt wordt. Recreëren kan aan het Nieuwe Meer, Amsterdamse Bos en de Sloterplas.
+
+Via de nabijgelegen snelwegen (A4, A5, A9, en A10) zijn Haarlem, Hoofddorp, Amstelveen en Schiphol binnen luttele minuten bereikbaar. 
+
+BIJZONDERHEDEN
+- Bouwjaar 1999
+- Energielabel A+
+-17 zonnepanelen
+- Airco en boiler
+- Gehele woning voorzien van dubbel glas en inzethorren
+- Woonoppervlak van circa 151 m2 
+- 3 ruime slaapkamers
+- Cv-installatie voorjaar 2017
+- Vloerverwarming in keuken en woonkamer op de eerste verdieping
+- Gelegen op erfpacht, afgekocht tot 2047, afkoopofferte is aangevraagd
+- Zonnige tuin op het Zuidwesten
+- Eigen Carport onder het huis 
+- Parkeren voor de deur met een parkeervergunning (€100 per 6 maanden)
+- Oplevering in overleg
+
+“Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten zijn ingemeten conform NEN 2580 en zijn indicatief. Wij adviseren u een NVM/MVA Makelaar in te schakelen, die u met zijn deskundigheid zal bijstaan in het aankoopproces. Indien u geen professionele begeleiding wenst in te schakelen, acht u zich volgens de wet deskundig genoeg om alle zaken, die van belang zijn, te kunnen overzien. De Algemene Consumentenvoorwaarden van de NVM zijn van toepassing”
+
+*** English translation ***
+
+What a surprisingly spacious and fully modernised split-level townhouse, situated in the highly sought-after residential area of De Aker! This generous family home was extensively and tastefully renovated from top to bottom in 2021, with virtually every aspect of the property being renewed. Offering three spacious bedrooms, a sunny south-west facing garden, private parking beneath the carport, 17 solar panels, underfloor heating, air conditioning and an A+ energy rating, this is a home where comfort and sustainability come together perfectly.
+The property is situated in a quiet, family-friendly neighbourhood, close to De Dukaat Shopping Centre, public transport, schools, recreational areas and excellent road links to Amsterdam, Schiphol Airport, Haarlem and Amstelveen.
+In short: a beautifully presented family home, ready to move into and requiring no further work for many years to come.
+
+LIVING AND COOKING
+A short flight of stairs leads to the spacious and light-filled kitchen/dining room. Full-width sliding doors provide access to the lower-level garden, allowing an abundance of natural light to flood the room. The contemporary kitchen features a central island with an inset sink and breakfast bar, creating the perfect setting for cooking while family and friends gather around.
+The kitchen is fully equipped with every modern built-in appliance, including a five-burner gas hob with a contemporary extractor hood, a refrigerator, freezer, dishwasher and two combination microwave ovens. There is ample cupboard space as well as generous preparation space on the ceramic worktop.
+Also on this level is a guest cloakroom with washbasin. The entire floor benefits from underfloor heating and a stylish PVC floor.
+A few steps higher is the generous living room at the front of the property. The playful split-level layout gives this space a distinctive character. Large windows allow an abundance of natural daylight to enter while offering attractive views over the canal. There is plenty of room for a generous seating area where you can relax, read or enjoy spending time with family and friends. Underfloor heating and the attractive PVC flooring provide additional comfort.
+A further short flight of stairs leads to the charming dining room at the rear of the property. This inviting space is perfect for long dinners with family and friends. The current home office area also makes the room multifunctional and ideal for working from home.
+
+SLEEPING
+The next level leads to the spacious principal bedroom at the front of the property. This generous room easily accommodates a large double bed and a substantial wardrobe.
+The two remaining bedrooms are located on the third floor and are also surprisingly spacious. The bedroom at the rear benefits from air conditioning for additional comfort.
+The landing provides access to a practical utility room housing the Vaillant central heating boiler (2017), the mechanical ventilation system, a 110-litre electric boiler and connections for both a washing machine and tumble dryer. There is also ample storage space.
+
+BATHING
+The stylish bathroom was completely renovated in 2021 and finished in a timeless contemporary style. It features a comfortable whirlpool bath, a walk-in shower, a generous vanity unit with double washbasins offering plenty of storage, and a second toilet. Underfloor heating adds an extra touch of luxury and comfort.
+
+GARDEN
+The sheltered rear garden enjoys a sunny south-west facing aspect, allowing you to make the most of the afternoon and evening sunshine. The garden has been designed to require very little maintenance.
+A convenient rear entrance provides easy access to the garden. The detached wooden storage shed with electricity offers ample space for bicycles, garden furniture and tools. On warm summer days, the electrically operated awning provides welcome shade.
+
+LOCATION
+De Aker is a peaceful, safe and family-friendly residential neighbourhood. Its many green spaces and playgrounds make it an extremely popular place to live for families with children. All everyday amenities, including shops, schools and public transport, are within easy reach.
+For your daily shopping, De Dukaat Shopping Centre is just a short walk away. It offers a wide range of amenities, including a Jumbo supermarket with off-licence, bakery, butcher, bicycle shop, day nursery and a medical centre with pharmacy. The tram stop for Line 1 is also within walking distance, providing a direct connection to Amsterdam city centre in approximately 25 minutes. Nearby recreational areas include the Nieuwe Meer, the Amsterdamse Bos and the Sloterplas.
+The nearby A4, A5, A9 and A10 motorways provide excellent access to Haarlem, Hoofddorp, Amstelveen and Schiphol Airport, all of which can be reached within just a few minutes.
+
+HIGHLIGHTS
+•	Built in 1999
+•	Energy rating A+
+•	17 solar panels
+•	Air conditioning and electric boiler
+•	Fully double glazed throughout with removable insect screens
+•	Living area of approximately 151 sq.m.
+•	Three spacious bedrooms
+•	Vaillant central heating boiler installed in spring 2017
+•	Underfloor heating in the kitchen and living room on the first floor
+•	Leasehold property; ground lease prepaid until 2047, with a quotation for the freehold buy-out currently requested
+•	Sunny south-west facing rear garden
+•	Private carport beneath the property
+•	On-street parking available with a residents&#x27; parking permit (€100 per six months)
+•	Completion by mutual agreement
+
+&quot;We have composed this information with due care. On our part, however, no liability whatsoever is accepted for any incompleteness, inaccuracy or otherwise, or its consequences. All specified sizes are measured in accordance with NEN 2580 and are indicative. We advise you to call in an NVM / MVA Broker who will assist you with his expertise in the purchase process. If you do not wish to take professional counseling, you are legally competent enough to oversee all matters that are of interest. The General Consumer conditions of the NVM are applicable &quot;</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 6 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Fenny van der Meijden</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/232/321/590_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/586_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/547_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/550_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/538_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/584_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/581_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/593_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/594_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/578_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/558_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/596_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/537_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/535_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/562_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/566_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/577_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/623_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/553_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/557_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/534_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/624_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/544_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/527_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/549_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/568_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/620_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/625_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/617_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/621_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/612_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/598_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/588_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/627_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/321/541_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

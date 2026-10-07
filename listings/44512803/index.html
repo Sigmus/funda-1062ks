@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dellaertlaan 5 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Dellaertlaan 5</h1>
+  <p class="sub">
+    <span>1171 HE Badhoevedorp</span>
+    <span>·</span>
+    <span>Badhoevedorp Antoniushoeve</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/404/925_1440x960.jpg" alt="Dellaertlaan 5 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">68 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€749.500</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.835/m² · 4.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.0 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">155 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1967</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/badhoevedorp/huis-dellaertlaan-5/44512803/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>Per Immediate Available</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 749.500 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.835</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Herenhuis, geschakelde 2-onder-1-kapwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1967</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gedeeltelijk gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Bouwkundige Keuring</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>155 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>30 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>257 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>525 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches, 2 toiletten, en 2 Washbasinmeubels</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Airconditioning, dakraam, Mechanical ventilation, TV cable, en zonnepanelen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, HR-glas en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en warmtepomp</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd></dd></div>
+        <div class="frow"><dt>Boiler</dt><dd></dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha Central heating boiler (gas gestookt uit 2024, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>HAARLEMMERMEER H 6988</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>257 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan water, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>130 m² (13,00 m deep en 10,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidwesten</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruim familiehuis met uitzicht op het water
+
+Deze grote geschakelde 2/1 kapwoning met zuidwest tuin aan de Dellaertlaan 5 in Badhoevedorp is ideaal gelegen en per direct beschikbaar 
+Dit duurzame huis met nieuwe cv-ketel en hybride warmtepomp, veelal nieuwe radiatoren en 10 zonnepanelen op het dak heeft een circa 125 m² grote achtertuin op het zuidwesten, een living van ruim 43 m² met aan de voorzijde de woonkamer met groot raam en uitzicht en achter de moderne en lichte keuken met bijkeuken en de deur naar de omsloten tuin. Op de eerste etage zijn twee slaapkamers van 20 en 10 m² en twee badkamers met twee toiletten. Op de tweede etage zijn door de grote dakkapel twee ruime slaapkamers van ruim 11 en 13 m² gerealiseerd. Ook is er nog ruimte voor een aparte wasruimte en heel veel bergruimte. 
+
+Deze woning (bouwperiode 1967) is gelegen op een kavel van 257 m² eigen grond en beschikt over circa 155 m² gebruiksoppervlak wonen, dit is exclusief de externe bergruimte, zoals de (in de tuin gelegen) berging van circa 6,5 m², en exclusief de gebouw gebonden buitenruimte, zoals de overkapping van circa 16 m² en het balkon van circa 14 m², de woning heeft circa 525 m³ inhoud (zo goed als mogelijk opgemeten volgens de branche brede meetinstructies van de NVM waarvoor de Nen-2580 norm de basis vormt). Deze maten zijn indicatief. Voor deze woning is het Energielabel C afgegeven.
+
+Indeling:
+Begane grond: 
+Entree, hal, toilet met fontein, toegang naar berging (circa 5 m²),  lichte woonkamer (circa 33 m²) met open haard, open keuken (circa 10 m²) met inbouwapparatuur en schuifpui naar de achtertuin met overkapping, via zowel de keuken als de berging is de bijkeuken (circa 6m²) bereikbaar.
+
+1e Verdieping:
+Overloop met vaste kast, zeer ruime slaapkamer aan de voorzijde (circa 20 m²), badkamer (circa 3 m²) voorzien van inloopdouche, wastafelmeubel, handdoekenradiator en toilet, slaapkamer achterzijde (circa 10 m²), badkamer  (circa 7 m²)  voorzien van inloopdouche, wastafel met meubel en radiator, ruim balkon (van 14 m²) te bereiken via overloop.
+
+2e Verdieping:
+Overloop, derde slaapkamer (circa 11,1 m²) met dakkapel, toegang tot berging (circa 7 m²) met CV-opstelling, vierde slaapkamer over de gehele lengte van het huis (circa 14 m²) met dakkapel en wastafel.
+
+Tuin: 
+De voortuin is voorzien van vaste planten met een bestraat pad naar de voordeur. Via de schuifpui van de keuken is de groen aangelegde achtertuin, op het zuid westen gelegen, te bereiken. De tuin heeft een terras met overkapping, en is omringd door vaste planten met een grasveld in het midden van de tuin. Ook staat er een berging in de tuin.
+
+Ligging:
+De woning is gelegen in een groene, ruim opgezette en kindvriendelijke woonwijk.  De woning ligt langs een vijver en heeft vrij uitzicht. Met een paar minuten ben je via de Sloterbrug in Amsterdam.  Alle voorzieningen als basisscholen, kinderopvang, naschoolse opvang, sportfaciliteiten en de diverse uitvalswegen zijn op korte afstand aanwezig. Deze woning is de perfecte uitvalsbasis richting de snelwegen A-9 (Haarlem), A-5 (Hoofddorp), A-4 (luchthaven Schiphol) en ringweg A-10 (Amsterdam)
+
+Op zoek naar een flinke gezinswoning om direct in te trekken? Deze helft van dubbel woonhuis heeft alle comfort en biedt alle gelegenheid om heerlijk te gaan wonen.
+
+Interesse in een bezichtiging? 
+- Neem dan contact op met je eigen MVA- of NVM-makelaar 
+- Of doe dit direct online via de knop &quot;Plan Afspraak&quot; op onze site 
+- Of kies de knop &quot;Vraag bezichtiging aan&quot; op Funda
+Wij laten je deze woning dan heel graag zien!
+
+Afspraken
+Onze bezichtigingen proberen we zoveel als mogelijk voor een bepaalde tijd in te plannen en zijn vrijwel altijd individueel. We verzoeken je dan ook op tijd te komen en de geplande tijd niet te overschrijden als er meerdere bezichtigingen ingepland zijn.
+
+Mocht je verhinderd zijn dan vernemen we dat graag ruim van tevoren. 
+
+Bereid je goed voor op de bezichtiging. Alle relevante informatie is te vinden op onze website. Zo staat er onder het tabblad &#x27;bijzonderheden&#x27; aanvullende informatie die niet op Funda wordt vermeld. 
+
+Wij adviseren je ook:
+-de foto&#x27;s goed te bekijken
+-de plattegronden door te nemen
+-een vragenlijstje mee te nemen naar de bezichtiging
+
+Wij kijken ernaar uit jou te zien!
+
+Vraagprijs: € 749.500,-- kosten koper
+
+Kijk voor meer foto&#x27;s, plattegronden en uitgebreide informatie op onze eigen site!
+Op deze transactie zijn onze (verkoop)voorwaarden, algemene voorwaarden en de 
+voorwaarden van de NVM van toepassing, zie onze site.
+
+Bijzonderheden:
+- Bouwjaar 1967
+- Type
+- Gebruiksoppervlak wonen 155 m²
+- Eigen grond, circa 257 m² 
+- Oplevering in overleg, kan snel
+- Bouwtechnisch rapport aanwezig
+- De volgende clausules zijn van toepassing en zullen in de koopakte worden opgenomen:
+  Bouwkwaliteit / Milieuclausule / Asbestclausule / Energielabel /Toelichtingsclausule Meetinstructie, zie ook de Verkoopvoorwaarden en adviezen Onkenhout Makelaars 2026
+- Bieden gaat via een digitaal biedlogboek (meer info bij bijzonderheden op onze eigen site)
+- De koop van een woning (door een consument) is pas gesloten (rechtsgeldig) als de koopakte door zowel de koper als de verkoper is getekend</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Onkenhout Makelaars B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 68</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/404/925_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/404/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/037_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/404/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/404/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/404/954_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/008_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/404/934_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/404/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/404/978_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/217_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/214_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/190_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/187_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/448/444_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/072_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/208_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/061_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/065_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/181_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/039_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/192_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/154_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/178_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/138_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/117_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/129_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/156_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/202_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/212_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/177_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/044_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/183_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/157_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/191_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/059_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/114_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/076_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/215_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/087_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/140_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/078_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/110_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/048_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/118_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/133_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/206_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/057_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/120_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/047_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/150_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/213_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/170_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/175_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/143_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/196_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/151_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/182_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/189_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/222_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/098_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/169_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/108_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/160_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/052_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/113_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/405/205_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

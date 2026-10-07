@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pieter van der Werfstraat 128 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Pieter van der Werfstraat 128</h1>
+  <p class="sub">
+    <span>1067 EP Amsterdam</span>
+    <span>·</span>
+    <span>Ruys de Beerenbrouckbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/275/348_1440x960.jpg" alt="Pieter van der Werfstraat 128 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">48 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€575.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.228/m² · 4.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">136 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 2003</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">4 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-pieter-van-der-werfstraat-128/44584021/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 575.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.228</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, hoekwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2003</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>136 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>23 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>39 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>475 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, Walk-in shower, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>4 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation, schuifpui, TV cable, en zonnepanelen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, HR-glas, Wall insulation, Floor insulation en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler en gedeeltelijke Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha Avanta HR (gas-fired combi boiler uit 2022, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN (N-H) L 3356</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>39 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-12-2051</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Sun terrace</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>47 m² (9,50 m deep en 4,95 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidwesten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Indoor, parkeerkelder en parkeerplaats</dd></div>
+        <div class="frow"><dt>Capaciteit</dt><dd>1 auto</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektrische deur en elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, On own property en Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Unieke kans in Amsterdam Nieuw-West! In een rustige, groene en kindvriendelijke woonomgeving ligt deze ruime, lichte en energiezuinige (energielabel B) HOEK-woning met een woonoppervlakte (113 M2) én een zonnige riante daktuin op het zuid-westen. Dankzij de hoekligging geniet je hier van extra lichtinval en een heerlijk ruimtelijk gevoel. Extra bijzonder: je parkeert je auto eenvoudig in je eigen inpandige garage (23 M2) onder de woning, die direct vanuit binnen bereikbaar is. Comfort en gemak komen hier perfect samen! De woning ligt op loopafstand van winkels, openbaar vervoer en recreatie, waardoor je hier heerlijk rustig woont met alle voorzieningen binnen handbereik.
+
+***English version below***
+
+Indeling: zie de plattegronden voor de indeling in de fotobijlage en/of maak een afspraak met Urban Makelaars. 
+
+Begane grond:
+Via de entree kom je in de hal met meterkast, toiletruimte en toegang tot de garage. De speelse split-level indeling leidt naar de ruime woonkeuken, het hart van het huis. De moderne keuken is van alle gemakken voorzien, waaronder een vaatwasser, 5-pits gasfornuis met grote oven, afzuigkap en magnetron, plus volop kastruimte. De gehele begane grond is afgewerkt met een stijlvolle marmeren tegelvloer met comfortabele vloerverwarming.
+
+Eerste verdieping:
+Hier bevindt zich de royale en lichte woonkamer met extra zijramen dankzij de hoekligging. Aansluitend ligt een ruime slaapkamer aan de tuinzijde, eveneens met veel lichtinval.
+
+Tweede verdieping:
+Overloop, ruime slaapkamer aan de voorzijde met inbouwkast en een praktische berging/stookruimte met o.a. de cv-installatie (Remeha HR, 2022), wasmachineaansluiting en WTW-installatie.
+De moderne badkamer is compleet uitgerust met een dubbele wastafel, inloopdouche en tweede toilet. Aan de achterzijde bevindt zich nog een derde ruime slaapkamer.
+
+Garage:
+De inpandige garage onder de woning is ruim en afsluitbaar en biedt plek voor een auto, fietsen en extra opslag. Voorzien van elektra en direct bereikbaar vanuit de woning.
+
+Tuin: 
+Vanuit de keuken stap je zo de zonnige en onderhoudsvriendelijke tuin van 47 M2 op het zuid-westen in – een heerlijke plek om de hele dag van de zon te genieten. Door de ligging op het westen kun je hier heerlijk genieten van de middag en avondzon genieten. Door de ruimte kun je verschillende zitjes creëren en is er altijd plek voor de zon of schaduw. 
+
+Omgeving en bereikbaarheid: 
+De woning is gelegen in een rustige wijk in Geuzenveld (Amsterdam Nieuw-West). Op loopafstand vind je winkelcentrum Lambertus Zijlplein en het vernieuwde Plein ’40-’45 met een breed winkelaanbod. De bereikbaarheid is uitstekend: diverse bus- en tramlijnen brengen je binnen ca. 15 minuten naar het centrum van Amsterdam. Ook de uitvalswegen (A4, A5, A9 en A10) zijn snel bereikbaar en Schiphol ligt op korte afstand. Voor ontspanning en recreatie ligt de Sloterplas om de hoek, met volop mogelijkheden zoals wandelen, sporten, watersport en horeca. Ook natuurgebieden zoals Spaarnwoude en De Oeverlanden zijn eenvoudig per fiets te bereiken.
+
+Bijzonderheden
+- Het voortdurend recht van erfpacht is afgekocht tot en met 15 december 2051.
+- Gebruiksoppervlakte: ca. 136 M2 incl. inpandige garage. (NEN 2580 gemeten, meetrapport aanwezig)
+- Woonoppervlakte: ca. 113 M2.
+- Inpandige garage: ca. 23 M2.
+- Bouwjaar: 2003.
+- Afgesloten parkeergarage onder de woning die toegang biedt tot de garagebox v.v. elektrische deur.
+- Zonnig gelegen ruime daktuin van 47 M2 ( 9 meter diep) op het zuid-westen.
+- Energielabel B. 
+- Goed geïsoleerde woning o.a. voorzien van dubbel glas, vloer en muurisolatie.
+- Verwarmd middels cv-ketel. (Remeha HR uit 2022)
+- 8 Zonnepanelen. (uit 2023) 
+- Voorzien van vloerverwarming op de begane grond. 
+- Voorzien van WTW systeem
+- Geen servicekosten.
+- Uitstekende ligging ten opzichte van het openbaar vervoer, winkels en sportvoorzieningen.
+- Notaris: naar keuze koper, mits koopakte conform Model Ring bij notaris in Groot Amsterdam.
+- Vraagprijs: € 575.000,- k.k.  
+- Oplevering: per direct mogelijk. 
+
+Kortom: een instapklare, ruime en energiezuinige gezinswoning met garage én zonnige buitenruimte op een toplocatie in Nieuw-West. Plan snel een bezichtiging en ervaar het zelf!
+
+***English ***
+
+Unique opportunity in Amsterdam Nieuw-West! Situated in a green, and family-friendly residential area, this spacious, bright, and energy-efficient (energy label B) corner house offers approximately 113 m² of living space and a sunny southwest-facing roof terrace. Thanks to its corner position, the home benefits from extra natural light and a wonderful sense of space. An added bonus: you can easily park your car in your own indoor garage beneath the house, which is directly accessible from inside. Comfort and convenience come together perfectly here! The property is within walking distance of shops, public transport, and recreational facilities—offering peaceful living with all amenities close at hand.
+
+Layout: See the floor plans in the photo attachment for details and/or schedule a viewing with Urban Makelaars.
+
+Ground floor:
+Through the entrance, you enter the hallway with a meter cupboard, toilet, and access to the garage. The playful split-level layout leads to the spacious kitchen-diner—the heart of the home.
+The modern kitchen is fully equipped, including a dishwasher, 5-burner gas stove with a large oven, extractor hood, microwave, and plenty of storage space. The entire ground floor features a stylish marble tile floor with comfortable underfloor heating.
+
+First floor:
+Here you’ll find the spacious and bright living room, enhanced by extra side windows due to the corner location. Adjacent is a generous bedroom overlooking the garden, also with plenty of natural light.
+
+Second floor:
+Landing, a spacious bedroom at the front with built-in wardrobe, and a practical storage/utility room with central heating system (Remeha HR, 2022), washing machine connection, and heat recovery ventilation (HRV) system.
+The modern bathroom is fully equipped with a double sink, walk-in shower, and second toilet. At the rear, there is a third spacious bedroom.
+
+Garage:
+The indoor garage beneath the house is spacious and lockable, offering room for a car, bicycles, and additional storage. It is equipped with electricity and directly accessible from the home.
+
+Garden:
+From the kitchen, you step directly into the sunny, low-maintenance southwest-facing garden of 47 m²—an ideal place to enjoy the sun all day long. Thanks to its westward orientation, you can fully enjoy the afternoon and evening sun. The generous space allows for multiple seating areas, ensuring there is always a spot in the sun or shade.
+
+Location and accessibility:
+The property is located in a quiet neighborhood in Geuzenveld (Amsterdam Nieuw-West). Within walking distance are the Lambertus Zijlplein shopping center and the renovated Plein ’40-’45, offering a wide range of shops.
+Accessibility is excellent: several bus and tram lines will take you to Amsterdam city center in approximately 15 minutes. Major roads (A4, A5, A9, and A10) are easily accessible, and Schiphol Airport is nearby.
+For relaxation and recreation, Sloterplas is just around the corner, offering opportunities for walking, sports, water activities, and dining. Nature areas such as Spaarnwoude and De Oeverlanden are also easily reachable by bike.
+
+Key features:
+- Perpetual ground lease paid off until December 15, 2051
+- Usable area: approx. 136 m² incl. indoor garage (NEN 2580 measured, report available)
+- Living area: approx. 113 m²
+- Indoor garage: approx. 23 m²
+- Year of construction: 2003
+- Enclosed parking garage beneath the property with access to garage box with electric door
+- Sunny, spacious roof terrace of 47 m² (9 meters deep), southwest-facing
+- Energy label B
+- Well-insulated (double glazing, floor and wall insulation)
+- Heating via central heating boiler (Remeha HR, 2022)
+- 8 solar panels (2023)
+- Underfloor heating on the ground floor
+- Equipped with heat recovery ventilation (HRV) system
+- No service charges
+- Excellent location near public transport, shops, and sports facilities
+- Notary: buyer’s choice, provided deed follows Model Ring in Greater Amsterdam
+- Asking price: € 575,000 costs for buyer (k.k.)
+- Transfer: in consultation
+
+In short: a move-in-ready, spacious, and energy-efficient family home with garage and sunny outdoor space in a prime location in Nieuw-West. Schedule a viewing soon and experience it for yourself!
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Raymond Noordeloos</strong> · Urban Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 48</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/275/348_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/298_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/139_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/211_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/109_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/339_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/525_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/397_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/062_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/287_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/353_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/317_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/177_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/326_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/309_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/325_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/130_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/223_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/400_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/235_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/327_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/164_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/478_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/214_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/086_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/138_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/689_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/538_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/639_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/687_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/697_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/682_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/606_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/651_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/636_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/669_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/565_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/554_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/681_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/679_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/567_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/603_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/275/555_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

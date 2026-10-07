@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Van Suchtelen van de Haarestraat 121 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Van Suchtelen van de Haarestraat 121</h1>
+  <p class="sub">
+    <span>1068 GR Amsterdam</span>
+    <span>·</span>
+    <span>Osdorpplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/468/986_1440x960.jpg" alt="Van Suchtelen van de Haarestraat 121 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€525.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.707/m² · 2.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">92 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A+</span>
+      <span class="chip">Built 2023</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-suchtelen-van-de-haarestraat-121/44513247/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 525.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.707</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 199,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Ground-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2023</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>92 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>17 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>348 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, Underfloor heating, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, lift, Mechanical ventilation, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>Begane grond</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating en gehele Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND E 9702</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-05-2070</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Patio/atrium en Front garden</dd></div>
+        <div class="frow"><dt>Front garden</dt><dd>22 m² (3,00 m deep en 7,17 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het oosten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 199,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Osdorpplein e.o.</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>4.840</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>25%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 5.695</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Bezoek dit pand zonder afspraak tijdens de Open Huizen Dag op zaterdag 03 oktober a.s. tussen 11.00 - 15.00 uur.
+
+Ruime en praktisch ingedeelde benedenwoning van circa 92 m2 met drie slaapkamers, een royale woon- en eetkamer, tuin, patio én een eigen parkeerplaats. Een complete woning met volop leefruimte op een aantrekkelijke locatie in Amsterdam Nieuw-West.
+
+Indeling
+Via de eigen voortuin is de entree te bereiken. De hal verbindt de entree met alle vertrekken in de woning. Achterin de woning bevinden zich de ruime eetkamer met open keuken en de woonkamer. De open keuken is voorzien van inbouwapparatuur uit het bouwjaar van de woning, 2023. Via de eetkamer en de woonkamer is ook de patio toegankelijk. Deze bevindt zich tevens aan de achterzijde van de woning, is gelegen op het westen en zorgt voor veel natuurlijk licht in de woning. 
+
+Ook is achterin één van de drie slaapkamers te vinden. Naast deze slaapkamer bevindt zich de badkamer. De badkamer is voorzien van een inloopdouche, een wastafel met wastafelmeubel en net als de hele woning van vloerverwarming. Centraal gelegen in de woning is de wasruimte te vinden, voorzien van genoeg ruimte voor een wasmachine en een droger, en eventuele extra opslag. Naast de wasruimte is ook het separate toilet te vinden. 
+
+Aan de voorzijde van de woning bevinden zich de overige twee slaapkamers. Beide slaapkamers zijn voorzien van grote raampartijen, waardoor ook hier veel natuurlijk licht de kamers binnen komt. De kamers kijken uit op de eigen voortuin, van ca. 22m2 groot. 
+
+Omgeving
+De Van Suchtelen van de Haarestraat ligt in Osdorp, Amsterdam Nieuw-West, in de buurt van het Osdorpplein. De gemeente rekent de straat tot het gebied Osdorpplein en omgeving. Amsterdam Assets Daarmee bevindt de woning zich in een stadsdeel waar wonen wordt gecombineerd met winkels, voorzieningen, openbaar vervoer en recreatiemogelijkheden rondom onder meer de Sloterplas.
+
+De omgeving van het Osdorpplein is volop in ontwikkeling. De gemeente Amsterdam werkt aan de verdere vernieuwing van het stadscentrum en specifiek aan de zogenoemde SuHa-buurt rond de Van Suchtelen van de Haarestraat. De plannen voorzien onder andere in nieuwe woningen en voorzieningen, horeca, meer groen en een herinrichting van de openbare ruimte. Ook staat een nieuw buurtpark met groen, speelplekken en nieuwe routes gepland. De werkzaamheden worden volgens de huidige gemeentelijke planning gefaseerd uitgevoerd tot circa 2032.
+
+Voor het openbaar vervoer zijn er vanuit Osdorp tramverbindingen richting andere delen van Amsterdam. GVB vermeldt onder meer tram 1 en tram 17 in Osdorp, met verbindingen via onder andere Meer en Vaart en Station Lelylaan richting de stad. Vanwege werkzaamheden kunnen routes en haltes tijdelijk wijzigen. 
+
+Ook voor wie graag buiten is, biedt Amsterdam Nieuw-West volop mogelijkheden. De Sloterplas en het omliggende groen vormen een belangrijk recreatiegebied in het stadsdeel. Zo combineert deze locatie de dagelijkse voorzieningen van Osdorp met de ruimte en recreatiemogelijkheden van Nieuw-West.
+
+Bijzonderheden:
+- Woonoppervlakte ca. 92 m2
+- Energielabel A+
+- Vloerverwarming door de gehele woning
+- Voortdurend recht van erfpacht afgekocht tot en met 31-05-2070
+- Bouwjaar 2023
+- Los verkrijgbare parkeerplek in de ondergelegen parkeerkelder voor €25.000,-
+- Eigen voortuin wegens ligging begane grond
+- Oplevering in overleg
+
+De op deze website getoonde vrijblijvende informatie is door ons met zorg samengesteld op basis van gegevens van de verhuurder en/of derden. Wij staan niet in voor de juistheid of volledigheid daarvan. Wij adviseren u om bij interesse contact met ons op te nemen.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Van de Steege Makelaarsgroep Amsterdam-West</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/468/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/882_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/967_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/907_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/862_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/860_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/861_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/892_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/901_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/876_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/849_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/993_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/846_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/856_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/929_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/998_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/844_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/988_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/903_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/914_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/863_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/894_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/889_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/867_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/890_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/973_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/848_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/884_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/468/897_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

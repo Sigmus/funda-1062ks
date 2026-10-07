@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top Naefflaan 3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Top Naefflaan 3</h1>
+  <p class="sub">
+    <span>1183 BN Amstelveen</span>
+    <span>·</span>
+    <span>Heldenbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/513/763_1440x960.jpg" alt="Top Naefflaan 3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">41 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.075/m² · 5.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">5.0 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">107 m² living</span>
+      <span class="chip">8 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amstelveen/huis-top-naefflaan-3/44590159/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.075</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Bouwperiode</dt><dd>1960-1970</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>107 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>150 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>367 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>8 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Valliant EcoTec plus (gas gestookt uit 2020, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTELVEEN I 5187</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>150 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>89 m² (14,00 m deep en 6,37 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande stenen berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ontdek deze ruime eengezinswoning met vier slaapkamers, een royale doorzonwoonkamer, open haard en een groene achtertuin op het zuiden, gelegen aan de rustige Top Naefflaan in de Heldenbuurt/Kostverlorenhof. De woning is verdeeld over drie woonlagen en beschikt over veel grote raampartijen, een separate keuken, drie slaapkamers en een badkamer op de eerste verdieping en een ruime vierde kamer op de tweede verdieping. Een belangrijk extra pluspunt zijn de ruime uitbreidingsmogelijkheden: zowel aan de achterzijde van de begane grond als op de eerste en tweede verdieping zijn er mogelijkheden om extra woonruimte te creëren. Met een woonoppervlakte van ca. 105 m² en een perceel van ca. 150 m² biedt de woning daardoor niet alleen veel ruimte, maar ook interessante mogelijkheden om de woning geheel naar eigen wens/voorkeur verder te moderniseren en uit te breiden.
+
+Indeling
+
+Begane grond
+De royale doorzonwoonkamer strekt zich uit over de volledige diepte van de woning. Grote raampartijen aan de voor- en achterzijde zorgen voor veel daglicht en er is ruim plaats voor zowel een comfortabele zithoek als een grote eettafel. De open haard geeft de woonkamer extra karakter. Aan de achterzijde zorgen de brede glazen schuifpui en het zicht op de tuin voor een prettige verbinding met buiten.
+
+Naast de woonkamer ligt de separate keuken, uitgevoerd in een dubbele opstelling en voorzien van een gaskookplaat, oven, afzuigkap en spoelbak. Vanuit de keuken is de achtertuin direct bereikbaar. In de hal bevinden zich de meterkast en een modern toilet met fonteintje.
+
+Eerste verdieping
+Op de eerste verdieping bevinden zich drie slaapkamers en de badkamer. De grootste slaapkamer is royaal van formaat en beschikt over een brede raampartij met uitzicht op de groene omgeving. Ook de tweede slaapkamer is goed bemeten, voorzien van vaste kastruimte en een wastafel. De derde kamer kan uitstekend worden gebruikt als kinder-, werk-, logeer- of studeerkamer. De badkamer is voorzien van een douche, toilet, wastafelmeubel, spiegelkast en een raam voor daglicht en natuurlijke ventilatie.
+
+Tweede verdieping
+De tweede verdieping beschikt over een ruime vierde kamer met 2 Velux-dakramen. Deze ruimte is geschikt als slaapkamer, werkruimte, atelier of speelkamer. Onder de schuine dakvlakken is veel bergruimte aanwezig. Op de overloop bevindt zich nog een vijfde ruimte met Velux-dakraam; beschikbaar als technische ruimte en/of opbergruimte.
+
+Tuin
+De achtertuin is ruim en groen aangelegd en heeft door de aanwezige beplanting een beschut karakter. Er is voldoende ruimte voor zowel een grote eettafel als een aparte zit- of loungehoek.
+
+Omgeving
+De Top Naefflaan ligt in de Heldenbuurt, onderdeel van Kostverlorenhof. De wijk is ruim opgezet en groen, met winkelcentrum Kostverlorenhof op loopafstand en diverse dagelijkse voorzieningen in de directe omgeving. Ook het Stadshart Amstelveen is goed bereikbaar.
+Langs de Beneluxbaan bevinden zich openbaarvervoerverbindingen richting onder andere de Zuidas en Amsterdam. Voor wandelen, fietsen en recreatie liggen de Middelpolder en het Amsterdamse Bos in de omgeving. Ook de belangrijkste uitvalswegen (A9 – A10 – A2) zijn goed bereikbaar.
+
+Bijzonderheden
+Perceeloppervlakte ca. 150 m²
+Bouwjaar ca. 1965
+Ruime eengezinswoning verdeeld over drie woonlagen
+Royale doorzonwoonkamer met grote raampartijen
+Alle kozijnen/raamdelen zijn van onderhoudsvriendelijk aluminium
+Open haard (gashaard) in de woonkamer
+Op eerste verdieping in badkamer een 2de toilet
+Ruime, groene en beschutte zonnige achtertuin op het zuiden
+Gelegen in de Heldenbuurt/Kostverlorenhof nabij winkels, openbaar vervoer en groen
+Ruime uitbreidingsmogelijkheden op de begane grond, eerste en tweede verdieping</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Jeroen Henselijn</strong> · Forte Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 41</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/513/763_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/562_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/643_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/745_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/644_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/597_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/753_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/546_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/615_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/555_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/757_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/771_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/784_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/631_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/651_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/759_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/653_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/762_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/556_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/624_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/575_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/655_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/747_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/684_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/592_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/637_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/571_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/586_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/749_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/681_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/778_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/578_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/576_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/641_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/787_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/577_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/513/714_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

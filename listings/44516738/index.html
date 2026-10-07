@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rhijnvis Feithstraat 60-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Rhijnvis Feithstraat 60-2</h1>
+  <p class="sub">
+    <span>1054 VA Amsterdam</span>
+    <span>·</span>
+    <span>Cremerbuurt-West</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/149/331_1440x960.jpg" alt="Rhijnvis Feithstraat 60-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">24 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€600.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.375/m² · 1.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">64 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1911</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-rhijnvis-feithstraat-60-2/44516738/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 600.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.375</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 156,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1911</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>64 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>214 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Gedeeltelijk Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha (gas-fired combi boiler uit 2020, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM T 6393</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 98,96 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 156,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruim opgezet en goed ingedeeld 4-kamerappartement van 64 m2 met 2 balkons in rustig straatje nabij het Vondelpark in Amsterdam Oud West.
+
+Dit goed onderhouden en modern afgewerkte appartement ligt op de tweede verdieping van een mooi karakteristiek pand uit 1911 en heeft het allemaal! Drie goed bruikbare slaapkamers, een houten vloer, een moderne open keuken, een frisse badkamer, een sfeervolle en royale woonkamer, 2 balkons, voldoende bergruimte, gunstig geregelde erfpacht, is heerlijk licht en bovenal perfect gelegen nabij het Vondelpark in Amsterdam West op de rand van Zuid!
+
+Indeling:
+Via het gemeenschappelijke trappenhuis bereik je de woning op de tweede verdieping.
+De centrale hal geeft toegang tot alle vertrekken. Direct valt de fraaie eikenhouten vloer op die door de gehele woning is doorgelegd.
+De royale doorzonwoonkamer vormt het hart van het appartement. Dankzij de hoge plafonds, de grote raampartijen en de openslaande deuren naar het balkon op het westen aan de achterzijde voelt deze ruimte bijzonder licht en ruim aan. Vanaf het balkon is er mooi en groen uitzicht over de binnentuinen van de Overtoom en het J.J. Cremerplein. De originele schouw en de glas in lood raampjes in de woonkamer voegen karakter toe en vormen een sfeervol middelpunt van de woonkamer.
+
+De moderne open keuken is strak uitgevoerd en voorzien van een royaal kookeiland met composiet werkblad. De keuken beschikt over diverse inbouwapparatuur (Quooker, vaatwasser, Bora inductie kookplaat met interne afzuiging, combi oven, American fridge) en biedt volop werk- en kastruimte. Via de openslaande deuren is het balkon aan de voorzijde bereikbaar, waar je heerlijk kunt genieten van de ochtendzon.
+
+Royale hoofdslaapkamer aan de voorzijde met daarnaast de tweede slaapkamer die uitstekend geschikt is als kinderkamer, werkkamer of logeerkamer. De derde slaapkamer aan de rustige achterzijde is nu in gebruik als kastenkamer en waskamer met de optelplaats voor wasmachine en droger. De moderne en frisse badkamer is efficiënt ingedeeld en voorzien van een inloopdouche, wastafel, designradiator en toilet.
+
+De Rhijnvis Feithstraat is een rustige straat tussen de gezellige Overtoom en het charmante J.J. Cremerplein in Amsterdam West om de hoek van het Vondelpark. Hier woon je in een geliefde buurt met een breed aanbod aan gezellige cafés, restaurants, speciaalzaken en winkels. Zowel de Amstelveenseweg als de Zeilstraat liggen op korte loopafstand.
+
+Voor ontspanning wandel of sport je in het Vondel- of Rembrandtparkpark, terwijl ook diverse openbaarvervoervoorzieningen, Station Amsterdam Zuid en Station Lelylaan snel bereikbaar zijn. Met de auto ben je binnen enkele minuten op de Ring A10.
+
+Specificaties:
+-	Goed ingedeeld en lekker licht 4-kamerappartement met 2 balkons;
+-	3 goede slaapkamers, moderne open keuken (2021), frisse badkamer;
+-	Erfpachtcanon € 98,- per jaar tot en met 2034;
+-	Erfpacht onder gunstige voorwaarden vastgeklikt (vw 2016) na 2034;
+-	Erfpachtcanon vastgeklikt op € 1.712,- per jaar vanaf 2034 (onderhevig aan inflatie);
+-	Goede en actieve VvE (5 leden);
+-	Servicekosten € 156,- per maand;
+-	Bouwjaar cv ketel 2020;
+-	Deels voorzien van dubbel glas;
+-	Woonoppervlakte 64 m2, balkons 4 m2;
+-	Bouwjaar 1911;
+-	VvE gaat de achtergevel opknappen;
+-       Oplevering in overleg.
+
+================================================
+A spacious and well-planned 4-room flat of 64 m² with 2 balconies in a quiet side street near the Vondelpark in Amsterdam Oud West.
+
+This well-maintained and modernly finished flat is situated on the second floor of a beautiful, characterful building dating from 1911 and has it all! Three practical bedrooms, wooden flooring, a modern open-plan kitchen, a fresh bathroom, a cosy and spacious living room, two balconies, ample storage space, a favourable leasehold arrangement – it is wonderfully light and, above all, perfectly situated near Vondelpark in Amsterdam West on the edge of Zuid!
+
+Layout:
+You reach the flat on the second floor via the communal staircase.
+The central hall provides access to all rooms. The beautiful oak flooring, which runs throughout the entire flat, immediately catches the eye.
+The spacious, double-aspect living room forms the heart of the flat. Thanks to the high ceilings, large windows and French doors leading to the west-facing balcony at the rear, this space feels exceptionally light and spacious. From the balcony, there is a lovely, green view over the inner gardens of the Overtoom and J.J. Cremerplein. The original fireplace and the stained-glass windows in the living room add character and form an atmospheric focal point of the living room.
+
+The modern open-plan kitchen has a sleek design and features a spacious cooking island with a composite worktop. The kitchen is fitted with a range of built-in appliances (Quooker, dishwasher, Bora induction hob with integrated extractor, combi oven, American-style fridge) and offers plenty of worktop and cupboard space. French doors lead out onto the front balcony, where you can enjoy the morning sun.
+
+A spacious master bedroom at the front, with the second bedroom adjacent, which is ideal as a children’s room, study or guest room. The third bedroom at the quiet rear is currently used as a storage room and utility room, with space for a washing machine and tumble dryer. The modern and fresh bathroom is efficiently laid out and fitted with a walk-in shower, washbasin, designer radiator and toilet.
+
+The Rhijnvis Feithstraat is a quiet street between the lively Overtoom and the charming J.J. Cremerplein in Amsterdam West, just round the corner from the Vondelpark. Here, you’ll live in a popular neighbourhood with a wide range of cosy cafés, restaurants, specialist shops and high-street retailers. Both the Amstelveenseweg and the Zeilstraat are within easy walking distance.
+For relaxation, you can go for a walk or do some exercise in Vondelpark or Rembrandtpark, whilst various public transport links, Amsterdam Zuid station and Lelylaan station are also within easy reach. By car, you can be on the A10 ring road within a few minutes.
+
+Specifications:
+-    Well-planned and bright 4-room flat with 2 balconies;
+-    3 good-sized bedrooms, modern open-plan kitchen (2021), fresh bathroom;
+-    Ground rent of €98 per year until 2034;
+-    Leasehold secured on favourable terms (subject to approval in 2016) after 2034;
+-    Leasehold rent fixed at €1,712 per year from 2034 (subject to inflation);
+-    Well-run and active owners’ association (5 members);
+-    Service charges €156 per month;
+-    Central heating boiler installed in 2020;
+-    Partially double-glazed;
+-    Living area 64 m², balconies 4 m²;
+-    Built in 1911;
+-    The owners’ association is planning to refurbish the rear façade;
+-    Handover by mutual agreement.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Lichte woonkamer met balkons
+
+Royale doorzonwoonkamer met twee balkons en groen uitzicht.
+
+Moderne open keuken eiland
+
+Strakke keuken (2021) met kookeiland en luxe inbouwapparatuur.
+
+Rustige straat bij Vondelpark
+
+Gelegen in rustige straat om de hoek van het Vondelpark.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 24</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/149/331_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/306_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/363_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/367_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/328_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/353_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/371_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/288_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/332_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/347_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/295_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/279_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/357_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/340_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/336_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/335_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/364_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/272_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/339_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/149/324_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

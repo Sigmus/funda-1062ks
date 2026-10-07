@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meidoornweg 212 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Meidoornweg 212</h1>
+  <p class="sub">
+    <span>1171 KE Badhoevedorp</span>
+    <span>·</span>
+    <span>Badhoevedorp Antoniushoeve</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/215/695_1440x960.jpg" alt="Meidoornweg 212 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">45 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€485.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.272/m² · 3.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.6 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">92 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1977</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/badhoevedorp/appartement-meidoornweg-212/44569935/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 314 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 485.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.272</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1977</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        <div class="frow"><dt>Toegankelijkheid</dt><dd>Toegankelijk voor mensen met een beperking en toegankelijk voor ouderen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>92 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>290 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, lift, Mechanical ventilation, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha Avanta (gas-fired combi boiler uit 2018, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>HAARLEMMERMEER H 10151</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        <div class="frow"><dt>HAARLEMMERMEER H 10151</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Badhoevedorp Antoniushoeve</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>1.280</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>39%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 5.123</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Luxe, licht en heerlijk vrij wonen op korte afstand van Amsterdam Op zoek naar een instapklaar appartement met volop ruimte, luxe en privacy? Dan is dit 4-kamerappartement van ca. 92 m² in Badhoevedorp absoluut een bezichtiging waard. In 2022 is de woning gedeeltelijk hoogwaardig verbouwd, waarbij onder andere een prachtige nieuwe keuken en een stijlvolle PU-gietvloer zijn gerealiseerd. Tel daarbij de lichte living, drie slaapkamers, het zonnige balkon en de groene, vrije ligging op en je hebt een bijzonder compleet appartement.
+
+***English translation below***
+
+Zodra je binnenkomt, valt de prettige ruimtelijkheid en het vele daglicht op. De woonkamer met open woonkeuken ligt aan de achterzijde en beschikt over grote raampartijen die het groen en het licht optimaal naar binnen halen. Alle ramen zijn bovendien voorzien van ingebouwde horren, zodat je op warme dagen heerlijk kunt ventileren zonder insecten binnen te laten. Doordat er geen directe achterburen zijn, geniet je hier bovendien van een heerlijk vrij uitzicht en veel privacy. Over de volledige breedte van de achterzijde ligt een royaal balkon van ca. 9 m², gelegen op het zuidoosten. Een heerlijke plek voor je eerste kop koffie, een ontspannen lunch of een drankje in de middag, terwijl je uitkijkt over de groene omgeving. De gehele woning is voorzien van een fraaie, onderhoudsarme PU-gietvloer in een neutrale kleur, die de verschillende ruimtes stijlvol met elkaar verbindt. Sfeervolle woonkeuken voor kookliefhebbers De in 2022 gerealiseerde keuken is een echte eyecatcher. De hoogwaardige keuken van Intercodam combineert een chique uitstraling met uitstekende apparatuur en volop werkruimte.
+
+De keuken is uitgerust met onder andere: een 4-pits inductiekookplaat met geïntegreerd afzuigsysteem, een Siemens oven met stoomfunctie, een Siemens vaatwasser, een Liebherr koelkast met 2 vriesladen, een Liebherr wijnklimaatkast en een royaal keramisch werkblad in stijlvolle marmerlook. Hier kook je niet alleen praktisch, maar vooral met plezier.
+
+Drie slaapkamers en volop mogelijkheden: Het appartement beschikt over drie slaapkamers, alle gelegen aan de voorzijde. De ruime master bedroom beschikt over een grote ingebouwde garderobekast. De tweede slaapkamer is uitstekend geschikt als kinderkamer, logeerkamer of comfortabele thuiswerkplek. De derde kamer is momenteel ingericht als kledingkamer en beschikt over de aansluiting voor de wasmachine. Deze twee kleinere kamers kunnen bovendien worden samengevoegd, waardoor je eenvoudig een tweede ruime slaapkamer met separate wasruimte kunt creëren.
+
+Comfortabel baden: De verzorgde badkamer is compleet ingericht met een ruime inloopdouche, ligbad, wastafel met spiegelkast en toilet. Een fijne, frisse ruimte om de dag ontspannen te beginnen of juist af te sluiten.
+
+Groene en rustige ligging: Het appartement ligt op de derde verdieping van het complex. Via de centrale entree met video-intercom bereik je de woning met de lift of trap. In de onderbouw bevindt zich een ruime, afgesloten berging van ca. 7 m². Voor de deur kun je gratis parkeren, een groot voordeel in deze omgeving. De ligging is minstens zo aantrekkelijk als de woning zelf. Badhoevedorp combineert het beste van twee werelden: de rust, ruimte en gezelligheid van een dorp én de nabijheid van Amsterdam. Het vernieuwde dorpshart biedt een gevarieerd aanbod aan winkels, speciaalzaken, restaurants en andere voorzieningen. Ook scholen, kinderopvang en diverse sportverenigingen zijn in de omgeving te vinden. Voor natuurliefhebbers liggen het Amsterdamse Bos en de Nieuwe Meer vlakbij. En wil je de dynamiek van de stad opzoeken? Amsterdam is op slechts ca. 5 minuten fietsen bereikbaar. Ook de bereikbaarheid is uitstekend. Via de A4, A9 en A10 zijn onder meer Amsterdam, Schiphol, Amstelveen, Haarlem en Hoofddorp snel bereikbaar. Schiphol ligt op circa 10 autominuten.
+
+Kortom: Een luxe, licht en comfortabel 4-kamerappartement met drie slaapkamers, een hoogwaardige keuken, prachtige gietvloer, zonnig balkon, vrij uitzicht en volop privacy. In 2022 gedeeltelijk verbouwd en uitstekend onderhouden, energiezuinig met label B en gelegen op een centrale locatie vlak bij Amsterdam. Een woning waar je niets meer aan hoeft te doen en waar je zo je koffers kunt uitpakken.
+
+Bijzonderheden:
+- Ca. 92 m² woonoppervlakte. (NEN 2580 gemeten, meetrapport aanwezig)
+- 4-kamerappartement met 3 slaapkamers.
+- Ruime berging van ca. 7 m² in de onderbouw.
+- Groot balkon van ca. 9 m² op het zuidoosten.
+- Turn-key! 
+- Hoogwaardig gedeeltelijk verbouwd in 2022.
+- Nieuwe Intercodam-keuken uit eind 2022.
+- PU-gietvloer door de gehele woning.
+- Energielabel B.
+- Vrij en groen uitzicht, zonder achterburen.
+- Lift aanwezig en minder valide en rolstoel toegankelijk.
+- Parkeren is vrij en zonder vergunning, er is altijd voldoende plek voor de deur.
+- Eigen grond, gelegen op steenworp afstand van Amsterdam. 
+- Houten kozijnen met dubbele beglazing.
+- Videofoon aanwezig. 
+- Geheel voorzien van ingebouwde horren. 
+- CV-ketel Remeha, september 2018.
+- Professioneel beheerde en gezonde VvE.
+- Servicekosten € 314,- per maand, inclusief watergeld. 
+- Amsterdam op ca. 20 minuten fietsen.
+- Schiphol op ca. 10 autominuten.
+- Uitvalswegen zijn (zeer) vlot bereikbaar.
+- Ouderdoms- en asbestclausule van toepassing
+- Notaris: naar keuze koper, mits koopakte conform Model Ring bij notaris in Groot Amsterdam.
+- Oplevering: in overleg. 
+- Vraagprijs: € 485.000,- k.k.
+
+Kortom: een heerlijk compleet appartement op een verrassend groene en centrale plek. Kom snel kijken en laat je verrassen door deze parel in Badhoevedorp!
+
+***English***
+
+Luxury, Light and Wonderful Freedom of Living Just a Short Distance from Amsterdam Looking for a move-in-ready apartment offering plenty of space, luxury and privacy? Then this four-room apartment of approximately 92 m² in Badhoevedorp is definitely worth a viewing. The property was partially renovated to a high standard in 2022, including a beautiful new kitchen and a stylish PU resin floor. Add to this the bright living area, three bedrooms, sunny balcony and green, open surroundings, and you have an exceptionally complete apartment.
+
+As soon as you enter, you immediately notice the spacious feel and abundance of natural light. The living room with open-plan kitchen is located at the rear of the apartment and features large windows that bring the greenery and daylight inside. All windows are also fitted with integrated insect screens, allowing you to ventilate comfortably on warm days without letting insects in. As there are no direct neighbours at the rear, you can enjoy an unobstructed view and plenty of privacy. A generous balcony of approximately 9 m² stretches across the full width of the rear of the apartment and faces southeast. It is the perfect spot for your first cup of coffee in the morning, a relaxed lunch or an afternoon drink while enjoying the green surroundings. The entire apartment features a beautiful, low-maintenance PU resin floor in a neutral colour, stylishly connecting the different living spaces. Atmospheric Open-Plan Kitchen for Cooking Enthusiasts
+
+The kitchen, installed in 2022, is a real eye-catcher. This high-quality Intercodam kitchen combines a sophisticated appearance with excellent appliances and plenty of workspace.
+The kitchen is equipped with, among other things: a four-zone induction hob with integrated extractor; a Siemens oven with steam function; a Siemens dishwasher; a Liebherr refrigerator with two freezer drawers; a Liebherr wine climate cabinet; and a generous ceramic worktop with an elegant marble look. Here, cooking is not only practical, but above all enjoyable.
+
+Three Bedrooms and Plenty of Possibilities. The apartment has three bedrooms, all located at the front. The spacious master bedroom features a large built-in wardrobe. The second bedroom is ideal as a children&#x27;s room, guest bedroom or comfortable home office.
+The third room is currently used as a dressing room and has the connection for the washing machine. These two smaller rooms can also be combined, allowing you to easily create a second spacious bedroom with a separate laundry area.
+
+Comfortable Bathroom: The well-maintained bathroom is fully equipped with a spacious walk-in shower, bathtub, washbasin with mirrored cabinet and toilet. A fresh and pleasant space in which to start the day in a relaxed way or unwind at the end of it.
+
+Green and Peaceful Location:
+The apartment is situated on the third floor of the complex. From the central entrance, equipped with a video intercom, you can reach the apartment by lift or stairs. A spacious, secure storage room of approximately 7 m² is located in the basement. Free parking is available directly in front of the building, which is a major advantage in this area. The location is every bit as attractive as the apartment itself. Badhoevedorp combines the best of both worlds: the peace, space and welcoming atmosphere of a village with the proximity of Amsterdam. The renewed village centre offers a varied selection of shops, specialist stores, restaurants and other amenities. Schools, childcare facilities and various sports clubs can also be found nearby. For nature lovers, the Amsterdamse Bos and Nieuwe Meer are close by. And if you want to enjoy the energy of the city, Amsterdam can be reached by bicycle in approximately 5 minutes. Accessibility is excellent as well. Via the A4, A9 and A10 motorways, Amsterdam, Schiphol, Amstelveen, Haarlem and Hoofddorp are all easily accessible. Schiphol Airport is approximately 10 minutes away by car.
+
+In Short: A luxurious, bright and comfortable four-room apartment with three bedrooms, a high-quality kitchen, beautiful resin floor, sunny balcony, unobstructed views and plenty of privacy. Partially renovated in 2022 and exceptionally well maintained, with energy label B and situated in a central location close to Amsterdam. A home that requires no further work and where you can simply unpack your suitcases and start enjoying life.
+
+Key Features:
+- Approximately 92 m² of living space (measured in accordance with NEN 2580; measurement report available).
+- Four-room apartment with three bedrooms.
+- Spacious storage room of approximately 7 m² in the basement.
+- Large southeast-facing balcony of approximately 9 m².
+- Move-in ready.
+- Partially renovated to a high standard in 2022.
+- New Intercodam kitchen installed at the end of 2022.
+- PU resin floor throughout the apartment.
+- Energy label B.
+- Unobstructed green views with no rear neighbours.
+- Lift available; accessible for people with reduced mobility and wheelchair users.
+- Free parking without a permit; there is always ample parking space directly in front of the building.
+- Freehold property, located just a stone&#x27;s throw from Amsterdam.
+- Wooden window frames with double glazing.
+- Integrated insect screens throughout.
+- Remeha central heating boiler, September 2018.
+- Professionally managed and financially healthy homeowners&#x27; association (VvE).
+- Service charges: €314 per month, including water charges.
+- Amsterdam approximately 20 minutes by bicycle.
+- Schiphol Airport approximately 10 minutes by car.
+- Excellent access to major roads.
+- Age and asbestos clauses applicable.
+- Notary of the buyer&#x27;s choice, provided the purchase agreement follows the Model Ring format at a notary in the Greater Amsterdam area.
+- Completion date: by mutual agreement.
+- Asking price: € 485,000 buyer&#x27;s costs.
+
+In Short: a wonderfully complete apartment in a surprisingly green and central location. Come and take a look soon and let yourself be surprised by this gem in Badhoevedorp!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Urban Makelaars</strong> · Urban Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 45</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/215/695_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/697_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/713_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/698_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/719_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/703_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/694_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/712_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/716_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/706_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/711_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/699_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/715_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/701_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/718_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/693_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/735_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/734_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/730_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/733_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/725_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/215/726_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

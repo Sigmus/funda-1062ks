@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baarsjesweg 176-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Baarsjesweg 176-2</h1>
+  <p class="sub">
+    <span>1057 HP Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/231/701/824_1440x960.jpg" alt="Baarsjesweg 176-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">25 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.286/m² · 2.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">70 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1923</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-baarsjesweg-176-2/80882992/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>Per Immediate Available</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.286</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 219,78 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1923</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>70 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>11 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>205 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Frans balkon, glasvezelkabel, Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN, NOORD HOLLAND C 11633</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 31-05-2060)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 99,37 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan vaarwater, aan water en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 219,78 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">----------ENGLISH TRANSLATION BELOW----------
+
+INTRODUCTIE
+
+Hoogwaardig gerenoveerd en volledig turnkey appartement van circa 70 m², gelegen op de tweede verdieping van een karakteristiek pand uit 1923 aan de geliefde Baarsjesweg in Amsterdam. De woning is in 2022 volledig gerenoveerd met veel aandacht voor maatwerk, hoogwaardige materialen en comfort. Het appartement beschikt over twee slaapkamers, een luxe en-suite badkamer, een zonnig balkon op het westen met harmonica schuifpui, vloerverwarming, een visgraatvloer, een exclusieve maatwerkkeuken met Siemens inbouwapparatuur en Bora inductiekookplaat, én een volledig afgewerkte extra kamer van circa 11 m² op de vierde verdieping, ideaal als logeerkamer, thuiswerkplek of derde slaapkamer. De woning heeft energielabel B en de erfpachtcanon is afgekocht tot en met 31 mei 2060.
+
+OMSCHRIJVING
+
+Aan de geliefde Baarsjesweg, midden in één van de populairste woonwijken van Amsterdam, bevindt zich dit uitzonderlijk fraai afgewerkte appartement. De woning is in 2022 volledig gerenoveerd, waarbij vrijwel alles is vernieuwd en afgewerkt met hoogwaardige materialen. Maatwerk, comfort en een tijdloos interieur staan centraal.
+
+De woonkamer vormt het hart van de woning en staat in directe verbinding met de luxe open keuken. Dankzij de brede harmonica schuifpui loopt de woonkamer naadloos over in het balkon op het westen, waar u geniet van veel licht en middag- en avondzon. De maatwerkkeuken is voorzien van Siemens inbouwapparatuur, een Bora inductiekookplaat met geïntegreerde afzuiging en veel praktische opberg- en werkruimte.
+
+Aan de voorzijde bevindt zich de royale hoofdslaapkamer met directe toegang tot de luxe en-suite badkamer, voorzien van een ruime inloopdouche, stijlvol wastafelmeubel en hoogwaardige afwerking. Aan de achterzijde ligt de tweede slaapkamer, geschikt als slaapkamer, kinderkamer of werkkamer.
+
+Een uniek pluspunt is de volledig afgewerkte extra kamer van circa 11 m² op de vierde verdieping. Deze ruimte is veel meer dan een traditionele berging en uitstekend te gebruiken als logeerkamer, thuiswerkplek, creatieve studio of derde slaapkamer. Een waardevolle en zeldzame toevoeging in Amsterdam.
+
+HOOGWAARDIGE AFWERKING
+
+De woning onderscheidt zich door het hoge afwerkingsniveau en de vele maatwerkoplossingen. De visgraatvloer loopt door de gehele woning en wordt gecombineerd met comfortabele vloerverwarming. Ook de keuken, kasten, badkamer en extra kamer zijn in dezelfde hoogwaardige stijl uitgevoerd. Dit is een echte turnkey woning waar niets meer aan hoeft te gebeuren.
+
+ERFPACHT
+
+De woning is gelegen op gemeentelijke erfpacht. De huidige canon is afgekocht tot en met 31 mei 2060, waardoor de eigenaar de komende decennia geen erfpachtcanon verschuldigd is.
+
+VERENIGING VAN EIGENAARS
+
+Het appartement maakt onderdeel uit van een actieve en professioneel beheerde VvE. De VvE wordt beheerd door Ymere VvE Beheer en beschikt over een MJOP, een gezonde reserve en een actief onderhoudsbeleid. De maandelijkse servicekosten bedragen € 219,78. Het gebouw is collectief verzekerd middels een uitgebreide opstalverzekering.
+
+DUURZAAMHEID EN COMFORT
+
+De woning beschikt over energielabel B, HR++ beglazing, vloerverwarming en moderne installaties. Dit zorgt voor comfortabel wonen en een relatief laag energieverbruik, zeker voor een karakteristiek pand uit 1923.
+
+LIGGING
+
+De Baarsjes is één van de meest geliefde wijken van Amsterdam, met een breed aanbod aan winkels, koffiebars, restaurants en speciaalzaken. De Jan Evertsenstraat, Kinkerstraat, Ten Katemarkt, De Hallen en Foodhallen liggen op korte afstand. Ook het Rembrandtpark, Erasmuspark en Vondelpark zijn nabij. De bereikbaarheid is uitstekend met diverse tram- en busverbindingen en snelle toegang tot de Ring A10. Parkeren kan via het gemeentelijke vergunningensysteem.
+
+OPLEVERING EN CLAUSULES
+
+Oplevering vindt plaats in overleg met verkoper. De verkoop wordt begeleid door WestNova Notariaat te Amsterdam. Het appartement wordt verkocht kosten koper. In de koopovereenkomst worden de gebruikelijke clausules opgenomen, waaronder een ouderdomsclausule en asbestclausule.
+
+DISCLAIMER
+
+Aan de inhoud van deze presentatie kunnen geen rechten worden ontleend. Alle maten en gegevens zijn indicatief en afkomstig van derden. Kopers worden geadviseerd alle informatie zelfstandig te verifiëren.
+
+----------ENGLISH VERSION----------
+
+INTRODUCTION
+
+Beautifully renovated and fully turnkey apartment of approximately 70 sq.m., located on the second floor of a characteristic 1923 building on the highly sought-after Baarsjesweg in Amsterdam. Fully renovated in 2022, the apartment has been finished to a high standard with bespoke craftsmanship, premium materials and great attention to detail. It offers two bedrooms, a luxurious en-suite bathroom, a sunny west-facing balcony with harmonica sliding doors, underfloor heating, herringbone flooring, a custom-made kitchen with Siemens built-in appliances and a Bora induction cooktop, plus a fully finished additional room of approximately 11 sq.m. on the fourth floor, ideal as a guest bedroom, home office or third bedroom. The apartment has Energy Label B and the ground lease has been prepaid until 31 May 2060.
+
+DESCRIPTION
+
+Situated on the popular Baarsjesweg, this beautifully finished apartment combines character, comfort and contemporary luxury. The property was fully renovated in 2022, with a strong focus on quality, bespoke design and a timeless interior.
+
+The living room forms the heart of the home and connects seamlessly with the luxury open-plan kitchen. Full-width harmonica sliding doors open onto the west-facing balcony, creating a bright indoor-outdoor living experience with afternoon and evening sun. The bespoke kitchen is fitted with Siemens built-in appliances, a Bora induction cooktop with integrated extraction and generous storage and worktop space.
+
+At the front of the apartment is the spacious primary bedroom with direct access to the luxurious en-suite bathroom, featuring a walk-in shower, stylish vanity unit and high-quality finishes. At the rear is the second bedroom, suitable as a bedroom, nursery or home office.
+
+A unique feature is the fully finished additional room of approximately 11 sq.m. on the fourth floor. Far more than a traditional storage room, this versatile space is ideal as a guest bedroom, home office, creative studio or third bedroom. A rare and valuable addition in Amsterdam.
+
+HIGH-END FINISHES
+
+The apartment stands out due to its excellent level of finish and bespoke details. The herringbone floor runs throughout the apartment and is combined with comfortable underfloor heating. The kitchen, cabinetry, bathroom and additional room have all been finished in the same high-quality style. This is a genuine turnkey home, ready to move into immediately.
+
+LEASEHOLD
+
+The apartment is situated on municipal leasehold land. The current ground lease has been prepaid until 31 May 2060, meaning no ground lease payments are due for decades to come.
+
+HOMEOWNERS’ ASSOCIATION
+
+The apartment forms part of an active and professionally managed Homeowners’ Association. The VvE is managed by Ymere VvE Beheer and has a Long-Term Maintenance Plan, a healthy reserve fund and a proactive maintenance policy. The monthly service charges are €219.78. The building is covered by collective building insurance.
+
+SUSTAINABILITY AND COMFORT
+
+The apartment has Energy Label B, HR++ glazing, underfloor heating and modern installations, resulting in comfortable living and relatively low energy consumption for a characteristic 1923 building.
+
+LOCATION
+
+De Baarsjes is one of Amsterdam’s most popular neighbourhoods, offering a wide range of cafés, restaurants, specialty shops and supermarkets. Jan Evertsenstraat, Kinkerstraat, Ten Katemarkt, De Hallen and the Foodhallen are all nearby. Rembrandtpark, Erasmuspark and Vondelpark are also within easy reach. Accessibility is excellent, with tram and bus connections nearby and quick access to the A10 ring road. Parking is available through the municipal permit system.
+
+COMPLETION AND CLAUSES
+
+Completion will take place in consultation with the seller. The sale will be handled by WestNova Notariaat in Amsterdam. The property will be sold subject to buyer’s costs. The purchase agreement will include the customary clauses appropriate for a property of this age, including an age clause and asbestos clause.
+
+DISCLAIMER
+
+No rights can be derived from this presentation. All measurements and information are indicative and obtained from third parties. Buyers are advised to independently verify all information.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>hausing</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 25</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/231/701/824_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/839_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/864_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/800_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/851_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/868_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/799_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/859_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/817_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/807_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/842_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/802_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/844_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/835_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/804_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/841_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/849_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/820_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/818_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/863_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/831_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/867_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/828_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/813_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/701/834_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

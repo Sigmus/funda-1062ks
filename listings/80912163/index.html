@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Derkinderenstraat 162 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Derkinderenstraat 162</h1>
+  <p class="sub">
+    <span>1061 VX Amsterdam</span>
+    <span>·</span>
+    <span>Overtoomse Veld-Noord</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/232/753/631_1440x960.jpg" alt="Derkinderenstraat 162 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">26 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€700.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.931/m² · 1.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">101 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2006</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-derkinderenstraat-162/80912163/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 700.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.931</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 291,39 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2006</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gestoffeerd</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>101 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>10 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>338 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Walk-in shower, Underfloor heating, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift en Mechanical ventilation</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>HR-glas en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating en gedeeltelijke Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN D 9288</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking en parkeergarage</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 291,39 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**English below**
+RUIM WONEN, STIJLVOL AFGEWERKT EN HEERLIJK GENIETEN OP HET ZONNIGE BALKON -  PARKEERPLAATS IN AFGESLOTEN GARAGE
+
+Dit royale vierkamerappartement gelegen op de derde verdieping biedt verrassend veel ruimte en is volledig gelijkvloers. Met circa 101 m² woonoppervlakte, drie volwaardige slaapkamers, een luxe afwerking, een zonnige loggia én een eigen parkeerplaats is dit een woning waar je zó in kunt. Daarbij is de erfpacht eeuwigdurend afgekocht en beschikt de woning over energielabel A.
+
+Binnen valt direct op hoeveel licht en ruimte het appartement biedt. De brede raampartijen, de fraaie visgraatvloer en de strak gestucte wanden geven de woning een rustige, moderne uitstraling. Dankzij de vloerverwarming voelt het hier bovendien in ieder seizoen aangenaam aan.
+
+De ruime woonkamer vormt samen met de open keuken het kloppende hart van het huis. Er is volop plaats voor een royale zithoek en een grote eettafel, waardoor dit een heerlijke plek is voor lange diners, ontspannen avonden en gezellige momenten met familie en vrienden.
+
+De moderne keuken is uitgevoerd in een warme, donkere houtlook en voorzien van een royaal kookeiland. Dankzij de vele kasten, het ruime werkblad en de complete inbouwapparatuur is dit een keuken waarin koken niet alleen praktisch, maar vooral ook leuk is.
+
+ZONNIG BALKON OP HET WESTEN
+Vanuit de woonkamer stap je zo de circa 6,7 meter brede loggia op. Door de ligging op het westen is dit een fijne plek om van zonnige momenten te genieten. Met voldoende ruimte voor een gezellig zitje en beplanting. Begin de avond met een drankje of heerlijk buiten eten.
+
+DRIE SLAAPKAMERS EN EEN ROYALE INLOOPKAST
+Het appartement beschikt over drie goed bemeten slaapkamers. De hoofdslaapkamer grenst aan een royale inloopkastenkamer, waarin ook de wasmachine en droger keurig zijn opgesteld. De andere kamers zijn flexibel te gebruiken als werk-, logeer-, kinder- of hobbykamer. Ideaal voor een gezin, thuiswerkers of iedereen die graag wat extra ruimte achter de hand heeft.
+
+LUXE BADKAMER
+De luxe badkamer heeft de uitstraling van een comfortabel hotel. Je vindt hier een royale inloopdouche met regen- en handdouche, een breed wastafelmeubel met twee opbouwkommen, stijlvolle inbouwkranen, een grote spiegel en een designradiator. Het separate toilet is in dezelfde moderne stijl uitgevoerd.
+
+PARKEREN ZONDER ZOEKEN
+Bij het appartement hoort een eigen parkeerplaats in de afgesloten parkeergarage. Vanuit het complex bereik je de garage eenvoudig en droog. Ook zijn er twee liften aanwezig. Bewoners kunnen daarnaast gebruikmaken van het afgeschermde gemeenschappelijke leefdek. Een prettige extra buitenruimte, waar kinderen veilig kunnen spelen en bewoners elkaar kunnen ontmoeten.
+
+GROEN WONEN MET DE STAD DICHTBIJ
+De woning is aantrekkelijk gelegen in Overtoomse Veld, een ruim opgezette en groene buurt met winkels, supermarkten, horeca, scholen, kinderopvang en sportvoorzieningen in de directe omgeving. Het Rembrandtpark, de Sloterplas en de gezellige Jan Evertsenstraat liggen op korte afstand. Ook de bereikbaarheid is uitstekend. Tram, bus en metro brengen je snel naar het centrum, Amsterdam Zuid, Sloterdijk en station Lelylaan. Met de auto rijd je vlot naar de Ring A10 en de A4, A5 en A9. De Baarsjes en Oud-West zijn binnen korte tijd per fiets bereikbaar. Voor ontspanning liggen onder meer het Rembrandtpark, de Sloterplas en het Vondelpark dichtbij. Wandelen, sporten, picknicken of een terras pakken: hier kan het allemaal.
+
+ERFPACHT
+De canon is zowel voor het huidige tijdvak tot en met 15 december 2055 als voor de periode daarna eeuwigdurend afgekocht. Er is dus geen periodieke canon verschuldigd. Op het erfpachtrecht zijn de Algemene Bepalingen voor eeuwigdurende erfpacht 2016 Amsterdam (AB 2016) van toepassing.
+
+PLUSPUNTEN
+
+•	Circa 101 m² woonoppervlakte 
+•	Drie volwaardige slaapkamers 
+•	Volledig en stijlvol gemoderniseerd (2025)
+•	Lichte woonkamer met brede raampartijen 
+•	Moderne open keuken met kookeiland (2025)
+•	Luxe badkamer en separaat toilet (2025)
+•	Vloerverwarming en visgraatvloer (2025)
+•	Inloopkastenkamer met wasopstelling (2025)
+•	Brede loggia op het westen 
+•	Eigen parkeerplaats in afgesloten garage 
+•	Twee liften 
+•	Gemeenschappelijk leefdek 
+•	Energielabel A 
+•	Eeuwigdurend afgekochte erfpacht 
+•	Professioneel beheerde VvE, maandelijkse servicekosten € 291,39  
+
+KORTOM een ruim, licht en bijzonder compleet appartement dat direct klaar is voor nieuwe bewoners. Met drie slaapkamers, een zonnige loggia, een luxe afwerking en een eigen parkeerplaats heeft deze woning alles in huis voor prettig en zorgeloos wonen. Kom binnen, kijk rond en ervaar hoeveel ruimte en woonplezier Derkinderenstraat 162 te bieden heeft.
+
+*English*
+SPACIOUS LIVING, STYLISH FINISHES AND A SUNNY BALCONY TO ENJOY - PARKING SPACE IN GARAGE
+
+This generous four-room apartment situated on the third floor offers a surprising amount of space and is arranged entirely on one level. With approximately 101 m² of living space, three full-sized bedrooms, high-quality finishes, a sunny loggia and a private parking space, this is a home you can move straight into. The ground lease has been bought off in perpetuity, and the property has an Energy Label A.
+
+As soon as you step inside, the abundance of light and space immediately stands out. The wide windows, elegant herringbone flooring and smooth plastered walls give the apartment a calm, contemporary feel. Underfloor heating ensures a pleasant indoor climate throughout the year.
+
+The spacious living room and open-plan kitchen form the heart of the home. There is plenty of room for a generous seating area and a large dining table, making this a wonderful place for long dinners, relaxed evenings and enjoyable moments with family and friends.
+
+The modern kitchen is finished in a warm, dark wood look and features a large kitchen island. With ample cabinetry, generous worktop space and a full range of integrated appliances, this is a kitchen where cooking is not only practical, but genuinely enjoyable.
+
+SUNNY WEST-FACING BALCONY
+The living room opens directly onto the approximately 6.7-metre-wide loggia. Thanks to its west-facing position, this is a lovely place to enjoy sunny moments. There is ample room for a comfortable seating area and plants. Start the evening here with a drink or enjoy a meal outdoors.
+
+THREE BEDROOMS AND A GENEROUS WALK-IN WARDROBE
+The apartment has three well-proportioned bedrooms. The principal bedroom adjoins a generous walk-in wardrobe, where the washing machine and dryer have also been neatly installed. The other rooms can be used flexibly as a home office, guest room, children’s bedroom or hobby room. Ideal for a family, those working from home or anyone who appreciates having some extra space.
+
+LUXURIOUS BATHROOM
+The luxurious bathroom has the feel of a comfortable hotel. It features a spacious walk-in shower with both a rainfall and handheld shower, a wide vanity unit with two countertop basins, stylish built-in taps, a large mirror and a designer radiator. 
+
+The separate toilet has been finished in the same contemporary style.
+
+PRIVATE PARKING AND NO SEARCHING REQUIRED
+The apartment comes with its own private parking space in the secure underground garage. The garage can be accessed easily and under cover from within the building. There are also two lifts. Residents also have access to the enclosed communal deck, a pleasant additional outdoor area where children can play safely and neighbours can meet.
+
+GREEN SURROUNDINGS WITH THE CITY CLOSE BY
+The property is attractively situated in Overtoomse Veld, a spacious and green neighbourhood with shops, supermarkets, restaurants, schools, childcare facilities and sports amenities all close at hand. Rembrandt Park, Sloterplas and the lively Jan Evertsenstraat are all within easy reach. Accessibility is excellent. Tram, bus and metro connections provide quick access to Amsterdam city centre, Amsterdam Zuid, Sloterdijk and Lelylaan Station. By car, the A10 ring road and the A4, A5 and A9 motorways can be reached quickly. De Baarsjes and Oud-West are both within easy cycling distance. For recreation, Rembrandtpark, Sloterplas and Vondelpark are all nearby. Whether you enjoy walking, exercising, picnicking or relaxing on a terrace, there is plenty to choose from.
+
+GROUNDLEASE
+The ground rent has been bought off for both the current period, up to and including 15 December 2055, and in perpetuity for the period thereafter. No periodic ground rent is therefore payable. The Amsterdam General Provisions for Perpetual Ground Lease 2016 (AB 2016) apply.
+
+KEY FEATURES
+- Approximately 101 m² of living space
+- Three full-sized bedrooms
+- Fully and stylishly modernised in 2025
+- Bright living room with wide windows
+- Modern open-plan kitchen with kitchen island, installed in 2025
+- Luxurious bathroom and separate toilet, renovated in 2025
+- Underfloor heating and herringbone flooring, installed in 2025
+- Walk-in wardrobe with laundry area, created in 2025
+- Wide west-facing loggia
+- Private parking space in a secure garage
+- Two lifts
+- Communal deck
+- Energy Label A
+- Ground lease bought off in perpetuity
+- Professionally managed Homeowners’ Association, with monthly service charges of €291.39
+
+IN SHORT, this is a spacious, bright and exceptionally complete apartment, ready for its new residents. With three bedrooms, a sunny loggia, high-quality finishes and a private parking space, this home has everything needed for pleasant and carefree living. Come inside, take a look around and experience for yourself how much space and enjoyment Derkinderenstraat 162 has to offer.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 26</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/232/753/631_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/669_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/639_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/612_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/586_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/573_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/645_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/663_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/579_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/594_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/585_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/646_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/681_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/625_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/644_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/684_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/699_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/581_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/753/685_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admiralengracht 277-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Admiralengracht 277-2</h1>
+  <p class="sub">
+    <span>1056 EA Amsterdam</span>
+    <span>·</span>
+    <span>John Franklinbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/763/658_1440x960.jpg" alt="Admiralengracht 277-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">31 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€800.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.511/m² · 2.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.3 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">94 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1926</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-admiralengracht-277-2/44521886/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 800.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.511</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 179,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1926</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>94 m²</dd></div>
+        <div class="frow"><dt>1 m²</dt><dd>Gebouwgebonden buitenruimte</dd></div>
+        <div class="frow"><dt>7 m²</dt><dd>Externe bergruimte</dd></div>
+        <div class="frow"><dt>6 m²</dt><dd>Inhoud</dd></div>
+        <div class="frow"><dt>305 m³</dt><dd>Indeling</dd></div>
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Airconditioning en natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Nefit Proline HRC30 (gas-fired combi boiler, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Kadastraal perceel</dt><dd>AMSTERDAM L 3387</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 739,39 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan vaarwater, aan water en Open views</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 179,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">ADMIRALENGRACHT 277-2, 1056 EA AMSTERDAM
+
+** FOR ENGLISH BELOW **
+
+Heerlijk licht en sfeervol 5-kamerappartement van ruim 94 m² met breed zonnig balkon (ca. 7 m²) op het westen, gelegen op een rustige plek aan het water, om de hoek van de levendige Jan Evertsenstraat. Er is een berging op de begane grond en zowel het Erasmuspark als het Rembrandtpark liggen op steenworpafstand.
+
+INDELING
+Via de entree betreedt men de woning op de tweede verdieping. Op deze verdieping bevinden zich 2 goed bemeten slaapkamers en een badkamer met ligbad, wc en wastafel met wastafelmeubel. Op de derde verdieping bevinden zich nog 2 slaapkamers en de ruime doorzon woonkamer met open keuken. Deze ruimte kenmerkt zich door het vele daglicht dan binnenvalt, het uitzicht aan de voorzijde op het water en de openslaande deuren aan de achterzijde naar het brede balkon. De keuken is van alle gemakken voorzien; 4 pits inductieplaat, afzuigkap, combi oven, grote koelkast, aparte vriezer, afwasmachine en zeer veel werk- en opbergruimte.
+
+LIGGING
+In de gezellige wijk de Baarsjes, aan het vaarwater van de Admiralengracht, vindt u deze heerlijk lichte dubbele bovenwoning. Gesitueerd in een rustige buurt met hippe en bruisende horeca zoals De Neef van Fred, cafe Cook, September Amsterdam, Fort Negen, Ulmus Bakkerij en Terrasmus. Diverse speciaalzaken en supermarkten zijn te vinden op de Jan Evertsenstraat en op het Mercatorplein. Zowel het Rembrandtpark als het Erasmuspark zijn op loopafstand. De Baarsjes is goed bereikbaar met het openbaar vervoer, diverse tram- en buslijnen hebben een stop in de directe nabijheid van het appartement bij o.a. het Mercatorplein, de Kinkerstraat, Postjesweg en de Hoofdweg. Via deze haltes is het gemakkelijk om naar het centrum, of andere stations te reizen. Tevens gunstig gelegen ten opzichte van de ring A-10, waardoor je gemakkelijk naar de Zuid-as en Sloterdijk reist, maar ook de steden zoals Alkmaar, Haarlem, Utrecht, Leiden, Den-Haag en Rotterdam.
+
+BIJZONDERHEDEN
+- Woonoppervlak van 94,4 m² conform NEN2580 meetrapport;
+- Huidige canon betreft €739,39 met tijdvak tot 15-07-2050;
+- De eeuwigdurende erfpacht is onder gunstige voorwaarden notarieel vastgelegd;  
+- 4 slaapkamers;
+- Drie airco-units;
+- Energielabel C; 
+- Keuken met kookeiland en diverse inbouwapparatuur;
+- Royale woonkamer met veel lichtinval;
+- Woning-breed balkon;
+- Berging op de begane grond;
+- Maandelijkse VvE bijdrage p.m. € 179,-;
+- Mogelijkheid om een privé dakterras aan te leggen; 
+- De luxe en het gemak van je eigen ligplaats voor de deur, perfect voor een bootje;
+- Oplevering in overleg.
+
+** ENGLISH TRANLATION ** 
+
+A lovely, light and cosy 5-room flat of over 94 m² with a wide, sunny west-facing balcony (approx. 7 m²), situated in a quiet spot by the water, just round the corner from the lively Jan Evertsenstraat. There is a storage room on the ground floor, and both Erasmuspark and Rembrandtpark are just a stone’s throw away. 
+
+LAYOUT
+The entrance leads into the flat on the second floor. On this floor, there are two good-sized bedrooms and a bathroom with a bath, toilet and washbasin with vanity unit. On the third floor, there are a further two bedrooms and the spacious living room with open-plan kitchen. This space is characterised by the abundance of natural light, the view of the water at the front and the French doors at the rear leading onto the wide balcony. The kitchen is fully equipped with all modern conveniences: a 4-ring induction hob, extractor hood, combi oven, large fridge, separate freezer, dishwasher and plenty of worktop and storage space.
+
+LOCATION
+In the charming De Baarsjes neighbourhood, on the Admiralengracht waterway, you’ll find this wonderfully light double-storey flat. Situated in a quiet neighbourhood with trendy and lively restaurants and bars such as De Neef van Fred, Café Cook, September Amsterdam, Fort Negen, Ulmus Bakkerij and Terrasmus. Various specialist shops and supermarkets can be found on Jan Evertsenstraat and at Mercatorplein. Both Rembrandtpark and Erasmuspark are within walking distance. De Baarsjes is easily accessible by public transport, with various tram and bus routes stopping in the immediate vicinity of the flat, including at Mercatorplein, Kinkerstraat, Postjesweg and Hoofdweg. From these stops, it is easy to travel to the city centre or other stations. It is also conveniently situated near the A-10 ring road, making it easy to travel to the Zuid-as and Sloterdijk, as well as to cities such as Alkmaar, Haarlem, Utrecht, Leiden, The Hague and Rotterdam.
+
+SPECIAL FEATURES
+- Living area of 94.4 m² in accordance with NEN2580 survey report;
+- The current ground rent is €739.39, valid until 15 July 2050;
+- The perpetual leasehold has been formalised by a notary on favourable terms;
+- 4 bedrooms;
+- Three air-conditioning units;
+- Energy label C;
+- Kitchen with cooking island and various built-in appliances;
+- Spacious living room with plenty of natural light;
+- Balcony spanning the full width of the property;
+- Storage room on the ground floor;
+- Monthly owners’ association fee: €179;
+- Potential to create a private roof terrace;
+- The luxury and convenience of your own mooring right on your doorstep, perfect for a small boat;
+- Handover by mutual agreement.
+
+DISCLAIMER 
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Koper heeft zijn eigen onderzoek plicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien. Van toepassing zijn de NVM voorwaarden.  
+
+NEN CLAUSULE 
+De gebruiksoppervlakte is berekend conform de branche vastgestelde NEN 2580- norm. De oppervlakte kan derhalve afwijken van vergelijkbare panden en/of oude referenties. Dit heeft vooral te maken met deze (nieuwe) rekenmethode. Koper verklaart voldoende te zijn geïnformeerd over de hiervoor bedoelde normering. Verkoper en diens makelaar doen hun uiterste best de juiste oppervlakte en inhoud te berekenen aan de hand van eigen metingen en dit zoveel mogelijk te ondersteunen door het plaatsen van plattegronden met maatvoering. Mocht de maatvoering onverhoopt niet (volledig) overeenkomstig de normering zijn vastgesteld, wordt dit door koper aanvaard. Koper is voldoende in de gelegenheid gesteld de maatvoering zelf te (laten) controleren. Verschillen in de opgegeven maat en grootte geven geen der partijen enig recht, zo ook niet op aanpassing van de koopsom. Verkoper en diens makelaar aanvaarden geen enkele aansprakelijkheid in deze.
+
+DISCLAIMER 
+This information has been compiled by us with the necessary care. However, on our part no liability is accepted for any incompleteness, inaccuracy or otherwise, nor the consequences thereof. The buyer has his or her own obligation to investigate all matters that are of importance to him/her. With regard to this property the broker is an advisor to the seller. We advise you to employ an expert (NVM) broker who guides you during the purchase process. If you have specific wishes with regard to the property, we advise you to make this known to your purchasing broker in good time and to do research (or have research done) independently. If you do not employ an expert representative, you, according to the law, consider yourself competent enough to be able to oversee all matters that are of importance. The terms and conditions of the NVM apply. 
+
+NEN CLAUSE 
+The usable area is calculated in accordance with the industry adopted NEN 2580 standard. Therefore, the surface can deviate from similar properties and/or old references. This has mainly to do with this (new) calculation method. Buyer declares to have been sufficiently informed about the aforementioned standards. The seller and his broker will do their utmost to calculate the right surface area and content based on their own measurements and support this as much as possible by placing floor plans with dimensions. In the unlikely event that the dimensions are not (completely) determined in accordance with the standards, this is accepted by the buyer. The buyer has been given sufficient opportunity to check the dimensions themselves or have them checked. Differences in the specified size do not give any of the parties any right, nor can they be used to discuss an adjustment of the purchase price. The seller and his broker do not accept any liability in this.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>De Graaf &amp; Groot Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 31</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/763/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/650_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/713_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/669_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/724_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/706_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/644_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/680_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/683_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/679_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/643_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/718_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/647_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/641_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/687_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/689_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/688_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/693_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/682_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/648_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/663_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/660_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/763/645_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

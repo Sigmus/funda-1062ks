@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Langswater 631 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Langswater 631</h1>
+  <p class="sub">
+    <span>1069 EE Amsterdam</span>
+    <span>·</span>
+    <span>Dijkgraafpleinbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/146/930_1440x960.jpg" alt="Langswater 631 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">28 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€350.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.930/m² · 3.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">71 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1960-1970</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">11 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-langswater-631/80970305/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 289 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 350.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.930</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 288,64 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Bouwperiode</dt><dd>1960-1970</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>71 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>10 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>227 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>11 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler (huur)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN G 6282</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 31-03-2040)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 65,00 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 288,64 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Een heerlijk licht 4-kamer appartement op de 11e verdieping met zonnige woonkamer, een balkon op het zuiden, 3 slaapkamers en vrij uitzicht. Wat een prachtig uitzicht, zowel aan de voorzijde als aan de achterzijde van het appartement en wat is het mooi verbouwd.... 
+
+Gelegen op zeer goed bereikbare locatie! Op een paar minuten lopen van de supermarkt en om de hoek van tram 17 met directe verbinding naar Centraal Station en Lelylaan/Schiphol. De vele winkels aan het Osdorpplein liggen dichtbij met direct daarachter de prachtige omgeving van de Sloterplas.
+
+I N D E L I N G : 
+
+Gemeenschappelijke entree met brievenbussen en twee liften en toegangsdeur naar de bergingen. De bergingen zijn ook buitenom bereikbaar. 
+
+Met de lift naar de galerij op de 11e verdieping. Entree in de woning, tochtportaal, hal met toegang tot bijna alle vertrekken. Woonkamer aan de achterzijde van het appartement, met fantastisch uitzicht. 
+De  woonkeuken is verplaatst naar de achterzijde van woning, met toegang tot het balkon. Alle denkbare inbouwapparatuur is hier te vinden. Een plaatje is het! Het balkon is gelegen op het zonnige zuiden en beschikt over een ruim zitgedeelte. 
+Aan de voorzijde van het appartement bevindt zich de 3 slaapkamers.  
+De badkamer is voorzien van een groot wastafelmeubel en het toilet. 
+
+In de onderbouw op de begane grond bevindt zich een ruime berging behorende bij het appartement.
+
+L O C A T I E :
+
+De woning is gelegen op een uitstekende, goed bereikbare locatie. Op slechts vijf minuten afstand bevinden zich een supermarkt en de tramhaltes van lijn 17 en iets verderop lijn 1, met directe verbindingen naar onder andere Centraal Station en Station Lelylaan/Schiphol.
+
+Voor de dagelijkse boodschappen zijn er meerdere mogelijkheden. Op loopafstand liggen de winkels aan het Dijkgraafplein en Tussen Meer. Het winkelcentrum Osdorpplein ligt iets verderop en biedt een breed aanbod aan winkels en theater Meervaart. Ook winkelcentrum Akerpoort en De Dukaat (Ecuplein) bevinden zich in de nabije omgeving.
+
+De buurt ligt in het groenste stadsdeel van Amsterdam: Nieuw-West. In de directe omgeving vindt u het Natuurpark Vrije Geer, het Kasterleepark, de Tuinen van West, het Rembrandtpark en uiteraard het Sloterpark met de Sloterplas. Een heerlijke omgeving om te recreëren, wandelen, hardlopen of te genieten van een terras aan het water. Ook de strandjes aan het Nieuwe Meer en de Oeverlanden zijn per fiets goed bereikbaar. Daarnaast zijn er diverse sportscholen in de buurt en het Sloterparkbad.
+
+De bereikbaarheid is uitstekend. Met de fiets, bus, tram of auto bent u binnen circa 25 minuten in het centrum van Amsterdam. Schiphol is zowel met het openbaar vervoer als met de auto zeer goed bereikbaar. Er is voldoende parkeergelegenheid voor de deur. Tram 17 heeft een directe verbinding met Station Lelylaan (met snelle metroverbindingen naar Schiphol-Hoofddorp en Centraal Station), het Leidseplein en het centrum. Met de auto zijn de Ring A10 en de snelwegen A4, A5 en A9 binnen ongeveer vijf minuten bereikbaar.
+
+W A T   U   O O K   W I L T   W E T E N :
+
+- Ruim 4-kamer appartement op de 11e verdieping met zonnig balkon en een (grote) berging in de onderbouw
+- Het betreft een appartementsrecht (vrij te financieren)
+- Woonoppervlak circa 71 m² (meetrapport aanwezig)
+- Balkon op het zuiden met vrij uitzicht
+- Lichte woonkamer 
+- 3 slaapkamers 
+- Grote berging in de onderbouw
+- Twee liften, zeer net complex
+- Energielabel D
+- Verwarming middels stadsverwarming, warm water middels elektrische boiler.
+- Actieve Vereniging van Eigenaren, in professioneel beheer
+- De bijdrage aan de VvE bedraagt momenteel € 288,63 per maand, inclusief opstalverzekering, gemeenschappelijke kosten en reserveringen voor groot onderhoud en exclusief voorschot stookkosten.
+- De erfpachtcanon bedraagt momenteel € 72,39 per jaar en wordt jaarlijks geïndexeerd per 1 oktober, het huidige tijdvak loopt tot en met 31-03-2040 en zal hierna worden herzien
+- Kijk op langswater.com voor informatie over de bouw, de architecten, de plattegronden en de verenigingen van de 7 complexen aan Langswater
+- Oplevering in overleg
+
+Kortom: een ruim en goed ingedeeld appartement met lichte woonkamer en 3 slaapkamers, gelegen op een top locatie!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Linger OG Makelaars en Taxateurs</strong> · Linger OG Makelaars en Taxateurs</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 28</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/146/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/867_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/987_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/884_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/919_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/147/044_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/911_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/847_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/147/004_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/894_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/981_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/147/045_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/898_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/147/026_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/147/041_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/970_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/936_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/857_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/939_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/905_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/972_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/147/024_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/146/902_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

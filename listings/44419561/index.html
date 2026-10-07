@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joos de Moorstraat 1-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Joos de Moorstraat 1-2</h1>
+  <p class="sub">
+    <span>1056 TT Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/231/352/710_1440x960.jpg" alt="Joos de Moorstraat 1-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€600.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.143/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">84 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1935</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-joos-de-moorstraat-1-2/44419561/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 600.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.143</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 175,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1935</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>84 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>279 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HR Intergas (gas-fired combi boiler uit 2012, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN L 3554</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en Open views</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 175,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">(the translation is on the English version of this site)
+Luxe gerenoveerd 4/5-kamer hoekappartement op EIGEN GROND van bijna 85 M2 met mooie badkamer en luxe keuken in de Baarsjes. Het appartement is gebouwd in de charmante stijl uit de jaren dertig en is tijdens de renovatie goed geïsoleerd, waaronder een geisoleerde vloer en dubbel glas.
+
+INDELING:
+Via de gemeenschappelijke opgang bereikt u op de tweede verdieping de woning.
+Alle ruimtes zijn via de centrale hal te bereiken. Er zijn twee deuren die toegang geven tot de doorzon living met open keuken. Hier valt meteen de enorme hoeveelheid licht op door de vele ramen rondom ! In de hoek achterin is een moderne keuken met kookeiland opgesteld welke is uitgerust met alle benodigde inbouwapparatuur en zijn er meerdere vaste kasten voor opbergmogelijkheden.
+
+Er zijn in totaal 3 slaapkamers waarvan een met ingebouwde garderobe kast, de luxe badkamer ligt in het midden van de twee grotere slaapkamers en is uitgerust met een ligbad die is voorzien van een douche gedeelte, ook is er een modern, strak wastafelmeubel met spiegel en een handdoekradiator. Verder beschikt deze verdieping over een separaat toilet en een handige kast voor de wasmachine en droger.
+
+HET ONDERHOUD:
+Het betreft hier een volledig gerenoveerde woning, de keuken is recent vernieuwd, er ligt een mooie donker houten parket vloer in bijna het gehele appartement, alles is gestuukt en recent geschilderd. Verder is de woning in zijn geheel voorzien van dubbel glas, is de vloer geïsoleerd met fermacell en is de groepenkast vernieuwd.
+
+DE OMGEVING:
+Dit is wat je zoekt in een stad. Wonen in een brede, rustige, groene straat met vrij uitzicht op een plein, met om de hoek een mogelijkheid voor een bootje en veel fijne adresjes zoals Fort Negen en diverse leuke horeca gelegenheden, dus genoeg aanbod om jezelf goed te vermaken. Volgens velen is dit momenteel een van de leukste buurten van Amsterdam, je loopt zo naar het Erasmuspark of het Rembrandtpark. Op de fiets ben je binnen 8 minuten in het Centrum, het Vondelpark, de Ten Katemarkt of bij De Hallen (met o.a. bioscoop, winkels, restaurantjes en vaak een Sunday-market). De straat is snel te bereiken vanaf de Ring A10 en er zijn zeer goede mogelijkheden met het openbaar vervoer, ook zijn er genoeg scholen en is er een speeltuin in de buurt.
+
+VvE:
+De VvE wordt professioneel beheerd en reserveerd via de 0,5% regeling. Recent is er groot onderhoud aan het dak geweest en zijn de kozijnen aan de voorzijde een paar jaar gelegen geschilderd. Momenteel is verkoper bezig met een wijziging splisting, kosten zijn voor rekening verkoper.
+
+BIJZONDERHEDEN:
+Vaste project notaris van Rooij en Wassink notarissen
+Voorbehoud wijziging splitsing (kosten zijn voor verkoper)
+Pand is gebouwd in 1935 en staat op EIGEN GROND
+Woonoppervlak is 84,35 m² conform NEN 2580 onder NVM voorwaarden
+Verwarming middels eigen CV-ketel uit 2012
+De servicekosten worden conform het nieuwe breukdeel waarschijnlijk 175 euro per maand
+Oplevering is in overleg, bij voorkeur 2 a 3 maanden na tekenen koopakte i.v.m. wijziging splitsing
+
+Deze aanmelding is met zorg samengesteld; de informatie die wordt verstrekt is echter indicatief en er kunnen geen rechten aan ontleend worden. De Meetinstructie NEN 2580 onder NVM-voorwaarden is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting (rapport aanwezig).</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 1 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>ISAAK makelaardij o.g. B.V.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/231/352/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/981_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/014_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/004_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/993_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/000_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/980_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/009_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/006_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/010_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/345/049_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/005_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/983_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/001_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/002_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/997_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/994_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/356/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/345/188_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/991_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/988_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/008_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/992_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/012_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/999_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/343/188_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/353/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/316/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/050_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/052_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/051_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/317/007_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

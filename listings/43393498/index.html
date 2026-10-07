@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eurokade 41 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Eurokade 41</h1>
+  <p class="sub">
+    <span>1060 RZ Amsterdam</span>
+    <span>·</span>
+    <span>De Aker-Oost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/226/688/818_1440x960.jpg" alt="Eurokade 41 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">64 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€695.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.860/m² · 3.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.7 km</span>
+      <span class="chip">7 bedrooms</span>
+      <span class="chip">143 m² living</span>
+      <span class="chip">8 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1998</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">4 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-eurokade-41/43393498/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 695.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.860</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1998</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Lessenaardak bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>143 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>10 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>93 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>508 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>8 rooms (7 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>5 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>5 douches, 4 toiletten, 4 Washbasins, Bathtub, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>4 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>CCTV, glasvezelkabel, Mechanical ventilation, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Nefit (gas-fired combi boiler uit 2016, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND G 3835</dt><dd>Oppervlakte</dd></div>
+        <div class="frow"><dt>93 m²</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijk eigendom belast met erfpacht (einddatum erfpacht: 01-01-2047)</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan water, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>54 m² (5,40 m deep en 10,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidwesten</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Ruimte, rust én mogelijkheden – deze woning heeft het allemaal!
+
+Bent u op zoek naar een riante, multifunctionele woning waar u met het hele gezin comfortabel kunt wonen én werken? Dan is deze verrassend ruime woning van maar liefst 142 m² in het groene en kindvriendelijke De Aker écht iets voor u.
+Met zeven slaapkamers, vijf badkamers, een zonnige tuin, balkon én een royale extra kamer met hoog plafond, biedt deze woning volop ruimte voor grote gezinnen, studerende pubers die thuis willen blijven wonen maar wel met een zelfstandige plek, of voor wie een praktijk of kantoor aan huis zoekt.
+
+Wonen in De Aker betekent rust, ruimte én alle voorzieningen dichtbij. Op loopafstand vindt u basisscholen, kinderopvang, een gezondheidscentrum, winkels (zoals winkelcentrum Dukaat), tramhalte (lijn 1) én veel groen en speelruimte. Binnen een half uur bent u in hartje Amsterdam met de tram, en met de auto zit u zó op de A4, A5, A9 of A10.
+
+Indeling
+Begane grond
+Via de overdekte entree betreedt u de hal met meterkast en trapkast met wasmachine-aansluiting. Aan de hal grenzen drie kamers, elk met een eigen kleine kitchenette, douche en toilet. De twee kamers aan de achterzijde geven toegang tot de zonnige tuin op het zuidwesten. Perfect als eigen ruimtes voor pubers, logees of als praktijkruimte!
+
+Eerste verdieping
+Hier vindt u een ruime slaapkamer aan de voorzijde met eigen badkamer en uitzicht op de Eurokade en het vernieuwde Ecuplein. Aan de achterzijde ligt de lichte woonkamer met open keuken en openslaande deuren naar het balkon met trap naar de tuin. Ideaal als u werk- en woonruimte gescheiden wilt houden.
+De moderne keuken is voorzien van inbouwapparatuur, waaronder een inductiekookplaat, oven, vaatwasser en een royale Amerikaanse koelkast met water- en ijsdispenser. De gehele verdieping is afgewerkt met een hardhouten vloer.
+
+Tweede verdieping
+Twee grote slaapkamers en een ruime badkamer met ligbad, aparte douche en wastafel. Het toilet is separaat.
+
+Derde verdieping
+Een grote kamer met hoog plafond aan de voorzijde, perfect als slaapkamer, werkruimte, atelier of speelkamer. Dankzij de hoogte is het zelfs mogelijk om hier een entresol te creëren. Aan de achterzijde vindt u een royale wasruimte met aansluiting voor wasmachine en droger, de cv-opstelling en extra bergruimte. Er is tevens ruimte voor het plaatsen van een dakkapel.
+
+Buitenruimte
+De tuin is gelegen op het zonnige zuidwesten en is bereikbaar vanuit de twee kamers op de begane grond en via een trap vanaf het balkon. Hier geniet u bijna de hele dag van de zon! De tuin beschikt over een houten schuur van ca. 10 m² en een achterom via de gezamenlijke binnentuin, die voorzien is van een pingpongtafel, klimrek en zitgelegenheid.
+
+Goed om te weten:
+•	Erfpachtcanon afgekocht tot 1 januari 2047
+•	Overstap naar eeuwigdurende erfpacht onder gunstige voorwaarden reeds geregeld
+•	Twee parkeervergunningen mogelijk
+•	Veelzijdige indeling met meerdere badkamers en semi-zelfstandige ruimtes
+•	Zonnige tuin en balkon
+•	Perfect voor gezinnen, thuiswerkers of praktijk aan huis
+
+Leven in een groene, kindvriendelijke én goed bereikbare buurt
+De Eurokade ligt in de geliefde Europese Muntenwijk – een van de mooiste delen van De Aker. Deze wijk is ruim opgezet, rijk aan groen en biedt volop speelruimte voor kinderen. Ideaal voor gezinnen die op zoek zijn naar een rustige en veilige woonomgeving met alle voorzieningen binnen handbereik.
+
+Op loopafstand vindt u winkelcentrum Dukaat, waar u terecht kunt voor al uw dagelijkse én wekelijkse boodschappen. Hier vindt u o.a. een supermarkt (Jumbo), bakker, slager, drogist, kaaswinkel, viswinkel, bloemenzaak, fietswinkel en stomerij. Daarnaast zijn hier een gezondheidscentrum, apotheek, kapper en kinderopvang gevestigd. Drie basisscholen bevinden zich in de wijk zelf en er zijn diverse sportverenigingen in de directe omgeving.
+Wilt u uitgebreider winkelen of uitgaan? Dan ligt winkelcentrum Osdorpplein op fietsafstand. U vindt hier bekende winkels zoals Albert Heijn, Blokker, Douglas, Etos, Hema en WE, maar ook gezellige boetiekjes en horecagelegenheden. In food court Westmarket proeft u gerechten uit verschillende internationale keukens. Ook vindt u hier theater De Meervaart en de Openbare Bibliotheek. Het Osdorpplein ligt aan de Sloterplas – dé plek voor wandelen, zwemmen, fietsen of watersport. Ook zijn er diverse restaurants aan het water.
+
+Centrale ligging en goede bereikbaarheid
+Met de auto rijdt u binnen 10 minuten op de A4, A5, A9 of A10. Schiphol bereikt u in ongeveer 15 minuten.
+Tram lijn 1 brengt u rechtstreeks naar het centrum van Amsterdam of binnen 10 minuten naar Station Lelylaan. Met buslijnen 61 en 69 reist u eenvoudig naar Station Sloterdijk of Schiphol. En ook &#x27;s nachts komt u makkelijk thuis met nachtbus N83 vanuit de stad.
+
+Space, peace and endless possibilities – this home has it all!
+Are you looking for a spacious, multifunctional home where your entire family can live and work comfortably? Then this surprisingly roomy house of no less than 142 m², located in the green and family-friendly neighbourhood De Aker, might be exactly what you’re looking for.
+With seven bedrooms, five bathrooms, a sunny garden, balcony, and a generous extra room with a high ceiling, this property offers all the space you need – whether you&#x27;re a large family, have teenagers who want their own space, or need a home office or private practice.
+Living in De Aker means peace, space, and convenience. Within walking distance, you&#x27;ll find primary schools, childcare, a health centre, shops (such as shopping centre Dukaat), a tram stop (line 1), and plenty of green space and playgrounds. The tram takes you to the heart of Amsterdam within 30 minutes, and by car, you’ll be on the A4, A5, A9 or A10 motorways in just minutes.
+________________________________________
+Layout
+Ground floor
+Through the covered entrance, you enter the hallway with a meter cupboard and storage under the stairs (with washing machine connection). The hallway gives access to three rooms, each equipped with a private kitchenette, shower, and toilet. The two rooms at the rear open directly into the sunny southwest-facing garden – perfect for independent teens, guests, or use as office/practice space.
+First floor
+At the front, you&#x27;ll find a spacious bedroom with a private bathroom and a nice view over the Eurokade and the renovated Ecuplein. At the back is the bright living room with open kitchen and French doors leading to the balcony, which connects to the garden via an outdoor staircase – ideal for keeping work and home life separate.
+The modern kitchen includes built-in appliances such as an induction hob, oven, dishwasher, and a large American-style fridge (Samsung) with water and ice dispenser. The entire floor features a stylish hardwood floor.
+Second floor
+Two large bedrooms and a generous bathroom with a bathtub, separate shower, and washbasin. There is also a separate toilet on this floor.
+Third floor
+At the front, a spacious room with a double-height ceiling, ideal as a bedroom, workshop or playroom. There is even the possibility of creating a mezzanine for additional space. At the rear, a large laundry room with washer/dryer connections, the boiler setup, and ample storage space. There&#x27;s also room to add a dormer window if desired.
+________________________________________
+Outdoor space
+The sun-drenched garden faces southwest and is accessible from two rooms on the ground floor and via the stairs from the balcony. Enjoy sunshine almost all day long! The garden also features a wooden shed (approx. 10 m²) and a back entrance via the shared courtyard, which includes a ping pong table, climbing frame, benches, and picnic tables.
+________________________________________
+Good to know:
+•	Ground lease (erfpacht) paid off until January 1st, 2047
+•	Switch to perpetual lease under favourable conditions already arranged
+•	Two parking permits available
+•	Versatile layout with multiple bathrooms and semi-independent living units
+•	Sunny garden and balcony
+•	Ideal for families, home-based entrepreneurs, or anyone needing a lot of space
+________________________________________
+A unique home with endless possibilities – come and experience it for yourself. Schedule a viewing today!
+
+Living in a Green, Family-Friendly and Well-Connected Neighbourhood
+Eurokade is located in the popular Europese Muntenwijk – one of the most attractive parts of De Aker. This neighbourhood is spaciously designed, rich in greenery, and offers plenty of play areas for children.
+Just a short walk away, you’ll find shopping centre Dukaat, where you can do both your daily and weekly grocery shopping. It features a large Jumbo supermarket, bakery, butcher, drugstore, cheese shop, fishmonger, florist, bike shop, and dry cleaner. You’ll also find a health centre, pharmacy, hairdresser, and daycare facilities. 
+If you&#x27;re in the mood for more extensive shopping or a night out, Osdorpplein shopping centre is just a short bike ride away. Here you’ll find well-known stores such as Albert Heijn, Blokker, Douglas, Etos, Hema, and WE, as well as charming boutiques and cosy cafés. At the Westmarket food court, you can enjoy dishes from various international cuisines. The area also features theatre De Meervaart and a public library.
+Osdorpplein is located next to the Sloterplas lake, a lively hub for walking, swimming, cycling, and watersports. The lake is lined with several restaurants offering beautiful waterside dining.
+________________________________________
+Central Location and Excellent Accessibility
+Within just 10 minutes, you can be on the A4, A5, A9, or A10 motorways. Schiphol Airport is about a 15-minute drive away.
+Tram line 1 offers a direct connection to Amsterdam city centre or Station Lelylaan in just 10 minutes. Bus lines 61 and 69 provide easy access to Station Sloterdijk or Schiphol Airport. And even at night, you can get home comfortably with night bus N83 from the city.
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Zelfverkopen.nl</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 64</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/226/688/818_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/918_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/819_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/840_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/820_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/821_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/849_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/822_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/823_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/689/014_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/689/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/824_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/826_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/827_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/828_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/902_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/830_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/917_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/833_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/689/049_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/845_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/835_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/689/054_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/837_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/838_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/841_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/904_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/844_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/942_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/689/018_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/846_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/903_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/848_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/850_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/852_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/856_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/922_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/860_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/863_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/864_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/866_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/689/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/871_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/874_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/878_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/689/032_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/882_1440x960.jpg", "https://cloud.funda.nl/valentina_media/226/688/886_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

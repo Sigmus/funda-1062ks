@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burgemeester Tellegenstraat 39-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Burgemeester Tellegenstraat 39-2</h1>
+  <p class="sub">
+    <span>1073 KB Amsterdam</span>
+    <span>·</span>
+    <span>Burgemeester Tellegenbuurt-Oost</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/280/741_1440x960.jpg" alt="Burgemeester Tellegenstraat 39-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">25 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€575.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.274/m² · 4.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">62 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy Niet beschikbaar</span>
+      <span class="chip">Built 1928</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-burgemeester-tellegenstraat-39-2/44584272/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 575.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.274</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 140,26 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1928</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>62 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>228 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Bathtub, toilet, Underfloor heating, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>Niet Available</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Elektrische verwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 12036</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-03-2063</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 140,26 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">JA! Een sfeervolle bovenwoning op een karakteristieke plek in Amsterdam-Zuid, gelegen aan de prachtige Burgemeester Tellegenstraat in de geliefde de Pijp.
+
+De woning beschikt over een fijne indeling met drie slaapkamers, een lichte woonkamer, praktische keuken en moderne badkamer.
+
+De rustige ligging aan een eenrichtingsstraat wordt gecombineerd met alle voorzieningen binnen handbereik. De woning is gelegen op erfpachtgrond waarvan de canon is afgekocht tot en met maart 2063!
+
+INDELING 
+De woning is bereikbaar via een gemeenschappelijk trappenhuis en is gelegen op de tweede verdieping;
+
+WONEN &amp; LEVEN
+- Binnenkomst in de centrale hal, waar zich de meterkast bevindt;
+- De lichte woonkamer beschikt over fijn lichtinval dankzij de grote raampartij aan de voorzijde;
+- Ruime woonkamer met voldoende plek voor een sfeervolle zithoek. Vanuit de woonkamer leidt een interne trap naar de extra kamer op de derde verdieping;
+- De woonkamer beschikt over een praktische bergkast;
+- De praktisch ingedeelde keuken bevindt zich aan de achterzijde en beschikt over twee grote raampartijen en directe toegang tot het balkon;
+- De keuken is uitgerust met diverse inbouwapparatuur, waaronder een 4-pits gaskookplaat, oven, vaatwasser en een aansluiting voor de wasmachine;
+- Vanuit de keuken is er een prettige verbinding met het groene karakter aan de achterzijde van de woning.
+- Ruimte voor een gezellige eettafel met uitzicht over de groene binnentuinen.
+
+BUITENRUIMTE
+- De woning beschikt over een charmant balkon, bereikbaar vanuit zowel de master bedroom als de keuken;
+- Het balkon kijkt uit over de groene binnentuinen en biedt een fijne plek om in alle rust te genieten van een kop koffie.
+
+SLAPEN &amp; BADEN
+- De woning beschikt in totaal over drie slaapkamers;
+- De master bedroom bevindt zich aan de achterzijde en biedt directe toegang tot het balkon;
+- De slaapkamer biedt voldoende ruimte voor een tweepersoonsbed en beschikt over een praktische bergkast;
+- De tweede slaapkamer bevindt zich aan de rustige voorzijde en is eveneens geschikt als kantoor-, kinder- of logeerkamer;
+- Via de interne trap is de derde en tevens bovenste verdieping bereikbaar, met een ruime derde slaapkamer van circa 11 m²;
+- De centraal gelegen moderne badkamer is voorzien van een bad-douchecombinatie, wastafelmeubel en toilet;
+- De badkamer beschikt tevens over comfortabele vloerverwarming.
+
+WOONOPPERVLAKTE 
+- De woonoppervlakte bedraagt 62,40 m²;
+- De gebouwgebonden buitenruimte bedraagt 1,40 m².
+NB. De opgegeven oppervlakte is door een gespecialiseerd bedrijf gemeten conform NEN2580. 
+
+BOUWAARD &amp; TECHNISCHE INFORMATIE
+- De woning is gelegen in een pand dat omstreeks 1928 gebouwd is; 
+- Traditionele bouwstijl; 
+- Houten kozijnen, voorzien van dubbele beglazing; 
+- Verwarming en warm water middels Cv-ketel;
+- Elektriciteit: voldoende groepen met aardlekschakelaar; 
+- Energielabel G.
+
+KADASTER &amp; SPLITSING 
+- Kadastrale aanduiding Amsterdam V 12036 A237
+- Het pand is op 21 mei 2013 gesplitst in 188 appartementsrechten;
+- Het appartementsrecht A237 is voor 70/15.541e aandeel in de gemeenschap gerechtigd.
+
+ERFPACHT
+- De woning is gelegen op eeuwigdurend erfpachtgrond van de gemeente Amsterdam
+- De algemene bepalingen voor eeuwigdurend erfpacht 2016 zijn van toepassing;
+- De huidige canon is AFGEKOCHT t/m 31 maart 2063.
+- Het toekomstige tijdvak zal €1.112,23 per jaar kosten, exclusief inflatie.
+
+VERENIGING VAN EIGENAREN
+- De VvE bestaat uit 188 leden en wordt professioneel beheerd door VvE Beheer Amsterdam;
+- De servicekosten bedragen € 140,26 per maand; 
+- Er is een MJOP beschikbaar;
+- Het betreft een actieve en financieel gezonde VvE.
+
+LOCATIE
+- Perfect gelegen aan de prachtige en ruime Burgemeester Tellegenstraat, ontworpen door de gerenommeerde Amsterdamse School-architecten M. de Klerk en P.L. Kramer;
+- De woning is gelegen aan een rustige eenrichtingsstraat, voornamelijk bestemd voor bestemmingsverkeer, wat zorgt voor een rustige woonomgeving en tegelijkertijd een uitstekende ligging nabij het bruisende stadsleven;
+- De populaire Albert Cuypmarkt, het Sarphatipark en de Amstel zijn allemaal op loopafstand gelegen;
+- De Van Woustraat bevindt zich om de hoek en biedt een breed aanbod aan winkels en supermarkten voor de dagelijkse boodschappen;
+- De omgeving staat bekend om de uitstekende restaurants, gezellige cafés, wijnbars, karakteristieke straten en levendige pleinen;
+- Het centrum van Amsterdam is eenvoudig bereikbaar, waardoor het beste van Amsterdam binnen handbereik ligt;
+- Kortom, een prachtige locatie waar rust, groen en de levendige sfeer van Amsterdam op een ideale manier samenkomen.
+
+BEREIKBAARHEID EN PARKEREN
+- De woning is zowel met de auto als met het openbaar vervoer uitstekend bereikbaar;
+- Metrostation De Pijp (Noord/Zuidlijn) bevindt zich op enkele minuten loopafstand en biedt een directe verbinding met station Amsterdam Zuid in circa 3 minuten en Amsterdam Centraal in circa 5 minuten;
+- Aan de Van Woustraat en Ceintuurbaan bevinden zich diverse tramhaltes met goede verbindingen naar verschillende delen van de stad;
+- Met de auto bieden de S110 en S109 een snelle aansluiting op de A2 en de ringweg A10;
+- Kortom, de woning beschikt over een uitstekende bereikbaarheid, zowel richting het centrum als de omliggende gebieden.
+
+BIJZONDERHEDEN
+- Lichte en goed ingedeelde woning, verdeeld over de tweede en derde verdieping;
+- Drie slaapkamers, waaronder een ruime slaapkamer van circa 11 m² op de bovenste verdieping;
+- Charmant balkon met uitzicht over de groene achtertuin;
+- Separate, lichte en ruime woonkeuken;
+- Erfpacht afgekocht tot en met 31 maart 2063;
+- Het betreft een Rijksbeschermd stadsgezicht;
+- Vergunning voor het omzetten van de berging naar woonruimte.
+
+OPLEVERING
+De oplevering zal plaatsvinden in overleg.
+
+VERKOOPVOORWAARDEN
+- Koopakte bij notaris in Amsterdam naar keuze koper conform Amsterdam Ring model.
+
+OP AANVRAAG BESCHIKBAAR
+- Eigendomsakte
+- Energielabel G
+- Splitsingsakte
+- Stukken VvE
+- Meetrapport
+
+**************************
+
+JA! A charming upper-floor apartment in a characteristic location in Amsterdam-Zuid, situated on the beautiful Burgemeester Tellegenstraat in the popular De Pijp neighbourhood.
+
+The property offers a pleasant layout with three bedrooms, a bright living room, a practical kitchen and a modern bathroom.
+
+The peaceful location on a one-way street is combined with all amenities within easy reach. The property is situated on leasehold land, with the ground rent paid off until and including March 2063.
+
+LAYOUT
+The property is accessible via a communal staircase and is located on the second floor.
+
+LIVING &amp; DINING
+- Entrance into the central hallway, which provides access to the meter cupboard;
+- The bright living room benefits from an abundance of natural light through the large windows at the front;
+- Spacious living room with ample room for a comfortable seating area. An internal staircase leads from the living room to the additional room on the third floor;
+- The living room features a practical storage cupboard;
+- The practically laid-out kitchen is located at the rear of the property and features two large windows and direct access to the balcony;
+- The kitchen is equipped with various built-in appliances, including a 4-burner gas hob, oven, dishwasher and washing machine connection;
+- The kitchen offers a pleasant connection to the greenery at the rear of the property;
+- There is ample space for a dining table overlooking the green inner gardens.
+
+OUTDOOR SPACE
+- The property features a charming balcony, accessible from both the master bedroom and the kitchen;
+- The balcony overlooks the green inner gardens and provides a pleasant and peaceful spot to enjoy a cup of coffee.
+
+BEDROOMS &amp; BATHROOM
+- The property has a total of three bedrooms;
+- The master bedroom is located at the rear and offers direct access to the balcony;
+- The bedroom provides ample space for a double bed and features a practical storage cupboard;
+- The second bedroom is located at the quiet front of the property and is also suitable as a home office, children&#x27;s room or guest bedroom;
+- The internal staircase provides access to the third and uppermost floor, featuring a spacious third bedroom of approximately 11 m²;
+- The centrally located modern bathroom is equipped with a bath/shower combination, vanity unit and toilet;
+- The bathroom also features underfloor heating.
+
+LIVING AREA
+- The living area measures 62.40 m²;
+- The building-related outdoor space measures 1.40 m².
+Please note: The stated area has been measured by a specialised company in accordance with the NEN 2580 standard.
+
+CONSTRUCTION &amp; TECHNICAL INFORMATION
+- The property is situated in a building dating from approximately 1928;
+- Traditional construction;
+- Wooden window frames fitted with double glazing;
+- Heating and hot water provided by a central heating boiler;
+- Electricity: sufficient groups with residual-current protection;
+- Energy label G.
+
+LAND REGISTRY &amp; SUBDIVISION
+- Cadastral designation: Amsterdam V 12036 A237;
+- The building was subdivided into 188 apartment rights on 21 May 2013;
+- Apartment right A237 represents a 70/15,541 share in the community.
+
+LEASEHOLD
+- The property is situated on perpetual leasehold land owned by the Municipality of Amsterdam;
+- The General Provisions for Perpetual Leasehold 2016 apply;
+- The current ground rent has been PAID OFF until and including 31 March 2063;
+- The ground rent for the subsequent period will amount to €1,112.23 per year, excluding inflation.
+
+OWNERS&#x27; ASSOCIATION
+- The Owners&#x27; Association consists of 188 members and is professionally managed by VvE Beheer Amsterdam;
+- The monthly service charges are €140.26;
+- A multi-year maintenance plan (MJOP) is available;
+-The Owners&#x27; Association is active and financially healthy.
+
+LOCATION
+- Ideally located on the beautiful and spacious Burgemeester Tellegenstraat, designed by renowned Amsterdam School architects M. de Klerk and P.L. Kramer;
+- The property is situated on a quiet one-way street, primarily used by local traffic, creating a peaceful residential setting while offering an excellent location close to the vibrant city centre;
+- The popular Albert Cuyp Market, Sarphatipark and the Amstel River are all within walking distance;
+- Van Woustraat is just around the corner and offers a wide range of shops and supermarkets for everyday groceries;
+- The neighbourhood is known for its excellent restaurants, cosy cafés, wine bars, characteristic streets and lively squares;
+-Amsterdam city centre is easily accessible, putting the best of Amsterdam within easy reach;
+- In short, a wonderful location where peace, greenery and the vibrant atmosphere of Amsterdam come together perfectly.
+
+ACCESSIBILITY &amp; PARKING
+- The property is easily accessible by both car and public transport;
+- De Pijp metro station, served by the North/South Line, is just a few minutes&#x27; walk away and provides a direct connection to Amsterdam Zuid station in approximately 3 minutes and Amsterdam Central Station in approximately 5 minutes;
+- Various tram stops are located along Van Woustraat and Ceintuurbaan, providing convenient connections to different parts of the city;
+- By car, the S110 and S109 provide quick access to the A2 motorway and the A10 ring road;
+- In short, the property offers excellent accessibility, both to the city centre and surrounding areas.
+
+KEY FEATURES
+- Bright and well-designed property spread over the second and third floors;
+- Three bedrooms, including a spacious bedroom of approximately 11 m² on the uppermost floor;
+- Charming balcony overlooking the green rear gardens;
+- Separate, bright and spacious kitchen/dining area;
+- Leasehold ground rent paid off until and including 31 March 2063;
+- Located within a Rijksbeschermd stadsgezicht (protected townscape);
+- Permit available for converting the storage room into residential space.
+
+COMPLETION
+Completion will take place in consultation.
+
+SALES CONDITIONS
+- Purchase agreement to be concluded before a notary in Amsterdam of the buyer’s choice, in accordance with the Amsterdam Ring model.
+
+AVAILABLE UPON REQUEST
+- Deed of title
+- Energy label G
+- Deed of subdivision
+- Owners&#x27; Association documents
+- Measurement report</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Jan-Willem Kwant</strong> · JA! Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 25</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/280/741_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/746_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/694_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/730_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/721_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/779_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/759_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/707_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/698_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/780_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/783_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/767_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/787_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/684_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/761_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/768_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/747_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/704_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/280/695_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theodorus Dobbestraat 74-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Theodorus Dobbestraat 74-3</h1>
+  <p class="sub">
+    <span>1063 BX Amsterdam</span>
+    <span>·</span>
+    <span>Dobbebuurt</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/889/096_1440x960.jpg" alt="Theodorus Dobbestraat 74-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">33 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€350.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.385/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">65 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy G</span>
+      <span class="chip">Built 1953</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-theodorus-dobbestraat-74-3/44585511/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>65 m²</dd></div>
+        <div class="frow"><dt>65 m²</dt><dd>Overige Indoore ruimte</dd></div>
+        <div class="frow"><dt>17 m²</dt><dd>Gebouwgebonden buitenruimte</dd></div>
+        <div class="frow"><dt>8 m²</dt><dd>Externe bergruimte</dd></div>
+        <div class="frow"><dt>4 m²</dt><dd>Inhoud</dd></div>
+        <div class="frow"><dt>275 m³</dt><dd>Indeling</dd></div>
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor en een zolder</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 350.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.385</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 313,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Walk-up flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1953</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>G</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HR gesloten combi EO HRE 24/18 (gas-fired combi boiler uit 2012, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN D 9171</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 31-08-2054)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-08-2054</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 313,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** English text below ***
+
+Een ruim opgezet 3/4-kamer appartement van circa 65 m2 met royale berging van circa 17 m2 direct boven de woning en een eigen schuur.
+De woning is netjes onderhouden en heeft een leuk vrij uitzicht over de omgeving en het water.
+Opvallend is de heerlijke lichtinval en de 2 balkons (waarvan één op het zonnige zuiden en één op het koele noorden).
+Het appartement is centraal gesitueerd tussen het Bos en Lommerplein en Plein 40-45 met in de omgeving de Bos en Lommerweg, het Erasmuspark en Gerbrandypark, de Ringweg A10 en diverse tram- en bushaltes richting onder andere Amsterdam Centraal Station en Amsterdam Sloterdijk.
+Deze omgeving bruist door de vele leuke winkels en restaurants met Amsterdam Centrum op een kwartier fietsen.
+De erfpacht is langdurig afgekocht.
+
+INDELING
+Begane grond:
+afgesloten entree met bellentableau, brievenbussen, trappenhuis en toegang tot de bergingen.
+
+Een trap leidt naar de derde verdieping:
+Via de centrale hal met inbouwkast en moderne toiletruimte zijn alle vertrekken bereikbaar.
+De ruime woonkamer en suite loopt van voor naar achter en heeft openslaande deuren naar het eerste zonnige balkon, gelegen op het zuiden. Leuke details zijn de originele schouw en de paneeldeuren.
+De nette keuken (2023) is separaat gelegen en ingebouwd voorzien van een inductie kookplaat, combi oven magnetron, vaatwasser en koel-/vriescombinatie. Handig is ook de ingebouwde kast.
+Vanuit de keuken is de badkamer (2022/2023) bereikbaar voorzien van inloopdouche en wastafel. Een deur leidt naar het tweede balkon op het noorden.
+De eerste slaapkamer is van een uitstekend formaat en biedt genoeg ruimte voor een tweepersoonsbed en kledingkast.
+Naast de keuken ligt de tweede slaapkamer.
+Het geheel is netjes afgewerkt met een PVC vloer en gestucte wanden (2022).
+Direct boven het appartement ligt een berging van voor naar achter, bereikbaar via de centrale trap. 
+
+Via het centrale trapportaal is de vierde verdieping bereikbaar. 
+Grote berging van circa 17 m2 met elektra en aansluiting voor de wasmachine. 
+
+LIGGING
+Het appartement ligt in de wijk Slotermeer Noordoost aan de westzijde van de buurt Bos en Lommer.
+De vele leuke restaurantjes, theatercafé Podium Mozaïek, kroegjes, trendy winkels, maar ook de grote variatie in verswinkels en supermarkten, het Gerbrandypark, de Erasmusgracht met het drijvende Restaurant Café Florya en gezellige buurtpizzeria Buurman &amp; Buurman, maken dat je je onmiddellijk thuis voelt.
+Het Bos en Lommerplein evenals Plein 40-45 liggen op loop afstand. Het Rembrandtpark ligt op 10 minuten fietsafstand.
+De afgelopen jaren heeft het stadsdeel veel geïnvesteerd in de buurt en daardoor heeft deze omgeving een ware metamorfose ondergaan.
+Voor kinderen zijn er diverse speeltuinen in de nabije omgeving. Er is keuze in basisscholen en kinderopvang.
+Qua sport en vermaak liggen in de directe omgeving de (nieuwe) bioscoop De Vlugt en faciliteiten voor buitensport zoals tennisbanen, SportContainer, een voetbal- en basketbalveld, evenals de Sloterplas en het zwembad op 5 minuten fietsen.
+
+BEREIKBAARHEID
+Het appartementencomplex ligt zeer gunstig ten opzichte van Schiphol en Haarlem; uitvalswegen (A10, A9, A5 en N200) en de verbindingen met openbaar vervoer zijn uitstekend. Trams en diverse bussen richting het centrum stoppen om de hoek. Metrostation Burgemeester de Vlugtlaan is op slechts 5 minuten loopafstand. Door de strategische ligging van het appartement fiets je binnen 15 minuten naar de Jordaan, het Westerpark, Vondelpark en hartje centrum. NS-station Sloterdijk is binnen 6 minuten fietsen te bereiken.
+
+VERENIGING VAN EIGENAREN
+Vereniging van Eigenaars ‘Burgemeester de Vlugtlaan 61 tot en met 75 (oneven nummers) en Theodorus Dobbestraat 72 tot en met 86 (even nummers)’ is actief, het vastgoedbeheer wordt professioneel uitgevoerd, er wordt jaarlijks vergaderd en er is een Meerjarenonderhoudsplan van toepassing. De servicekosten bedragen € 313,- per maand.
+
+EIGENDOMSSITUATIE
+Het betreft een voortdurend recht van erfpacht, eigendom van de gemeente Amsterdam.
+De Algemene Bepalingen 2000 zijn van toepassing.
+De jaarlijkse canon is langdurig afgekocht en bij vooruitbetaling voldaan tot en met 31 augustus 2054.
+
+INDICATIEVE AFMETINGEN
+• Gebruiksoppervlakte wonen: circa 65 m².
+• Gebruiksoppervlakte overige inpandige ruimte: circa 17 m².
+• Gebouw gebonden buitenruimte: circa 8 m².
+• Externe bergruimte: circa 4 m².
+• Bruto inhoud woning: circa 275 m³.
+
+BIJZONDERHEDEN
+• Bouwjaar: 1953.
+• Het hoofd balkon is gesitueerd op het zuiden en tweede balkon op het noorden.
+• Isolatie: voorzien van dubbel glas.
+• Verwarming en warm water middels een CV combi ketel, bouwjaar 2012.
+• Energielabel: G.
+• Funderingsrisico: A-C.
+• Parkeren is mogelijk op basis van betaald parkeren. Informatie over de mogelijkheden, wachttijden en kosten van een parkeervergunning is terug te vinden op de website van de gemeente.
+• Notaris: naar keuze koper, mits koopakte conform Model Ring bij notaris in Groot Amsterdam.
+• Er is pas een overeenkomst indien zowel de particuliere koper en verkoper een schriftelijke koopovereenkomst hebben ondertekend.
+• Verkoper behoudt zich het recht van gunning voor.
+
+Oplevering: in overleg.
+
+Voorbehoud
+De Meetinstructie is gebaseerd op de NEN2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit, door bijvoorbeeld interpretatieverschillen, afrondingen of beperkingen bij het uitvoeren van de meting.
+
+Alle verkoopinformatie is met de nodige zorgvuldigheid samengesteld. Wij aanvaarden geen enkele aansprakelijkheid voor onjuist verkregen (mondelinge) informatie, onvolledigheid of anderszins, dan wel de gevolgen daarvan en wijzen de koper nadrukkelijk op zijn wettelijke onderzoeksplicht.
+
+Interesse in dit huis?
+Schakel direct uw eigen NVM-aankoopmakelaar in.
+Uw NVM-aankoopmakelaar komt op voor úw belang en bespaart u tijd, geld en zorgen.
+Adressen van collega NVM-aankoopmakelaars vindt u op Funda.
+
+****************************************************************************************
+
+A spacious 3/4-room apartment of approximately 65 m², featuring a generous storage room of approximately 17 m² directly above the apartment and a private storage shed.
+
+The property is well maintained and enjoys pleasant unobstructed views over the surrounding area and the water. Particularly noteworthy are the excellent natural light and the two balconies, one facing the sunny south and the other facing the cooler north.
+
+The apartment is centrally located between Bos en Lommerplein and Plein 40-45, with Bos en Lommerweg, Erasmuspark and Gerbrandypark, the A10 ring road and various tram and bus stops nearby, offering connections to, among others, Amsterdam Central Station and Amsterdam Sloterdijk.
+
+The area is vibrant, with numerous charming shops and restaurants, while Amsterdam city centre is approximately a 15-minute bike ride away.
+
+The ground lease has been bought out for a long period.
+
+LAYOUT
+Ground floor
+Secured entrance with intercom panel, mailboxes, staircase and access to the storage areas.
+
+A staircase leads to the third floor.
+
+From the central hallway, which features a built-in cupboard and a modern toilet, all rooms are accessible.
+
+The spacious front-to-back en-suite living room features French doors opening onto the first, sunny south-facing balcony. Characteristic details include the original fireplace and panel doors.
+
+The neat, separate kitchen, installed in 2023, is fitted with an induction hob, combination oven/microwave, dishwasher and fridge/freezer combination. There is also a convenient built-in cupboard.
+
+The bathroom, accessible from the kitchen, was renovated in 2022/2023 and features a walk-in shower and washbasin. A door provides access to the second, north-facing balcony.
+
+The first bedroom is generously sized and offers ample space for a double bed and wardrobe.
+
+The second bedroom is located next to the kitchen.
+
+The apartment is finished with a PVC floor and plastered walls, both completed in 2022.
+
+Directly above the apartment is a storage room extending from front to back, accessible via the communal staircase.
+
+The fourth floor can be reached via the central stairwell.
+
+This large storage room measures approximately 17 m² and is equipped with electricity and a connection for a washing machine.
+
+LOCATION
+The apartment is located in the Slotermeer Noordoost neighbourhood, on the western side of the Bos en Lommer area.
+
+The many charming restaurants, Podium Mozaïek theatre café, pubs, trendy shops, as well as the wide variety of specialty food shops and supermarkets, Gerbrandypark, and the Erasmusgracht with floating Restaurant Café Florya and popular neighbourhood pizzeria Buurman &amp; Buurman, make this a lively and welcoming place to live.
+
+Bos en Lommerplein and Plein 40-45 are both within walking distance. Rembrandtpark is approximately a 10-minute bike ride away.
+
+In recent years, the local district has invested significantly in the neighbourhood, resulting in a major transformation of the area.
+
+There are several playgrounds for children nearby, as well as a choice of primary schools and childcare facilities.
+
+For sports and leisure, the immediate surroundings offer the new De Vlugt cinema and outdoor sports facilities, including tennis courts, SportContainer, a football and basketball court. Sloterplas lake and the swimming pool are approximately a 5-minute bike ride away.
+
+ACCESSIBILITY
+The apartment complex is conveniently located in relation to Schiphol Airport and Haarlem. Major roads, including the A10, A9, A5 and N200, are easily accessible, and public transport connections are excellent.
+
+Trams and several buses towards the city centre stop just around the corner. Burgemeester de Vlugtlaan metro station is only a 5-minute walk away.
+
+Thanks to the apartment&#x27;s strategic location, the Jordaan, Westerpark, Vondelpark and the heart of Amsterdam city centre can all be reached by bicycle within approximately 15 minutes.
+
+Amsterdam Sloterdijk railway station is approximately a 6-minute bike ride away.
+
+OWNERS&#x27; ASSOCIATION
+The Owners&#x27; Association, Vereniging van Eigenaars ‘Burgemeester de Vlugtlaan 61 through 75 (odd numbers) and Theodorus Dobbestraat 72 through 86 (even numbers)’, is active and professionally managed.
+
+The association holds an annual general meeting and has a long-term maintenance plan (MJOP) in place.
+
+The monthly service charges are €313.
+
+OWNERSHIP
+The property concerns a perpetual leasehold right owned by the Municipality of Amsterdam.
+
+The General Provisions 2000 apply.
+
+The annual ground rent has been bought out for a long period and has been paid in advance through 31 August 2054.
+
+APPROXIMATE DIMENSIONS
+Living area: approximately 65 m².
+Other internal space: approximately 17 m².
+Building-related outdoor space: approximately 8 m².
+External storage space: approximately 4 m².
+Gross volume: approximately 275 m³.
+PARTICULARS
+Year of construction: 1953.
+The main balcony faces south; the second balcony faces north.
+Insulation: double glazing.
+Heating and hot water supplied by a central heating combi boiler, installed in 2012.
+Energy label: G.
+Foundation risk classification: A-C.
+Paid parking is available. Information regarding availability, waiting times and the costs of a parking permit can be found on the Municipality of Amsterdam&#x27;s website.
+Notary: at the buyer&#x27;s discretion, provided that the purchase agreement is drawn up in accordance with the Model Ring agreement by a notary in the Greater Amsterdam area.
+A purchase agreement is only concluded once both the private buyer and seller have signed a written purchase agreement.
+The seller reserves the right of approval.
+Completion: by mutual agreement.
+
+DISCLAIMER
+The Measurement Instruction is based on NEN 2580. The Measurement Instruction is intended to provide a more uniform method of measuring and to give an indication of the usable floor area. It does not completely eliminate differences in measurement results, for example due to differences in interpretation, rounding or limitations when carrying out the measurement.
+
+All sales information has been compiled with due care. We accept no liability for incorrectly obtained information, whether oral or otherwise, omissions or other inaccuracies, nor for any consequences thereof. We expressly draw the buyer&#x27;s attention to their statutory duty to investigate.
+
+INTERESTED IN THIS PROPERTY?
+Engage your own NVM-certified buying agent directly.
+
+Your NVM-certified buying agent represents your interests and can save you time, money and worries.
+
+Addresses of fellow NVM-certified buying agents can be found on Funda.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>De Makelaers | Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 33</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/889/096_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/145_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/189_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/190_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/092_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/091_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/146_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/134_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/119_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/181_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/125_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/080_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/140_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/101_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/120_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/204_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/153_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/216_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/198_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/086_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/183_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/087_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/199_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/154_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/160_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/220_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/149_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/218_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/112_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/102_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/132_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/223_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/889/163_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

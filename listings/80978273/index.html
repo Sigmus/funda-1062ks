@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Herculesstraat 30-C · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Herculesstraat 30-C</h1>
+  <p class="sub">
+    <span>1076 SM Amsterdam</span>
+    <span>·</span>
+    <span>Marathonbuurt-Oost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/483/415_1440x960.jpg" alt="Herculesstraat 30-C — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">32 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€699.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.128/m² · 1.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">86 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy F</span>
+      <span class="chip">Built 1931</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-herculesstraat-30-c/80978273/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 699.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.128</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 240,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1931</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>86 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>307 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 separate toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>F</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas gestookt uit 2012, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM AC 1335</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM AC 1335</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 240,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Bezichtigingen kunnen worden aangevraagd via Funda of via onze website.
+Nu te koop bij Bloomstone Real Estate: Herculesstraat 30 C te Amsterdam. Een licht en ruim bovenhuis met drie slaapkamers, een eeuwigdurende erfpacht AFGEKOCHT en een fijne ligging in de geliefde Stadionbuurt. Aan de rustige Herculesstraat, om de hoek van het Olympiaplein, ligt dit verrassend ruime appartement van circa 86 m². De woning is gelegen op de tweede verdieping en beschikt over een royale woonkamer, een separate keuken, drie slaapkamers, een badkamer en een apart toilet.
+Wat deze woning aantrekkelijk maakt, is de combinatie van ruimte, licht en ligging. De woonkamer is royaal opgezet en heeft grote raampartijen, waardoor er veel natuurlijk licht binnenvalt. De indeling is praktisch en biedt veel flexibiliteit, met drie slaapkamers die geschikt zijn voor slapen, werken, logeren of een gezinssituatie. De woning ligt midden in Amsterdam-Zuid, op korte afstand van het Olympiaplein, de Stadionweg, Marathonweg, Beethovenstraat en het Vondelpark. Hier woon je rustig, maar met goede restaurants, bakkers, winkels en dagelijkse voorzieningen direct om de hoek.
+Inleiding
+Via het gemeenschappelijke trappenhuis bereik je de woning op de tweede verdieping. De entree geeft toegang tot de hal, vanwaar de verschillende vertrekken op een logische manier bereikbaar zijn. Aan de rechterzijde bevindt zich de ruime woonkamer. Door de royale ruimte en de grote ramen voelt deze woonkamer licht en prettig aan. Er is voldoende plaats voor een comfortabele zithoek en een eettafel, waardoor wonen en dineren hier mooi samenkomen.
+Aan de andere zijde van de woning ligt de separate keuken. De keukenopstelling dateert uit circa 2018 en is praktisch ingericht met diverse inbouwapparatuur. Door de afzonderlijke ligging blijft de leefruimte rustig en overzichtelijk, terwijl de keuken voldoende ruimte biedt voor dagelijks koken. De keuken heeft een rustige, tijdloze uitstraling en sluit goed aan op de praktische indeling van de woning.b
+De woning beschikt over drie slaapkamers. Twee slaapkamers liggen naast elkaar en zijn goed bruikbaar als hoofdslaapkamer, kinderkamer, logeerkamer of werkruimte. De derde slaapkamer ligt op de bovenste woonlaag en biedt extra privacy. Deze kamer is ideaal als master bedroom. Mogelijkheid om de realisatie van een dakterras te onderzoeken, onder voorbehoud van toestemming van de VvE, vergunning van de gemeente en eventuele overige vereisten
+De badkamer is centraal gelegen en beschikt over een douche en wastafel. Het toilet bevindt zich separaat, wat de indeling praktisch maakt voor dagelijks gebruik.
+Kenmerken
+• Woonoppervlakte circa 86 m² NEN 2580 ingemeten
+• Gelegen op de tweede verdieping
+• Bovenhuis met drie slaapkamers
+• Ruime woonkamer met veel lichtinval
+• Separate keuken met inbouwapparatuur uit circa 2018
+• AFGEKOCHTE EEUWIGDURENDE ERFPACHT
+• Separaat toilet aanwezig
+• Bouwjaar complex 1931
+• Kunststof kozijnen met isolerende beglazing aanwezig
+• Verwarming en warm water via Intergas Kompakt HRE cv-ketel uit 2012
+• Collectieve rookgasafvoerkanalen vervangen in 2021
+• Potentie voor het onderzoeken van een dakterras, onder voorbehoud van toestemming van de VvE en gemeente
+• QuickScan funderingsrisico uitgevoerd, beoordeling LAAG risico
+• Actieve VvE Olympiaweg 1, professioneel bestuurd, met reservefonds, DMJOP 2025 tot en met 2054, collectieve opstalverzekering, aansprakelijkheidsverzekering, jaarlijkse vergadering en een maandelijkse VvE bijdrage van circa €240
+• Energielabel F
+• Oplevering in overleg
+Locatie
+De Herculesstraat ligt in de geliefde Stadionbuurt in Amsterdam-Zuid, een rustige en karaktervolle buurt met brede straten, fraaie jaren-dertigarchitectuur en veel groen. Hier woon je op een fijne plek tussen het Olympiaplein, de Stadionweg, de Marathonweg en de Beethovenstraat.
+Voor dagelijkse boodschappen, koffie, lunch of diner hoef je de buurt nauwelijks uit. Om de hoek vind je geliefde adressen zoals Fromagerie L’Amuse en Le Fournil de Sébastien aan het Olympiaplein, Le Petit Bouillon d’Amsterdam aan de Stadionweg en Marathonweg voor koffie, lunch, diner of borrel. Ook de speciaalzaken, traiteurs en winkels rondom het Olympiaplein en de Beethovenstraat liggen op korte afstand. De buurt biedt een prettige mix van rust en levendigheid. Het Vondelpark, het Beatrixpark en het Amsterdamse Bos zijn eenvoudig bereikbaar voor wandelen, sporten of ontspannen in het groen. Ook het Olympisch Stadion en diverse sportvoorzieningen liggen dichtbij.
+De bereikbaarheid is uitstekend. Verschillende tram en busverbindingen bevinden zich op loopafstand en Station Zuid is goed bereikbaar per fiets of openbaar vervoer. Met de auto ben je snel op de Ring A10 en richting Schiphol, de Zuidas of de rest van de stad.
+Kortom: een licht en ruim bovenhuis van circa 86 m² met drie slaapkamers, afgekochte erfpacht en een fijne ligging in het geliefde Amsterdam-Zuid, met de leukste adressen om de hoek.
+De op deze website getoonde vrijblijvende informatie is door ons met zorg samengesteld op basis van gegevens van de verkoper en/of derden. Wij staan niet in voor de juistheid of volledigheid daarvan. Wij adviseren je en/of jouw makelaar om contact met ons op te nemen als je interesse hebt in een van onze woningen.
+Wij zijn niet verantwoordelijk voor de inhoud van de websites waarnaar wordt verwezen.
+Interesse in deze woning?
+Schakel direct uw eigen aankoopmakelaar in. Een aankoopmakelaar behartigt úw belangen en kan u veel tijd, geld en zorgen besparen.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Bloomstone Real Estate</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 32</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/483/415_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/485_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/430_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/493_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/421_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/470_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/454_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/397_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/445_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/404_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/535_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/456_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/528_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/396_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/435_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/466_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/409_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/405_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/737/534_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/517_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/480_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/400_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/424_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/395_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/491_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/471_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/419_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/513_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/483/412_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/521/245_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/521/383_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

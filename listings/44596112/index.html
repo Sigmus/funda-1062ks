@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harry Koningsbergerstraat 83 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Harry Koningsbergerstraat 83</h1>
+  <p class="sub">
+    <span>1063 AC Amsterdam</span>
+    <span>·</span>
+    <span>Coronelbuurt</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/358/524_1440x960.jpg" alt="Harry Koningsbergerstraat 83 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">61 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€695.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.744/m² · 3.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.2 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">121 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1953</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-harry-koningsbergerstraat-83/44596112/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 695.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.744</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1953</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>121 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>149 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>428 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 toiletten, 2 Washbasins, Walk-in shower, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing, Wall insulation en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Kompakt HRE (CV) (gas-fired combi boiler uit 2019, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN D 2443</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>149 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 81,68 per Yesar met optie tot afkopen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Tuin</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Back garden</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>85 m² (12,00 meter diep en 7,00 meter breed)</dt><dd>Ligging tuin</dd></div>
+        <div class="frow"><dt>Gelegen op het westen</dt><dd>Balkon/dakterras</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">121 M², VIJF SLAAPKAMERS EN EEN ACHTERTUIN VAN CIRCA 12 METER DIEP
+
+Een verrassend ruim en licht gezinshuis van 121 m², verdeeld over drie woonlagen, met vijf slaapkamers, twee badkamers en vooral: een uitzonderlijk grote achtertuin op het westen. Dit is zo’n huis voor wie uit een appartement groeit, maar Amsterdam nog lang niet uit wil.
+
+De indeling is praktisch, er is volop ruimte om te slapen, werken en spelen en met een aparte wasruimte, een balkon en een vrijstaande berging is het huis bijzonder compleet. De circa twaalf meter diepe achtertuin is zonder twijfel een van de fijnste onderdelen van de woning. Kinderen kunnen hier echt naar buiten, terwijl er meer dan genoeg plek overblijft voor verschillende zitplekken, een lange eettafel en volop groen.
+
+Daarbij biedt het huis volop mogelijkheden om in de toekomst verder mee te groeien. De begane grond kan aan de achterzijde vergunningsvrij met circa vier meter worden uitgebouwd. Daarmee kan bijvoorbeeld een royale woonkeuken worden gerealiseerd, terwijl er zelfs daarna nog een tuin van circa acht meter diep overblijft. Ook de grootste slaapkamer op de bovenste verdieping kan worden verdeeld, waardoor een zesde slaapkamer of meerdere volwaardige thuiswerkplekken kunnen worden gecreëerd.
+
+Een heerlijk huis voor een jong gezin dat toe is aan een volgende stap, met binnen én buiten alle ruimte om hier jarenlang met plezier te wonen.
+
+INDELING
+Begane grond
+Entree in de ruime hal met garderoberuimte, een praktische trapkast, het toilet en de trap naar de verdiepingen.
+
+De woonkamer loopt van de voor- tot de achterzijde van de woning. Dankzij de grote ramen aan beide kanten komt er de hele dag veel natuurlijk licht naar binnen, wat de ruimte een bijzonder prettige en open sfeer geeft. Aan de voorzijde is volop plek voor een ruime zithoek en aan de tuinzijde voor een grote eettafel. Daarnaast bevindt zich de keuken in lichte kleurstelling. Vanuit zowel de eetkamer als de keuken stap je rechtstreeks de achtertuin in.
+
+En die tuin verdient echt wat extra aandacht. Met een diepte van circa twaalf meter en een breedte van bijna zeven meter is dit een buitenruimte die je in Amsterdam niet vaak tegenkomt. De tuin ligt op het westen, is groen en beschut en biedt alle ruimte om te eten, spelen, tuinieren of gewoon uitgebreid van het buitenleven te genieten. Achter in de tuin staat een vrijstaande houten berging van circa 8 m², ideaal voor fietsen, gereedschap en buitenspeelgoed.
+
+De begane grond kan aan de achterzijde vergunningsvrij met circa vier meter worden uitgebouwd. Een mooie kans om een bijzonder royale leefruimte of woonkeuken te creëren, zonder dat de tuin zijn ruime karakter verliest.
+
+Eerste verdieping
+Overloop met toegang tot drie slaapkamers en de eerste badkamer.
+
+De grootste slaapkamer op deze verdieping ligt aan de voorzijde en geeft toegang tot het balkon, waar je &#x27;s morgens heerlijk van de zon kunt genieten. Daarnaast zijn er nog twee slaapkamers, uitstekend te gebruiken als kinder-, werk- of logeerkamer.
+
+De badkamer is voorzien van een douche, wastafelmeubel en toilet.
+
+Tweede verdieping
+Op de bovenste woonlaag bevinden zich nog eens twee slaapkamers. De royale kamer aan de voorzijde beslaat vrijwel de volledige breedte van de woning. Deze kamer biedt volop ruimte als ouderslaapkamer, speelkamer of combinatie van slapen en werken.
+
+Door het royale formaat en de verschillende raampartijen kan deze kamer ook uitstekend worden verdeeld in twee afzonderlijke kamers. Daarmee kan eenvoudig een zesde slaapkamer worden gecreëerd, ideaal voor een groot gezin of voor wie behoefte heeft aan meerdere rustige thuiswerkplekken.
+
+Aan de achterzijde ligt de vijfde slaapkamer. Daarnaast beschikt deze verdieping over een tweede badkamer met douche, wastafel en toilet en een aparte wasruimte met aansluitingen voor de wasmachine en droger.
+
+KARAKTER EN COMFORT
+De woning heeft een prettige, lichte basis en een indeling die helemaal aansluit bij het dagelijks leven van een gezin. Doordat de woonruimte over drie woonlagen is verdeeld, heeft iedereen zijn eigen plek en blijft de begane grond echt het gezamenlijke hart van het huis.
+
+Vijf slaapkamers, twee badkamers en een aparte wasruimte maken het huis praktisch en flexibel. Met de mogelijkheid om een zesde slaapkamer te creëren en de begane grond vergunningsvrij uit te bouwen, kan het huis ook in de toekomst eenvoudig met zijn bewoners meegroeien.
+
+Maar het is vooral de combinatie van zoveel leefruimte met de grote tuin die deze woning bijzonder maakt. Een fijne plek waar kinderen kunnen opgroeien, zonder dat je daarvoor Amsterdam hoeft te verlaten.
+
+BUURT
+De Harry Koningsbergerstraat ligt in de groene en rustige Coronelbuurt, precies op de overgang van Nieuw-West naar Bos en Lommer. Daardoor combineert de woning de ruimte en rust van Slotermeer met de levendigheid van Amsterdam-West binnen handbereik.
+
+De winkels, koffiezaken en restaurants rond de Bos en Lommerweg en het Bos en Lommerplein zijn gemakkelijk lopend of per fiets te bereiken. Ook de Sloterplas, het Erasmuspark, het Westerpark en de Jordaan liggen op korte fietsafstand. In minder dan 20 minuten fietsen ben je bovendien middenin het centrum van Amsterdam.
+
+De ligging ten opzichte van Station Sloterdijk is bijzonder gunstig. Binnen enkele minuten wandelen of fietsen sta je op het station, met snelle trein-, metro-, tram- en busverbindingen richting onder meer het centrum, Schiphol en de rest van het land. Ook tram- en metrostation Burg. de Vlugtlaan is op loopafstand. Met de auto is de bereikbaarheid uitstekend dankzij de nabijgelegen Ring A10.
+
+Zo woon je rustig en groen, met Bos en Lommer om de hoek en een van de best bereikbare stations van Amsterdam vlakbij.
+
+EIGENDOM
+De woning is gelegen op gemeentelijke erfpachtgrond.
+
+Tot en met 15 maart 2028 bedraagt de vaste canon slechts € 81,68 per jaar. De huidige eigenaren zijn reeds onder de gunstige voorwaarden overgestapt naar eeuwigdurende erfpacht. Vanaf 16 maart 2028 bedraagt de canon € 891,36 per jaar, met indexering conform de geldende erfpachtvoorwaarden.
+
+ENERGIELABEL
+De woning beschikt over energielabel D. Het ruime platte dak biedt veel plaats voor zonnepanelen, waarmee de woning verder kan worden verduurzaamd en het energieverbruik kan worden verlaagd.
+
+BIJZONDERHEDEN
+* Woonoppervlakte 121 m²;
+* Perceeloppervlakte circa 149 m²;
+* Verdeeld over drie woonlagen;
+* Vijf slaapkamers, met de mogelijkheid een zesde slaapkamer te creëren;
+* Twee badkamers;
+* Aparte wasruimte;
+* Grote achtertuin op het westen van circa twaalf meter diep en bijna zeven meter breed;
+* Begane grond aan de achterzijde vergunningsvrij uit te bouwen met circa vier meter;
+* Ook na een uitbouw resteert een achtertuin van circa acht meter diep;
+* Vrijstaande berging van circa 8 m²;
+* Balkon aan de voorzijde;
+* Ruim plat dak met plaats voor zonnepanelen;
+* Energielabel D;
+* Gunstige erfpacht;
+* Station Sloterdijk binnen enkele minuten fietsen;
+
+-------English version--------
+
+121 M², FIVE BEDROOMS AND A REAR GARDEN APPROXIMATELY 12 METRES DEEP
+
+A surprisingly spacious and bright family home of 121 m², arranged over three floors, with five bedrooms, two bathrooms and, above all, an exceptionally large west-facing rear garden. This is the perfect home for anyone who has outgrown apartment living but is not ready to leave Amsterdam.
+
+The layout is practical, with plenty of room for sleeping, working and playing. A separate laundry room, a balcony and a detached storage shed make the property particularly complete. The approximately twelve-metre-deep rear garden is undoubtedly one of the home’s greatest assets. Children have ample space to play outside, while plenty of room remains for several seating areas, a long dining table and lots of greenery.
+
+The property also offers excellent potential to adapt as your needs change in the future. The ground floor can be extended at the rear by approximately four metres without planning permission. This would make it possible to create a particularly spacious kitchen-diner, while still retaining a rear garden approximately eight metres deep. The largest bedroom on the top floor could also be divided, creating a sixth bedroom or several full-sized home-working spaces.
+
+A wonderful home for a young family ready to take the next step, with all the indoor and outdoor space needed to enjoy living here for many years to come.
+
+LAYOUT
+
+Ground floor
+Entrance into the spacious hallway with room for coats, a practical under-stairs cupboard, the toilet and stairs leading to the upper floors.
+
+The living room extends from the front to the rear of the property. Large windows on both sides allow natural light to flood in throughout the day, giving the room a wonderfully bright and open feel. There is ample space for a generous seating area at the front and a large dining table beside the garden. The light-coloured kitchen is also situated at the rear. Both the dining area and the kitchen provide direct access to the rear garden.
+
+And this garden certainly deserves some extra attention. At approximately twelve metres deep and almost seven metres wide, this is the kind of outdoor space rarely found in Amsterdam. The west-facing garden is green and sheltered, with plenty of room for dining, playing, gardening or simply enjoying outdoor living. At the rear of the garden is a detached wooden storage shed of approximately 8 m², ideal for bicycles, tools and outdoor toys.
+
+The ground floor can be extended at the rear by approximately four metres without planning permission. This presents an excellent opportunity to create an exceptionally spacious living area or kitchen-diner while retaining the garden’s generous proportions.
+
+First floor
+Landing providing access to three bedrooms and the first bathroom.
+
+The largest bedroom on this floor is situated at the front and opens onto the balcony, where you can enjoy the morning sun. There are also two further bedrooms, both ideal for use as children’s rooms, home offices or guest rooms.
+
+The bathroom is fitted with a shower, washbasin unit and toilet.
+
+Second floor
+The top floor contains another two bedrooms. The generously sized room at the front spans almost the entire width of the property. It offers plenty of space for use as a main bedroom, playroom or a combination of sleeping and working.
+
+Thanks to its generous dimensions and multiple windows, this room could also be divided into two separate rooms. This would make it easy to create a sixth bedroom, ideal for a larger family or anyone requiring several quiet home-working spaces.
+
+The fifth bedroom is situated at the rear. This floor also features a second bathroom with a shower, washbasin and toilet, as well as a separate laundry room with connections for a washing machine and dryer.
+
+CHARACTER AND COMFORT
+The property provides a pleasant, bright foundation and a layout perfectly suited to everyday family life. With the accommodation arranged over three floors, everyone can enjoy their own space while the ground floor remains the shared heart of the home.
+
+Five bedrooms, two bathrooms and a separate laundry room make the property practical and versatile. With the potential to create a sixth bedroom and extend the ground floor at the rear without planning permission, the house can easily adapt to the changing needs of its residents in the future.
+
+Above all, it is the combination of generous living space and the large garden that makes this property so special. A wonderful place for children to grow up without having to leave Amsterdam.
+
+NEIGHBOURHOOD
+Harry Koningsbergerstraat is situated in the green and peaceful Coronelbuurt, right on the boundary between Nieuw-West and Bos en Lommer. This allows the property to combine the space and tranquillity of Slotermeer with the lively atmosphere of Amsterdam-West close at hand.
+
+The shops, coffee bars and restaurants around Bos en Lommerweg and Bos en Lommerplein are easily accessible on foot or by bicycle. Sloterplas, Erasmuspark, Westerpark and the Jordaan are also just a short cycle ride away. Amsterdam city centre can be reached by bicycle in less than 20 minutes.
+
+The location in relation to Sloterdijk Station is particularly convenient. The station is just a few minutes away on foot or by bicycle and offers fast train, metro, tram and bus connections to the city centre, Schiphol Airport and destinations throughout the country. The Burgemeester de Vlugtlaan tram and metro station is also within walking distance. Accessibility by car is excellent, with the A10 ring road nearby.
+
+Here you can enjoy peaceful, green surroundings, with Bos en Lommer around the corner and one of Amsterdam’s best-connected stations close by.
+
+OWNERSHIP
+The property is situated on municipal leasehold land.
+
+Up to and including 15 March 2028, the fixed annual ground rent is just €81.68. The current owners have already switched to perpetual leasehold under favourable conditions. From 16 March 2028, the annual ground rent will amount to €891.36, subject to indexation in accordance with the applicable leasehold conditions.
+
+ENERGY LABEL
+The property has energy label D. The large flat roof provides ample space for solar panels, offering an opportunity to make the property more sustainable and reduce its energy consumption.
+
+KEY FEATURES
+*Living area of 121 m²;
+*Plot size of approximately 149 m²;
+*Arranged over three floors;
+*Five bedrooms, with the potential to create a sixth;
+*Two bathrooms;
+*Separate laundry room;
+*Large west-facing rear garden, approximately twelve metres deep and almost seven metres wide;
+*Ground floor can be extended at the rear by approximately four metres without planning permission;
+*Even after an extension, a rear garden approximately eight metres deep would remain;
+*Detached storage shed of approximately 8 m²;
+*Balcony at the front;
+*Large flat roof with space for solar panels;
+*Energy label D;
+*Favourable leasehold conditions;
+*Sloterdijk Station just a few minutes away by bicycle.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 61</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/358/524_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/632_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/669_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/528_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/558_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/677_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/523_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/644_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/534_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/542_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/555_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/609_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/540_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/520_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/686_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/581_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/697_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/641_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/622_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/574_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/684_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/698_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/543_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/604_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/615_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/562_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/603_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/601_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/651_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/579_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/516_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/650_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/578_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/675_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/605_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/614_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/552_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/548_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/612_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/633_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/599_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/560_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/636_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/640_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/525_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/680_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/635_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/592_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/559_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/619_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/568_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/657_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/660_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/358/639_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

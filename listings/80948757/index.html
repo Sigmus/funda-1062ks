@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Willem Baerdesenstraat 4 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Willem Baerdesenstraat 4</h1>
+  <p class="sub">
+    <span>1067 XX Amsterdam</span>
+    <span>·</span>
+    <span>Bakemabuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/278/480_1440x960.jpg" alt="Willem Baerdesenstraat 4 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">28 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€539.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.133/m² · 3.5 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.5 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">105 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 2004</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-willem-baerdesenstraat-4/80948757/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 539.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.133</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 204,68 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2004</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>105 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>15 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>342 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha Avanta (2018, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND I 3639</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>owned belast met Leasehold</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Aangebouwde stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>No</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>No</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>No</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>No</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>No</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Willem Baerdesenstraat 4 – Amsterdam
+
+Ruim en licht appartement met drie slaapkamers, een royaal balkon, veel bergruimte én eeuwigdurend afgekochte erfpacht!
+
+Op zoek naar een ruim en comfortabel appartement in Amsterdam met veel lichtinval, drie slaapkamers en een heerlijk balkon? Dan is Willem Baerdesenstraat 4 zeker een bezichtiging waard.
+
+De woning beschikt over een bijzonder ruime en lichte woonkamer met grote raampartijen, een moderne open keuken, drie slaapkamers, een nette badkamer, separaat toilet, inpandige bergruimte en een royaal overdekt balkon. Daarnaast beschikt de woning over een grote separate berging. Een belangrijk pluspunt is dat de erfpacht eeuwigdurend is afgekocht, waardoor er geen jaarlijkse erfpachtcanon verschuldigd is.
+
+INDELING
+
+Via de gemeenschappelijke entree van het appartementencomplex bereikt u de woning. Vanuit de entree van het appartement biedt de hal toegang tot de verschillende vertrekken.
+
+WOONKAMER
+
+De royale woonkamer vormt het hart van de woning en valt direct op door de grote hoeveelheid daglicht. De brede raampartijen zorgen voor een open en ruimtelijk karakter en bieden een prettige verbinding met het balkon.
+
+Dankzij de royale afmetingen is er volop ruimte voor zowel een comfortabele zithoek als een ruime eethoek. De lichte vloer met marmerlook en de strak afgewerkte wanden geven het geheel een verzorgde en eigentijdse uitstraling.
+
+KEUKEN
+
+De open keuken sluit mooi aan op de woonkamer en is uitgevoerd in een moderne, lichte kleurstelling. De keuken biedt volop werk- en opbergruimte en is compleet uitgerust met diverse inbouwapparatuur, waaronder een 4-pits gaskookplaat met afzuigkap, vaatwasser, combi-oven en een koelkast met vriesgedeelte.
+
+Dankzij de open indeling vormt de keuken een prettig geheel met de woon- en eetkamer en blijft er tijdens het koken volop contact met de leefruimte.
+
+BALKON
+
+Vanuit de woonkamer is het royale overdekte balkon bereikbaar. Door de ruime afmetingen is hier voldoende plaats voor een comfortabele zitopstelling, waardoor het balkon in de warmere maanden als een prettige verlenging van de woonkamer kan worden gebruikt.
+
+Het balkon biedt uitzicht op de groene en ruim opgezette omgeving en vormt een fijne plek om rustig buiten te zitten.
+
+SLAAPKAMERS
+
+De woning beschikt over drie slaapkamers. Hierdoor is het appartement geschikt voor uiteenlopende woonwensen. Naast gebruik als slaapkamers kunnen de vertrekken bijvoorbeeld uitstekend worden ingericht als thuiswerkplek, logeerkamer of hobbyruimte.
+
+BADKAMER EN TOILET
+De badkamer is praktisch ingericht en voorzien van een douchecabine, badkamermeubel en designradiator.
+
+Het toilet bevindt zich separaat van de badkamer, wat zorgt voor extra comfort in het dagelijks gebruik.
+
+BERGRUIMTE
+
+Aan praktische bergruimte is eveneens gedacht. De woning beschikt over een inpandige bergruimte voor het opbergen van dagelijkse spullen.
+
+Daarnaast behoort er een grote separate berging tot de woning, ideaal voor bijvoorbeeld fietsen, gereedschap en overige opslag.
+
+VERWARMING
+
+De woning beschikt over een Remeha Avanta cv-ketel uit 2018 voor verwarming en warm water.
+
+OMGEVING
+
+De woning is gelegen in een ruim opgezette woonomgeving in Amsterdam. Rondom het appartementencomplex is veel groen aanwezig en de brede opzet van de buurt draagt bij aan een prettig woonklimaat.
+
+In de directe en nabije omgeving zijn diverse voorzieningen aanwezig en vanuit de woning zijn verschillende delen van Amsterdam goed bereikbaar.
+
+ERFPACHT
+
+Een belangrijk voordeel van deze woning is dat de erfpacht eeuwigdurend is afgekocht. Hierdoor is er geen jaarlijkse erfpachtcanon verschuldigd.
+
+BIJZONDERHEDEN:
+
+- Ruim en licht appartement;
+- Drie slaapkamers;
+- Royale woonkamer met grote raampartijen;
+- Moderne open keuken;
+- Energielabel B
+- Bijdrage VVE p/m €204.68,-
+- Keuken voorzien van diverse inbouwapparatuur;
+- 4-pits gaskookplaat met afzuigkap;
+- Vaatwasser;
+- Combi-oven;
+- Koelkast met vriesgedeelte;
+- Royaal overdekt balkon;
+- Badkamer met douchecabine, badkamermeubel en designradiator;
+- Separaat toilet;
+- Inpandige bergruimte;
+- Grote separate berging;
+- Remeha Avanta cv-ketel uit 2018;
+- Erfpacht eeuwigdurend afgekocht;
+- Gelegen in een verzorgd appartementencomplex;
+- Oplevering in overleg.
+
+Kortom: Willem Baerdesenstraat 4 is een ruim en licht appartement met drie slaapkamers, een royale woonkamer, open keuken, groot balkon en veel praktische bergruimte. De eeuwigdurend afgekochte erfpacht maakt het geheel extra aantrekkelijk. Een comfortabele woning met volop mogelijkheden, die u het beste tijdens een bezichtiging zelf kunt ervaren.
+
+Nieuwsgierig geworden? Wij nodigen u graag uit voor een bezichtiging van Willem Baerdesenstraat 4 te Amsterdam!
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Willem Baerdesenstraat 4 – Amsterdam
+Spacious and bright apartment with three bedrooms, a generous balcony, ample storage space and a perpetual leasehold fully bought off!
+
+Looking for a spacious and comfortable apartment in Amsterdam with plenty of natural light, three bedrooms and a wonderful balcony? Then Willem Baerdesenstraat 4 is definitely worth viewing.
+
+The property features a particularly spacious and bright living room with large windows, a modern open-plan kitchen, three bedrooms, a well-maintained bathroom, separate toilet, internal storage room and a generous covered balcony. In addition, the apartment comes with a large private storage unit. An important advantage is that the leasehold has been bought off in perpetuity, meaning that no annual ground rent is payable.
+
+LAYOUT
+
+The property is accessed through the communal entrance of the apartment complex. From the entrance hall of the apartment, the hallway provides access to the various rooms.
+
+LIVING ROOM
+
+The spacious living room forms the heart of the property and immediately stands out due to the abundance of natural light. The wide windows create an open and spacious atmosphere and provide a pleasant connection with the balcony.
+
+Thanks to its generous dimensions, there is ample room for both a comfortable seating area and a spacious dining area. The light-coloured marble-look flooring and sleekly finished walls give the room a well-maintained and contemporary appearance.
+
+KITCHEN
+
+The open-plan kitchen connects beautifully with the living room and features a modern, light colour scheme. The kitchen offers plenty of work and storage space and is fully equipped with various built-in appliances, including a four-burner gas hob with extractor hood, dishwasher, combination oven and refrigerator with freezer compartment.
+
+Thanks to the open layout, the kitchen forms a pleasant whole with the living and dining areas, while maintaining a good connection with the rest of the living space when cooking.
+
+BALCONY
+
+The generous covered balcony can be accessed from the living room. Its spacious dimensions provide enough room for comfortable outdoor seating, allowing the balcony to serve as a pleasant extension of the living room during the warmer months.
+
+The balcony overlooks the green and spacious surroundings and offers a lovely place to sit and relax outdoors.
+
+BEDROOMS
+
+The property features three bedrooms, making the apartment suitable for a variety of living arrangements. In addition to being used as bedrooms, the rooms could also be ideally suited as a home office, guest room or hobby room.
+
+BATHROOM AND TOILET
+
+The bathroom is practically laid out and features a shower enclosure, bathroom vanity and designer radiator.
+
+The toilet is separate from the bathroom, providing additional convenience in everyday use.
+
+STORAGE
+
+There is also plenty of practical storage space. The apartment has an internal storage room for everyday belongings.
+
+In addition, the property comes with a large private storage unit, ideal for bicycles, tools and other items.
+
+HEATING
+
+The property is equipped with a Remeha Avanta central heating boiler from 2018, providing heating and hot water.
+
+LOCATION
+
+The property is situated in a spacious residential area of Amsterdam. The surroundings of the apartment complex feature plenty of greenery, while the spacious layout of the neighbourhood contributes to a pleasant living environment.
+
+Various amenities can be found in the immediate and surrounding area, and several parts of Amsterdam are easily accessible from the property.
+
+LEASEHOLD
+
+An important advantage of this property is that the leasehold has been bought off in perpetuity. As a result, there is no annual ground rent payable.
+
+KEY FEATURES
+
+Spacious and bright apartment;
+
+- Three bedrooms;
+- Generous living room with large windows;
+- Modern open-plan kitchen;
+- Energy label B;
+- VvE contribution per month: €204.68,-
+- Kitchen equipped with various built-in appliances;
+- Four-burner gas hob with extractor hood;
+- Dishwasher;
+- Combination oven;
+- Refrigerator with freezer compartment;
+-Generous covered balcony;
+- Bathroom with shower enclosure, bathroom vanity and designer radiator;
+- Separate toilet;
+- Internal storage room;
+- Large private storage unit;
+- Remeha Avanta central heating boiler from 2018;
+- Leasehold bought off in perpetuity;
+- Located in a well-maintained apartment complex;
+- Transfer date by mutual agreement.
+
+IN SHORT
+
+Willem Baerdesenstraat 4 is a spacious and bright apartment featuring three bedrooms, a generous living room, an open-plan kitchen, a large balcony and plenty of practical storage space. The leasehold being bought off in perpetuity makes the property particularly attractive.
+
+A comfortable home offering plenty of possibilities, best appreciated during a viewing.
+
+Interested? We would be delighted to invite you for a viewing of Willem Baerdesenstraat 4 in Amsterdam!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>LDB Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 28</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/278/480_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/507_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/640_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/468_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/520_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/566_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/683_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/595_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/581_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/647_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/607_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/522_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/471_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/564_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/554_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/692_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/618_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/563_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/643_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/494_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/484_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/575_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/584_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/278/545_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Govert Flinckstraat 366-B · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Govert Flinckstraat 366-B</h1>
+  <p class="sub">
+    <span>1074 CG Amsterdam</span>
+    <span>·</span>
+    <span>Hemonybuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/413/911_1440x960.jpg" alt="Govert Flinckstraat 366-B — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">38 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€750.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.333/m² · 4.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.2 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">90 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1987</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-govert-flinckstraat-366-b/44598551/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 750.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.333</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 153,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1987</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>90 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>287 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Atag (gas-fired combi boiler, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM R 7388</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-03-2038</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 153,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">JA! Een heerlijke instapklare bovenwoning van 90 m² gelegen op een toplocatie in de populaire Pijp. Rustig wonen met al het moois dat Amsterdam te bieden heeft binnen handbereik.
+
+De woning is gelegen op de eerste verdieping en beschikt over een riante woonkamer, een open keuken en maar liefst 3 goed bemeten slaapkamers. Daarnaast beschikt de woning over een eigen privé berging in de onderbouw. De woning is gelegen in een rustige straat, met talloze restaurants, cafés en winkels om de hoek.
+
+Pluspunt: er is een woondelersvergunning aanwezig én energielabel A!
+
+INDELING 
+LEEFRUIMTES 
+- Binnenkomst in het nette gemeenschappelijke trappenhuis, welke is voorzien van een brede gang en trap;
+- Aan de voorzijde van de woning bevindt zich de royale en lichte woonkamer, waar grote raampartijen zorgen veel natuurlijke lichtinval; 
+- De moderne open keuken is stijlvol afgewerkt met glanzend witte kasten en een strak wit werkblad; 
+- De keuken is volledig uitgerust met luxe inbouwapparatuur, waaronder een 5-pits gasfornuis, vaatwasser, oven, magnetron, koelkast en vriezer; 
+- Vanuit de keuken is er directe toegang tot het heerlijk zonnige balkon, gelegen op het zuidoosten, met uitzicht op de groene, rustige binnentuinen;
+- Er is ruimte voor een grote eettafel waaraan gezeten kan worden met groot gezelschap; 
+- Via de woonkamer bereik je een extra ruimte waar zich het separate toilet bevindt. 
+
+SLAAPVERTREKKEN 
+- De woning beschikt over maar liefst drie ruime slaapkamers; 
+- De royale slaapkamer aan de voorzijde biedt plaats aan een tweepersoonsbed en er is ruimte voor eventuele kastenwand; 
+- De twee andere slaapkamers liggen aan de achterzijde van de woning. Eén van deze kamers biedt bovendien ook toegang tot het balkon; 
+- De hoeveelheid slaapkamers maakt dit een zeer geschikt familiehuis! 
+
+BADKAMER 
+- De woning beschikt over een royale badkamer; 
+- Voorzien van een aparte douche, een wastafel met spiegel en aansluitingen voor zowel een wasmachine als een droger. 
+
+BERGING
+- Op de begane grond bevindt zich een praktische privéberging van ca. 6 m²;
+
+WOONOPPERVLAKTE 
+- De woonoppervlakte bedraagt 90 m²; 
+- De gebouwgebonden buitenruimte bedraagt 3,80 m²; 
+- De externe bergruimte bedraagt 5,80 m ²; 
+NB. De opgegeven oppervlakte is door een gespecialiseerd bedrijf gemeten conform NEN2580. 
+
+BOUWAARD &amp; TECHNISCHE INFORMATIE
+- De woning is gelegen in een pand dat omstreeks 1987 gebouwd is; 
+- Betonskelet bouwstijl; 
+- Kunststof kozijnen, voorzien van dubbele beglazing; 
+- Verwarming en warm water middels Cv-ketel; merk: Atag, bouwjaar: 2018;
+- Elektriciteit: voldoende groepen met aardlekschakelaar;
+- Het betreft een gemeentelijk beschermd stadsgezicht.
+
+KADASTER &amp; SPLITSING 
+- Kadastrale aanduiding Amsterdam, sectie R, nummer 7388, appartementsrecht A6. 
+- Het pand is op 22 juni 2005 gesplitst in 18 appartementsrechten;
+- Het appartementsrecht A6 is voor 87/1.175ste aandeel in de gemeenschap gerechtigd.
+
+ERFPACHT
+- De woning is gelegen op eeuwigdurende erfpachtgrond van de gemeente Amsterdam 
+- De algemene bepalingen voor eeuwigdurende erfpacht 2016 zijn van toepassing; 
+- De huidige canon is afgekocht t/m 31 maart 2038; 
+- Vanaf 1 april 2038 bedraagt de canon €1.931,39, met 1-jaarlijkse indexering.
+
+VERENIGING VAN EIGENAREN
+- De VvE wordt professioneel beheerd door Pro VvE beheer; 
+- De servicekosten bedragen € 130,- per maand; 
+- Er is een MJOP beschikbaar; 
+- Het betreft een actieve en financieel gezonde VvE.
+
+LOCATIE
+- Het pand is gelegen in een rustige straat in de levendige en populaire wijk de Pijp;
+- Met talloze restaurantjes, cafés en boetiekjes om de hoek is de ligging van het appartement perfect;
+- Ontbijt buiten de deur of een coffee to go bij het Vlaamsch Broodhuys of de Coffee Company op de Van Woustraat;
+- Er is een groot en diverse aanbod aan fijne restaurants in de omgeving om de dag goed af te sluiten, met o.a.: Little Collins, Impero Romano, Pekelharing, en Restaurant Le Hollandais;
+- Voor ontspanning en vertier ligt zowel de Amstel als het fijne Sarphatipark nabij de woning;
+- Voor de dagelijkse boodschappen kunt u terecht bij de Van Woustraat, Ferdinand Bolstraat of op de gezellige en veelzijdige Albert Cuypmarkt;
+- Het centrum van Amsterdam bevindt zich op een paar minuten fietsafstand;
+- Kortom: De omgeving zal werkelijk nooit vervelen.
+
+BEREIKBAARHEID EN PARKEREN
+- De woning ligt zeer centraal in de Pijp op slechts enkele minuten fietsen van hartje centrum;
+- Het appartement is per auto goed bereikbaar vanaf ringweg A-10 (afslag s110);
+- Nabijgelegen zijn verschillende tram- en bushaltes met o.a. tramlijnen 1, 3, 4, 7 en 19 en buslijnen N85 en N86;
+- Ook de metrohalte De Pijp, Wibautstraat en de Weesperplein zijn binnen 4 min fietsen te bereiken;
+- Het NS-station Amstel bevindt zich op circa 7 minuten fietsafstand;
+- Parkeren middels een vergunningensysteem;
+- Op de openbare weg is het betaald parkeren van ma t/m za van 09.00 tot 24.00 uur en zondag van 12.00 t/m 24.00 uur;
+
+BIJZONDERHEDEN
+- Een heerlijke en instapklare bovenwoning op een TOPlocatie;
+- Woonoppervlakte bedraagt 90 m²; 
+- Maar liefst drie goed bemeten slaapkamers;
+- Moderne keuken;
+- Heerlijk zonnig balkon op het zuidoosten gelegen;
+- Privé berging in de onderbouw;
+- Grote raampartijen zorgen voor een prachtige natuurlijke lichtinval;
+- Afgekochte erfpacht t/m maart 2038;
+- Brede trap en ruime gang, ideaal voor mensen met jonge kinderen;
+- Voorzien van energielabel A;
+- De woning beschikt over een woondelersvergunning;
+- Uitstekende ligging in de populaire Pijp met alle voorzieningen binnen handbereik.
+
+OPLEVERING
+De oplevering zal plaatsvinden in overleg.
+
+OP AANVRAAG BESCHIKBAAR
+- Eigendomsakte
+- Energielabel A
+- Splitsingsakte
+- Stukken VvE
+- Meetrapport</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Philip van Poelje</strong> · JA! Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 38</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/413/911_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/987_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/833_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/826_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/992_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/897_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/813_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/969_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/887_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/927_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/755_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/848_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/934_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/054_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/929_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/005_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/084_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/747_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/736_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/081_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/794_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/064_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/090_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/413/749_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/414/061_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

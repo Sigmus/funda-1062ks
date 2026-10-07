@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zeelandstraat 34-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Zeelandstraat 34-3</h1>
+  <p class="sub">
+    <span>1082 BX Amsterdam</span>
+    <span>·</span>
+    <span>Buitenveldert-Zuid-Midden</span>
+    <span class="status offer">Under option</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/232/871/904_1440x960.jpg" alt="Zeelandstraat 34-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">45 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€575.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.476/m² · 4.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">105 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1961</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-zeelandstraat-34-3/80915231/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 575.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.476</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under option</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 327,63 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1961</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Gedeeltelijk gestoffeerd</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>105 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>356 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Dakraam</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HR-107 (gas-fired combi boiler uit 2023, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM AK 3600</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>owned belast met Leasehold (einddatum Leasehold: 01-09-2051)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 1.455,36 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan bosrand, On a quiet road, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 327,63 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">RUIM EN LICHT DUBBEL BOVENHUIS VAN CA. 105 M² MET 3 SLAAPKAMERS, ZONNIG BALKON EN
+BIJZONDERE VIDE IN BUITENVELDERT
+Omgeving
+Dit ruime dubbele bovenhuis ligt in de geliefde, groene en ruim opgezette wijk Buitenveldert, op korte afstand van station Amsterdam Zuid, de Zuidas, het World Trade Center en de Vrije Universiteit. De wijk staat bekend om de rustige woonomgeving, het vele groen en de uitstekende voorzieningen.
+Voor de dagelijkse boodschappen kunt u terecht bij winkelcentrum Gelderlandplein en de winkels aan de Buitenveldertselaan, met diverse supermarkten, winkels en speciaalzaken. Ook voor recreatie en ontspanning is de ligging ideaal, met het Gijsbrecht van Aemstelpark, het Amstelpark en het Amsterdamse Bos in de directe omgeving.
+De bereikbaarheid is uitstekend. Met de auto zijn de A10 en diverse uitvalswegen binnen enkele minuten bereikbaar. Ook met het openbaar vervoer is de woning goed bereikbaar, met trein, tram, bus en de Noord/Zuidlijn op korte afstand. In de directe omgeving is parkeergelegenheid aanwezig. Indeling
+Het dubbele bovenhuis van circa 105 m² is gelegen op de derde en vierde verdieping en beschikt over twee woonlagen. De woning is bereikbaar via een breed trappenhuis.
+Bij binnenkomst komt u in de ruime hal, van waaruit de verschillende vertrekken bereikbaar zijn. De royale doorzonwoonkamer vormt het hart van de woning. Dankzij de grote raampartijen aan zowel de voorals achterzijde valt er veel natuurlijk licht naar binnen en heeft de ruimte een prettig ruimtelijk karakter. Vanuit de woonkamer is er toegang tot het zonnige balkon van circa 5 m² op het zuiden. Hier kijkt u uit over een groen en goed onderhouden speelparkje en kunt u heerlijk genieten van de middag- en avondzon. Aan de voorzijde bevindt zich de keuken. Deze ruimte is praktisch gelegen en biedt volop mogelijkheden om de keuken naar eigen smaak en wensen verder te moderniseren. Tevens bevindt zich hier de CV-ketel uit 2023. De badkamer is ruim en praktisch ingedeeld en beschikt over zowel een separate douche als een ligbad. Daarnaast bevinden zich hier het toilet en de aansluiting voor de wasmachine.
+Op deze woonlaag bevinden zich twee ruime slaapkamers, waarvan beide kamers directe toegang hebben tot het balkon.
+Bijzondere tweede woonlaag
+Via de woonkamer leidt een trap naar de tweede woonlaag van de woning. Hier bevindt zich de derde slaapkamer in de vide, een bijzondere en zeer lichte ruimte met een open en ruimtelijk karakter. De grote Velux dakramen zorgen voor een royale hoeveelheid natuurlijk licht en geven deze verdieping een geheel eigen sfeer. De ruimte is uitstekend geschikt als slaapkamer, maar kan uiteraard ook worden ingericht als comfortabele werk-, studie- of hobbyruimte.
+Op de begane grond beschikt de woning over een ruime separate berging van circa 5,5 m². € 575.000
+De
+woning k.k.
+biedt een mooie combinatie van ruimte, licht, buitenruimte en een bijzondere indeling. Bijzonderheden
+• Woonoppervlakte circa 105 m²
+• Drie slaapkamers
+• Bijzondere derde slaapkamer in de vide
+• Grote Velux dakramen in de vide
+• Veel natuurlijk licht door de gehele woning
+• Royale en lichte doorzonwoonkamer
+• Zonnig balkon van circa 5 m² op het zuiden
+• Groen uitzicht aan de achterzijde plus voorzijde
+• CV-ketel uit 2023
+• Ruime badkamer met separate douche en ligbad
+• Ruime separate berging van circa 5,5 m² op de begane grond
+• Energielabel D
+• Actieve en betrokken VvE
+• VvE-bijdrage € 327,63 per maand
+• Erfpachtcanon afgekocht tot eind augustus 2051
+• Gelegen in het geliefde Buitenveldert
+• Nabij station Amsterdam Zuid, Zuidas, WTC en Vrije Universiteit
+• Nabij winkelcentrum Gelderlandplein
+• Nabij het Gijsbrecht van Aemstelpark, Amstelpark en Amsterdamse Bos
+• Goede bereikbaarheid met auto en openbaar vervoer
+• Oplevering in overleg
+______________________________________
+ENGLISH
+SPACIOUS AND LIGHT DUPLEX UPPER-FLOOR APARTMENT OF APPROX. 105 SQ.M. WITH 3 BEDROOMS, SUNNY BALCONY AND UNIQUE LOFT SPACE IN BUITENVELDERT
+Location
+This spacious duplex upper-floor apartment is situated in the popular, green and spaciously laid-out neighbourhood of Buitenveldert, within easy reach of Amsterdam Zuid railway station, the Zuidas business district, the World Trade Center and Vrije Universiteit Amsterdam. The neighbourhood is known for its peaceful residential atmosphere, abundant greenery and excellent amenities.
+For daily shopping, you can visit Gelderlandplein shopping centre and the shops along Buitenveldertselaan, offering a wide range of supermarkets, shops and speciality stores. The location is also ideal for recreation and relaxation, with Gijsbrecht van Aemstelpark, Amstelpark and the Amsterdamse Bos all close by. The property is excellently connected. By car, the A10 motorway and various arterial roads can be reached within minutes. Public transport connections are also excellent, with train, tram, bus and the North/South metro line all within easy reach. Street parking is available in the immediate vicinity.
+Layout
+The duplex upper-floor apartment measures approximately 105 sq.m. and is spread over the third and fourth floors. The property is accessed via a wide communal staircase.
+Upon entering, you will find a spacious hallway providing access to the various rooms. The generous through-living room forms the heart of the home. Large windows at both the front and rear allow plenty of natural light to enter, creating a bright and spacious atmosphere. From the living room, you have direct access to the south-facing balcony of approximately 5 sq.m. Here, you can enjoy views over a green and wellmaintained playground and make the most of the afternoon and evening sun. The kitchen is located at the front of the apartment. It is practically positioned and offers plenty of potential to modernise and finish according to your own taste and requirements. The central heating boiler was installed in 2023 and is also located here.
+The spacious and practical bathroom features both a separate shower and a bathtub. The toilet and washing machine connection are also located in the bathroom.
+The first living level features two spacious bedrooms, both with direct access to the balcony. Unique second living level
+A staircase from the living room leads to the second living level. Here you will find the third bedroom in the loft space, a particularly attractive and exceptionally bright room with an open and spacious character. The large Velux skylights provide an abundance of natural light and give this upper level its own distinctive atmosphere. The space is ideally suited as a bedroom, but could equally well be used as a comfortable home office, study or hobby room.
+On the ground floor, the property benefits from a separate private storage room of approximately 5.5 sq.m. The property offers an appealing combination of space, natural light, outdoor space and a distinctive layout. Key features
+• Living area of approximately 105 sq.m.
+• Three bedrooms
+• Unique third bedroom in the loft space
+• Large Velux skylights in the loft
+• Abundant natural light throughout the property
+• Generous and bright through-living room
+• Sunny south-facing balcony of approximately 5 sq.m.
+• Green views to both the front and rear
+• Central heating boiler installed in 2023
+• Spacious bathroom with separate shower and bathtub
+• Separate private storage room of approximately 5.5 sq.m. on the ground floor
+• Energy label D
+• Active and well-managed owners&#x27; association (VvE)
+• VvE service charge of €327.63 per month
+• Ground lease (erfpacht) canon prepaid until the end of August 2051
+• Located in the sought-after neighbourhood of Buitenveldert
+€
+k.k.
+• 575.000
+Close to Amsterdam
+Zuid railway station, Zuidas, WTC and Vrije Universiteit Amsterdam</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Not extracted; see media_counts.</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Haverkamp Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 45</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/232/871/904_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/914_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/917_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/909_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/956_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/961_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/970_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/931_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/992_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/981_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/932_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/923_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/972_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/966_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/988_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/937_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/980_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/940_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/973_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/954_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/871/987_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

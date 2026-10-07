@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jan Springerhof 41 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Jan Springerhof 41</h1>
+  <p class="sub">
+    <span>1067 LG Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/231/166/292_1440x960.jpg" alt="Jan Springerhof 41 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">50 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€545.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.860/m² · 4.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.0 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">93 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy D</span>
+      <span class="chip">Built 1957</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-jan-springerhof-41/44415440/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 545.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.860</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, hoekwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1957</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>93 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>20 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>140 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>365 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, Washbasinmeubel, douche, en Bathtub</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>D</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing en HR-glas</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HRE (gas-fired combi boiler uit 2025, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN I 5888</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>140 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-01-2054</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN I 4498</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 31-07-2055)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan park, beschutte ligging, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden, Front garden en zijtuin</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>65 m² (10,45 m deep en 6,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Zeer lichte en royale familie HOEK-woning (93 M2) met maar liefst VIER prettige slaapkamers, twee dakkapellen uit 2022, zonnige achtertuin (63 M2) op het zuiden, aperte (fietsen)berging en vrij en groen uitzicht aan zowel de voor- als achterzijde. Ook buiten is het volop genieten. De zonnige achtertuin ligt perfect op het zuiden en grenst aan een groen plantsoen zonder directe achterburen. Hierdoor geniet je van optimale privacy én een heerlijk vrij uitzicht. Kinderen kunnen hier veilig spelen terwijl jij ontspant in de zon. Ook aan de voorzijde ervaar je rust door een grasveld en het ontbreken van directe overburen. De woning ligt in een rustige, groene en kindvriendelijke straat in het populaire Amsterdam Nieuw-West. In de directe omgeving vind je volop recreatievoorzieningen zoals de Sloterplas, Tuinen van West, Park de Kuil en diverse sportfaciliteiten. Winkels, scholen, openbaar vervoer en uitvalswegen bevinden zich allemaal binnen handbereik. Binnen 15 tot 20 minuten fietsen sta je bovendien in hartje Amsterdam. Word jij de gelukkige nieuwe bewoner van dit pareltje? Neem dan (heel) snel contact met op met Urban Makelaars! 
+
+***ENGLISH TRANSLATION BELOW***
+
+INDELING: (zie ook de plattegronden in de fotobijlage) 
+
+BEGANE GROND: Voortuin en entree aan de zijkant van de woning: ruime hal met meterkast, vrijhangend toilet met fonteintje, trap naar de eerste verdieping en toegang tot de tuingerichte woonkamer. De riante en lichte woonkamer geeft toegang tot de serre. De woonkeuken is gelegen aan de voorzijde van de woning is voorzien van diverse inbouwapparatuur en de nodige opbergruimte.
+
+EERSTE VERDIEPING: Op de eerste verdieping bevinden zich totaal drie royale slaapkamers. De badkamer is voorzien van een inloopdouche, wastafelmeubel met spiegel en tweede toilet. 
+
+TWEEDE VERDIEPING: Via een vaste trap bereik je de tweede verdieping met een ruime overloop en door de twee dakkapellen (2022) is daar een enorme vierde slaapkamer ontstaan. Tevens bevindt zich hier een bad met douche, keukenblok met spoelbak en kraan en een aparte ruimte voor aansluitingen van de wasmachine- en droger opstelling en cv-ketel. (Intergas HRE uit 2025).
+
+TUIN: De onderhoudsvriendelijke achtertuin voorzien van kunstgras (ca. 63 M2) met een achterom is gelegen op het zonnige zuiden. Hier kun je heerlijk van de middag- en avondzon genieten! De voor- en achtertuin grenst aan een groen (speel)plantsoen, zodat kinderen alle ruimte hebben om te spelen. Echt ideaal voor gezinnen met (kleine) opgroeiende kinderen! Verder nog een handige berging (ca. 3 M2) om de hoek van de woning voor extra opslag. 
+
+EIGENDOMSSITUATIE: 
+Het betreft een voortdurend recht van erfpacht, eigendom van de gemeente Amsterdam. De Algemene Bepalingen 2000 zijn van toepassing. De jaarlijkse canon is langdurig afgekocht en bij vooruitbetaling voldaan tot en met 31 januari 2054 en voor de berging (appartementsrecht) tot en met 31 juli 2055.
+
+OMGEVING EN BEREIKBAARHEID:
+Deze woning ligt in een rustige wijk van Geuzenveld, gekenmerkt door diverse groen- en recreatievoorzieningen zoals het Park de Kuil en de Tuinen van West. Het stadsmeer Sloterplas ligt om de hoek. Je hebt hier tal van recreatie mogelijkheden zoals het Sloterparkbad met fitnesscentrum, horeca, watersport, wandelroutes en een nieuw aangelegd stadsstrand. De Sloterplas wordt ontwikkeld naar een recreatiegebied waar Amsterdammers heerlijk kunnen recreëren in een groene, waterrijke, omgeving. Ook natuurgebieden Spaarnwoude en de Oeverlanden liggen beiden op ca. 20 minuten fietsafstand. Voor de sportliefhebbers: sportpark Ookmeer, een unieke (top) sportlocatie in Amsterdam Nieuw-West en sportpark De Eendracht met onder andere voetbalvelden, volleybalvelden, tennisbanen en golfbanen liggen vlakbij. en basis- en middelbare scholen zijn in de buurt aanwezig en op loopafstand bevindt zich een winkelcentrum aan het Lambertus Zijlplein met vele winkels voor de dagelijkse boodschappen en op het iets verderop gelegen vernieuwde Plein 40-45 is er nog een uitgebreidere keus aanwezig.Op loopafstand zijn bushaltes voor lijn 21 (Amsterdam centrum) en lijn 61 (station Sloterdijk) en tramhalte voor tram 13 (Amsterdam centrum). Via de Haarlemmerweg zijn de snelwegen A 4, A 5, A9 en A 10 snel bereikbaar en men is ook in ‘no-time’  bij luchthaven Schiphol maar ook Haarlem, Bloemendaal, Hoofddorp, Utrecht en Den Haag zijn gemakkelijk te bereiken. Het is ook mogelijk om per fiets erop uit te gaan. Zo is de binnenstad van Amsterdam op 15-20 minuten fietsafstand. Lekker centraal dus! Een geweldige aankoop dus in het kloppend hart van Nieuw-West.
+
+BIJZONDERHEDEN:
+- Familie hoek-woning met een totale oppervlakte van: ca. 93 M2 (NEN 2580 gemeten, meetrapport aanwezig)
+- Perceel oppervlakte: totaal ca. 140 M2.
+- Berging: ca. 3 M2.
+- Achtertuin van ca. 63 M2 is gelegen op het zonnige zuiden met een achterom.
+- De woning biedt bovendien interessante uitbreidingsmogelijkheden: aan de achterzijde kan vergunningvrij tot 4 meter worden uitgebouwd en de zolderverdieping leent zich uitstekend voor het realiseren van een extra slaapkamer.
+- Twee dakkapellen uit 2022. 
+- Verwarming en warm water middels een Intergas HRE combi ketel, bouwjaar 2025.
+- Veel privacy wegens het ontbreken van directe buren aan de voor- en achterzijde.
+- Tuinbijdrage Stadgenoot bedraagt € 12,50 per maand.
+- Servicekosten voor de berging bedraagt € 3,- per maand.
+- Uitstekende ligging ten opzichte van het openbaar vervoer, winkels en sportvoorzieningen.
+- Notaris: naar keuze koper, mits koopakte conform Model Ring bij notaris in Groot Amsterdam.
+- Vraagprijs: € 545.000,- k.k.  
+- Oplevering: geheel in overleg.
+
+***ENGLISH***
+
+xceptionally bright and spacious corner family home (93 m²) featuring no fewer than FOUR comfortable bedrooms, two dormer windows installed in 2022, a sunny south-facing rear garden (63 m²), a separate (bicycle) storage unit, and open green views at both the front and rear of the property. Outdoor living is just as enjoyable as the interior. The sunny rear garden is perfectly positioned facing south and borders a green communal area with no direct rear neighbors, offering excellent privacy and a wonderfully open outlook. Children can play safely while you relax in the sun. At the front, the absence of direct neighbors and the presence of a green lawn also contribute to a peaceful and spacious feeling. The property is situated on a quiet, green, and family-friendly street in the popular Amsterdam Nieuw-West district. The surrounding area offers plenty of recreational opportunities, including the Sloterplas lake, Tuinen van West, Park de Kuil, and various sports facilities. Shops, schools, public transportation, and major roads are all within easy reach. Moreover, Amsterdam city center can be reached by bicycle within 15 to 20 minutes. Could you be the lucky new owner of this gem? Contact Urban Makelaars today to arrange a viewing!
+
+LAYOUT: (Please also refer to the floor plans included in the photo presentation.)
+
+GROUND FLOOR: Front garden and side entrance to the property. Spacious entrance hall with meter cupboard, wall-mounted toilet with washbasin, staircase to the first floor, and access to the garden-facing living room.
+The generous and bright living room provides access to the conservatory/sunroom. The open-plan kitchen is located at the front of the house and is equipped with various built-in appliances and ample storage space.
+
+FIRST FLOOR: The first floor comprises a total of three spacious bedrooms. The bathroom is fitted with a walk-in shower, vanity unit with mirror, and a second toilet.
+
+SECOND FLOOR: A fixed staircase leads to the second floor, featuring a spacious landing. Thanks to the two dormer windows (2022), a very large fourth bedroom has been created here. This floor also includes a bathtub with shower, a kitchenette with sink and faucet, and a separate utility room housing the connections for a washing machine and dryer, as well as the central heating boiler (Intergas HRE, installed in 2025).
+
+GARDEN: The low-maintenance rear garden (approx. 63 m²) is fitted with artificial grass, features a rear entrance, and enjoys a sunny south-facing orientation. This is the perfect place to enjoy the afternoon and evening sun. Both the front and rear gardens border a green communal play area, providing plenty of space for children to play safely. An ideal setting for families with young children. In addition, there is a convenient separate storage unit (approx. 3 m²) located around the corner of the house, offering extra storage space.
+
+GROUND LEASE: The property is situated on municipal leasehold land owned by the City of Amsterdam. The General Provisions 2000 apply. The annual ground rent (canon) has been prepaid and bought off until 31 January 2054, and for the storage unit (apartment right) until 31 July 2055.
+
+LOCATION AND ACCESSIBILITY: This home is located in a quiet part of Geuzenveld, characterized by numerous green spaces and recreational facilities such as Park de Kuil and Tuinen van West. The Sloterplas lake is just around the corner. The area offers a wide range of leisure opportunities, including the Sloterpark swimming complex with fitness center, restaurants and cafés, water sports facilities, walking routes, and a newly developed urban beach. The Sloterplas area is currently being further developed into a vibrant recreational destination where residents can enjoy a green, water-rich environment. The nature reserves of Spaarnwoude and De Oeverlanden can both be reached within approximately 20 minutes by bicycle. For sports enthusiasts, Sportpark Ookmeer—one of Amsterdam Nieuw-West&#x27;s premier sports locations—and Sportpark De Eendracht, featuring football fields, volleyball courts, tennis courts, and golf facilities, are located nearby. Primary and secondary schools are available in the immediate vicinity. Within walking distance, you will find the shopping center at Lambertus Zijlplein, offering a wide variety of shops for daily groceries. The recently renovated Plein 40-45, located slightly further away, provides an even broader selection of retail stores. Public transport connections are excellent. Bus line 21 (Amsterdam city center), bus line 61 (Sloterdijk Station), and tram line 13 (Amsterdam city center) are all within walking distance. Via the Haarlemmerweg, the A4, A5, A9, and A10 motorways are easily accessible. Schiphol Airport can be reached in no time, while Haarlem, Bloemendaal, Hoofddorp, Utrecht, and The Hague are also conveniently accessible. Amsterdam city center is only a 15–20 minute bike ride away. In short: a fantastic opportunity in the vibrant heart of Amsterdam Nieuw-West.
+
+KEY FEATURES:
+
+- Spacious corner family home with a total living area of approximately 93 m² (measured in accordance with NEN 2580; measurement report available).
+- Total plot size: approximately 140 m².
+- Separate storage unit of approximately 3 m².
+- Sunny south-facing rear garden of approximately 63 m², including rear access.
+- Excellent expansion potential: the rear of the house can be extended by up to 4 meters permit-free, and the attic floor offers excellent possibilities for creating an additional bedroom.
+- Two dormer windows installed in 2022.
+- Heating and hot water supplied by an Intergas HRE combination boiler (2025).
+- Exceptional privacy due to the absence of direct neighbors at both the front and rear.
+- Monthly garden contribution to Stadgenoot: €12.50.
+- Monthly service charges for the storage unit: €3.00.
+- Excellent location near public transport, shops, schools, and sports facilities.
+- Notary: buyer&#x27;s choice, provided the deed of sale follows the Ring Amsterdam model and is executed by a notary within Greater Amsterdam.
+- Completion: to be agreed upon.
+ Lees de volledige omschrijving
+Advertentie</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 50</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/231/166/292_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/284_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/238_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/223_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/290_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/244_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/276_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/220_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/234_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/221_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/242_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/255_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/256_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/252_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/271_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/243_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/278_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/259_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/268_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/264_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/229_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/289_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/282_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/200_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/250_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/280_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/269_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/247_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/312_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/311_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/294_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/291_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/307_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/295_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/303_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/299_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/296_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/315_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/293_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/302_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/309_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/298_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/304_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/300_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/310_1440x960.jpg", "https://cloud.funda.nl/valentina_media/231/166/306_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

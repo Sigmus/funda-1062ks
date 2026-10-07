@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Josephus Jittastraat 5 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Josephus Jittastraat 5</h1>
+  <p class="sub">
+    <span>1063 NJ Amsterdam</span>
+    <span>·</span>
+    <span>Jan de Louterbuurt</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/229/678/732_1440x960.jpg" alt="Josephus Jittastraat 5 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">29 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€475.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.013/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">79 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1954</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-josephus-jittastraat-5/44477195/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 475.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.013</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1954</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>79 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>18 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>77 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>358 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors en een zolder</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en Wall insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HR 22 (gas-fired combi boiler, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND D 8973</dt><dd>Oppervlakte</dd></div>
+        <div class="frow"><dt>77 m²</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijk eigendom belast met erfpacht (einddatum erfpacht: 31-08-2054)</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>29 m² (5,70 m deep en 5,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuiden bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** English text below***
+Woningzoekers opgelet! In het geliefde Amsterdam-West staat deze fijne eengezinswoning te koop, met een woonoppervlakte van circa 79 m² en een heerlijke achtertuin van circa 29 m² op het zonnige zuiden! De woning biedt een ruime woonkamer, een keuken die u geheel naar eigen wens kunt inrichten, drie slaapkamers, een badkamer én een zolderverdieping met veel potentie. Geniet van het levendige karakter van de buurt, met alle benodigde voorzieningen binnen handbereik.
+
+Indeling:
+Begane grond:
+Via uw eigen voortuin bereikt u de entree van de woning en stapt u binnen in het tochtportaal. Vanuit hier heeft u toegang tot een inpandige berging. Tevens vindt u hier de meterkast. Vanuit het tochtportaal kunt u eveneens de deur openen naar de rest van de woning. Aan de voorzijde bevindt zich de lichte keuken, in casco staat, die u geheel naar eigen smaak kunt inrichten. Aan de achterzijde treft u de lichte woonkamer en een separaat toilet. De tuindeur in de woonkamer geeft toegang tot de ruime achtertuin van circa 29 m² op het zonnige zuiden. Hier kunt u heerlijk genieten van de hele dag zon en het groen om u heen. De tuin beschikt bovendien over een achterom.
+
+Via een vaste trap bereikt u de eerste verdieping. 
+
+Eerste verdieping:
+De overloop biedt toegang tot alle vertrekken op de eerste verdieping. Aan de achterzijde ligt een ruime slaapkamer en de badkamer, voorzien van een douche, wastafel en een tweede toilet. Aan de voorzijde van de woning vindt u een tweede slaapkamer met opbergkast en de derde slaapkamer. De vlizotrap op de overloop biedt toegang tot de tweede verdieping.
+
+Tweede verdieping:
+Op de tweede verdieping vindt u de ruime zolder met dakraam voor daglicht. Deze ruimte biedt volop mogelijkheden voor diverse gebruiksdoeleinden en indelingen. Hier kunt u bijvoorbeeld eenvoudig een vierde slaapkamer en extra woonoppervlakte creëren. Hier bevindt zich tevens de cv-ketel. 
+
+Omgeving en bereikbaarheid:
+De woning is gelegen in het bruisende stadsdeel Nieuw-West. Op loopafstand vindt u Plein &#x27;40-&#x27;45, een overdekt winkelcentrum met een uitgebreid aanbod van winkels, inclusief de grootste markt van Amsterdam Nieuw-West. Binnen tien minuten bereikt u het Westerpark, met de iconische Westergasfabriek en een scala aan gezellige cafés en restaurants. Voor de natuurliefhebbers zijn de Bretten en de Sloterplas op korte afstand te bereiken, met het Sloterparkbad en het Sloterpark als extra recreatiemogelijkheden.
+
+De woning is uitstekend bereikbaar met openbaar vervoer, met nabijgelegen taxi-, tram- en busverbindingen. Ook met de auto is de woning goed bereikbaar door de goede aansluiting naar de Ring A10. Buslijn 21 biedt een directe verbinding naar Amsterdam Centraal Station.
+
+Grondsituatie:
+De woning is gelegen op gemeentelijke erfpachtgrond. De erfpacht is vooruitbetaald tot en met 31 augustus 2054. Op dit recht zijn de Algemene Bepalingen voor voortdurende erfpacht van het jaar 2000 van toepassing.
+
+Bijzonderheden:
+- Woonoppervlakte 79,4 m² (NEN-2580 meetcertificaat aanwezig);
+- Bouwjaar 1954;
+- Achtertuin van circa 29 m² met achterom, gelegen op het zuiden;
+- Voortuin van circa 13 m², gelegen op het noorden;
+- Drie slaapkamers;
+- Ruime zolderverdieping met mogelijkheden voor diverse gebruiksdoeleinden;
+- Energielabel C;
+- Erfpacht vooruitbetaald t/m 31-08-2054;
+- De woning is uitsluitend beschikbaar voor eigen bewoning door de koper of diens eigen kind vanaf 18 jaar. De eigenaar of het eigen kind dient zich in te schrijven als hoofdbewoner. In de akte wordt een verkoop- en verhuur belemmerende bepaling opgenomen;
+- De ouderdoms-, NEN-, asbest- en niet-zelfbewoningsclausule worden opgenomen in de koopovereenkomst;
+- Projectnotaris Hartman LMH notarissen te Amsterdam; 
+- Oplevering per direct mogelijk.
+---------------------------------------------------
+*** English text***
+
+Tenants of Rochdale will have priority until 15 june for the purchase of this property. Not a tenant? Then register as an interested party. If the property has not been sold after 10 working days, we will invite you for a viewing.
+
+Attention home seekers! In the popular Amsterdam-West area, this pleasant family home is for sale, with a living area of approximately 79 m² and a lovely backyard of approximately 29 m² facing south! The property offers a spacious living room, a kitchen that you can fully design to your own taste, three bedrooms, a bathroom, and an attic floor with great potential. Enjoy the vibrant character of the neighbourhood, with all necessary amenities within easy reach.
+
+Layout:
+
+Ground floor:
+Through your private front garden you reach the entrance of the house and enter the vestibule. From here you have access to an indoor storage room. The meter cupboard is also located here. From the vestibule you can also enter the rest of the house. At the front is the bright kitchen, in shell condition, which you can fully design according to your own taste. At the rear you will find the bright living room and a separate toilet. The garden door in the living room provides access to the spacious backyard of approximately 29 m² facing south. Here you can enjoy sunshine all day long and the surrounding greenery. The garden also has a back entrance.
+
+A fixed staircase leads to the first floor.
+
+First floor:
+The landing provides access to all rooms on this floor. At the rear is a spacious bedroom and the bathroom, fitted with a shower, sink and a second toilet. At the front of the property you will find a second bedroom with storage cupboard and the third bedroom. The loft ladder on the landing provides access to the second floor.
+
+Second floor:
+On the second floor you will find a spacious attic with a skylight for natural daylight. This space offers plenty of possibilities for various uses and layouts. For example, you could easily create a fourth bedroom and additional living space here. The central heating boiler is also located here.
+
+Surroundings and accessibility:
+The property is located in the lively Nieuw-West district. Within walking distance you will find Plein &#x27;40-&#x27;45, an indoor shopping centre with a wide range of shops, including the largest market in Amsterdam Nieuw-West. Within ten minutes you can reach the Westerpark, with the iconic Westergasfabriek and a variety of cosy cafés and restaurants. For nature lovers, the Bretten area and Sloterplas lake are within short distance, with Sloterparkbad swimming pool and Sloterpark offering additional recreational opportunities.
+
+The property is excellently accessible by public transport, with nearby taxi, tram and bus connections. It is also easily accessible by car due to its good connection to the A10 ring road. Bus line 21 provides a direct connection to Amsterdam Central Station.
+
+Land situation:
+The property is located on municipal leasehold land. The leasehold has been prepaid until 31 August 2054. The General Provisions for continuous leasehold from the year 2000 apply.
+
+Details:
+
+- Living area 79.4 m² (NEN-2580 measurement certificate available);
+- Year of construction 1954;
+- Backyard of approximately 29 m² with back entrance, facing south;
+- Front garden of approximately 13 m², facing north;
+- Three bedrooms;
+- Spacious attic floor with potential for various uses;
+- Energy label C;
+- Leasehold prepaid until 31-08-2054;
+- The property is only available for owner-occupation by the buyer or their own child aged 18 or older. The owner or their child must register as the main occupant. A clause restricting sale and rental will be included in the deed;
+Age, NEN, asbestos, and non-owner-occupation clauses will be included in the purchase agreement;
+- Project notary Hartman LMH Notaries in Amsterdam;
+- Immediate delivery possible.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 29</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/229/678/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/641_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/597_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/593_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/609_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/691_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/656_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/744_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/605_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/687_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/688_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/651_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/725_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/591_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/757_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/737_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/653_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/629_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/582_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/759_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/694_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/603_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/678/766_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

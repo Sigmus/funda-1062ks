@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lutonhof 453 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Lutonhof 453</h1>
+  <p class="sub">
+    <span>1043 EG Amsterdam</span>
+    <span>·</span>
+    <span>Sloterdijk Stationskwartier</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/463/397_1440x960.jpg" alt="Lutonhof 453 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.143/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">91 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A++</span>
+      <span class="chip">Built 2024</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-lutonhof-453/44599887/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.143</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 141,87 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2024</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>91 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>36 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>322 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 Walk-in showers, 2 Washbasins, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Balansventilatie, buitenzonwering, glasvezelkabel, lift, Mechanical ventilation, en schuifpui</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>4e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A++</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Gehele Underfloor heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN K 4593</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 2.544,09 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Sun terrace</dd></div>
+        <div class="frow"><dt>Sun terrace</dt><dd>28 m² (10,85 m deep en 2,54 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het westen</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present en Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 141,87 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Sloterdijk Stationskwartier</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Inwoners</dt><dd>1.680</dd></div>
+        <div class="frow"><dt>Gezin met kinderen</dt><dd>7%</dd></div>
+        <div class="frow"><dt>Gem. vraagprijs / m²</dt><dd>€ 7.302</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Welkom in dit splinternieuwe (2024) en duurzame 4-kamerappartement aan de Lutonhof 453 in Amsterdam. De woning is instapklaar, je kunt meteen verhuizen! Met een woonoppervlakte van 91 m², drie ruime slaapkamers, twee badkamers en toiletten biedt dit appartement alles wat je zoekt.
+
+Het energielabel A++ en de vloerverwarming én -koeling via een WKO-installatie zorgen voor optimaal wooncomfort in ieder seizoen. Een absoluut pluspunt is het royale terras gelegen op het westen met een prachtig vrij uitzicht, waar je kunt genieten van de mooiste zonsondergangen. 
+
+Snel meer zien? Kom binnen!
+
+Omgeving: 
+De woning is gelegen aan de Lutonhof in de geliefde en groene wijk Sloterdijk in Amsterdam Nieuw-West. Deze rustige, ruim opgezette woonomgeving biedt een fijne combinatie van stedelijke voorzieningen en veel groen, waardoor het een aantrekkelijke plek is voor zowel gezinnen als starters.
+
+In de directe omgeving bevinden zich diverse supermarkten, winkels, scholen, kinderopvang en sportvoorzieningen. Op de hoek van het complex ligt een grote Jumbo voor de dagelijkse boodschappen. Daarnaast bevinden zich direct tegenover het complex een ambachtelijke bakker en een gezellig café, waardoor alle dagelijkse voorzieningen binnen handbereik zijn.. Ook voor ontspanning en recreatie zijn er volop mogelijkheden, zoals het Sloterpark en de Sloterplas, waar je kunt wandelen, hardlopen, zwemmen of genieten van de natuur.
+
+De bereikbaarheid is uitstekend. Verschillende tram- en busverbindingen bevinden zich op loopafstand en bieden een snelle verbinding naar onder andere Amsterdam Centraal, Schiphol, Amsterdam Zuid en Haarlem. Met de auto zijn de uitvalswegen A4, A5, A9 en A10 eenvoudig bereikbaar, waardoor ook omliggende steden goed te bereiken zijn.
+
+Indeling: 
+Welkom in dit lichte en royaal ingedeelde appartement aan de Lutonhof 453 in Amsterdam. De woning is modern afgewerkt, beschikt over drie goed bemeten slaapkamers, twee badkamers, twee separate toiletten en meerdere fijne buitenruimtes. Dankzij de grote raampartijen, de open leefruimte en het vrije uitzicht voelt het appartement ruim, comfortabel en bijzonder prettig aan.
+
+Via de verzorgde gemeenschappelijke entree met brievenbussen bereikt u het appartement. Bij binnenkomst in de woning komt u in de hal, vanwaar de verschillende vertrekken overzichtelijk bereikbaar zijn. 
+De hal leidt door naar de lichte woonkamer. Door de grote ramen en de brede glaspartijen valt hier veel natuurlijk licht naar binnen. De woonkamer biedt volop ruimte voor een comfortabele zithoek en staat in open verbinding met de eetkamer en keuken. De eetkamer is ruim opgezet en biedt plaats aan een royale eettafel. Aansluitend bevindt zich de moderne keuken met een strakke, donkere afwerking, veel kastruimte, een groot werkblad en inbouwapparatuur. Vanuit de woon- en eetruimte is het ruime balkon bereikbaar, een heerlijke plek om buiten te zitten en te genieten van het vrije uitzicht over de omgeving.
+
+Het appartement beschikt over drie slaapkamers. De hoofdslaapkamer is ruim van opzet en heeft een eigen inloopkast, wat zorgt voor veel opbergruimte en extra comfort. De tweede slaapkamer is momenteel ingericht als kledingkamer en beschikt over toegang tot een eigen balkon. Deze kamer is uiteraard ook uitstekend te gebruiken als volwaardige slaapkamer. De derde slaapkamer is op dit moment ingericht als logeerkamer, maar leent zich ook perfect als babykamer, werkkamer of hobbyruimte.
+
+De hoofdbadkamer is bereikbaar via de hal en is modern afgewerkt met een inloopdouche, wastafel met meubel, ronde spiegel en handdoekradiator. Daarnaast is er een separaat toilet aanwezig. De tweede badkamer, gelegen nabij de entree, is eveneens modern afgewerkt en bericht over een inloopdouche en wastafel. 
+
+Een groot pluspunt van dit appartement zijn de buitenruimtes. Aan de woonzijde bevindt zich een ruim terras gelegen op het Westen met genoeg plaats voor een zitje en een prachtig vrij uitzicht. Daarnaast is er nog een balkon aan een van de slaapkamers, waardoor ook daar een fijne verbinding met buiten ontstaat. De combinatie van licht, ruimte, moderne afwerking en meerdere buitenplekken maakt dit appartement bijzonder compleet.
+
+Vereniging van Eigenaren: 
+Het betreft een gezonde en actieve vereniging van eigenaren genaamd ‘MOTown-Track 8 te Amsterdam’. De VvE wordt professioneel beheerd door NEWOMIJ, er wordt jaarlijks vergaderd en de vereniging beschikt over een meerjaren onderhoudsplan. De maandelijkse bijdrage is € 141,87. 
+
+Eigendomssituatie: 
+De woning is gelegen op gemeentelijke erfpachtgrond, waarbij sprake is van eeuwigdurende erfpacht. Er is een jaarlijkse canon verschuldigd van € 2.544,09, welke jaarlijks wordt geïndexeerd.
+
+Bijzonderheden: 
+- Gelegen in Nieuw-West; 
+- Woonoppervlakte van 91m2 (NEN gemeten);
+- 3 slaapkamers;
+- Ruim terras gelegen op het Westen (vanaf de middag tot einde avond zon);
+- Balkon gelegen aan slaapkamer;
+- Service kosten VvE € 141,87 per maand;
+- Energielabel A++;
+- Vloerverwarming in het gehele appartement incl. badkamer;
+- WKO-installatie (warmte en koude opslag);
+- Uitgegeven in eeuwigdurende erfpacht (VW 2016); canon bedraagt € 2.500,- per jaar;
+- 2 toiletten;
+- 2 Badkamers;
+- Mogelijkheid om een parkeerplaats te huren;
+- Oplevering in overleg;
+- Er is pas een overeenkomst als de koopakte is getekend;
+- De koopakte wordt opgemaakt door een notaris in Amsterdam.
+
+DISCLAIMER
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien. Van toepassing zijn de NVM voorwaarden.
+
+**ENGLISH**
+
+Welcome to this brand-new and sustainable four-room apartment at Lutonhof 453 in Amsterdam. Completed in 2024 and ready for immediate occupancy, this modern home offers 91 sqm of living space, three spacious bedrooms, two bathrooms, two separate toilets, and multiple outdoor areas, everything you need for comfortable contemporary living.
+
+The brand-new kitchen, excellent A++ energy label, underfloor heating and cooling through an energy-efficient ATES (Aquifer Thermal Energy Storage) system provide exceptional comfort throughout the year. A true highlight is the spacious west-facing terrace with unobstructed views, where you can enjoy breathtaking sunsets.
+
+Want to see more? Step inside!
+
+Location:
+The apartment is situated on Lutonhof in the popular and green district of Osdorp, Amsterdam Nieuw-West. This quiet and spacious residential neighbourhood offers the perfect balance between urban convenience and abundant green spaces, making it an attractive location for both families and first-time buyers.
+
+The immediate surroundings offer a wide range of amenities, including supermarkets, shops, schools, childcare facilities, and sports facilities. A large Jumbo supermarket is located on the corner of the complex, making daily grocery shopping very convenient. In addition, there is an artisan bakery and a cosy café directly opposite the complex, ensuring that all daily necessities are within easy reach. The nearby Sloterpark and Sloterplas provide excellent opportunities for walking, jogging, swimming, or simply relaxing in nature.
+
+The accessibility is excellent. Several tram and bus connections are within walking distance, providing quick and convenient links to destinations including Amsterdam Central Station, Schiphol Airport, Amsterdam Zuid, and Haarlem. By car, the A4, A5, A9, and A10 motorways are easily accessible, making surrounding cities and areas easy to reach.
+
+Layout:
+Welcome to this bright and spacious apartment at Lutonhof 453 in Amsterdam. Finished to a high standard, the apartment features three well-proportioned bedrooms, two bathrooms, two separate toilets, and multiple pleasant outdoor spaces. Large windows, an open-plan living area, and unobstructed views create a bright, spacious, and welcoming atmosphere.
+
+The well-maintained communal entrance with mailboxes provides access to the apartment. Upon entering, you arrive in the spacious hallway, which offers access to all rooms.
+
+The hallway leads into the bright living room, where large windows and expansive glazing allow an abundance of natural daylight to flood the space. The living room offers plenty of room for a comfortable seating area and seamlessly connects to the dining area and open-plan kitchen. The dining area easily accommodates a large dining table, making it perfect for entertaining family and friends.
+
+Adjacent to the dining area is the contemporary kitchen, finished in stylish dark tones and equipped with ample cabinet space, a generous worktop, and built-in appliances. From the living and dining area, you have direct access to the spacious terrace—a wonderful place to relax outdoors while enjoying the open views.
+
+The apartment offers three bedrooms. The generously sized master bedroom features its own walk-in wardrobe, providing excellent storage space and added comfort. The second bedroom is currently used as a dressing room and has access to a private balcony, but can easily serve as a full-sized bedroom. The third bedroom is currently arranged as a guest room and is equally suitable as a nursery, home office, or hobby room.
+
+The main bathroom is accessed from the hallway and is beautifully finished with a walk-in shower, vanity unit, round mirror, and heated towel rail. There is also a separate toilet. The second bathroom, located near the entrance, provides additional comfort and convenience.
+
+One of the apartment&#x27;s greatest assets is its outdoor space. On the living side of the apartment, there is a spacious west-facing terrace with plenty of room for outdoor seating and beautiful unobstructed views. In addition, one of the bedrooms has access to its own private balcony, creating another pleasant outdoor retreat. The combination of natural light, generous living space, modern finishes, and multiple outdoor areas makes this apartment truly complete.
+
+Homeowners&#x27; Association (VvE):
+The apartment forms part of the healthy and active homeowners&#x27; association &quot;MOTown-Track 8 te Amsterdam.&quot; The association is professionally managed by NEWOMIJ, holds annual meetings, and has a long-term maintenance plan (MJOP) in place. The monthly service charge amounts to €141.87.
+
+Leasehold:
+The property is situated on municipal leasehold land with a perpetual leasehold. An annual ground rent (canon) of €2,544.09 is payable and is indexed annually.
+
+Details: 
+- Located in Amsterdam Nieuw-West;
+- Living area of 91 sqm (NEN measured);
+- Three spacious bedrooms;
+- Spacious west-facing terrace (sun from the afternoon until late evening)
+- Private balcony accessible from one of the bedrooms;
+- Monthly VvE service charges: €141.87;
+- Energy label A++;
+- Underfloor heating throughout the apartment, including the bathrooms;
+- Energy-efficient ATES (Aquifer Thermal Energy Storage) system for heating and cooling;
+- Perpetual municipal leasehold (2016 conditions); annual ground rent approximately €2,500;
+- Two separate toilets;
+- Two bathrooms;
+- Possibility to rent a parking space;
+- Completion in consultation;
+- A binding purchase agreement is only concluded once the deed of sale has been signed by both parties;
+- The deed of sale will be drawn up by a civil-law notary in Amsterdam.
+
+DISCLAIMER
+This information has been compiled by us with due care. However, we accept no liability for any incompleteness, inaccuracy, or otherwise, or for the consequences thereof. All stated dimensions and surface areas are indicative. The buyer has the obligation to investigate all matters of importance to them. The real estate agent is acting as the seller&#x27;s advisor for this property. We advise you to engage an expert (NVM) real estate agent to guide you through the purchase process. If you have specific wishes regarding the property, we advise you to inform your purchasing agent in a timely manner and to conduct your own independent investigation. If you do not engage an expert representative, you are legally considered sufficiently expert to be able to oversee all important matters. The NVM terms and conditions apply.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Modern ruim ingedeeld appartement
+
+Nieuw 4-kamerappartement uit 2024 met 3 slaapkamers, 2 badkamers en 2 toiletten.
+
+Ruim terras met vrij uitzicht
+
+Westelijk gelegen terras en extra balkon met vrij uitzicht en avondzon.
+
+Zeer energiezuinig wooncomfort
+
+Energielabel A++, vloerverwarming en -koeling via WKO-installatie.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Your Home Makelaars Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/463/397_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/321_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/343_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/546/027_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/545/848_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/545/870_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/546/090_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/390_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/388_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/629/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/310_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/545/843_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/545/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/330_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/315_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/415_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/367_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/412_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/334_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/393_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/342_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/418_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/394_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/395_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/405_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/306_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/372_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/347_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/402_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/326_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/376_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/398_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/546/065_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/339_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/337_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/396_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/463/356_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

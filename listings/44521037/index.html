@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lijnbaansgracht 29-B · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Lijnbaansgracht 29-B</h1>
+  <p class="sub">
+    <span>1015 GP Amsterdam</span>
+    <span>·</span>
+    <span>Driehoekbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/772/507_1440x960.jpg" alt="Lijnbaansgracht 29-B — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">31 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.904/m² · 4.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">73 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1981</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-lijnbaansgracht-29-b/44521037/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 267 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.904</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Portiekwoning (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1981</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>73 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>3 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>241 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HRE (gas gestookt, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>AMSTERDAM L 9697</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 30-06-2032)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-06-2032</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Direct online een bezichtiging inplannen? Ga naar onze website!
+
+WAANZINNIG WONEN AAN DE RAND VAN DE JORDAAN
+Welkom op de Lijnbaansgracht, waar het bruisende stadsleven en serene rust naadloos samenkomen. Zoek je een instapklaar appartement met ruimte, uitzicht op de gracht én een vleugje Jordaan-charme? Dan is dit 4-kamer appartement met drie royale slaapkamers precies wat je zoekt. Geniet van de moderne keuken, frisse badkamer en een zonnig balkon op het westen. Ideaal voor een eenpersoonshuishouden of een stel dat houdt van het beste van beide werelden: de dynamiek van de stad en een oase van rust thuis.
+
+HIGHLIGHTS WAAR JE HART SNELLER VAN GAAT KLOPPEN
+
+Instapklaar wonen: Een modern 4-kamer appartement van 73 m², compleet met 3 ruime slaapkamers.
+Keuken: Voorzien van alle gemakken, inclusief een koel-vriescombinatie, vaatwasser en oven.
+Sanitair: Een moderne badkamer met douche, wastafelmeubel en witgoedaansluiting. Separaat toilet voor extra gemak.
+Balkon met uitzicht: Geniet van de avondzon op je balkon, met uitzicht op de iconische gracht.
+Handige extra’s: Eigen berging op de begane grond, perfect voor je fiets en extra spullen.
+Unieke indeling: Drie slaapkamers in de Jordaan? Dat kom je echt zelden tegen!
+
+STIJLVOL WONEN MET EEN VLEUGJE STADSMAGIE
+Wonen in de Jordaan is wonen in een stukje Amsterdam dat historie ademt en toch helemaal van deze tijd is. Dit appartement, gelegen aan de rustige Lijnbaansgracht, is jouw privéplek in een buurt vol karakter. Met een woonoppervlakte van 73 m² voelt het ruim en licht aan. Of je nu een avondje wilt relaxen met een glas wijn op je westelijk gelegen balkon of uitgebreid wilt koken in de moderne keuken, dit appartement biedt alles wat je nodig hebt.
+
+De drie slaapkamers bieden een flexibiliteit waar je normaal gesproken alleen maar van kunt dromen in dit deel van de stad. Of je nu een thuiskantoor wilt, een logeerkamer of een walk-in closet: het kan allemaal. De badkamer is modern, fris en praktisch ingericht met een inloopdouche, wastafelmeubel en aansluiting voor wasmachine en droger. Het aparte toilet is een fijne extra, zeker als je gasten over de vloer hebt.
+
+De keuken is een waar kookparadijs met een stijlvolle afwerking en inbouwapparatuur zoals een koel-vriescombinatie, vaatwasser en oven. Nodig vrienden uit voor een etentje, en laat je kookkunsten stralen! En heb je spullen die je niet dagelijks gebruikt? Geen zorgen, want op de begane grond vind je een eigen berging. Ideaal voor je fiets, koffers of andere opbergbehoeften.
+
+LIGGING
+Met een balkon op het westen zit je hier altijd goed. Na een lange werkdag is dit de perfecte plek om met een drankje in de avondzon te genieten van het uitzicht over de gracht. De Lijnbaansgracht is een rustige straat middenin de levendige Jordaan. Hier woon je op steenworp afstand van de Egelantiersgracht, de Amsterdamse grachtengordel en iconische hotspots zoals de Noordermarkt en de Westerstraat.
+
+DE JORDAAN
+
+Wonen aan de Lijnbaansgracht betekent dat je midden in Amsterdam woont, maar dat je al snel een vast ritme en je eigen favoriete plekken in de buurt krijgt. De bakker om de hoek, even een koffie halen, op zaterdag over de Noordermarkt struinen of aan het einde van de middag langs de gracht naar huis lopen: het dagelijkse leven speelt zich hier grotendeels buiten de voordeur af.
+
+In de directe omgeving vind je een mooie mix van vertrouwde adressen en nieuwe plekken. Voor koffie, ontbijt of lunch hoef je nooit ver te zoeken. Voor een borrel zijn Café ’t Smalle, Café de Tuin en Café Thijssen geliefde adressen in de buurt. Ook voor een avond uit eten is er volop keuze, van informeel en gezellig tot uitgebreid tafelen.
+
+De Noordermarkt en Lindengracht liggen op steenworp afstand en maken de zaterdag extra leuk. Even verderop vind je de gezellige straten rondom de Westerstraat, de Negen Straatjes en de Haarlemmerdijk. Alles is dichtbij, maar juist doordat je zoveel te voet of met de fiets kunt doen, voelt de buurt verrassend ontspannen.
+
+Voor wie graag de drukte af en toe achter zich laat, liggen zowel het Westerpark als het Westerdok op korte afstand. En natuurlijk is ook de rest van Amsterdam vanuit deze centrale plek eenvoudig per fiets bereikbaar.
+
+Dit appartement is gelegen op grond van de gemeente Amsterdam en heeft erfpacht die is afgekocht tot 30 juni 2032. Daarna is de canon eeuwigdurend vastgezet, met uitzondering van inflatiecorrecties, voor een bedrag van €1.938 per jaar. Dat betekent duidelijkheid en zekerheid voor de toekomst!
+_______________
+
+Want to schedule a viewing online right away? Visit our website!
+
+INCREDIBLE LIVING ON THE EDGE OF THE JORDAAN
+Welcome to Lijnbaansgracht, where the vibrant energy of city life seamlessly blends with serene tranquility. Are you looking for a move-in ready apartment with ample space, canal views, and a touch of Jordaan charm? Then this 4-room apartment with three generously sized bedrooms is exactly what you’re looking for. Enjoy the modern kitchen, bright bathroom, and a sunny west-facing balcony. It’s ideal for a single household or a couple who want the best of both worlds: the dynamic city life and an oasis of calm at home.
+
+HIGHLIGHTS THAT WILL MAKE YOUR HEART RACE
+
+- Move-in ready living: A modern 4-room apartment of 73 m², complete with 3 spacious bedrooms.
+- Kitchen: Equipped with all the comforts, including a fridge-freezer combination, dishwasher, and oven.
+- Bathroom: A modern bathroom featuring a shower, washbasin unit, and connection for a washing machine. There’s also a separate toilet for added convenience.
+- Balcony with a view: Enjoy the evening sun on your balcony with a view of the iconic canal.
+- Useful extras: Private storage on the ground floor, perfect for your bike and extra belongings.
+- Unique layout: Three bedrooms in the Jordaan? That’s truly a rarity!
+
+STYLISH LIVING WITH A TOUCH OF URBAN MAGIC
+Living in the Jordaan means residing in a piece of Amsterdam that breathes history while remaining completely contemporary. This apartment, located on the quiet Lijnbaansgracht, is your private haven in a neighborhood full of character. With a living space of 73 m², it feels both spacious and light. Whether you want to unwind with a glass of wine on your west-facing balcony or cook an elaborate meal in the modern kitchen, this apartment offers everything you need.
+
+The three bedrooms provide a level of flexibility you’d normally only dream of in this part of the city. Whether you desire a home office, a guest room, or a walk-in closet, it’s all possible. The bathroom is modern, fresh, and practically designed with a walk-in shower, washbasin unit, and connections for a washing machine and dryer. The separate toilet is a pleasant extra, especially when guests are over.
+
+The kitchen is a true culinary paradise, featuring stylish finishes and integrated appliances such as a fridge-freezer combination, dishwasher, and oven. Invite friends over for dinner and let your cooking skills shine! And if you have items you don’t use daily, don’t worry—there’s your own storage room on the ground floor. It’s perfect for your bike, suitcases, or other storage needs.
+
+LOCATION
+With a west-facing balcony, you’re in the perfect spot. After a long day’s work, this is the ideal place to enjoy a drink in the evening sun while admiring the view over the canal. Lijnbaansgracht is a quiet street in the heart of the lively Jordaan. Here, you live just a stone’s throw from Egelantiersgracht, the Amsterdam canal belt, and iconic hotspots like Noordermarkt and Westerstraat.
+
+In the Jordaan, it feels like living in a village—all while enjoying all the advantages of city life. Pick up your groceries at the organic Farmers’ Market or wander through the charming streets lined with boutiques, cafés, and restaurants. Think Café Thijssen, restaurant Daalder, or a drink at Café Lowietje. Need a break from the urban bustle? Take a stroll to Westerpark, where you can exercise, picnic, or enjoy cultural events at Westergasfabriek.
+
+This apartment is situated on land owned by the municipality of Amsterdam, with leasehold that has been prepaid until June 30, 2032. After that, the ground rent is permanently fixed, except for inflation adjustments, at an amount of €1,938 per year. This brings clarity and certainty for the future!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Hoekstra en Van Eck Amsterdam West</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 31</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/772/507_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/404_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/433_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/287_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/259_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/395_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/242_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/489_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/479_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/473_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/437_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/449_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/528_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/553_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/421_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/462_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/448_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/548_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/347_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/451_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/446_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/509_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/538_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/325_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/388_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/240_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/271_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/456_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/772/529_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

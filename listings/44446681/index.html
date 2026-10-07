@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruimzicht 298 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Ruimzicht 298</h1>
+  <p class="sub">
+    <span>1068 CZ Amsterdam</span>
+    <span>·</span>
+    <span>Meer en Oever</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/232/316/002_1440x960.jpg" alt="Ruimzicht 298 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">51 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€450.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.688/m² · 2.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.2 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">96 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1966</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-ruimzicht-298/44446681/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 311 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 450.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.688</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Walk-up flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1966</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>96 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>316 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>7e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening en gasboiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND D 5746</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 15-06-2038)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 114,00 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Direct online een bezichtiging inplannen? Ga naar onze website!
+
+WELKOM IN JOUW NIEUWE DROOMAPPARTEMENT IN AMSTERDAM-WEST
+Ben je starter op de woningmarkt, altijd al dol geweest op het bruisende stadsleven, maar tegelijkertijd op zoek naar een rustige plek die als een oase voelt? Zoek niet verder, want dit royale 4-kamer appartement met maar liefst twee balkons staat te popelen om jouw nieuwe thuis te worden! Met een fantastisch uitzicht over de Sloterplas en het omringende groen, leef je hier letterlijk tussen de stad en de natuur. De 96 m² woonoppervlakte biedt volop ruimte voor ontspanning, werken én gezelligheid. Hier woon je levensloopbestendig én comfortabel, dicht bij alle voorzieningen die Amsterdam-West te bieden heeft.
+
+DIT MAAKT HET APPARTEMENT ZO UNIEK
+
+Ruim formaat en indeling: 4-kamer appartement met 96 m² aan woonoppervlakte, inclusief een woonkamer met aangrenzend balkon en drie ruime slaapkamers; perfect voor gezinnen, thuiswerkers of logees!
+Fijne buitenruimtes: Twee balkons met ieder een eigen charme: geniet van de zon op het royale balkon op het westen en ontwaak met de ochtendzon op het kleinere balkon aan de oostzijde.
+Adembenemend uitzicht: Zowel aan de voorkant als achterzijde kijk je uit over de Sloterplas en omringend groen. Perfect voor natuur- én stadsliefhebbers!
+Volop woongenot: Grote, lichte woonkamer waar je heerlijk kunt relaxen en een royale open keuken om uitgebreid in te koken (ideaal voor de innerlijke chef).
+Praktisch en ruim: Separaat toilet, een badkamer met alle gemakken én drie slaapkamers die je naar wens kunt inrichten.
+Toplocatie: Gelegen in de nabijheid van winkels, horeca, theater en natuur én goed bereikbaar met zowel de fiets, auto als OV.
+
+STEL JE HIER JOUW NIEUWE THUIS EENS VOOR
+Welkom bij een woning die je meteen omarmt vanaf het moment dat je binnenstapt. Zodra je de voordeur opent, word je begroet door een lichte, ruime gang die je door het appartement leidt. Links vind je de royale woonkamer. Grote ramen laten het daglicht rijkelijk naar binnen stromen en geven je een fenomenaal uitzicht over het bruisende leven rondom de Sloterplas. Vanaf de woonkamer stap je zo het ruime balkon op, gelegen op het westen. Hier is het op zomeravonden genieten van de ondergaande zon met een goed glas wijn of een gezellig diner met vrienden.
+
+Aan de andere kant van het appartement bevindt zich het tweede, knusse balkon met een ligging op het oosten. Perfect voor rustige ochtenden, een kop koffie en een goed boek terwijl de eerste zonnestralen je verwarmen.
+
+De drie goed bemeten slaapkamers bieden volop mogelijkheden. De master bedroom? Een serene plek waar je heerlijk tot rust komt na een drukke dag in de stad. De andere twee slaapkamers zijn flexibel inzetbaar en perfect voor bijvoorbeeld een thuiskantoor, een babykamer of logeerkamer. Aan jou de keuze!
+
+De grote keuken biedt genoeg ruimte voor uitgebreide kookavonden. Bak samen pizza’s met vrienden of maak de lekkerste gerechten voor een intieme avond met je partner: hier kan het allemaal. Naast de keuken vind je een keurig separaat toilet en een functionele badkamer waar je precies hebt wat je nodig hebt: een praktische én verzorgde ruimte.
+
+En dan de omgeving… Het voelt haast alsof je hier in een buurt woont die álles heeft waaraan je ooit hebt gedacht. Binnen een paar minuten wandel je naar het winkelcentrum Osdorpplein, dé hotspot voor je dagelijkse boodschappen, een fijne koffiebreak of een bezoek aan Theater De Meervaart. De prachtige natuurgebieden rondom de Sloterplas maken dit appartement extra aantrekkelijk. Begin je dag met een frisse ochtendwandeling rondom het water of ontspan op een zonnige middag in het Sloterpark. Ongeacht je lifestyle is dit een locatie die blijft inspireren.
+
+EEN PLEK MET ALLE GEMAKKEN BINNEN HANDBEREIK
+Verhuis je naar dit appartement, dan merk je direct de voordelen van de topligging in Amsterdam-West. Openbaar vervoer? Binnen no-time ben je op Station Lelylaan of sta je midden in het centrum van Amsterdam dankzij tramlijnen 1 en 17. Werk je buiten de stad? Via de ring A10 rijd je binnen enkele minuten op de A4 of A9, en parkeren kan voor de deur met vergunning!
+
+Op zoek naar leuke hotspots en lekker eten? De buurt biedt een diversiteit aan gezellige restaurants, koffiezaken en terrasjes. En laten we het Sloterpark niet vergeten: voor ontspanning én avontuur zit je hier helemaal goed.
+
+Praktisch? Dit appartement heeft erfpacht met een jaarlijkse canon van slechts €114,35 per jaar, lopend tot 15 juni 2038.
+
+Dit 4-kamer appartement in Amsterdam-West heeft:
+
+- Ruimte voor eigen ideeën; 
+- 3 ruime slaapkamers en een lichte woonkamer van royale afmetingen;
+- Twee balkons op het oosten en westen, elk met eigen charme;
+- Fenomenaal uitzicht over de Sloterplas en veel omliggend groen;
+- Een centrale, goed bereikbare locatie nabij winkels, horeca en natuur;
+- Een fijne ruime badkamer, separaat toilet én een grote keuken; praktisch en comfortabel.
+_____________________________________
+
+Would you like to schedule a viewing online right away? Visit our website!
+
+WELCOME TO YOUR NEW DREAM APARTMENT IN AMSTERDAM-WEST
+Are you a starter on the housing market, always captivated by the vibrant city life, yet in search of a peaceful spot that feels like an oasis? Look no further, because this spacious 4-room apartment with no less than two balconies is eager to become your new home! With breathtaking views over Sloterplas and the surrounding greenery, you literally live between the city and nature. The 96 m² of living space offers plenty of room for relaxation, work, and good times. Here you live comfortably and in a home that adapts to every stage of life, close to all the amenities that Amsterdam-West has to offer.
+
+WHAT MAKES THIS APARTMENT SO UNIQUE
+
+- Spacious layout: A 4-room apartment with 96 m² of living space, including a living room with an adjoining balcony and three generously sized bedrooms—perfect for families, home workers, or guests!
+- Pleasant outdoor spaces: Two balconies, each with its own charm. Enjoy the generous western balcony during sunny afternoons and wake up to the morning sun on the cozier eastern balcony.
+- Stunning views: Both the front and back of the apartment overlook Sloterplas and the surrounding green areas—ideal for both nature and city lovers!
+- Ample living enjoyment: A large, bright living room where you can relax as well as a spacious open kitchen perfect for culinary adventures (ideal for the inner chef).
+- Practical and roomy: A separate toilet, a bathroom with all comforts, and three bedrooms that you can furnish to your liking.
+- Prime location: Situated close to shops, restaurants, theaters, and nature, and easily accessible by bicycle, car, or public transport.
+
+PICTURE YOUR NEW HOME HERE
+Welcome to a home that embraces you the moment you step inside. As soon as you open the front door, you are greeted by a bright, spacious hallway that leads you through the apartment. To the left, you find the generous living room. Large windows allow ample daylight to flood in, offering a phenomenal view of the bustling life around Sloterplas. From the living room, you step out onto the spacious western balcony, where you can savor summer evenings with a glass of wine or enjoy a cozy dinner with friends as the sun sets.
+
+On the other side of the apartment lies the second, intimate eastern balcony. Perfect for quiet mornings, a cup of coffee, and a good book as the first rays of sunshine warm you.
+
+The three well-proportioned bedrooms offer a world of possibilities. The master bedroom? A serene space where you can unwind after a busy day in the city. The other two bedrooms are versatile and ideal for a home office, a baby’s room, or a guest room. The choice is yours!
+
+The large kitchen provides plenty of space for elaborate cooking evenings. Bake pizzas with friends or prepare delicious meals for an intimate evening with your partner—here you can do it all. Adjacent to the kitchen, you’ll find a neat separate toilet and a functional bathroom that offers exactly what you need: a practical, well-maintained space.
+
+And then there’s the neighborhood… It almost feels like you live in an area that has absolutely everything you could ever imagine. Within minutes, you can walk to the Osdorpplein shopping center, the hotspot for your daily groceries, a lovely coffee break, or a visit to Theater De Meervaart. The beautiful nature areas surrounding Sloterplas make this apartment even more attractive. Start your day with a refreshing morning walk around the water or relax on a sunny afternoon in Sloterpark. No matter your lifestyle, this location continues to inspire.
+
+A PLACE WITH EVERY CONVENIENCE AT YOUR FINGERTIPS
+Moving into this apartment, you’ll immediately appreciate the advantages of its prime location in Amsterdam-West. Public transport? In no time, you’re at Lelylaan Station or right in the heart of Amsterdam thanks to tram lines 1 and 17. Do you work outside the city? You can reach the A4 or A9 within minutes via the A10 ring road.
+Looking for cool hotspots and great food? The neighborhood offers a wide variety of cozy restaurants, coffee shops, and terraces. And let’s not forget Sloterpark: it’s the perfect place for both relaxation and adventure.
+
+Practical? This apartment is on leasehold with an annual ground rent of only €114.35 per year, valid until June 15, 2038.
+
+This 4-room apartment in Amsterdam-West features:
+
+- Space for your own ideas;
+- 3 spacious bedrooms and a generous, light-filled living room;
+- Two balconies facing east and west, each with its own unique charm;
+- Phenomenal views over Sloterplas and plenty of surrounding greenery;
+- A central, easily accessible location near shops, restaurants, and nature;
+- A large, well-appointed bathroom, a separate toilet, and a big kitchen—practical and comfortable.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 51</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/232/316/002_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/005_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/042_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/009_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/998_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/036_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/020_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/961_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/967_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/957_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/037_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/966_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/039_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/019_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/017_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/047_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/956_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/038_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/984_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/991_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/041_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/007_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/010_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/015_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/987_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/025_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/993_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/045_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/316/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/981_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/862_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/994_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/920_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/315/867_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

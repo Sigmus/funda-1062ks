@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Van Speijkstraat 48-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Van Speijkstraat 48-3</h1>
+  <p class="sub">
+    <span>1057 HD Amsterdam</span>
+    <span>·</span>
+    <span>De Wester Quartier</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/893/475_1440x960.jpg" alt="Van Speijkstraat 48-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€799.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.264/m² · 2.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.1 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">110 m² living</span>
+      <span class="chip">7 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1922</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-speijkstraat-48-3/44585619/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>110 m²</dd></div>
+        <div class="frow"><dt>110 m²</dt><dd>Gebouwgebonden buitenruimte</dd></div>
+        <div class="frow"><dt>7 m²</dt><dd>Inhoud</dd></div>
+        <div class="frow"><dt>395 m³</dt><dd>Indeling</dd></div>
+        <div class="frow"><dt>Number of rooms</dt><dd>7 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 799.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.264</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 168,33 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1922</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Elektrische verwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN C 11537</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 168,33 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">In het hart van Amsterdam-West vind je dit prachtig appartement, verdeeld over twee verdiepingen. De woning beschikt over maar liefst drie (mogelijk vier) slaapkamers, twee badkamers en twee woonkamers met moderne open keukens. Daarnaast bevindt zich op de derde verdieping een zonnig balkon.
+
+De woning is voorzien van energielabel A én een eeuwigdurend afgekochte erfpacht, dus zorgeloos wonen in de stad! Perfect voor grote gezinnen, samenwoners of iedereen die nét wat meer ruimte zoekt.
+
+Nieuwsgierig? Je bent van harte welkom om binnen te kijken!
+
+Omgeving:
+Wonen aan de Van Speijkstraat 48 betekent thuiskomen in een levendige en geliefde buurt in Amsterdam-West, midden in stadsdeel De Baarsjes. De directe omgeving biedt alles wat je nodig hebt. Op loopafstand bevinden zich tal van gezellige cafés, lunchzaken en restaurants. Ook voor de dagelijkse boodschappen is er volop keus: van grote supermarkten tot ambachtelijke speciaalzaken in de Jan Evertsenstraat, de Kinkerstraat en de Postjesweg. Bovendien zijn er verschillende scholen, kinderopvanglocaties en sportvoorzieningen in de buurt, wat de wijk extra aantrekkelijk maakt voor gezinnen. Natuurliefhebbers kunnen hun hart ophalen in de nabijgelegen parken. Zowel het Rembrandtpark als het Erasmuspark liggen op korte afstand en bieden volop mogelijkheden voor ontspanning, een wandeling of een sportieve activiteit. Ook fiets je binnen enkele minuten naar het Vondelpark.
+
+De ligging is zeer gunstig. Het centrum van Amsterdam is in tien minuten per fiets bereikbaar. In de directe omgeving bevinden zich meerdere tram- en bushaltes met goede verbindingen naar andere delen van de stad. Met de auto ben je via de nabijgelegen afritten snel op de Ring A10.
+
+Indeling:
+Bij binnenkomst op de derde verdieping betreedt u direct de royale en opvallend lichte woonkamer. Dankzij de grote raampartijen en openslaande deuren wordt de ruimte overspoeld met daglicht, wat bijdraagt aan een bijzonder aangename sfeer. De deuren geven toegang tot een ruim balkon, waar u in alle rust kunt genieten van de frisse buitenlucht, een perfecte plek voor een kop koffie in de ochtend of een glas wijn aan het eind van de dag. De woonkamer staat in open verbinding met de eetkamer en moderne keuken, waardoor een ruimtelijk geheel ontstaat dat ideaal is voor zowel dagelijks gebruik als gezellige diners met vrienden en familie. De keuken is uitgerust met een ruim kookeiland, een strak afgewerkt werkblad en luxe inbouwapparatuur van hoogwaardige kwaliteit. 
+
+Op deze verdieping bevinden zich twee slaapkamers. De ruime hoofdslaapkamer is gesitueerd aan de rustige achterzijde van de woning en biedt eveneens directe toegang tot het balkon. Deze kamer biedt voldoende ruimte voor een groot bed en een kledingkast. De tweede slaapkamer leent zich uitstekend als logeerkamer, kinderkamer of comfortabele werkplek. De luxe afgewerkte badkamer completeert deze woonlaag. Deze is voorzien van een royaal ligbad, een douche, een dubbele wastafel en een toilet. De moderne afwerking en het gebruik van kwalitatieve materialen zorgen voor een stijlvolle en ontspannende sfeer.
+
+Via de gemeenschappelijke trap bereikt u de vierde en bovenste verdieping van de woning. Ook hier wordt u verwelkomd door een lichte en comfortabele woonruimte. De ramen in de tweede woonkamer zorgen voor een prettige lichtinval en een open, luchtige sfeer. Aansluitend bevindt zich een moderne open keuken, voorzien van inbouwapparatuur en veel praktische kastruimte. Daarnaast bevindt zich in de keuken ook aansluiting voor een wasmachine. 
+
+Koper kan er ook voor kiezen een interne trap te realiseren zodat je vanuit de derde etage naar de vierde etage kan zonder de gemeenschappelijke trap te gebruiken, Deze werkzaamheden zijn onder voorbehoud van het verkrijgen van een gemeentelijke vergunning en toestemming van de VvE. Deze dienen door de koper te worden verkregen, verkoper kan de benodigde toestemmingen niet garanderen.
+
+Aan de woonkamer grenst een ruime slaapkamer, die dankzij brede raampartijen eveneens profiteert van veel daglicht. Deze kamer biedt voldoende ruimte voor een tweepersoonsbed en een garderobekast. Tot slot beschikt deze verdieping over een tweede, volledig uitgeruste badkamer met een douche, wastafel en toilet. 
+
+Mogelijkheid voor de aanleg van een &#x27;dakterras&#x27; op het bovengelegen platte dak! Deze werkzaamheden zijn onder voorbehoud van het verkrijgen van een gemeentelijke vergunning en toestemming van de VvE. Deze dienen door de koper te worden verkregen, verkoper kan de benodigde toestemmingen niet garanderen.
+
+Vereniging van Eigenaren:
+Het betreft een gezonde en actieve vereniging van eigenaren genaamd ‘Van Speijkstraat 48 t/m 54’. De VvE wordt professioneel beheerd door Ymere, er wordt jaarlijks vergaderd en de vereniging beschikt over een meerjaren onderhoudsplan. De maandelijkse bijdrage is €168,33.
+
+Eigendomssituatie: 
+De woning is gelegen op gemeentelijke erfpachtgrond, waarbij de erfpacht eeuwigdurend is afgekocht!
+
+De Van Speijkstraat 48-3 en 48-4 staan bij de gemeente Amsterdam officieel bekend als twee
+afzonderlijke huisnummers er kunnen dus 2 parkeervergunning worden aangevraagd. De
+bovenverdieping (woning zolderverdieping) mag niet afzonderlijk gebruikt worden door
+een ander dan de eigenaar/gebruiker van de woning op de derde verdieping zolang de
+VvE daarvoor geen toestemming heeft verleend.
+
+Bijzonderheden: 
+- Gelegen in geliefd Amsterdam-West;  
+- Woonoppervlakte van 110m2 (NEN gemeten);
+- Dubbel bovenhuis;
+- 2 woonkamers; 
+- 3 slaapkamers;
+- 2 badkamers; 
+- Erfpacht eeuwigdurend is afgekocht; 
+- Energie label A; 
+- Balkon op de derde verdieping; 
+- Service kosten VvE €168,33 per maand;
+- Niet-zelfbewoningsclausule van toepassing;
+- Ouderdoms clausule;
+- Parkeren via vergunningsstelsel, veel parkeergelegenheid in de directe omgeving;
+- Oplevering in overleg;
+- Er is pas een overeenkomst als de koopakte is getekend;
+- Project notaris Van Dijk De Jongh te Dronten;
+
+DISCLAIMER
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft zijn eigen onderzoeksplicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien. Van toepassing zijn de NVM voorwaarden.
+
+**ENGLISH** 
+
+In the heart of Amsterdam-West, you&#x27;ll find this beautiful apartment. The property boasts no fewer than three (possibly four) bedrooms, two bathrooms, and two living rooms with modern open-plan kitchens. There&#x27;s also a sunny balcony on the third floor.
+
+The apartment has an energy label A and a perpetual leasehold, so you can enjoy carefree city living! Perfect for large families, couples, or anyone looking for a little more space.
+
+Curious? You&#x27;re welcome to take a look inside!
+
+Neighborhood:
+Living at Van Speijkstraat 48 means coming home to a vibrant and popular neighborhood in Amsterdam-West, right in the heart of the De Baarsjes district. The immediate area offers everything you need. Numerous charming cafés, lunchrooms, and restaurants are within walking distance. There&#x27;s also plenty of choice for daily shopping: from large supermarkets to artisanal specialty stores in Jan Evertsenstraat, Kinkerstraat, and Postjesweg. Moreover, there are several schools, childcare facilities, and sports facilities nearby, making the neighborhood particularly attractive for families. Nature lovers can indulge in the nearby parks. Both Rembrandtpark and Erasmuspark are a short distance away and offer ample opportunities for relaxation, a stroll, or a sporting activity. Vondelpark is also just a few minutes&#x27; bike ride away.
+
+The location is very convenient. Amsterdam city center is a ten-minute bike ride away. Several tram and bus stops are located nearby, offering excellent connections to other parts of the city. Nearby exits provide quick access to the A10 ring road by car.
+
+Layout:
+Upon entering the third floor, you immediately step into the spacious and remarkably bright living room. Thanks to the large windows and French doors, the room is flooded with natural light, contributing to a particularly pleasant atmosphere. The doors open onto a spacious balcony, where you can peacefully enjoy the fresh air—a perfect spot for a morning cup of coffee or a glass of wine at the end of the day. The living room is open-plan to the dining room and modern kitchen, creating a spacious space ideal for both everyday use and cozy dinners with friends and family. The kitchen is equipped with a spacious island, a sleek countertop, and high-quality built-in appliances.
+
+This floor features two bedrooms. The spacious master bedroom is situated at the quiet rear of the house and also offers direct access to the balcony. This room offers ample space for a large bed and a wardrobe. The second bedroom is ideal as a guest room, children&#x27;s room, or a comfortable workspace. The luxuriously finished bathroom completes this floor. It features a spacious bathtub, a shower, a double sink, and a toilet. The modern finishes and the use of high-quality materials create a stylish and relaxing atmosphere.
+
+The shared staircase leads to the fourth and top floor of the house. Here, too, you are welcomed by a bright and comfortable living space. The windows in the second living room provide pleasant light and an open, airy atmosphere. Adjacent is a modern open-plan kitchen, equipped with built-in appliances and ample cupboard space. The kitchen also has a washing machine connection.
+
+The buyer can also choose to install an internal staircase, allowing access from the third floor to the fourth without using the communal staircase. This work is subject to obtaining a municipal permit and permission from the homeowners&#x27; association (VvE). The buyer must obtain these permits; the seller cannot guarantee the necessary permissions.
+
+Adjacent to the living room is a spacious bedroom, which also benefits from ample natural light thanks to its wide windows. This room offers ample space for a double bed and a wardrobe. Finally, this floor has a second, fully equipped bathroom with a shower, sink, and toilet.
+
+Possibility for the construction of a &quot;roof terrace&quot; on the flat roof above! This work is subject to obtaining a municipal permit and permission from the homeowners&#x27; association (VvE). The buyer must obtain these permits; the seller cannot guarantee the necessary permissions.
+
+Home Owners Association:
+This is a healthy and active owners&#x27; association called &quot;Van Speijkstraat 48 t/m 54.&quot; The homeowners&#x27; association is professionally managed by Ymere, meets annually, and has a multi-year maintenance plan. The monthly fee is €168.33.
+
+Ownership situation:
+The property is located on municipal leasehold land, with the leasehold having been bought off in perpetuity!
+
+Van Speijkstraat 48-3 and 48-4 are officially registered with the municipality of Amsterdam as two separate house numbers, so two parking permits can be applied for. The top floor (attic apartment) may not be used separately by anyone other than the owner/occupier of the apartment on the third floor until the homeowners&#x27; association (VvE) has granted permission.
+
+Details:
+- Located in popular Amsterdam-West;
+- Living area of 110sqm (NEN measured);
+- Double upper house;
+- 2 living rooms;
+- 3 bedrooms;
+- 2 bathrooms;
+- Leasehold has been bought off in perpetuity;
+- Energy label A;
+- Balcony on the third floor;
+- Homeowners&#x27; association (VvE) service fees €168,33 per month;
+- Non-owner-occupancy clause applies;
+- Age clause;
+- Parking via permit system, ample parking in the immediate vicinity;
+- Delivery date negotiable;
+- An agreement is only concluded once the purchase agreement has been signed;
+- Project notary Van Dijk De Jongh in Dronten;
+
+DISCLAIMER
+This information has been compiled by us with due care. However, we accept no liability for any incompleteness, inaccuracy, or otherwise, or for the consequences thereof. All stated dimensions and surface areas are indicative. The buyer has the obligation to investigate all matters of importance to them. The real estate agent is acting as the seller&#x27;s advisor for this property. We advise you to engage an expert (NVM) real estate agent to guide you through the purchase process. If you have specific wishes regarding the property, we advise you to inform your purchasing agent in a timely manner and to conduct your own independent investigation. If you do not engage an expert representative, you are legally considered sufficiently expert to be able to oversee all important matters. The NVM terms and conditions apply.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Diederick Hoorn</strong> · Your Home Makelaars Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/893/475_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/437_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/506_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/502_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/488_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/465_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/445_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/477_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/504_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/455_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/494_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/492_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/454_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/459_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/509_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/480_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/524_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/501_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/446_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/452_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/535_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/461_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/510_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/516_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/497_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/467_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/435_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/458_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/507_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/470_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/436_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/526_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/463_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/485_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/483_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/893/513_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

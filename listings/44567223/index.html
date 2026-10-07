@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jan den Haenstraat 27-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Jan den Haenstraat 27-2</h1>
+  <p class="sub">
+    <span>1055 WC Amsterdam</span>
+    <span>·</span>
+    <span>Landlust-Zuid</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/142/959_1440x960.jpg" alt="Jan den Haenstraat 27-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">41 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€750.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.427/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">89 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1934</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-jan-den-haenstraat-27-2/44567223/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 750.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.427</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 202,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Bovenwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1934</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>89 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>22 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>292 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, HR-glas en Floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>2011 (gas-fired combi boiler, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN C 11498</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 16-05-2058</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present en Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 202,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Sommige woningen voelen direct als een thuis. Jan den Haenstraat 27 is zo&#x27;n plek. Een heerlijk licht en verrassend ruim dubbel bovenhuis waar alles klopt. Hier geniet je van drie slaapkamers, twee fantastische buitenruimtes op het westen, energielabel A én het comfort van geen bovenburen. De combinatie van rust, ruimte en een hoogwaardige afwerking maakt dit een woning waar je jarenlang met plezier woont.
+
+Of je nu een jong gezin bent, allebei regelmatig thuiswerkt of simpelweg op zoek bent naar een woning waar je niets meer aan hoeft te doen: hier hoef je alleen nog maar je spullen neer te zetten en te genieten.
+
+Nieuwsgierig? Neem contact met ons op voor een bezichtiging. We laten je deze heerlijke woning graag zien.
+
+OMGEVING EN BEREIKBAARHEID
+De Jan den Haenstraat ligt in een rustige en groene straat in Amsterdam-West. Een plek waar kinderen nog voor de deur spelen, de stoepen breed zijn en buren elkaar kennen. Tegelijkertijd woon je hier verrassend centraal.
+
+Binnen enkele minuten wandel je naar het Erasmuspark of het Westerpark voor een rondje hardlopen, een picknick of een ontspannen wandeling. Zin in een goede kop koffie, een uitgebreid diner of even boodschappen doen? De Jan Evertsenstraat, De Clercqstraat en het Hugo de Grootplein liggen allemaal om de hoek en bieden een enorme variatie aan gezellige cafés, restaurants, speciaalzaken en winkels.
+
+Ook voor gezinnen is dit een ideale omgeving. Er zijn meerdere basisscholen, kinderopvanglocaties en speeltuinen op loopafstand. Sportliefhebbers kunnen terecht bij onder andere Beest Boulders en PadelNext.
+
+Met de fiets bereik je binnen tien minuten de Jordaan of de binnenstad en ook met de auto zit je snel op de Ring A10. Extra prettig: momenteel is er geen wachttijd voor een parkeervergunning (bron: Gemeente Amsterdam).
+
+INDELING
+Via je eigen entree op de eerste verdieping kom je thuis. Geen gedeelde galerij of buren die langs je voordeur lopen, maar een eigen opgang die direct zorgt voor een gevoel van privacy. Grote raampartijen laten het daglicht binnen en begeleiden je naar de woonverdieping.
+
+Tweede verdieping: zodra je boven komt, valt direct de hoeveelheid licht op. De doorzonwoonkamer voelt ruim en sfeervol aan en biedt aan de voorzijde alle ruimte voor een royale zithoek.
+
+Aan de achterzijde ligt de moderne keuken, vernieuwd in 2021 en voorzien van alle gewenste inbouwapparatuur. De keuken sluit naadloos aan op de eetkamer, waardoor een gezellige leefruimte ontstaat. Ook is er naast de keuken een ruime en praktische opbergkast ingebouwd.
+
+Open de openslaande deuren vanuit de keuken en stap direct het circa 6 m² brede balkon op. Gelegen op het westen kijk je uit over een prachtig verzorgde binnentuin met veel groen en een sfeervolle vijver. Een plek waar je tot laat in de avond van de zon geniet en waar het moeilijk is om niet nog éven te blijven zitten. 
+
+Grenzend aan het balkon ligt ook een fijne en ruime slaapkamer. Deze wordt momenteel gebruikt als werkkamer, maar is ook ideaal als tweede slaapkamer of logeerkamer. Extra fijn: op deze verdieping is er een apart toilet.
+
+Derde verdieping: de bovenste verdieping is volledig ingericht als rustige slaapverdieping. Hier bevindt zich de royale hoofdslaapkamer van ruim 17 m². Via de openslaande deuren stap je zo het ruime dakterras op. Hier geniet je van lange zomeravonden, een barbecue met vrienden of simpelweg van de ondergaande zon. Het voelt eerder als een vakantie dan als een gewone dinsdagavond.
+
+De babykamer is in 2023 gerealiseerd door middel van een dakkapel met nieuwe kozijnen en triple glas. Dankzij de slimme indeling en de diepe knieschotten is dit een ideale babykamer, een rustige thuiswerkplek of hobbykamer met veel handige bergruimte. 
+Ook de badkamer is in 2023 volledig vernieuwd. De combinatie van grote beige vloertegels, warme taupekleurige wandtegels en een royale inloopdouche zorgt voor een rustige, luxe uitstraling. Daarnaast beschikt de badkamer over een tweede toilet, veel bergruimte in de knieschotten én een netjes weggewerkte wasmachine en droger.
+
+Kortom: een heerlijk dubbel bovenhuis waar ruimte, comfort, duurzaamheid en buitenleven op een huiselijke manier samenkomen.
+
+VVE
+De VvE wordt professioneel beheerd en valt onder &#x27;Bloom blok 3&#x27;. De vereniging telt 125 leden en de servicekosten bedragen € 202,00 per jaar. Vanaf 1 januari 2027 worden de kosten verhoogd naar € 224,06 per maand.
+
+ENERGIE
+De woning is goed geïsoleerd en beschikt over energielabel A. Dit zorgt niet alleen voor extra comfort, maar ook voor lagere maandelijkse lasten. Een goed energielabel zorgt bovendien voor extra leencapaciteit tot wel € 10.000 of een lagere rente!
+
+ERFPACHT
+De erfpacht is afgekocht tot 15-08-2058. Vanaf dat moment bedraagt de jaarlijkse canon € 3.545,95, welke jaarlijks wordt geïndexeerd. Let op: erfpacht is deels aftrekbaar bij de inkomstenbelasting!
+
+HIGHLIGHTS
+- Ca. 89 m² gebruiksoppervlak
+- Eigen opgang vanaf de eerste verdieping
+- Geen bovenburen!
+- Goed geïsoleerde woning met energielabel A
+- Geweldig terras op het westen
+- Gevelbreed balkon op het westen, gelegen op de tweede verdieping
+- Luxe badkamer met veel opbergruimte middels diepe knieschotten en weggewerkte wasmachine
+- Energielabel A, wat zorgt voor lage maandelijkse lasten
+- Drie slaapkamers, ideaal voor gezinnen, werken vanuit huis of logees
+- Twee toiletten, verdeeld over beide woonlagen
+- Fijne en rustige straat met veel parkeerplekken en brede stoepen
+- Oplevering kan snel!
+- Notariskeuze koper: regio Amsterdam
+
+CLAUSULES 
+- In de koopakte wordt standaard een ouderdomsclausule opgenomen
+
+-----------------------
+
+Some homes instantly feel like home. Jan den Haenstraat 27 is one of them. A wonderfully bright and surprisingly spacious double upper-floor apartment where everything comes together. Here, you can enjoy three bedrooms, two fantastic west-facing outdoor spaces, an energy label A and the comfort of having no upstairs neighbours. The combination of peace, space and high-quality finishes makes this a home you can enjoy for many years to come.
+
+Whether you are a young family, both regularly work from home or are simply looking for a property that requires no further work: all you have to do here is move in, put your belongings in place and enjoy.
+
+Curious to see more? Get in touch with us to arrange a viewing. We would be delighted to show you around this wonderful home.
+
+LOCATION AND ACCESSIBILITY
+Jan den Haenstraat is located on a quiet and green street in Amsterdam West. A place where children still play outside, the pavements are wide and neighbours know each other. At the same time, you are surprisingly close to everything.
+
+Within just a few minutes, you can walk to Erasmuspark or Westerpark for a run, a picnic or a relaxing stroll. Fancy a good cup of coffee, an extensive dinner or simply need to pick up some groceries? Jan Evertsenstraat, De Clercqstraat and Hugo de Grootplein are all just around the corner and offer a huge variety of cosy cafés, restaurants, specialty shops and stores.
+
+This is also an ideal area for families. Several primary schools, childcare facilities and playgrounds are within walking distance. Sports enthusiasts can visit, among others, Beest Boulders and PadelNext.
+
+By bike, you can reach the Jordaan or Amsterdam city centre within ten minutes, while by car you can quickly access the A10 ring road. An added advantage: there is currently no waiting list for a residential parking permit (source: Municipality of Amsterdam).
+
+LAYOUT
+You enter the property via your own private entrance on the first floor. No shared gallery or neighbours walking past your front door, but a private staircase that immediately creates a sense of privacy. Large windows allow plenty of natural daylight in and lead you towards the living floor.
+
+Second floor: as soon as you arrive upstairs, the abundance of natural light immediately catches your eye. The bright, dual-aspect living room feels spacious and atmospheric, with plenty of room at the front for a generous seating area.
+
+At the rear is the modern kitchen, renovated in 2021 and equipped with all the desired built-in appliances. The kitchen connects seamlessly to the dining area, creating a cosy and inviting living space. There is also a spacious and practical built-in storage cupboard next to the kitchen.
+
+Open the French doors from the kitchen and step straight onto the approximately 6 m² wide balcony. Facing west, the balcony overlooks a beautifully maintained communal garden with plenty of greenery and an atmospheric pond. A wonderful spot to enjoy the sunshine well into the evening, where it is hard to resist staying just a little longer.
+
+Adjacent to the balcony is a comfortable and spacious bedroom. It is currently being used as a home office, but would also be ideal as a second bedroom or guest room. An added bonus: there is a separate toilet on this floor.
+
+Third floor: the top floor is fully arranged as a peaceful sleeping area. Here you will find the generous master bedroom of more than 17 m². Through the French doors, you can step straight onto the spacious roof terrace. This is the perfect place to enjoy long summer evenings, a barbecue with friends or simply watch the sun go down. It feels more like a holiday than an ordinary Tuesday evening.
+
+The nursery was created in 2023 with the addition of a dormer window featuring new window frames and triple glazing. Thanks to the smart layout and deep storage areas behind the knee walls, this is an ideal nursery, quiet home office or hobby room with plenty of convenient storage space.
+
+The bathroom was also completely renovated in 2023. The combination of large beige floor tiles, warm taupe-coloured wall tiles and a generous walk-in shower creates a calm and luxurious atmosphere. The bathroom also features a second toilet, plenty of storage space behind the knee walls, and a neatly concealed washing machine and dryer.
+
+In short: a wonderful double upper-floor apartment where space, comfort, sustainability and outdoor living come together in a warm and homely setting.
+
+OWNERS&#x27; ASSOCIATION
+The Owners&#x27; Association (VvE) is professionally managed and falls under &#x27;Bloom Block 3&#x27;. The association has 125 members and the service charges are €202.00 per year. From 1 January 2027, the charges will increase to €224.06 per month.
+
+ENERGY
+The property is well insulated and has an energy label A. This not only provides additional comfort, but also helps keep monthly costs lower. A good energy label can also provide additional borrowing capacity of up to €10,000 or a lower mortgage interest rate!
+
+GROUND LEASE
+The ground lease has been bought off until 15 August 2058. From that date onwards, the annual ground rent will be €3,545.95, which will be indexed annually.
+Please note: ground lease payments are partially tax-deductible for income tax purposes!
+
+HIGHLIGHTS
+- Approx. 89 m² of usable floor area
+- Private entrance from the first floor
+- No upstairs neighbors!
+- Well-insulated property with energy label A
+- Fantastic west-facing roof terrace
+- Full-width west-facing balcony on the second floor
+- Luxury bathroom with plenty of storage space thanks to deep knee-wall storage and a concealed washing machine
+- Energy label A, resulting in lower monthly costs
+- Three bedrooms, ideal for families, working from home or accommodating guests
+- Two toilets, one on each living floor
+- Pleasant and quiet street with plenty of parking spaces and wide pavements
+- Quick hand-over possible!
+- Buyer&#x27;s choice of notary: Amsterdam region
+
+CLAUSES
+- An age clause applies to the purchase agreement.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Voortman &amp; Fransen Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 41</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/142/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/025_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/991_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/029_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/035_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/033_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/939_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/030_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/979_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/998_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/934_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/961_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/973_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/975_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/044_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/055_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/058_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/936_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/062_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/023_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/056_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/060_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/942_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/142/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/143/051_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

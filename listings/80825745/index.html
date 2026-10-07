@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kempenlaan 91 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Kempenlaan 91</h1>
+  <p class="sub">
+    <span>1066 RA Amsterdam</span>
+    <span>·</span>
+    <span>Belgiëplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/229/434/411_1440x960.jpg" alt="Kempenlaan 91 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">56 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€630.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.667/m² · 2.3 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.3 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">135 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1994</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-kempenlaan-91/80825745/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oorspronkelijke vraagprijs</dt><dd>€ 595.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 630.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.667</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 378,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Beneden + Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1994</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>135 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>474 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Walk-in shower, toilet, 2 Washbasins, Bathtub, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift en natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>Begane grond</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing en Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HR-107 ketel (gas gestookt uit 2017, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN E 6746</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijke erfpacht</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Open ligging en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>106 m² (11,00 m deep en 9,72 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidwesten</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 378,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Bedrijfsruimte</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Praktijkruimte</dt><dd>38 m², Indoor</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">ENGLISH BELOW:
+
+UNIEKE EN MULTIFUNCTIONELE WONING MET ROYALE TUIN ÉN EXTRA PRAKTIJK-/WOONRUIMTE IN HET GELIEFDE NIEUW SLOTEN!
+Aan de rustige en groene Kempenlaan bieden wij dit bijzonder veelzijdige appartement aan van in totaal circa 134 m² gebruiksoppervlakte, verdeeld over een ruim appartement op de eerste verdieping én een separate praktijkruimte op de begane grond. De praktijkruimte wordt momenteel feitelijk als extra woonruimte gebruikt en biedt talloze mogelijkheden voor de toekomstige eigenaar. Denk aan een kantoor aan huis, gastenverblijf, atelier, praktijkruimte of extra woonunit voor bijvoorbeeld inwonende familie.
+
+De woning beschikt daarnaast over een uitzonderlijk diepe en zonnige tuin, twee balkons, drie slaapkamers én een royale living met veel lichtinval. Een ideale woning voor kopers die ruimte, flexibiliteit en potentie zoeken op een uitstekende locatie in Amsterdam.
+
+INDELING APPARTEMENT – EERSTE VERDIEPING (KEMPENLAAN 91)
+Via de gezamenlijke entree bereikt u met de lift de eerste verdieping, waar de entree van het appartement zich bevindt.
+
+Bij binnenkomst betreedt u de centrale hal, die toegang geeft tot vrijwel alle vertrekken. Aan de achterzijde bevinden zich drie slaapkamers, waarvan twee slaapkamers directe toegang hebben tot het balkon aan de tuinzijde.
+
+De ruime woonkamer vormt het hart van de woning en valt direct op door de royale afmetingen en grote raampartijen, waardoor er veel natuurlijk licht binnenvalt. Vanuit de woonkamer heeft u tevens toegang tot het tweede balkon, gelegen aan de voorzijde van het appartement met uitzicht richting de straatzijde.
+
+De open leefruimte biedt volop mogelijkheden om geheel naar eigen smaak te moderniseren en in te richten. De keuken is praktisch opgesteld en bevindt zich aansluitend aan de woonruimte.
+
+Verder beschikt het appartement over een badkamer voorzien van ligbad met douchefunctie, wastafelmeubel en wasmachineaansluiting. Daarnaast is er een separaat toilet aanwezig.
+
+Vanuit het appartement heeft u daarnaast toegang tot de royale achtertuin — een zeldzaam ruime buitenruimte voor Amsterdamse begrippen.
+
+PRAKTIJKRUIMTE/ MULTIFUNCTIONELE RUIMTE – BEGANE GROND (KEMPENLAAN 103)
+Op de begane grond bevindt zich de separate ruimte met eigen entree, momenteel in gebruik als extra woonruimte. Deze ruimte beschikt over een open leefruimte met pantry/keukenopstelling, badkamer/toilet en een vide-/slaapgedeelte.
+
+Deze multifunctionele ruimte biedt diverse gebruiksmogelijkheden en kan geheel naar eigen inzicht worden ingericht. Ideaal als praktijkruimte aan huis, kantoor, studio, gastenverblijf of extra woonruimte.
+
+BIJZONDERHEDEN
+
+- Unieke combinatie van wonen en multifunctionele praktijkruimte;
+- Energielabel: A
+- Appartement én separate ruimte op de begane grond;
+- Momenteel feitelijk in gebruik als extra woonruimte;
+- Royale diepe en zonnige tuin
+- Twee balkons aanwezig;
+- Drie slaapkamers;
+- Lift aanwezig in het complex;
+- Gelegen in een verzorgd appartementencomplex;
+- NEN2580 meetrapport beschikbaar;
+- Privé berging aanwezig
+- Servicekosten circa € 378,- per maand;
+- Oplevering in overleg.
+
+METRAGES
+
+- Gebruiksoppervlakte wonen: circa 134,40 m²;
+- Gebouwgebonden buitenruimte: circa 7,00 m²;
+- Externe bergruimte: circa 4,50 m²;
+- Bruto inhoud: circa 473,67 m³.
+
+EIGENDOMSSITUATIE
+De erfpachtcanon is vooruitbetaald tot en met 30 september 2042.
+
+VERENIGING VAN EIGENAREN
+
+- Actieve VvE;
+- Professioneel beheer;
+- Servicekosten circa € 378,- per maand;
+- MJOP en reservefonds aanwezig.
+
+LOCATIE
+De Kempenlaan is gelegen in het populaire Nieuw Sloten: een groene, rustige en kindvriendelijke woonomgeving met alle dagelijkse voorzieningen binnen handbereik.
+
+Op korte afstand bevinden zich het Belgiëplein, diverse supermarkten, winkels, scholen, sportfaciliteiten en recreatiemogelijkheden. Ook het Sloterpark en andere groenvoorzieningen liggen nabij.
+
+De bereikbaarheid is uitstekend. Tram- en busverbindingen bevinden zich op loopafstand en met de auto bereikt u binnen enkele minuten de A4, A9 en A10. Daarnaast zijn Amsterdam Zuid, de Zuidas en Schiphol snel bereikbaar.
+
+Kortom: een woning met enorm veel mogelijkheden, royale buitenruimte en een uitstekende ligging in Amsterdam.
+
+Deze informatie is met de nodige zorgvuldigheid samengesteld. Aan eventuele onjuistheden of onvolledigheden kunnen geen rechten worden ontleend. Alle opgegeven maten en oppervlakten zijn indicatief.
+
+ENGLISH TEXT:
+UNIQUE MULTIFUNCTIONAL HOME WITH GENEROUS GARDEN AND EXTRA PRACTICE/MULTI-PURPOSE ROOM IN THE SAME COMPLEX – KEMPENLAAN 91 &amp; 103, AMSTERDAM
+At the quiet and green Kempenlaan, we offer this particularly versatile apartment of approximately 134 m² of living space, spread over the first floor and a separate practice or multifunctional space on the ground floor. The property features a spacious and bright living room, multiple bedrooms, a practical layout, and the possibility for dual use. Thanks to the combination of living and working space, this property offers exceptional opportunities in an excellent location in Amsterdam.
+
+The apartment consists of a spacious living area on the first floor and an additional practice/multi-purpose space on the ground floor, currently used as living space. One of the most distinctive features of this property is the exceptionally generous private garden.
+
+APARTMENT – FIRST FLOOR (KEMPENLAAN 91)
+Through the communal entrance with intercom system and elevator access, you reach the apartment entrance on the first floor.
+
+Upon entering, you arrive in the central hallway, which provides access to virtually all rooms. At the rear of the apartment is the spacious and bright living room with an open kitchen. The living room benefits from large windows, allowing plenty of natural daylight and providing direct access to the spacious balcony at the front of the apartment.
+
+The apartment features three well-sized bedrooms, two of which have direct access to the second balcony at the rear of the property. The balconies create a pleasant connection between indoor and outdoor living and offer attractive views of the surrounding greenery and communal gardens.
+
+The property further includes a bathroom equipped with a bathtub with shower function, washbasin cabinet, and washing machine connection. In addition, there is a separate toilet.
+
+From the apartment, you also have access to the spacious private garden — a truly unique outdoor area by Amsterdam standards.
+
+PRACTICE/MULTIFUNCTIONAL SPACE – GROUND FLOOR (KEMPENLAAN 103)
+On the ground floor, the property includes a separate practice/multi-purpose space with its own entrance. This space is currently being used as additional living accommodation and can be customized entirely to the buyer’s wishes and needs. Its flexible layout makes it suitable for various purposes, such as a home office, practice space, guest accommodation, studio, hobby room, or additional living area.
+
+The combination of the apartment and this additional space creates a unique opportunity for buyers seeking flexibility in both living and working arrangements.
+
+OUTDOOR SPACE
+One of the absolute highlights of this property is the exceptionally spacious private garden of approximately 107 m². The garden offers plenty of privacy, greenery, and sunshine throughout the day, making it an ideal place to relax, entertain guests, or enjoy outdoor living in the city. In addition, the apartment features two balconies, creating multiple pleasant outdoor areas.
+
+FEATURES
+
+- Multifunctional apartment with separate practice/multi-purpose space;
+- Energy label: A
+- Located on the first floor with elevator access;
+- Approx. 134 m² living space (according to NEN 2580 measurement report);
+- Three bedrooms;
+- Spacious and bright living room with open kitchen;
+- Two balconies;
+- Exceptionally large private garden
+- Separate ground floor practice/multi-purpose space with private entrance;
+- Bathroom with bathtub/shower combination and washbasin;
+- Separate toilet;
+- Practice space currently used as additional living space;
+- Property offers various layout and usage possibilities;
+- Service charges: approximately €378 per month;
+- Leasehold has been bought off until 30 September 2042;
+- Professionally managed homeowners’ association (VvE);
+- Delivery in consultation.
+
+LOCATION
+The property is located in the popular and green Nieuw Sloten district in Amsterdam Nieuw-West. Within walking distance you will find shopping center Belgiëplein, supermarkets, restaurants, schools, sports facilities, and public transport connections. Major roads such as the A4, A9, and A10 are easily accessible, and both Amsterdam city centre and Schiphol Airport can be reached within a short time.
+
+The area is characterized by its spacious layout, greenery, and family-friendly atmosphere, while still offering all urban amenities within easy reach.
+
+DISCLAIMER
+This information has been compiled with due care. However, no liability is accepted for any inaccuracies, omissions, or consequences thereof. All measurements and surface areas are indicative.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Housiva</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 56</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/229/434/411_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/384_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/421_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/432_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/386_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/448_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/403_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/378_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/433_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/422_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/391_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/361_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/436_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/449_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/395_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/400_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/420_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/398_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/372_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/414_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/390_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/408_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/439_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/428_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/359_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/396_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/389_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/397_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/399_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/387_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/369_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/429_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/451_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/373_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/409_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/438_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/423_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/382_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/441_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/417_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/381_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/412_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/358_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/360_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/434_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/425_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/371_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/415_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/426_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/446_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/364_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/405_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/419_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/367_1440x960.jpg", "https://cloud.funda.nl/valentina_media/229/434/375_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

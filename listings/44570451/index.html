@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marco Polostraat 72-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Marco Polostraat 72-2</h1>
+  <p class="sub">
+    <span>1057 WS Amsterdam</span>
+    <span>·</span>
+    <span>Amsterdam</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/675/232_1440x960.jpg" alt="Marco Polostraat 72-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">46 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€675.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.618/m² · 1.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.8 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">102 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy G</span>
+      <span class="chip">Built 1929</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-marco-polostraat-72-2/44570451/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 675.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.618</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 91,25 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Portiekwoning (Double upper house)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1929</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>102 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>26 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>346 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, Bathtub, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Dakraam, glasvezelkabel, Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>G</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation en Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Gaskachels</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND C 10821</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 15-08-2053)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 605,76 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en City centre</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present en Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 91,25 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Achter de karakteristieke gevel van dit pand in de geliefde Marco Polostraat schuilt een verrassend ruime dubbele bovenwoning met een woonoppervlakte van circa 102 m². De woning beschikt over een royale woonkamer met eetkamer, drie slaapkamers, een balkon en een fantastisch dakterras waar u in alle rust van de zon kunt genieten. Een unieke combinatie van ruimte, comfort en stedelijke dynamiek op een van de meest gewilde locaties van Amsterdam-West.
+
+De combinatie van royale leefruimtes, veel bergruimte, een fijne lichtinval en de uitstekende ligging nabij het Rembrandtpark, het Erasmuspark en talloze voorzieningen maakt dit een woning waar u zich direct thuis zult voelen.
+
+Indeling
+Eerste verdieping
+Eigen entree vanaf de eerste verdieping met trapopgang naar de woonverdieping.
+
+Tweede verdieping
+Centraal in de woning bevinden zich de hal en overloop, die toegang geven tot de verschillende vertrekken. Aan de achterzijde ligt de keuken, met directe toegang tot het balkon. Het balkon aan de achterzijde biedt een prettige buitenruimte voor ontspanning en rust. Naast de keuken bevindt zich een ruime inloopkast die zorgt voor veel bergruimte. Op deze verdieping zijn tevens de badkamer en een separaat toilet gesitueerd. De badkamer is voorzien van een ligbad met douche, wastafelmeubel en een toilet.
+
+De ruime en lichte woonverdieping vormt het hart van de woning. Aan de voorzijde bevindt zich de royale woonkamer met voldoende ruimte voor een comfortabele zithoek. De aangrenzende eetkamer biedt een fijne plek voor lange diners en staat in open verbinding met de rest van de leefruimte.
+
+Derde verdieping
+De bovenste verdieping beschikt over drie goed bemeten slaapkamers. Twee slaapkamers bevinden zich aan de voorzijde van de woning en zijn dankzij de kapconstructie sfeervol van karakter. De derde slaapkamer ligt aan de achterzijde en biedt directe toegang tot het royale dakterras.
+Het ruime dakterras vormt een absolute meerwaarde van de woning. Hier geniet u van volop privacy en een heerlijke plek om buiten te zitten, te ontspannen of gasten te ontvangen.
+
+Omgeving
+De woning is gelegen aan het rustige deel van de Marco Polostraat in de populaire wijk &#x27;De Baarsjes&#x27;. Dit is een levendige en dynamische omgeving met een gevarieerd aanbod van winkels, restaurants en groene plekken. Zowel het Erasmuspark, Rembrandtpark en het Vondelpark liggen op een paar minuten loop- of fietsafstand, ideaal voor ontspanning. Ook ben je met binnen nog geen 10 minuten fietsen in hartje centrum of in de gezellige Jordaan. Voor wie meer zin heeft in cultuur of een filmavond, zijn De Hallen vlakbij te vinden.
+
+Voor je dagelijkse boodschappen zijn er diverse supermarkten in de buurt, zoals Albert Heijn en Dirk van den Broek, en bovendien is er een breed scala aan speciaalzaken en hippe koffiezaken, waaronder Local Hero en White Label Coffee.
+
+De bereikbaarheid is uitstekend: tramlijnen 7, 13, 19 stoppen op loopafstand. Daarnaast kan je bus 15 nemen naar Zuid of Sloterdijk. Met de fiets ben je in 10 minuten bij de grachten of station Lelylaan, waar je de trein naar Schiphol kunt nemen. Met de auto ben je binnen enkele minuten op de Ring A10 via de S105.
+
+Eigendomssituatie:
+De woning is gelegen op grond, welke formeel eigendom is van de gemeente Amsterdam. De canon (de jaarlijkse huur voor deze grond) bedraagt € 605,76 en wordt jaarlijks herzien en het tijdvak loopt tot 15 augustus 2053. De erfpacht is voortdurend en hierop zijn de erfpachtbepalingen van 2000 van toepassing (jaarlijkse indexering). Kijk voor meer informatie op de website van de gemeente Amsterdam.
+
+Bijzonderheden: 
+- Bouwjaar 1929
+- Voortdurende erfpacht € 605,76 per jaar (jaarlijkse indexering) tot 15 augustus 2053
+- Energielabel G
+- Servicekosten ca. € 91,25,- per maand
+- Woonoppervlakte ca. 102 m2
+- Balkon op het oosten
+- Dakterras 
+- Mogelijkheid tot dak uitbouw
+- Oplevering in overleg
+
+De op deze website getoonde vrijblijvende informatie is door ons (met zorg) samengesteld op basis van gegevens van de verkoper (en/of derden). Wij staan niet in voor de juistheid of volledigheid daarvan. Wij adviseren je om contact met ons op te nemen bij interesse in een van onze woningen of je door een eigen NVM-makelaar te laten bijstaan. 
+
+Wij zijn niet verantwoordelijk voor de inhoud van de websites waarnaar verwezen wordt.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Van de Steege Makelaarsgroep Amsterdam-West</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 46</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/675/232_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/281_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/436_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/273_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/486_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/296_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/507_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/358_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/535_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/510_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/359_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/434_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/478_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/274_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/254_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/263_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/493_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/260_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/494_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/337_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/430_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/327_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/487_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/453_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/481_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/444_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/335_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/449_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/480_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/364_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/470_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/233_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/256_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/425_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/292_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/376_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/474_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/371_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/484_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/454_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/236_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/675/354_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

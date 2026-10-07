@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Van Tuyll van Serooskerkenweg 1-1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Van Tuyll van Serooskerkenweg 1-1</h1>
+  <p class="sub">
+    <span>1076 JA Amsterdam</span>
+    <span>·</span>
+    <span>Van Tuyllbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/540/508_1440x960.jpg" alt="Van Tuyll van Serooskerkenweg 1-1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">31 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€675.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.036/m² · 2.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.0 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">84 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy E</span>
+      <span class="chip">Built 1930</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-van-tuyll-van-serooskerkenweg-1-1/80989730/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>Per Immediate Available</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 675.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.036</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 58,44 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Walk-up flat (appartement met open portiek)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1930</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>84 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>326 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>E</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas-fired combi boiler uit 2020, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM AB A5</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>Deelperceel</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 16-12-2054)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 675,19 per Yesar</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 58,44 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">(English translation available below)
+LICHT HOEKAPPARTEMENT VAN CIRCA 84 M² MET DRIE SLAAPKAMERS EN TWEE ERKERS IN AMSTERDAM-
+ZUID
+Veel daglicht, twee karakteristieke erkers en ruimte om wonen en werken te combineren. Dit hoekappartement aan de Van Tuyll van Serooskerkenweg biedt circa 84 m² woonoppervlakte, een lichte woonkamer met open keuken en drie slaapkamers. Een fijne combinatie aan een brede, groene laan in de Stadionbuurt, met winkels, horeca en sportvoorzieningen in de omgeving.
+INDELING
+Via het gemeenschappelijke trappenhuis bereikt u de entree van het appartement. De hal geeft toegang tot de verschillende vertrekken.
+De woonkamer vormt het hart van de woning. Brede raampartijen zorgen voor veel daglicht en een open uitstraling. Er is ruimte voor een comfortabele zithoek en een eettafel, waardoor koken, tafelen en ontspannen prettig samenkomen. De open keuken sluit direct aan op de leefruimte en beschikt over praktische werk- en bergruimte.
+Het appartement heeft drie slaapkamers. Twee daarvan zijn voorzien van een karakteristieke erker, die extra licht en sfeer toevoegt. De derde kamer is ook geschikt als werk-, kinder- of logeerkamer. Zo laat de indeling zich aanpassen aan verschillende woonwensen.
+De badkamer is voorzien van een douche en wastafel. Daarnaast zijn er een separaat toilet en een praktische bergruimte bij de entree.
+De lichte vloer en neutrale afwerking vormen een rustige basis voor uw eigen inrichting.
+OMGEVING
+De Van Tuyll van Serooskerkenweg ligt in de Stadionbuurt in Amsterdam-Zuid. De brede straat, het groen en de voorzieningen in de omgeving maken dit een prettige woonplek.
+Rond het Stadionplein en de Stadionweg vindt u winkels, supermarkten, cafés en restaurants. Ook scholen, kinderopvang en sportvoorzieningen liggen in de buurt. Het Olympisch Stadion bevindt zich nabij; het Vondelpark en het Amsterdamse Bos zijn per fiets bereikbaar.
+Met openbaar vervoer in de omgeving en een goede aansluiting op de Ring A10 is de woning goed bereikbaar. ERFPACHT
+De woning is gelegen op erfpachtgrond. De Algemene Bepalingen voor voortdurende erfpacht 2000 (AB2000) zijn van toepassing. Het huidige tijdvak loopt tot en met 15 december 2054.
+De jaarlijkse canon bedraagt:
+• € 675,19 voor de periode van 16 december 2025 tot en met 15 december 2026;
+• € 689,37 voor de periode van 16 december 2026 tot en met 15 december 2027.
+De canon wordt jaarlijks geïndexeerd en is niet afgekocht.
+KENMERKEN
+• Licht hoekappartement van circa 84 m²;
+• Vier kamers, waaronder drie slaapkamers;
+• Twee slaapkamers met een karakteristieke erker;
+• Woonkamer met open keuken;
+• Badkamer met douche en wastafel;
+• Separaat toilet;
+• Bergruimte bij de entree;
+• Gelegen aan een brede, groene laan in de Stadionbuurt, Amsterdam-Zuid.
+ONTWERPIMPRESSIES
+De als ‘artist impression’ gemarkeerde beelden tonen mogelijkheden voor een andere inrichting en verbouwing. Deze aanpassingen zijn niet uitgevoerd; de woning wordt aangeboden in de huidige staat. Het badkamerontwerp benut één van de huidige slaapkamers, waardoor bij die indeling twee slaapkamers overblijven. De technische uitvoerbaarheid van de ontwerpen moet nog worden onderzocht.
+BEZICHTIGING
+Ervaar zelf het daglicht, de karakteristieke erkers en de indeling van dit hoekappartement. Neem contact op met Residential Real Estate voor een bezichtiging.
+Disclaimer
+De gegevens en maatvoeringen op de plattegronden en in deze brochure zijn indicatief. Hoewel de informatie met de grootst mogelijke zorgvuldigheid is samengesteld, kunnen er geen rechten aan worden ontleend. Residential Real Estate aanvaardt geen aansprakelijkheid voor eventuele onjuistheden of verouderde informatie.
+____________________________________
+BRIGHT CORNER APARTMENT OF APPROX. 84 M² WITH THREE BEDROOMS AND TWO BAY WINDOWS IN
+AMSTERDAM SOUTH
+Plenty of natural light, two distinctive bay windows and space for both everyday living and working from home. This corner apartment on Van Tuyll van Serooskerkenweg offers approximately 84 m² of living space, a bright living room with an open-plan kitchen and three bedrooms. An appealing combination on a broad, green street in the Stadionbuurt, with shops, restaurants and sports facilities nearby.
+LAYOUT
+The apartment’s entrance is reached via the communal staircase. The hallway provides access to the various rooms.
+The living room forms the heart of the home. Large windows bring in plenty of daylight and give the space an open feel. There is room for a comfortable seating area and a dining table, bringing cooking, dining and relaxing together. The open-plan kitchen connects directly to the living area and offers practical worktop and storage space.
+The apartment has three bedrooms. Two feature a distinctive bay window, adding natural light and character. The third room also lends itself to use as a home office, children’s room or guest room, allowing the layout to suit different needs.
+The bathroom is fitted with a shower and washbasin. There is also a separate toilet and a useful storage space near the entrance.
+Light-coloured flooring and neutral finishes provide a calm starting point for your own interior style. LOCATION
+Van Tuyll van Serooskerkenweg is situated in the Stadionbuurt in Amsterdam South. Its broad streetscape, greenery and nearby amenities make it a pleasant place to live.
+Shops, supermarkets, cafés and restaurants can be found around Stadionplein and Stadionweg. Schools, childcare and sports facilities are also nearby. The Olympic Stadium is close by, while Vondelpark and Amsterdamse Bos can be reached by bicycle.
+Public transport in the area and convenient access to the A10 ring road provide good connections. LEASEHOLD
+The property is situated on leasehold land, subject to the General Provisions for Continuous Leasehold 2000 (AB2000). The current leasehold period runs until 15 December 2054.
+The annual ground rent is:
+• €675.19 for the period from 16 December 2025 to 15 December 2026;
+• €689.37 for the period from 16 December 2026 to 15 December 2027.
+Ground rent is indexed annually and has not been bought out.
+KEY FEATURES
+• Bright corner apartment of approximately 84 m²;
+• Four rooms, including three bedrooms;
+• Two bedrooms with distinctive bay windows;
+• Living room with an open-plan kitchen;
+• Bathroom with shower and washbasin;
+• Separate toilet;
+• Storage space near the entrance;
+• Located on a broad, green street in the Stadionbuurt, Amsterdam South.
+ARTIST IMPRESSIONS
+Images labelled ‘artist impression’ illustrate possible changes to the interior and layout. These changes have not been carried out; the property is offered in its current condition. The bathroom concept uses one of the existing bedrooms, leaving two bedrooms in that proposed layout. The technical feasibility of the designs still needs to be assessed.
+VIEWING
+Experience the natural light, distinctive bay windows and layout of this corner apartment for yourself. Contact Residential Real Estate to arrange a viewing.
+Disclaimer
+All information provided in this brochure has been compiled with the utmost care. However, no rights can be derived from its content. Residential Real Estate accepts no liability for any inaccuracies or outdated information.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Residential Real Estate</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 31</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/540/508_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/485_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/434_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/516_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/392_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/395_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/404_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/453_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/488_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/424_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/474_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/521_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/437_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/502_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/426_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/509_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/396_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/501_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/397_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/408_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/432_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/458_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/486_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/412_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/506_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/409_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/431_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/421_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/540/414_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

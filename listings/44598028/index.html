@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nachtwachtlaan 480 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Nachtwachtlaan 480</h1>
+  <p class="sub">
+    <span>1058 ES Amsterdam</span>
+    <span>·</span>
+    <span>Rembrandtpark-Zuid</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/432/305_1440x960.jpg" alt="Nachtwachtlaan 480 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">47 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€695.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.950/m² · 1.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">100 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1974</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-nachtwachtlaan-480/44598028/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 695.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.950</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 357,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Tussenverdieping (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1974</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        <div class="frow"><dt>Toegankelijkheid</dt><dd>Toegankelijk voor ouderen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>100 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>19 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>312 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, lift, Mechanical ventilation, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>10e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Centrale voorziening</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN D 9200</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a busy road, aan park, On a quiet road, in bosrijke omgeving en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Geen isolatie</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, op afgesloten terrein, On own property, parkeergarage en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 357,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Wonen op hoog niveau met een panoramisch uitzicht over het Rembrandtpark, de Amsterdamse skyline, een eigen parkeerplaats én eeuwigdurend afgekochte erfpacht.
+
+Op de tiende verdieping van een verzorgd appartementencomplex bevindt zich dit verrassend ruime vierkamerappartement van circa 97 m². De woning combineert comfort, ruimte en een spectaculair uitzicht met een aantal unieke pluspunten die zelden samenkomen: drie slaapkamers, een moderne open keuken, een vernieuwde badkamer met een tweede toilet, twee afzonderlijke bergingen, een eigen parkeerplaats in de parkeerkelder én een erfpachtrecht dat eeuwigdurend is afgekocht. Dat betekent zorgeloos wonen zonder toekomstige erfpachtverplichtingen.
+
+Vanuit de woning en vanaf het balkon geniet u dagelijks van een schitterend en vrij uitzicht over het groene Rembrandtpark, met daarachter de karakteristieke skyline van Amsterdam. De hoge ligging zorgt voor veel privacy, rust en een bijzonder gevoel van ruimte.
+
+Indeling
+Via de nette centrale entree bereikt u met de lift de tiende verdieping. Achter de voordeur komt u binnen in een ruime hal die toegang geeft tot vrijwel alle vertrekken van de woning.
+
+Direct valt de royale leefruimte op. De woonkamer vormt het hart van het appartement en biedt dankzij de grote raampartijen een prachtige lichtinval en een fenomenaal uitzicht over het Rembrandtpark en de stad. De warme houten vloer, die door vrijwel de gehele woning is doorgelegd, zorgt voor een sfeervolle en verzorgde uitstraling.
+
+De woonkamer staat in open verbinding met de keuken, waardoor een ruimtelijk geheel ontstaat dat zich uitstekend leent voor zowel dagelijks gebruik als gezellige diners met familie en vrienden. De open keuken is strak uitgevoerd met een lange wandopstelling, veel bergruimte en diverse inbouwapparatuur. De open indeling zorgt ervoor dat koken en wonen naadloos in elkaar overlopen.
+
+Vanuit de woonkamer geven de deuren toegang tot het balkon van circa 8 m². Hier kunt u in alle rust genieten van de zon, het uitzicht over het uitgestrekte groen van het Rembrandtpark en de indrukwekkende Amsterdamse skyline op de achtergrond.
+
+Terug in de hal bereikt u de drie slaapkamers. De grootste slaapkamer biedt volop ruimte voor een tweepersoonsbed en een grote kledingkast. De tweede slaapkamer is eveneens royaal van formaat en ideaal als kinder-, werk- of logeerkamer. De derde slaapkamer is compact maar uitstekend bruikbaar als kinderkamer, thuiswerkplek of hobbyruimte. In de hal bevindt zich bovendien een praktische vaste kast met aansluiting voor de wasmachine en droger, waardoor deze netjes uit het zicht kunnen worden geplaatst.
+
+De badkamer is recent vernieuwd en modern afgewerkt met een ruime inloopdouche, een stijlvol wastafelmeubel en hoogwaardige materialen. Een bijzonder pluspunt is de aanwezigheid van een tweede toilet in de badkamer, wat zorgt voor extra comfort en gebruiksgemak. Daarnaast beschikt de woning ook over een separaat toilet in de hal.
+
+Bergingen en parkeren
+De woning beschikt over maar liefst twee privébergingen. Op de tiende verdieping bevindt zich een praktische berging voor spullen die u graag dichtbij houdt. Daarnaast beschikt u op de eerste verdieping over een tweede, grotere berging met volop ruimte voor fietsen, koffers, seizoensspullen en overige opslag.
+
+In de afgesloten parkeerkelder beschikt u bovendien over een eigen parkeerplaats. Een waardevolle luxe in Amsterdam, waarmee u altijd verzekerd bent van een vaste parkeerplek onder het gebouw.
+
+Erfpacht
+Een belangrijk voordeel van deze woning is dat de erfpacht eeuwigdurend is afgekocht. U betaalt hierdoor nooit meer erfpachtcanon en bent verzekerd van maximale duidelijkheid en zekerheid voor de toekomst. Een zeer aantrekkelijk pluspunt dat steeds belangrijker wordt op de Amsterdamse woningmarkt.
+
+Een groene oase in de stad
+Wonen aan de Nachtwachtlaan betekent wonen in het groen, direct aan het geliefde Rembrandtpark. Hier kun je hardlopen, wandelen, picknicken, of gewoon even ontsnappen aan de drukte van de stad. De kinderboerderij is een fijne plek voor jonge gezinnen, en ’s zomers wordt er volop gebarbecued en genoten. De ligging is daarnaast super centraal: winkels op loopafstand, Station Lelylaan om de hoek en met 10 minuten fiets je naar het centrum van Amsterdam. Met de auto zit je zó op de A10, en Schiphol of de Zuidas zijn snel bereikbaar met het openbaar vervoer. 
+
+Bijzonderheden
+- Woonoppervlakte circa 97 m²;
+- Gelegen op de 10e verdieping;
+- Drie slaapkamers;
+- Royale woonkamer met veel lichtinval;
+- Open keuken;
+- Houten vloer;
+- Vernieuwde badkamer;
+- Tweede toilet in de badkamer;
+- Separaat toilet aanwezig;
+- Balkon van circa 8 m²;
+- Vrij uitzicht over het Rembrandtpark en de Amsterdamse skyline;
+- Twee privébergingen (10e verdieping en 1e verdieping);
+- Eigen parkeerplaats in de afgesloten parkeerkelder;
+- Erfpacht eeuwigdurend afgekocht;
+- Actieve VVE met een maandelijkse bijdrage van € 357,04. Dit is inclusief de parkeerplaats en exclusief voorschot stookkosten;
+- Uitstekende bereikbaarheid en gunstige ligging nabij winkels, openbaar vervoer, uitvalswegen en recreatiemogelijkheden.
+
+Voor inlichtingen of het maken van een afspraak voor een bezichtiging:
+
+Visch &amp; van Zeggelaar Amsterdam 020 - 20 91 911
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Koper heeft zijn eigen onderzoek plicht naar alle zaken die voor hem of haar van belang zijn. Met betrekking tot deze woning is de makelaar adviseur van verkoper. Wij adviseren u een deskundige (NVM-)makelaar in te schakelen die u begeleidt bij het aankoopproces. Indien u specifieke wensen heeft omtrent de woning, adviseren wij u deze tijdig kenbaar te maken aan uw aankopend makelaar en hiernaar zelfstandig onderzoek te (laten) doen. Indien u geen deskundige vertegenwoordiger inschakelt, acht u zich volgens de wet deskundige genoeg om alle zaken die van belang zijn te kunnen overzien. Van toepassing zijn de NVM voorwaarden.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Living at new heights with panoramic views over Rembrandt Park, the Amsterdam skyline, a private parking space, and perpetually prepaid leasehold.
+
+Located on the tenth floor of a well-maintained apartment complex, this surprisingly spacious four-room apartment of approximately 97 m² offers a unique combination of comfort, space, and spectacular views. Rarely do so many attractive features come together in one property: three bedrooms, a modern open-plan kitchen, a renovated bathroom with a second toilet, two separate storage units, a private parking space in the underground garage, and a leasehold that has been bought off in perpetuity. This means carefree living with no future ground lease payments.
+
+From both the apartment and the balcony, you can enjoy stunning unobstructed views over the lush greenery of Rembrandt Park, with the iconic Amsterdam skyline forming an impressive backdrop. The elevated position ensures privacy, tranquillity, and a remarkable sense of space.
+
+Layout
+Through the well-kept central entrance, the elevator takes you to the tenth floor. Upon entering the apartment, you arrive in a spacious hallway that provides access to nearly all rooms.
+
+The generous living area immediately catches the eye. The living room forms the heart of the home and benefits from large windows that flood the space with natural light while offering phenomenal views over Rembrandt Park and the city. The warm wooden flooring, which extends throughout most of the apartment, creates a welcoming and well-finished atmosphere.
+
+The living room flows seamlessly into the kitchen, creating an open and spacious environment that is perfect for both everyday living and entertaining family and friends. The modern open-plan kitchen features a long wall-mounted layout, ample storage space, and various built-in appliances. Its open design ensures that cooking and living blend together effortlessly.
+
+From the living room, doors open onto the balcony of approximately 8 m². Here, you can relax and enjoy the sunshine, the expansive greenery of Rembrandt Park, and the impressive Amsterdam skyline in the distance.
+
+Returning to the hallway, you will find the three bedrooms. The primary bedroom offers ample space for a double bed and a large wardrobe. The second bedroom is also generously sized and ideal as a children&#x27;s room, home office, or guest room. The third bedroom is more compact but perfectly suitable as a nursery, workspace, or hobby room. The hallway also features a practical built-in storage cupboard with connections for a washing machine and dryer, allowing these appliances to be neatly concealed from view.
+
+The bathroom has recently been renovated and is finished to a high standard, featuring a spacious walk-in shower, a stylish vanity unit, and quality materials throughout. A particularly valuable feature is the presence of a second toilet in the bathroom, providing additional comfort and convenience. In addition, there is a separate guest toilet located in the hallway.
+
+Storage and Parking
+The apartment benefits from no fewer than two private storage units. On the tenth floor, there is a convenient storage room for items you wish to keep close at hand. In addition, a second, larger storage unit is located on the first floor, offering ample space for bicycles, luggage, seasonal items, and other belongings.
+
+The property also includes a private parking space in the secure underground parking garage. A valuable luxury in Amsterdam, ensuring you always have a dedicated parking spot beneath the building.
+
+Leasehold
+An important advantage of this property is that the leasehold has been bought off in perpetuity. As a result, you will never have to pay ground lease charges again, providing maximum clarity and financial certainty for the future. This is an increasingly attractive benefit in the Amsterdam housing market.
+
+A Green Oasis in the City
+Living on Nachtwachtlaan means enjoying a green and peaceful environment directly adjacent to the popular Rembrandt Park. Whether you enjoy jogging, walking, picnicking, or simply escaping the hustle and bustle of city life, the park is right on your doorstep. The nearby petting zoo is a wonderful attraction for young families, while during the summer months the park becomes a vibrant place for barbecues and outdoor gatherings.
+
+Despite its green surroundings, the location is exceptionally central. Shops are within walking distance, Station Lelylaan is just around the corner, and Amsterdam’s city centre can be reached within approximately 10 minutes by bicycle. By car, the A10 ring road is easily accessible, while Schiphol Airport and the Zuidas business district can be reached quickly by public transport.
+
+Key Features
+- Approx. 97 m² of living space;
+- Situated on the 10th floor;
+- Three bedrooms;
+- Spacious living room with abundant natural light;
+- Open-plan kitchen;
+- Wooden flooring;
+- Renovated bathroom;
+- Second toilet in the bathroom;
+- Separate guest toilet;
+- Balcony of approximately 8 m²;
+- Unobstructed views over Rembrandt Park and the Amsterdam skyline;
+- Two private storage units (10th floor and 1st floor);
+- Private parking space in the secure underground garage;
+- Leasehold bought off in perpetuity;
+- Active homeowners’ association (VvE) with a monthly contribution of €357.04, including the parking space and excluding the advance payment for heating costs;
+- Excellent accessibility and convenient location near shops, public transport, major roads, and recreational facilities.
+- For Further Information or to Arrange a Viewing
+
+Visch &amp; van Zeggelaar Amsterdam
+T: +31 (0)20 209 1911
+
+This information has been compiled with due care. However, no liability is accepted for any inaccuracies, omissions, or the consequences thereof. All measurements and surface areas are indicative. Buyers are responsible for conducting their own investigations into all matters that may be of importance to them. With regard to this property, the estate agent acts as an advisor to the seller. We recommend engaging a qualified (NVM) real estate agent to assist you during the purchasing process. Should you have specific requirements concerning the property, we advise you to communicate these to your purchasing agent in a timely manner and to conduct your own independent investigations. If you do not engage a professional representative, you declare yourself sufficiently knowledgeable under Dutch law to oversee all matters of importance. The terms and conditions of the NVM apply.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 47</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/432/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/433/828_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/407_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/510_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/535_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/532_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/314_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/432_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/393_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/324_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/465_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/309_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/468_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/364_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/306_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/358_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/550_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/490_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/512_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/533_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/380_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/427_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/516_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/477_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/519_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/440_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/385_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/366_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/503_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/554_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/394_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/509_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/401_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/497_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/329_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/368_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/408_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/546_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/456_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/455_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/409_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/376_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/441_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/432/322_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

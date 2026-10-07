@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geert Grootestraat 25 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Geert Grootestraat 25</h1>
+  <p class="sub">
+    <span>1064 NH Amsterdam</span>
+    <span>·</span>
+    <span>Confuciusbuurt</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/224/826/405_1440x960.jpg" alt="Geert Grootestraat 25 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">36 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€595.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.833/m²
+    </div>
+    <div class="chips">
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">102 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1954</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-geert-grootestraat-25/89608377/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oorspronkelijke vraagprijs</dt><dd>€ 620.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 595.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.833</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1954</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>102 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>4 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>100 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>363 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, toilet, en urinoir</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Glasvezelkabel, Mechanical ventilation, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation en Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HRE (gas gestookt uit 2025, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND D 9985</dt><dd>Oppervlakte</dd></div>
+        <div class="frow"><dt>100 m²</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Gemeentelijk eigendom belast met erfpacht (einddatum erfpacht: 15-11-2060)</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>45 m² (9,00 m deep en 5,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het westen bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">===========
+ENGLISH BELOW
+===========
+
+Welkom in deze prachtige, ruime (uitgebouwde) gezinswoning aan de Geert Grootestraat in Amsterdam!
+
+Deze keurig onderhouden eengezinswoning is gelegen in een rustige straat, maar toch nabij alle essentiële voorzieningen. Met maar liefst 5 kamers, waarvan 4 slaapkamers, biedt deze woning volop ruimte voor zowel stellen als gezinnen. Dankzij de dubbele dakkapel op zolder bestaat bovendien de mogelijkheid om de grote slaapkamer te splitsen, waardoor u eenvoudig een vijfde slaapkamer kunt creëren.
+
+Locatie &amp; Omgeving
+De woning is rustig gelegen in een prettige woonwijk van Amsterdam. In de directe omgeving vindt u diverse supermarkten, scholen en universiteiten – ideaal voor gezinnen. Ook zijn er meerdere sportscholen in de buurt. Voor natuurliefhebbers zijn er mooie wandelparken en speeltuinen op korte afstand. Daarnaast zijn uitvalswegen eenvoudig en snel bereikbaar.
+
+Algemene kenmerken
+Deze ruime eengezinswoning voldoet aan hedendaagse woonwensen en beschikt over een royale woonoppervlakte van ca. 102 m². De woning is in 2019 grondig gerenoveerd en sindsdien keurig bewoond en onderhouden. Woning is voorzien van een nieuwe cv ketel Intergas HRE in 2025. Dit betekent onder andere een moderne keuken, stijlvolle vloeren, strak afgewerkte wanden en een nette toiletruimte en badkamer.
+De woning verkeert zowel intern als extern in goede tot uitstekende staat van onderhoud. Voor de warmwatervoorziening en verwarming is er een centrale verwarmingsketel aanwezig. Dubbel glas en dakisolatie dragen bij aan een optimale energie-efficiëntie.
+
+Verdiepingen &amp; Indeling
+
+Begane grond
+Op de begane grond bevindt zich een ruime en lichte woonkamer van circa 25 m². De open keuken, vernieuwd in 2019, is voorzien van diverse inbouwapparatuur en biedt alle comfort voor dagelijks gebruik.
+
+Eerste verdieping:
+Hier bevinden zich drie comfortabele slaapkamers en een ruime, nette badkamer met toilet en dubbele wastafel.
+
+Tweede verdieping:
+De zolderverdieping beschikt over een extra slaapkamer. Dankzij de dubbele dakkapellen aan beide zijden is het mogelijk om hier een vijfde slaapkamer te realiseren. Dit biedt veel flexibiliteit en uitbreidingsmogelijkheden.
+
+Buitenruimte &amp; Tuin
+De woning beschikt over een sfeervolle voortuin en een prachtig aangelegde achtertuin van circa 45 m², gunstig gelegen op het westen. De tuin is zeer goed onderhouden en voorzien van een houten tuinhuis met elektra.
+
+Parkeren &amp; Erfpacht
+In de directe omgeving is ruim voldoende parkeergelegenheid op de openbare weg. De erfpacht is afgekocht voor een lange periode tot en met 15-11-2060.
+
+Bijzonderheden
+- Grondig gerenoveerd in 2019
+- Erfpacht afgekocht tot 15-11-2060
+- Nieuwe cv ketel Intergas HRE 2025
+- 5 kamers (4 slaapkamers)
+- Woonoppervlakte ca. 102 m²
+- Mogelijkheid tot realiseren van een 5e slaapkamer
+- Rustige ligging nabij alle voorzieningen
+- Oplevering in overleg
+
+Bent u geïnteresseerd in deze prachtige gezinswoning? Wij nodigen u graag uit voor een bezichtiging. Grijp deze kans om te wonen in een rustige, gezinsvriendelijke wijk in Amsterdam. Neem vandaag nog contact met ons op voor een afspraak!
+
+Deze tekst is door ons kantoor met de meeste zorg samengesteld aan de hand van de door de verkoper aan ons ter hand gestelde gegevens en tekeningen. Derhalve kunnen wij geen garanties verstrekken, noch kunnen wij op enigerlei wijze eventuele aansprakelijkheid voor deze gegevens aanvaarden
+
+===========
+ENGLISH 
+===========
+
+Welcome to this beautiful, spacious (extended) family home on Geert Grootestraat in Amsterdam!
+
+This well-maintained family home is located in a quiet street, yet close to all essential amenities. With no less than 5 rooms, of which 4 bedrooms, this house offers plenty of space for both couples and families. Thanks to the double dormer in the attic, there is also the possibility of splitting the master bedroom, making it easy to create a fifth bedroom.
+
+Location &amp; Surroundings
+The house is quietly located in a pleasant residential area of Amsterdam. In the immediate vicinity you will find several supermarkets, schools and universities - ideal for families. There are also several gyms nearby. For nature lovers, there are beautiful walking parks and playgrounds a short distance away. In addition, arterial roads are easily and quickly accessible.
+
+General features
+This spacious family home meets contemporary living requirements and boasts a generous living area of approx. 102 m². The house was thoroughly renovated in 2019 and has since been neatly occupied and maintained. Property is equipped with a new central heating boiler Intergas HRE in 2025. This includes a modern kitchen, stylish floors, tightly finished walls and a neat toilet and bathroom.
+The house is in good to excellent condition both internally and externally. There is a central heating boiler for hot water supply and heating. Double glazing and roof insulation
+
+Floors &amp; Layout
+
+Ground floor
+On the ground floor is a spacious and bright living room of about 25 m². The open kitchen, renewed in 2019, is equipped with various built-in appliances and offers all the comforts for daily use.
+
+First floor:
+Here you will find three comfortable bedrooms and a spacious, neat bathroom with toilet and double sink.
+
+Second floor:
+The attic floor features an extra bedroom. Thanks to the double dormers on both sides, it is possible to create a fifth bedroom here. This offers a lot of flexibility and expansion possibilities.
+
+Outside space &amp; Garden
+The property features an attractive front garden and a beautifully landscaped back garden of approximately 45 m², conveniently located on the west. The garden is very well maintained and features a wooden gazebo with electricity.
+
+Parking &amp; Leasehold
+In the immediate vicinity is ample parking on the public road. The ground lease has been bought off for a long period until 15-11-2060.
+
+Details
+- Thoroughly renovated in 2019
+- Ground lease bought off until 15-11-2060
+- New central heating boiler Intergas HRE 2025
+- 5 rooms (4 bedrooms)
+- Living area approx 102 m²
+- Possibility to realise a 5th bedroom
+- Quiet location near all amenities
+- Delivery in consultation
+
+Are you interested in this beautiful family home? We would like to invite you for a viewing. Seize this opportunity to live in a quiet, family-friendly neighbourhood in Amsterdam. Contact us today for an appointment!
+
+This text has been compiled by our office with the utmost care based on the information and drawings provided to us by the seller. Therefore, we cannot give any guarantees, nor can we accept any liability for these data in any way.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 36</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/224/826/405_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/408_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/411_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/414_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/417_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/420_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/423_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/427_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/431_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/435_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/439_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/446_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/450_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/456_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/460_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/463_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/467_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/470_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/473_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/476_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/479_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/482_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/486_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/488_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/492_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/495_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/497_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/499_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/534_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/503_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/506_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/509_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/513_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/224/826/522_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wigbolt Ripperdastraat 72 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Wigbolt Ripperdastraat 72</h1>
+  <p class="sub">
+    <span>1067 EH Amsterdam</span>
+    <span>·</span>
+    <span>Ruys de Beerenbrouckbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/551/836_1440x960.jpg" alt="Wigbolt Ripperdastraat 72 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">64 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€599.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.164/m² · 3.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">116 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2005</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-wigbolt-ripperdastraat-72/44568453/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 599.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.164</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 241,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Maisonette apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2005</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>116 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>19 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>355 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Balansventilatie, glasvezelkabel, lift, Mechanical ventilation, schuifpui, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Roof insulation, Double glazing en Wall insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas Compact HR (gas-fired combi boiler uit 2005, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN I 3991</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN I 3991</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Beschutte ligging, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerkelder en parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 241,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">CENTRAAL GELEGEN | RUIME MAISONNETTE | ZONNIG TERRAS OP HET ZUIDEN | 116 M² | EIGEN PARKEERPLAATS | ENERGIELABEL A
+
+Wonen met het gevoel van een eengezinswoning, maar dan midden in Amsterdam? Deze royale maisonnette aan de Wigbolt Ripperdastraat biedt het beste van twee werelden. Verdeeld over twee woonlagen beschikt deze woning over maar liefst circa 116 m² woonoppervlakte, twee ruime slaapkamers, een royale woonkeuken, een lichte woonkamer én een heerlijk zonnig terras op het zuiden. Dankzij de twee volwaardige woonlagen en de directe verbinding tussen de master bedroom en het terras, voelt deze woning verrassend veel meer als een eengezinswoning dan als een appartement.
+
+En dan de ligging: centraal in Amsterdam Nieuw-West, in de groene en rustige Ruys de Beerenbrouckbuurt. Vanuit hier zijn winkels, horeca, recreatie en openbaar vervoer binnen handbereik en zijn zowel de binnenstad, de A10 als Schiphol uitstekend bereikbaar.
+
+Een fijne combinatie van ruimte, buitenleven, comfort en bereikbaarheid, met als extra pluspunten een eigen parkeerplaats in de afgesloten parkeergarage, een separate berging en energielabel A.
+
+Indeling
+Begane grond 
+Middels de goed onderhouden en afgesloten entree met intercominstallatie bereikt u de derde verdieping. De lift brengt u comfortabel naar de entree van de woning.
+
+Benedenverdieping
+De ruime hal vormt het centrale punt van deze verdieping en biedt toegang tot het moderne toilet met fonteintje, de trap naar de bovenverdieping en de verschillende leefruimtes.
+
+Aan de achterzijde bevindt zich de royale woonkamer. Dankzij de brede raampartij valt hier veel natuurlijk daglicht naar binnen en heeft u een vrij uitzicht. De ruime opzet biedt volop mogelijkheden voor een comfortabele zithoek én een royale eethoek.
+
+Aan de voorzijde bevindt zich de ruime woonkeuken. De keuken is uitgevoerd in een lichte kleurstelling met een houten werkblad en beschikt over diverse inbouwapparatuur, waaronder een gaskookplaat, afzuigkap, combimagnetron, koelkast, vriezer en vaatwasser. Door de royale afmetingen is hier bovendien voldoende ruimte voor een grote eettafel. Een heerlijke plek om uitgebreid te koken, samen te eten of gezellig met vrienden en familie te tafelen.
+
+Bovenverdieping
+Via de overloop zijn alle vertrekken bereikbaar.
+Aan de achterzijde bevindt zich de royale master bedroom. Grote glazen schuifpuien geven vanuit de slaapkamer direct toegang tot het zonnige terras op het zuiden. Hierdoor loopt de slaapkamer als het ware door naar buiten en wordt het terras een verlengstuk van de leefruimte.
+
+Het terras is ruim opgezet en biedt voldoende plaats voor een comfortabele lounge- of zithoek. Dankzij de ligging op het zuiden is dit een heerlijke plek om van de zon en het buitenleven te genieten. Of u nu rustig de dag begint met een kop koffie, uitgebreid buiten wilt dineren of op een zomeravond wilt ontspannen: hier kunt u volop buiten wonen.
+
+De tweede slaapkamer bevindt zich aan de voorzijde en is eveneens ruim van formaat. Deze kamer kan uiteraard als slaapkamer worden gebruikt, maar leent zich ook uitstekend als thuiswerkplek, hobbyruimte of logeerkamer.
+Daarnaast biedt de verdieping de mogelijkheid om aan de voorzijde relatief eenvoudig een derde slaapkamer te realiseren.
+
+De moderne badkamer is royaal uitgevoerd en beschikt over een ruime inloopdouche, een breed wastafelmeubel, tweede toilet en designradiator.
+
+In de onderbouw beschikt de woning over een eigen parkeerplaats in de afgesloten parkeergarage, een privéberging en toegang tot de gemeenschappelijke fietsenstalling.
+
+Buitenleven
+Een van de grote pluspunten van deze woning is het royale terras van circa 9 m² op het zuiden. Vanuit de master bedroom stapt u via de grote schuifpuien zo naar buiten. De combinatie van de royale woonoppervlakte, de twee woonlagen en het ruime terras zorgt voor een woongevoel dat u niet snel bij een appartement verwacht.
+Hier woont u dus niet alleen ruim, maar kunt u ook echt genieten van uw eigen buitenruimte.
+
+Omgeving
+De woning ligt in de rustige en groene Ruys de Beerenbrouckbuurt in Amsterdam Nieuw-West. Een prettige woonomgeving met veel groen, diverse voorzieningen en een centrale ligging ten opzichte van de rest van Amsterdam.
+
+Voor de dagelijkse boodschappen zijn diverse winkels en supermarkten op korte afstand gelegen. Ook winkelcentrum Plein &#x27;40-&#x27;45, de Jan van Galenstraat en de Bos en Lommerweg bevinden zich in de nabije omgeving. Daarnaast zijn er verschillende basisscholen, sportvoorzieningen en horecagelegenheden in de buurt.
+
+Voor ontspanning en recreatie zijn onder andere de (Fruit)tuinen van West, de Bretten, het Eendrachtspark, de Sloterplas, het Gerbrandypark en het Rembrandtpark eenvoudig bereikbaar. Ideaal voor een wandeling, rondje hardlopen of een ontspannen middag in het groen.
+
+Ook de bereikbaarheid is uitstekend. Station Amsterdam Sloterdijk bevindt zich op korte fietsafstand en diverse tram-, metro- en busverbindingen zijn nabij gelegen. Met de auto bereikt u binnen enkele minuten de A10, A5 en A4. Hierdoor zijn zowel de binnenstad als Schiphol goed bereikbaar.
+
+Erfpacht
+Het complex waar de woning deel van uitmaakt is gelegen op erfpachtgrond van de gemeente Amsterdam. De canon is eeuwigdurend afgekocht.
+
+VvE
+•	De maandelijkse VvE-bijdrage bedraagt € 241,-
+•	Wordt professioneel beheerd door NEWOMIJ
+•	MJOP aanwezig t/m 2050
+
+Bijzonderheden
+· Woonoppervlakte ca. 116 m²
+· Bouwjaar ca. 2005
+· Energielabel A
+· Zonnig terras op het zuiden
+· Twee ruime slaapkamers, mogelijkheid voor derde slaapkamer
+· Eigen parkeerplaats in de afgesloten parkeergarage
+· Geïsoleerd d.m.v. dubbele beglazing
+· Warm water en verwarming middels cv-ketel
+· Lift aanwezig
+· 2 toiletten
+· Erfpacht eeuwigdurend afgekocht
+· Oplevering in overleg
+
+Meetinstructie
+Het verkochte is gemeten met gebruikmaking van de Meetinstructie, gebaseerd op de normen zoals vastgelegd in NEN 2580. De Meetinstructie is bedoeld om een meer eenduidige manier van meten toe te passen voor het geven van een indicatie van de gebruiksoppervlakte. De Meetinstructie sluit verschillen in meetuitkomsten niet volledig uit door bijvoorbeeld interpretatieverschillen, afrondingen en beperkingen bij het uitvoeren van een meting. 
+
+De woning is gemeten door een betrouwbaar professioneel bedrijf en koper vrijwaart de medewerkers van Voorma &amp; Millenaar makelaars o.g. en de verkoper voor eventuele afwijkingen in de opgegeven maten. Koper verklaart in de gelegenheid te zijn gesteld om het verkochte zelf te (laten) meten conform NEN 2580.
+
+**OPEN HOUSE WEDNESDAY SEPTEMBER 30TH 2PM - 4PM**
+
+*** This Property is listed by an MVA Certified Expat Broker ***
+
+CENTRALLY LOCATED | SPACIOUS MAISONETTE | SUNNY SOUTH-FACING TERRACE | 116 M² | PRIVATE PARKING SPACE | ENERGY RATING A
+
+Want to live with the feel of a single-family home, but right in the heart of Amsterdam? This spacious maisonette on Wigbolt Ripperdastraat offers the best of both worlds. Spread over two floors, this home features approximately 116 m² of living space, two spacious bedrooms, a generous kitchen-diner, a bright living room, and a lovely, sunny south-facing terrace. Thanks to the two full floors and the direct connection between the master bedroom and the terrace, this home feels surprisingly more like a single-family home than an apartment.
+
+And then there’s the location: centrally located in Amsterdam Nieuw-West, in the green and quiet Ruys de Beerenbrouck neighborhood. From here, shops, restaurants, recreational activities, and public transportation are within easy reach, and the city center, the A10, and Schiphol Airport are all easily accessible.
+
+A delightful combination of space, outdoor living, comfort, and accessibility, with the added benefits of a private parking space in the secure parking garage, a separate storage room, and an energy efficiency rating of A.
+
+Layout
+Ground Floor
+Through the well-maintained, secure entrance with an intercom system, you reach the third floor. The elevator takes you comfortably to the apartment’s entrance.
+
+Ground Floor
+The spacious entry hall serves as the central hub of this floor and provides access to the modern restroom with a sink, the staircase to the upper floor, and the various living areas.
+
+At the rear is the spacious living room. Thanks to the wide windows, plenty of natural light floods in, and you enjoy an unobstructed view. The spacious layout offers ample opportunities for a comfortable seating area and a generous dining area.
+
+At the front is the spacious kitchen. The kitchen features a light color scheme with a wooden countertop and is equipped with various built-in appliances, including a gas stovetop, range hood, combination microwave, refrigerator, freezer, and dishwasher. Thanks to its generous dimensions, there is also plenty of room here for a large dining table. A wonderful place to cook to your heart’s content, enjoy meals together, or dine with friends and family.
+
+Upper Floor
+All rooms are accessible via the landing.
+The spacious master bedroom is located at the rear of the home. Large sliding glass doors provide direct access from the bedroom to the sunny south-facing terrace. This makes the bedroom feel as if it extends outdoors, turning the terrace into an extension of the living space.
+
+The terrace is spacious and offers plenty of room for a comfortable lounge or seating area. Thanks to its south-facing orientation, this is a wonderful spot to enjoy the sun and the outdoors. Whether you want to start your day quietly with a cup of coffee, have a leisurely dinner outside, or relax on a summer evening: here, you can truly embrace outdoor living.
+
+The second bedroom is located at the front of the house and is also spacious. This room can, of course, be used as a bedroom, but it’s also ideal as a home office, hobby room, or guest room.
+In addition, the floor plan allows for the relatively easy addition of a third bedroom at the front of the house.
+
+The modern bathroom is generously sized and features a spacious walk-in shower, a wide vanity unit, a second toilet, and a designer radiator.
+
+In the basement, the home includes a private parking space in the enclosed parking garage, a private storage room, and access to the communal bicycle storage area.
+
+Outdoor Living
+One of the major highlights of this home is the spacious, south-facing terrace measuring approximately 9 m². From the master bedroom, you can step right outside through the large sliding doors. The combination of the generous living space, the two floors, and the spacious terrace creates a sense of home that you wouldn’t typically expect from an apartment.
+So here, you not only have plenty of space to live in, but you can also truly enjoy your own outdoor area.
+
+Neighborhood
+The home is located in the quiet and green Ruys de Beerenbrouck neighborhood in Amsterdam Nieuw-West. It’s a pleasant residential area with plenty of green space, a variety of amenities, and a central location relative to the rest of Amsterdam.
+
+For daily shopping, various stores and supermarkets are located a short distance away. The Plein ’40–’45 shopping center, Jan van Galenstraat, and Bos en Lommerweg are also nearby. In addition, there are several elementary schools, sports facilities, and restaurants in the neighborhood.
+
+For relaxation and recreation, the (Fruit) Gardens of West, the Bretten, Eendrachtspark, Sloterplas, Gerbrandypark, and Rembrandtpark are all easily accessible. Ideal for a walk, a jog, or a relaxing afternoon surrounded by nature.
+
+Accessibility is also excellent. Amsterdam Sloterdijk Station is a short bike ride away, and various tram, metro, and bus connections are nearby. By car, you can reach the A10, A5, and A4 highways within minutes. This makes both the city center and Schiphol Airport easily accessible.
+
+Leasehold
+The complex of which this home is a part is located on leasehold land owned by the municipality of Amsterdam. The ground rent has been purchased in full for perpetuity.
+
+Homeowners’ Association (VvE)
+•    The monthly VvE fee is €241
+•    Professionally managed by NEWOMIJ
+•    Long-term maintenance plan (MJOP) in place through 2050
+
+Details
+· Living area approx. 116 m²
+· Year built approx. 2005
+· Energy efficiency rating: A
+· Sunny south-facing terrace
+· Two spacious bedrooms, with the possibility of a third bedroom
+· Private parking space in the enclosed parking garage
+· Insulated with double-glazed windows
+· Hot water and heating provided by a central heating boiler
+· Elevator available
+· 2 toilets
+· Leasehold permanently redeemed
+· Closing date to be agreed upon
+
+Measurement Guidelines
+The property has been measured in accordance with the Measurement Guidelines, based on the standards set forth in NEN 2580. The Measurement Guidelines are intended to provide a more uniform method of measurement for indicating the usable floor area. The Measurement Guidelines do not completely rule out differences in measurement results due to, for example, differences in interpretation, rounding, and limitations in performing a measurement.
+
+The property was measured by a reputable professional firm, and the buyer releases the employees of Voorma &amp; Millenaar makelaars o.g. and the seller from liability for any discrepancies in the stated measurements. The buyer declares that they were given the opportunity to measure the sold property themselves or have it measured in accordance with NEN 2580.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Voorma &amp; Millenaar makelaars - taxateurs o.g.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 64</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/551/836_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/518_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/660_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/511_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/530_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/531_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/529_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/517_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/594_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/656_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/528_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/825_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/606_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/582_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/581_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/546_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/827_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/444_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/767_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/646_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/556_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/555_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/541_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/512_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/547_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/551/764_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/551_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/558_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/549_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/544_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/588_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/592_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/579_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/548_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/589_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/585_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/545_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/539_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/574_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/561_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/552_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/566_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/568_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/583/768_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/543_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/580_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/573_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/563_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/583_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/591_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/560_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/565_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/562_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/542_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/571_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/538_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/575_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/572_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/554_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/586_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/564_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/151/590_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

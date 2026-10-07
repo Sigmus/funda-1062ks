@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curaçaostraat 100-1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Curaçaostraat 100-1</h1>
+  <p class="sub">
+    <span>1058 CB Amsterdam</span>
+    <span>·</span>
+    <span>Postjeskade e.o.</span>
+    <span class="status offer">Under offer</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/228/916/315_1440x960.jpg" alt="Curaçaostraat 100-1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">24 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€500.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.463/m² · 1.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.2 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">67 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1935</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-curacaostraat-100-1/80812859/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 153 per maand</dd></div>
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 500.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.463</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Under offer</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Tussenverdieping (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1935</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>67 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>10 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>222 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Walk-in shower, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>1e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>gas-fired combi boiler, owned</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Kadastraal perceel</dt><dd>SLOTEN NOORD-HOLLAND M 1932</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-03-2059</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, City centre en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Een net en instapklaar driekamerappartement op de eerste verdieping in een levendig deel van De Baarsjes, met een fijn balkon over de volledige breedte op het oosten en, een bijzondere extra, een eigen werkkamer op de bovenste verdieping. Voor wie thuis werkt of studeert is dat verschil van dag en nacht: rust en concentratie boven, wonen en koken beneden.
+
+DE INDELING
+Vanuit het trappenhuis stap je binnen in een centrale hal van 4,8 m2 waar alle vertrekken op uitkomen. De woning heeft nog de oorspronkelijke plattegrond: aan de straatzijde de woonkamer, in het midden de badkamer en aan de achterzijde de aparte keuken die grenst aan twee slaapkamers. Een beproefde indeling die zich in de praktijk verrassend ruim laat bewonen.
+
+DE WOONKAMER
+De woonkamer aan de voorzijde is met 24,2 m2 het hart van de woning. Een eikenlook laminaatvloer loopt door tot in de slaapkamers en geeft de woning een rustige eenheid. Grote raampartijen aan de straatzijde zorgen voor mooi daglicht in de ochtend en de namiddag. Plek genoeg voor een royale zithoek én eettafel, met aan de andere zijde van de hal directe toegang naar de keuken en het balkon.
+
+DE KEUKEN
+De afzonderlijke keuken van 4,5 m2 ligt strategisch tussen woonkamer en slaapkamers, met directe toegang tot het balkon. De keuken is netjes en functioneel uitgevoerd in witte fronten met een zwart werkblad. De inbouwapparatuur omvat een inductiekookplaat, oven, vaatwasser en koelvriescombinatie. Klaar voor gebruik vanaf dag één, met ruimte om er later jouw eigen draai aan te geven.
+
+HET BALKON OP HET OOSTEN
+Vanuit de keuken stap je het balkon op, dat zich over de volledige breedte van de achtergevel uitstrekt. Met 6,6 m2 ruimte voor een ontbijttafel, planten en een loungestoel begin je je dag met de ochtendzon. In de loop van de dag schuift de zon door en wordt het balkon koel en aangenaam, ideaal voor een glas wijn na het werk.
+
+DE SLAAPKAMERS
+Aan de achterzijde, beide grenzend aan het balkon, vind je twee slaapkamers. De grootste van 10,9 m2 is ruim genoeg voor een tweepersoonsbed met kledingkasten. De tweede slaapkamer van 7,2 m2 is veelzijdig inzetbaar als kinderkamer, logeerkamer of extra werkruimte. Beide ruimten zijn voorzien van dezelfde eikenlook laminaatvloer als de woonkamer.
+
+DE BADKAMER
+Centraal in de plattegrond ligt de badkamer van 2,3 m2. Compact maar volledig en netjes afgewerkt, met witte wandtegels en zwarte vloertegels die de ruimte een tijdloze look geven. Voorzien van een inloopdouche, enkel wastafelmeubel en toilet. Basic en functioneel, klaar om met kleine accenten je eigen sfeer te geven.
+
+DE WERKKAMER OP DE BOVENSTE VERDIEPING
+Op de bovenste verdieping bevindt zich het verborgen pluspunt van deze woning: een eigen werkkamer van 9,7 m2 met raam en kastruimte. Mooi daglicht, rust, en op afstand van het dagelijkse woonritme. De huidige eigenaar heeft de ruimte ingericht als home office en in de praktijk werkt dat opvallend goed. Geconcentreerd thuiswerken zonder dat het ten koste gaat van het woongedeelte beneden, en aan het eind van de werkdag letterlijk de deur achter je dicht.
+
+Goed om te weten: in de splitsingsakte uit 2009 staat deze ruimte nog omschreven als afzonderlijke berging op de zolderverdieping. Feitelijk en bouwkundig is het inmiddels een prettig bruikbare ruimte met daglicht en de meetrapporteur heeft de meters dan ook als gebruiksoppervlakte wonen meegenomen in de NEN 2580 meting. De koper die er werk of studieruimte van wil blijven maken, kan er direct gebruik van maken. Wens je in de toekomst de aanduiding formeel te wijzigen, dan loopt dat via de Vereniging van Eigenaars.
+
+DE BAARSJES
+Curaçaostraat ligt in de Westindische Buurt, een van de meest geliefde delen van De Baarsjes en Amsterdam-West. Op loopafstand vind je Mercatorplein met zijn terrasjes en weekmarkten, het Erasmuspark voor een ommetje in het groen, en de Jan Evertsenstraat die zich de afgelopen jaren heeft ontwikkeld tot een van de leukste eet en uitgaansstraten van de stad. Bakkers, koffiebars, restaurants en kleine speciaalzaken wisselen elkaar af. Het Vondelpark bereik je in een kwartier op de fiets, en ook de Foodhallen en De Hallen zijn op fietsafstand.
+
+BEREIKBAARHEID
+Per auto sta je in een paar minuten op de Ring A10. Met het openbaar vervoer ben je via tram 7 of 17 binnen een kwartier in het centrum. Station Lelylaan ligt op fietsafstand, met directe Intercityverbindingen naar Schiphol, Den Haag en Rotterdam.
+
+DE VERENIGING VAN EIGENAARS
+De woning maakt deel uit van Vereniging van Eigenaars Curaçaostraat 92 tot en met 128 (even nummers), een actieve en professioneel beheerde vereniging met 72 appartementsrechten. Het beheer is in handen van Ymere VvE Beheer. De maandelijkse bijdrage bedraagt op dit moment 153 euro. De financiële positie van de VvE is gezond, met een reservefonds van ruim 437.000 euro per balansdatum 30 juni 2025 en een vastgesteld meerjarenonderhoudsplan.
+
+EEN VOORUITKIJKENDE VERENIGING
+Wat deze VvE onderscheidt is dat er actief wordt gewerkt aan een grootschalig verduurzamingstraject. In de algemene ledenvergadering van juli 2025 is ingestemd met Voorkeursscenario 3: vervanging van de oorspronkelijke schuiframen door HR++ glas met ZR-roosters, isolatie van het dakvlak, vloer- en bodemisolatie, vervanging van de asbestpanelen in de erkers door geïsoleerde panelen, en CO2-gestuurde ventilatie. Doel is dat alle appartementen tenminste energielabel C halen, ruim vóór de wettelijke deadline van 2029 voor het sociale huurgedeelte. Financiering verloopt deels via een VvE Energiebespaarlening van het Nationaal Warmtefonds en subsidies. Een verstandige en goed voorbereide stap die de woning klaarmaakt voor de komende decennia.
+
+ERFPACHT
+De grond is uitgegeven in voortdurende erfpacht onder de Algemene Bepalingen 2000. Het huidige tijdvak loopt tot 31 maart 2059 en is volledig afgekocht. Tot die datum zijn er dus geen canonverplichtingen. De aanvraag voor overstap naar eeuwigdurende erfpacht is op 22 februari 2026 ingediend bij de gemeente Amsterdam.
+
+Bijzonderheden:
+
+- Woonoppervlakte: 67,10 m2 (NEN 2580 gemeten door Zibber, meetcertificaat type A d.d. 05-05-2026)
+- Indeling: 3 kamers, waarvan 2 slaapkamers, plus aparte werkkamer op zolder
+- Werkkamer zolder: 9,7 m2, in splitsingsakte 2009 aangeduid als afzonderlijke berging, in meetrapport meegenomen als gebruiksoppervlakte wonen
+- Buitenruimte: balkon van 6,6 m2 op het oosten, over volle breedte achtergevel
+- Bruto inhoud woning: 221,67 m3
+- Bouwjaar: 1935
+- Splitsing in appartementsrechten: augustus 2009
+- Vloeren: eikenlook laminaat in woonkamer en beide slaapkamers
+- Keuken: aparte keuken met witte fronten en zwart werkblad, voorzien van inductiekookplaat, oven, vaatwasser en koel-vriescombinatie
+- Badkamer: inloopdouche, wastafelmeubel en toilet, witte wandtegels en zwarte vloertegels
+- Verwarming en warm water: cv-ketel
+- Energielabel: C
+- Erfpacht: voortdurend, Algemene Bepalingen 2000, huidige tijdvak afgekocht tot 31-03-2059, aanvraag overstap eeuwigdurend ingediend op 22-02-2026
+- VvE: Vereniging van Eigenaars Curaçaostraat 92 tot en met 128, 72 appartementsrechten, beheer door Ymere VvE Beheer, maandelijkse bijdrage 153 euro, reservefonds ruim 437.000 euro per 30-06-2025
+- Verduurzaming: in juli 2025 heeft de ALV ingestemd met Voorkeursscenario 3 (HR++ glas, dak en vloerisolatie, CO2-ventilatie. uitvoering in voorbereiding
+- Oplevering: in overleg
+
+[English translation follows on Funda page; omitted here — see listing URL]</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Makelaars van Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 24</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/228/916/315_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/304_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/331_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/306_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/318_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/335_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/328_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/325_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/329_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/323_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/330_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/334_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/332_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/307_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/333_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/305_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/320_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/319_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/324_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/308_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/312_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/313_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/311_1440x960.jpg", "https://cloud.funda.nl/valentina_media/228/916/326_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

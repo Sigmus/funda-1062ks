@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liftado Waterfront 95-100 (Bouwnr. 534) · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Liftado Waterfront 95-100 (Bouwnr. 534)</h1>
+  <p class="sub">
+    <span>1064 AB Amsterdam</span>
+    <span>·</span>
+    <span>Noordoever Sloterplas</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/222/968/709_1440x960.jpg" alt="Liftado Waterfront 95-100 (Bouwnr. 534) — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">115 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€730.000</div>
+      <div class="price-note">asking · seller pays transfer costs (v.o.n.)</div>
+    </div>
+    <div class="meta-line">
+      €7.374/m² · 2.0 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.0 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">99 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy A++</span>
+      <span class="chip">Built 2028</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-liftado-waterfront-95-100-bouwnr-534/43294186/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 730.000 seller pays transfer costs (v.o.n.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.374</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Walk-up flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>New build</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2028</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>GIW Waarborgcertificaat</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>ca. 99 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>300 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>4 bathrooms en 2 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>4 Walk-in showers, 2 Washbasins, en 2 dubbele Washbasins</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Balansventilatie, glasvezelkabel, lift, schuifpui, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A++</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, aan water, in woonwijk en Open views</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Parkeergarage</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">ACE Amsterdam fase 2 – Luxe wonen aan de Sloterplas
+
+Welkom bij ACE fase 2, de nieuwe en exclusieve woonfase aan de noordzijde van de Sloterplas in Amsterdam. Hier komen stijlvolle appartementen en maisonnettes van circa 47 tot 170 m², ontworpen voor bewoners die houden van ruimte, rust en stijlvol – met het levendige hart van de stad binnen handbereik.
+
+Inloopevent 
+We heten je graag ook echt welkom bij ACE! We zijn wekelijks op donderdagen van 15.00 tot 17.00 uur op de bouw, in de bouwkeet (Jan Evertsenstraat 164, Amsterdam). Dé kans om alles te ontdekken en de sfeer te proeven over het nieuwste aanbod in ACE fase 2. Of je nu al heel concreet bent of je gewoon wilt oriënteren: ons team staat voor je klaar om je verder te helpen. We nemen de tijd om je mee te nemen in het project, de verschillende woningtypes en het aankoopproces. Locatie: In de bouwkeet, aan de Jan Evertsenstraat 164, Amsterdam. Let op: Meld je aan bij de portier, vervolgens word je opgehaald door de makelaar.
+
+Inschrijven
+Je kunt je direct aanmelden. Wil je dolgraag in een van deze mooie woningen komen te wonen? Vul dan het inschrijfformulier op de website aanbod.vorm.nl/acefase2 in of bel gewoon even met ons.
+
+VORM SmartMove - Onze persoonlijke begeleiding
+Misschien heb je jouw oog al laten vallen op een woning binnen ACE fase 2. Misschien ben je nog aan het oriënteren. Hoe dan ook: er komt vaak meer kijken bij het kopen van een woning dan alleen het kiezen van je favoriete bouwnummer.
+* Kan ik mijn huidige woning op tijd verkopen?
+* Hoe ziet mijn financiële situatie eruit?
+* Kan ik mijn huidige hypotheek meenemen?
+* Wat bedragen mijn maandlasten straks?
+* Is dit eigenlijk wel het juiste moment om de stap te zetten?
+Dat zijn heel normale vragen. En juist daarom hebben we VORM SmartMove ontwikkeld. Onze persoonlijke begeleiding met maatwerk bij het aankopen van jouw huis in ACE fase 2. 
+
+Nu tijdelijk met de VORM Dubbele Maandlastenreductor! Graag bekijken we met jou of je in aanmerking komt voor de Dubbele Maandlastenreductor.
+Lees er alles over op de speciale SmartMove-pagina op de projectsite aanbod.vorm.nl/acefase2
+
+Wonen, sporten en ontspannen
+De woningen in ACE fase 2 combineren moderne architectuur, duurzame technieken en hoogwaardige afwerking. Een plek waar je geniet van uitzicht over het water, sportfaciliteiten om de hoek en een ontspannen, groene woonomgeving.
+
+Het plan ACE is ontworpen rondom een levendig sporthart met tennis- en padelbanen. Daaromheen liggen moderne woongebouwen met elk hun eigen karakter. In fase 2 – de gebouwen Liftado en Cortado – woon je direct aan de Burgemeester Cramergracht, met uitzicht over het water en het groene Sloterpark om de hoek.
+De eerdere fases (Grand Slam, Slice en Bandeja) vormen samen al een duurzame, goed verbonden buurt waar wonen, bewegen en ontspannen vanzelf samenkomen. Met de metrohalte Jan van Galenstraat op loopafstand is de binnenstad in no-time bereikbaar.
+
+Ontdek het woningaanbod
+In ACE fase 2 komen ruime appartementen, maisonnettes en penthouses met woonoppervlaktes van circa 47 tot 170 m². Elk appartement is zorgvuldig ontworpen met oog voor comfort, licht en uitzicht.
+
+Uitgelicht:
+•	Waterfront 95-100: appartementen van circa 89 tot 99 vierkante meter met drie of vier kamers en een buitenruimte. Ook vanuit deze woningen kijk je uit op Burgemeester Cramergracht. Vanuit de hoger gelegen appartementen zie je de Sloterplas liggen. De prijzen: van 681.000 tot 740.000 euro (v.o.n.)*.
+
+* Prijzen o.b.v. jaarlijkse canon, de eerste 2 jaar zijn afgekocht
+
+Mede dankzij hybride stadsverwarming, zonnepanelen, warmteterugwinning en goede isolatie hebben de appartementen van ACE energielabel A+ of A++. Je bespaart daardoor flink op je energiekosten en kunt extra geld lenen om het appartement van jouw voorkeur te kopen.
+
+Mobiliteit
+Bij de koopsom is een aantal plekken in de fietsenstalling inbegrepen. Heb je een auto, dan hebben een aantal woningen de mogelijkheid om via een abonnement een zwerfparkeerplaats te huren in ACE.
+
+Highlights:
+•	Luxe afwerking met hoogwaardige materialen
+•	Inclusief keuken, badkamer en toiletruimte
+•	Grote raampartijen en buitenruimtes op het zuiden of westen
+•	Energiezuinig (minimaal A+ label) en voorzien van vloerverwarming/-koeling
+•	Eigen berging en deelmobiliteit voor de deur
+•	Prachtige ligging aan de Sloterplas
+
+Erfpacht
+Ace wordt gebouwd op erfpachtgrond (voortdurend recht van erfpacht, AB2000). De genoemde prijzen zijn V.O.N. en op basis van een jaarlijkse canonbetaling. De eerste 2 jaar canon zijn inbegrepen in de koopsom. Er is ook nog de mogelijkheid om de canon af te kopen voor het resterende tijdvak (tot 2063).
+
+Locatie - Stad, natuur en ontspanning
+ACE ligt aan de noordzijde van de Sloterplas, in Amsterdam Nieuw-West. Een wijk die volop in ontwikkeling is, met een perfecte balans tussen stadse energie en groene rust.
+De Sloterplas en het Sloterpark vormen het groene hart van Nieuw-West, op loopafstand van ACE. Je geniet hier van rust én volop activiteit: watersport, hardlopen, strand, festivals, horeca, buurtinitiatieven en meer. Een veelzijdige plek waar natuur, sport en cultuur samenkomen – allemaal vlak bij huis.
+
+In de directe omgeving vind je; 
+•	De Sloterplas en het Sloterpark voor wandelen, hardlopen of suppen
+•	Horeca, winkels en sportclubs op loopafstand
+•	Tram, metro en bus binnen 5 minuten
+•	Centrum van Amsterdam en Zuidas binnen 15 minuten fietsen
+•	Autoluw binnengebied
+
+Hier woon je in een duurzaam, toekomstgericht stadsdeel, met ruimte om te leven, te bewegen en te ontspannen.
+
+Bereikbaarheid
+ACE ligt in Amsterdam Nieuw-West, vlak bij metrostation Jan van Galenstraat. Metro, tram en bus brengen je zo de stad door. Fietsers hebben een centrale stallingsruimte en volop routes rond de Sloterplas. Tegelijkertijd woon je hier op een kwartier fietsen van de Jordaan, met al zijn cafés, terrassen en boetiekjes. Ook op een kwartier fietsen: het Leidseplein, met al zijn restaurants, bars en theaters. Met de auto zit je snel op de ring, ideaal voor woon-werkverkeer.
+
+Kijk vooral even op de website aanbod.vorm.nl/acefase2, daar kun je alle appartementen bekijken en de nodige informatie downloaden. Heb je nog vragen over Ace fase 2, neem dan vrijblijvend contact op met de makelaars. We helpen je graag verder!
+
+De verkoopinformatie is met grote zorgvuldigheid samengesteld doch voor de juistheid van de inhoud kunnen wij niet instaan en er kunnen derhalve geen rechten aan worden ontleend. De inhoud is puur informatief en mag niet worden beschouwd als een aanbod. Daar waar gesproken wordt over inhoud, oppervlakten of afmetingen moeten deze worden beschouwd als indicatief en als circa maten. Aangezien het nieuwbouw betreft, zijn de opgegeven m2 niet conform de Meetinstructie Gebruiksoppervlakte woningen van de NVM, maar zijn conform opgave architect. U dient als koper zelfonderzoek te verrichten naar zaken die voor u van belang zijn. Wij raden u in dat verband aan uw eigen (NVM-)makelaar in te schakelen.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Sense Vastgoed &amp; Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 115</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/222/968/709_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/713_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/723_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/731_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/735_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/740_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/743_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/747_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/758_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/760_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/764_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/768_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/772_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/775_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/780_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/785_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/789_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/793_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/797_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/803_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/807_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/811_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/815_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/821_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/823_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/827_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/832_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/836_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/841_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/844_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/848_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/858_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/862_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/865_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/869_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/873_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/877_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/881_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/886_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/893_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/896_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/901_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/903_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/907_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/917_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/921_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/926_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/955_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/966_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/970_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/978_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/991_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/968/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/000_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/005_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/015_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/022_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/025_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/029_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/032_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/034_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/040_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/044_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/089_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/094_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/098_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/101_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/105_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/107_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/111_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/115_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/122_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/129_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/133_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/142_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/149_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/155_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/162_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/169_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/177_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/182_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/187_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/192_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/195_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/198_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/207_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/213_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/217_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/220_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/224_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/228_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/234_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/238_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/242_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/245_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/251_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/255_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/259_1440x960.jpg", "https://cloud.funda.nl/valentina_media/222/969/265_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

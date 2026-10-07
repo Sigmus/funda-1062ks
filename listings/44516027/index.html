@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toevluchtstraat 6 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Toevluchtstraat 6</h1>
+  <p class="sub">
+    <span>1171 GG Badhoevedorp</span>
+    <span>·</span>
+    <span>Badhoevedorp Noordoost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/161/004_1440x960.jpg" alt="Toevluchtstraat 6 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">61 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€675.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.490/m² · 3.6 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.6 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">104 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1959</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/badhoevedorp/huis-toevluchtstraat-6/44516027/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 675.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.490</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, tussenwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1959</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>104 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>157 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>344 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 3 separate toiletten</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, dubbele Washbasin, Bathtub, Underfloor heating, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Buitenzonwering, dakraam, rookkanaal, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>VHR NL 30-34/5-5 R3 (gas-fired combi boiler uit 2014, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>HAARLEMMERMEER H 5761</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>157 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>61 m² (10,70 m deep en 5,70 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidoosten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Sfeervolle doorzonwoning uit 1959 met drie slaapkamers, moderne badkamer met vloerverwarming en een moderne keuken, op 157 m² eigen grond
+
+Wie hier de straat inrijdt, voelt het direct: dit is dorps wonen met Amsterdam om de hoek. Aan de rustige en kindvriendelijke Toevluchtstraat, met het park aan de voorzijde en een speeltuin vlakbij, staat deze sfeervolle doorzonwoning uit 1959. Ruim 104 m² woonoppervlakte (NEN 2580 gemeten), een perceel van 157 m² eigen grond en dus geen erfpacht, drie slaapkamers, een vernieuwde badkamer mét vloerverwarming en een tweede douche op de zolderverdieping. De keuken is modern uitgevoerd in de gedeeltelijke uitbouw en aan de voor- én achterzijde liggen zonnige tuinen. Wil je nog meer ruimte? Dan biedt de woning mogelijkheden om zowel aan de achter- als aan de voorzijde verder uit te bouwen. Hier komen charme, licht en praktisch woongemak samen.
+
+Begane grond: licht van voor naar achter
+Via de ruime voortuin loop je naar de entree. De gang geeft toegang tot de meterkast, de trapopgang met praktische trapkast en de toiletruimte met wandcloset en een wastafel in meubel. Dit toilet is opvallend ruim: een stuk gang met de oorspronkelijke toegang tot de keuken is hier bij de ruimte getrokken. Vanuit de hal betreed je de woonkamer via een fraaie klassieke deur in een hardhouten kozijn; dezelfde klassieke stijl zie je terug bij de toiletdeur. Op de hele begane grond ligt een hardhouten vloer, die de woning direct warmte en karakter geeft.
+
+De doorzonwoonkamer is een ruimte om in te leven. In de ochtend en vroege middag valt de zon binnen aan de achterzijde, later op de dag aan de voorzijde, waardoor het hier de hele dag aangenaam licht is. Bovendien kijk je aan zowel de voor- als de achterzijde vrij weg. Aan de achterzijde is een convectorput aanwezig en het kozijn bestaat uit dubbele openslaande deuren met ramen en deuren met een fraaie roedeverdeling, zodat je in één stap in de achtertuin staat. Een elektrisch zonnescherm aan de achterzijde houdt het op warme dagen aangenaam koel. En dan het detail dat deze kamer &#x27;s winters echt maakt: de gashaard, die met één druk op de knop zorgt voor sfeer en warmte op donkere avonden.
+
+De keuken is het domein van de kookliefhebber. Deze halfopen keuken is modern uitgevoerd en gesitueerd in de gedeeltelijke uitbouw aan de achterzijde, en compleet met een elektrische kookplaat van SMEG, afzuigkap, vaatwasser, anderhalve spoelbak, combi-oven, koffiemachine en een koelkast van Liebherr. In het plafond zijn inbouwspots opgenomen en ook onder de keukenkasten zit sfeervolle spotverlichting, precies waar je het nodig hebt. Ook vanuit de keuken heb je directe toegang tot de tuin: ideaal voor een kop koffie in de ochtendzon.
+
+Eerste verdieping: slapen en een badkamer met comfort
+De overloop met vaste kast geeft toegang tot twee royale slaapkamers en de moderne badkamer. De slaapkamer aan de achterzijde is heerlijk licht dankzij het grote raam en beschikt over een vaste kast; ook de slaapkamer aan de voorzijde heeft een groot raam en een vaste kast, met vrij uitzicht op het groen van het park.
+
+De badkamer is vernieuwd en voorzien van vloerverwarming. Een grijs gemêleerde vloer, lichte wandtegels tot aan het plafond, een douchecabine met regendouche en handdouche, een ligbad van Duravit en een dubbele wastafel in meubel met grote spiegel en verlichting. Ook een handdoekradiator en te openen ramen voor frisse lucht en daglicht zijn aanwezig. Heerlijk comfortabel, en &#x27;s ochtends stap je op een warme vloer.
+
+Op de plek van de oorspronkelijke badkamer is nu een separate ruimte gemaakt, en dat blijkt in de praktijk bijzonder praktisch: een toilet, een wastafel met spiegel, een handdoekenradiator, een vast raam voor extra lichtinval en de aansluitingen voor de wasmachine en eventueel een droger. De binnendeuren op deze verdieping zijn stomp uitgevoerd en gevat in houten kozijnen.
+
+Zolderverdieping: de derde slaapkamer én een tweede douche en toilet
+Via de voorzolder en de overloop met Velux-dakraam bereik je de derde, ruime slaapkamer met een kunststof dakkapel aan de achterzijde. En dan de luxe die je zelden tegenkomt in een woning van dit type: op deze verdieping is een compacte, maar zeer welkome douche aanwezig. Aan de achterzijde vind je daarnaast een ruimte met de opstelling van de cv-installatie, die jaarlijks wordt gecontroleerd, een toilet, een wastafel, een dakraam voor daglicht en frisse lucht en bergruimte. Achter de knieschotten zit nog extra kastruimte.
+
+Wens je meer ruimte? Dan kun je aan de voorzijde een tweede dakkapel plaatsen of dit dakvlak voorzien van een extra Velux-dakraam.
+
+De tuinen: zon aan twee zijden en een handige achterom
+De voortuin is ruim van formaat en geeft de woning direct een groene, vriendelijke uitstraling. De achtertuin bereik je via zowel de keuken als de dubbele deuren in de woonkamer en dankzij de doorzonligging is er op elk moment van de dag een plek in de zon of juist in de schaduw. De tuin is aangelegd met een niveauverschil: het terras ligt hoger, wat een fraai en verrassend ruimtelijk effect geeft. Achterin staat een vrijstaande stenen berging van circa 7,6 m², ideaal voor fietsen, tuingereedschap en de tuinkussens.
+
+Een groot praktisch voordeel: achter de woning loopt een breed pad, waardoor tuin en berging ook via de achterzijde bereikbaar zijn. Het pad is zelfs zo breed dat je er met de auto makkelijk kunt komen. Handig voor het stallen van fietsen, het afvoeren van tuinafval of als er in de tuin gewerkt moet worden, zonder dat alles door de woning hoeft.
+
+De locatie: dorps wonen met de stad om de hoek
+Badhoevedorp is ontstaan als groen tuindorp en heeft dat karakter tot op de dag van vandaag behouden: slingerende bomenlanen, plantsoenen, veel groen en een rijk verenigingsleven. Alleen de Ringvaart scheidt het dorp van Amsterdam. Via de Sloterbrug fiets je zo het pittoreske oude Sloten in, langs de karakteristieke Molen van Sloten, en sta je binnen circa 25 minuten in het centrum van de stad. Het Amsterdamse Bos ligt op zo&#x27;n vijftien minuten fietsen; wie wil, vaart er zelfs naartoe over de Ringvaart.
+
+De Toevluchtstraat ligt aan het einde van de Burgemeester Amersfoordtlaan, of net hoe je het bekijkt: juist aan het begin. Aan de voorzijde kijk je uit op het park en op korte loopafstand ligt een speeltuin, waar kinderen naar hartenlust kunnen spelen. Het dorp is bovendien bijzonder kindvriendelijk, met een aantal goede basisscholen, tal van speelpleintjes en speeltuinen, diverse sportverenigingen en een overdekt zwembad. Alle dagelijkse voorzieningen, zoals supermarkten, speciaalzaken, apotheek, bibliotheek en gezellige restaurants, vind je op loop- of fietsafstand. En Badhoevedorp wordt alleen maar mooier: door de omlegging van de A9 om het dorp heen ontstaat ruimte voor nog meer groen, parken en de nieuwe wandel- en fietsroute &#x27;Het Lint&#x27;.
+
+Ook de bereikbaarheid is uitstekend: via de A4, A5, A9 en A10 ben je snel in Amsterdam, op Schiphol, in Haarlem of Amstelveen, en ook met het openbaar vervoer sta je in korte tijd in de stad.
+
+Tot slot
+Dit is dorpse charme in een praktisch jasje: een lichte doorzonwoning met drie slaapkamers, een vernieuwde badkamer met ligbad en vloerverwarming, een extra doucheruimte op zolder, een doorzonwoonkamer met gashaard, een moderne halfopen keuken in de gedeeltelijke uitbouw en zonnige tuinen aan de voor- én achterzijde. Eigen grond, geen erfpacht, een stenen berging met brede achterom en een woning die zich zowel aan de achter- als aan de voorzijde verder laat uitbouwen.
+
+Kortom: ruimte, licht en groen, met het park voor de deur, een speeltuin vlakbij en Amsterdam om de hoek. Plan uw bezichtiging en ervaar het zelf.
+
+Kenmerken van de woning:
+•	Bouwjaar 1959
+•	Woonoppervlakte ruim 104 m², inhoud circa 344 m³ (NEN 2580 meetrapport aanwezig)
+•	Perceeloppervlakte 157 m² eigen grond, geen erfpacht (kadastraal bekend gemeente Haarlemmermeer, sectie H, nummer 5761)
+•	Energielabel C
+•	Verwarming en warm water middels cv-installatie, jaarlijks gecontroleerd
+•	Drie slaapkamers, vernieuwde badkamer met ligbad en vloerverwarming én extra douche op de zolderverdieping
+•	Moderne halfopen keuken in de uitbouw (de enige uitbouw van de woning) met onder meer SMEG-kookplaat en Liebherr-koelkast, inbouwspots in het plafond en spotverlichting onder de keukenkasten
+•	Doorzonwoonkamer met gashaard en veel lichtinval: ochtend- en middagzon aan de achterzijde, middag- en avondzon aan de voorzijde
+•	Hardhouten vloer op de gehele begane grond
+•	Ruime toiletruimte op de begane grond met wandcloset en wastafel in meubel (vergroot door het bij de ruimte trekken van een stuk gang met de oorspronkelijke keukentoegang)
+•	Kozijn aan de achterzijde in de woonkamer met dubbele openslaande deuren met ramen en deuren met roedeverdeling
+•	Elektrisch zonnescherm aan de achterzijde
+•	Vrij uitzicht aan zowel de voor- als de achterzijde; slaapkamer aan de voorzijde met uitzicht op het groen van het park
+•	Klassieke binnendeuren in hardhouten kozijnen op de begane grond; stompe binnendeuren in houten kozijnen op de eerste verdieping
+•	Vernieuwde badkamer met ligbad van Duravit, regendouche, dubbele wastafel, handdoekradiator en te openen ramen
+•	Kunststof dakkapel aan de achterzijde en twee dakramen op de zolderverdieping (overloop en toiletruimte); mogelijkheid voor een tweede dakkapel of extra dakraam aan de voorzijde
+•	Mogelijkheid om zowel aan de achterzijde als aan de voorzijde verder uit te bouwen
+•	Vrijstaande stenen berging van circa 7,6 m² en achterom via een breed pad, dat zelfs met de auto bereikbaar is
+•	Gelegen aan het park, met een speeltuin op korte loopafstand, nabij de Ringvaart en de Molen van Sloten
+•	Rustige, kindvriendelijke woonomgeving; scholen, winkels, sport en zwembad op loop- en fietsafstand
+•	Amsterdamse Bos op circa 15 minuten fietsen, centrum Amsterdam op circa 25 minuten
+•	Uitstekende bereikbaarheid via de A4, A5, A9 en A10 en het openbaar vervoer
+•	Oplevering in overleg
+•	Asbest- en ouderdomsclausule van toepassing
+
+Notariskeuze aan koper, met dien verstande dat het een notaris uit de regio Amsterdam/Amstelveen dient te zijn en dat de koopovereenkomst door de notaris conform het model Ring Amsterdam zal worden opgesteld.
+
+Deze informatie is door ons met de nodige zorgvuldigheid samengesteld. Onzerzijds wordt echter geen enkele aansprakelijkheid aanvaard voor enige onvolledigheid, onjuistheid of anderszins, dan wel de gevolgen daarvan. Alle opgegeven maten en oppervlakten zijn indicatief. Van toepassing zijn de NVM-voorwaarden.
+Dit huis in het kort
+AI-gegenereerd uit de omschrijving
+Lichte woonkamer met haard
+
+Doorzonwoonkamer met gashaard, openslaande tuindeuren en hardhouten vloer.
+
+Zonnige tuinen en berging
+
+Voor- en achtertuin met niveauverschil, stenen berging van circa 7,6 m² en brede achterom.
+
+Park voor de deur
+
+Rustige, kindvriendelijke straat aan het park, speeltuin dichtbij en Amsterdam snel bereikbaar.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 61</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/161/004_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/939_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/991_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/944_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/017_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/981_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/979_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/001_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/010_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/994_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/967_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/978_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/008_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/983_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/950_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/973_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/018_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/000_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/982_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/005_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/985_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/988_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/999_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/977_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/975_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/949_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/952_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/956_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/016_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/007_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/962_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/993_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/009_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/997_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/015_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/964_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/969_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/974_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/989_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/998_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/020_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/971_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/161/021_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/954_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/160/984_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

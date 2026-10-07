@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S. F. van Ossstraat 342 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>S. F. van Ossstraat 342</h1>
+  <p class="sub">
+    <span>1068 JS Hoofdinhoud</span>
+    <span>·</span>
+    <span>Kopen</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/230/811/609_1440x960.jpg" alt="S. F. van Ossstraat 342 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">36 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€332.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €4.312/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">77 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1965</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-s-f-van-ossstraat-342/80860213/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 332.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 4.312</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 268,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Gallery flat (appartement)</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1965</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>77 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>248 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>7e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Gedeeltelijk Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Blokverwarming</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Elektrische boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND D 5217</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 268,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*ENGLISH BELOW*
+
+Eeuwigdurend afgekochte erfpacht | 77 m² woonoppervlakte | 3 slaapkamers en vrij uitzicht vanaf de 7e verdieping
+
+Plan direct uw bezichtiging via de website van Snoep Makelaardij. Wij laten u deze woning graag persoonlijk ervaren.
+
+Welkom aan de S.F. van Ossstraat 342 in Amsterdam.
+Met circa 77 m² woonoppervlakte, drie slaapkamers, een balkon, een eigen berging, een ligging op de zevende verdieping én eeuwigdurend afgekochte erfpacht beschikt deze woning over een combinatie van eigenschappen die binnen Amsterdam steeds moeilijker te vinden is.
+De hoge ligging zorgt voor veel lichtinval, privacy en een vrij uitzicht over de omgeving. In combinatie met de praktische indeling, de professionele Vereniging van Eigenaars en de uitstekende bereikbaarheid biedt dit appartement een aantrekkelijk uitgangspunt voor woningzoekers die op zoek zijn naar ruimte op een centrale locatie in Amsterdam.
+
+Wonen:
+De woonkamer vormt het centrale gedeelte van de woning. Dankzij de grote raampartijen en de ligging op de zevende verdieping profiteert de ruimte van een prettige hoeveelheid daglicht en een open uitzicht over de omgeving. Dit zorgt voor een ruimtelijk gevoel en een aangename woonbeleving.
+Er is voldoende ruimte voor zowel een comfortabele zithoek als een royale eethoek, waardoor de woonkamer zich uitstekend leent voor zowel dagelijks gebruik als gezellige momenten met familie en vrienden.
+
+Keuken:
+De keuken bevindt zich aan de galerijzijde van de woning en beschikt over een praktische opstelling met voldoende werk- en bergruimte.
+
+Slaapkamers:
+De woning beschikt over vier kamers, waarvan drie volwaardige slaapkamers.
+Dat maakt dit appartement bijzonder geschikt voor gezinnen, thuiswerkers of woningzoekers die behoefte hebben aan extra ruimte. De kamers zijn flexibel in te delen en bieden volop mogelijkheden voor verschillende woonwensen.
+Juist de combinatie van drie slaapkamers en circa 77 m² woonoppervlakte maakt deze woning aantrekkelijk binnen de Amsterdamse woningmarkt.
+
+Badkamer:
+De badkamer is functioneel ingedeeld en volledig naar eigen smaak in te richten.
+
+Buitenruimte:
+Vanuit de woning heeft u toegang tot het balkon van circa 5 m². Dankzij de ligging op de zevende verdieping geniet u hier van een prettig vrij uitzicht en een fijne plek om buiten te zitten.
+
+Berging:
+Op de begane grond beschikt de woning over een eigen berging van circa 6 m². Ideaal voor het stallen van fietsen en het opbergen van spullen die u niet dagelijks nodig heeft.
+
+Vereniging van Eigenaars:
+De woning maakt deel uit van een grote Vereniging van Eigenaars bestaande uit 133 appartementsrechten.
+De VvE wordt professioneel beheerd en beschikt over een actueel meerjarenonderhoudsplan. Daarnaast is er circa €50.000,- aan reserves aanwezig voor toekomstig onderhoud. De maandelijkse bijdrage bedraagt €268,-.
+
+Erfpacht:
+Een van de grootste pluspunten van deze woning is zonder twijfel de erfpachtsituatie.
+De erfpacht is eeuwigdurend afgekocht. Dat betekent dat er nooit meer canonbetalingen verschuldigd zijn. In Amsterdam is dit een bijzonder waardevolle eigenschap die zorgt voor financiële duidelijkheid en zekerheid voor de toekomst.
+
+Fundering:
+Voor het complex geldt een ABC-codering met betrekking tot de fundering. Deze classificatie wordt door geldverstrekkers in de praktijk als positief beschouwd, waardoor de financierbaarheid van het appartement goed is.
+
+Duurzaamheid:
+De woning beschikt over een energielabel C
+De woning beschikt over blokverwarming en warm water via een elektrische boiler. Voorsstookkosten bedragen €105,- per maand.
+
+Locatie:
+De woning is gelegen in Amsterdam Nieuw-West, een stadsdeel dat bekendstaat om zijn ruime opzet, vele groenvoorzieningen en uitstekende bereikbaarheid.
+Voor dagelijkse boodschappen, winkels en horeca kunt u terecht bij het nabijgelegen Osdorpplein. Ook de Sloterplas bevindt zich op korte afstand. Een geliefde plek voor wandelen, hardlopen, sporten en recreëren aan het water.
+De bereikbaarheid is uitstekend. Diverse tram- en busverbindingen bevinden zich op korte afstand en zorgen voor een snelle verbinding richting Station Lelylaan, Station Sloterdijk, Schiphol en het centrum van Amsterdam.
+Met de auto bereikt u binnen enkele minuten de A4, A5, A9 en A10, waardoor ook omliggende steden uitstekend bereikbaar zijn.
+
+Bijzonderheden:
+
+* Woonoppervlakte circa 77 m²
+* Balkon circa 5 m²
+* Externe berging circa 6 m²
+* Gelegen op de 7e verdieping
+* 4 kamers waarvan 3 slaapkamers
+* Eeuwigdurend afgekochte erfpacht
+* Professioneel beheerde Vereniging van Eigenaars
+* Servicekosten €268,- per maand
+* Actueel MJOP aanwezig
+* ABC-codering fundering
+* Blokverwarming
+* Warm water middels elektrische boiler
+* Energielabel volgt
+* Niet-zelfbewoningsclausule van toepassing
+
+Samenvatting:
+S.F. van Ossstraat 342 biedt een aantrekkelijke combinatie van ruimte, licht en locatie. Met circa 77 m² woonoppervlakte, drie slaapkamers, een balkon, een eigen berging, een vrij uitzicht vanaf de zevende verdieping, een professioneel beheerde Vereniging van Eigenaars en eeuwigdurend afgekochte erfpacht beschikt deze woning over eigenschappen die ook op lange termijn aantrekkelijk blijven.
+Een appartement op een centrale locatie in Amsterdam met een uitstekende basis, veel leefruimte en een uitzicht waar u iedere dag opnieuw van kunt genieten.
+
+Disclaimer:
+Deze informatie is met de nodige zorgvuldigheid samengesteld. Aan eventuele onjuistheden kunnen geen rechten worden ontleend. Koper heeft een eigen onderzoeksplicht. De opgegeven oppervlakten zijn indicatief conform NEN2580.
+
+English version below:
+
+Perpetually prepaid ground lease | 77 m² living space | 3 bedrooms and unobstructed views from the 7th floor
+
+Schedule your viewing directly via the Snoep Makelaardij website. We would be delighted to show you this property in person.
+
+Welcome to S.F. van Ossstraat 342 in Amsterdam.
+Offering approximately 77 m² of living space, three bedrooms, a balcony, a private storage room, a position on the seventh floor, and a perpetually prepaid ground lease, this apartment combines several highly desirable features that are becoming increasingly difficult to find in Amsterdam.
+Its elevated position provides abundant natural light, privacy, and unobstructed views over the surrounding area. Combined with the practical layout, professionally managed homeowners’ association, and excellent accessibility, this apartment presents an attractive opportunity for buyers seeking space in a central Amsterdam location.
+
+Living Room:
+The living room forms the heart of the home. Thanks to the large windows and seventh-floor position, the space benefits from an abundance of natural light and open views, creating a bright and spacious atmosphere.
+There is ample room for both a comfortable seating area and a generous dining space, making it ideal for everyday living as well as entertaining family and friends.
+
+Kitchen:
+The kitchen is located on the gallery side of the apartment and offers a practical layout with sufficient workspace and storage capacity.
+
+Bedrooms:
+The apartment features four rooms in total, including three full-sized bedrooms.
+This makes the property particularly suitable for families, remote workers, or anyone seeking additional living space. The rooms offer flexibility and can easily be adapted to a variety of lifestyle needs.
+The combination of approximately 77 m² of living space and three bedrooms is a highly sought-after feature within the Amsterdam housing market.
+
+Bathroom:
+The bathroom is functionally laid out and offers the opportunity to modernize and finish it according to your own preferences and style.
+
+Outdoor Space:
+The apartment provides access to a balcony of approximately 5 m². Thanks to its position on the seventh floor, you can enjoy pleasant open views and a wonderful place to relax outdoors.
+
+Storage Room:
+On the ground floor, the property includes a private storage room of approximately 6 m², ideal for bicycles and additional storage.
+
+Homeowners’ Association (VvE):
+The apartment forms part of a large homeowners’ association consisting of 133 apartment rights.
+
+The association is professionally managed and has an up-to-date long-term maintenance plan (MJOP). In addition, approximately €50,000 is available in reserve funds for future maintenance. The monthly service charges amount to €268.
+
+Ground Lease:
+Without question, one of the strongest selling points of this property is its ground lease situation.
+The ground lease has been prepaid in perpetuity. This means no future ground lease payments will ever be due. Within Amsterdam, this is considered a highly valuable feature, providing long-term financial certainty and peace of mind.
+
+Foundation:
+The building has an ABC foundation classification. In practice, this classification is generally viewed positively by mortgage lenders, contributing to good financing possibilities for the apartment.
+
+Sustainability:
+The property has an energy label C
+The apartment benefits from district heating through block heating and hot water supplied via an electric boiler. Advance heating costs amount to €105 per month.
+
+Location:
+The apartment is situated in Amsterdam Nieuw-West, a district known for its spacious layout, abundant green areas, and excellent accessibility.
+For daily shopping, retail stores, and restaurants, Osdorpplein is located nearby. The Sloterplas is also within easy reach and is a popular destination for walking, jogging, outdoor sports, and recreation by the water.
+Public transport connections are excellent, with several tram and bus lines located nearby, providing quick access to Amsterdam Lelylaan Station, Sloterdijk Station, Schiphol Airport, and Amsterdam city centre.
+By car, the A4, A5, A9, and A10 motorways can be reached within minutes, ensuring excellent connectivity to Amsterdam and surrounding cities.
+
+Key Features:
+
+• Approximately 77 m² of living space
+• Balcony of approximately 5 m²
+• External storage room of approximately 6 m²
+• Located on the 7th floor
+• 4 rooms, including 3 bedrooms
+• Perpetually prepaid ground lease
+• Professionally managed homeowners’ association
+• Service charges of €268 per month
+• Up-to-date long-term maintenance plan (MJOP) available
+• ABC foundation classification
+• Block heating system
+• Hot water supplied via electric boiler
+• Energy label to follow
+• Non-owner-occupancy clause applies
+
+Summary:
+
+S.F. van Ossstraat 342 offers an attractive combination of space, natural light, and location. With approximately 77 m² of living space, three bedrooms, a balcony, a private storage room, unobstructed views from the seventh floor, a professionally managed homeowners’ association, and perpetually prepaid ground lease, this apartment possesses qualities that remain highly desirable for years to come.
+A centrally located Amsterdam apartment offering an excellent foundation, generous living space, and views that can be enjoyed every single day.
+
+Disclaimer:
+This information has been compiled with due care and attention. However, no rights may be derived from any inaccuracies. Buyers are advised to conduct their own due diligence. All measurements are indicative and have been measured in accordance with the NEN2580 standard.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Snoep Makelaardij</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 36</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/230/811/609_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/680_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/665_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/671_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/619_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/650_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/668_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/634_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/658_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/602_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/659_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/647_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/611_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/652_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/589_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/584_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/597_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/613_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/627_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/674_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/681_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/676_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/628_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/587_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/593_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/635_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/654_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/667_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/621_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/641_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/811/605_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

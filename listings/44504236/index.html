@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paramariboplein 22 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Paramariboplein 22</h1>
+  <p class="sub">
+    <span>1058 AS Amsterdam</span>
+    <span>·</span>
+    <span>Paramariboplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/085/915_1440x960.jpg" alt="Paramariboplein 22 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">45 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€700.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.589/m² · 1.2 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.2 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">73 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip">Built 1929</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-paramariboplein-22/44504236/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 700.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.589</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 138,20 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Ground-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1929</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Kluswoning</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Samengesteld dak bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Gebruiksoppervlakten</dt><dd></dd></div>
+        <div class="frow"><dt>Living area</dt><dd>73 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>300 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>Begane grond</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>Niet Available</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Gedeeltelijk Double glazing</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN (N.H.) M 1636</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>67 m² (10,59 m deep en 6,87 m wide)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande houten berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 138,20 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*****See English version below*****
+Paramariboplein 22-H – Amsterdam
+Op zoek naar een woning die je volledig naar eigen wens kunt inrichten, met de ruimte om mee te groeien als gezin? Deze kluswoning van 73 m² op de begane grond biedt volop potentie voor wie zijn ideale thuis wil creëren. Dankzij de aanwezige uitbouwmogelijkheden van circa 26 m2 is deze woning bij uitstek geschikt voor jonge gezinnen die op zoek zijn naar extra ruimte. De woning is gelegen op eigen grond, zonder erfpachtverplichtingen, en beschikt over een achtertuin van 67 m² inclusief schuur. MOGELIJKE INDELING De woning wordt in casco staat aangeboden en vormt daarmee een blanco canvas. Om de mogelijkheden inzichtelijk te maken is een voorbeeld-indeling uitgewerkt na uitbouw, zie de bijgevoegde alternatieve plattegrond. Deze laat zien hoe de woning kan worden ingericht met een ruime woonkamer van circa 14,9 m², een open woonkeuken van circa 19,8 m², drie volwaardige slaapkamers, een inloopkast, een badkamer en een separaat toilet. De getoonde plattegrond dient uitsluitend ter inspiratie. De achtertuin van 67 m², inclusief schuur, vormt in de huidige situatie al een fijne buitenruimte en biedt bij eventuele uitbreiding extra mogelijkheden om het woonoppervlak te vergroten. OMGEVING De woning is gelegen op een zeer aantrekkelijke locatie in Amsterdam, op korte afstand van zowel het Vondelpark als het Rembrandtpark. Beide parken bieden volop ruimte voor ontspanning, sport en een frisse neus. De bereikbaarheid is goed dankzij de nabijheid van de Ring A10, waarmee de stad snel in- en uit te rijden is. Er kan bij de gemeente Amsterdam een parkeervergunning worden aangevraagd. Volgens de online informatie van de Gemeente Amsterdam (controle uitgevoerd op 8-7-2026) geldt voor vergunninggebied West 1.3 een geschatte wachttijd van circa 4 maanden. *Aan deze indicatie kunnen geen rechten worden ontleend. VERENIGING VAN EIGENAARS De VvE bestaat uit 4 leden. De maandelijkse servicekosten bedragen € 138,20 (bron: begroting 2026). Het beheer en de administratie worden gevoerd door Parel VvE Beheer. Per 31 december 2025 heeft de VvE Paramariboplein 20-22 ruim € 25.000,- in Reserve. EIGENDOMSSITUATIE De woning is gelegen op eigen grond!! BIJZONDERHEDEN
+- Kluswoning, casco staat;
+- Huidige woonoppervlakte: 73 m²;
+- Uitbouwmogelijkheden van circa 26 m2 aanwezig, zie alternatieve plattegrond;
+- Achtertuin: 67 m², inclusief schuur (dakbedekking is vermoedelijk van asbesthoudend materiaal);
+- Bouwjaar 1929;
+- Eigen grond;
+- VvE bestaat uit 4 leden;
+- Maandelijkse servicekosten € 138,20
+- Professioneel beheerd door Parel VvE Beheer;
+- Projectnotaris: Klein Binnenkade;
+- Verkoop op basis van as-is-where-is, ouderdomsclausule, asbestclausule en niet-zelfbewoningsclausule;
+- Oplevering per direct te aanvaarden.
+*De juistheid van de vermelde gegevens is met zorg samengesteld. Ten aanzien van de juistheid kan door de makelaar echter geen aansprakelijkheid worden aanvaard. De maatvoering is ingemeten conform de NEN2580- meetinstructie, welke tot doel heeft een meer eenduidige manier van meten toe te passen voor de bepaling van het gebruiksoppervlak.
+------------------------------------------------------------------------------------
+Paramariboplein 22-H – Amsterdam
+Looking for a home you can fully renovate to your own taste, with room to grow as a family?
+This 73 m² fixer-upper on the ground floor offers great potential for those wanting to create their ideal home. Thanks to the available extension possibilities of approx 26 m2, this property is particularly well suited for young families looking for extra space. The home is situated on freehold land, with no ground lease obligations, and features a 67 m² back garden including a shed. LAYOUT POSSIBILITIES The property is offered in shell condition (casco), providing a blank canvas. To illustrate the possibilities, a sample layout has been developed showing the home after an extension, see the attached alternative floor plan. This shows how the property could be arranged with a spacious 14.9 m² living room, an open 19.8 m² kitchen-living area, three full-sized bedrooms, a walk-in closet, a bathroom, and a separate toilet. The floor plan shown is for illustrative purposes only. The 67 m² back garden, including shed, already provides a pleasant outdoor space in its current form and offers further potential to expand the living area should an extension be built. LOCATION The property is situated in a very attractive location in Amsterdam, within short distance of both Vondelpark and Rembrandtpark. Both parks offer plenty of space for relaxation, sport, and fresh air. Accessibility is excellent thanks to the proximity of the A10 ring road, allowing quick access in and out of the city. A parking permit can be applied for through the City of Amsterdam. According to information available online from the City of Amsterdam (checked on 8 July 2026), the estimated waiting time for permit zone West 1.3 is approximately 4 months. *No rights can be derived from this indication. OWNERS&#x27; ASSOCIATION (VvE) The Owners&#x27; Association consists of 4 members. The monthly service charges amount to €138.20 (source: 2026 budget). Management and administration are handled by Parel VvE Beheer. As of December 31, 2025, the Homeowners&#x27; Association (HOA) of Paramariboplein 20–22 maintains reserve funds exceeding €25,000. OWNERSHIP SITUATION The property is situated on freehold land. Interested? Contact our office to schedule a viewing. We would be happy to show you this home. PARTICULARS
+- Fixer-upper, shell condition (casco);
+- Current living area: 73 m²;
+- Extension possibilities available of approx 26 m2, see alternative floor plan;
+- Back garden: 67 m², including shed (roof covering is presumed to contain asbestos);
+- Year of construction: 1929;
+- Freehold (no ground lease);
+- Owners&#x27; Association consists of 4 members;
+- Monthly service charges €138.20;
+- Professionally managed by Parel VvE Beheer;
+- Notary handling the transaction: Klein Binnenkade;
+- Sold on an as-is-where-is basis, subject to an age clause, asbestos clause, and non-owner-occupancy clause;
+- Delivery: immediately available.
+*The accuracy of the information stated has been compiled with care. However, the agent cannot accept liability for its accuracy. Measurements have been taken in accordance with the NEN2580 measurement instruction, which aims to provide a more uniform method of measuring usable floor area.
+*De juistheid van de vermelde gegevens is met zorg samengesteld. Ten aanzien van de juistheid kan door de makelaar echter geen aansprakelijkheid worden aanvaard. De maatvoering is ingemeten conform de NEN2580- meetinstructie, welke tot doel heeft een meer eenduidige manier van meten toe te passen voor de bepaling van het gebruiksoppervlak.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 6 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Richard van Gaelen</strong> · Scholten Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 45</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/085/915_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/913_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/898_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/951_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/884_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/899_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/954_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/881_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/879_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/919_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/922_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/909_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/888_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/906_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/892_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/890_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/894_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/914_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/965_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/933_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/934_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/889_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/900_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/886_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/925_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/940_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/966_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/902_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/926_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/883_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/930_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/912_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/958_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/924_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/887_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/935_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/948_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/893_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/085/882_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

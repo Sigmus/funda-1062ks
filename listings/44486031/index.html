@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schipholweg 435 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Schipholweg 435</h1>
+  <p class="sub">
+    <span>1171 GE Badhoevedorp</span>
+    <span>·</span>
+    <span>Badhoevedorp Zuid</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/230/038/052_1440x960.jpg" alt="Schipholweg 435 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">71 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€650.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.804/m² · 4.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">112 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy F</span>
+      <span class="chip">Built 1928</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/badhoevedorp/huis-schipholweg-435/44486031/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 650.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.804</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, 2-onder-1-kapwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1928</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>112 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>46 m²</dd></div>
+        <div class="frow"><dt>Plot</dt><dd>398 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>436 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, dubbele Washbasin, Bathtub, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Frans balkon, glasvezelkabel, natuurlijke ventilatie, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>F</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha Tzerra ACE- Matic (gas gestookt uit 2025, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>HAARLEMMERMEER H 7570</dt><dd>Oppervlakte</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>French balcony present</dd></div>
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, in woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden, Front garden en zijtuin</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>185 m² (26,00 m deep en 7,10 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het noordoosten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande stenen berging</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>On own property en Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">**This property is sold by a certified MVA expat broker**For English translation see below Dutch text**
+
+Charmante jaren ’30 twee-onder-een-kapwoning met een zeer diepe achtertuin voorzien van een chalet en kantoorunit met overkapping, parkeren op eigen terrein, drie ruime slaapkamers én volop mogelijkheden.
+
+Deze karakteristieke woning is gelegen aan een ventweg van de Schipholweg en beschikt over diverse sfeervolle details, waaronder een charmante erker in de woonkamer en een gezellige houtkachel die zorgt voor extra warmte en karakter. De woning verkeert in nette staat, maar biedt tevens de mogelijkheid om naar eigen smaak te moderniseren en zo een eigentijdse droomwoning te creëren met behoud van de authentieke sfeer.
+
+Indeling
+Via de entree met meterkast en garderobe bereikt u de hal met toiletruimte voorzien van een zwevend toilet en fonteintje, praktische trapkast en toegang tot de dichte keuken. De keuken is uitgevoerd in houtlook met een hardstenen werkblad, diverse onder- en bovenkasten en verschillende inbouwapparatuur, waaronder een gaskookplaat, afzuigkap, oven, vaatwasser en koel-/vriescombinatie. Vanuit de keuken is er toegang tot de achtertuin. De hal en keuken zijn afgewerkt met een grijze tegelvloer.
+
+De gezellige woonkamer beschikt over een houten vloer, een houtkachel en een karakteristieke erker aan de voorzijde. Dankzij de grote raampartijen en deur staat de woonkamer in directe verbinding met de royale achtertuin, wat zorgt voor veel lichtinval en een prettig ruimtelijk gevoel.
+
+Eerste verdieping
+Via de trap bereikt u de eerste verdieping. De ruime overloop met groot raam zorgt voor aangenaam veel daglicht. Op deze verdieping bevinden zich drie goed bemeten slaapkamers en is de vloer afgewerkt met laminaat. De royale masterbedroom aan de achterzijde beschikt over openslaande deuren, uitzicht op de achtertuin en twee vaste inbouwkasten. De tweede slaapkamer bevindt zich aan de voorzijde en is eveneens voorzien van een praktische vaste kast. De derde kamer aan de voorzijde is ideaal te gebruiken als kinder-, werk- of inloopkamer.
+
+De badkamer is uitgevoerd in een wit-zwarte kleurstelling en beschikt over een ligbad, douchecabine, dubbele wastafel, toilet en een raam voor natuurlijke ventilatie en daglicht. Daarnaast bevindt zich op de overloop nog een handige bergkast waar de wasmachine en droger netjes zijn weggewerkt.
+
+Middels een vlizotrap is de vliering bereikbaar. Hier bevindt zich de cv-ketel en is er praktische bergruimte aanwezig.
+
+Tuin
+De zeer diepe achtertuin is fraai aangelegd met meerdere terrassen, diverse beplanting en een kleine vijver. Dankzij de diepte van de tuin is er op ieder moment van de dag wel een zonnig plekje te vinden, ondanks de ligging op het noordoosten.
+
+Achter in de tuin bevindt zich een houten chalet dat uitstekend kan dienen als gastenverblijf. Het chalet is voorzien van water, elektra, een aansluiting voor riolering, een keukenblok én een airco-/verwarmingsunit.
+
+Daarnaast beschikt de tuin over een separate kantoorunit met eigen toiletruimte, keukenblok, water en elektra. Deze ruimte wordt momenteel gebruikt als opslag, maar is uitermate geschikt als kantoor aan huis, praktijkruimte, hobbyruimte of voor andere doeleinden. Aan de unit bevindt zich tevens een gezellige overkapping waar heerlijk kan worden gezeten.
+
+De zonnige voortuin is gelegen op het zuidwesten en biedt parkeergelegenheid voor één tot twee auto’s op eigen terrein. Via de zijkant van de woning is er middels een hek toegang tot de achtertuin. Daarnaast bevindt zich naast de woning nog een praktische overkapping, ideaal voor het stallen van fietsen of extra opslagruimte.
+
+Deze woning heeft geen verhoogd funderingsrisico.
+
+Omgeving
+Schipholweg 435 is gelegen op een centrale locatie in Badhoevedorp, met diverse voorzieningen binnen handbereik. In de directe omgeving bevinden zich winkels, supermarkten, scholen, sportfaciliteiten en horecagelegenheden. Ook het dorpscentrum van Badhoevedorp ligt op korte afstand. De woning is gunstig gelegen ten opzichte van uitvalswegen zoals de A4, A5, A9 en A10, waardoor steden als Amsterdam, Haarlem, Hoofddorp en Schiphol uitstekend bereikbaar zijn. Daarnaast zijn er goede openbaar vervoersverbindingen in de nabije omgeving. Voor recreatie en ontspanning bevinden zich diverse groenvoorzieningen, wandelmogelijkheden en sportfaciliteiten in de buurt, waaronder het Amsterdamse Bos en recreatiegebieden rondom de Nieuwe Meer.
+
+Verkoopvoorwaarden
+
+Roerende zaken
+Volgens lijst
+
+Oplevering
+In overleg
+
+Clausules
+Het appartement wordt opgeleverd in de staat waarin het ten tijde van koop en levering zich bevindt in de ruimste betekenis (&#x27;As is - where is&#x27; ).
+
+Koopakte en notaris
+Een mondelinge overeenstemming tussen de particuliere verkoper en de particuliere koper is niet rechtsgeldig. Met andere woorden: er is geen koop. Er is pas sprake van een rechtsgeldige koopovereenkomst als de particuliere verkoper en de particuliere koper de koopovereenkomst hebben ondertekend. Koper dient binnen twee werkdagen na het bereiken van de mondelinge overeenstemming inzake de koopsom en de voorwaarden, een notaris aan te wijzen binnen een straal van 15 km van het ter verkoop aangeboden object, opdat uiterlijk 1 week na deze mondelinge overeenstemming de koopakte ondertekend kan worden. Indien koper binnen deze periode geen notaris heeft aangewezen, heeft verkoper het recht deze aan te wijzen.
+***********************************************************************************************
+Charming 1930s semi-detached house with a very deep backyard featuring a chalet and an office unit with a canopy, private parking, three spacious bedrooms, and plenty of possibilities.
+
+This characteristic home is situated on a service road off Schipholweg and features various atmospheric details, including a charming bay window in the living room and a cozy wood-burning stove that provides extra warmth and character. The property is in good condition but also offers the opportunity to modernize to your own taste, creating a contemporary dream home while preserving the authentic atmosphere.
+
+Layout
+Via the entrance with meter cupboard and wardrobe, you reach the hall with a toilet room equipped with a wall-mounted toilet and washbasin, a practical under-stairs cupboard, and access to the enclosed kitchen. The kitchen features a wood-look finish with a hardstone worktop, various base and wall cabinets, and several built-in appliances, including a gas hob, extractor hood, oven, dishwasher, and fridge-freezer. There is access to the backyard from the kitchen. The hall and kitchen are finished with a grey tiled floor. The cozy living room features a wooden floor, a wood-burning stove, and a characteristic bay window at the front. Thanks to the large windows and door, the living room is directly connected to the spacious backyard, ensuring plenty of natural light and a pleasant sense of space.
+
+First Floor
+You reach the first floor via the stairs. The spacious landing with a large window provides a pleasant amount of daylight. This floor houses three well-sized bedrooms, and the flooring is finished with laminate. The spacious master bedroom at the rear features French doors, a view of the backyard, and two built-in wardrobes. The second bedroom is located at the front and is also equipped with a practical built-in closet. The third room at the front is ideal for use as a nursery, home office, or walk-in closet.
+
+The bathroom is finished in a white and black color scheme and features a bathtub, shower cabin, double sink, toilet, and a window for natural ventilation and daylight. Additionally, there is a handy storage cupboard on the landing where the washing machine and dryer are neatly concealed.
+
+The attic is accessible via a loft ladder. The central heating boiler is located here, and practical storage space is available.
+
+Garden
+The very deep backyard is beautifully landscaped with multiple terraces, various plantings, and a small pond. Thanks to the depth of the garden, a sunny spot can be found at any time of day, despite its northeast orientation.
+
+At the back of the garden is a wooden chalet that serves perfectly as a guest house. The chalet is equipped with water, electricity, a sewage connection, a kitchenette, and an air conditioning/heating unit.
+
+Additionally, the garden features a separate office unit with its own toilet, kitchenette, water, and electricity. This space is currently used for storage but is extremely suitable as a home office, practice room, hobby room, or for other purposes. Attached to the unit is also a cozy covered area where you can sit comfortably.
+
+The sunny front garden faces southwest and offers parking for one to two cars on private property. Access to the backyard is via a gate on the side of the house. Additionally, there is a practical canopy next to the home, ideal for storing bicycles or extra storage space.
+
+This home has no increased foundation risk.
+
+Surroundings
+Schipholweg 435 is situated in a central location in Badhoevedorp, with various amenities within easy reach. Shops, supermarkets, schools, sports facilities, and hospitality establishments are located in the immediate vicinity. The village center of Badhoevedorp is also a short distance away. The property is conveniently located in relation to arterial roads such as the A4, A5, A9, and A10, making cities like Amsterdam, Haarlem, Hoofddorp, and Schiphol easily accessible. Furthermore, there are good public transport connections in the nearby area. For recreation and relaxation, there are various green spaces, walking opportunities, and sports facilities nearby, including the Amsterdamse Bos and recreational areas around the Nieuwe Meer.
+
+Conditions of Sale
+
+Movable property
+According to list
+
+Delivery
+By mutual agreement
+
+Clauses
+The apartment will be delivered in the condition in which it is at the time of purchase and delivery in the broadest sense (&#x27;As is - where is&#x27;). Purchase Agreement and Notary
+
+Deed of Sale and Notary
+A verbal agreement between the private seller and the private buyer is not legally binding. In other words: there is no purchase. A legally valid purchase agreement only exists once the private seller and the private buyer have signed the agreement. The Buyer must appoint a notary within a radius of 15 km of the property offered for sale within two working days after reaching verbal agreement regarding the purchase price and conditions, so that the deed of sale can be signed no later than one week after this verbal agreement. If the Buyer has not appointed a notary within this period, the Seller has the right to appoint one.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 5 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Arjen Ketel Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 71</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/230/038/052_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/196_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/041_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/995_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/117_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/059_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/025_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/177_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/032_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/083_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/072_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/953_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/121_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/023_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/975_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/092_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/171_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/998_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/186_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/073_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/051_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/093_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/002_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/162_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/030_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/128_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/999_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/988_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/147_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/012_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/098_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/105_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/097_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/201_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/116_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/133_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/946_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/970_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/028_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/150_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/173_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/204_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/153_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/119_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/029_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/005_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/090_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/193_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/069_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/137_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/142_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/172_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/205_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/148_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/027_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/003_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/036_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/199_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/037/986_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/075_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/118_1440x960.jpg", "https://cloud.funda.nl/valentina_media/230/038/048_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

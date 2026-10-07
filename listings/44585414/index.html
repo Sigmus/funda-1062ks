@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Willy Sluiterstraat 114 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Willy Sluiterstraat 114</h1>
+  <p class="sub">
+    <span>1061 TJ Amsterdam</span>
+    <span>·</span>
+    <span>Overtoomse Veld-Noord</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/886/942_1440x960.jpg" alt="Willy Sluiterstraat 114 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">28 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€575.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.389/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">90 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A+</span>
+      <span class="chip">Built 2013</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-willy-sluiterstraat-114/44585414/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>90 m²</dd></div>
+        <div class="frow"><dt>90 m²</dt><dd>Gebouwgebonden buitenruimte</dd></div>
+        <div class="frow"><dt>13 m²</dt><dd>Externe bergruimte</dd></div>
+        <div class="frow"><dt>8 m²</dt><dd>Inhoud</dd></div>
+        <div class="frow"><dt>294 m³</dt><dd>Indeling</dd></div>
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, dubbele Washbasin, Bathtub, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 575.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.389</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 157,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2013</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND D 10396</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Eeuwigdurend afgekocht</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 157,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">(FOR ENGLISH DESCRIPTION SCROLL DOWN)
+Zoek je ruimte, comfort en een zonovergoten buitenruimte op een toplocatie in Amsterdam West? Dit lichte, moderne appartement (ruim 90 m²) op de tweede verdieping biedt het allemaal: drie slaapkamers, een riant balkon, eigen parkeerplaats en externe berging en een energielabel A+. 
+
+Dit moderne appartement uit 2013 heeft een zeer praktische en ruimtelijke indeling.  De basis van de woning is hoogwaardig: het beschikt over een luxe open keuken met een kookeiland, ideaal voor wie van koken en gezelligheid houdt. 
+
+LOCATIE
+De woning is centraal gelegen in een buurt die volop in beweging is. Overal worden oudere gebouwen vervangen door moderne architectuur en poppen nieuwe restaurantjes en koffiebars op, wat zorgt voor een bruisende sfeer.
+
+Bereikbaarheid: De Ring A10 bereikt u in enkele minuten, het metrostation ligt op slechts 5 minuten lopen en met de fiets staat u binnen een kwartier op de Dam.
+
+Groen: Voor rust en ontspanning ligt het Rembrandtpark letterlijk aan de overkant van de straat. Ook het Sloterpark en de Sloterplas zijn op loopafstand bereikbaar.
+
+INDELING
+- Entree: Ruime ontvangsthal, direct tegenover de lift op de tweede verdieping.
+- Woonkamer &amp; Keuken: Zeer ruime en lichte woonkamer met een luxe open keuken voorzien van werkeiland en diverse luxe inbouwapparatuur.
+- Balkon: Ruim terras (ca. 12 m²), gelegen op het westen; dé plek voor de middag- en avondzon. Vanuit de woonkamer  en vanuit de slaapkamer stapt u zo op het ruime balkon.
+- Slaapkamers:  3 slaapkamers.
+- Sanitair: Een modern uitgevoerde badkamer met bad en wastafelmeubel. Er is een separaat toilet met fonteintje.
+- Berging in appartement: Een handige inpandige bergkast met de opstelling voor de wasmachine, droger en de mechanische installatie.
+
+EXTERNE BERGING:
+Op de begane grond bevindt zich een eigen berging van maar liefst 11,34 m².
+
+PARKEREN
+Uw auto staat veilig op de eigen parkeerplaats op het afgesloten terrein achter het gebouw.
+
+Belangrijkste kenmerken:
+- Bouwjaar: 2013
+- Woonoppervlakte: 92 m² (4 kamers)
+- Energielabel: A+
+- Erfpacht: Volledig en eeuwigdurend afgekocht (twv 40.000 euro)
+- Ligging: Tweede verdieping
+- Buitenruimte: Groot terras van ca. 12 m² op het westen.
+- Verwarming via stadsverwarming (geen eigen cv-ketel)
+- Nette afwerking met luxe sanitair en luxe keuken, instapklaar!
+- Parkeren: Inclusief eigen parkeerplaats op afgesloten terrein.
+- Berging: Zeer ruime externe berging (11,34 m²) op de begane grond.
+- Servicekosten € 220,10 per maand. (€156,56 voor appartement en €63,54 voor de VVE Parkeren)
+- VvE: Goed georganiseerde, professioneel beheerde VvE. Alle financiële documenten zijn op te vragen bij ons kantoor.
+- Niet-Zelfbewoningsclausule zal worden opgenomen in de koopovereenkomst
+
+Dit appartement, met eeuwigafgekochte erfpacht, biedt een fantastische kans om op een gewilde plek in Amsterdam te wonen die alleen nog maar mooier wordt!
+
+Interesse? Plan direct een bezichtiging via Funda.
+
+English Version
+
+Are you looking for space, comfort, and a sun-drenched outdoor area in a prime location in Amsterdam West? This bright, modern apartment (approx. 90 m²) on the second floor has it all: three bedrooms, a spacious balcony, private parking, a separate storage unit, and an energy label A+.
+
+This modern apartment, built in 2013, offers a highly practical and spacious layout. The property features high-quality finishes, including a luxurious open-plan kitchen with a cooking island—perfect for those who enjoy cooking and entertaining.
+
+LOCATION
+The property is centrally located in a neighborhood that is rapidly developing. Older buildings are being replaced by modern architecture, and new restaurants and coffee bars are constantly emerging, creating a vibrant atmosphere.
+
+Accessibility: The A10 Ring Road can be reached within minutes, the metro station is just a 5-minute walk away, and you can reach Dam Square by bike in about 15 minutes.
+
+Green spaces: For peace and relaxation, Rembrandtpark is literally across the street. Sloterpark and Sloterplas are also within walking distance.
+
+LAYOUT
+
+- Entrance:** Spacious entrance hall, located directly opposite the elevator on the second floor.
+- Living Room &amp; Kitchen:** Very spacious and bright living area with a luxurious open kitchen featuring a cooking island and various high-end built-in appliances.
+- Balcony:** Large terrace (approx. 12 m²), west-facing—perfect for enjoying the afternoon and evening sun. Accessible from both the living room and one of the bedrooms.
+- Bedrooms:** 3 bedrooms.
+- Bathroom:** Modern bathroom with a bathtub and vanity unit. Separate toilet with a washbasin.
+- Storage (inside apartment):** Practical internal storage space with connections for a washing machine, dryer, and mechanical ventilation system.
+
+EXTERNAL STORAGE
+A private storage unit of no less than 11.34 m² is located on the ground floor.
+
+PARKING
+Your car can be safely parked in your private parking space on the enclosed grounds behind the building.
+
+Key features:
+- Year of construction: 2013
+- Living area: 92 m² (4 rooms)
+- Energy label: A+
+- Ground lease: Fully paid off in perpetuity (value approx. €40,000)
+- Location: Second floor
+- Outdoor space: Large west-facing terrace of approx. 12 m²
+- Heating via district heating (no individual central heating boiler)
+- High-quality finishes with luxury bathroom and kitchen, 
+- Parking: Includes private parking space on a secured lot
+- Storage: Very spacious external storage unit (11.34 m²) on the ground floor
+- Service charges: €220.10 per month (€156.56 for the apartment and €63.54 for the parking association)
+- HOA: Well-organized and professionally managed. All financial documents are available upon request
+- Non-owner-occupancy clause will be included in the purchase agreement
+
+This apartment offers a fantastic opportunity to live in a highly desirable area of Amsterdam that continues to improve and develop!
+
+Interested? Schedule a viewing directly via Funda.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Makelaarsland</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 28</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/886/942_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/053_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/007_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/970_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/013_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/087_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/976_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/029_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/028_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/980_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/990_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/957_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/002_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/983_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/991_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/939_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/967_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/938_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/017_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/054_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/998_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/075_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/975_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/074_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/996_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/886/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/887/061_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

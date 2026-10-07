@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ampèrestraat 15 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Ampèrestraat 15</h1>
+  <p class="sub">
+    <span>1171 BS Badhoevedorp</span>
+    <span>·</span>
+    <span>Badhoevedorp Bouwlust</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/235/710/686_1440x960.jpg" alt="Ampèrestraat 15 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">51 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€769.500</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.130/m² · 4.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.7 km</span>
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">150 m² living</span>
+      <span class="chip">8 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1967</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/badhoevedorp/huis-amperestraat-15/44520437/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 769.500 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 5.130</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, 2-onder-1-kapwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1967</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>150 m²</dd></div>
+        <div class="frow"><dt>15 m²</dt><dd>Perceel</dd></div>
+        <div class="frow"><dt>240 m²</dt><dd>Inhoud</dd></div>
+        <div class="frow"><dt>359 m³</dt><dd>Indeling</dd></div>
+        <div class="frow"><dt>Number of rooms</dt><dd>8 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms en 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches, toilet, en 2 Washbasinmeubels</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors en een zolder</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Zonnepanelen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>HR Intergas (gas-fired combi boiler uit 2010, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Oppervlakte</dt><dd>240 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road, beschutte ligging en in woonwijk</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>90 m² (10,00 m deep en 9,00 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het noordwesten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Capaciteit</dt><dd>1 auto</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra en stromend water</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>On own property en Public parking</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">147 m² woonoppervlakte | 6 kamers | 4 à 5 slaapkamers | uitgebouwde begane grond | 2 dakkapellen | 2 badkamers | garage | eigen oprit | zonnige tuin | Energielabel C
+
+Dit is er zo eentje waar je eigenlijk niet zoveel meer aan hoeft te doen. Spullen pakken, verhuiswagen voorrijden en wonen maar!
+
+Aan de Ampèrestraat 15 staat deze verrassend ruime en vooral uitstekend verzorgde gezinswoning. Met 147 m² woonoppervlakte, een uitgebouwde begane grond, twee grote dakkapellen op de tweede verdieping, twee badkamers, een garage én een eigen oprit is het huis een stuk ruimer dan je vanaf de straat misschien zou verwachten.
+
+En ruimte is hier sowieso een belangrijk woord. De woning telt in totaal zes kamers, waarvan vijf kamers als slaap-/werkkamer kunnen worden gebruikt. Vier daarvan zijn zonder meer volwaardige slaapkamers; de vijfde is wat compacter, maar prima bruikbaar als kleinere “slaapkamer”, werkkamer, babykamer of kleedkamer.
+
+Binnen valt direct op hoe netjes alles is onderhouden. De begane grond is aan de achterzijde uitgebouwd en biedt daardoor een heerlijke hoeveelheid leefruimte. De eikenhouten vloer in de woonkamer is netjes behandeld en geeft de ruimte een warme en tijdloze uitstraling.
+
+De keuken is helemaal van nu: strak uitgevoerd, voorzien van alle gewenste inbouwapparatuur en natuurlijk de gewenste Quooker. Een fijne keuken die niet alleen mooi oogt, maar vooral praktisch is in het dagelijks gebruik.
+
+En dan de tuin. Een heerlijke plek met een gunstige zonligging, waardoor je hier volop van de middag- én avondzon kunt genieten. Lange zomeravonden, eten buiten of gewoon na het werk nog even de zon meepakken: hier kan het.
+
+EERSTE VERDIEPING
+
+Op de eerste verdieping bevinden zich drie kamers. Twee daarvan zijn prima volwaardige slaapkamers en de derde kamer is wat compacter van formaat. Deze kan als kleinere “slaapkamer” worden gebruikt, maar leent zich natuurlijk ook uitstekend als werk-, kinder- of kleedkamer.
+
+Op deze verdieping bevindt zich tevens de eerste en meest complete badkamer, voorzien van een douche, wastafel en toilet.
+
+TWEEDE VERDIEPING
+
+Dankzij de twee dakkapellen is ook de tweede verdieping verrassend ruim en goed bruikbaar. Hier bevinden zich nog eens twee slaapkamers, waarmee het huis bijzonder veel slaap- en werkruimte biedt.
+
+Daarnaast is er op deze verdieping een aparte stookruimte én een tweede badkamer, voorzien van een douche en wastafel. Zeker voor een groter gezin is die tweede badkamer geen overbodige luxe. Geen ochtendspits voor de douche, maar gewoon twee volwaardige sanitaire ruimtes verdeeld over de slaapverdiepingen.
+
+GARAGE, BIJKEUKEN ÉN EIGEN OPRIT
+
+Nog zo&#x27;n pluspunt: de woning beschikt over een eigen garage met bijkeuken. Ideaal voor fietsen, opslag, hobby&#x27;s en alle spullen die je liever niet midden in huis hebt staan. En dankzij de eigen oprit parkeer je de auto gewoon op eigen terrein.
+
+Ook technisch is de woning netjes voor elkaar. Het huis is voorzien van isolerende beglazing en goed onderhouden kozijnwerk. Het geheel maakt een verzorgde indruk en is zonder grote werkzaamheden te betrekken.
+
+CENTRAAL EN TOCH LEKKER WONEN
+
+De ligging maakt het plaatje compleet. De Ampèrestraat ligt op korte afstand van het centrum, waardoor winkels, voorzieningen, horeca en dagelijkse boodschappen gemakkelijk bereikbaar zijn. Tegelijkertijd woon je hier prettig en comfortabel in een echte gezinswoning met tuin, garage en eigen parkeergelegenheid.
+
+KORTOM
+
+Een verrassend ruime, uitgebouwde en uitstekend onderhouden zeskamerwoning waar eigenlijk alles al aanwezig is: vier goede slaapkamers plus een vijfde kleinere slaap-/werkkamer, twee badkamers verdeeld over de eerste en tweede verdieping, een moderne keuken, eikenhouten vloer, twee dakkapellen, een zonnige tuin, garage met bijkeuken en een eigen oprit.
+
+Veel ruimte, keurig onderhouden en vooral: een huis waar je zó in kunt.
+
+Bijzonderheden
+in totaal 6 kamers;
+uitgebouwde begane grond;
+recent vernieuwde keuken met complete inbouwapparatuur en Quooker;
+verzorgde eikenhouten vloer;
+twee dakkapellen op de tweede verdieping;
+garage met bijkeuken;
+eigen oprit voor twee auto&#x27;s;
+isolerende beglazing en verzorgd kozijnwerk;
+zeer nette staat van onderhoud;
+op korte afstand van het centrum;
+Oplevering vanaf</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 0 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Sander Lokhoff</strong> · Urban Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 51</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/235/710/686_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/869_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/931_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/959_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/911_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/830_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/750_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/922_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/769_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/923_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/941_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/968_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/936_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/879_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/710_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/711/030_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/947_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/811_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/708_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/761_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/943_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/859_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/827_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/809_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/828_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/788_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/751_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/801_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/839_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/963_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/910_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/685_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/711/024_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/833_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/782_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/689_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/795_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/754_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/836_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/896_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/780_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/843_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/732_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/916_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/928_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/960_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/884_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/868_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/710/697_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Mairekade 1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Le Mairekade 1</h1>
+  <p class="sub">
+    <span>1013 CB Amsterdam</span>
+    <span>·</span>
+    <span>Spaarndammerbuurt-Noordoost</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/681/705_1440x960.jpg" alt="Le Mairekade 1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">29 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€675.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.959/m² · 4.9 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">4.9 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">97 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1993</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-le-mairekade-1/44594281/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd></dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 675.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.959</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 238,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1993</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>97 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>40 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>319 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>InloopShower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha (gas-fired combi boiler uit 2010, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM X 2107</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 31-05-2043)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 31-05-2043</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Box</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 238,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** ENGLISH BELOW ***
+Ruim en licht appartement van circa 97 m² met drie slaapkamers, open keuken, ruim terras en lift, op een aantrekkelijke locatie nabij het Westerpark.
+Ruimte, licht en een eigen buitenplek in Amsterdam. Aan de Le Mairekade 1 ligt dit bijzonder ruime appartement van circa 97 m², gelegen op de tweede verdieping van een appartementencomplex uit 1993.
+De woning valt direct op door de royale leefruimte en de vele raampartijen in de woonkamer, waardoor er prettig veel daglicht naar binnen valt. Vanuit de woning is er zicht op de Pontsteiger en de Westertoren. De open keuken staat in directe verbinding met de woonkamer en draagt bij aan het ruimtelijke en sociale karakter van de woning. Daarnaast beschikt het appartement over drie ruime slaapkamers, apart toilet, een ruim terras en een eigen berging in de onderbouw.
+Wie graag ruim woont, thuis werkt of simpelweg waarde hecht aan veel leefruimte én een eigen buitenplek, vindt hier een uitstekende basis.
+Indeling
+Via de gemeenschappelijke entree bereik je met de trap of lift de tweede verdieping, waar het appartement is gelegen.
+Bij binnenkomst kom je in de hal, die toegang biedt tot de verschillende vertrekken van de woning.
+De royale woonkamer vormt het hart van het appartement. Dankzij de vele raampartijen valt er prettig veel daglicht naar binnen en heeft de ruimte een open en lichte uitstraling. Vanuit de woonkamer is er zicht op de Pontsteiger en de Westertoren.
+Er is volop plaats voor een ruime zithoek en een grote eettafel. Daarnaast blijft er voldoende ruimte over voor bijvoorbeeld een werkplek of leeshoek.
+De open keuken staat in directe verbinding met de woonkamer en zorgt voor een prettige samenhang tussen koken, eten en wonen. Hierdoor ontstaat een gezellige en sociale leefruimte met volop mogelijkheden om deze geheel naar eigen smaak in te richten.
+Het appartement beschikt over maar liefst drie slaapkamers. Daarmee is de woning geschikt voor
+uiteenlopende woonwensen.
+De badkamer is voorzien van een douche en wastafel. Daarnaast beschikt de woning over een separaat toilet, wat het dagelijks comfort verder vergroot. In de badkamer bevindt zich tevens de aansluiting voor de wasmachine.
+Bij het appartement behoort tevens een separate berging, ideaal voor het stallen van fietsen en het opbergen van spullen die je niet dagelijks nodig hebt.
+Een waardevolle aanvulling op het appartement is het ruime terras. In een stad als Amsterdam is een buitenruimte een heerlijke luxe. Hier is ruimte om een gezellige zitplek te creëren en op mooie dagen lekker buiten te verblijven. Op het terras is tevens een aansluiting voor een tuinslang aanwezig.
+Of het nu gaat om de eerste koffie van de dag, een drankje aan het einde van de middag of gewoon even buiten zitten: het terras vormt een fijne verlenging van het wooncomfort.
+Wonen aan de Le Mairekade
+Hier woon je op een prettige plek waar Amsterdam verrassend rustig aanvoelt, terwijl de levendigheid van de stad dichtbij is.
+Water en groen bevinden zich in de directe omgeving en voor ontspanning, sport of een wandeling is het Westerpark snel bereikbaar. Ook zwemwater is dichtbij te vinden. De Pont richting het NDSM-terrein ligt op loopafstand, waardoor je vanaf hier eenvoudig de overkant bereikt en kunt genieten van alles wat het NDSM- gebied te bieden heeft. Voor de deur bevinden zich bovendien ligplaatsen voor bootjes, wat de ligging aan het water extra bijzonder maakt. Ook de gezellige horeca, winkels en terrassen richting de Haarlemmerstraat, Jordaan en het centrum liggen op korte fietsafstand.
+Bijzonderheden
+- Circa 97 m² woonoppervlakte;
+- 3 slaapkamers;
+- Ruim terras;
+- Eigen separate berging in de onderbouw;
+- Bouwjaar1993;
+- Veel mogelijkheden voor een eigen indeling en modernisering;
+- Gezonde VvE;
+- Aansluiting voor een tuinslang op het terras;
+- Wasmachineaansluiting in de badkamer;
+- Telefoonaansluiting aanwezig;
+- Water en groen in de directe omgeving;
+- Westerpark op korte afstand;
+- Jordaan, Haarlemmerstraat en centrum eenvoudig per fiets bereikbaar;
+- Goede bereikbaarheid met fiets en openbaar vervoer;
+- Servicekosten € 237,66 euro per maand;
+- Erfpacht afgekocht t/m 31-05-2043; aanvraag overstap naar eeuwigdurende erfpacht is ingediend;
+- Oplevering in overleg, kan spoedig;
+- Koopakte volgens Ringmodel Amsterdam.
+Le Mairekade 1 is vooral een woning voor wie in Amsterdam niet wil inleveren op ruimte én graag over een eigen buitenplek beschikt. Met circa 97 m² woonoppervlakte, een uitzonderlijk royale leefruimte, ruime slaapkamer, eigen terras en praktische indeling biedt het appartement een comfortabele basis die geheel naar eigen smaak kan worden ingericht.
+Tel daarbij de rustige ligging nabij water en groen én de korte afstand tot het bruisende Amsterdamse stadsleven op, en je hebt een appartement met een combinatie die niet vaak voorbij komt.
+Nieuwsgierig naar de ruimte, het terras en alle mogelijkheden? We laten Le Mairekade 1 graag tijdens een bezichtiging zien.
+Hoewel deze informatie met zorg is samengesteld, aanvaarden wij geen aansprakelijkheid voor onjuistheden, onvolledigheden of de gevolgen daarvan.
+***
+Spacious and bright apartment of approximately 97 m² with three bedrooms, an open-plan kitchen, a generous terrace and elevator access, in an attractive location near Westerpark.
+Space, natural light and private outdoor space in Amsterdam. Located at Le Mairekade 1, this exceptionally spacious apartment of approximately 97 m² is situated on the second floor of an apartment building dating from 1993.
+The property immediately stands out thanks to its generous living space and the many windows in the living room, allowing plenty of natural daylight to enter. From the apartment, there are views towards the Pontsteiger and the Westertoren. The open-plan kitchen is directly connected to the living room, contributing to the spacious and social character of the property. In addition, the apartment features three spacious bedrooms, a separate toilet, a generous terrace and a private storage unit in the basement.
+For those who appreciate generous living space, work from home or simply value both comfort and private outdoor space, this apartment offers an excellent foundation.
+Layout
+Through the communal entrance, you can reach the second floor by either stairs or elevator, where the apartment is located.
+Upon entering, you arrive in the hallway, which provides access to the various rooms of the apartment.
+The generous living room forms the heart of the property. Thanks to the many windows, the room benefits from an abundance of natural daylight and has a bright and open atmosphere. From the living room, there are views towards the Pontsteiger and the Westertoren.
+There is ample space for a large seating area and a spacious dining table. There is also sufficient room for, for example, a home office or reading corner.
+The open-plan kitchen is directly connected to the living room, creating a pleasant connection between cooking, dining and living. This results in a welcoming and social living space with plenty of possibilities to arrange and style according to your own preferences.
+The apartment has no fewer than three bedrooms, making it suitable for a wide range of living arrangements and needs.
+The bathroom is equipped with a shower and washbasin. There is also a separate toilet, adding to the everyday comfort of the home. The bathroom also includes the connection for a washing machine.
+The apartment also comes with a separate private storage unit, ideal for storing bicycles and belongings that are not needed on a daily basis.
+A valuable addition to the apartment is the generous terrace. In a city like Amsterdam, having private outdoor space is a wonderful luxury. There is plenty of room to create a comfortable seating area and enjoy the outdoors on sunny days. The terrace also has a connection for a garden hose.
+Whether it is enjoying your first coffee of the day, having a drink at the end of the afternoon or simply spending some time outside, the terrace provides a lovely extension of the living space.
+Living at Le Mairekade
+Here, you live in a pleasant part of Amsterdam where the city feels surprisingly peaceful, while the vibrant city centre is still close by.
+Water and green spaces are right on your doorstep, and Westerpark is easily accessible for relaxation, sports or a walk. Swimming spots are also nearby. The ferry to the NDSM area is within walking distance, providing easy access to the other side of the IJ and everything the NDSM area has to offer.
+There are also mooring places for boats directly in front of the property, making the waterside location particularly special. The lively restaurants, cafés, shops and terraces around Haarlemmerstraat, the Jordaan and the city centre are all just a short bicycle ride away.
+Property Details
+- Approximately 97 m² of living space;
+- 3 bedrooms;
+- Generous terrace;
+- Private separate storage unit in the basement;
+- Built in 1993;
+- Plenty of possibilities for reconfiguration and modernization;
+- Well-managed and financially healthy owners&#x27; association (VvE);
+- Garden hose connection on the terrace;
+- Washing machine connection in the bathroom;
+- Telephone connection available;
+- Water and green spaces in the immediate surroundings;
+- Westerpark a short distance away;
+- Jordaan, Haarlemmerstraat and the city centre easily accessible by bicycle;
+- Good accessibility by bicycle and public transport;
+- Service charges: €237.66 per month;
+- Ground lease (erfpacht) prepaid until 31 May 2043; an application to switch to perpetual ground lease has been - submitted;
+- Transfer date by mutual agreement; can take place at short notice;
+- Purchase agreement in accordance with the Ring Model Amsterdam.
+Le Mairekade 1 is particularly suited to those who do not want to compromise on space while living in Amsterdam and who value having their own outdoor area. With approximately 97 m² of living space, an exceptionally generous living area, three spacious bedrooms, a private terrace and a practical layout, the apartment offers a comfortable foundation that can be fully adapted to your own taste and preferences.
+Add to this the peaceful location near water and green spaces, combined with the short distance to the vibrant city life of Amsterdam, and you have an apartment offering a combination that does not come along often.
+Curious to experience the space, terrace and possibilities for yourself? We would be delighted to show you Le Mairekade 1 during a viewing.
+Although this information has been compiled with care, no liability is accepted for any inaccuracies, incompleteness or the consequences thereof.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Floorplans not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>VLIEG Makelaars Amsterdam OG</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 29</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/681/705_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/777_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/791_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/756_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/864_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/697_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/677_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/816_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/733_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/703_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/789_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/863_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/846_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/676_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/854_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/776_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/722_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/799_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/869_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/842_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/680_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/844_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/666_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/852_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/717_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/681/850_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

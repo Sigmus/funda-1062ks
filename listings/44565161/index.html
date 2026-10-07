@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hegelhof 28 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Hegelhof 28</h1>
+  <p class="sub">
+    <span>1064 VX Amsterdam</span>
+    <span>·</span>
+    <span>Confuciusbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/055/352_1440x960.jpg" alt="Hegelhof 28 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">36 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€700.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €5.600/m² · 2.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.8 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">125 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy A+</span>
+      <span class="chip">Built 2014</span>
+      <span class="chip">Garden / terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-hegelhof-28/44565161/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Aanvaarding</dd></div>
+        <div class="frow"><dt>In overleg</dt><dd>Vraagprijs</dd></div>
+        <div class="frow"><dt>€ 700.000 kosten koper</dt><dd>Vraagprijs per m²</dd></div>
+        <div class="frow"><dt>€ 5.600</dt><dd>Status</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, hoekwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2014</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        <div class="frow"><dt>Keurmerken</dt><dd>Energie Prestatie Advies</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>125 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>17 m²</dd></div>
+        <div class="frow"><dt>External storage</dt><dd>8 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>460 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Dubbele Washbasin, Walk-in shower, toilet, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors en een zolder</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Alarminstallatie, buitenzonwering, dakraam, domotica, glasvezelkabel, Mechanical ventilation, schuifpui, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A+</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>District heating en gedeeltelijke Underfloor heating</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>District heating</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND D 10543</dt><dd>ownedssituatie</dd></div>
+        <div class="frow"><dt>Eigendom belast met erfpacht</dt><dd>Lasten</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>In woonwijk en Open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Back garden en Front garden</dd></div>
+        <div class="frow"><dt>Back garden</dt><dd>62 m² (11,25 m deep en 5,47 m wide)</dd></div>
+        <div class="frow"><dt>Ligging tuin</dt><dd>Gelegen op het zuidoosten bereikbaar via achterom</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Vrijstaande stenen berging</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>On own property</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Wonen op z’n best! Op een rustige locatie in een geliefde wijk mogen wij deze instapklare en energiezuinige HOEKwoning met eigen PARKEERPLAATS aanbieden. Dit huis is van alle gemakken voorzien en biedt veel wooncomfort. Binnen vind je een lichte woonkamer, een ruim opgezette keuken, drie volwaardige slaapkamers, een moderne badkamer en een grote zolder. Ook buiten is het volop genieten in de fraai aangelegde achtertuin met overkapping en privacy. Dankzij energielabel A+ woon je hier comfortabel én energiezuinig.
+
+En dat alles op een geweldige locatie, op korte afstand van winkels, parken, sportclubs, openbaar vervoer en uitvalswegen. Dit is een buitenkans, dus plan snel een bezichtiging in! We nemen je mee:
+
+•	Woongenot: 125 m²
+•	Erfpacht eeuwigdurend afgekocht
+•	Voorzien van 12 zonnepanelen (2023)
+•       Privé parkeerplaats op eigen terrein in een hof
+•	Ruime en lichte woonkamer met schuifpui naar de tuin
+•	Grote, nette keuken met diverse inbouwapparatuur
+•	Drie keurig afgewerkte slaapkamers
+•	Grote zolderverdieping met mogelijkheden
+•	Luxe badkamer met toilet, dubbele wastafel en inloopdouche
+•	Fraai aangelegde achtertuin (zuidoost) met overkapping
+
+Indeling van de woning:
+
+Begane grond:
+Via de fraai aangelegde voortuin bereik je de voordeur van de woning. Na binnenkomst word je verwelkomd in een ruime entreehal. Deze hal is voorzien van een lichte tegelvloer en biedt toegang tot de meterkast, een toiletruimte, de trap naar de eerste verdieping en de woonkamer.
+
+De tegelvloer loopt door in de woonkamer. Op de begane grond is vloerverwarming aanwezig. In de ruime woonkamer zijn de wanden strak afgewerkt in rustige tinten. Dankzij de grote ramen en schuifpui wordt deze ruimte overspoeld met natuurlijk licht. 
+
+De ruim opgezette keuken bevindt zich aan de voorzijde van het huis en is uitgevoerd in een hoekopstelling. Het design is strak met witte kastjes en een zwart werkblad. Er is moderne apparatuur aanwezig, waaronder een vaatwasser, kookplaat, afzuigkap, oven, koelkast en een Quooker.
+
+Eerste verdieping:
+Deze verdieping beschikt over drie slaapkamers en een badkamer. Van de drie slaapkamers liggen er twee aan de achterzijde en één aan de voorzijde. De kamer aan de voorzijde strekt zich uit over de gehele breedte van het huis en is daardoor heerlijk ruim. Alle slaapkamers zijn fraai afgewerkt en genieten van een prettige lichtinval.
+
+De badkamer is afgewerkt met moderne tegels en straalt veel luxe uit. Deze ruimte is uitgerust met een zwevend toilet, badmeubel met dubbele wastafel en een inloopdouche.
+
+Tweede verdieping:
+Via een vaste trap bereik je de zolderverdieping. Deze verdieping is ruim opgezet en biedt mogelijkheden voor een extra slaapkamer, een werkplek of een hobbyruimte. Op zolder ligt een fraaie vloer en is de lichtinval uitstekend. Ook de aansluitingen voor de wasmachine en droger bevinden zich op deze verdieping. 
+
+Tuin:
+Het huis beschikt over een netjes verzorgde achtertuin, die is ingericht met een combinatie van bestrating en groen. Direct aan de woning bevindt zich een overkapping, waar je een overdekte loungeplek kunt realiseren. Dankzij de uitstekende beschutting geniet je hier in alle rust van het buitenleven. Hier is het dan ook heerlijk toeven als het zonnetje schijnt!
+
+Via een looppad bereik je de poort naar de achterom. Achter de poort bevinden zich een berging en een eigen parkeerplaats.
+
+Parkeren:
+Eigen parkeerplaats.
+
+VVE:
+Maandelijkse VvE-bijdrage voor weg achter het huis is € 16,65.
+
+Ken je de omgeving al?
+Deze instapklare hoekwoning (2014) is gelegen in de populaire wijk Slotermeer-West, in het stadsdeel Amsterdam Nieuw-West. Lopend bereik je diverse winkels voor je dagelijkse boodschappen en Winkelcentrum Plein ’40-’45. 
+Met het Sloterpark op loopafstand en het Rembrandtpark en Erasmuspark op fietsafstand, biedt de omgeving volop wandel-, fiets- en recreatiemogelijkheden. Ook andere belangrijke voorzieningen, zoals scholen, sportverenigingen en medische faciliteiten, liggen vlakbij. 
+Qua bereikbaarheid woon je hier ideaal. Je vindt bus- en tramhaltes op loopafstand en NS-station Amsterdam Sloterdijk op fietsafstand. Met de auto ben je binnen enkele minuten op de A10.
+
+Goed om te weten:
+•	Instapklare en energiezuinige hoekwoning met heerlijke achtertuin
+•	Aangename lichtinval
+•	Volledig geïsoleerd
+•	Vloerverwarming op de begane grond
+•	Mechanische ventilatie aanwezig
+•	Gelegen in een populaire en groene wijk
+•	Veel voorzieningen op loopafstand
+•	Uitvalswegen snel bereikbaar
+•	Energielabel: A+</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 4 plattegrond(en), not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 36</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/055/352_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/399_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/442_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/377_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/390_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/379_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/411_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/364_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/424_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/446_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/419_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/387_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/437_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/440_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/413_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/370_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/526_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/541_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/549_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/598_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/625_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/686_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/478_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/693_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/636_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/462_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/461_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/647_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/645_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/702_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/616_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/463_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/596_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/055/697_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

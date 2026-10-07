@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maasstraat 149-2 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Maasstraat 149-2</h1>
+  <p class="sub">
+    <span>1079 BE Amsterdam</span>
+    <span>·</span>
+    <span>Scheldebuurt-Midden</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/232/989/624_1440x960.jpg" alt="Maasstraat 149-2 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">38 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€749.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.231/m²
+    </div>
+    <div class="chips">
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">91 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1933</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-maasstraat-149-2/80918197/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 749.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.231</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 168,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1933</dd></div>
+        <div class="frow"><dt>Specifics</dt><dd>Beschermd stads- of dorpsgezicht</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>gable roof bedekt met tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>91 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>2 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>309 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Frans balkon, Mechanical ventilation, natuurlijke ventilatie, en TV cable</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha Tzerra (gas-fired combi boiler uit 2017, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM V 10795</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>Deelperceel</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold (einddatum Leasehold: 15-09-2056)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>€ 940,00 per Yesar met optie tot afkopen</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 168,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Wie op zoek is naar een ruim appartement met karakter, veel licht en drie écht goede slaapkamers, zit hier meteen goed. Maasstraat 149-2 is een sfeervol hoekappartement van circa 91 m², midden in de geliefde Rivierenbuurt. De combinatie van de hoekligging, vier grote raampartijen in de woonkamer en de karakteristieke erkers maakt dit een woning die vanaf het moment dat je binnenkomt prettig en ruim aanvoelt. Wat dit appartement vooral bijzonder maakt, is de sfeer. Het licht komt van meerdere kanten naar binnen, de houten vloerdelen en paneeldeuren zijn nog aanwezig en ook de originele schouwen en vaste kasten geven de woning dat karakter dat je bij een appartement uit deze periode hoopt te vinden. Aan de voorzijde kijk je vanuit de erker uit over de levendige Maasstraat, terwijl je aan de achterzijde juist uitkijkt over groene binnentuinen. Stad aan de ene kant, rust aan de andere.
+Kenmerken op een rij
+– Ruim hoekappartement van circa 91 m²
+– Gelegen midden in de geliefde Rivierenbuurt
+– Drie volwaardige slaapkamers
+– Vier grote raampartijen in de woonkamer
+– Karakteristieke erkers met uitzicht over de Maasstraat
+– Veel natuurlijk licht door de hoekligging
+– Originele houten vloerdelen, paneeldeuren, schouwen en vaste kasten
+– Separate keuken aan de rustige achterzijde
+– Energielabel B
+– Volledig voorzien van BENGglas
+– Actieve en gezonde VvE
+– Servicekosten € 169,- per maand
+Indeling
+Via het gemeenschappelijke trappenhuis bereik je de woning op de tweede verdieping. Bij binnenkomst kom je in de centrale hal, vanwaar vrijwel alle vertrekken afzonderlijk bereikbaar zijn. Hier begint ook meteen de sfeer van het appartement. De originele paneeldeuren, houten vloer en karakteristieke details zijn door de hele woning heen terug te vinden en zorgen ervoor dat het geheel warm en eigen aanvoelt. Aan de voorzijde ligt de woonkamer, zonder twijfel een van de fijnste ruimtes van het appartement. Door de hoekligging beschikt deze over maar liefst vier grote raampartijen. Daardoor komt het daglicht van verschillende kanten binnen en voelt de kamer gedurende de hele dag open en aangenaam.
+De erker is daarbij zo&#x27;n plek die echt bij de woning hoort. Je kijkt hier mooi de Maasstraat in en zit midden in het dagelijkse leven van de buurt, zonder dat de woonkamer zijn rustige sfeer verliest. Er is volop ruimte voor een royale zithoek én een grote eettafel, terwijl er daarnaast gemakkelijk plek overblijft voor bijvoorbeeld een boekenkast, dressoir of thuiswerkplek. De originele schouw maakt de ruimte compleet en geeft de woonkamer net dat extra beetje karakter. De woning beschikt over drie slaapkamers die stuk voor stuk goed bruikbaar zijn. Niet alleen op de plattegrond, maar ook daadwerkelijk in de praktijk. Daardoor is de woning heel flexibel in te delen. Drie slaapkamers, twee slaapkamers en een ruime werkkamer, een logeerkamer of juist een aparte kleedkamer:
+hier kan het allemaal zonder concessies te doen aan de overige ruimtes.
+Ook in de slaapkamers zijn verschillende oorspronkelijke details behouden gebleven. Houten vloerdelen, schouwen en grote ramen zorgen ervoor dat iedere kamer zijn eigen sfeer heeft en prettig licht aanvoelt. Aan de achterzijde bevindt zich de separate keuken. Deze is praktisch ingericht met werkblad en kastruimte aan beide zijden en voorzien van een gaskookplaat, afzuigkap, vaatwasser, spoelbak en koel-/vriescombinatie. Ook hier is de oorspronkelijke vaste kast behouden gebleven, een detail dat mooi past bij de rest van het appartement.
+Centraal in de woning ligt de badkamer. Deze is volledig betegeld en voorzien van een douche, wastafel met houten blad en praktische kastruimte. Het toilet is separaat en beschikt over een eigen fonteintje. De indeling voelt hierdoor heel vanzelfsprekend: een ruime en lichte woonkamer aan de voorzijde, drie goede slaapkamers, een separate keuken aan de rustige achterkant en centraal alle praktische ruimtes. Een appartement dat nu al prettig woont, maar tegelijkertijd genoeg mogelijkheden biedt om het helemaal naar je eigen smaak te maken. Comfort &amp; onderhoud
+Ook op technisch vlak is er al het nodige gedaan. De woning is volledig voorzien van BENGglas, met een Rwaarde die zelfs hoger ligt dan die van tripleglas. Zeker bij een hoekappartement met relatief veel glas levert dat extra comfort en goede isolatie op. De woning beschikt over energielabel B en maakt deel uit van een gezonde en actieve VvE. Het onderhoud wordt goed bijgehouden en het buitenschilderwerk is in 2022 uitgevoerd. De maandelijkse servicekosten bedragen € 169,-.
+Erfpacht
+De woning staat op erfpachtgrond van de gemeente Amsterdam. De huidige erfpachtcanon bedraagt € 940,per jaar en loopt in deze vorm tot 15 september 2056. Verkopers hebben reeds een aanvraag gedaan voor de overstap naar gunstige eeuwigdurende erfpacht. De daarbij geregistreerde aanvraagdatum blijft bij verkoop behouden voor koper, mits aan de voorwaarden en termijnen van de gemeente Amsterdam wordt voldaan. Koper kan vervolgens zelf een aanbieding voor de overstap aanvragen.
+Wonen in de Rivierenbuurt
+De Maasstraat is zo&#x27;n straat waar je eigenlijk alles dichtbij hebt. Voor koffie, boodschappen, een goede lunch of diner hoef je de buurt nauwelijks uit. In de straat zelf en direct daaromheen vind je een prettige mix van winkels, speciaalzaken, cafés en restaurants, waardoor het hier levendig is zonder dat het massaal aanvoelt. De Rivierenbuurt staat bovendien bekend om haar brede straten, karakteristieke architectuur en groene uitstraling. De Rijnstraat en Scheldestraat liggen om de hoek en voor meer groen fiets of wandel je gemakkelijk richting het Beatrixpark of de Amstel. Juist vanuit dit appartement ervaar je beide kanten van de buurt. Aan de voorkant kijk je uit over de Maasstraat en gebeurt er altijd iets. Aan de achterkant kijk je uit over de groene binnentuinen en is het opvallend rustig. Dat maakt het een fijne plek om thuis te komen. Ook de bereikbaarheid is uitstekend. Met de auto rijd je snel richting de A10 en A2 en met het openbaar vervoer kun je vrijwel alle kanten op. Station RAI, Station Zuid en Station Amstel zijn goed bereikbaar en in de directe omgeving vertrekken verschillende tram- en buslijnen. Met de fiets ben je binnen korte tijd in De Pijp, op de Zuidas, langs de Amstel of verder richting het centrum. Je woont hier daardoor heel centraal, maar wel in een
+buurt die
+nog echt als woonbuurt voelt.
+Maasstraat
+149-2
+Kom kijken bij jouw nieuwe thuis
+Maasstraat 149-2 is zo&#x27;n appartement waarvan je de sfeer vooral binnen ervaart. Het licht dat vanuit verschillende kanten binnenvalt, de erker aan de voorzijde, de originele details geven de woning iets eigens. Met circa 91 m² woonoppervlakte, drie volwaardige slaapkamers en een ruime woonkamer is er bovendien genoeg plek om hier echt langere tijd fijn te wonen. Een karakteristiek Amsterdams appartement op een hoek, midden in een van de prettigste buurten van Zuid. Plan een bezichtiging in via Bloem Makelaars. Wij laten je deze fijne woning graag persoonlijk zien. Je bent van harte welkom.
+Bijzonderheden
+– Gelegen op een mooie hoek in de geliefde Rivierenbuurt
+– Woonoppervlakte circa 91 m²
+– Drie ruime en volwaardige slaapkamers
+– Hoekligging met veel natuurlijk licht
+– Vier grote raampartijen in de woonkamer
+– Karakteristieke erkers met uitzicht over de Maasstraat
+– Separate keuken aan de achterzijde
+– Diverse originele details, waaronder houten vloerdelen, paneeldeuren, vaste kasten en schouwen
+– Ruime badkamer en separaat toilet
+– Wasmachine en droger netjes geplaatst in inbouwkast
+– Energielabel B
+– Volledig voorzien van BENGglas
+– Gezonde en actieve VvE
+-----------------------------------------------------------------------------------------------------------------------------------------------Anyone looking for a spacious apartment with character, plenty of light and three genuinely good bedrooms will feel right at home here. Maasstraat 149-2 is an attractive corner apartment of approximately 91 m², right in the heart of the popular Rivierenbuurt. The combination of its corner position, four large windows in the living room and the characteristic bay window makes this a home that feels pleasant and spacious from the moment you step inside.
+What makes this apartment particularly special is its atmosphere. Light enters from several directions, the wooden floorboards and panel doors have been preserved, and the original fireplaces and built-in cupboards also give the home the character you hope to find in an apartment from this period. At the front, the bay window overlooks the lively Maasstraat, while at the rear you look out over green inner gardens. City life on one side, tranquillity on the other.
+Key features at a glance
+– Spacious corner apartment of approximately 91 m²
+– Located in the heart of the popular Rivierenbuurt
+– Three full-sized bedrooms
+– Four large windows in the living room
+–
+Characteristic
+bay window overlooking the Maasstraat
+Maasstraat
+149-2
+–
+of k.k.
+natural light thanks to the corner position
+€ Plenty
+749.000
+– Original wooden floorboards, panel doors, fireplaces and built-in cupboards
+– Separate kitchen at the quiet rear
+– Energy label B
+– Fully fitted with BENG glass
+– Active and financially healthy Owners’ Association
+– Service charges €169 per month
+Layout
+The apartment is reached via the communal staircase on the second floor. Upon entering, you step into the central hallway, from which almost all rooms can be accessed separately. This is also where the atmosphere of the apartment immediately becomes apparent. The original panel doors, wooden flooring and characteristic details can be found throughout the home and give the apartment a warm and distinctive feel. At the front is the living room, without doubt one of the most pleasant spaces in the apartment. Thanks to the corner position, it has no fewer than four large windows. As a result, daylight enters from different directions and the room feels open and pleasant throughout the day.
+The bay window is one of those places that truly belongs to the home. From here you have a lovely view along the Maasstraat and feel part of the everyday life of the neighbourhood, without the living room losing its calm atmosphere. There is plenty of room for a generous seating area as well as a large dining table, while still leaving space for, for example, a bookcase, sideboard or home office. The original fireplace completes the room and gives the living area that little bit of extra character. The property has three bedrooms, each of which is genuinely practical in size. Not just on the floor plan, but in everyday use as well. This makes the apartment very flexible in terms of layout. Three bedrooms, two bedrooms and a spacious study, a guest room or perhaps a separate dressing room: all are possible without compromising the other spaces.
+Several original details have also been preserved in the bedrooms. Wooden floorboards, fireplaces and large windows give each room its own atmosphere and plenty of natural light. At the rear is the separate kitchen. It is practically arranged with worktops and cupboard space on both sides and is equipped with a gas hob, extractor hood, dishwasher, sink and fridge/freezer. The original built-in cupboard has also been retained here, a detail that fits beautifully with the rest of the apartment. From the kitchen you look out over the inner gardens behind the property.
+The bathroom is located centrally within the apartment. It is fully tiled and fitted with a shower, washbasin with wooden countertop and practical cupboard space. The toilet is separate and has its own hand basin. The layout therefore feels very natural: a spacious and bright living room at the front, three good bedrooms, a separate kitchen at the quiet rear and all practical spaces centrally located. An apartment that is already very pleasant to live in, while at the same time offering plenty of opportunities to make it entirely your own. Comfort &amp; maintenance
+A number of technical improvements have already been made as well. The property is fully fitted with BENG glass, with an R-value that is even higher than that of triple glazing. Especially in a corner apartment with a relatively large amount of glass, this provides additional comfort and good insulation. The property has energy label B and forms part of a healthy and active Owners’ Association. Maintenance is kept up to date and the exterior
+painting
+€ 749.000
+k.k. was carried out in 2022. The monthly service charges are €169.
+Ground lease
+The property is situated on leasehold land owned by the Municipality of Amsterdam. The current annual ground rent is €940 and remains in its current form until 15 September 2056. The sellers have already submitted an application to switch to perpetual ground lease. The registered application date will be retained for the buyer upon sale, provided the conditions and deadlines set by the Municipality of Amsterdam are met. The buyer can then apply for an offer for the switch themselves.
+Living in the Rivierenbuurt
+The Maasstraat is one of those streets where you have virtually everything close at hand. For coffee, groceries, a good lunch or dinner, you hardly need to leave the neighbourhood. In the street itself and immediately around it you will find a pleasant mix of shops, specialist stores, cafés and restaurants, making the area lively without ever feeling overcrowded.
+The Rivierenbuurt is also known for its wide streets, characteristic architecture and green appearance. Rijnstraat and Scheldestraat are just around the corner, and for even more greenery you can easily cycle or walk towards Beatrixpark or the Amstel. This apartment allows you to experience both sides of the neighbourhood. At the front, you overlook the Maasstraat where there is always something going on. At the rear, you look out over the green inner gardens and it is remarkably peaceful. That makes it a lovely place to come home to. Accessibility is also excellent. By car, you can quickly reach the A10 and A2 motorways, and public transport takes you in virtually every direction. RAI Station, Zuid Station and Amstel Station are all easily accessible, and several tram and bus lines depart from the immediate area. By bicycle, you can reach De Pijp, the Zuidas, the Amstel or the city centre within a short time. This means you live in a very central location, while still being in a neighbourhood that truly feels residential.
+Come and see your new home
+Maasstraat 149-2 is one of those apartments whose atmosphere is best experienced once you step inside. The light entering from different directions, the bay window at the front and the original details give the home a distinctive character. With approximately 91 m² of living space, three full-sized bedrooms and a spacious living room, there is also plenty of room to enjoy living here for many years. A characteristic Amsterdam corner apartment. Schedule a viewing through Bloem Makelaars. We would be happy to show you around.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Not extracted; see media_counts.</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Bloem Makelaars</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 38</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/232/989/624_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/675_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/637_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/626_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/596_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/672_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/593_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/608_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/620_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/693_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/676_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/662_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/646_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/615_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/665_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/664_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/696_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/670_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/606_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/674_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/597_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/661_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/659_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/745_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/727_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/700_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/699_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/746_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/714_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/720_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/697_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/726_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/752_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/729_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/728_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/756_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/748_1440x960.jpg", "https://cloud.funda.nl/valentina_media/232/989/732_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

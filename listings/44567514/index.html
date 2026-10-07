@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Borgerstraat 266-3 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Borgerstraat 266-3</h1>
+  <p class="sub">
+    <span>1053 RH Amsterdam</span>
+    <span>·</span>
+    <span>Lootsbuurt</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/115/228_1440x960.jpg" alt="Borgerstraat 266-3 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">36 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€565.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €7.958/m² · 1.7 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">1.7 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">71 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy C</span>
+      <span class="chip">Built 1914</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-borgerstraat-266-3/44567514/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 565.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 7.958</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 218,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1914</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>71 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>5 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>237 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>2 bathrooms</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>2 douches, 2 toiletten, en Washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>3e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>C</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Remeha (gas-fired combi boiler uit 2016, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM T 6488</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 30-06-2054)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-06-2054</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM T 6488</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 30-06-2054)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-06-2054</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM T 6488</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijke Leasehold (einddatum Leasehold: 30-06-2054)</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 30-06-2054</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en City centre</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking, Public parking en Resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 218,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Heerlijk wonen in Oud-West! 
+See for English text below
+
+Op een toplocatie, om de hoek van de Tweede Kostverlorenkade en de Kinkerstraat en op slechts enkele minuten fietsen van het Vondelpark, ligt deze ruime dubbele bovenwoning van circa 71 m², verdeeld over de derde en vierde verdieping.
+De woning is toe aan een upgrade, maar biedt juist daardoor volop mogelijkheden om er helemaal jouw eigen plek van te maken. Met meerdere slaapkamers, twee badkamers, een zonnig Frans balkon aan de voorzijde én een balkon aan de achterzijde is er bovendien al een mooie basis aanwezig.
+
+De woning
+Op de derde verdieping vind je een ruime en lichte woonkamer met openslaande deuren naar het Franse balkon. Er is een moderne dichte keuken, twee goede slaapkamers en een badkamer met douche, wastafel en toilet. Aan de achterzijde ligt een fijn balkon, een heerlijke plek om met een kop koffie of een glas wijn even buiten te zitten.
+
+Via de huidige externe trap is de vierde verdieping bereikbaar. Hier bevinden zich nog eens twee kamers en een tweede badkamer met douche en toilet. De grootste kamer is uitstekend geschikt als master bedroom; de kleinere kamer kan bijvoorbeeld worden ingericht als werk-, hobby- of logeerkamer.
+
+Een belangrijk aandachtspunt én tegelijkertijd een mooie kans: de beide verdiepingen zijn bestemd voor bewoning door één huishouden en mogen niet afzonderlijk worden verhuurd. Wanneer je beide verdiepingen als woonruimte wilt gebruiken, dient er een interne trap tussen de derde en vierde verdieping te worden aangelegd. Een investering, maar daarmee ontstaat wel een royale en bijzondere woonplek met veel mogelijkheden.
+
+Wonen in Oud-West
+De Borgerstraat is een rustige straat midden in het bruisende Oud-West. Je woont hier letterlijk om de hoek van alles wat deze populaire buurt zo aantrekkelijk maakt. Op de Kinkerstraat vind je een groot en gevarieerd winkelaanbod, met onder andere de HEMA om de hoek. Ook de Jan Pieter Heijestraat zit vol leuke winkels, gezellige cafés, koffiebars en restaurants.
+Voor een goede koffie kun je terecht bij bijvoorbeeld Wakuli of Coffeecompany en voor een gezellig diner zijn er volop mogelijkheden, van Spaghetteria en Nonna tot Restaurant Brons. Ook De Hallen liggen vlakbij, met een breed aanbod aan foodstands, winkels en natuurlijk een bioscoop.
+En wil je even aan de drukte ontsnappen? Binnen enkele minuten fietsen sta je in het Vondelpark. Ideaal voor een wandeling, een rondje hardlopen of gewoon lekker neerstrijken op een terras.
+
+Bereikbaarheid
+Ook qua bereikbaarheid zit je hier uitstekend. Vanaf de Kinkerstraat vertrekken diverse tramlijnen richting onder andere het centrum en Station Lelylaan. Met de auto ben je via de nabijgelegen uitvalswegen snel op de Ring A10.
+
+Indeling
+Begane grond
+Gemeenschappelijke entree en trappenhuis naar de woning.
+
+Derde verdieping
+Ruime woonkamer met openslaande deuren naar het Franse balkon, twee goede slaapkamers, moderne keuken, balkon aan achterzijde en een badkamer met douche, wastafel en toilet.
+
+Vierde verdieping
+Twee slaapkamers, waaronder een ruime kamer die uitstekend als master bedroom kan worden gebruikt, plus een tweede kleinere kamer die ook zeer geschikt is als werk- of hobbykamer. Daarnaast bevindt zich hier een tweede badkamer met douche en toilet.
+
+Bijzonderheden
+-Ruime dubbele bovenwoning verdeeld over de derde en vierde verdieping van circa 71 m²
+-Derde verdieping met ruime woonkamer, twee slaapkamers, keuken, badkamer en balkon
+-Vierde verdieping met twee (slaap)kamers en een tweede badkamer
+-Bestemd voor bewoning door één huishouden en niet geschikt voor separate verhuur
+-Bij gebruik van beide verdiepingen als woonruimte dient een interne trap tussen de derde en vierde verdieping te worden gerealiseerd
+-Indien de vierde verdieping uitsluitend als berging wordt gebruikt, is deze via de externe trap bereikbaar
+-Deels houten en deels kunststof kozijnen met dubbele beglazing
+-Er zijn 2 CV ketels, op 3e verdieping een Remeha HR ketel uit 2016 en op de 4e een Remeha HR uit 2022
+-Er is een energielabel C
+-Actieve VvE, professioneel beheerd door Alliantie VVE Diensten
+-De servicekosten bedragen € 218,- per maand
+-Gelegen op een toplocatie in het populaire Oud-West
+-Alle voorzieningen van de Kinkerbuurt en de Jan Pieter Heijestraat op loopafstand
+-Vondelpark op nog geen 10 minuten lopen
+-Gelegen op erfpachtgrond waarvan de canon is afgekocht tot 2054
+-In de koopakte zal een niet-zelfbewoningsclausule en een ouderdomsclausule worden opgenomen.
+
+English text
+Wonderful living in Oud-West! Located in a prime spot, just around the corner from the Tweede Kostverlorenkade and Kinkerstraat and only a few minutes by bike from the Vondelpark, this spacious double upper-floor apartment of approximately 71 m² is spread over the third and fourth floors.
+The apartment is ready for an upgrade, but that is precisely what makes it such a great opportunity to create a home entirely to your own taste. With several bedrooms, two bathrooms, a sunny French balcony at the front and a balcony at the rear, there is already a great foundation to work with.
+
+The apartment
+On the third floor, you will find a spacious and bright living room with French doors opening onto the French balcony. There is a modern separate kitchen, two good-sized bedrooms and a bathroom with a shower, washbasin and toilet. At the rear is a pleasant balcony, a lovely spot to sit outside with a cup of coffee or a glass of wine.
+The fourth floor is currently accessible via an external staircase. Here you will find two additional rooms and a second bathroom with a shower and toilet. The larger room would make an excellent master bedroom, while the smaller room could be used as a home office, hobby room or guest room.
+An important point to note, but also a great opportunity: both floors are designated for use as a single household and may not be rented out separately. If you wish to use both floors as living space, an internal staircase between the third and fourth floors will need to be installed. This represents an investment, but would create a generous and unique home with plenty of possibilities.
+
+Living in Oud-West
+Borgerstraat is a quiet street in the heart of vibrant Oud-West. You are literally around the corner from everything that makes this popular neighbourhood so appealing. Kinkerstraat offers a wide and varied range of shops, including HEMA just around the corner. Jan Pieter Heijestraat is also packed with lovely shops, cosy cafés, coffee bars and restaurants.
+For a good cup of coffee, you can head to Wakuli or Coffeecompany, while there are plenty of options for a great dinner, ranging from Spaghetteria and Nonna to Restaurant Brons. De Hallen is also close by, offering a wide variety of food stands, shops and, of course, a cinema.
+And when you want to escape the hustle and bustle for a while, you can be in Vondelpark within just a few minutes by bike. Perfect for a walk, a run or simply relaxing on one of the terraces.
+
+Accessibility
+The apartment is also very well connected. Several tram lines depart from Kinkerstraat, providing connections to the city centre and Lelylaan Station, among other destinations. By car, the nearby main roads provide quick access to the A10 ring road.
+
+Layout
+Ground floor
+Communal entrance and staircase leading to the apartment.
+
+Third floor
+Spacious living room with French doors opening onto the French balcony, two good-sized bedrooms, modern kitchen, rear balcony and bathroom with shower, washbasin and toilet.
+
+Fourth floor
+Two bedrooms, including a spacious room that would be ideally suited as a master bedroom, and a smaller room that could also be used as a home office or hobby room. There is also a second bathroom with shower and toilet.
+Particulars
+-Spacious double upper-floor apartment spread over the third and fourth floors, approximately 71 m² 
+-Third floor with spacious living room, two bedrooms, kitchen, bathroom and balcony 
+-Fourth floor with two (bed)rooms and a second bathroom 
+-Designated for occupation by one household and not suitable for separate rental 
+-If both floors are to be used as living space, an internal staircase between the third and fourth floors must be created 
+-If the fourth floor is used solely as storage space, it can be accessed via the external staircase 
+-Combination of wooden and uPVC window frames, all with double glazing 
+-Two central heating boilers: a Remeha HR boiler from 2016 on the third floor and a Remeha HR boiler from 2022 on the fourth floor 
+-Energy label C 
+-Active Owners’ Association (VvE), professionally managed by Alliantie VVE Diensten 
+-Service charges: € 218,- per month 
+-Prime location in the popular Oud-West neighbourhood 
+-All amenities of Kinkerbuurt and Jan Pieter Heijestraat within walking distance 
+Vondelpark less than a 10-minute walk away 
+-Located on leasehold land, with the ground rent bought off until 2054 
+-The purchase agreement will include a non-owner-occupancy clause and an age clause</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 2 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>PB Makelaars o.z.</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 36</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/115/228_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/223_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/270_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/156_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/246_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/207_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/297_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/238_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/197_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/301_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/307_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/155_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/237_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/247_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/226_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/263_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/288_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/299_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/281_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/210_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/250_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/181_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/252_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/230_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/195_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/163_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/182_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/165_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/216_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/211_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/253_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/190_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/271_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/175_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/115/183_1440x960.jpg", "https://cloud.funda.nl/valentina_media/235/837/812_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

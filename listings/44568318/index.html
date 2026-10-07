@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jacques Veltmanstraat 131 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Jacques Veltmanstraat 131</h1>
+  <p class="sub">
+    <span>1065 DB Amsterdam</span>
+    <span>·</span>
+    <span>Jacques Veltmanbuurt</span>
+    <span class="status offer">Sold subject to conditions</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/233/188/397_1440x960.jpg" alt="Jacques Veltmanstraat 131 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">37 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€795.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €6.260/m²
+    </div>
+    <div class="chips">
+      <span class="chip">5 bedrooms</span>
+      <span class="chip">127 m² living</span>
+      <span class="chip">6 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 2003</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">3 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/huis-jacques-veltmanstraat-131/44568318/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Service costs</dt><dd>€ 254 per maand</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 795.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 6.260</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Sold subject to conditions</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort woonhuis</dt><dd>Eengezinswoning, hoekwoning</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>2003</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>127 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>9 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>20 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>419 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>6 rooms (5 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 separate toilet</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>3 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Lift, Mechanical ventilation, en TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Fully insulated</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>ATAG E215 (gas-fired combi boiler uit 2015, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND D 7974</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-03-2052</dd></div>
+        <div class="frow"><dt>Cadastral reference</dt><dd>SLOTEN NOORD-HOLLAND D 7974</dd></div>
+        <div class="frow"><dt>Oppervlakte</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Gemeentelijk owned belast met Leasehold</dd></div>
+        <div class="frow"><dt>Charges</dt><dd>Afgekocht tot 15-03-2052</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>Aan vaarwater en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Storage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Shed / storage</dt><dd>Indoor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Elektra</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Garage</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Soort garage</dt><dd>Parkeerplaats</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>On own property</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">***ENGLISH TEXT BELOW***
+
+LICHT, RUIM EN VRIJ WONEN AAN HET WATER
+
+Stel je voor: je opent de schuifdeur, stapt het vlonderterras op en vaart vanuit je eigen aanlegplaats zo richting de Amsterdamse grachten of de Sloterplas. Hier woon je aan het water, omringd door groen, met alle dynamiek van de stad verrassend dichtbij.
+
+Dit royale hoekappartement voelt dankzij de drie woonlagen als een volwaardige hoekwoning. Met 127 m² woonoppervlak, vijf slaapkamers, twee zonnige terrassen, een lichte woonkeuken, energielabel A en een eigen parkeerplaats met laadpaal biedt deze woning een zeldzame combinatie van ruimte, comfort en vrijheid.
+
+Belangrijkste kenmerken
+- Vijf volwaardige slaapkamers.
+- Twee zonnige terrassen, waarvan één direct aan het water (gelegen op het zuidoosten). Het terras voor is gedoogd vanuit de VVE.
+- Eigen aanlegplaats aan vaarwater.
+- Lichte woonkeuken met glazen overkapping en Boretti fornuis met wokbrander en grillplaat.
+- Luxe badkamer met ligbad, royale inloopdouche met pebblestonevloer en dubbele regendouche.
+- Energielabel A.
+- Eigen parkeerplaats met laadpaal.
+- Actieve en financieel gezonde VvE met een actueel Meerjarenonderhoudsplan (MJOP).
+
+Wonen
+Zodra je binnenkomt vallen de ruimte en het daglicht direct op. De rimpelingen in het water weerkaatsen met ochtendzon op het plafond. Dankzij de hoekligging en grote raampartijen voelt iedere verdieping licht en open. Aan de achterzijde geniet je van een groen uitzicht; vanuit de woonkeuken zie je de wolken overdag voorbijtrekken en &#x27;s avonds de sterrenhemel.
+
+De royale woonkeuken vormt het hart van het huis. De glazen overkapping zorgt voor een heerlijke lichtinval en een subtiele verbinding tussen binnen en buiten. Het Boretti fornuis maakt deze ruimte een fijne plek voor lange diners en gezellige avonden met familie en vrienden. Buiten heeft elk terras zijn eigen sfeer. Het vlonderterras aan het water is een heerlijke plek voor een rustig ontbijt in de ochtendzon. Het tweede terras ligt gunstig op de middag- en avondzon en nodigt uit tot ontspannen borrels en lange zomeravonden.
+
+Met vijf ruime slaapkamers heb je hier meer dan genoeg opties. Een comfortabele master bedroom, een rustige thuiswerkplek of extra kamers voor logees of opgroeiende kinderen: dit appartement groeit moeiteloos met je mee. Daarnaast is de luxe badkamer een echte eyecatcher. Of je nu kiest voor een uitgebreid bad om de dag af te sluiten of een snelle douche in de ochtend – deze ruimte biedt alle comfort.
+
+Ligging
+De woning ligt in een rustige en groene omgeving in Amsterdam Nieuw-West. Winkels, horeca, scholen, de Sloterplas, het Rembrandtpark en de Natureluur liggen op korte afstand. Station Lelylaan biedt snelle verbindingen naar Schiphol en Amsterdam Centraal, terwijl je met de auto binnen enkele minuten de A10 bereikt.
+
+Bijzonderheden
+- Woonoppervlakte: 127 m² (officieel ingemeten conform NEN 2580).
+- Erfpacht appartement: afgekocht tot 15-03-2052; erna vastgezet voor € 695,15 per jaar (inclusief inflatie) in het voortdurende en eeuwigdurende tijdvak.
+- Erfpacht parkeerplaats: afgekocht tot 15-03-2052; erna vastgezet voor € 84,09 per jaar (inclusief inflatie) in het voortdurende en eeuwigdurende tijdvak.
+- Servicekosten appartement: €254,39 per maand.
+- Servicekosten parkeerplaats: €34,00 per maand.
+- Actieve en financieel gezonde VvE met een actueel MJOP waarin toekomstig onderhoud planmatig is opgenomen.
+- Vaste projectnotaris: Albers en Van Tienen Amsterdam (inclusief opmaak koopakte volgens het Amsterdams Ringmodel, zie offerte tussen de documenten)
+- Officieel is dit een ander type woning naar de terminologie en een appartementsrecht met indexnummers 141 en 14
+
+****
+
+LIGHT, SPACIOUS, AND FREE LIVING BY THE WATER
+
+Imagine this: you open the sliding door, step onto the deck terrace, and sail from your own private mooring straight towards the Amsterdam canals or the Sloterplas. Here, you live by the water, surrounded by greenery, with all the dynamism of the city surprisingly close by.
+
+Thanks to its three levels, this spacious corner apartment feels like a full-fledged corner home. With 127 m² of living space, five bedrooms, two sunny terraces, a bright eat-in kitchen, an energy label A, and a private parking space with a charging station, this home offers a rare combination of space, comfort, and freedom.
+
+Key features
+- Five full-sized bedrooms.
+- Two sunny terraces, one of which is directly on the water (facing southeast). The front terrace is tolerated by the homeowners&#x27; association.
+- Private mooring on navigable water.
+- Bright eat-in kitchen with glass canopy and Boretti stove with wok burner and griddle.
+- Luxurious bathroom with bathtub, spacious walk-in shower with pebble stone floor, and double rain shower. - Energy label A.
+- Private parking space with charging station.
+- Active and financially sound Owners&#x27; Association with an up-to-date Multi-Year Maintenance Plan (MJOP).
+
+Living
+As soon as you enter, the spaciousness and daylight immediately catch your eye. The ripples in the water reflect off the ceiling in the morning sun. Thanks to the corner location and large windows, every floor feels light and open. At the rear, you enjoy a green view; from the eat-in kitchen, you can watch the clouds drift by during the day and the starry sky in the evening.
+
+The spacious eat-in kitchen forms the heart of the home. The glass canopy provides wonderful natural light and a subtle connection between inside and outside. The Boretti stove makes this space a lovely spot for long dinners and cozy evenings with family and friends. Outside, each terrace has its own atmosphere. The deck terrace by the water is a delightful spot for a quiet breakfast in the morning sun. The second terrace is favorably positioned to catch the afternoon and evening sun and invites you to relaxed drinks and long summer evenings. With five spacious bedrooms, you have more than enough options here. A comfortable master bedroom, a quiet home office, or extra rooms for guests or growing children: this apartment grows effortlessly with you. Additionally, the luxurious bathroom is a real eye-catcher. Whether you choose a long bath to end the day or a quick shower in the morning – this space offers every comfort.
+
+Location
+The property is situated in a quiet and green area in Amsterdam Nieuw-West. Shops, restaurants, schools, the Sloterplas, the Rembrandtpark, and the Natureluur are within easy reach. Lelylaan Station offers fast connections to Schiphol and Amsterdam Central, while you can reach the A10 by car within a few minutes.
+
+Particulars
+- Living area: 127 m² (officially measured in accordance with NEN 2580).
+- Leasehold apartment: redeemed until 15-03-2052; subsequently fixed for € 695.15 per year (including inflation) for the continuous and perpetual period. - Leasehold parking space: redeemed until 15-03-2052; subsequently fixed at € 84.09 per year (including inflation) for the continuous and perpetual period.
+- Apartment service charges: €254.39 per month.
+- Parking space service charges: €34.00 per month.
+- Active and financially sound Owners&#x27; Association with an up-to-date Multi-Year Maintenance Plan (MJOP) in which future maintenance is included in a planned manner.
+- Designated project notary: Albers en Van Tienen Amsterdam (including drafting of the deed of purchase according to the Amsterdam Ring Model, see quotation among the documents)
+- Officially, this is a different type of dwelling according to the terminology and an apartment right with index numbers 141 and 14.</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">Page shows 3 plattegronden, not extracted as separate URLs</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong></strong>Hoekstra en Van Eck Amsterdam West</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 37</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/233/188/397_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/348_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/415_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/391_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/434_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/356_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/452_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/405_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/320_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/402_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/399_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/418_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/370_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/459_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/335_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/455_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/454_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/328_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/359_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/378_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/396_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/333_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/411_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/457_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/327_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/429_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/363_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/354_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/343_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/395_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/349_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/339_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/336_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/420_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/423_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/351_1440x960.jpg", "https://cloud.funda.nl/valentina_media/233/188/338_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>

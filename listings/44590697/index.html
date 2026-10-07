@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bartholomeus Diazstraat 10-1 · Funda near 1062KS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+
+  .status.offer { background: #fff7ed; color: var(--offer); }
+  .status.new { background: #eff6ff; color: var(--new); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Bartholomeus Diazstraat 10-1</h1>
+  <p class="sub">
+    <span>1057 TB Amsterdam</span>
+    <span>·</span>
+    <span>Balboaplein e.o.</span>
+    <span class="status ok">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="https://cloud.funda.nl/valentina_media/234/882/021_1440x960.jpg" alt="Bartholomeus Diazstraat 10-1 — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">40 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€440.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €8.980/m² · 2.1 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">2.1 km</span>
+      <span class="chip">3 bedrooms</span>
+      <span class="chip">49 m² living</span>
+      <span class="chip">4 rooms</span>
+      <span class="chip energy">Energy B</span>
+      <span class="chip">Built 1925</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">1 floor</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-bartholomeus-diazstraat-10-1/44590697/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Aangeboden sinds</dt><dd>Log in om te bekijken</dd></div>
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 440.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 8.980</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        <div class="frow"><dt>VvE contribution</dt><dd>€ 150,00 per maand</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1925</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>flat roof bedekt met bitumineuze dakbedekking</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>49 m²</dd></div>
+        <div class="frow"><dt>Overige inpandige ruimte</dt><dd>1 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>6 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>164 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>4 rooms (3 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Douche, toilet, Washbasin, en Washbasinmeubel</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>1 floor</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Natuurlijke ventilatie</dd></div>
+        <div class="frow"><dt>Gelegen op</dt><dd>2e floor</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>B</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas HRE (2025, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>SLOTEN NOORD-HOLLAND C 10607</dt><dd>Kadastrale kaart</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>On a quiet road en in woonwijk</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Balcony present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>Yes (€ 150,00 per maand)</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>Yes</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">*** ENGLISH TEXT BELOW ***
+
+Instapklaar 4-kamerappartement (3 slaapkamers) met woningbreed balkon aan de groene binnentuin, op eigen grond in De Baarsjes.
+
+Op zoek naar een warm, licht en compleet vernieuwd thuis in Amsterdam-West? Aan de rustige Bartholomeus Diazstraat, in een karakteristiek pand uit 1925 in het beschermd stadsgezicht Admiralenbuurt, ligt dit sfeervolle appartement van 49 m² op de eerste verdieping. Een zonnige, open woon-eetkamer op het zuidoosten, drie slaapkamers, een woningbreed balkon met uitzicht op de groene binnentuinen en, zeldzaam in deze buurt, volle eigendom: geen erfpacht, geen canon.
+
+De woning is eind 2018 / begin 2019 tot op het casco gestript en met veel zorg opnieuw opgebouwd. De indeling is daarbij modern en praktisch gemaakt: drie slaapkamers en een grote woonkamer die aansluit op de open keuken. Nieuwe elektra en leidingen, nieuwe badkamer en keuken, een zwevende vloer en zwevende, geïsoleerde plafonds met dimbare spots en designradiatoren: alles is al gedaan, zodat je hier direct comfortabel woont. Energielabel B, glasvezel en een cv-ketel uit 2025 maken het plaatje compleet. Ideaal voor starters, stellen, een jong gezin of wie thuiswerkt en een aparte werkkamer wil.
+
+INDELING
+
+Via het gemeenschappelijke trappenhuis bereik je de woning op de eerste verdieping. De voordeur komt direct uit in de ruime, open woon-eetkamer. Bij de entree staat de eettafel, met door de keuken heen zicht op het groen achter het huis; aan de voorzijde ligt het zitgedeelte, met een brede raampartij op het zuidoosten. De doorlopende vloer in lichte eikenlook, de strak gestuukte wanden en de dimbare inbouwspots geven de woning een warme, ruime uitstraling. Woonkamer en slaapkamers hebben elk een dimmer; op de laagste stand geeft dat een warm, sfeervol licht. Achter de tv is in de wand een kabelgoot ingebouwd, zodat je de televisie strak en zonder zichtbare snoeren ophangt; hier zit ook een bekabelde internetaansluiting (ethernet).
+
+Naast de woonkamer, eveneens aan de voorzijde, ligt de derde slaapkamer, nu in gebruik als werkkamer: ook ideaal als kinderkamer of logeerkamer.
+
+Aan de rustige achterzijde ligt de keuken, met deur naar het balkon. De keuken (2018) heeft donkere fronten, een houten werkblad en verlichting onder de bovenkasten en is compleet ingericht met inductiekookplaat, afzuigkap met afvoer naar buiten, oven, koelkast, geïntegreerde vaatwasser en geïntegreerde wasmachine. Aan weerszijden van de keuken liggen de twee andere slaapkamers, beide rustig gelegen aan de achterzijde en beide met een deur naar het balkon. De ene is de hoofdslaapkamer, de andere is nu tweede werkkamer en af en toe logeerkamer; er is een ingebouwde bedlamp met weggewerkte bekabeling. Op de foto&#x27;s zie je de kamer als werkkamer én als slaapkamer.
+
+De badkamer (2018) is licht en modern afgewerkt met grote witte tegels en houtlook tegels in de douche: een inloopdouche met regendouche en glazen wand, een zwevend toilet, een wastafelmeubel met spiegelkast, handdoekradiator en mechanische afzuiging.
+
+Het woningbrede balkon ligt op het noordwesten aan de achterzijde, kijkt uit op de groene binnentuinen met volwassen bomen en is bereikbaar vanuit de keuken en beide achterslaapkamers. Met houten vlondertegels, een bamboe afscherming en aan weerszijden een handige kast is dit een heerlijk rustige plek voor je ochtendkoffie of een lange zomeravond buiten.
+
+VOLLEDIG GERENOVEERD (2018/2019)
+
+- Tot op het casco gestript en opnieuw opgebouwd
+- Moderne, praktische indeling: grote woonkamer die aansluit op de open keuken
+- Nieuwe voorzetwanden aan de voorzijde; alle wanden en plafonds gestuukt en professioneel geschilderd
+- Zwevende, verlaagde plafonds met een dubbele laag isolatie van minerale wol (warmte én geluid) en dimbare inbouwspots in alle kamers
+- Zwevende vloer op geluiddempende Fermacell-dekvloer, afgewerkt met laminaat in lichte eikenlook
+- Volledig nieuwe elektrische installatie: nieuwe groepenkast, ruim voldoende stopcontacten, dimmers en nieuwe intercom
+- Ingebouwde kabelgoot in de wand achter de tv, ethernet in de woonkamer en een slaapkamer, glasvezel aanwezig
+- Nieuwe waterleidingen en afvoeren
+- Nieuwe Vasco designradiatoren
+- Nieuwe badkamer, keuken en binnendeuren
+- Cv-ketel Intergas HRE (2025)
+
+DE BUURT
+
+De Bartholomeus Diazstraat is een rustige woonstraat in de Admiralenbuurt, het hart van De Baarsjes en sinds 2022 gemeentelijk beschermd stadsgezicht. De Jan Evertsenstraat ligt op twee minuten lopen, met bakkers, koffiebars, restaurants en supermarkten (Albert Heijn op 300 meter, Dirk op het Mercatorplein). Een straat verderop, op twee minuten lopen, ligt het autoluwe Balboaplein met Cruyff Court, basisschool en kinderopvang; ook de Admiralengracht ligt om de hoek. Populaire adressen als Café Cook, De Neef van Fred, Bar Lusconi en White Label Coffee liggen op loopafstand. Het Erasmuspark en het Rembrandtpark bereik je in zes tot zeven minuten lopen; zwembad Sportplaza Mercator ligt op tien minuten lopen. De Hallen met de Foodhallen en de Ten Katemarkt zijn vijf minuten fietsen.
+
+BEREIKBAARHEID
+
+De haltes Marco Polostraat (tram 13, bus 18) en Mercatorplein (tram 7 en 13, bus 15 en 18) liggen op één tot vier minuten lopen. Zo sta je in tien minuten op station Sloterdijk, in een kwartier op het Leidseplein en in circa twintig minuten op Amsterdam Centraal of station Zuid. Op de fiets ben je in een kwartier in het centrum. Met de auto sta je binnen tien minuten op de Ring A10 (afslag S105) en in nog geen twintig minuten op Schiphol. Parkeren is mogelijk met een bewonersvergunning.
+
+VERENIGING VAN EIGENAARS EN ONDERHOUD
+
+Het pand telt vier appartementen en heeft een kleine, actieve VvE: ingeschreven bij de KvK, jaarlijkse vergadering, reservefonds, meerjarenonderhoudsplan en opstalverzekering. De maandelijkse bijdrage bedraagt € 150,-. In 2025 is het grote onderhoud uitgevoerd: nieuwe bitumen dakbedekking, en de kozijnen aan de voorzijde zijn hersteld en geschilderd.
+
+EIGENDOM
+
+De woning staat op eigen grond: volle eigendom. Geen erfpacht, geen canon en geen afkoop in de toekomst.
+
+BIJZONDERHEDEN
+
+- Woonoppervlakte 49 m², totale inpandige gebruiksoppervlakte 50 m² (NEN 2580 meetrapport en plattegronden beschikbaar)
+- Inhoud circa 164 m³
+- 4 kamers, waarvan 3 slaapkamers
+- Ruime, open woon-eetkamer
+- Woningbreed balkon van circa 6 m² op het noordwesten met uitzicht op de groene binnentuinen
+- Bouwjaar 1925, gelegen op de eerste verdieping
+- Volle eigendom (eigen grond), geen erfpacht
+- Volledig gerenoveerd in 2018/2019
+- Energielabel B (geldig tot 2035), dubbel glas
+- Cv-ketel Intergas HRE uit 2025
+- Glasvezel en ethernet in de woonkamer en een slaapkamer
+- Rustige woonstraat in het gemeentelijk beschermd stadsgezicht Admiralenbuurt
+- Actieve VvE van 4 leden, bijdrage € 150,- per maand, MJOP en reservefonds aanwezig
+- Parkeren via bewonersvergunning (betaald parkeren)
+- Oplevering in overleg
+
+Kortom: een instapklaar, compleet vernieuwd en heel efficiënt ingedeeld appartement met drie slaapkamers, een rustig balkon over het groen en eigen grond, in een van de gezelligste buurten van Amsterdam. Kom kijken en ervaar het zelf!
+
+ENGLISH
+
+Move-in-ready 4-room apartment (3 bedrooms) with a full-width balcony overlooking the green courtyard gardens, on freehold land in De Baarsjes.
+
+Looking for a warm, bright and completely renovated home in Amsterdam West? On the quiet Bartholomeus Diazstraat, in a characteristic 1925 building within the protected Admiralenbuurt cityscape, sits this charming first-floor apartment of 49 m². It offers a sunny, open-plan living and dining room facing south-east, three bedrooms, a full-width balcony overlooking the green courtyard gardens and, rare in this neighbourhood, full freehold ownership: no ground lease (erfpacht), no annual canon.
+
+At the end of 2018 / beginning of 2019 the apartment was stripped back to the shell and rebuilt with great care. The layout was made modern and practical: three bedrooms and a large living room that connects with the open kitchen. New wiring and plumbing, a new bathroom and kitchen, a floating floor and floating, insulated ceilings with dimmable spotlights and design radiators: everything has been done, so you can move straight in and enjoy. Energy label B, a fibre-optic connection and a 2025 boiler complete the picture. Ideal for first-time buyers, couples, a young family or anyone who works from home and wants a separate study.
+
+LAYOUT
+
+The communal staircase leads to the apartment on the first floor. The front door opens directly into the generous, open-plan living and dining room. By the entrance stands the dining table, with a view through the kitchen to the greenery behind the building; the seating area is at the front, with a wide window facing south-east. The continuous light-oak-look floor, smoothly plastered walls and dimmable recessed spotlights give the apartment a warm, spacious feel. The living room and each bedroom have a dimmer; on the lowest setting the spots give a warm, cosy light. Behind the TV a cable duct has been built into the wall, so you can wall-mount the television neatly without any visible wires; there is also a wired internet (ethernet) point here.
+
+Next to the living room, also at the front, is the third bedroom, currently used as a home office: also perfect as a nursery or guest room.
+
+The kitchen is at the quiet rear of the apartment, with a door onto the balcony. Fitted in 2018, it has dark fronts, a wooden worktop and lighting under the wall units, and is fully equipped with an induction hob, an extractor hood vented to the outside, an oven, a fridge, an integrated dishwasher and an integrated washing machine. On either side of the kitchen are the two other bedrooms, both quietly located at the rear and both with a door onto the balcony. One is the main bedroom; the other is currently a second home office and occasional guest room, there is a built-in bedside light with concealed wiring. The photos show it both as an office and as a bedroom.
+
+The bathroom (2018) is bright and modern, finished with large white tiles and wood-look tiles in the shower: a walk-in shower with rain shower and glass screen, a wall-hung toilet, a vanity unit with mirror cabinet, a towel radiator and mechanical extraction.
+
+The full-width balcony faces north-west at the rear, overlooks the green courtyard gardens with their mature trees and can be reached from the kitchen and both rear bedrooms. With its wooden decking tiles, bamboo screen and a handy cupboard at either end, it is a wonderfully quiet spot for your morning coffee or a long summer evening outdoors.
+
+FULLY RENOVATED (2018/2019)
+
+- Stripped back to the shell and rebuilt
+- Modern, practical layout: large living room connecting with the open kitchen
+- New stud walls at the front; all walls and ceilings plastered and professionally painted
+- Floating, suspended ceilings with a double layer of mineral wool insulation (thermal and acoustic) and dimmable recessed spotlights in every room
+- Floating floor on a sound-damping Fermacell subfloor, finished with light-oak-look laminate
+- Completely new electrical installation: new consumer unit, plenty of sockets, dimmers and a new intercom
+- Built-in cable duct in the wall behind the TV, ethernet in the living room and one bedroom, fibre-optic connection
+- New water pipes and drains
+- New Vasco design radiators
+- New bathroom, kitchen and interior doors
+- Intergas HRE central-heating boiler (2025)
+
+THE NEIGHBOURHOOD
+
+Bartholomeus Diazstraat is a quiet residential street in the Admiralenbuurt, the heart of De Baarsjes and a municipally protected cityscape since 2022. Jan Evertsenstraat is a two-minute walk away, with bakeries, coffee bars, restaurants and supermarkets (Albert Heijn 300 metres away, Dirk on Mercatorplein). One block away, a two-minute walk, is the traffic-calmed Balboaplein with its Cruyff Court, primary school and childcare; the Admiralengracht canal is also just around the corner. Popular spots such as Café Cook, De Neef van Fred, Bar Lusconi and White Label Coffee are all within walking distance. Erasmuspark and Rembrandtpark are a six- to seven-minute walk, and the Sportplaza Mercator swimming pool is ten minutes on foot. De Hallen with the Foodhallen and the Ten Kate market are five minutes by bike.
+
+GETTING AROUND
+
+The Marco Polostraat stop (tram 13, bus 18) and Mercatorplein (trams 7 and 13, buses 15 and 18) are one to four minutes on foot. That puts Sloterdijk station ten minutes away, Leidseplein a quarter of an hour and Amsterdam Centraal or Zuid station about twenty minutes. By bike the city centre is a quarter of an hour. By car you are on the A10 ring road (exit S105) within ten minutes and at Schiphol in under twenty. Parking is available with a residents&#x27; permit.
+
+OWNERS&#x27; ASSOCIATION (VVE) AND MAINTENANCE
+
+The building contains four apartments and has a small, active owners&#x27; association: registered with the Chamber of Commerce, an annual meeting, a reserve fund, a long-term maintenance plan and building insurance. The monthly contribution is EUR 150. The major maintenance was carried out in 2025: a new bitumen roof covering, and the window frames at the front were repaired and painted.
+
+OWNERSHIP
+
+The apartment is on freehold land: full ownership. No ground lease, no annual canon and no future buy-out.
+
+KEY FEATURES
+
+- Living area 49 m², total internal usable area 50 m² (NEN 2580 measurement report and floor plans available)
+- Volume approximately 164 m³
+- 4 rooms, including 3 bedrooms
+- Generous, open-plan living and dining room
+- Full-width balcony of approximately 6 m² facing north-west, overlooking the green courtyard gardens
+- Built in 1925, located on the first floor
+- Freehold (full ownership), no ground lease
+- Fully renovated in 2018/2019
+- Energy label B (valid until 2035), double glazing
+- Intergas HRE boiler from 2025
+- Fibre-optic connection and ethernet in the living room and one bedroom
+- Quiet residential street in the protected Admiralenbuurt cityscape
+- Active owners&#x27; association of 4 members, contribution EUR 150 per month, long-term maintenance plan and reserve fund in place
+- Parking with a residents&#x27; permit (paid parking)
+- Completion in consultation
+
+In short: a move-in-ready, completely renovated and very efficiently laid-out apartment with three bedrooms, a quiet balcony over the greenery and freehold land, in one of Amsterdam&#x27;s most convivial neighbourhoods. Come and see it for yourself!</div>
+    <p class="note">Dutch listing description shown pending English paraphrase. Original text preserved from Funda.</p>
+    <p class="note">not extracted as separate URLs</p>
+  </section>
+
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 40</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["https://cloud.funda.nl/valentina_media/234/882/021_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/127_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/034_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/008_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/065_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/125_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/077_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/011_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/090_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/119_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/128_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/124_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/102_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/118_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/079_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/043_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/237_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/129_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/253_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/198_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/323_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/133_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/271_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/225_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/137_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/322_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/240_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/247_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/328_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/200_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/309_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/254_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/255_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/264_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/249_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/270_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/231_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/285_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/226_1440x960.jpg", "https://cloud.funda.nl/valentina_media/234/882/134_1440x960.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  if (!PHOTOS.length) return;
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+const hero = document.getElementById('hero');
+if (hero) {
+  hero.addEventListener('click', () => openLb(0));
+  hero.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+  });
+}
+const heroBadge = document.getElementById('heroBadge');
+if (heroBadge) {
+  heroBadge.addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>
