@@ -148,6 +148,7 @@ DATA.listings.forEach(item => {
     <div class="popup-meta">${item.postcode || ""} ${item.city || ""} · ${item.living_m2} m² · ${item.bedrooms} bed · ${st}</div>
     <div class="popup-meta">${item.distance_km != null ? item.distance_km.toFixed(1) + " km" : ""}</div>
     <div style="margin-top:.35rem"><a href="${item.url}" target="_blank" rel="noopener">Open on Funda →</a></div>
+    ${item.id === "44508514" ? '<div style="margin-top:.25rem"><a href="listings/44508514/">Detail page →</a></div>' : ""}
   `;
   L.circleMarker([item.lat, item.lon], {
     radius: 7,

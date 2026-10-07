@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gasthuismolensteeg 10-D · Funda prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #fff; --ink: #1a1a1a; --muted: #5c5c5c;
+    --line: #e5e0d6; --accent: #f2552c; --ok: #1b7f4a; --offer: #b45309; --new: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  a { color: var(--accent); }
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(244,241,234,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 1rem 1.25rem;
+  }
+  @media (max-width: 768px) {
+    header { position: static; }
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem .85rem; margin-bottom: .65rem; font-size: .85rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  header h1 { margin: 0 0 .25rem; font-size: 1.35rem; font-weight: 650; }
+  .sub { margin: 0; color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .status {
+    font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
+    padding: .2rem .45rem; border-radius: 999px; background: #e8f5ee; color: var(--ok);
+  }
+  main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line); background: #ddd; aspect-ratio: 16/10;
+    cursor: pointer;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge {
+    position: absolute; right: .75rem; bottom: .75rem;
+    background: rgba(0,0,0,.72); color: #fff; font-size: .85rem; font-weight: 600;
+    padding: .4rem .7rem; border-radius: 999px; border: 0; cursor: pointer;
+  }
+  .hero-badge:hover { background: rgba(0,0,0,.85); }
+  .summary {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .price-row { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; }
+  .price { font-size: 1.6rem; font-weight: 700; }
+  .price-note { color: var(--muted); font-size: .9rem; }
+  .meta-line { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+  .chip {
+    font-size: .78rem; background: #f7f4ee; border: 1px solid var(--line);
+    border-radius: 999px; padding: .25rem .6rem; color: #333;
+  }
+  .chip.energy { background: #f0f7f2; }
+  .chip.dist { background: #f3f4f6; }
+  .section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.2rem; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .section h2 { margin: 0 0 .85rem; font-size: 1.05rem; font-weight: 650; }
+  .gallery {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: .5rem;
+  }
+  .gitem {
+    border: 0; padding: 0; border-radius: 10px; overflow: hidden; cursor: pointer;
+    aspect-ratio: 4/3; background: #ddd; display: block;
+  }
+  .gitem img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gitem:hover { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .note { font-size: .82rem; color: var(--muted); margin: .65rem 0 0; }
+  .fgroup { margin-bottom: 1.1rem; }
+  .fgroup:last-child { margin-bottom: 0; }
+  .fgroup h3 {
+    margin: 0 0 .5rem; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--muted); font-weight: 650;
+  }
+  .flist { margin: 0; }
+  .frow {
+    display: grid; grid-template-columns: minmax(8rem, 38%) 1fr;
+    gap: .35rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line);
+    font-size: .92rem;
+  }
+  .frow dt { margin: 0; color: var(--muted); font-weight: 500; }
+  .frow dd { margin: 0; }
+  @media (max-width: 560px) {
+    .frow { grid-template-columns: 1fr; gap: .15rem; }
+  }
+  .desc { white-space: pre-wrap; font-size: .95rem; }
+  .agent { font-size: .95rem; }
+  .agent strong { font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+  .btn {
+    display: inline-block; text-decoration: none; font: inherit; font-weight: 600;
+    font-size: .9rem; padding: .55rem .9rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn:hover { border-color: #ccc; }
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: min(96vw, 1200px); max-height: calc(100vh - 5.5rem);
+    object-fit: contain; border-radius: 6px; user-select: none;
+  }
+  .lb-bar {
+    display: flex; align-items: center; gap: .75rem; margin-top: .75rem;
+    color: #fff; font-size: .9rem;
+  }
+  .lb-btn {
+    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1);
+    color: #fff; border-radius: 8px; padding: .45rem .75rem; font: inherit;
+    cursor: pointer;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.2); }
+  .lb-close { position: absolute; top: .75rem; right: .75rem; }
+  .lb-cap { min-width: 4.5rem; text-align: center; opacity: .9; }
+  body.lb-lock { overflow: hidden; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="../../index.html">← Listings</a>
+    <a href="../../heatmap.html">Heatmap</a>
+  </div>
+  <h1>Gasthuismolensteeg 10-D</h1>
+  <p class="sub">
+    <span>1016 AN Amsterdam</span>
+    <span>·</span>
+    <span>Felix Meritisbuurt</span>
+    <span class="status">Available</span>
+  </p>
+</header>
+<main>
+  <div class="hero" id="hero" role="button" tabindex="0" aria-label="Open photo gallery">
+    <img src="photos/01.jpg" alt="Gasthuismolensteeg 10-D — main photo">
+    <button type="button" class="hero-badge" id="heroBadge">39 photos</button>
+  </div>
+
+  <section class="summary">
+    <div class="price-row">
+      <div class="price">€595.000</div>
+      <div class="price-note">asking · buyer pays costs (k.k.)</div>
+    </div>
+    <div class="meta-line">
+      €9.917/m²
+       · 3.8 km from 1062KS
+    </div>
+    <div class="chips">
+      <span class="chip dist">3.8 km</span>
+      <span class="chip">4 bedrooms</span>
+      <span class="chip">60 m² living</span>
+      <span class="chip">5 rooms</span>
+      <span class="chip energy">Energy A</span>
+      <span class="chip">Built 1787</span>
+      <span class="chip">Roof terrace</span>
+      <span class="chip">2 floors</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://www.funda.nl/detail/koop/amsterdam/appartement-gasthuismolensteeg-10-d/44508514/" target="_blank" rel="noopener">View on Funda</a>
+      <a class="btn" href="../../index.html">Back to listings</a>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <h2>Photos (39)</h2>
+    <div class="gallery">
+      <button type="button" class="gitem" data-idx="0" aria-label="Photo 1"><img src="photos/01.jpg" alt="Photo 1" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="1" aria-label="Photo 2"><img src="photos/02.jpg" alt="Photo 2" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="2" aria-label="Photo 3"><img src="photos/03.jpg" alt="Photo 3" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="3" aria-label="Photo 4"><img src="photos/04.jpg" alt="Photo 4" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="4" aria-label="Photo 5"><img src="photos/05.jpg" alt="Photo 5" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="5" aria-label="Photo 6"><img src="photos/06.jpg" alt="Photo 6" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="6" aria-label="Photo 7"><img src="photos/07.jpg" alt="Photo 7" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="7" aria-label="Photo 8"><img src="photos/08.jpg" alt="Photo 8" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="8" aria-label="Photo 9"><img src="photos/09.jpg" alt="Photo 9" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="9" aria-label="Photo 10"><img src="photos/10.jpg" alt="Photo 10" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="10" aria-label="Photo 11"><img src="photos/11.jpg" alt="Photo 11" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="11" aria-label="Photo 12"><img src="photos/12.jpg" alt="Photo 12" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="12" aria-label="Photo 13"><img src="photos/13.jpg" alt="Photo 13" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="13" aria-label="Photo 14"><img src="photos/14.jpg" alt="Photo 14" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="14" aria-label="Photo 15"><img src="photos/15.jpg" alt="Photo 15" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="15" aria-label="Photo 16"><img src="photos/16.jpg" alt="Photo 16" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="16" aria-label="Photo 17"><img src="photos/17.jpg" alt="Photo 17" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="17" aria-label="Photo 18"><img src="photos/18.jpg" alt="Photo 18" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="18" aria-label="Photo 19"><img src="photos/19.jpg" alt="Photo 19" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="19" aria-label="Photo 20"><img src="photos/20.jpg" alt="Photo 20" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="20" aria-label="Photo 21"><img src="photos/21.jpg" alt="Photo 21" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="21" aria-label="Photo 22"><img src="photos/22.jpg" alt="Photo 22" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="22" aria-label="Photo 23"><img src="photos/23.jpg" alt="Photo 23" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="23" aria-label="Photo 24"><img src="photos/24.jpg" alt="Photo 24" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="24" aria-label="Photo 25"><img src="photos/25.jpg" alt="Photo 25" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="25" aria-label="Photo 26"><img src="photos/26.jpg" alt="Photo 26" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="26" aria-label="Photo 27"><img src="photos/27.jpg" alt="Photo 27" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="27" aria-label="Photo 28"><img src="photos/28.jpg" alt="Photo 28" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="28" aria-label="Photo 29"><img src="photos/29.jpg" alt="Photo 29" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="29" aria-label="Photo 30"><img src="photos/30.jpg" alt="Photo 30" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="30" aria-label="Photo 31"><img src="photos/31.jpg" alt="Photo 31" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="31" aria-label="Photo 32"><img src="photos/32.jpg" alt="Photo 32" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="32" aria-label="Photo 33"><img src="photos/33.jpg" alt="Photo 33" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="33" aria-label="Photo 34"><img src="photos/34.jpg" alt="Photo 34" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="34" aria-label="Photo 35"><img src="photos/35.jpg" alt="Photo 35" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="35" aria-label="Photo 36"><img src="photos/36.jpg" alt="Photo 36" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="36" aria-label="Photo 37"><img src="photos/37.jpg" alt="Photo 37" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="37" aria-label="Photo 38"><img src="photos/38.jpg" alt="Photo 38" loading="lazy"></button>
+      <button type="button" class="gitem" data-idx="38" aria-label="Photo 39"><img src="photos/39.jpg" alt="Photo 39" loading="lazy"></button>
+    </div>
+    <p class="note">Floor plans were listed on Funda (3) but were not scraped for this prototype — no floorplan images invented here.</p>
+  </section>
+
+  <section class="section">
+    <h2>Details</h2>
+      <section class="fgroup">
+        <h3>Transfer</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Availability / transfer</dt><dd>By arrangement</dd></div>
+        <div class="frow"><dt>Asking price</dt><dd>€ 595.000 buyer pays costs (k.k.)</dd></div>
+        <div class="frow"><dt>Asking price per m²</dt><dd>€ 9.917</dd></div>
+        <div class="frow"><dt>Status</dt><dd>Available</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Construction</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Apartment type</dt><dd>Upper-floor apartment</dd></div>
+        <div class="frow"><dt>Construction type</dt><dd>Existing building</dd></div>
+        <div class="frow"><dt>Year built</dt><dd>1787</dd></div>
+        <div class="frow"><dt>Roof type</dt><dd>Mansard roof with tiles</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Areas &amp; volume</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Living area</dt><dd>60 m²</dd></div>
+        <div class="frow"><dt>Building-related outdoor space</dt><dd>7 m²</dd></div>
+        <div class="frow"><dt>Volume</dt><dd>154 m³</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Layout</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Number of rooms</dt><dd>5 rooms (4 bedrooms)</dd></div>
+        <div class="frow"><dt>Bathrooms</dt><dd>1 bathroom and 1 separate toilet</dd></div>
+        <div class="frow"><dt>Bathroom facilities</dt><dd>Shower and washbasin</dd></div>
+        <div class="frow"><dt>Number of floors</dt><dd>2 floors</dd></div>
+        <div class="frow"><dt>Amenities</dt><dd>Mechanical ventilation and TV cable</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Energy</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Energy label</dt><dd>A</dd></div>
+        <div class="frow"><dt>Insulation</dt><dd>Double glazing and floor insulation</dd></div>
+        <div class="frow"><dt>Heating</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Hot water</dt><dd>Central heating boiler</dd></div>
+        <div class="frow"><dt>Boiler</dt><dd>Intergas (gas-fired combi boiler from 2019, owned)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Cadastral data</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Cadastral reference</dt><dd>AMSTERDAM E 11005</dd></div>
+        <div class="frow"><dt>Ownership</dt><dd>Full ownership (freehold)</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Outdoor space</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Location</dt><dd>City centre with open views</dd></div>
+        <div class="frow"><dt>Garden / terrace</dt><dd>Sun terrace</dd></div>
+        <div class="frow"><dt>Sun terrace</dt><dd>7 m² (3,51 m deep and 2,00 m wide)</dd></div>
+        <div class="frow"><dt>Balcony / roof terrace</dt><dd>Roof terrace present</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Parking</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Parking type</dt><dd>Paid parking and resident permits</dd></div>
+        </dl>
+      </section>
+      <section class="fgroup">
+        <h3>Owners’ association (VvE)</h3>
+        <dl class="flist">
+        <div class="frow"><dt>Chamber of Commerce registration</dt><dd>Yes</dd></div>
+        <div class="frow"><dt>Annual meeting</dt><dd>No</dd></div>
+        <div class="frow"><dt>Periodic contribution (VvE)</dt><dd>No</dd></div>
+        <div class="frow"><dt>Reserve fund present</dt><dd>No</dd></div>
+        <div class="frow"><dt>Maintenance plan</dt><dd>No</dd></div>
+        <div class="frow"><dt>Building insurance</dt><dd>No</dd></div>
+        </dl>
+      </section>
+  </section>
+
+  <section class="section">
+    <h2>Description</h2>
+    <div class="desc">Move-in ready 60 m² apartment (NEN-measured) in a characterful building in Amsterdam’s historic city centre. Stylish living space with a sleek open kitchen, a roof terrace, and a well-finished interior. All city-centre amenities are within easy reach.
+
+Layout:
+Shared entrance with access to the apartment on the third floor.
+The cosy living room with open kitchen sits at the rear and opens onto the roof terrace. The modern open kitchen has a timeless design and built-in appliances.
+At the front are two bedrooms that can easily be combined into one, or removed entirely for a larger living floor.
+The upper floor has two bedrooms and a bathroom. The modern bathroom has a walk-in shower and washbasin; there is also a separate toilet in the hallway. The finish makes the apartment move-in ready.
+
+Location:
+Gasthuismolensteeg is in the historic heart of Amsterdam, a short walk from Dam Square, Kalverstraat and the Nine Streets. Shops, restaurants, cafés and culture are nearby, with excellent public transport links.
+
+Highlights:
+• Living area: 60 m² (NEN-measured)
+• Energy label: A
+• Characteristic monumental building
+• Four bedrooms, one bathroom
+• Roof terrace
+• Freehold (eigen grond)
+• Foundations renewed in 2018
+• Owners’ association (VvE) being established
+• Service costs: TBA
+• Non-owner-occupancy clause applies
+• Buyer may choose the notary (Amsterdam-based; KNB / Amsterdam Ring model contract)
+• Binding agreement only after both parties sign the purchase deed
+
+Disclaimer: Information carefully compiled by Engel &amp; Völkers; no rights may be derived from it. Measurements follow NEN2580; buyers may arrange their own NEN2580 survey.</div>
+    <p class="note">English paraphrase of the listing text. Original Dutch omschrijving is in the source JSON.</p>
+  </section>
+
+  <section class="section">
+    <h2>Agent</h2>
+    <p class="agent"><strong>Wieger van der Linden</strong> · Engel &amp; Völkers Amsterdam</p>
+  </section>
+</main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox" hidden>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close">Esc</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" aria-label="Previous">← Prev</button>
+    <span class="lb-cap" id="lbCap">1 / 39</span>
+    <button type="button" class="lb-btn" id="lbNext" aria-label="Next">Next →</button>
+  </div>
+</div>
+
+<script>
+const PHOTOS = ["photos/01.jpg", "photos/02.jpg", "photos/03.jpg", "photos/04.jpg", "photos/05.jpg", "photos/06.jpg", "photos/07.jpg", "photos/08.jpg", "photos/09.jpg", "photos/10.jpg", "photos/11.jpg", "photos/12.jpg", "photos/13.jpg", "photos/14.jpg", "photos/15.jpg", "photos/16.jpg", "photos/17.jpg", "photos/18.jpg", "photos/19.jpg", "photos/20.jpg", "photos/21.jpg", "photos/22.jpg", "photos/23.jpg", "photos/24.jpg", "photos/25.jpg", "photos/26.jpg", "photos/27.jpg", "photos/28.jpg", "photos/29.jpg", "photos/30.jpg", "photos/31.jpg", "photos/32.jpg", "photos/33.jpg", "photos/34.jpg", "photos/35.jpg", "photos/36.jpg", "photos/37.jpg", "photos/38.jpg", "photos/39.jpg"];
+let idx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+
+function openLb(i) {
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = PHOTOS[idx];
+  lbCap.textContent = (idx + 1) + ' / ' + PHOTOS.length;
+  lb.hidden = false;
+  lb.classList.add('open');
+  document.body.classList.add('lb-lock');
+}
+function closeLb() {
+  lb.classList.remove('open');
+  lb.hidden = true;
+  document.body.classList.remove('lb-lock');
+}
+function step(d) { openLb(idx + d); }
+
+document.getElementById('hero').addEventListener('click', () => openLb(0));
+document.getElementById('hero').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(0); }
+});
+document.getElementById('heroBadge').addEventListener('click', e => { e.stopPropagation(); openLb(0); });
+document.querySelectorAll('.gitem').forEach(btn => {
+  btn.addEventListener('click', () => openLb(+btn.dataset.idx));
+});
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+document.getElementById('lbNext').addEventListener('click', () => step(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// basic swipe
+let tx = null;
+lbImg.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, {passive:true});
+lbImg.addEventListener('touchend', e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].screenX - tx;
+  tx = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+}, {passive:true});
+</script>
+</body>
+</html>
